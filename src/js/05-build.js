@@ -190,7 +190,7 @@
         const n = W.byId[id], name = pstr(f.name);
         if (!n || !name) return skip("Couldn't rename " + id + tail);
         const was = n.name; n.name = name; if (pstr(f.what)) n.what = pstr(f.what);
-        ok("Renamed \"" + was + "\" to \"" + name + "\"" + tail);
+        ok(was === name ? "Corrected the description of \"" + name + "\"" + tail : "Renamed \"" + was + "\" to \"" + name + "\"" + tail);
       } else if (op === "move") {
         const b = ball(pstr(f.topic));
         if (!W.byId[id] || !b) return skip("Couldn't move " + id + tail);
@@ -359,8 +359,8 @@
       (M.route && M.route.note ? "<h3>" + T("How the route was chosen") + '</h3><p class="km-small" data-ai>' + esc(M.route.note) + "</p>" : "") +
       "<h3>" + T("What the checker changed") + "</h3>" +
       (M.checks && M.checks.verdict ? '<p class="km-small" data-ai>' + esc(M.checks.verdict) + "</p>" : "") +
-      (done.length ? '<ul class="km-notelist" data-ai>' + done.map((f) => "<li>" + esc(f.text) + "</li>").join("") + "</ul>" : '<p class="km-empty">' + T("Nothing: it found no errors to fix.") + "</p>") +
-      (notes.length ? "<h3>" + T("What the page's structure check changed") + '</h3><ul class="km-notelist">' + notes.map((n) => "<li>" + esc(n) + "</li>").join("") + "</ul>" : "") +
+      (done.length ? '<ul class="km-notelist">' + done.map((f) => "<li>" + esc(I18N.t(f.text)) + "</li>").join("") + "</ul>" : '<p class="km-empty">' + T("Nothing: it found no errors to fix.") + "</p>") +
+      (notes.length ? "<h3>" + T("What the page's structure check changed") + '</h3><ul class="km-notelist">' + notes.map((n) => "<li>" + esc(I18N.t(n)) + "</li>").join("") + "</ul>" : "") +
       '<p class="km-small">' + esc(I18N.t("Built " + new Date(M.built).toLocaleDateString(I18N.lang === "zh" ? "zh-CN" : "en-US", { year: "numeric", month: "short", day: "numeric" }) + ".")) + "</p>" +
       '<div class="km-btns"><button class="km-btn" type="button" data-about="profile">' + T("Rebuild or update in Profile") + "</button></div>";
   }

@@ -551,6 +551,58 @@
  },
  "patterns": [
   [
+   "Added \"(.+?)\" to (.+?)( \\(.*\\))?",
+   "在“\\2”中加入“\\1”\\3"
+  ],
+  [
+   "Removed \"(.+?)\"( \\(.*\\))?",
+   "删除了“\\1”\\2"
+  ],
+  [
+   "Merged \"(.+?)\" into \"(.+?)\"( \\(.*\\))?",
+   "把“\\1”并入“\\2”\\3"
+  ],
+  [
+   "Moved \"(.+?)\" to (.+?)( \\(.*\\))?",
+   "把“\\1”移到“\\2”\\3"
+  ],
+  [
+   "\"(.+?)\" now needs \"(.+?)\" first( \\(.*\\))?",
+   "“\\1”现在需先学“\\2”\\3"
+  ],
+  [
+   "\"(.+?)\" no longer needs \"(.+?)\" first( \\(.*\\))?",
+   "“\\1”不再需先学“\\2”\\3"
+  ],
+  [
+   "Put \"(.+?)\" on the route( \\(.*\\))?",
+   "把“\\1”放上路线\\2"
+  ],
+  [
+   "Took \"(.+?)\" off the route( \\(.*\\))?",
+   "把“\\1”移出路线\\2"
+  ],
+  [
+   "(\\d+) points came back without a description\\.",
+   "\\1 个知识点没有返回描述。"
+  ],
+  [
+   "The map ran past the page's safety limits, so (\\d+) topics or points were left out\\.",
+   "地图超出了页面的安全上限，略去了 \\1 个主题或知识点。"
+  ],
+  [
+   "Dropped a second point named \"(.+)\"\\.",
+   "删除了重名的知识点“\\1”。"
+  ],
+  [
+   "Renamed \"(.+?)\" to \"(.+?)\"(.*)",
+   "把“\\1”改名为“\\2”\\3"
+  ],
+  [
+   "Corrected the description of \"(.+?)\"(.*)",
+   "修正了“\\1”的描述\\2"
+  ],
+  [
    "Written and checked by AI, without a textbook behind it\\. The page ran (\\d+) of the (\\d+) Python examples and checked their output; for everything else, check what matters to you in a source you trust\\.",
    "由 AI 编写和检查，背后没有教材。页面运行了 \\2 个 Python 示例中的 \\1 个并核对了输出；其余内容，请到你信任的资料中核对对你重要的部分。"
   ],
