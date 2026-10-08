@@ -1,0 +1,5 @@
+node_modules/
+__pycache__/
+*.pyc
+pyodide/
+.DS_Store

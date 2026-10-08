@@ -1,0 +1,933 @@
+{
+ "id": "byte",
+ "name": "A Byte of Python",
+ "author": "Swaroop C H",
+ "url": "https://python.swaroopch.com/",
+ "kind": "Book",
+ "items": [
+  {
+   "chapter": "About Python",
+   "heading": "About Python",
+   "level": 0,
+   "url": "https://python.swaroopch.com/about_python.html",
+   "order": 0
+  },
+  {
+   "chapter": "About Python",
+   "heading": "Story behind the name",
+   "level": 1,
+   "url": "https://python.swaroopch.com/about_python.html",
+   "order": 1
+  },
+  {
+   "chapter": "About Python",
+   "heading": "Features of Python",
+   "level": 1,
+   "url": "https://python.swaroopch.com/about_python.html",
+   "order": 2
+  },
+  {
+   "chapter": "About Python",
+   "heading": "Simple",
+   "level": 2,
+   "url": "https://python.swaroopch.com/about_python.html",
+   "order": 3
+  },
+  {
+   "chapter": "About Python",
+   "heading": "Easy to Learn",
+   "level": 2,
+   "url": "https://python.swaroopch.com/about_python.html",
+   "order": 4
+  },
+  {
+   "chapter": "About Python",
+   "heading": "Free and Open Source",
+   "level": 2,
+   "url": "https://python.swaroopch.com/about_python.html",
+   "order": 5
+  },
+  {
+   "chapter": "About Python",
+   "heading": "High-level Language",
+   "level": 2,
+   "url": "https://python.swaroopch.com/about_python.html",
+   "order": 6
+  },
+  {
+   "chapter": "About Python",
+   "heading": "Portable",
+   "level": 2,
+   "url": "https://python.swaroopch.com/about_python.html",
+   "order": 7
+  },
+  {
+   "chapter": "About Python",
+   "heading": "Interpreted",
+   "level": 2,
+   "url": "https://python.swaroopch.com/about_python.html",
+   "order": 8
+  },
+  {
+   "chapter": "About Python",
+   "heading": "Object Oriented",
+   "level": 2,
+   "url": "https://python.swaroopch.com/about_python.html",
+   "order": 9
+  },
+  {
+   "chapter": "About Python",
+   "heading": "Extensible",
+   "level": 2,
+   "url": "https://python.swaroopch.com/about_python.html",
+   "order": 10
+  },
+  {
+   "chapter": "About Python",
+   "heading": "Embeddable",
+   "level": 2,
+   "url": "https://python.swaroopch.com/about_python.html",
+   "order": 11
+  },
+  {
+   "chapter": "About Python",
+   "heading": "Extensive Libraries",
+   "level": 2,
+   "url": "https://python.swaroopch.com/about_python.html",
+   "order": 12
+  },
+  {
+   "chapter": "About Python",
+   "heading": "Python 3 versus 2",
+   "level": 1,
+   "url": "https://python.swaroopch.com/about_python.html",
+   "order": 13
+  },
+  {
+   "chapter": "About Python",
+   "heading": "What Programmers Say",
+   "level": 1,
+   "url": "https://python.swaroopch.com/about_python.html",
+   "order": 14
+  },
+  {
+   "chapter": "Installation",
+   "heading": "Installation",
+   "level": 0,
+   "url": "https://python.swaroopch.com/installation.html",
+   "order": 15
+  },
+  {
+   "chapter": "Installation",
+   "heading": "Installation on Windows",
+   "level": 1,
+   "url": "https://python.swaroopch.com/installation.html",
+   "order": 16
+  },
+  {
+   "chapter": "Installation",
+   "heading": "DOS Prompt",
+   "level": 2,
+   "url": "https://python.swaroopch.com/installation.html",
+   "order": 17
+  },
+  {
+   "chapter": "Installation",
+   "heading": "Running Python prompt on Windows",
+   "level": 2,
+   "url": "https://python.swaroopch.com/installation.html",
+   "order": 18
+  },
+  {
+   "chapter": "Installation",
+   "heading": "Installation on Mac OS X",
+   "level": 1,
+   "url": "https://python.swaroopch.com/installation.html",
+   "order": 19
+  },
+  {
+   "chapter": "Installation",
+   "heading": "Installation on GNU/Linux",
+   "level": 1,
+   "url": "https://python.swaroopch.com/installation.html",
+   "order": 20
+  },
+  {
+   "chapter": "First Steps",
+   "heading": "First Steps",
+   "level": 0,
+   "url": "https://python.swaroopch.com/first_steps.html",
+   "order": 21
+  },
+  {
+   "chapter": "First Steps",
+   "heading": "Using The Interpreter Prompt",
+   "level": 1,
+   "url": "https://python.swaroopch.com/first_steps.html",
+   "order": 22
+  },
+  {
+   "chapter": "First Steps",
+   "heading": "How to Quit the Interpreter Prompt",
+   "level": 2,
+   "url": "https://python.swaroopch.com/first_steps.html",
+   "order": 23
+  },
+  {
+   "chapter": "First Steps",
+   "heading": "Choosing An Editor",
+   "level": 1,
+   "url": "https://python.swaroopch.com/first_steps.html",
+   "order": 24
+  },
+  {
+   "chapter": "First Steps",
+   "heading": "PyCharm",
+   "level": 1,
+   "url": "https://python.swaroopch.com/first_steps.html",
+   "order": 25
+  },
+  {
+   "chapter": "First Steps",
+   "heading": "Vim",
+   "level": 1,
+   "url": "https://python.swaroopch.com/first_steps.html",
+   "order": 26
+  },
+  {
+   "chapter": "First Steps",
+   "heading": "Emacs",
+   "level": 1,
+   "url": "https://python.swaroopch.com/first_steps.html",
+   "order": 27
+  },
+  {
+   "chapter": "First Steps",
+   "heading": "Using A Source File",
+   "level": 1,
+   "url": "https://python.swaroopch.com/first_steps.html",
+   "order": 28
+  },
+  {
+   "chapter": "First Steps",
+   "heading": "Getting Help",
+   "level": 1,
+   "url": "https://python.swaroopch.com/first_steps.html",
+   "order": 29
+  },
+  {
+   "chapter": "Basics",
+   "heading": "Basics",
+   "level": 0,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 30
+  },
+  {
+   "chapter": "Basics",
+   "heading": "Comments",
+   "level": 1,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 31
+  },
+  {
+   "chapter": "Basics",
+   "heading": "Literal Constants",
+   "level": 1,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 32
+  },
+  {
+   "chapter": "Basics",
+   "heading": "Numbers",
+   "level": 1,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 33
+  },
+  {
+   "chapter": "Basics",
+   "heading": "Strings",
+   "level": 1,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 34
+  },
+  {
+   "chapter": "Basics",
+   "heading": "Single Quote",
+   "level": 2,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 35
+  },
+  {
+   "chapter": "Basics",
+   "heading": "Double Quotes",
+   "level": 2,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 36
+  },
+  {
+   "chapter": "Basics",
+   "heading": "Triple Quotes",
+   "level": 2,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 37
+  },
+  {
+   "chapter": "Basics",
+   "heading": "Strings Are Immutable",
+   "level": 2,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 38
+  },
+  {
+   "chapter": "Basics",
+   "heading": "The format method",
+   "level": 2,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 39
+  },
+  {
+   "chapter": "Basics",
+   "heading": "Escape Sequences",
+   "level": 2,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 40
+  },
+  {
+   "chapter": "Basics",
+   "heading": "Raw String",
+   "level": 2,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 41
+  },
+  {
+   "chapter": "Basics",
+   "heading": "Variable",
+   "level": 1,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 42
+  },
+  {
+   "chapter": "Basics",
+   "heading": "Identifier Naming",
+   "level": 1,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 43
+  },
+  {
+   "chapter": "Basics",
+   "heading": "Data Types",
+   "level": 1,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 44
+  },
+  {
+   "chapter": "Basics",
+   "heading": "Object",
+   "level": 1,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 45
+  },
+  {
+   "chapter": "Basics",
+   "heading": "How to write Python programs",
+   "level": 1,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 46
+  },
+  {
+   "chapter": "Basics",
+   "heading": "For PyCharm",
+   "level": 2,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 47
+  },
+  {
+   "chapter": "Basics",
+   "heading": "For other editors",
+   "level": 2,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 48
+  },
+  {
+   "chapter": "Basics",
+   "heading": "Example: Using Variables And Literal Constants",
+   "level": 2,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 49
+  },
+  {
+   "chapter": "Basics",
+   "heading": "Logical And Physical Line",
+   "level": 1,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 50
+  },
+  {
+   "chapter": "Basics",
+   "heading": "Indentation",
+   "level": 1,
+   "url": "https://python.swaroopch.com/basics.html",
+   "order": 51
+  },
+  {
+   "chapter": "Operators and Expressions",
+   "heading": "Operators and Expressions",
+   "level": 0,
+   "url": "https://python.swaroopch.com/op_exp.html",
+   "order": 52
+  },
+  {
+   "chapter": "Operators and Expressions",
+   "heading": "Operators",
+   "level": 1,
+   "url": "https://python.swaroopch.com/op_exp.html",
+   "order": 53
+  },
+  {
+   "chapter": "Operators and Expressions",
+   "heading": "Shortcut for math operation and assignment",
+   "level": 1,
+   "url": "https://python.swaroopch.com/op_exp.html",
+   "order": 54
+  },
+  {
+   "chapter": "Operators and Expressions",
+   "heading": "Evaluation Order",
+   "level": 1,
+   "url": "https://python.swaroopch.com/op_exp.html",
+   "order": 55
+  },
+  {
+   "chapter": "Operators and Expressions",
+   "heading": "Changing the Order Of Evaluation",
+   "level": 1,
+   "url": "https://python.swaroopch.com/op_exp.html",
+   "order": 56
+  },
+  {
+   "chapter": "Operators and Expressions",
+   "heading": "Associativity",
+   "level": 1,
+   "url": "https://python.swaroopch.com/op_exp.html",
+   "order": 57
+  },
+  {
+   "chapter": "Operators and Expressions",
+   "heading": "Expressions",
+   "level": 1,
+   "url": "https://python.swaroopch.com/op_exp.html",
+   "order": 58
+  },
+  {
+   "chapter": "Control flow",
+   "heading": "Control Flow",
+   "level": 0,
+   "url": "https://python.swaroopch.com/control_flow.html",
+   "order": 59
+  },
+  {
+   "chapter": "Control flow",
+   "heading": "The if Statement",
+   "level": 1,
+   "url": "https://python.swaroopch.com/control_flow.html",
+   "order": 60
+  },
+  {
+   "chapter": "Control flow",
+   "heading": "The while Statement",
+   "level": 1,
+   "url": "https://python.swaroopch.com/control_flow.html",
+   "order": 61
+  },
+  {
+   "chapter": "Control flow",
+   "heading": "The for Loop",
+   "level": 1,
+   "url": "https://python.swaroopch.com/control_flow.html",
+   "order": 62
+  },
+  {
+   "chapter": "Control flow",
+   "heading": "The break Statement",
+   "level": 1,
+   "url": "https://python.swaroopch.com/control_flow.html",
+   "order": 63
+  },
+  {
+   "chapter": "Control flow",
+   "heading": "The continue Statement",
+   "level": 1,
+   "url": "https://python.swaroopch.com/control_flow.html",
+   "order": 64
+  },
+  {
+   "chapter": "Functions",
+   "heading": "Functions",
+   "level": 0,
+   "url": "https://python.swaroopch.com/functions.html",
+   "order": 65
+  },
+  {
+   "chapter": "Functions",
+   "heading": "Function Parameters",
+   "level": 1,
+   "url": "https://python.swaroopch.com/functions.html",
+   "order": 66
+  },
+  {
+   "chapter": "Functions",
+   "heading": "Local Variables",
+   "level": 1,
+   "url": "https://python.swaroopch.com/functions.html",
+   "order": 67
+  },
+  {
+   "chapter": "Functions",
+   "heading": "The global statement",
+   "level": 1,
+   "url": "https://python.swaroopch.com/functions.html",
+   "order": 68
+  },
+  {
+   "chapter": "Functions",
+   "heading": "Default Argument Values",
+   "level": 1,
+   "url": "https://python.swaroopch.com/functions.html",
+   "order": 69
+  },
+  {
+   "chapter": "Functions",
+   "heading": "Keyword Arguments",
+   "level": 1,
+   "url": "https://python.swaroopch.com/functions.html",
+   "order": 70
+  },
+  {
+   "chapter": "Functions",
+   "heading": "VarArgs parameters",
+   "level": 1,
+   "url": "https://python.swaroopch.com/functions.html",
+   "order": 71
+  },
+  {
+   "chapter": "Functions",
+   "heading": "The return statement",
+   "level": 1,
+   "url": "https://python.swaroopch.com/functions.html",
+   "order": 72
+  },
+  {
+   "chapter": "Functions",
+   "heading": "DocStrings",
+   "level": 1,
+   "url": "https://python.swaroopch.com/functions.html",
+   "order": 73
+  },
+  {
+   "chapter": "Modules",
+   "heading": "Modules",
+   "level": 0,
+   "url": "https://python.swaroopch.com/modules.html",
+   "order": 74
+  },
+  {
+   "chapter": "Modules",
+   "heading": "Byte-compiled .pyc files",
+   "level": 1,
+   "url": "https://python.swaroopch.com/modules.html",
+   "order": 75
+  },
+  {
+   "chapter": "Modules",
+   "heading": "The from..import statement",
+   "level": 1,
+   "url": "https://python.swaroopch.com/modules.html",
+   "order": 76
+  },
+  {
+   "chapter": "Modules",
+   "heading": "A module's __name__",
+   "level": 1,
+   "url": "https://python.swaroopch.com/modules.html",
+   "order": 77
+  },
+  {
+   "chapter": "Modules",
+   "heading": "Making Your Own Modules",
+   "level": 1,
+   "url": "https://python.swaroopch.com/modules.html",
+   "order": 78
+  },
+  {
+   "chapter": "Modules",
+   "heading": "The dir function",
+   "level": 1,
+   "url": "https://python.swaroopch.com/modules.html",
+   "order": 79
+  },
+  {
+   "chapter": "Modules",
+   "heading": "Packages",
+   "level": 1,
+   "url": "https://python.swaroopch.com/modules.html",
+   "order": 80
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "Data Structures",
+   "level": 0,
+   "url": "https://python.swaroopch.com/data_structures.html",
+   "order": 81
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "List",
+   "level": 1,
+   "url": "https://python.swaroopch.com/data_structures.html",
+   "order": 82
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "Quick Introduction To Objects And Classes",
+   "level": 1,
+   "url": "https://python.swaroopch.com/data_structures.html",
+   "order": 83
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "Tuple",
+   "level": 1,
+   "url": "https://python.swaroopch.com/data_structures.html",
+   "order": 84
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "Dictionary",
+   "level": 1,
+   "url": "https://python.swaroopch.com/data_structures.html",
+   "order": 85
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "Sequence",
+   "level": 1,
+   "url": "https://python.swaroopch.com/data_structures.html",
+   "order": 86
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "Set",
+   "level": 1,
+   "url": "https://python.swaroopch.com/data_structures.html",
+   "order": 87
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "References",
+   "level": 1,
+   "url": "https://python.swaroopch.com/data_structures.html",
+   "order": 88
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "More About Strings",
+   "level": 1,
+   "url": "https://python.swaroopch.com/data_structures.html",
+   "order": 89
+  },
+  {
+   "chapter": "Problem Solving",
+   "heading": "Problem Solving",
+   "level": 0,
+   "url": "https://python.swaroopch.com/problem_solving.html",
+   "order": 90
+  },
+  {
+   "chapter": "Problem Solving",
+   "heading": "The Problem",
+   "level": 1,
+   "url": "https://python.swaroopch.com/problem_solving.html",
+   "order": 91
+  },
+  {
+   "chapter": "Problem Solving",
+   "heading": "The Solution",
+   "level": 1,
+   "url": "https://python.swaroopch.com/problem_solving.html",
+   "order": 92
+  },
+  {
+   "chapter": "Problem Solving",
+   "heading": "Second Version",
+   "level": 1,
+   "url": "https://python.swaroopch.com/problem_solving.html",
+   "order": 93
+  },
+  {
+   "chapter": "Problem Solving",
+   "heading": "Third Version",
+   "level": 1,
+   "url": "https://python.swaroopch.com/problem_solving.html",
+   "order": 94
+  },
+  {
+   "chapter": "Problem Solving",
+   "heading": "Fourth Version",
+   "level": 1,
+   "url": "https://python.swaroopch.com/problem_solving.html",
+   "order": 95
+  },
+  {
+   "chapter": "Problem Solving",
+   "heading": "More Refinements",
+   "level": 1,
+   "url": "https://python.swaroopch.com/problem_solving.html",
+   "order": 96
+  },
+  {
+   "chapter": "Problem Solving",
+   "heading": "The Software Development Process",
+   "level": 1,
+   "url": "https://python.swaroopch.com/problem_solving.html",
+   "order": 97
+  },
+  {
+   "chapter": "Object Oriented Programming",
+   "heading": "Object Oriented Programming",
+   "level": 0,
+   "url": "https://python.swaroopch.com/oop.html",
+   "order": 98
+  },
+  {
+   "chapter": "Object Oriented Programming",
+   "heading": "The self",
+   "level": 1,
+   "url": "https://python.swaroopch.com/oop.html",
+   "order": 99
+  },
+  {
+   "chapter": "Object Oriented Programming",
+   "heading": "Classes",
+   "level": 1,
+   "url": "https://python.swaroopch.com/oop.html",
+   "order": 100
+  },
+  {
+   "chapter": "Object Oriented Programming",
+   "heading": "Methods",
+   "level": 1,
+   "url": "https://python.swaroopch.com/oop.html",
+   "order": 101
+  },
+  {
+   "chapter": "Object Oriented Programming",
+   "heading": "The __init__ method",
+   "level": 1,
+   "url": "https://python.swaroopch.com/oop.html",
+   "order": 102
+  },
+  {
+   "chapter": "Object Oriented Programming",
+   "heading": "Class And Object Variables",
+   "level": 1,
+   "url": "https://python.swaroopch.com/oop.html",
+   "order": 103
+  },
+  {
+   "chapter": "Object Oriented Programming",
+   "heading": "Inheritance",
+   "level": 1,
+   "url": "https://python.swaroopch.com/oop.html",
+   "order": 104
+  },
+  {
+   "chapter": "Input and Output",
+   "heading": "Input and Output",
+   "level": 0,
+   "url": "https://python.swaroopch.com/io.html",
+   "order": 105
+  },
+  {
+   "chapter": "Input and Output",
+   "heading": "Input from user",
+   "level": 1,
+   "url": "https://python.swaroopch.com/io.html",
+   "order": 106
+  },
+  {
+   "chapter": "Input and Output",
+   "heading": "Homework exercise",
+   "level": 2,
+   "url": "https://python.swaroopch.com/io.html",
+   "order": 107
+  },
+  {
+   "chapter": "Input and Output",
+   "heading": "Files",
+   "level": 1,
+   "url": "https://python.swaroopch.com/io.html",
+   "order": 108
+  },
+  {
+   "chapter": "Input and Output",
+   "heading": "Pickle",
+   "level": 1,
+   "url": "https://python.swaroopch.com/io.html",
+   "order": 109
+  },
+  {
+   "chapter": "Input and Output",
+   "heading": "Unicode",
+   "level": 1,
+   "url": "https://python.swaroopch.com/io.html",
+   "order": 110
+  },
+  {
+   "chapter": "Exceptions",
+   "heading": "Exceptions",
+   "level": 0,
+   "url": "https://python.swaroopch.com/exceptions.html",
+   "order": 111
+  },
+  {
+   "chapter": "Exceptions",
+   "heading": "Errors",
+   "level": 1,
+   "url": "https://python.swaroopch.com/exceptions.html",
+   "order": 112
+  },
+  {
+   "chapter": "Exceptions",
+   "heading": "Exceptions",
+   "level": 1,
+   "url": "https://python.swaroopch.com/exceptions.html",
+   "order": 113
+  },
+  {
+   "chapter": "Exceptions",
+   "heading": "Handling Exceptions",
+   "level": 1,
+   "url": "https://python.swaroopch.com/exceptions.html",
+   "order": 114
+  },
+  {
+   "chapter": "Exceptions",
+   "heading": "Raising Exceptions",
+   "level": 1,
+   "url": "https://python.swaroopch.com/exceptions.html",
+   "order": 115
+  },
+  {
+   "chapter": "Exceptions",
+   "heading": "Try ... Finally",
+   "level": 1,
+   "url": "https://python.swaroopch.com/exceptions.html",
+   "order": 116
+  },
+  {
+   "chapter": "Exceptions",
+   "heading": "The with Statement",
+   "level": 1,
+   "url": "https://python.swaroopch.com/exceptions.html",
+   "order": 117
+  },
+  {
+   "chapter": "Standard Library",
+   "heading": "Standard Library",
+   "level": 0,
+   "url": "https://python.swaroopch.com/stdlib.html",
+   "order": 118
+  },
+  {
+   "chapter": "Standard Library",
+   "heading": "sys module",
+   "level": 1,
+   "url": "https://python.swaroopch.com/stdlib.html",
+   "order": 119
+  },
+  {
+   "chapter": "Standard Library",
+   "heading": "logging module",
+   "level": 1,
+   "url": "https://python.swaroopch.com/stdlib.html",
+   "order": 120
+  },
+  {
+   "chapter": "Standard Library",
+   "heading": "Module of the Week Series",
+   "level": 1,
+   "url": "https://python.swaroopch.com/stdlib.html",
+   "order": 121
+  },
+  {
+   "chapter": "More",
+   "heading": "More",
+   "level": 0,
+   "url": "https://python.swaroopch.com/more.html",
+   "order": 122
+  },
+  {
+   "chapter": "More",
+   "heading": "Passing tuples around",
+   "level": 1,
+   "url": "https://python.swaroopch.com/more.html",
+   "order": 123
+  },
+  {
+   "chapter": "More",
+   "heading": "Special Methods",
+   "level": 1,
+   "url": "https://python.swaroopch.com/more.html",
+   "order": 124
+  },
+  {
+   "chapter": "More",
+   "heading": "Single Statement Blocks",
+   "level": 1,
+   "url": "https://python.swaroopch.com/more.html",
+   "order": 125
+  },
+  {
+   "chapter": "More",
+   "heading": "Lambda Forms",
+   "level": 1,
+   "url": "https://python.swaroopch.com/more.html",
+   "order": 126
+  },
+  {
+   "chapter": "More",
+   "heading": "List Comprehension",
+   "level": 1,
+   "url": "https://python.swaroopch.com/more.html",
+   "order": 127
+  },
+  {
+   "chapter": "More",
+   "heading": "Receiving Tuples and Dictionaries in Functions",
+   "level": 1,
+   "url": "https://python.swaroopch.com/more.html",
+   "order": 128
+  },
+  {
+   "chapter": "More",
+   "heading": "The assert statement",
+   "level": 1,
+   "url": "https://python.swaroopch.com/more.html",
+   "order": 129
+  },
+  {
+   "chapter": "More",
+   "heading": "Decorators",
+   "level": 1,
+   "url": "https://python.swaroopch.com/more.html",
+   "order": 130
+  },
+  {
+   "chapter": "More",
+   "heading": "Differences between Python 2 and Python 3",
+   "level": 1,
+   "url": "https://python.swaroopch.com/more.html",
+   "order": 131
+  }
+ ]
+}

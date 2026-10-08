@@ -1,0 +1,709 @@
+{
+ "id": "cs50p",
+ "name": "CS50's Introduction to Programming with Python",
+ "author": "David J. Malan (Harvard)",
+ "url": "https://cs50.harvard.edu/python/",
+ "kind": "University course",
+ "items": [
+  {
+   "order": 0,
+   "chapter": "Lecture 0: Functions, Variables",
+   "heading": "Functions, Variables",
+   "level": 0,
+   "url": "https://cs50.harvard.edu/python/notes/0/"
+  },
+  {
+   "order": 1,
+   "chapter": "Lecture 0: Functions, Variables",
+   "heading": "Creating Code with Python",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/0/"
+  },
+  {
+   "order": 2,
+   "chapter": "Lecture 0: Functions, Variables",
+   "heading": "Functions",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/0/"
+  },
+  {
+   "order": 3,
+   "chapter": "Lecture 0: Functions, Variables",
+   "heading": "Bugs",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/0/"
+  },
+  {
+   "order": 4,
+   "chapter": "Lecture 0: Functions, Variables",
+   "heading": "Improving Your First Python Program",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/0/"
+  },
+  {
+   "order": 5,
+   "chapter": "Lecture 0: Functions, Variables",
+   "heading": "Variables",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/0/"
+  },
+  {
+   "order": 6,
+   "chapter": "Lecture 0: Functions, Variables",
+   "heading": "Comments",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/0/"
+  },
+  {
+   "order": 7,
+   "chapter": "Lecture 0: Functions, Variables",
+   "heading": "Pseudocode",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/0/"
+  },
+  {
+   "order": 8,
+   "chapter": "Lecture 0: Functions, Variables",
+   "heading": "Further Improving Your First Python Program",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/0/"
+  },
+  {
+   "order": 9,
+   "chapter": "Lecture 0: Functions, Variables",
+   "heading": "Strings and Parameters",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/0/"
+  },
+  {
+   "order": 10,
+   "chapter": "Lecture 0: Functions, Variables",
+   "heading": "A small problem with quotation marks",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/0/"
+  },
+  {
+   "order": 11,
+   "chapter": "Lecture 0: Functions, Variables",
+   "heading": "Formatting Strings",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/0/"
+  },
+  {
+   "order": 12,
+   "chapter": "Lecture 0: Functions, Variables",
+   "heading": "More on Strings",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/0/"
+  },
+  {
+   "order": 13,
+   "chapter": "Lecture 0: Functions, Variables",
+   "heading": "Integers or int",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/0/"
+  },
+  {
+   "order": 14,
+   "chapter": "Lecture 0: Functions, Variables",
+   "heading": "Readability Wins",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/0/"
+  },
+  {
+   "order": 15,
+   "chapter": "Lecture 0: Functions, Variables",
+   "heading": "Float Basics",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/0/"
+  },
+  {
+   "order": 16,
+   "chapter": "Lecture 0: Functions, Variables",
+   "heading": "More on Floats",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/0/"
+  },
+  {
+   "order": 17,
+   "chapter": "Lecture 0: Functions, Variables",
+   "heading": "Def",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/0/"
+  },
+  {
+   "order": 18,
+   "chapter": "Lecture 0: Functions, Variables",
+   "heading": "Returning Values",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/0/"
+  },
+  {
+   "order": 19,
+   "chapter": "Lecture 1: Conditionals",
+   "heading": "Conditionals",
+   "level": 0,
+   "url": "https://cs50.harvard.edu/python/notes/1/"
+  },
+  {
+   "order": 20,
+   "chapter": "Lecture 1: Conditionals",
+   "heading": "Conditionals",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/1/"
+  },
+  {
+   "order": 21,
+   "chapter": "Lecture 1: Conditionals",
+   "heading": "if Statements",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/1/"
+  },
+  {
+   "order": 22,
+   "chapter": "Lecture 1: Conditionals",
+   "heading": "Control Flow, elif, and else",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/1/"
+  },
+  {
+   "order": 23,
+   "chapter": "Lecture 1: Conditionals",
+   "heading": "or",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/1/"
+  },
+  {
+   "order": 24,
+   "chapter": "Lecture 1: Conditionals",
+   "heading": "and",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/1/"
+  },
+  {
+   "order": 25,
+   "chapter": "Lecture 1: Conditionals",
+   "heading": "Modulo",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/1/"
+  },
+  {
+   "order": 26,
+   "chapter": "Lecture 1: Conditionals",
+   "heading": "Creating Our Own Parity Function",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/1/"
+  },
+  {
+   "order": 27,
+   "chapter": "Lecture 1: Conditionals",
+   "heading": "Pythonic",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/1/"
+  },
+  {
+   "order": 28,
+   "chapter": "Lecture 1: Conditionals",
+   "heading": "match",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/1/"
+  },
+  {
+   "order": 29,
+   "chapter": "Lecture 2: Loops",
+   "heading": "Loops",
+   "level": 0,
+   "url": "https://cs50.harvard.edu/python/notes/2/"
+  },
+  {
+   "order": 30,
+   "chapter": "Lecture 2: Loops",
+   "heading": "Loops",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/2/"
+  },
+  {
+   "order": 31,
+   "chapter": "Lecture 2: Loops",
+   "heading": "While Loops",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/2/"
+  },
+  {
+   "order": 32,
+   "chapter": "Lecture 2: Loops",
+   "heading": "For Loops",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/2/"
+  },
+  {
+   "order": 33,
+   "chapter": "Lecture 2: Loops",
+   "heading": "Improving with User Input",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/2/"
+  },
+  {
+   "order": 34,
+   "chapter": "Lecture 2: Loops",
+   "heading": "More About Lists",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/2/"
+  },
+  {
+   "order": 35,
+   "chapter": "Lecture 2: Loops",
+   "heading": "Length",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/2/"
+  },
+  {
+   "order": 36,
+   "chapter": "Lecture 2: Loops",
+   "heading": "Dictionaries",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/2/"
+  },
+  {
+   "order": 37,
+   "chapter": "Lecture 2: Loops",
+   "heading": "Mario",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/2/"
+  },
+  {
+   "order": 38,
+   "chapter": "Lecture 3: Exceptions",
+   "heading": "Exceptions",
+   "level": 0,
+   "url": "https://cs50.harvard.edu/python/notes/3/"
+  },
+  {
+   "order": 39,
+   "chapter": "Lecture 3: Exceptions",
+   "heading": "Exceptions",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/3/"
+  },
+  {
+   "order": 40,
+   "chapter": "Lecture 3: Exceptions",
+   "heading": "Runtime Errors",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/3/"
+  },
+  {
+   "order": 41,
+   "chapter": "Lecture 3: Exceptions",
+   "heading": "try",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/3/"
+  },
+  {
+   "order": 42,
+   "chapter": "Lecture 3: Exceptions",
+   "heading": "else",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/3/"
+  },
+  {
+   "order": 43,
+   "chapter": "Lecture 3: Exceptions",
+   "heading": "Creating a Function to Get an Integer",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/3/"
+  },
+  {
+   "order": 44,
+   "chapter": "Lecture 3: Exceptions",
+   "heading": "pass",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/3/"
+  },
+  {
+   "order": 45,
+   "chapter": "Lecture 4: Libraries",
+   "heading": "Libraries",
+   "level": 0,
+   "url": "https://cs50.harvard.edu/python/notes/4/"
+  },
+  {
+   "order": 46,
+   "chapter": "Lecture 4: Libraries",
+   "heading": "Libraries",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/4/"
+  },
+  {
+   "order": 47,
+   "chapter": "Lecture 4: Libraries",
+   "heading": "Random",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/4/"
+  },
+  {
+   "order": 48,
+   "chapter": "Lecture 4: Libraries",
+   "heading": "Statistics",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/4/"
+  },
+  {
+   "order": 49,
+   "chapter": "Lecture 4: Libraries",
+   "heading": "Command-Line Arguments",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/4/"
+  },
+  {
+   "order": 50,
+   "chapter": "Lecture 4: Libraries",
+   "heading": "slice",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/4/"
+  },
+  {
+   "order": 51,
+   "chapter": "Lecture 4: Libraries",
+   "heading": "Packages",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/4/"
+  },
+  {
+   "order": 52,
+   "chapter": "Lecture 4: Libraries",
+   "heading": "APIs",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/4/"
+  },
+  {
+   "order": 53,
+   "chapter": "Lecture 4: Libraries",
+   "heading": "Making Your Own Libraries",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/4/"
+  },
+  {
+   "order": 54,
+   "chapter": "Lecture 5: Unit Tests",
+   "heading": "Unit Tests",
+   "level": 0,
+   "url": "https://cs50.harvard.edu/python/notes/5/"
+  },
+  {
+   "order": 55,
+   "chapter": "Lecture 5: Unit Tests",
+   "heading": "Unit Tests",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/5/"
+  },
+  {
+   "order": 56,
+   "chapter": "Lecture 5: Unit Tests",
+   "heading": "assert",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/5/"
+  },
+  {
+   "order": 57,
+   "chapter": "Lecture 5: Unit Tests",
+   "heading": "pytest",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/5/"
+  },
+  {
+   "order": 58,
+   "chapter": "Lecture 5: Unit Tests",
+   "heading": "Testing Strings",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/5/"
+  },
+  {
+   "order": 59,
+   "chapter": "Lecture 5: Unit Tests",
+   "heading": "Organizing Tests into Folders",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/5/"
+  },
+  {
+   "order": 60,
+   "chapter": "Lecture 6: File I/O",
+   "heading": "File I/O",
+   "level": 0,
+   "url": "https://cs50.harvard.edu/python/notes/6/"
+  },
+  {
+   "order": 61,
+   "chapter": "Lecture 6: File I/O",
+   "heading": "File I/O",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/6/"
+  },
+  {
+   "order": 62,
+   "chapter": "Lecture 6: File I/O",
+   "heading": "open",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/6/"
+  },
+  {
+   "order": 63,
+   "chapter": "Lecture 6: File I/O",
+   "heading": "with",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/6/"
+  },
+  {
+   "order": 64,
+   "chapter": "Lecture 6: File I/O",
+   "heading": "CSV",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/6/"
+  },
+  {
+   "order": 65,
+   "chapter": "Lecture 6: File I/O",
+   "heading": "Binary Files and PIL",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/6/"
+  },
+  {
+   "order": 66,
+   "chapter": "Lecture 7: Regular Expressions",
+   "heading": "Regular Expressions",
+   "level": 0,
+   "url": "https://cs50.harvard.edu/python/notes/7/"
+  },
+  {
+   "order": 67,
+   "chapter": "Lecture 7: Regular Expressions",
+   "heading": "Regular Expressions",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/7/"
+  },
+  {
+   "order": 68,
+   "chapter": "Lecture 7: Regular Expressions",
+   "heading": "Case Sensitivity",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/7/"
+  },
+  {
+   "order": 69,
+   "chapter": "Lecture 7: Regular Expressions",
+   "heading": "Cleaning Up User Input",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/7/"
+  },
+  {
+   "order": 70,
+   "chapter": "Lecture 7: Regular Expressions",
+   "heading": "Extracting User Input",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/7/"
+  },
+  {
+   "order": 71,
+   "chapter": "Lecture 8: Object-Oriented Programming",
+   "heading": "Object-Oriented Programming",
+   "level": 0,
+   "url": "https://cs50.harvard.edu/python/notes/8/"
+  },
+  {
+   "order": 72,
+   "chapter": "Lecture 8: Object-Oriented Programming",
+   "heading": "Object-Oriented Programming",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/8/"
+  },
+  {
+   "order": 73,
+   "chapter": "Lecture 8: Object-Oriented Programming",
+   "heading": "Classes",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/8/"
+  },
+  {
+   "order": 74,
+   "chapter": "Lecture 8: Object-Oriented Programming",
+   "heading": "raise",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/8/"
+  },
+  {
+   "order": 75,
+   "chapter": "Lecture 8: Object-Oriented Programming",
+   "heading": "Decorators",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/8/"
+  },
+  {
+   "order": 76,
+   "chapter": "Lecture 8: Object-Oriented Programming",
+   "heading": "Connecting to Previous Work in this Course",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/8/"
+  },
+  {
+   "order": 77,
+   "chapter": "Lecture 8: Object-Oriented Programming",
+   "heading": "Class Methods",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/8/"
+  },
+  {
+   "order": 78,
+   "chapter": "Lecture 8: Object-Oriented Programming",
+   "heading": "Static Methods",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/8/"
+  },
+  {
+   "order": 79,
+   "chapter": "Lecture 8: Object-Oriented Programming",
+   "heading": "Inheritance",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/8/"
+  },
+  {
+   "order": 80,
+   "chapter": "Lecture 8: Object-Oriented Programming",
+   "heading": "Inheritance and Exceptions",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/8/"
+  },
+  {
+   "order": 81,
+   "chapter": "Lecture 8: Object-Oriented Programming",
+   "heading": "Operator Overloading",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/8/"
+  },
+  {
+   "order": 82,
+   "chapter": "Lecture 9: Et Cetera",
+   "heading": "Et Cetera",
+   "level": 0,
+   "url": "https://cs50.harvard.edu/python/notes/9/"
+  },
+  {
+   "order": 83,
+   "chapter": "Lecture 9: Et Cetera",
+   "heading": "Et Cetera",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/9/"
+  },
+  {
+   "order": 84,
+   "chapter": "Lecture 9: Et Cetera",
+   "heading": "set",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/9/"
+  },
+  {
+   "order": 85,
+   "chapter": "Lecture 9: Et Cetera",
+   "heading": "Global Variables",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/9/"
+  },
+  {
+   "order": 86,
+   "chapter": "Lecture 9: Et Cetera",
+   "heading": "Constants",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/9/"
+  },
+  {
+   "order": 87,
+   "chapter": "Lecture 9: Et Cetera",
+   "heading": "Type Hints",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/9/"
+  },
+  {
+   "order": 88,
+   "chapter": "Lecture 9: Et Cetera",
+   "heading": "Docstrings",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/9/"
+  },
+  {
+   "order": 89,
+   "chapter": "Lecture 9: Et Cetera",
+   "heading": "argparse",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/9/"
+  },
+  {
+   "order": 90,
+   "chapter": "Lecture 9: Et Cetera",
+   "heading": "Unpacking",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/9/"
+  },
+  {
+   "order": 91,
+   "chapter": "Lecture 9: Et Cetera",
+   "heading": "args and kwargs",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/9/"
+  },
+  {
+   "order": 92,
+   "chapter": "Lecture 9: Et Cetera",
+   "heading": "map",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/9/"
+  },
+  {
+   "order": 93,
+   "chapter": "Lecture 9: Et Cetera",
+   "heading": "List Comprehensions",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/9/"
+  },
+  {
+   "order": 94,
+   "chapter": "Lecture 9: Et Cetera",
+   "heading": "filter",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/9/"
+  },
+  {
+   "order": 95,
+   "chapter": "Lecture 9: Et Cetera",
+   "heading": "Dictionary Comprehensions",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/9/"
+  },
+  {
+   "order": 96,
+   "chapter": "Lecture 9: Et Cetera",
+   "heading": "enumerate",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/9/"
+  },
+  {
+   "order": 97,
+   "chapter": "Lecture 9: Et Cetera",
+   "heading": "Generators and Iterators",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/9/"
+  },
+  {
+   "order": 98,
+   "chapter": "Lecture 9: Et Cetera",
+   "heading": "Congratulations!",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/9/"
+  },
+  {
+   "order": 99,
+   "chapter": "Lecture 9: Et Cetera",
+   "heading": "This was CS50!",
+   "level": 1,
+   "url": "https://cs50.harvard.edu/python/notes/9/"
+  }
+ ]
+}

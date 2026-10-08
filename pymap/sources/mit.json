@@ -1,0 +1,954 @@
+{
+ "id": "mit",
+ "name": "MIT 6.100L Introduction to CS and Programming Using Python (Fall 2022)",
+ "author": "Ana Bell (MIT OpenCourseWare)",
+ "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/",
+ "kind": "University course",
+ "items": [
+  {
+   "order": 0,
+   "chapter": "Lecture 1: Introduction",
+   "heading": "Introduction",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-1-introduction/"
+  },
+  {
+   "order": 1,
+   "chapter": "Lecture 1: Introduction",
+   "heading": "Introduction to Python",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 2,
+   "chapter": "Lecture 1: Introduction",
+   "heading": "knowledge",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 3,
+   "chapter": "Lecture 1: Introduction",
+   "heading": "machines",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 4,
+   "chapter": "Lecture 1: Introduction",
+   "heading": "objects",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 5,
+   "chapter": "Lecture 1: Introduction",
+   "heading": "types",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 6,
+   "chapter": "Lecture 1: Introduction",
+   "heading": "variables",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 7,
+   "chapter": "Lecture 1: Introduction",
+   "heading": "bindings",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 8,
+   "chapter": "Lecture 1: Introduction",
+   "heading": "IDEs",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 9,
+   "chapter": "Lecture 2: Strings, Input/Output, Branching",
+   "heading": "Strings, Input/Output, Branching",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-2-strings-inputoutput-branching/"
+  },
+  {
+   "order": 10,
+   "chapter": "Lecture 2: Strings, Input/Output, Branching",
+   "heading": "Core Elements of Programs",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 11,
+   "chapter": "Lecture 2: Strings, Input/Output, Branching",
+   "heading": "strings",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 12,
+   "chapter": "Lecture 2: Strings, Input/Output, Branching",
+   "heading": "input/output",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 13,
+   "chapter": "Lecture 2: Strings, Input/Output, Branching",
+   "heading": "f-strings",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 14,
+   "chapter": "Lecture 2: Strings, Input/Output, Branching",
+   "heading": "operators",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 15,
+   "chapter": "Lecture 2: Strings, Input/Output, Branching",
+   "heading": "branching",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 16,
+   "chapter": "Lecture 2: Strings, Input/Output, Branching",
+   "heading": "indentation",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 17,
+   "chapter": "Lecture 3: Iteration",
+   "heading": "Iteration",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-3-iteration/"
+  },
+  {
+   "order": 18,
+   "chapter": "Lecture 3: Iteration",
+   "heading": "Program Flow",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 19,
+   "chapter": "Lecture 3: Iteration",
+   "heading": "control flow",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 20,
+   "chapter": "Lecture 3: Iteration",
+   "heading": "loops",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 21,
+   "chapter": "Lecture 4: Loops over Strings, Guess-and-Check, Binary",
+   "heading": "Loops over Strings, Guess-and-Check, Binary",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-4-loops-over-strings-guess-and-check-binary/"
+  },
+  {
+   "order": 22,
+   "chapter": "Lecture 4: Loops over Strings, Guess-and-Check, Binary",
+   "heading": "Iteration",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 23,
+   "chapter": "Lecture 4: Loops over Strings, Guess-and-Check, Binary",
+   "heading": "Simple Programs",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 24,
+   "chapter": "Lecture 4: Loops over Strings, Guess-and-Check, Binary",
+   "heading": "guess and check",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 25,
+   "chapter": "Lecture 4: Loops over Strings, Guess-and-Check, Binary",
+   "heading": "binary",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 26,
+   "chapter": "Lecture 4: Loops over Strings, Guess-and-Check, Binary",
+   "heading": "fractions",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 27,
+   "chapter": "Lecture 5: Floats and Approximation Methods",
+   "heading": "Floats and Approximation Methods",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-5-floats-and-approximation-methods/"
+  },
+  {
+   "order": 28,
+   "chapter": "Lecture 5: Floats and Approximation Methods",
+   "heading": "Simple Algorithms",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 29,
+   "chapter": "Lecture 5: Floats and Approximation Methods",
+   "heading": "approximation method",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 30,
+   "chapter": "Lecture 5: Floats and Approximation Methods",
+   "heading": "floats",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 31,
+   "chapter": "Lecture 6: Bisection Search",
+   "heading": "Bisection Search",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-6-bisection-search/"
+  },
+  {
+   "order": 32,
+   "chapter": "Lecture 6: Bisection Search",
+   "heading": "Simple Algorithms",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 33,
+   "chapter": "Lecture 6: Bisection Search",
+   "heading": "bisection search",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 34,
+   "chapter": "Lecture 6: Bisection Search",
+   "heading": "Newton-Raphson",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 35,
+   "chapter": "Lecture 7: Decomposition, Abstraction, Functions",
+   "heading": "Decomposition, Abstraction, Functions",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-7-decomposition-abstraction-functions/"
+  },
+  {
+   "order": 36,
+   "chapter": "Lecture 7: Decomposition, Abstraction, Functions",
+   "heading": "Functions",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 37,
+   "chapter": "Lecture 7: Decomposition, Abstraction, Functions",
+   "heading": "decomposition",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 38,
+   "chapter": "Lecture 7: Decomposition, Abstraction, Functions",
+   "heading": "abstraction",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 39,
+   "chapter": "Lecture 7: Decomposition, Abstraction, Functions",
+   "heading": "specifications",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 40,
+   "chapter": "Lecture 8: Functions as Objects",
+   "heading": "Functions as Objects",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-8-functions-as-objects/"
+  },
+  {
+   "order": 41,
+   "chapter": "Lecture 8: Functions as Objects",
+   "heading": "Functions",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 42,
+   "chapter": "Lecture 8: Functions as Objects",
+   "heading": "environments",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 43,
+   "chapter": "Lecture 8: Functions as Objects",
+   "heading": "scope",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 44,
+   "chapter": "Lecture 8: Functions as Objects",
+   "heading": "functions as objects",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 45,
+   "chapter": "Lecture 9: Lambda Functions, Tuples, and Lists",
+   "heading": "Lambda Functions, Tuples, and Lists",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-9-lambda-functions-tuples-and-lists/"
+  },
+  {
+   "order": 46,
+   "chapter": "Lecture 9: Lambda Functions, Tuples, and Lists",
+   "heading": "Tuples and Lists",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 47,
+   "chapter": "Lecture 10: Lists, Mutability",
+   "heading": "Lists, Mutability",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-10-lists-mutability/"
+  },
+  {
+   "order": 48,
+   "chapter": "Lecture 10: Lists, Mutability",
+   "heading": "List Operations",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 49,
+   "chapter": "Lecture 10: Lists, Mutability",
+   "heading": "Mutability",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 50,
+   "chapter": "Lecture 10: Lists, Mutability",
+   "heading": "mutation",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 51,
+   "chapter": "Lecture 10: Lists, Mutability",
+   "heading": "aliasing",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 52,
+   "chapter": "Lecture 10: Lists, Mutability",
+   "heading": "tricky examples with loops over L",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 53,
+   "chapter": "Lecture 11: Aliasing, Cloning",
+   "heading": "Aliasing, Cloning",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-11-aliasing-cloning/"
+  },
+  {
+   "order": 54,
+   "chapter": "Lecture 11: Aliasing, Cloning",
+   "heading": "Aliasing and Cloning",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 55,
+   "chapter": "Lecture 11: Aliasing, Cloning",
+   "heading": "List Comprehensions",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 56,
+   "chapter": "Lecture 12: List Comprehension, Functions as Objects, Testing, Debugging",
+   "heading": "List Comprehension, Functions as Objects, Testing, Debugging",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-12-list-comprehension-functions-as-objects-testing-debugging/"
+  },
+  {
+   "order": 57,
+   "chapter": "Lecture 12: List Comprehension, Functions as Objects, Testing, Debugging",
+   "heading": "More Functions as Objects",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 58,
+   "chapter": "Lecture 12: List Comprehension, Functions as Objects, Testing, Debugging",
+   "heading": "Keyword Arguments",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 59,
+   "chapter": "Lecture 12: List Comprehension, Functions as Objects, Testing, Debugging",
+   "heading": "Default Arguments",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 60,
+   "chapter": "Lecture 12: List Comprehension, Functions as Objects, Testing, Debugging",
+   "heading": "Debugging",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 61,
+   "chapter": "Lecture 12: List Comprehension, Functions as Objects, Testing, Debugging",
+   "heading": "glass box/black box testing",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 62,
+   "chapter": "Lecture 12: List Comprehension, Functions as Objects, Testing, Debugging",
+   "heading": "examples",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 63,
+   "chapter": "Lecture 13: Exceptions, Assertions",
+   "heading": "Exceptions, Assertions",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-13-exceptions-assertions/"
+  },
+  {
+   "order": 64,
+   "chapter": "Lecture 13: Exceptions, Assertions",
+   "heading": "Exceptions",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 65,
+   "chapter": "Lecture 13: Exceptions, Assertions",
+   "heading": "Assertions",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 66,
+   "chapter": "Lecture 14: Dictionaries",
+   "heading": "Dictionaries",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-14-dictionaries/"
+  },
+  {
+   "order": 67,
+   "chapter": "Lecture 14: Dictionaries",
+   "heading": "Dictionaries",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 68,
+   "chapter": "Lecture 14: Dictionaries",
+   "heading": "keys",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 69,
+   "chapter": "Lecture 14: Dictionaries",
+   "heading": "values",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 70,
+   "chapter": "Lecture 14: Dictionaries",
+   "heading": "mutability",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 71,
+   "chapter": "Lecture 14: Dictionaries",
+   "heading": "iteration over a dict",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 72,
+   "chapter": "Lecture 14: Dictionaries",
+   "heading": "examples",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 73,
+   "chapter": "Lecture 15: Recursion",
+   "heading": "Recursion",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-15-recursion/"
+  },
+  {
+   "order": 74,
+   "chapter": "Lecture 15: Recursion",
+   "heading": "Recursion",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 75,
+   "chapter": "Lecture 15: Recursion",
+   "heading": "iteration vs recursion",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 76,
+   "chapter": "Lecture 15: Recursion",
+   "heading": "inductive reasoning",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 77,
+   "chapter": "Lecture 16: Recursion on Non-Numerics",
+   "heading": "Recursion on Non-Numerics",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-16-recursion-on-non-numerics/"
+  },
+  {
+   "order": 78,
+   "chapter": "Lecture 16: Recursion on Non-Numerics",
+   "heading": "Recursion",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 79,
+   "chapter": "Lecture 16: Recursion on Non-Numerics",
+   "heading": "Fibonacci",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 80,
+   "chapter": "Lecture 16: Recursion on Non-Numerics",
+   "heading": "Fibonacci with a dict",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 81,
+   "chapter": "Lecture 16: Recursion on Non-Numerics",
+   "heading": "recursion on non-numerics",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 82,
+   "chapter": "Lecture 16: Recursion on Non-Numerics",
+   "heading": "recursion on lists",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 83,
+   "chapter": "Lecture 16: Recursion on Non-Numerics",
+   "heading": "Towers of Hanoi (extra)",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 84,
+   "chapter": "Lecture 17: Python Classes",
+   "heading": "Python Classes",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-17-python-classes/"
+  },
+  {
+   "order": 85,
+   "chapter": "Lecture 17: Python Classes",
+   "heading": "Object Oriented Programming",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 86,
+   "chapter": "Lecture 17: Python Classes",
+   "heading": "data abstraction",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 87,
+   "chapter": "Lecture 17: Python Classes",
+   "heading": "class def",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 88,
+   "chapter": "Lecture 17: Python Classes",
+   "heading": "class instances",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 89,
+   "chapter": "Lecture 17: Python Classes",
+   "heading": "methods",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 90,
+   "chapter": "Lecture 18: More Python Class Methods",
+   "heading": "More Python Class Methods",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-18-more-python-class-methods/"
+  },
+  {
+   "order": 91,
+   "chapter": "Lecture 18: More Python Class Methods",
+   "heading": "Object Oriented Programming",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 92,
+   "chapter": "Lecture 18: More Python Class Methods",
+   "heading": "dunder methods",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 93,
+   "chapter": "Lecture 18: More Python Class Methods",
+   "heading": "examples",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 94,
+   "chapter": "Lecture 19: Inheritance",
+   "heading": "Inheritance",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-19-inheritance/"
+  },
+  {
+   "order": 95,
+   "chapter": "Lecture 19: Inheritance",
+   "heading": "Inheritance",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 96,
+   "chapter": "Lecture 19: Inheritance",
+   "heading": "hierarchies",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 97,
+   "chapter": "Lecture 19: Inheritance",
+   "heading": "subclasses",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 98,
+   "chapter": "Lecture 19: Inheritance",
+   "heading": "using inherited methods",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 99,
+   "chapter": "Lecture 19: Inheritance",
+   "heading": "examples",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 100,
+   "chapter": "Lecture 20: Fitness Tracker Object-Oriented Programming Example",
+   "heading": "Fitness Tracker Object-Oriented Programming Example",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-20-fitness-tracker-object-oriented-programming-example/"
+  },
+  {
+   "order": 101,
+   "chapter": "Lecture 20: Fitness Tracker Object-Oriented Programming Example",
+   "heading": "Inheritance",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 102,
+   "chapter": "Lecture 20: Fitness Tracker Object-Oriented Programming Example",
+   "heading": "more examples",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 103,
+   "chapter": "Lecture 21: Timing Programs, Counting Operations",
+   "heading": "Timing Programs, Counting Operations",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-21-timing-programs-counting-operations/"
+  },
+  {
+   "order": 104,
+   "chapter": "Lecture 21: Timing Programs, Counting Operations",
+   "heading": "Complexity",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 105,
+   "chapter": "Lecture 21: Timing Programs, Counting Operations",
+   "heading": "measuring efficiency",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 106,
+   "chapter": "Lecture 21: Timing Programs, Counting Operations",
+   "heading": "timing programs",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 107,
+   "chapter": "Lecture 21: Timing Programs, Counting Operations",
+   "heading": "counting operations",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 108,
+   "chapter": "Lecture 22: Big Oh and Theta",
+   "heading": "Big Oh and Theta",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-22-big-oh-and-theta/"
+  },
+  {
+   "order": 109,
+   "chapter": "Lecture 22: Big Oh and Theta",
+   "heading": "Complexity",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 110,
+   "chapter": "Lecture 22: Big Oh and Theta",
+   "heading": "Big-Oh notation",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 111,
+   "chapter": "Lecture 22: Big Oh and Theta",
+   "heading": "Big-Theta notation",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 112,
+   "chapter": "Lecture 22: Big Oh and Theta",
+   "heading": "complexity relations and classes",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 113,
+   "chapter": "Lecture 22: Big Oh and Theta",
+   "heading": "calc-complexity",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 114,
+   "chapter": "Lecture 23: Complexity Classes Examples",
+   "heading": "Complexity Classes Examples",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-23-complexity-classes-examples/"
+  },
+  {
+   "order": 115,
+   "chapter": "Lecture 23: Complexity Classes Examples",
+   "heading": "String and List Examples",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 116,
+   "chapter": "Lecture 23: Complexity Classes Examples",
+   "heading": "Analyzing Complexity",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 117,
+   "chapter": "Lecture 23: Complexity Classes Examples",
+   "heading": "Search",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 118,
+   "chapter": "Lecture 23: Complexity Classes Examples",
+   "heading": "indirection",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 119,
+   "chapter": "Lecture 23: Complexity Classes Examples",
+   "heading": "linear search",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 120,
+   "chapter": "Lecture 23: Complexity Classes Examples",
+   "heading": "bisection search",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 121,
+   "chapter": "Lecture 24: Sorting Algorithms",
+   "heading": "Sorting Algorithms",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-24-sorting-algorithms/"
+  },
+  {
+   "order": 122,
+   "chapter": "Lecture 24: Sorting Algorithms",
+   "heading": "Sort",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 123,
+   "chapter": "Lecture 24: Sorting Algorithms",
+   "heading": "bogo",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 124,
+   "chapter": "Lecture 24: Sorting Algorithms",
+   "heading": "bubble",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 125,
+   "chapter": "Lecture 24: Sorting Algorithms",
+   "heading": "selection",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 126,
+   "chapter": "Lecture 24: Sorting Algorithms",
+   "heading": "merge sort",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 127,
+   "chapter": "Lecture 25: Plotting",
+   "heading": "Plotting",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-25-plotting/"
+  },
+  {
+   "order": 128,
+   "chapter": "Lecture 25: Plotting",
+   "heading": "Visualization Library",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 129,
+   "chapter": "Lecture 26: List Access, Hashing, Simulations, and Wrap-Up",
+   "heading": "List Access, Hashing, Simulations, and Wrap-Up",
+   "level": 0,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/lecture-26-list-access-hashing-simulations-and-wrap-up/"
+  },
+  {
+   "order": 130,
+   "chapter": "Lecture 26: List Access, Hashing, Simulations, and Wrap-Up",
+   "heading": "Extras",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 131,
+   "chapter": "Lecture 26: List Access, Hashing, Simulations, and Wrap-Up",
+   "heading": "lists in memory",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 132,
+   "chapter": "Lecture 26: List Access, Hashing, Simulations, and Wrap-Up",
+   "heading": "hashing",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 133,
+   "chapter": "Lecture 26: List Access, Hashing, Simulations, and Wrap-Up",
+   "heading": "simulations",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  },
+  {
+   "order": 134,
+   "chapter": "Lecture 26: List Access, Hashing, Simulations, and Wrap-Up",
+   "heading": "wrap-up",
+   "level": 1,
+   "url": "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/"
+  }
+ ]
+}

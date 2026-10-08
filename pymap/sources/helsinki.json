@@ -1,0 +1,2194 @@
+{
+ "id": "helsinki",
+ "name": "Python Programming MOOC 2025",
+ "author": "University of Helsinki",
+ "url": "https://programming-25.mooc.fi/",
+ "kind": "University course",
+ "items": [
+  {
+   "chapter": "Part 1",
+   "heading": "Getting started",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-1/1-getting-started",
+   "objectives": [],
+   "order": 0
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "A program of multiple commands",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-1/1-getting-started",
+   "order": 1
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "Arithmetic operations",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-1/1-getting-started",
+   "order": 2
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "Commenting",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-1/1-getting-started",
+   "order": 3
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "Information from the user",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-1/2-information-from-the-user",
+   "objectives": [],
+   "order": 4
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "Referencing a variable",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-1/2-information-from-the-user",
+   "order": 5
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "More than one input",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-1/2-information-from-the-user",
+   "order": 6
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "More about variables",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-1/3-more-about-variables",
+   "objectives": [],
+   "order": 7
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "Changing the value of a variable",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-1/3-more-about-variables",
+   "order": 8
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "Integers",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-1/3-more-about-variables",
+   "order": 9
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "Combining values when printing",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-1/3-more-about-variables",
+   "order": 10
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "Printing with f-strings",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-1/3-more-about-variables",
+   "order": 11
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "Floating point numbers",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-1/3-more-about-variables",
+   "order": 12
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "Arithmetic operations",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-1/4-arithmetic-operations",
+   "objectives": [
+    "You will be able to use variables in various arithmetic operations",
+    "You will know how to deal with numbers in user input",
+    "You will know how to cast values into other fundamental data types"
+   ],
+   "order": 13
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "Operands, operators and data types",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-1/4-arithmetic-operations",
+   "order": 14
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "Numbers as input",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-1/4-arithmetic-operations",
+   "order": 15
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "Using variables",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-1/4-arithmetic-operations",
+   "order": 16
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "Conditional statements",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-1/5-conditional-statements",
+   "objectives": [
+    "You will be able to use a simple conditional statement in programming",
+    "You will know what a Boolean value is",
+    "You will be able to express conditionals with comparison operators"
+   ],
+   "order": 17
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "Comparison operators",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-1/5-conditional-statements",
+   "order": 18
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "Indentation",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-1/5-conditional-statements",
+   "order": 19
+  },
+  {
+   "chapter": "Part 1",
+   "heading": "Boolean values and Boolean expressions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-1/5-conditional-statements",
+   "order": 20
+  },
+  {
+   "chapter": "Part 2",
+   "heading": "Programming terminology",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-2/1-programming-terminology",
+   "objectives": [
+    "You will be familiar with some essential terminology in programming",
+    "You will know the difference between a statement and an expression",
+    "You will be able to find out the data type of an evaluated expression",
+    "You will have learnt to use debugging methods to find mistakes in your code"
+   ],
+   "order": 21
+  },
+  {
+   "chapter": "Part 2",
+   "heading": "Statement",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-2/1-programming-terminology",
+   "order": 22
+  },
+  {
+   "chapter": "Part 2",
+   "heading": "Block",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-2/1-programming-terminology",
+   "order": 23
+  },
+  {
+   "chapter": "Part 2",
+   "heading": "Expression",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-2/1-programming-terminology",
+   "order": 24
+  },
+  {
+   "chapter": "Part 2",
+   "heading": "Function",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-2/1-programming-terminology",
+   "order": 25
+  },
+  {
+   "chapter": "Part 2",
+   "heading": "Data type",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-2/1-programming-terminology",
+   "order": 26
+  },
+  {
+   "chapter": "Part 2",
+   "heading": "Syntax",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-2/1-programming-terminology",
+   "order": 27
+  },
+  {
+   "chapter": "Part 2",
+   "heading": "Debugging",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-2/1-programming-terminology",
+   "order": 28
+  },
+  {
+   "chapter": "Part 2",
+   "heading": "More conditionals",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-2/2-else-elif",
+   "objectives": [
+    "You will know how to create multiple branches within conditional statements",
+    "You will understand the purpose of if, elif and else statements within a conditional statement",
+    "You will be able to use the modulo operation % in Boolean expressions"
+   ],
+   "order": 29
+  },
+  {
+   "chapter": "Part 2",
+   "heading": "Alternative branches using the elif statement",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-2/2-else-elif",
+   "order": 30
+  },
+  {
+   "chapter": "Part 2",
+   "heading": "Combining conditions",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-2/3-combining-conditions",
+   "objectives": [
+    "You will know how to use the operators and, or and not in conditions",
+    "You will be able to write nested conditionals"
+   ],
+   "order": 31
+  },
+  {
+   "chapter": "Part 2",
+   "heading": "Logical operators",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-2/3-combining-conditions",
+   "order": 32
+  },
+  {
+   "chapter": "Part 2",
+   "heading": "Combining and chaining conditions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-2/3-combining-conditions",
+   "order": 33
+  },
+  {
+   "chapter": "Part 2",
+   "heading": "Nested conditionals",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-2/3-combining-conditions",
+   "order": 34
+  },
+  {
+   "chapter": "Part 2",
+   "heading": "Simple loops",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-2/4-simple-loops",
+   "objectives": [
+    "You will know what a loop means in programming",
+    "You will be able to use a while True loop in your programs",
+    "You will know how to use the break command to break out of a loop"
+   ],
+   "order": 35
+  },
+  {
+   "chapter": "Part 2",
+   "heading": "Loops and helper variables",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-2/4-simple-loops",
+   "order": 36
+  },
+  {
+   "chapter": "Part 2",
+   "heading": "Debugging print statements in loops",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-2/4-simple-loops",
+   "order": 37
+  },
+  {
+   "chapter": "Part 2",
+   "heading": "Concatenating strings with the + operator",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-2/4-simple-loops",
+   "order": 38
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "Loops with conditions",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-3/1-loops-with-conditions",
+   "objectives": [
+    "You will know how to create a while loop with a condition",
+    "You will know what roles initialisation, formulating a condition and updating variables perform in a loop",
+    "You will be able to create loops with different kinds of conditions"
+   ],
+   "order": 39
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "Initialisation, condition and update",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-3/1-loops-with-conditions",
+   "order": 40
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "Writing conditions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-3/1-loops-with-conditions",
+   "order": 41
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "Debugging tips",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-3/1-loops-with-conditions",
+   "order": 42
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "Building strings",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-3/1-loops-with-conditions",
+   "order": 43
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "Working with strings",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-3/2-working-with-strings",
+   "objectives": [
+    "You will be able to use the operators + and * with strings",
+    "You will know how to find out the length of a string",
+    "You will know what is meant by string indexing",
+    "You will know how to look for substrings within a string"
+   ],
+   "order": 44
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "String operations",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-3/2-working-with-strings",
+   "order": 45
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "The length and index of a string",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-3/2-working-with-strings",
+   "order": 46
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "IndexError: string index out of range",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-3/2-working-with-strings",
+   "order": 47
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "Substrings and slices",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-3/2-working-with-strings",
+   "order": 48
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "Searching for substrings",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-3/2-working-with-strings",
+   "order": 49
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "More loops",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-3/3-more-loops",
+   "objectives": [
+    "You will understand when the break command is needed to break out of loops",
+    "You will be able to use the continue command to move to the next iteration",
+    "You will understand how nested loops work"
+   ],
+   "order": 50
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "The break command",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-3/3-more-loops",
+   "order": 51
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "The continue command",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-3/3-more-loops",
+   "order": 52
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "Nested loops",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-3/3-more-loops",
+   "order": 53
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "Defining functions",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-3/4-defining-functions",
+   "objectives": [
+    "You will know how to write and call your own functions",
+    "You will understand what is meant by the argument and the parameter of a function",
+    "You will be able to define parameters in your own functions"
+   ],
+   "order": 54
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "The function definition",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-3/4-defining-functions",
+   "order": 55
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "Function arguments",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-3/4-defining-functions",
+   "order": 56
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "More examples",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-3/4-defining-functions",
+   "order": 57
+  },
+  {
+   "chapter": "Part 3",
+   "heading": "Warning: using global variables within functions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-3/4-defining-functions",
+   "order": 58
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "The Visual Studio Code editor, Python interpreter and built-in debugging tool",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-4/1-vscode",
+   "objectives": [
+    "You will be equipped to use the Visual Studio Code editor to complete exercises on this course",
+    "You will be familiar with the interactive Python interpreter, and will be able to use it to run code"
+   ],
+   "order": 59
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "Executing code",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/1-vscode",
+   "order": 60
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "The interactive Python interpreter",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/1-vscode",
+   "order": 61
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "The built-in debugger",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/1-vscode",
+   "order": 62
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "More functions",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-4/2-more-functions",
+   "objectives": [
+    "You will know more about the arguments and parameters of functions",
+    "You will know how to return values from functions, and how to use the values in your code",
+    "You will be able to add type hints for parameters and return values"
+   ],
+   "order": 63
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "The parameters and arguments of a function",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/2-more-functions",
+   "order": 64
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "Error messages when running tests",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/2-more-functions",
+   "order": 65
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "Function calls within function calls",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/2-more-functions",
+   "order": 66
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "The return value of a function",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/2-more-functions",
+   "order": 67
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "The return statement",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/2-more-functions",
+   "order": 68
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "Using return values from functions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/2-more-functions",
+   "order": 69
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "The difference between return and print",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/2-more-functions",
+   "order": 70
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "The type of the argument",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/2-more-functions",
+   "order": 71
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "Lists",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-4/3-lists",
+   "objectives": [
+    "You will know what lists are in Python",
+    "You will be able access a specified item within a list",
+    "You will know how to add items to a list, and how to remove them",
+    "You will be familiar with built-in list functions and methods"
+   ],
+   "order": 72
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "Accessing items in a list",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/3-lists",
+   "order": 73
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "Adding items to a list",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/3-lists",
+   "order": 74
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "Adding to a specific location",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/3-lists",
+   "order": 75
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "Removing items from a list",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/3-lists",
+   "order": 76
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "Sorting lists",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/3-lists",
+   "order": 77
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "Maximum, minimum and sum",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/3-lists",
+   "order": 78
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "Methods vs functions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/3-lists",
+   "order": 79
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "A list as an argument or a return value",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/3-lists",
+   "order": 80
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "Definite iteration",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-4/4-definite-iteration",
+   "objectives": [
+    "You will know the difference between definite and indefinite iteration",
+    "You will know how a Python for loop works",
+    "You will be able to use a for loop to iterate through lists and strings"
+   ],
+   "order": 81
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "The for loop",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/4-definite-iteration",
+   "order": 82
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "The function range",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/4-definite-iteration",
+   "order": 83
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "From a range to a list",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/4-definite-iteration",
+   "order": 84
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "A reminder of the demands of the automatic tests",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/4-definite-iteration",
+   "order": 85
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "Finding the best or the worst item in a list",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/4-definite-iteration",
+   "order": 86
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "Print statement formatting",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-4/5-print-statement-formatting",
+   "objectives": [
+    "You will know how to use arguments to format the result of the print command",
+    "You will be able to use f-strings to format printouts"
+   ],
+   "order": 87
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "f-strings",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/5-print-statement-formatting",
+   "order": 88
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "More strings and lists",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-4/6-strings-and-lists",
+   "objectives": [
+    "You will be familiar with more methods for slicing strings and lists",
+    "You will understand what immutability of strings means",
+    "You will be able to use the methods count and replace"
+   ],
+   "order": 89
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "More slices",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/6-strings-and-lists",
+   "order": 90
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "Warning: using global variables within functions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/6-strings-and-lists",
+   "order": 91
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "Strings are immutable",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/6-strings-and-lists",
+   "order": 92
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "More methods for lists and strings",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/6-strings-and-lists",
+   "order": 93
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "Developing a larger programming project",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/6-strings-and-lists",
+   "order": 94
+  },
+  {
+   "chapter": "Part 4",
+   "heading": "Passing data from one function to another",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-4/6-strings-and-lists",
+   "order": 95
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "More lists",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-5/1-more-lists",
+   "objectives": [
+    "You will be able to create lists with different types of items",
+    "You will know how to use lists to organise data",
+    "You will be able to store a matrix as a two-dimensional list"
+   ],
+   "order": 96
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Lists with different types of data",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/1-more-lists",
+   "order": 97
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Reminder: using global variables within functions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/1-more-lists",
+   "order": 98
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Warning: overwriting a parameter and returning too early",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/1-more-lists",
+   "order": 99
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Lists within lists",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/1-more-lists",
+   "order": 100
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Matrices",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/1-more-lists",
+   "order": 101
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Visualising code containing lists within lists",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/1-more-lists",
+   "order": 102
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Accessing items in a matrix",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/1-more-lists",
+   "order": 103
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "A two-dimensional array as a data structure in a game",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/1-more-lists",
+   "order": 104
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "References",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-5/2-references",
+   "objectives": [
+    "You will know what is meant by a reference to a variable",
+    "You will understand that there can be multiple references to the same object",
+    "You will be able to use lists as parameters in functions",
+    "You will know what is meant by a side effect of a function"
+   ],
+   "order": 105
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Multiple references to the same list",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/2-references",
+   "order": 106
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Copying a list",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/2-references",
+   "order": 107
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Using lists as parameters in functions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/2-references",
+   "order": 108
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Editing a list given as an argument",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/2-references",
+   "order": 109
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Side effects of functions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/2-references",
+   "order": 110
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Dictionary",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-5/3-dictionary",
+   "objectives": [
+    "You will be familiar with the dictionary data structure",
+    "You will be able to use a dictionary with different types of keys and values",
+    "You will know how to traverse through the contents of a dictionary",
+    "You will be able to name some typical use cases for dictionaries"
+   ],
+   "order": 111
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Using a dictionary",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/3-dictionary",
+   "order": 112
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "What can be stored in a dictionary?",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/3-dictionary",
+   "order": 113
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "How keys and values work",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/3-dictionary",
+   "order": 114
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Traversing a dictionary",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/3-dictionary",
+   "order": 115
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Some more advanced ways to use dictionaries",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/3-dictionary",
+   "order": 116
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Removing keys and values from a dictionary",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/3-dictionary",
+   "order": 117
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Using dictionaries for structured data",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/3-dictionary",
+   "order": 118
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Tuple",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-5/4-tuple",
+   "objectives": [
+    "You will be familiar with the tuple data type",
+    "You will be able to create tuples from various types of values",
+    "You will know the difference between a tuple and a list",
+    "You will be able to name some typical use cases for tuples"
+   ],
+   "order": 119
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "What is the purpose of a tuple?",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/4-tuple",
+   "order": 120
+  },
+  {
+   "chapter": "Part 5",
+   "heading": "Tuples without parentheses",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-5/4-tuple",
+   "order": 121
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Reading files",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-6/1-reading-files",
+   "objectives": [
+    "You will know how to read the contents of files with Python",
+    "You will know what a text file and a CSV file are",
+    "You will be able to process the contents of a CSV file in your programs"
+   ],
+   "order": 122
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Reading data from a file",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/1-reading-files",
+   "order": 123
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Going through the contents of a file",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/1-reading-files",
+   "order": 124
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "What if Visual Studio Code cannot find my file?",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/1-reading-files",
+   "order": 125
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Debugging code which handles files",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/1-reading-files",
+   "order": 126
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Reading CSV files",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/1-reading-files",
+   "order": 127
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Reading the same file multiple times",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/1-reading-files",
+   "order": 128
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "More CSV file processing",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/1-reading-files",
+   "order": 129
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Removing unnecessary lines, spaces and line breaks",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/1-reading-files",
+   "order": 130
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Combining data from different files",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/1-reading-files",
+   "order": 131
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Writing files",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-6/2-writing-files",
+   "objectives": [
+    "You will know how to create files with Python code",
+    "You will be able to write text based data to a file",
+    "You will know how to create a CSV file"
+   ],
+   "order": 132
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Creating a new file",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/2-writing-files",
+   "order": 133
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Appending data to an existing file",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/2-writing-files",
+   "order": 134
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Writing CSV files",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/2-writing-files",
+   "order": 135
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Clearing file contents and deleting files",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/2-writing-files",
+   "order": 136
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Handling data in a CSV format",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/2-writing-files",
+   "order": 137
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Handling errors",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-6/3-errors",
+   "objectives": [
+    "You will know how to handle invalid input",
+    "You will understand what are exceptions in programming",
+    "You will be familiar with the most common exception types in Python",
+    "You will be able to handle exceptions in your own programs"
+   ],
+   "order": 138
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Input validation",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/3-errors",
+   "order": 139
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Exceptions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/3-errors",
+   "order": 140
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Typical errors",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/3-errors",
+   "order": 141
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Handling multiple exceptions at once",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/3-errors",
+   "order": 142
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Passing exceptions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/3-errors",
+   "order": 143
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Raising exceptions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/3-errors",
+   "order": 144
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Local and global variables",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-6/4-scope-of-variables",
+   "objectives": [
+    "You will know what is meant by a local variable",
+    "You will know how the scope of a variable affects how it is used",
+    "You will know what the Python keyword globalmeans",
+    "You will be able to use local and global variables in the correct contexts"
+   ],
+   "order": 145
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Local variables",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/4-scope-of-variables",
+   "order": 146
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Global variables",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/4-scope-of-variables",
+   "order": 147
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "When should you use global variables?",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/4-scope-of-variables",
+   "order": 148
+  },
+  {
+   "chapter": "Part 6",
+   "heading": "Passing data from one function to another, revisited",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-6/4-scope-of-variables",
+   "order": 149
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Modules",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-7/1-modules",
+   "objectives": [
+    "You will know what a Python module is",
+    "You will be able to include a module in your program with the import statement",
+    "You will know how to look for more information on the contents of modules"
+   ],
+   "order": 150
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Debugging revisited",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/1-modules",
+   "order": 151
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Using modules",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/1-modules",
+   "order": 152
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Selecting distinct sections from a module",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/1-modules",
+   "order": 153
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "The contents of a module",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/1-modules",
+   "order": 154
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Randomness",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-7/2-randomness",
+   "objectives": [
+    "You will be familiar with some of the functions in the module random",
+    "You will be able to make use of random numbers in your programs"
+   ],
+   "order": 155
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Generating a random number",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/2-randomness",
+   "order": 156
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "More randomizing functions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/2-randomness",
+   "order": 157
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Lottery numbers",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/2-randomness",
+   "order": 158
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Where do these random numbers come from?",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/2-randomness",
+   "order": 159
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Times and dates",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-7/3-times-and-dates",
+   "objectives": [
+    "You will know how to handle dates and times in Python code",
+    "You will be able to create and use datetime objects",
+    "You will know how to compare and calculate differences between two dates or times"
+   ],
+   "order": 160
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "The datetime object",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/3-times-and-dates",
+   "order": 161
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Compare times and calculate differences between them",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/3-times-and-dates",
+   "order": 162
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Formatting times and dates",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/3-times-and-dates",
+   "order": 163
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Data processing",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-7/4-data-processing",
+   "objectives": [
+    "You will know how to use a module to process CSV files",
+    "You will know how to use a module to process JSON files",
+    "You will be able to retrieve and read files from the internet"
+   ],
+   "order": 164
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Reading CSV files",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/4-data-processing",
+   "order": 165
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Reading JSON files",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/4-data-processing",
+   "order": 166
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Retrieving a file from the internet",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/4-data-processing",
+   "order": 167
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Looking for modules",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/4-data-processing",
+   "order": 168
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Creating your own modules",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-7/5-creating-modules",
+   "objectives": [
+    "You will be able to write your own modules",
+    "You will know what the Python variable __name__ and the value __main__ signify"
+   ],
+   "order": 169
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Putting type hints to use",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/5-creating-modules",
+   "order": 170
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Main function code in a module",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/5-creating-modules",
+   "order": 171
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "More Python features",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-7/6-more-features",
+   "objectives": [
+    "You will be familiar with some more Python features"
+   ],
+   "order": 172
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Single line conditionals",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/6-more-features",
+   "order": 173
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "An \"empty\" block",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/6-more-features",
+   "order": 174
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Loops with else blocks",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/6-more-features",
+   "order": 175
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "Default parameter value",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/6-more-features",
+   "order": 176
+  },
+  {
+   "chapter": "Part 7",
+   "heading": "A variable number of parameters",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-7/6-more-features",
+   "order": 177
+  },
+  {
+   "chapter": "Part 8",
+   "heading": "Objects and methods",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-8/1-objects-and-methods",
+   "objectives": [
+    "You will know what an object is in programming",
+    "You will understand what is meant by the independence of individual objects",
+    "You will be able to create and access objects"
+   ],
+   "order": 178
+  },
+  {
+   "chapter": "Part 8",
+   "heading": "Objects and methods",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-8/1-objects-and-methods",
+   "order": 179
+  },
+  {
+   "chapter": "Part 8",
+   "heading": "Classes and objects",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-8/2-classes-and-objects",
+   "objectives": [
+    "You will know what a class is",
+    "You will understand what the connection between a class and an object is",
+    "You will know what is meant by object oriented programming"
+   ],
+   "order": 180
+  },
+  {
+   "chapter": "Part 8",
+   "heading": "A class is the blueprint of an object",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-8/2-classes-and-objects",
+   "order": 181
+  },
+  {
+   "chapter": "Part 8",
+   "heading": "Functions which work with objects",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-8/2-classes-and-objects",
+   "order": 182
+  },
+  {
+   "chapter": "Part 8",
+   "heading": "Methods vs variables",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-8/2-classes-and-objects",
+   "order": 183
+  },
+  {
+   "chapter": "Part 8",
+   "heading": "Defining classes",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-8/3-defining-classes",
+   "objectives": [
+    "You will know how to define your own classes",
+    "You will be able to create objects based on classes you've defined yourself",
+    "You will know how to write a constructor",
+    "You are familiar with the parameter name self",
+    "You will know what attributes are and how they are used"
+   ],
+   "order": 184
+  },
+  {
+   "chapter": "Part 8",
+   "heading": "Adding a constructor",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-8/3-defining-classes",
+   "order": 185
+  },
+  {
+   "chapter": "Part 8",
+   "heading": "Using objecs formed from your own classes",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-8/3-defining-classes",
+   "order": 186
+  },
+  {
+   "chapter": "Part 8",
+   "heading": "Defining methods",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-8/4-defining-methods",
+   "objectives": [
+    "You will know how class methods work",
+    "You will be able to write new methods in your own classes",
+    "You will understand the concepts of encapsulation and client in object oriented programming"
+   ],
+   "order": 187
+  },
+  {
+   "chapter": "Part 8",
+   "heading": "Methods in classes",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-8/4-defining-methods",
+   "order": 188
+  },
+  {
+   "chapter": "Part 8",
+   "heading": "Encapsulation",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-8/4-defining-methods",
+   "order": 189
+  },
+  {
+   "chapter": "Part 8",
+   "heading": "More examples of classes",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-8/5-more-examples-of-classes",
+   "objectives": [
+    "You will be able to create more versatile classes",
+    "You will know how to add a __str__ method to your class definitions"
+   ],
+   "order": 190
+  },
+  {
+   "chapter": "Part 8",
+   "heading": "Example 1: the Rectangle class",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-8/5-more-examples-of-classes",
+   "order": 191
+  },
+  {
+   "chapter": "Part 8",
+   "heading": "Printing an object",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-8/5-more-examples-of-classes",
+   "order": 192
+  },
+  {
+   "chapter": "Part 8",
+   "heading": "Example 2: Task list",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-8/5-more-examples-of-classes",
+   "order": 193
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "Objects and references",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-9/1-objects-and-references",
+   "objectives": [
+    "You will be able to use different data structures for handling objects",
+    "You will know how objects can be passed as arguments"
+   ],
+   "order": 194
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "Self or no self?",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-9/1-objects-and-references",
+   "order": 195
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "Objects as arguments to functions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-9/1-objects-and-references",
+   "order": 196
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "Objects as arguments to methods",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-9/1-objects-and-references",
+   "order": 197
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "An instance of the same class as an argument to a method",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-9/1-objects-and-references",
+   "order": 198
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "Objects as attributes",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-9/2-objects-as-attributes",
+   "objectives": [
+    "You will know how to use objects as attributes in other objects",
+    "You will be familiar with the keyword None"
+   ],
+   "order": 199
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "When is an import necessary?",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-9/2-objects-as-attributes",
+   "order": 200
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "A list of objects as an attribute of an object",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-9/2-objects-as-attributes",
+   "order": 201
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "None: a reference to nothing",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-9/2-objects-as-attributes",
+   "order": 202
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "Encapsulation",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-9/3-encapsulation",
+   "objectives": [
+    "You will know what encapsulation means",
+    "You will be able to create private attributes",
+    "You will know how to create getters and setters for your attributes"
+   ],
+   "order": 203
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "Encapsulation",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-9/3-encapsulation",
+   "order": 204
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "A brief note on private attributes, Python and object oriented programming",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-9/3-encapsulation",
+   "order": 205
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "Getters and setters",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-9/3-encapsulation",
+   "order": 206
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "Scope of methods",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-9/4-scope-of-methods",
+   "objectives": [
+    "You will know how you can limit the visibility of a method in Python",
+    "You will be able to write private methods"
+   ],
+   "order": 207
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "Do I need a private method?",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-9/4-scope-of-methods",
+   "order": 208
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "Class attributes",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-9/5-class-attributes",
+   "objectives": [
+    "You will be familiar with the terms class variable and class method",
+    "You will know how static traits are different from the traits of instances",
+    "You will be able to add static traits to your own classes"
+   ],
+   "order": 209
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "Class variables",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-9/5-class-attributes",
+   "order": 210
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "Class methods",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-9/5-class-attributes",
+   "order": 211
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "More examples with classes",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-9/6-more-examples-with-classes",
+   "objectives": [
+    "You will be familiar with some more examples of classes and objects",
+    "You will be able to use default values for parameters in your methods"
+   ],
+   "order": 212
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "Default values of parameters",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-9/6-more-examples-with-classes",
+   "order": 213
+  },
+  {
+   "chapter": "Part 9",
+   "heading": "The Grand Finale",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-9/6-more-examples-with-classes",
+   "order": 214
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "Class hierarchies",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-10/1-class-hierarchies",
+   "objectives": [
+    "You will know what inheritance means in a programming context",
+    "You will be able to write classes which inherit other classes",
+    "You will know how inheritance affects the traits in classes"
+   ],
+   "order": 215
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "Special classes for special purposes",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-10/1-class-hierarchies",
+   "order": 216
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "Let's test our classes",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-10/1-class-hierarchies",
+   "order": 217
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "Access modifiers",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-10/2-access-modifiers",
+   "objectives": [
+    "You will understand the access modifiers private and protected",
+    "You will know how the visibility of traits is determined in Python"
+   ],
+   "order": 218
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "Protected traits",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-10/2-access-modifiers",
+   "order": 219
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "Object oriented programming techniques",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-10/3-oo-programming-techniques",
+   "objectives": [
+    "You will be familiar with some of the different uses for the variable name self",
+    "You will know how to overload operators in your own classes",
+    "You will be able to create an iterable class"
+   ],
+   "order": 220
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "Overloading operators",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-10/3-oo-programming-techniques",
+   "order": 221
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "More operators",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-10/3-oo-programming-techniques",
+   "order": 222
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "A string representation of an object",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-10/3-oo-programming-techniques",
+   "order": 223
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "Iterators",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-10/3-oo-programming-techniques",
+   "order": 224
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "Developing a larger application",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-10/4-application-development",
+   "objectives": [
+    "You will be familiar with some basic principles of application development",
+    "You will be comfortable with differentiating between the different parts of an application (user interface, program logic and file handling)",
+    "You will have practiced writing your own somewhat larger application"
+   ],
+   "order": 225
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "Managing complexity",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-10/4-application-development",
+   "order": 226
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "A worked example: phone book",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-10/4-application-development",
+   "order": 227
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "Step 1: an outline for the application logic",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-10/4-application-development",
+   "order": 228
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "Step 2: an outline for the user interface",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-10/4-application-development",
+   "order": 229
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "Step 3: importing data from a file",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-10/4-application-development",
+   "order": 230
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "Step 4: export data to a file",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-10/4-application-development",
+   "order": 231
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "Objects in a dictionary",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-10/4-application-development",
+   "order": 232
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "Some concluding remarks",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-10/4-application-development",
+   "order": 233
+  },
+  {
+   "chapter": "Part 10",
+   "heading": "Epilogue",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-10/4-application-development",
+   "order": 234
+  },
+  {
+   "chapter": "Part 11",
+   "heading": "List comprehensions",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-11/1-list-comprehensions",
+   "objectives": [
+    "You will know what list comprehensions are",
+    "You will be able to use list comprehensions to create new lists"
+   ],
+   "order": 235
+  },
+  {
+   "chapter": "Part 11",
+   "heading": "List comprehensions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-11/1-list-comprehensions",
+   "order": 236
+  },
+  {
+   "chapter": "Part 11",
+   "heading": "Filtering items",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-11/1-list-comprehensions",
+   "order": 237
+  },
+  {
+   "chapter": "Part 11",
+   "heading": "Alternative execution with list comprehensions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-11/1-list-comprehensions",
+   "order": 238
+  },
+  {
+   "chapter": "Part 11",
+   "heading": "LotteryNumbers matched",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-11/1-list-comprehensions",
+   "order": 239
+  },
+  {
+   "chapter": "Part 11",
+   "heading": "LotteryNumbers matched in place",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-11/1-list-comprehensions",
+   "order": 240
+  },
+  {
+   "chapter": "Part 11",
+   "heading": "More comprehensions",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-11/2-more-comprehensions",
+   "objectives": [
+    "You will be able to use comprehensions with strings",
+    "You will know how to use comprehensions with your own classes",
+    "You will be able to create dictionary comprehensions"
+   ],
+   "order": 241
+  },
+  {
+   "chapter": "Part 11",
+   "heading": "Own classes and comprehensions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-11/2-more-comprehensions",
+   "order": 242
+  },
+  {
+   "chapter": "Part 11",
+   "heading": "Comprehensions and dictionaries",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-11/2-more-comprehensions",
+   "order": 243
+  },
+  {
+   "chapter": "Part 11",
+   "heading": "Recursion",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-11/3-recursion",
+   "objectives": [
+    "You will know what recursion means",
+    "You will be able to write a simple recursive function"
+   ],
+   "order": 244
+  },
+  {
+   "chapter": "Part 11",
+   "heading": "What does recursion mean?",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-11/3-recursion",
+   "order": 245
+  },
+  {
+   "chapter": "Part 11",
+   "heading": "Recursion and return values",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-11/3-recursion",
+   "order": 246
+  },
+  {
+   "chapter": "Part 11",
+   "heading": "Binary search",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-11/3-recursion",
+   "order": 247
+  },
+  {
+   "chapter": "Part 11",
+   "heading": "More recursion examples",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-11/4-more-recursion-examples",
+   "objectives": [
+    "You will be familiar with binary trees and some recursive algorithms used to process them"
+   ],
+   "order": 248
+  },
+  {
+   "chapter": "Part 11",
+   "heading": "Recursive binary tree algorithms",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-11/4-more-recursion-examples",
+   "order": 249
+  },
+  {
+   "chapter": "Part 11",
+   "heading": "A sorted binary tree",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-11/4-more-recursion-examples",
+   "order": 250
+  },
+  {
+   "chapter": "Part 11",
+   "heading": "Revisiting the times before recursion",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-11/4-more-recursion-examples",
+   "order": 251
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "Functions as arguments",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-12/1-functions-as-arguments",
+   "objectives": [
+    "You will be able to sort lists according to different criteria",
+    "You will know what a lambda expression is",
+    "You will be able to use lambda expression with other Python functions",
+    "You will know how a function is passed as an argument to another function"
+   ],
+   "order": 252
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "Functions as arguments",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-12/1-functions-as-arguments",
+   "order": 253
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "A function definition within a function definition",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-12/1-functions-as-arguments",
+   "order": 254
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "Sorting collections of your own objects",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-12/1-functions-as-arguments",
+   "order": 255
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "Lambda expressions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-12/1-functions-as-arguments",
+   "order": 256
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "Functions as arguments within your own functions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-12/1-functions-as-arguments",
+   "order": 257
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "Generators",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-12/2-generators",
+   "objectives": [
+    "You will know what a Python generator is",
+    "You will be familiar with the keyword yield",
+    "You will be able to write your own generator functions"
+   ],
+   "order": 258
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "The keyword yield",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-12/2-generators",
+   "order": 259
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "Generator comprehensions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-12/2-generators",
+   "order": 260
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "Functional programming",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-12/3-functional-programming",
+   "objectives": [
+    "You will know what functional programming means",
+    "You will be able to make use of the functions map, reduce and filter in your own programs"
+   ],
+   "order": 261
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "map",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-12/3-functional-programming",
+   "order": 262
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "The map function and your own classes",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-12/3-functional-programming",
+   "order": 263
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "filter",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-12/3-functional-programming",
+   "order": 264
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "The return value of filter is an iterator",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-12/3-functional-programming",
+   "order": 265
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "reduce",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-12/3-functional-programming",
+   "order": 266
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "Regular expressions",
+   "level": 0,
+   "url": "https://programming-25.mooc.fi/part-12/4-regular-expressions",
+   "objectives": [
+    "You will know what regular expressions are",
+    "You will be able to use regular expressions in your own programs"
+   ],
+   "order": 267
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "What are regular expressions?",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-12/4-regular-expressions",
+   "order": 268
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "The syntax of regular expressions",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-12/4-regular-expressions",
+   "order": 269
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "Alternate substrings",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-12/4-regular-expressions",
+   "order": 270
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "Groups of characters",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-12/4-regular-expressions",
+   "order": 271
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "Repeated matches",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-12/4-regular-expressions",
+   "order": 272
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "Other special characters",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-12/4-regular-expressions",
+   "order": 273
+  },
+  {
+   "chapter": "Part 12",
+   "heading": "Grand finale",
+   "level": 1,
+   "url": "https://programming-25.mooc.fi/part-12/4-regular-expressions",
+   "order": 274
+  }
+ ]
+}

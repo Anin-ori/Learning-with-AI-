@@ -1,0 +1,485 @@
+{
+ "id": "pydata",
+ "name": "Python for Data Analysis, 3rd edition (ch. 2-3)",
+ "author": "Wes McKinney",
+ "url": "https://wesmckinney.com/book/",
+ "kind": "Book (data-science oriented)",
+ "items": [
+  {
+   "order": 0,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Python Language Basics, IPython, and Jupyter Notebooks",
+   "level": 0,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 1,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "2.1 The Python Interpreter",
+   "level": 1,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 2,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "2.2 IPython Basics",
+   "level": 1,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 3,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Running the IPython Shell",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 4,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Running the Jupyter Notebook",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 5,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Tab Completion",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 6,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Introspection",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 7,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "2.3 Python Language Basics",
+   "level": 1,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 8,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Language Semantics",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 9,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Indentation, not braces",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 10,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Everything is an object",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 11,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Comments",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 12,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Function and object method calls",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 13,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Variables and argument passing",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 14,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Dynamic references, strong types",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 15,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Attributes and methods",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 16,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Duck typing",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 17,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Imports",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 18,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Binary operators and comparisons",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 19,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Mutable and immutable objects",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 20,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Scalar Types",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 21,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Numeric types",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 22,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Strings",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 23,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Bytes and Unicode",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 24,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Booleans",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 25,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Type casting",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 26,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "None",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 27,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Dates and times",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 28,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "Control Flow",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 29,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "if, elif, and else",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 30,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "for loops",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 31,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "while loops",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 32,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "pass",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 33,
+   "chapter": "2. Python Language Basics, IPython, and Jupyter Notebooks",
+   "heading": "range",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-basics.html"
+  },
+  {
+   "order": 34,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Built-In Data Structures, Functions, and Files",
+   "level": 0,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 35,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "3.1 Data Structures and Sequences",
+   "level": 1,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 36,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Tuple",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 37,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Unpacking tuples",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 38,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Tuple methods",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 39,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "List",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 40,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Adding and removing elements",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 41,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Concatenating and combining lists",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 42,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Sorting",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 43,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Slicing",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 44,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Dictionary",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 45,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Creating dictionaries from sequences",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 46,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Default values",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 47,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Valid dictionary key types",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 48,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Set",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 49,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Built-In Sequence Functions",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 50,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "enumerate",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 51,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "sorted",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 52,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "zip",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 53,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "reversed",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 54,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "List, Set, and Dictionary Comprehensions",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 55,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Nested list comprehensions",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 56,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "3.2 Functions",
+   "level": 1,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 57,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Namespaces, Scope, and Local Functions",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 58,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Returning Multiple Values",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 59,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Functions Are Objects",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 60,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Anonymous (Lambda) Functions",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 61,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Generators",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 62,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Generator expressions",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 63,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "itertools module",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 64,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Errors and Exception Handling",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 65,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Exceptions in IPython",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 66,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "3.3 Files and the Operating System",
+   "level": 1,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  },
+  {
+   "order": 67,
+   "chapter": "3. Built-In Data Structures, Functions, and Files",
+   "heading": "Bytes and Unicode with Files",
+   "level": 2,
+   "url": "https://wesmckinney.com/book/python-builtin.html"
+  }
+ ]
+}

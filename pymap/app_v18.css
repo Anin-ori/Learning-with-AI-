@@ -1,0 +1,73 @@
+
+/* ---------- v1.8: type set like the reference slide, plus Chinese.
+   Body and big titles: a DIN-style face (Barlow), regular weight, like "EFFECTS" and "1 in 5 older people…".
+   Emphasis headings and numbers: a heavy geometric face (Montserrat), like "Trends in Recent Years:" and "1st".
+   Small labels, buttons and meta lines: condensed (Barlow Condensed), like "AGING TRENDS" and "PRESENTATION BY".
+   Chinese falls back to one family throughout (Noto Sans SC, then the system's PingFang SC or Microsoft YaHei). ---------- */
+:root {
+  --cjk: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", sans-serif;
+  --font-body: "Barlow", var(--cjk);
+  --font-display: "Barlow Condensed", var(--cjk);
+  --font-title: "Barlow", var(--cjk);
+  --font-heavy: "Montserrat", var(--cjk);
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, var(--cjk);
+}
+body { font-family: var(--font-body); }
+#kmap svg.km-svg text, #kmap .km-blab, #kmap .km-dot text { font-family: var(--font-body); }
+
+/* big page titles: regular DIN, like the slide's EFFECTS */
+h2, .panel-head h2 { font-family: var(--font-title); font-weight: 500; letter-spacing: -0.01em; }
+/* emphasis headings: heavy geometric */
+h3, .tutor h3, .note-head h3, .card h3, .lesson h3, .card.practice h3, #kmap .km-pane h2, #kmap .km-prob h4 {
+  font-family: var(--font-heavy); font-weight: 800; letter-spacing: -0.015em; }
+h3, .tutor h3, .note-head h3, .card h3 { font-size: 1.55rem; }
+.lesson h3 { font-size: 1.95rem; line-height: 1.15; }
+.lesson h4, .pt-note h4 { font-family: var(--font-heavy); font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; }
+#kmap .km-pane h2 { font-size: 34px; line-height: 1.08; }
+#kmap .km-prob h4 { font-size: 16px; }
+/* numbers: heavy geometric, like "1st" */
+#kmap .km-big b, #kmap .km-trio b, #kmap .km-prob .num, .note-head > span, .share { font-family: var(--font-heavy); font-weight: 800; letter-spacing: -0.02em; }
+#kmap .km-big b { font-size: 60px; font-weight: 900; }
+#kmap .km-trio b { font-size: 24px; }
+#kmap .km-dialtext tspan.n { font-family: var(--font-heavy); font-weight: 800; letter-spacing: 0; }
+#kmap .km-ball.open .km-blab { font-family: var(--font-heavy); font-weight: 800; letter-spacing: -0.01em; }
+/* the section badge reads like the slide's dark box: regular, sentence case */
+.eyebrow { font-family: var(--font-body); font-weight: 500; text-transform: none; letter-spacing: 0.01em; font-size: 1.08rem; }
+.card .eyebrow { font-size: 0.95rem; }
+#kmap .km-eyebrow { font-family: var(--font-body); font-weight: 500; text-transform: none; letter-spacing: 0.01em; font-size: 14.5px; }
+.lede, .hint, .choice { font-family: var(--font-body); }
+.brand h1 { font-family: var(--font-display); font-weight: 700; }
+.pill { font-family: var(--font-body); font-weight: 500; letter-spacing: 0.2em; }
+.choice strong { font-family: var(--font-heavy); font-weight: 700; font-size: 1.08rem; letter-spacing: -0.01em; }
+#kmap .km-pick b, #kmap .km-status { font-family: var(--font-heavy); font-weight: 700; letter-spacing: -0.01em; }
+#kmap .km-pick b { font-size: 16px; }
+.lang-btn { min-width: 3.4em; }
+/* the map is light paper in both themes: give it its own opaque paper, so in dark mode the side panel is not
+   light-on-dark-grey (its 55% surface used to sit over the dark page), and use the darker grey from v1.7 */
+#kmap { --muted: #575651; background-color: #e8e7e2; background-image: var(--grain); color-scheme: light; }
+
+/* ---------- Chinese ---------- */
+html[lang="zh-CN"] body { line-height: 1.75; }
+html[lang="zh-CN"] .lesson { line-height: 1.95; }
+html[lang="zh-CN"] .eyebrow, html[lang="zh-CN"] label, html[lang="zh-CN"] .label, html[lang="zh-CN"] details > summary,
+html[lang="zh-CN"] .tab, html[lang="zh-CN"] .metrics, html[lang="zh-CN"] .save-status, html[lang="zh-CN"] button,
+html[lang="zh-CN"] #topnav button, html[lang="zh-CN"] .subnav button, html[lang="zh-CN"] #kmap .km-tabs button,
+html[lang="zh-CN"] #kmap .km-pane h3, html[lang="zh-CN"] #kmap .km-tag, html[lang="zh-CN"] #kmap .km-legend,
+html[lang="zh-CN"] #kmap .km-gbtn, html[lang="zh-CN"] #kmap .km-btn, html[lang="zh-CN"] #kmap .km-big span, html[lang="zh-CN"] #kmap .km-trio,
+html[lang="zh-CN"] #kmap .km-dialtext, html[lang="zh-CN"] #kmap .km-prog, html[lang="zh-CN"] #kmap .km-back { letter-spacing: 0.04em; }
+html[lang="zh-CN"] h2 { letter-spacing: 0.01em; font-weight: 500; }
+html[lang="zh-CN"] .panel-head h2 { font-size: 3.3rem; line-height: 1.15; }
+html[lang="zh-CN"] h3, html[lang="zh-CN"] .lesson h3, html[lang="zh-CN"] #kmap .km-pane h2 { letter-spacing: 0.01em; font-weight: 800; }
+html[lang="zh-CN"] #kmap .km-pane h2 { line-height: 1.25; }
+html[lang="zh-CN"] .lede { line-height: 1.8; }
+html[lang="zh-CN"] #kmap .km-search input::placeholder { letter-spacing: 0.04em; }
+/* headings break between words, not inside them ("面向机器学习的 / Python", not "面向机器学习 / 的 Python");
+   a heading with nowhere to break still wraps rather than overflow */
+html[lang="zh-CN"] h1, html[lang="zh-CN"] h2, html[lang="zh-CN"] h3, html[lang="zh-CN"] h4, html[lang="zh-CN"] .choice strong,
+html[lang="zh-CN"] #kmap .km-pick b, html[lang="zh-CN"] .eyebrow { word-break: keep-all; overflow-wrap: anywhere; text-wrap: balance; }
+/* paragraphs avoid a lone last character */
+html[lang="zh-CN"] p, html[lang="zh-CN"] .lede, html[lang="zh-CN"] .hint { text-wrap: pretty; }
+@media (max-width: 760px) {
+  html[lang="zh-CN"] .panel-head h2 { font-size: 2.5rem; }
+  .lang-btn { min-width: 0; padding-inline: 10px; }
+}

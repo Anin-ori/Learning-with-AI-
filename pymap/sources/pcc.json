@@ -1,0 +1,1675 @@
+{
+ "id": "pcc",
+ "name": "Python Crash Course, 3rd edition (Part I)",
+ "author": "Eric Matthes",
+ "url": "https://nostarch.com/python-crash-course-3rd-edition",
+ "kind": "Book",
+ "items": [
+  {
+   "order": 0,
+   "chapter": "1. Getting Started",
+   "heading": "Getting Started",
+   "level": 0,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 1,
+   "chapter": "1. Getting Started",
+   "heading": "Setting Up Your Programming Environment",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 2,
+   "chapter": "1. Getting Started",
+   "heading": "Python Versions",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 3,
+   "chapter": "1. Getting Started",
+   "heading": "Running Snippets of Python Code",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 4,
+   "chapter": "1. Getting Started",
+   "heading": "About the VS Code Editor",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 5,
+   "chapter": "1. Getting Started",
+   "heading": "Python on Different Operating Systems",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 6,
+   "chapter": "1. Getting Started",
+   "heading": "Python on Windows",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 7,
+   "chapter": "1. Getting Started",
+   "heading": "Python on macOS",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 8,
+   "chapter": "1. Getting Started",
+   "heading": "Python on Linux",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 9,
+   "chapter": "1. Getting Started",
+   "heading": "Running a Hello World Program",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 10,
+   "chapter": "1. Getting Started",
+   "heading": "Installing the Python Extension for VS Code",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 11,
+   "chapter": "1. Getting Started",
+   "heading": "Running hello_world.py",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 12,
+   "chapter": "1. Getting Started",
+   "heading": "Troubleshooting",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 13,
+   "chapter": "1. Getting Started",
+   "heading": "Running Python Programs from a Terminal",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 14,
+   "chapter": "1. Getting Started",
+   "heading": "On Windows",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 15,
+   "chapter": "1. Getting Started",
+   "heading": "On macOS and Linux",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 16,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Variables and Simple Data Types",
+   "level": 0,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 17,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "What Really Happens When You Run hello_world.py",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 18,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Variables",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 19,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Naming and Using Variables",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 20,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Avoiding Name Errors When Using Variables",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 21,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Variables Are Labels",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 22,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Strings",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 23,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Changing Case in a String with Methods",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 24,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Using Variables in Strings",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 25,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Adding Whitespace to Strings with Tabs or Newlines",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 26,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Stripping Whitespace",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 27,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Removing Prefixes",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 28,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Avoiding Syntax Errors with Strings",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 29,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Numbers",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 30,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Integers",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 31,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Floats",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 32,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Integers and Floats",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 33,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Underscores in Numbers",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 34,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Multiple Assignment",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 35,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Constants",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 36,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "Comments",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 37,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "How Do You Write Comments?",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 38,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "What Kinds of Comments Should You Write?",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 39,
+   "chapter": "2. Variables and Simple Data Types",
+   "heading": "The Zen of Python",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 40,
+   "chapter": "3. Introducing Lists",
+   "heading": "Introducing Lists",
+   "level": 0,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 41,
+   "chapter": "3. Introducing Lists",
+   "heading": "What Is a List?",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 42,
+   "chapter": "3. Introducing Lists",
+   "heading": "Accessing Elements in a List",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 43,
+   "chapter": "3. Introducing Lists",
+   "heading": "Index Positions Start at 0, Not 1",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 44,
+   "chapter": "3. Introducing Lists",
+   "heading": "Using Individual Values from a List",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 45,
+   "chapter": "3. Introducing Lists",
+   "heading": "Modifying, Adding, and Removing Elements",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 46,
+   "chapter": "3. Introducing Lists",
+   "heading": "Modifying Elements in a List",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 47,
+   "chapter": "3. Introducing Lists",
+   "heading": "Adding Elements to a List",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 48,
+   "chapter": "3. Introducing Lists",
+   "heading": "Removing Elements from a List",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 49,
+   "chapter": "3. Introducing Lists",
+   "heading": "Organizing a List",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 50,
+   "chapter": "3. Introducing Lists",
+   "heading": "Sorting a List Permanently with the sort() Method",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 51,
+   "chapter": "3. Introducing Lists",
+   "heading": "Sorting a List Temporarily with the sorted() Function",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 52,
+   "chapter": "3. Introducing Lists",
+   "heading": "Printing a List in Reverse Order",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 53,
+   "chapter": "3. Introducing Lists",
+   "heading": "Finding the Length of a List",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 54,
+   "chapter": "3. Introducing Lists",
+   "heading": "Avoiding Index Errors When Working with Lists",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 55,
+   "chapter": "4. Working with Lists",
+   "heading": "Working with Lists",
+   "level": 0,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 56,
+   "chapter": "4. Working with Lists",
+   "heading": "Looping Through an Entire List",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 57,
+   "chapter": "4. Working with Lists",
+   "heading": "A Closer Look at Looping",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 58,
+   "chapter": "4. Working with Lists",
+   "heading": "Doing More Work Within a for Loop",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 59,
+   "chapter": "4. Working with Lists",
+   "heading": "Doing Something After a for Loop",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 60,
+   "chapter": "4. Working with Lists",
+   "heading": "Avoiding Indentation Errors",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 61,
+   "chapter": "4. Working with Lists",
+   "heading": "Forgetting to Indent",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 62,
+   "chapter": "4. Working with Lists",
+   "heading": "Forgetting to Indent Additional Lines",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 63,
+   "chapter": "4. Working with Lists",
+   "heading": "Indenting Unnecessarily",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 64,
+   "chapter": "4. Working with Lists",
+   "heading": "Indenting Unnecessarily After the Loop",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 65,
+   "chapter": "4. Working with Lists",
+   "heading": "Forgetting the Colon",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 66,
+   "chapter": "4. Working with Lists",
+   "heading": "Making Numerical Lists",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 67,
+   "chapter": "4. Working with Lists",
+   "heading": "Using the range() Function",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 68,
+   "chapter": "4. Working with Lists",
+   "heading": "Using range() to Make a List of Numbers",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 69,
+   "chapter": "4. Working with Lists",
+   "heading": "Simple Statistics with a List of Numbers",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 70,
+   "chapter": "4. Working with Lists",
+   "heading": "List Comprehensions",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 71,
+   "chapter": "4. Working with Lists",
+   "heading": "Working with Part of a List",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 72,
+   "chapter": "4. Working with Lists",
+   "heading": "Slicing a List",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 73,
+   "chapter": "4. Working with Lists",
+   "heading": "Looping Through a Slice",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 74,
+   "chapter": "4. Working with Lists",
+   "heading": "Copying a List",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 75,
+   "chapter": "4. Working with Lists",
+   "heading": "Tuples",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 76,
+   "chapter": "4. Working with Lists",
+   "heading": "Defining a Tuple",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 77,
+   "chapter": "4. Working with Lists",
+   "heading": "Looping Through All Values in a Tuple",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 78,
+   "chapter": "4. Working with Lists",
+   "heading": "Writing Over a Tuple",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 79,
+   "chapter": "4. Working with Lists",
+   "heading": "Styling Your Code",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 80,
+   "chapter": "4. Working with Lists",
+   "heading": "The Style Guide",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 81,
+   "chapter": "4. Working with Lists",
+   "heading": "Indentation",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 82,
+   "chapter": "4. Working with Lists",
+   "heading": "Line Length",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 83,
+   "chapter": "4. Working with Lists",
+   "heading": "Blank Lines",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 84,
+   "chapter": "4. Working with Lists",
+   "heading": "Other Style Guidelines",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 85,
+   "chapter": "5. if Statements",
+   "heading": "if Statements",
+   "level": 0,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 86,
+   "chapter": "5. if Statements",
+   "heading": "A Simple Example",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 87,
+   "chapter": "5. if Statements",
+   "heading": "Conditional Tests",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 88,
+   "chapter": "5. if Statements",
+   "heading": "Checking for Equality",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 89,
+   "chapter": "5. if Statements",
+   "heading": "Ignoring Case When Checking for Equality",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 90,
+   "chapter": "5. if Statements",
+   "heading": "Checking for Inequality",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 91,
+   "chapter": "5. if Statements",
+   "heading": "Numerical Comparisons",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 92,
+   "chapter": "5. if Statements",
+   "heading": "Checking Multiple Conditions",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 93,
+   "chapter": "5. if Statements",
+   "heading": "Checking Whether a Value Is in a List",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 94,
+   "chapter": "5. if Statements",
+   "heading": "Checking Whether a Value Is Not in a List",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 95,
+   "chapter": "5. if Statements",
+   "heading": "Boolean Expressions",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 96,
+   "chapter": "5. if Statements",
+   "heading": "if Statements",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 97,
+   "chapter": "5. if Statements",
+   "heading": "Simple if Statements",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 98,
+   "chapter": "5. if Statements",
+   "heading": "if-else Statements",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 99,
+   "chapter": "5. if Statements",
+   "heading": "The if-elif-else Chain",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 100,
+   "chapter": "5. if Statements",
+   "heading": "Using Multiple elif Blocks",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 101,
+   "chapter": "5. if Statements",
+   "heading": "Omitting the else Block",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 102,
+   "chapter": "5. if Statements",
+   "heading": "Testing Multiple Conditions",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 103,
+   "chapter": "5. if Statements",
+   "heading": "Using if Statements with Lists",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 104,
+   "chapter": "5. if Statements",
+   "heading": "Checking for Special Items",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 105,
+   "chapter": "5. if Statements",
+   "heading": "Checking That a List Is Not Empty",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 106,
+   "chapter": "5. if Statements",
+   "heading": "Using Multiple Lists",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 107,
+   "chapter": "5. if Statements",
+   "heading": "Styling Your if Statements",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 108,
+   "chapter": "6. Dictionaries",
+   "heading": "Dictionaries",
+   "level": 0,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 109,
+   "chapter": "6. Dictionaries",
+   "heading": "A Simple Dictionary",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 110,
+   "chapter": "6. Dictionaries",
+   "heading": "Working with Dictionaries",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 111,
+   "chapter": "6. Dictionaries",
+   "heading": "Accessing Values in a Dictionary",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 112,
+   "chapter": "6. Dictionaries",
+   "heading": "Adding New Key-Value Pairs",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 113,
+   "chapter": "6. Dictionaries",
+   "heading": "Starting with an Empty Dictionary",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 114,
+   "chapter": "6. Dictionaries",
+   "heading": "Modifying Values in a Dictionary",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 115,
+   "chapter": "6. Dictionaries",
+   "heading": "Removing Key-Value Pairs",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 116,
+   "chapter": "6. Dictionaries",
+   "heading": "A Dictionary of Similar Objects",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 117,
+   "chapter": "6. Dictionaries",
+   "heading": "Using get() to Access Values",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 118,
+   "chapter": "6. Dictionaries",
+   "heading": "Looping Through a Dictionary",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 119,
+   "chapter": "6. Dictionaries",
+   "heading": "Looping Through All Key-Value Pairs",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 120,
+   "chapter": "6. Dictionaries",
+   "heading": "Looping Through All the Keys in a Dictionary",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 121,
+   "chapter": "6. Dictionaries",
+   "heading": "Looping Through a Dictionary's Keys in a Particular Order",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 122,
+   "chapter": "6. Dictionaries",
+   "heading": "Looping Through All Values in a Dictionary",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 123,
+   "chapter": "6. Dictionaries",
+   "heading": "Nesting",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 124,
+   "chapter": "6. Dictionaries",
+   "heading": "A List of Dictionaries",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 125,
+   "chapter": "6. Dictionaries",
+   "heading": "A List in a Dictionary",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 126,
+   "chapter": "6. Dictionaries",
+   "heading": "A Dictionary in a Dictionary",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 127,
+   "chapter": "7. User Input and while Loops",
+   "heading": "User Input and while Loops",
+   "level": 0,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 128,
+   "chapter": "7. User Input and while Loops",
+   "heading": "How the input() Function Works",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 129,
+   "chapter": "7. User Input and while Loops",
+   "heading": "Writing Clear Prompts",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 130,
+   "chapter": "7. User Input and while Loops",
+   "heading": "Using int() to Accept Numerical Input",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 131,
+   "chapter": "7. User Input and while Loops",
+   "heading": "The Modulo Operator",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 132,
+   "chapter": "7. User Input and while Loops",
+   "heading": "Introducing while Loops",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 133,
+   "chapter": "7. User Input and while Loops",
+   "heading": "The while Loop in Action",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 134,
+   "chapter": "7. User Input and while Loops",
+   "heading": "Letting the User Choose When to Quit",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 135,
+   "chapter": "7. User Input and while Loops",
+   "heading": "Using a Flag",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 136,
+   "chapter": "7. User Input and while Loops",
+   "heading": "Using break to Exit a Loop",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 137,
+   "chapter": "7. User Input and while Loops",
+   "heading": "Using continue in a Loop",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 138,
+   "chapter": "7. User Input and while Loops",
+   "heading": "Avoiding Infinite Loops",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 139,
+   "chapter": "7. User Input and while Loops",
+   "heading": "Using a while Loop with Lists and Dictionaries",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 140,
+   "chapter": "7. User Input and while Loops",
+   "heading": "Moving Items from One List to Another",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 141,
+   "chapter": "7. User Input and while Loops",
+   "heading": "Removing All Instances of Specific Values from a List",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 142,
+   "chapter": "7. User Input and while Loops",
+   "heading": "Filling a Dictionary with User Input",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 143,
+   "chapter": "8. Functions",
+   "heading": "Functions",
+   "level": 0,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 144,
+   "chapter": "8. Functions",
+   "heading": "Defining a Function",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 145,
+   "chapter": "8. Functions",
+   "heading": "Passing Information to a Function",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 146,
+   "chapter": "8. Functions",
+   "heading": "Arguments and Parameters",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 147,
+   "chapter": "8. Functions",
+   "heading": "Passing Arguments",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 148,
+   "chapter": "8. Functions",
+   "heading": "Positional Arguments",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 149,
+   "chapter": "8. Functions",
+   "heading": "Keyword Arguments",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 150,
+   "chapter": "8. Functions",
+   "heading": "Default Values",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 151,
+   "chapter": "8. Functions",
+   "heading": "Equivalent Function Calls",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 152,
+   "chapter": "8. Functions",
+   "heading": "Avoiding Argument Errors",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 153,
+   "chapter": "8. Functions",
+   "heading": "Return Values",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 154,
+   "chapter": "8. Functions",
+   "heading": "Returning a Simple Value",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 155,
+   "chapter": "8. Functions",
+   "heading": "Making an Argument Optional",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 156,
+   "chapter": "8. Functions",
+   "heading": "Returning a Dictionary",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 157,
+   "chapter": "8. Functions",
+   "heading": "Using a Function with a while Loop",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 158,
+   "chapter": "8. Functions",
+   "heading": "Passing a List",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 159,
+   "chapter": "8. Functions",
+   "heading": "Modifying a List in a Function",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 160,
+   "chapter": "8. Functions",
+   "heading": "Preventing a Function from Modifying a List",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 161,
+   "chapter": "8. Functions",
+   "heading": "Passing an Arbitrary Number of Arguments",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 162,
+   "chapter": "8. Functions",
+   "heading": "Mixing Positional and Arbitrary Arguments",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 163,
+   "chapter": "8. Functions",
+   "heading": "Using Arbitrary Keyword Arguments",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 164,
+   "chapter": "8. Functions",
+   "heading": "Storing Your Functions in Modules",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 165,
+   "chapter": "8. Functions",
+   "heading": "Importing an Entire Module",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 166,
+   "chapter": "8. Functions",
+   "heading": "Importing Specific Functions",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 167,
+   "chapter": "8. Functions",
+   "heading": "Using as to Give a Function an Alias",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 168,
+   "chapter": "8. Functions",
+   "heading": "Using as to Give a Module an Alias",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 169,
+   "chapter": "8. Functions",
+   "heading": "Importing All Functions in a Module",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 170,
+   "chapter": "8. Functions",
+   "heading": "Styling Functions",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 171,
+   "chapter": "9. Classes",
+   "heading": "Classes",
+   "level": 0,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 172,
+   "chapter": "9. Classes",
+   "heading": "Creating and Using a Class",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 173,
+   "chapter": "9. Classes",
+   "heading": "Creating the Dog Class",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 174,
+   "chapter": "9. Classes",
+   "heading": "The __init__() Method",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 175,
+   "chapter": "9. Classes",
+   "heading": "Making an Instance from a Class",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 176,
+   "chapter": "9. Classes",
+   "heading": "Working with Classes and Instances",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 177,
+   "chapter": "9. Classes",
+   "heading": "The Car Class",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 178,
+   "chapter": "9. Classes",
+   "heading": "Setting a Default Value for an Attribute",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 179,
+   "chapter": "9. Classes",
+   "heading": "Modifying Attribute Values",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 180,
+   "chapter": "9. Classes",
+   "heading": "Inheritance",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 181,
+   "chapter": "9. Classes",
+   "heading": "The __init__() Method for a Child Class",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 182,
+   "chapter": "9. Classes",
+   "heading": "Defining Attributes and Methods for the Child Class",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 183,
+   "chapter": "9. Classes",
+   "heading": "Overriding Methods from the Parent Class",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 184,
+   "chapter": "9. Classes",
+   "heading": "Instances as Attributes",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 185,
+   "chapter": "9. Classes",
+   "heading": "Modeling Real-World Objects",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 186,
+   "chapter": "9. Classes",
+   "heading": "Importing Classes",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 187,
+   "chapter": "9. Classes",
+   "heading": "Importing a Single Class",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 188,
+   "chapter": "9. Classes",
+   "heading": "Storing Multiple Classes in a Module",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 189,
+   "chapter": "9. Classes",
+   "heading": "Importing Multiple Classes from a Module",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 190,
+   "chapter": "9. Classes",
+   "heading": "Importing an Entire Module",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 191,
+   "chapter": "9. Classes",
+   "heading": "Importing All Classes from a Module",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 192,
+   "chapter": "9. Classes",
+   "heading": "Importing a Module into a Module",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 193,
+   "chapter": "9. Classes",
+   "heading": "Using Aliases",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 194,
+   "chapter": "9. Classes",
+   "heading": "Finding Your Own Workflow",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 195,
+   "chapter": "9. Classes",
+   "heading": "The Python Standard Library",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 196,
+   "chapter": "9. Classes",
+   "heading": "Styling Classes",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 197,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Files and Exceptions",
+   "level": 0,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 198,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Reading from a File",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 199,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Reading the Contents of a File",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 200,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Relative and Absolute File Paths",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 201,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Accessing a File's Lines",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 202,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Working with a File's Contents",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 203,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Large Files: One Million Digits",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 204,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Is Your Birthday Contained in Pi?",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 205,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Writing to a File",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 206,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Writing a Single Line",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 207,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Writing Multiple Lines",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 208,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Exceptions",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 209,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Handling the ZeroDivisionError Exception",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 210,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Using try-except Blocks",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 211,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Using Exceptions to Prevent Crashes",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 212,
+   "chapter": "10. Files and Exceptions",
+   "heading": "The else Block",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 213,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Handling the FileNotFoundError Exception",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 214,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Analyzing Text",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 215,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Working with Multiple Files",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 216,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Failing Silently",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 217,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Deciding Which Errors to Report",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 218,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Storing Data",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 219,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Using json.dumps() and json.loads()",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 220,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Saving and Reading User-Generated Data",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 221,
+   "chapter": "10. Files and Exceptions",
+   "heading": "Refactoring",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 222,
+   "chapter": "11. Testing Your Code",
+   "heading": "Testing Your Code",
+   "level": 0,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 223,
+   "chapter": "11. Testing Your Code",
+   "heading": "Installing pytest with pip",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 224,
+   "chapter": "11. Testing Your Code",
+   "heading": "Updating pip",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 225,
+   "chapter": "11. Testing Your Code",
+   "heading": "Installing pytest",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 226,
+   "chapter": "11. Testing Your Code",
+   "heading": "Testing a Function",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 227,
+   "chapter": "11. Testing Your Code",
+   "heading": "Unit Tests and Test Cases",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 228,
+   "chapter": "11. Testing Your Code",
+   "heading": "A Passing Test",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 229,
+   "chapter": "11. Testing Your Code",
+   "heading": "Running a Test",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 230,
+   "chapter": "11. Testing Your Code",
+   "heading": "A Failing Test",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 231,
+   "chapter": "11. Testing Your Code",
+   "heading": "Responding to a Failed Test",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 232,
+   "chapter": "11. Testing Your Code",
+   "heading": "Adding New Tests",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 233,
+   "chapter": "11. Testing Your Code",
+   "heading": "Testing a Class",
+   "level": 1,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 234,
+   "chapter": "11. Testing Your Code",
+   "heading": "A Variety of Assertions",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 235,
+   "chapter": "11. Testing Your Code",
+   "heading": "A Class to Test",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 236,
+   "chapter": "11. Testing Your Code",
+   "heading": "Testing the AnonymousSurvey Class",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  },
+  {
+   "order": 237,
+   "chapter": "11. Testing Your Code",
+   "heading": "Using Fixtures",
+   "level": 2,
+   "url": "https://nostarch.com/download/PCC3e_detailedTOC.pdf"
+  }
+ ]
+}

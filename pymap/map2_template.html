@@ -1,0 +1,548 @@
+<title>Python Knowledge Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Schibsted+Grotesk:wght@600;700&display=swap">
+<style>
+/* Layout: map-first tool. Big balls (bundles of related points) sit on the left, basics in the middle;
+   opening a ball fans its small balls out around it. A reading panel on the right holds progress, details,
+   the problems found earlier, and the sources. */
+:root {
+  --bg: #f2f4f1; --surface: #ffffff; --map: #fafbf9; --ink: #16201b; --muted: #56645d; --faint: #8b9891; --line: #dbe2dd;
+  --accent: #0c6a64; --accent-soft: #d7edea; --warn: #9a610c; --warn-soft: #f5e8d2; --bad: #bd3822; --bad-soft: #f7dfd9;
+  --route: #d42f22; --locked: #dfe4e1; --locked-dot: #b9c2bd; --edge: rgba(22,32,27,.22);
+  --as: 50%; --al: 46%;
+  --display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e1311; --surface: #141b18; --map: #111815; --ink: #e3eae6; --muted: #9eaba4; --faint: #6c7a73; --line: #25302b;
+  --accent: #5cc3ba; --accent-soft: #15322e; --warn: #e2a64c; --warn-soft: #382a13; --bad: #f07a63; --bad-soft: #3b1c16;
+  --route: #ff6a55; --locked: #1c2420; --locked-dot: #36423d; --edge: rgba(227,234,230,.20);
+  --as: 46%; --al: 60%; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0e1311; --surface: #141b18; --map: #111815; --ink: #e3eae6; --muted: #9eaba4; --faint: #6c7a73; --line: #25302b;
+  --accent: #5cc3ba; --accent-soft: #15322e; --warn: #e2a64c; --warn-soft: #382a13; --bad: #f07a63; --bad-soft: #3b1c16;
+  --route: #ff6a55; --locked: #1c2420; --locked-dot: #36423d; --edge: rgba(227,234,230,.20);
+  --as: 46%; --al: 60%; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 14px/1.5 var(--body); margin: 0; }
+button, input { font: inherit; color: inherit; }
+a { color: var(--accent); }
+code { font-family: var(--mono); font-size: .92em; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 8px 24px; padding: 18px 16px 14px; }
+.top h1 { font: 700 26px/1.1 var(--display); letter-spacing: -0.01em; margin: 0 0 4px; text-wrap: balance; }
+.top p { margin: 0; color: var(--muted); max-width: 70ch; }
+.figs { display: flex; flex-wrap: wrap; gap: 6px 18px; font: 500 12px/1.3 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.figs b { display: block; font: 600 18px/1.1 var(--display); color: var(--ink); }
+
+.app { display: grid; grid-template-columns: minmax(0, 1fr) 410px; gap: 14px; padding-inline: 16px; padding-block: 0 16px;
+  height: max(580px, calc(100vh - 104px)); }
+.mapwrap { position: relative; min-width: 0; background: var(--map); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+.bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 10px 12px; border-bottom: 1px solid var(--line); background: var(--surface); }
+.search { flex: 1 1 200px; min-width: 0; max-width: 300px; }
+.search input { width: 100%; padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--map); }
+.btn { border: 1px solid var(--line); background: var(--surface); border-radius: 6px; padding: 5px 10px; cursor: pointer; font-size: 13px; }
+.btn:hover { border-color: var(--accent); }
+.btn.solid { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.focusnote { display: none; align-items: center; gap: 8px; font-size: 13px; background: var(--accent-soft); padding: 4px 6px 4px 10px; border-radius: 6px; max-width: 100%; }
+.focusnote.on { display: inline-flex; }
+.focusnote span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+svg#map { flex: 1; width: 100%; min-height: 0; display: block; cursor: grab; touch-action: none; }
+svg#map:active { cursor: grabbing; }
+
+.legend { position: absolute; left: 10px; bottom: 10px; display: flex; flex-wrap: wrap; gap: 4px 14px; max-width: calc(100% - 20px);
+  background: color-mix(in srgb, var(--surface) 90%, transparent); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; font-size: 12px; color: var(--muted); pointer-events: none; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+
+/* map marks */
+.blk { fill: none; stroke: var(--edge); stroke-width: 1.2; transition: opacity .2s; }
+.ball { cursor: pointer; transition: opacity .2s; }
+.ball .body { fill: var(--locked); stroke: none; transition: fill .25s, stroke .25s; }
+.ball.st-ready .body { fill: color-mix(in srgb, hsl(var(--h) var(--as) var(--al)) 22%, var(--map)); stroke: hsl(var(--h) var(--as) var(--al)); stroke-width: 1.8; }
+.ball.st-learned .body { fill: color-mix(in srgb, hsl(var(--h) var(--as) var(--al)) 62%, var(--map)); stroke: hsl(var(--h) var(--as) var(--al)); stroke-width: 1.8; }
+.ball .halo, .dot .halo { fill: none; stroke: none; pointer-events: none; }
+.ball.route > .halo { stroke: var(--route); stroke-width: 1.4; stroke-opacity: .55; }
+.ball.next > .halo { stroke-width: 3.4; stroke-opacity: 1; }
+.dot .core { fill: var(--locked-dot); stroke: var(--map); stroke-width: 1; transition: fill .25s; }
+.dot.st-ready .core { fill: var(--map); stroke: hsl(var(--h) var(--as) var(--al)); stroke-width: 1.8; }
+.dot.st-learned .core { fill: hsl(var(--h) var(--as) var(--al)); }
+.dot { pointer-events: none; transition: transform .35s ease; }
+.ball.open .dot { pointer-events: auto; cursor: pointer; }
+.ball.open .dot.route .halo { stroke: var(--route); stroke-width: 1.1; stroke-opacity: .6; }
+.ball.open .dot.next .halo { stroke-width: 2.4; stroke-opacity: 1; }
+.dot.sel .core { stroke: var(--ink); stroke-width: 2; }
+.dot text { display: none; fill: var(--ink); font-family: var(--body); font-weight: 500; paint-order: stroke; stroke: var(--map); stroke-linejoin: round; }
+.ball.open .dot text { display: inline; }
+.dot.st-locked text { fill: var(--muted); }
+.blab { fill: var(--ink); font-family: var(--display); font-weight: 600; paint-order: stroke; stroke: var(--map); stroke-linejoin: round; pointer-events: none; }
+.ball.st-locked .blab { fill: var(--muted); }
+.ball.open .blab { fill: var(--ink); }
+.bcount { fill: var(--ink); font-family: var(--mono); font-weight: 500; pointer-events: none; display: none; }
+.ball.open .bcount { display: inline; }
+.dimmed .ball:not(.lit) { opacity: .2; }
+.dimmed .blk:not(.lit) { opacity: .08; }
+.blk.lit { stroke: var(--muted); stroke-width: 1.6; }
+
+.tip { position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 6px 9px; font-size: 12px; box-shadow: 0 4px 14px rgba(0,0,0,.12); max-width: 260px; display: none; z-index: 3; }
+.tip b { display: block; font-size: 13px; }
+.tip span { color: var(--muted); }
+
+/* panel */
+.panel { min-width: 0; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.tabs { display: flex; border-bottom: 1px solid var(--line); }
+.tabs button { flex: 1; border: 0; background: none; padding: 11px 6px 10px; cursor: pointer; color: var(--muted); font-weight: 500; border-bottom: 2px solid transparent; white-space: nowrap; }
+.tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+.tabs .ct { font: 500 11px var(--mono); color: var(--faint); margin-left: 4px; }
+.pane { overflow-y: auto; padding: 16px 16px 24px; flex: 1; min-height: 0; }
+.pane h2 { font: 700 19px/1.2 var(--display); margin: 0 0 6px; text-wrap: balance; }
+.pane h3 { font: 600 12px/1.3 var(--body); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 20px 0 8px; }
+.pane p { margin: 0 0 10px; }
+.lead { font-size: 15px; line-height: 1.55; }
+.small { font-size: 12.5px; color: var(--muted); }
+.back { background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer; font-size: 13px; margin-bottom: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.chip i { width: 10px; height: 10px; border-radius: 50%; background: hsl(var(--h) var(--as) var(--al)); }
+.stat3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 12px 0 6px; }
+.stat3 div { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 12px; color: var(--muted); }
+.stat3 b { display: block; font: 600 20px/1.1 var(--display); color: var(--ink); font-variant-numeric: tabular-nums; }
+.note { background: var(--warn-soft); border-radius: 8px; padding: 10px 12px; font-size: 13px; display: grid; gap: 8px; margin: 12px 0; }
+.card { background: var(--map); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; display: grid; gap: 8px; margin: 10px 0; }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.status { font-weight: 600; font-size: 13px; }
+.status .r { color: var(--route); font-weight: 500; }
+.ex { display: flex; flex-wrap: wrap; gap: 4px; }
+.pill { border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; font-size: 12.5px; background: var(--map); cursor: pointer; }
+.pill:hover { border-color: var(--accent); }
+.pill.next { border-color: var(--route); border-width: 2px; }
+.rows { display: grid; gap: 4px; }
+.prow { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 3px 0; }
+.prow input { accent-color: var(--accent); width: 16px; height: 16px; margin: 0; }
+.nm { background: none; border: 0; padding: 0; text-align: left; cursor: pointer; color: var(--ink); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+.nm:hover { text-decoration-color: var(--accent); }
+.tag { font: 500 11px/1 var(--mono); padding: 3px 6px; border-radius: 4px; white-space: nowrap; }
+.tag.learned { background: var(--accent-soft); color: var(--accent); }
+.tag.ready { background: var(--map); color: var(--ink); border: 1px solid var(--line); }
+.tag.locked { background: var(--locked); color: var(--muted); }
+.tag.route { background: none; color: var(--route); border: 1px solid var(--route); }
+.inline { display: flex; flex-wrap: wrap; gap: 4px 10px; }
+.srcs { display: grid; gap: 8px; }
+.src { display: grid; gap: 2px; }
+.src b { font-size: 13px; font-weight: 600; }
+.src a { font-size: 13px; overflow-wrap: anywhere; }
+.empty { color: var(--muted); }
+.key { display: grid; gap: 8px; font-size: 13px; }
+.key div { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px; align-items: center; }
+.prob { border-top: 1px solid var(--line); padding: 14px 0 12px; display: grid; gap: 6px; }
+.prob .head { display: flex; align-items: baseline; gap: 10px; }
+.prob .num { font: 700 22px/1 var(--display); font-variant-numeric: tabular-nums; min-width: 2.6ch; }
+.prob h4 { margin: 0; font: 600 15px/1.3 var(--body); }
+.prob p { margin: 0; }
+.prob .so { color: var(--muted); font-size: 13px; }
+.prob .so b { color: var(--ink); font-weight: 600; }
+.sev { font: 500 11px/1 var(--mono); padding: 3px 6px; border-radius: 4px; margin-left: auto; white-space: nowrap; align-self: center; }
+.sev.core { background: var(--bad-soft); color: var(--bad); }
+.sev.major { background: var(--warn-soft); color: var(--warn); }
+.sev.ok { background: var(--accent-soft); color: var(--accent); }
+.prob .btn { justify-self: start; }
+.pairs { display: grid; gap: 2px; font-size: 13px; font-variant-numeric: tabular-nums; }
+.pairs div { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px; }
+.pairs span:last-child { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.srclist { display: grid; gap: 12px; }
+.srclist .src { border-top: 1px solid var(--line); padding-top: 10px; }
+.srclist .src span { color: var(--muted); font-size: 12.5px; }
+
+@media (max-width: 920px) {
+  .app { grid-template-columns: minmax(0, 1fr); height: auto; }
+  .mapwrap { height: 70vh; min-height: 440px; }
+  .pane { overflow: visible; }
+  .legend { position: static; margin: 0 10px 10px; pointer-events: auto; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<header class="top">
+  <div>
+    <h1>Python Knowledge Map</h1>
+    <p>153 knowledge points from 13 human courses and books, packed into 30 big balls of closely related points. Open a ball to see its points. Brightness shows what you've learned and what you can learn now; red rings mark the AI's suggested route. You choose what to study.</p>
+  </div>
+  <div class="figs" id="figs"></div>
+</header>
+
+<main class="app">
+  <section class="mapwrap" aria-label="Knowledge map">
+    <div class="bar">
+      <div class="search"><input id="q" type="search" list="names" placeholder="Find a topic, e.g. slicing" aria-label="Find a topic" autocomplete="off"><datalist id="names"></datalist></div>
+      <span class="focusnote" id="focusnote"><span id="focustext"></span><button class="btn" id="clear" type="button">Clear</button></span>
+      <button class="btn" id="fit" type="button">Show all</button>
+    </div>
+    <svg id="map" role="img" aria-label="Map of big balls of Python knowledge points"></svg>
+    <div class="legend" id="legend"></div>
+    <div class="tip" id="tip"></div>
+  </section>
+
+  <aside class="panel">
+    <div class="tabs" role="tablist">
+      <button role="tab" id="t-mine" aria-selected="true" type="button">My map</button>
+      <button role="tab" id="t-det" aria-selected="false" type="button">Details</button>
+      <button role="tab" id="t-prob" aria-selected="false" type="button">Problems<span class="ct">7</span></button>
+      <button role="tab" id="t-src" aria-selected="false" type="button">Sources<span class="ct">13</span></button>
+    </div>
+    <div class="pane" id="p-mine" role="tabpanel"></div>
+    <div class="pane" id="p-det" role="tabpanel" hidden><p class="empty">Click a ball on the map to see what's inside.</p></div>
+    <div class="pane" id="p-prob" role="tabpanel" hidden></div>
+    <div class="pane" id="p-src" role="tabpanel" hidden></div>
+  </aside>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+const D = /*__DATA__*/null;
+const SHORT = { atbs: "Automate the Boring Stuff", tutorial: "Python Tutorial", thinkpython: "Think Python", pcc: "Python Crash Course",
+  py4e: "Python for Everybody", cs50p: "CS50P", helsinki: "Helsinki MOOC", mit: "MIT 6.100L", kaggle: "Kaggle Learn",
+  pydata: "Python for Data Analysis", google: "Google's Python Class", byte: "A Byte of Python", exercism: "Exercism" };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const fmt = n => n.toLocaleString("en-US");
+const AREA = {}; D.areas.forEach(([id, name], i) => AREA[id] = { id, name, i, h: Math.round((i * 360 / D.areas.length + 8) % 360) });
+
+/* ---------- points ---------- */
+const byId = {}; D.nodes.forEach(n => { byId[n.id] = n; n.needs = []; n.helps = []; n.usedBy = []; });
+D.links.forEach(([s, t, k]) => { if (k === "helps") byId[t].helps.push(s); else { byId[t].needs.push(s); byId[s].usedBy.push(t); } });
+const nm = id => byId[id].name;
+function ancestors(id) {
+  const out = new Set(), st = [id];
+  while (st.length) { const x = st.pop(); for (const p of byId[x].needs) if (!out.has(p)) { out.add(p); st.push(p); } }
+  return out;
+}
+
+/* ---------- balls ---------- */
+const BALL = {}, BALL_OF = {};
+D.balls.forEach(b => { BALL[b.id] = b; b.parents = []; b.children = []; b.pts.forEach(p => BALL_OF[p] = b.id); });
+D.blinks.forEach(([s, t]) => { BALL[t].parents.push(s); BALL[s].children.push(t); });
+const bn = id => BALL[id].name;
+
+/* ---------- progress (saved in this browser only) ---------- */
+const LS_KEY = "pykm-learned-v1";
+const EXAMPLE = ["run", "print", "comments", "tracebacks", "numbers", "arith", "precedence", "variables", "names", "strbasics",
+  "types", "convert", "input", "bool", "compare", "logic", "if", "else", "blocks", "callfn", "while", "jupyter", "intdiv", "floatprec", "shortcirc"];
+let learned = null, isExample = false;
+try { const v = localStorage.getItem(LS_KEY); if (v) learned = new Set(JSON.parse(v).filter(id => byId[id])); } catch (e) {}
+if (!learned) { learned = new Set(EXAMPLE); isExample = true; }
+function save() { isExample = false; try { localStorage.setItem(LS_KEY, JSON.stringify([...learned])); } catch (e) {} }
+
+/* ---------- AI's suggested route (anchored in the two data/ML-oriented sources) ---------- */
+const GOAL_SRC = ["kaggle", "pydata"];
+const GOAL = new Set(D.nodes.filter(n => GOAL_SRC.some(s => n.src[s])).map(n => n.id));
+const ROUTE = new Set(GOAL); GOAL.forEach(g => ancestors(g).forEach(a => ROUTE.add(a)));
+const pStatus = id => learned.has(id) ? "learned" : byId[id].needs.every(p => learned.has(p)) ? "ready" : "locked";
+function bStatus(b) {
+  const pts = BALL[b].pts;
+  if (pts.every(p => learned.has(p))) return "learned";
+  return pts.some(p => pStatus(p) === "ready") ? "ready" : "locked";
+}
+const bOnRoute = b => BALL[b].pts.some(p => ROUTE.has(p) && !learned.has(p));
+const bNext = b => bOnRoute(b) && BALL[b].pts.some(p => ROUTE.has(p) && pStatus(p) === "ready");
+const pNext = p => ROUTE.has(p) && pStatus(p) === "ready";
+const STXT = { learned: "Learned", ready: "Can learn now", locked: "Not reachable yet" };
+
+/* ---------- header ---------- */
+document.getElementById("figs").innerHTML = [[13, "sources"], [fmt(Object.values(D.sources).reduce((a, s) => a + s.n, 0)), "headings"], [D.balls.length, "big balls"], [D.nodes.length, "points"]]
+  .map(([v, l]) => `<span><b>${v}</b>${l}</span>`).join("");
+
+/* ---------- layout ---------- */
+const RS = 5.5;
+D.balls.forEach(b => {
+  const cs = b.pts.map(id => ({ id, r: RS + 2 }));
+  d3.packSiblings(cs); const e = d3.packEnclose(cs);
+  b.r = e.r + 6;
+  const ringR = b.r + 18;
+  b.dots = cs.map((c, i) => {
+    const a = -Math.PI / 2 + i * 2 * Math.PI / cs.length;
+    return { id: c.id, px: c.x - e.x, py: c.y - e.y, qx: Math.cos(a) * ringR, qy: Math.sin(a) * ringR, a };
+  });
+});
+D.balls.forEach(b => {
+  const w = b.name.split(" ");
+  if (b.name.length <= 17 || w.length < 2) { b.lines = [b.name]; return; }
+  let best = null;
+  for (let i = 1; i < w.length; i++) { const l1 = w.slice(0, i).join(" "), l2 = w.slice(i).join(" "), m = Math.max(l1.length, l2.length); if (!best || m < best[0]) best = [m, l1, l2]; }
+  b.lines = [best[1], best[2]];
+});
+D.balls.forEach(b => b.cr = Math.max(b.r + 34, Math.max(...b.lines.map(l => l.length)) * 4.4));
+const angle = a => (AREA[a].i / D.areas.length) * Math.PI * 2 - Math.PI / 2;
+D.balls.forEach((b, i) => {
+  const a = angle(b.area) + ((i * 0.618) % 1 - 0.5) * 0.3, r = 62 * Math.pow(b.d, 0.85);
+  b.tx = Math.cos(a) * r; b.ty = Math.sin(a) * r; b.x = b.tx + (i % 5); b.y = b.ty + (i % 3);
+});
+const sim = d3.forceSimulation(D.balls)
+  .force("link", d3.forceLink(D.blinks.map(([s, t]) => ({ source: s, target: t }))).id(d => d.id).distance(90).strength(0.03))
+  .force("charge", d3.forceManyBody().strength(-90).distanceMax(300))
+  .force("collide", d3.forceCollide(d => d.cr).iterations(3))
+  .force("x", d3.forceX(d => d.tx).strength(0.12)).force("y", d3.forceY(d => d.ty).strength(0.12)).stop();
+for (let i = 0; i < 500; i++) sim.tick();
+
+/* ---------- drawing ---------- */
+const svg = d3.select("#map"), root = svg.append("g");
+svg.append("defs").append("marker").attr("id", "arr").attr("viewBox", "0 0 8 8").attr("refX", 7).attr("refY", 4)
+  .attr("markerWidth", 6).attr("markerHeight", 6).attr("orient", "auto").append("path").attr("d", "M0,0.8 L7.2,4 L0,7.2 z").style("fill", "var(--edge)");
+const gL = root.append("g"), gB = root.append("g");
+function edge(a, b) {
+  const dx = b.x - a.x, dy = b.y - a.y, L = Math.hypot(dx, dy) || 1;
+  return `M${a.x + dx / L * (a.r + 3)},${a.y + dy / L * (a.r + 3)}L${b.x - dx / L * (b.r + 7)},${b.y - dy / L * (b.r + 7)}`;
+}
+const linkSel = gL.selectAll("path").data(D.blinks).join("path").attr("class", "blk")
+  .attr("d", ([s, t]) => edge(BALL[s], BALL[t])).attr("marker-end", "url(#arr)");
+const ballSel = gB.selectAll("g.ball").data(D.balls).join("g").attr("class", "ball")
+  .attr("transform", b => `translate(${b.x},${b.y})`).style("--h", b => AREA[b.area].h);
+ballSel.append("circle").attr("class", "halo").attr("r", b => b.r + 5);
+ballSel.append("circle").attr("class", "body").attr("r", b => b.r);
+const dotSel = ballSel.selectAll("g.dot").data(b => b.dots).join("g").attr("class", "dot")
+  .attr("transform", d => `translate(${d.px},${d.py})`);
+dotSel.append("circle").attr("class", "halo").attr("r", RS + 3.2);
+dotSel.append("circle").attr("class", "core").attr("r", RS);
+dotSel.append("text").text(d => nm(d.id));
+const blab = ballSel.append("text").attr("class", "blab").attr("text-anchor", "middle");
+blab.selectAll("tspan").data(b => b.lines).join("tspan").attr("x", 0).text(l => l);
+const bcount = ballSel.append("text").attr("class", "bcount").attr("text-anchor", "middle").attr("dominant-baseline", "central");
+
+let K = 1;
+function sizeText() {
+  blab.attr("font-size", 12.5 / K).attr("stroke-width", 3.5 / K).attr("y", b => state.open === b.id ? (-3 - (b.lines.length - 1) * 15) / K : b.r + 5 + 12 / K);
+  blab.selectAll("tspan").attr("dy", (l, i) => i ? 15 / K : 0);
+  bcount.attr("font-size", 11 / K).attr("y", 11 / K);
+  dotSel.select("text").attr("font-size", 11 / K).attr("stroke-width", 3 / K)
+    .attr("x", d => Math.cos(d.a) * (RS + 5) + (Math.cos(d.a) >= -0.2 ? 0 : 0))
+    .attr("y", d => Math.sin(d.a) * (RS + 5))
+    .attr("text-anchor", d => Math.cos(d.a) > 0.25 ? "start" : Math.cos(d.a) < -0.25 ? "end" : "middle")
+    .attr("dominant-baseline", d => Math.abs(Math.cos(d.a)) > 0.25 ? "central" : Math.sin(d.a) < 0 ? "auto" : "hanging");
+}
+const zoom = d3.zoom().scaleExtent([0.25, 8]).on("zoom", e => { root.attr("transform", e.transform); if (Math.abs(e.transform.k - K) > 1e-3) { K = e.transform.k; sizeText(); } });
+svg.call(zoom).on("dblclick.zoom", null);
+function fitBox(x0, y0, x1, y1, ms = 450) {
+  const el = svg.node(), w = el.clientWidth, h = el.clientHeight; if (!w || !h) return;
+  const k = Math.min(4.5, 0.92 * Math.min(w / (x1 - x0), h / (y1 - y0)));
+  const t = d3.zoomIdentity.translate(w / 2 - k * (x0 + x1) / 2, h / 2 - k * (y0 + y1) / 2).scale(k);
+  (ms && !matchMedia("(prefers-reduced-motion: reduce)").matches ? svg.transition().duration(ms) : svg).call(zoom.transform, t);
+}
+function fitBalls(ids, ms) {
+  const bs = ids ? D.balls.filter(b => ids.has(b.id)) : D.balls;
+  fitBox(d3.min(bs, b => b.x - b.r) - 80, d3.min(bs, b => b.y - b.r) - 20, d3.max(bs, b => b.x + b.r) + 80, d3.max(bs, b => b.y + b.r) + 75, ms);
+}
+function fitOpen(b) { const R = b.r + 18 + 110; fitBox(b.x - R, b.y - R * 0.72, b.x + R, b.y + R * 0.72); }
+
+/* ---------- state ---------- */
+const state = { open: null, point: null, focus: null };
+function refresh() {
+  ballSel.attr("class", b => {
+    const st = bStatus(b.id);
+    return "ball st-" + st + (bOnRoute(b.id) ? " route" : "") + (bNext(b.id) ? " next" : "") + (state.open === b.id ? " open" : "");
+  });
+  dotSel.attr("class", d => "dot st-" + pStatus(d.id) + (ROUTE.has(d.id) && !learned.has(d.id) ? " route" : "") + (pNext(d.id) ? " next" : "") + (state.point === d.id ? " sel" : ""))
+    .style("--h", d => AREA[byId[d.id].area].h);
+  bcount.text(b => `${b.pts.filter(p => learned.has(p)).length} of ${b.pts.length} learned`);
+  sizeText(); paintFocus();
+  renderMine();
+  if (state.point) renderPoint(state.point); else if (state.open) renderBall(state.open);
+}
+function paintFocus() {
+  let lit = null;
+  if (state.focus) lit = state.focus;
+  else if (state.open) lit = new Set([state.open, ...BALL[state.open].parents, ...BALL[state.open].children]);
+  svg.classed("dimmed", !!lit);
+  ballSel.classed("lit", b => !!lit && lit.has(b.id));
+  linkSel.classed("lit", ([s, t]) => !!state.open && (s === state.open || t === state.open));
+}
+function openBall(id, fit = true) {
+  state.open = id; state.focus = null; state.point = null;
+  document.getElementById("focusnote").classList.remove("on");
+  dotSel.attr("transform", d => { const mine = BALL_OF[d.id] === id; return `translate(${mine ? d.qx : d.px},${mine ? d.qy : d.py})`; });
+  gB.selectAll("g.ball").filter(b => b.id === id).raise();
+  refresh(); renderBall(id); tab("det");
+  if (fit) fitOpen(BALL[id]);
+}
+function closeBall() {
+  if (!state.open) return;
+  state.open = null; state.point = null;
+  dotSel.attr("transform", d => `translate(${d.px},${d.py})`);
+  refresh();
+}
+function showPoint(id) {
+  if (state.open !== BALL_OF[id]) openBall(BALL_OF[id]);
+  state.point = id; refresh(); renderPoint(id); tab("det");
+}
+function setFocus(ids, label) {
+  closeBall(); state.focus = ids;
+  document.getElementById("focusnote").classList.toggle("on", !!ids);
+  document.getElementById("focustext").textContent = label || "";
+  paintFocus(); if (ids) fitBalls(ids);
+}
+document.getElementById("clear").onclick = () => { setFocus(null); fitBalls(null); };
+document.getElementById("fit").onclick = () => { closeBall(); setFocus(null); fitBalls(null); };
+
+/* ---------- interaction ---------- */
+const tip = document.getElementById("tip");
+function showTip(e, html) {
+  if (e.pointerType === "touch") return;
+  tip.innerHTML = html; tip.style.display = "block";
+  const r = svg.node().parentNode.getBoundingClientRect();
+  let x = e.clientX - r.left + 14; if (x + 270 > r.width) x = e.clientX - r.left - 274;
+  tip.style.left = x + "px"; tip.style.top = (e.clientY - r.top + 14) + "px";
+}
+ballSel.select(".body").on("pointermove", (e, b) => showTip(e, `<b>${esc(b.name)}</b><span>${STXT[bStatus(b.id)]} · ${b.pts.filter(p => learned.has(p)).length} of ${b.pts.length} points learned</span>`))
+  .on("pointerleave", () => tip.style.display = "none")
+  .on("click", (e, b) => { e.stopPropagation(); tip.style.display = "none"; state.open === b.id ? (state.point = null, refresh(), renderBall(b.id), tab("det")) : openBall(b.id); });
+dotSel.on("pointermove", (e, d) => { if (state.open === BALL_OF[d.id]) showTip(e, `<b>${esc(nm(d.id))}</b><span>${STXT[pStatus(d.id)]}${ROUTE.has(d.id) && !learned.has(d.id) ? " · on the suggested route" : ""}</span>`); })
+  .on("pointerleave", () => tip.style.display = "none")
+  .on("click", (e, d) => { e.stopPropagation(); if (state.open === BALL_OF[d.id]) showPoint(d.id); });
+svg.on("click", () => { if (state.open) { closeBall(); tab("mine"); } });
+
+const q = document.getElementById("q");
+document.getElementById("names").innerHTML = [...D.balls.map(b => b.name), ...D.nodes.map(n => n.name)].sort((a, b) => a.localeCompare(b)).map(n => `<option value="${esc(n)}">`).join("");
+q.addEventListener("change", () => {
+  const v = q.value.trim().toLowerCase(); if (!v) return;
+  const b = D.balls.find(b => b.name.toLowerCase() === v); if (b) return openBall(b.id);
+  const n = D.nodes.find(n => n.name.toLowerCase() === v) || D.nodes.find(n => n.name.toLowerCase().includes(v));
+  if (n) showPoint(n.id);
+});
+
+/* ---------- tabs ---------- */
+const TABS = { mine: "p-mine", det: "p-det", prob: "p-prob", src: "p-src" };
+function tab(which) {
+  for (const [k, p] of Object.entries(TABS)) { document.getElementById("t-" + k).setAttribute("aria-selected", k === which); document.getElementById(p).hidden = k !== which; }
+}
+Object.keys(TABS).forEach(k => document.getElementById("t-" + k).onclick = () => tab(k));
+
+/* ---------- panels ---------- */
+const bpill = id => `<button class="pill${bNext(id) ? " next" : ""}" data-ball="${id}" type="button">${esc(bn(id))}</button>`;
+const ppill = id => `<button class="pill" data-point="${id}" type="button">${esc(nm(id))}</button>`;
+const swatch = (fill, stroke, ring) => `<svg width="22" height="22" viewBox="0 0 22 22">${ring ? `<circle cx="11" cy="11" r="9.6" fill="none" stroke="var(--route)" stroke-width="${ring}" ${ring < 2 ? 'stroke-opacity=".6"' : ""}/>` : ""}<circle cx="11" cy="11" r="6.5" fill="${fill}" ${stroke ? `stroke="${stroke}" stroke-width="1.6"` : ""}/></svg>`;
+const C = "hsl(150 50% 45%)";
+const SW = { learned: swatch(`color-mix(in srgb, ${C} 62%, var(--map))`, C), ready: swatch(`color-mix(in srgb, ${C} 22%, var(--map))`, C), locked: swatch("var(--locked)", "var(--locked-dot)") };
+document.getElementById("legend").innerHTML = `<span>${SW.learned}Learned</span><span>${SW.ready}Can learn now</span><span>${SW.locked}Not reachable yet</span>
+  <span>${swatch("var(--locked)", "", 1.4)}AI's suggested route</span><span>${swatch("var(--locked)", "", 3)}Suggested next</span><span>Click a ball to open it</span>`;
+
+function renderMine() {
+  const bc = { learned: 0, ready: 0, locked: 0 }; D.balls.forEach(b => bc[bStatus(b.id)]++);
+  const bySize = (a, b) => BALL[b].pts.length - BALL[a].pts.length;
+  const next = D.balls.map(b => b.id).filter(bNext).sort(bySize);
+  const off = D.balls.map(b => b.id).filter(b => !bNext(b) && bStatus(b) === "ready").sort(bySize);
+  document.getElementById("p-mine").innerHTML = `
+    <p class="small" style="margin:0">Goal</p><h2>Python for machine learning</h2>
+    <div class="stat3"><div><b>${bc.learned}</b>balls learned</div><div><b>${bc.ready}</b>can learn now</div><div><b>${bc.locked}</b>not reachable yet</div></div>
+    <p class="small">${learned.size} of ${D.nodes.length} points learned.</p>
+    ${isExample ? `<div class="note"><span>This is <b>example progress</b> (roughly the first two chapters of a beginner book), not yours.</span><div class="btns"><button class="btn solid" type="button" data-act="clear">Start with an empty map</button></div></div>` : ""}
+    <h3>Suggested next</h3>
+    ${next.length ? `<div class="ex">${next.map(bpill).join("")}</div><p class="small" style="margin-top:8px">Balls on the route where you can start a point now. Thick red ring on the map.</p>` : `<p class="empty">Nothing on the route is reachable right now.</p>`}
+    ${off.length ? `<h3>Also open to you</h3><div class="ex">${off.map(bpill).join("")}</div>` : ""}
+    <h3>How to read the map</h3>
+    <div class="key">
+      <div>${SW.learned}<span><b>Bright</b>: you've learned every point in the ball.</span></div>
+      <div>${SW.ready}<span><b>Pale with an outline</b>: you can learn something in it now.</span></div>
+      <div>${SW.locked}<span><b>Grey</b>: nothing in it is reachable yet. You can still open it.</span></div>
+      <div>${swatch("var(--locked)", "", 1.4)}<span><b>Red ring</b>: the AI's suggested route to your goal. A thick ring is a suggested next step.</span></div>
+    </div>
+    <p class="small" style="margin-top:10px">The small dots inside each ball are its points, with the same brightness. Open a ball to see their names and mark them as learned.</p>
+    <h3>Where the balls and the route come from</h3>
+    <p class="small">Each ball groups points that books usually teach together; a ball's details show how often the 12 books put its points in the same chapter. The route is the ${GOAL.size} points taught in the two sources written for data work (Kaggle Learn: Python and Python for Data Analysis, chapters 2–3) plus the ${ROUTE.size - GOAL.size} points they build on. It is a suggestion, not a plan.</p>
+    <div class="btns"><button class="btn" type="button" data-act="clear">Clear my progress</button><button class="btn" type="button" data-act="example">Load example progress</button></div>
+    <p class="small" style="margin-top:8px">Progress is saved in this browser only.</p>`;
+}
+function renderBall(id) {
+  const b = BALL[id], st = bStatus(id), done = b.pts.filter(p => learned.has(p)).length, r = b.pts.filter(p => ROUTE.has(p)).length;
+  const prow = p => { const s = pStatus(p); return `<div class="prow"><input type="checkbox" data-mark="${p}" ${learned.has(p) ? "checked" : ""} aria-label="Learned: ${esc(nm(p))}">
+      <button class="nm" data-point="${p}" type="button">${esc(nm(p))}</button>
+      <span class="tag ${pNext(p) ? "route" : s}">${pNext(p) ? "next" : s === "learned" ? "learned" : s === "ready" ? "can learn" : "not yet"}</span></div>`; };
+  const rel = ids => ids.length ? `<div class="ex">${ids.map(bpill).join("")}</div>` : `<p class="empty">None.</p>`;
+  document.getElementById("p-det").innerHTML = `
+    <span class="chip" style="--h:${AREA[b.area].h}"><i></i>${esc(AREA[b.area].name)}</span>
+    <h2>${esc(b.name)}</h2>
+    <div class="card"><span class="status">${STXT[st]} · ${done} of ${b.pts.length} points learned${bOnRoute(id) ? ` · <span class="r">on the suggested route</span>` : ""}</span>
+      <div class="btns">${done < b.pts.length ? `<button class="btn solid" type="button" data-markall="${id}">Mark whole ball as learned</button>` : ""}${done ? `<button class="btn" type="button" data-clearall="${id}">Clear this ball</button>` : ""}</div></div>
+    <h3>Points inside</h3><div class="rows">${b.pts.map(prow).join("")}</div>
+    <h3>Builds on</h3>${rel(b.parents)}
+    <h3>Leads to</h3>${rel(b.children)}
+    <h3>Why these belong together</h3>
+    <p class="small">${b.coh != null ? `Across the books that teach them, any two of these points sit in the same chapter about <b>${b.coh}%</b> of the time.` : "Too few books teach these points for a same-chapter figure."} ${r ? `${r} of its ${b.pts.length} points are on the suggested route.` : "None of its points are on the suggested route."}</p>`;
+}
+function renderPoint(id) {
+  const n = byId[id], st = pStatus(id), miss = n.needs.filter(p => !learned.has(p));
+  const why = GOAL.has(id) ? "Taught in " + GOAL_SRC.filter(s => n.src[s]).map(s => SHORT[s]).join(" and ") + "."
+    : ROUTE.has(id) ? "Needed by route points such as " + [...GOAL].filter(g => ancestors(g).has(id)).slice(0, 3).map(nm).join(", ") + "." : "";
+  const srcRows = Object.entries(n.src).map(([s, hs]) => `<div class="src"><b>${SHORT[s]}</b>${hs.map(([h, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(h)}</a>`).join("")}</div>`).join("");
+  document.getElementById("p-det").innerHTML = `
+    <button class="back" type="button" data-ball="${BALL_OF[id]}">← ${esc(bn(BALL_OF[id]))}</button>
+    <h2>${esc(n.name)}</h2>
+    <div class="card"><span class="status">${STXT[st]}${ROUTE.has(id) && !learned.has(id) ? ` · <span class="r">on the suggested route</span>` : ""}</span>
+      ${st === "locked" ? `<span class="small">Still missing:</span><div class="ex">${miss.map(ppill).join("")}</div>` : ""}
+      ${why ? `<span class="small">${esc(why)}</span>` : ""}
+      <div class="btns"><button class="btn ${st === "learned" ? "" : "solid"}" type="button" data-toggle="${id}">${st === "learned" ? "Mark as not learned" : "Mark as learned"}</button></div></div>
+    <p class="small">Taught in ${n.n} of 13 sources.</p>
+    <h3>Needed first</h3>${n.needs.length ? `<div class="rows">${n.needs.map(p => `<div class="prow" style="grid-template-columns:minmax(0,1fr) auto"><button class="nm" data-point="${p}" type="button">${esc(nm(p))}</button><span class="tag ${pStatus(p)}">${learned.has(p) ? "learned" : "not yet"}</span></div>`).join("")}</div>` : `<p class="empty">Nothing. This is a starting point.</p>`}
+    ${n.helps.length ? `<h3>Helps to know first</h3><div class="inline">${n.helps.map(p => `<button class="nm" data-point="${p}" type="button">${esc(nm(p))}</button>`).join("")}</div>` : ""}
+    <h3>Needed by</h3>${n.usedBy.length ? `<div class="inline">${n.usedBy.map(p => `<button class="nm" data-point="${p}" type="button">${esc(nm(p))}</button>`).join("")}</div>` : `<p class="empty">No other point needs this one.</p>`}
+    <h3>Where the sources teach it</h3>${srcRows ? `<div class="srcs">${srcRows}</div>` : `<p class="empty">No source has a heading for this point.</p>`}`;
+}
+document.querySelector(".panel").addEventListener("click", e => {
+  const t = e.target.closest("[data-ball],[data-point],[data-toggle],[data-markall],[data-clearall],[data-act],[data-show]"); if (!t) return;
+  const ds = t.dataset;
+  if (ds.ball) openBall(ds.ball);
+  else if (ds.point) showPoint(ds.point);
+  else if (ds.toggle) { learned.has(ds.toggle) ? learned.delete(ds.toggle) : learned.add(ds.toggle); save(); refresh(); }
+  else if (ds.markall) { BALL[ds.markall].pts.forEach(p => learned.add(p)); save(); refresh(); }
+  else if (ds.clearall) { BALL[ds.clearall].pts.forEach(p => learned.delete(p)); save(); refresh(); }
+  else if (ds.act === "clear") { learned = new Set(); save(); refresh(); }
+  else if (ds.act === "example") { learned = new Set(EXAMPLE); try { localStorage.removeItem(LS_KEY); } catch (err) {} isExample = true; refresh(); }
+  else if (ds.show) { const p = PROBLEMS[+ds.show]; setFocus(new Set(p.pts().map(x => BALL_OF[x])), p.label); }
+});
+document.querySelector(".panel").addEventListener("change", e => {
+  const id = e.target.dataset.mark; if (!id) return;
+  e.target.checked ? learned.add(id) : learned.delete(id); save(); refresh();
+});
+
+/* ---------- problems found in the map test ---------- */
+const S = D.stats;
+const KNOT = new Set(["numbers", "variables", "strbasics", "types", "arith", "convert", "print", "compare", "if", "callfn", "def"]);
+const knotBad = D.against.filter(a => KNOT.has(a[0]) && KNOT.has(a[1]));
+const thin = D.nodes.filter(n => n.n <= 2);
+const PROBLEMS = [
+  { sev: "core", num: knotBad.length + "/" + D.against.length, title: "The start is a knot, not a tree",
+    body: `Numbers, variables, strings, types and <code>print()</code> arrive together in chapter 1, and each book orders their headings differently. ${D.against.length} of the AI's links run against most books' order, and ${knotBad.length} of those sit inside this knot. The big balls absorb most of it: the knot now lives inside the first few balls.`,
+    pts: () => D.against.flatMap(a => [a[0], a[1]]), label: "Balls holding links against most books' order" },
+  { sev: "core", num: S.human_links_in_neither_needs_chain + "/" + S.human_links, title: "“Prerequisite” means different things",
+    body: `Exercism's authors wrote ${S.human_links} prerequisite links by hand; ${S.human_links_in_neither_needs_chain} are in neither AI run's strict “needed first” chain. Most are exercise gates (“Booleans before classes” because their class exercise uses Booleans). Brightness depends on these links, so link types must be defined.`,
+    pts: () => D.human.flatMap(h => [h[0], h[1]]), label: "Balls touched by Exercism's human links" },
+  { sev: "major", num: fmt(S.pairs_sources_split_on_order), title: "The books don't share one order",
+    body: `Of ${fmt(S.popular_point_pairs)} pairs of widely taught points, the books split on ${S.pairs_sources_split_on_order}. With learners choosing their own route, this is fine: several routes are legitimate.`,
+    pairs: D.split.slice(0, 5), pts: () => D.split.slice(0, 14).flatMap(p => [p[0], p[1]]), label: "Balls the books order differently" },
+  { sev: "major", num: fmt(thin.length), title: "The edge of the map is unclear",
+    body: `${thin.length} of ${D.nodes.length} points appear in only 0–2 sources. They stay on the map, just away from the route.`,
+    pts: () => thin.map(n => n.id), label: "Balls with points in 0–2 sources" },
+  { sev: "major", num: "3", title: "The AI's own point list had gaps",
+    body: "The first AI-drafted list missed “Indentation and code blocks” (7 sources) and “Code style” (3), and included “Dataclasses”, which no source teaches. Matching against the headings caught all three.",
+    pts: () => ["blocks", "style", "dataclasses"], label: "Balls with points the sources corrected" },
+  { sev: "major", num: "2×", title: "One idea, two places",
+    body: "Indexing and slicing appear under both strings and lists. They stay in their own balls (that's how books teach them), but learning one makes the other nearly free.",
+    pts: () => ["strindex", "listindex", "strslice", "listslice"], label: "Balls with indexing and slicing" },
+  { sev: "ok", num: S.same_direct + "", title: "Two AI runs mostly agree",
+    body: `Run A drew ${S.needs_A} “needed first” links and run B ${S.needs_B}; ${S.same_direct} are identical and ${S.opposite_direction} point opposite ways. Where they differ, it's about how strict a link is.`,
+    pts: () => [], label: "" },
+];
+document.getElementById("p-prob").innerHTML = `
+  <p class="small">From the earlier test of the point map (before the points were packed into balls).</p>
+  ${PROBLEMS.map((p, i) => `<div class="prob"><div class="head"><span class="num">${p.num}</span><h4>${p.title}</h4><span class="sev ${p.sev}">${p.sev === "ok" ? "fine" : p.sev}</span></div>
+    <p>${p.body}</p>
+    ${p.pairs ? `<div class="pairs">${p.pairs.map(([a, b, bf, af]) => `<div><span>${esc(nm(a))} → ${esc(nm(b))}</span><span>${bf} : ${af}</span></div>`).join("")}<div><span class="small">books putting the left one first : the right one first</span><span></span></div></div>` : ""}
+    ${p.label ? `<button class="btn" type="button" data-show="${i}">Show on map</button>` : ""}</div>`).join("")}`;
+
+/* ---------- sources ---------- */
+document.getElementById("p-src").innerHTML = `<p class="small">Each source's section headings, in the authors' order.</p><div class="srclist">` +
+  Object.entries(D.sources).map(([id, s]) => `<div class="src"><b><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a></b><span>${esc(s.author)} · ${esc(s.kind)}</span><span>${s.n} headings · teaches ${D.nodes.filter(n => n.src[id]).length} of the ${D.nodes.length} points${id === "exercism" ? " · lists prerequisites, used as the human check" : ""}</span></div>`).join("") + `</div>`;
+
+/* ---------- start ---------- */
+refresh(); sizeText();
+requestAnimationFrame(() => fitBalls(null, 0));
+let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => state.open ? fitOpen(BALL[state.open]) : fitBalls(state.focus, 0), 150); });
+</script>

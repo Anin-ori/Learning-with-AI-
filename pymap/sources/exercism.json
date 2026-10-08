@@ -1,0 +1,2296 @@
+{
+ "id": "exercism",
+ "name": "Exercism Python track syllabus",
+ "author": "Exercism contributors",
+ "url": "https://exercism.org/tracks/python/concepts",
+ "kind": "Syllabus with explicit prerequisites",
+ "all_concepts": {
+  "aliasing": "Aliasing",
+  "anonymous-functions": "Anonymous Functions",
+  "basics": "Basics",
+  "binary-data": "Binary Data",
+  "binary-octal-hexadecimal": "Binary, Octal, and Hexadecimal",
+  "bitflags": "Bitflags",
+  "bitwise-operators": "Bitwise Operators",
+  "bools": "Bools",
+  "bytes": "Bytes",
+  "class-composition": "Class Composition",
+  "class-customization": "Class Customization",
+  "class-inheritance": "Class Inheritance",
+  "class-interfaces": "Class Interfaces",
+  "classes": "Classes",
+  "collections": "Collections",
+  "comparisons": "Comparisons",
+  "complex-numbers": "Complex Numbers",
+  "conditionals": "Conditionals",
+  "context-manager-customization": "Context Manager Customization",
+  "dataclasses": "Dataclasses",
+  "decorators": "Decorators",
+  "descriptors": "Descriptors",
+  "dict-methods": "Dict Methods",
+  "dicts": "Dicts",
+  "enums": "Enums",
+  "function-arguments": "Function Arguments",
+  "functional-tools": "Functional Tools",
+  "functions": "Functions",
+  "functools": "Functools",
+  "generator-expressions": "Generator Expressions",
+  "generators": "Generators",
+  "higher-order-functions": "Higher Order Functions",
+  "iteration": "Iteration",
+  "iterators": "Iterators",
+  "itertools": "Itertools",
+  "list-comprehensions": "List Comprehensions",
+  "list-methods": "List Methods",
+  "lists": "Lists",
+  "loops": "Loops",
+  "memoryview": "Memoryview",
+  "none": "None",
+  "number-variations": "Number Variations",
+  "numbers": "Numbers",
+  "operator-overloading": "Operator Overloading",
+  "other-comprehensions": "Other Comprehensions",
+  "raising-and-handling-errors": "Raising And Handling Errors",
+  "recursion": "Recursion",
+  "regular-expressions": "Regular Expressions",
+  "rich-comparisons": "Rich Comparisons",
+  "sequences": "Sequences",
+  "sets": "Sets",
+  "string-formatting": "String Formatting",
+  "string-methods": "String Methods",
+  "string-methods-splitting": "String Methods Splitting",
+  "strings": "Strings",
+  "testing": "Testing",
+  "text-processing": "Text Processing",
+  "tuples": "Tuples",
+  "type-hinting": "Type Hinting",
+  "unicode-regular-expressions": "Unicode Regular Expressions",
+  "unpacking-and-multiple-assignment": "Unpacking And Multiple Assignment",
+  "user-defined-errors": "User Defined Errors",
+  "walrus-operator": "Walrus Operator",
+  "with-statement": "With Statement",
+  "random": "Random",
+  "fractions": "Fractions",
+  "secrets": "Secrets"
+ },
+ "practice_exercises": [
+  {
+   "slug": "hello-world",
+   "practices": [],
+   "prerequisites": []
+  },
+  {
+   "slug": "leap",
+   "practices": [
+    "bools"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "triangle",
+   "practices": [
+    "bools"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "grains",
+   "practices": [
+    "numbers"
+   ],
+   "prerequisites": [
+    "basics",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "armstrong-numbers",
+   "practices": [
+    "numbers"
+   ],
+   "prerequisites": [
+    "basics",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "collatz-conjecture",
+   "practices": [
+    "numbers"
+   ],
+   "prerequisites": [
+    "basics",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "bob",
+   "practices": [
+    "conditionals"
+   ],
+   "prerequisites": [
+    "basics",
+    "conditionals"
+   ]
+  },
+  {
+   "slug": "raindrops",
+   "practices": [
+    "conditionals"
+   ],
+   "prerequisites": [
+    "basics",
+    "numbers",
+    "conditionals",
+    "bools"
+   ]
+  },
+  {
+   "slug": "darts",
+   "practices": [
+    "comparisons"
+   ],
+   "prerequisites": [
+    "basics",
+    "numbers",
+    "comparisons",
+    "conditionals"
+   ]
+  },
+  {
+   "slug": "perfect-numbers",
+   "practices": [
+    "comparisons"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "reverse-string",
+   "practices": [
+    "sequences"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "strings"
+   ]
+  },
+  {
+   "slug": "pangram",
+   "practices": [
+    "strings"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "strings"
+   ]
+  },
+  {
+   "slug": "isogram",
+   "practices": [
+    "strings"
+   ],
+   "prerequisites": [
+    "strings"
+   ]
+  },
+  {
+   "slug": "isbn-verifier",
+   "practices": [
+    "strings"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "strings"
+   ]
+  },
+  {
+   "slug": "rotational-cipher",
+   "practices": [
+    "strings"
+   ],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "numbers",
+    "strings"
+   ]
+  },
+  {
+   "slug": "rna-transcription",
+   "practices": [
+    "string-methods"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "loops",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "resistor-color",
+   "practices": [
+    "lists"
+   ],
+   "prerequisites": [
+    "strings",
+    "lists"
+   ]
+  },
+  {
+   "slug": "resistor-color-duo",
+   "practices": [
+    "lists"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "lists",
+    "numbers",
+    "strings"
+   ]
+  },
+  {
+   "slug": "resistor-color-trio",
+   "practices": [
+    "list-methods"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "lists",
+    "list-methods",
+    "numbers",
+    "strings",
+    "comparisons"
+   ]
+  },
+  {
+   "slug": "resistor-color-expert",
+   "practices": [
+    "list-methods"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "lists",
+    "list-methods",
+    "numbers",
+    "strings",
+    "comparisons"
+   ]
+  },
+  {
+   "slug": "secret-handshake",
+   "practices": [
+    "list-methods"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "list-methods",
+    "lists",
+    "loops",
+    "numbers",
+    "string-methods",
+    "strings"
+   ]
+  },
+  {
+   "slug": "anagram",
+   "practices": [
+    "list-methods"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "list-methods",
+    "lists",
+    "loops",
+    "string-methods",
+    "strings"
+   ]
+  },
+  {
+   "slug": "house",
+   "practices": [],
+   "prerequisites": [
+    "basics",
+    "lists",
+    "list-methods",
+    "loops",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "binary-search",
+   "practices": [
+    "loops"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "hamming",
+   "practices": [
+    "generator-expressions",
+    "raising-and-handling-errors",
+    "sequences"
+   ],
+   "prerequisites": [
+    "basics",
+    "lists",
+    "loops",
+    "conditionals",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "flatten-array",
+   "practices": [],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "strings",
+    "lists",
+    "list-methods",
+    "loops"
+   ]
+  },
+  {
+   "slug": "line-up",
+   "practices": [
+    "string-formatting"
+   ],
+   "prerequisites": [
+    "basics",
+    "strings"
+   ]
+  },
+  {
+   "slug": "difference-of-squares",
+   "practices": [],
+   "prerequisites": [
+    "basics",
+    "numbers",
+    "loops"
+   ]
+  },
+  {
+   "slug": "list-ops",
+   "practices": [],
+   "prerequisites": [
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops"
+   ]
+  },
+  {
+   "slug": "etl",
+   "practices": [
+    "dicts"
+   ],
+   "prerequisites": [
+    "dicts"
+   ]
+  },
+  {
+   "slug": "space-age",
+   "practices": [
+    "dicts"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "dicts",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "sum-of-multiples",
+   "practices": [
+    "sets"
+   ],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "lists",
+    "loops",
+    "numbers",
+    "sets"
+   ]
+  },
+  {
+   "slug": "gigasecond",
+   "practices": [],
+   "prerequisites": [
+    "classes"
+   ]
+  },
+  {
+   "slug": "two-fer",
+   "practices": [
+    "function-arguments"
+   ],
+   "prerequisites": [
+    "basics",
+    "sets"
+   ]
+  },
+  {
+   "slug": "square-root",
+   "practices": [],
+   "prerequisites": [
+    "basics",
+    "numbers",
+    "conditionals",
+    "loops"
+   ]
+  },
+  {
+   "slug": "pig-latin",
+   "practices": [
+    "conditionals"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals"
+   ]
+  },
+  {
+   "slug": "matching-brackets",
+   "practices": [
+    "conditionals"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "strings"
+   ]
+  },
+  {
+   "slug": "sublist",
+   "practices": [
+    "comparisons"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "comparisons",
+    "lists"
+   ]
+  },
+  {
+   "slug": "atbash-cipher",
+   "practices": [
+    "string-methods"
+   ],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "loops",
+    "lists",
+    "list-methods",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "diamond",
+   "practices": [
+    "lists"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "lists",
+    "loops",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "eliuds-eggs",
+   "practices": [
+    "loops"
+   ],
+   "prerequisites": [
+    "basics",
+    "lists",
+    "list-methods",
+    "loops",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "protein-translation",
+   "practices": [],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "lists",
+    "loops",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "prime-factors",
+   "practices": [],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "say",
+   "practices": [],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "dicts",
+    "lists",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "acronym",
+   "practices": [
+    "regular-expressions"
+   ],
+   "prerequisites": [
+    "basics",
+    "loops",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "series",
+   "practices": [
+    "sequences"
+   ],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "lists",
+    "loops",
+    "numbers",
+    "strings"
+   ]
+  },
+  {
+   "slug": "run-length-encoding",
+   "practices": [
+    "iteration",
+    "regular-expressions"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "nth-prime",
+   "practices": [
+    "generators"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "comparisons",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings"
+   ]
+  },
+  {
+   "slug": "twelve-days",
+   "practices": [
+    "tuples"
+   ],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "strings",
+    "string-methods",
+    "tuples"
+   ]
+  },
+  {
+   "slug": "roman-numerals",
+   "practices": [
+    "tuples"
+   ],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods",
+    "tuples"
+   ]
+  },
+  {
+   "slug": "word-count",
+   "practices": [
+    "dicts"
+   ],
+   "prerequisites": [
+    "basics",
+    "dicts",
+    "loops",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "scrabble-score",
+   "practices": [
+    "regular-expressions"
+   ],
+   "prerequisites": [
+    "basics",
+    "dicts",
+    "lists",
+    "loops",
+    "string-methods",
+    "strings"
+   ]
+  },
+  {
+   "slug": "proverb",
+   "practices": [
+    "unpacking-and-multiple-assignment"
+   ],
+   "prerequisites": [
+    "dicts",
+    "unpacking-and-multiple-assignment"
+   ]
+  },
+  {
+   "slug": "luhn",
+   "practices": [
+    "classes"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "lists",
+    "list-methods",
+    "loops",
+    "strings",
+    "string-methods",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "dnd-character",
+   "practices": [
+    "classes"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "dicts",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "robot-name",
+   "practices": [],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "classes",
+    "conditionals",
+    "lists",
+    "loops",
+    "sets",
+    "string-methods",
+    "strings"
+   ]
+  },
+  {
+   "slug": "phone-number",
+   "practices": [
+    "raising-and-handling-errors",
+    "string-formatting"
+   ],
+   "prerequisites": [
+    "basics",
+    "classes",
+    "lists",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "queen-attack",
+   "practices": [],
+   "prerequisites": [
+    "bools",
+    "conditionals",
+    "classes",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "transpose",
+   "practices": [
+    "unpacking-and-multiple-assignment"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods",
+    "unpacking-and-multiple-assignment"
+   ]
+  },
+  {
+   "slug": "yacht",
+   "practices": [
+    "enums"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "numbers",
+    "classes"
+   ]
+  },
+  {
+   "slug": "game-of-life",
+   "practices": [],
+   "prerequisites": [
+    "lists"
+   ]
+  },
+  {
+   "slug": "state-of-tic-tac-toe",
+   "practices": [
+    "loops"
+   ],
+   "prerequisites": [
+    "conditionals",
+    "lists",
+    "loops"
+   ]
+  },
+  {
+   "slug": "saddle-points",
+   "practices": [
+    "loops"
+   ],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "sets"
+   ]
+  },
+  {
+   "slug": "ocr-numbers",
+   "practices": [
+    "loops"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "robot-simulator",
+   "practices": [
+    "class-customization",
+    "decorators",
+    "dict-methods"
+   ],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "classes",
+    "dicts",
+    "lists",
+    "loops",
+    "numbers",
+    "tuples"
+   ]
+  },
+  {
+   "slug": "grade-school",
+   "practices": [
+    "collections",
+    "dict-methods"
+   ],
+   "prerequisites": [
+    "basics",
+    "dicts",
+    "lists",
+    "list-methods",
+    "classes"
+   ]
+  },
+  {
+   "slug": "sieve",
+   "practices": [
+    "sets"
+   ],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "sets"
+   ]
+  },
+  {
+   "slug": "pythagorean-triplet",
+   "practices": [
+    "sets"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "sets"
+   ]
+  },
+  {
+   "slug": "circular-buffer",
+   "practices": [
+    "class-inheritance",
+    "function-arguments",
+    "user-defined-errors"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "dicts",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings"
+   ]
+  },
+  {
+   "slug": "matrix",
+   "practices": [
+    "classes"
+   ],
+   "prerequisites": [
+    "basics",
+    "classes",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "high-scores",
+   "practices": [
+    "classes"
+   ],
+   "prerequisites": [
+    "basics",
+    "lists",
+    "list-methods",
+    "classes"
+   ]
+  },
+  {
+   "slug": "kindergarten-garden",
+   "practices": [
+    "classes"
+   ],
+   "prerequisites": [
+    "basics",
+    "classes",
+    "dicts",
+    "loops",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "bottle-song",
+   "practices": [
+    "list-methods"
+   ],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "dicts",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods",
+    "tuples"
+   ]
+  },
+  {
+   "slug": "allergies",
+   "practices": [],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "classes",
+    "dicts",
+    "loops",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "simple-cipher",
+   "practices": [],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "classes",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "poker",
+   "practices": [
+    "functions",
+    "higher-order-functions"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "wordy",
+   "practices": [
+    "string-methods"
+   ],
+   "prerequisites": [
+    "basics",
+    "lists",
+    "loops",
+    "strings",
+    "string-methods",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "crypto-square",
+   "practices": [
+    "list-comprehensions"
+   ],
+   "prerequisites": [
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "clock",
+   "practices": [
+    "class-composition",
+    "rich-comparisons",
+    "string-formatting"
+   ],
+   "prerequisites": [
+    "basics",
+    "numbers",
+    "strings",
+    "classes"
+   ]
+  },
+  {
+   "slug": "rectangles",
+   "practices": [
+    "iteration",
+    "itertools",
+    "sequences"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "classes",
+    "conditionals",
+    "list-methods",
+    "lists",
+    "loops",
+    "numbers",
+    "sets",
+    "string-methods",
+    "strings",
+    "tuples"
+   ]
+  },
+  {
+   "slug": "simple-linked-list",
+   "practices": [
+    "none",
+    "operator-overloading",
+    "rich-comparisons"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "loops",
+    "numbers",
+    "strings"
+   ]
+  },
+  {
+   "slug": "tree-building",
+   "practices": [
+    "none",
+    "raising-and-handling-errors"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "connect",
+   "practices": [],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "lists",
+    "loops",
+    "numbers",
+    "sets",
+    "strings",
+    "string-methods",
+    "tuples"
+   ]
+  },
+  {
+   "slug": "all-your-base",
+   "practices": [
+    "comparisons"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "comparisons",
+    "lists",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "swift-scheduling",
+   "practices": [],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "spiral-matrix",
+   "practices": [
+    "lists"
+   ],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "classes",
+    "dicts",
+    "lists",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "variable-length-quantity",
+   "practices": [
+    "list-methods"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "change",
+   "practices": [
+    "loops"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "killer-sudoku-helper",
+   "practices": [
+    "list-comprehensions"
+   ],
+   "prerequisites": [
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "flower-field",
+   "practices": [
+    "lists"
+   ],
+   "prerequisites": [
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "rail-fence-cipher",
+   "practices": [],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "palindrome-products",
+   "practices": [
+    "functions",
+    "function-arguments"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "tournament",
+   "practices": [
+    "tuples"
+   ],
+   "prerequisites": [
+    "basics",
+    "dicts",
+    "list-methods",
+    "lists",
+    "loops",
+    "string-methods",
+    "strings",
+    "tuples"
+   ]
+  },
+  {
+   "slug": "food-chain",
+   "practices": [
+    "tuples"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "dicts",
+    "list-methods",
+    "lists",
+    "loops",
+    "string-methods",
+    "strings",
+    "tuples"
+   ]
+  },
+  {
+   "slug": "scale-generator",
+   "practices": [],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "dicts",
+    "list-methods",
+    "lists",
+    "loops",
+    "string-methods",
+    "strings"
+   ]
+  },
+  {
+   "slug": "largest-series-product",
+   "practices": [
+    "generators"
+   ],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "markdown",
+   "practices": [
+    "regular-expressions",
+    "functions"
+   ],
+   "prerequisites": [
+    "lists",
+    "loops",
+    "sets",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "meetup",
+   "practices": [
+    "class-composition",
+    "dict-methods",
+    "raising-and-handling-errors",
+    "user-defined-errors"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "classes",
+    "conditionals",
+    "dicts",
+    "dict-methods",
+    "list-methods",
+    "lists",
+    "loops",
+    "string-methods",
+    "strings"
+   ]
+  },
+  {
+   "slug": "pascals-triangle",
+   "practices": [
+    "recursion"
+   ],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "classes",
+    "lists",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "grep",
+   "practices": [
+    "with-statement"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "lists",
+    "loops",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "linked-list",
+   "practices": [
+    "function-arguments",
+    "iterators",
+    "none",
+    "operator-overloading",
+    "rich-comparisons"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "lists",
+    "loops",
+    "numbers"
+   ]
+  },
+  {
+   "slug": "complex-numbers",
+   "practices": [
+    "class-customization",
+    "class-inheritance",
+    "rich-comparisons"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "numbers",
+    "strings"
+   ]
+  },
+  {
+   "slug": "ledger",
+   "practices": [
+    "operator-overloading",
+    "string-formatting"
+   ],
+   "prerequisites": [
+    "bools",
+    "conditionals",
+    "classes",
+    "dicts",
+    "lists",
+    "list-methods",
+    "loops",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "hangman",
+   "practices": [],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "dicts",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "go-counting",
+   "practices": [],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "lists",
+    "list-methods",
+    "loops",
+    "sets",
+    "tuples"
+   ]
+  },
+  {
+   "slug": "forth",
+   "practices": [
+    "dicts"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "dicts",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "tuples"
+   ]
+  },
+  {
+   "slug": "binary-search-tree",
+   "practices": [
+    "classes"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "lists",
+    "list-methods",
+    "loops",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "camicia",
+   "practices": [],
+   "prerequisites": [
+    "lists",
+    "sets",
+    "strings"
+   ]
+  },
+  {
+   "slug": "rational-numbers",
+   "practices": [
+    "operator-overloading",
+    "rich-comparisons"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "lists",
+    "loops",
+    "numbers",
+    "strings"
+   ]
+  },
+  {
+   "slug": "bowling",
+   "practices": [],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "tuples"
+   ]
+  },
+  {
+   "slug": "knapsack",
+   "practices": [
+    "itertools",
+    "list-comprehensions"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "dicts",
+    "list-methods",
+    "lists",
+    "loops",
+    "strings"
+   ]
+  },
+  {
+   "slug": "relative-distance",
+   "practices": [],
+   "prerequisites": [
+    "lists",
+    "dicts"
+   ]
+  },
+  {
+   "slug": "dot-dsl",
+   "practices": [
+    "class-composition",
+    "class-inheritance",
+    "operator-overloading",
+    "raising-and-handling-errors"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "dicts",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "custom-set",
+   "practices": [
+    "class-inheritance",
+    "operator-overloading",
+    "rich-comparisons"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "sets",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "zebra-puzzle",
+   "practices": [
+    "itertools"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "dicts",
+    "lists",
+    "list-methods",
+    "loops",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "affine-cipher",
+   "practices": [
+    "sequences"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "classes",
+    "conditionals",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "word-search",
+   "practices": [
+    "iteration"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "dicts",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "alphametics",
+   "practices": [
+    "itertools"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "classes",
+    "conditionals",
+    "dicts",
+    "list-methods",
+    "lists",
+    "loops",
+    "numbers",
+    "sets",
+    "string-methods",
+    "strings",
+    "tuples"
+   ]
+  },
+  {
+   "slug": "bank-account",
+   "practices": [
+    "enums",
+    "raising-and-handling-errors"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "loops"
+   ]
+  },
+  {
+   "slug": "react",
+   "practices": [
+    "class-customization",
+    "class-inheritance",
+    "decorators",
+    "descriptors"
+   ],
+   "prerequisites": [
+    "basics",
+    "conditionals",
+    "classes",
+    "lists",
+    "list-methods",
+    "loops",
+    "sets"
+   ]
+  },
+  {
+   "slug": "zipper",
+   "practices": [
+    "class-customization",
+    "none"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "dicts",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings"
+   ]
+  },
+  {
+   "slug": "two-bucket",
+   "practices": [
+    "iteration"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "classes",
+    "conditionals",
+    "dicts",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "dominoes",
+   "practices": [
+    "tuples"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "dicts",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods",
+    "tuples"
+   ]
+  },
+  {
+   "slug": "satellite",
+   "practices": [
+    "other-comprehensions"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "dicts",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "book-store",
+   "practices": [
+    "collections",
+    "functools",
+    "generator-expressions",
+    "other-comprehensions",
+    "sets"
+   ],
+   "prerequisites": [
+    "basics",
+    "classes",
+    "conditionals",
+    "dicts",
+    "list-methods",
+    "lists",
+    "loops",
+    "numbers",
+    "sets",
+    "tuples"
+   ]
+  },
+  {
+   "slug": "sgf-parsing",
+   "practices": [
+    "operator-overloading",
+    "regular-expressions",
+    "rich-comparisons"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "dicts",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "paasio",
+   "practices": [
+    "class-customization",
+    "class-inheritance",
+    "class-composition",
+    "context-manager-customization",
+    "decorators",
+    "descriptors",
+    "iterators",
+    "unpacking-and-multiple-assignment",
+    "with-statement"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "dicts",
+    "lists",
+    "list-methods",
+    "loops",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "rest-api",
+   "practices": [
+    "class-composition",
+    "none",
+    "raising-and-handling-errors"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "dicts",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  },
+  {
+   "slug": "pov",
+   "practices": [
+    "rich-comparisons"
+   ],
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals",
+    "classes",
+    "dicts",
+    "lists",
+    "list-methods",
+    "loops",
+    "numbers",
+    "strings",
+    "string-methods"
+   ]
+  }
+ ],
+ "items": [
+  {
+   "chapter": "Syllabus",
+   "heading": "Basics",
+   "slug": "basics",
+   "level": 0,
+   "prerequisites": [],
+   "exercise": "guidos-gorgeous-lasagna",
+   "status": "beta",
+   "url": "https://exercism.org/tracks/python/concepts/basics",
+   "order": 0
+  },
+  {
+   "chapter": "Syllabus",
+   "heading": "Bools",
+   "slug": "bools",
+   "level": 0,
+   "prerequisites": [
+    "basics"
+   ],
+   "exercise": "ghost-gobble-arcade-game",
+   "status": "beta",
+   "url": "https://exercism.org/tracks/python/concepts/bools",
+   "order": 1
+  },
+  {
+   "chapter": "Syllabus",
+   "heading": "Numbers",
+   "slug": "numbers",
+   "level": 0,
+   "prerequisites": [
+    "basics"
+   ],
+   "exercise": "currency-exchange",
+   "status": "beta",
+   "url": "https://exercism.org/tracks/python/concepts/numbers",
+   "order": 2
+  },
+  {
+   "chapter": "Syllabus",
+   "heading": "Conditionals",
+   "slug": "conditionals",
+   "level": 0,
+   "prerequisites": [
+    "basics",
+    "bools"
+   ],
+   "exercise": "meltdown-mitigation",
+   "status": "beta",
+   "url": "https://exercism.org/tracks/python/concepts/conditionals",
+   "order": 3
+  },
+  {
+   "chapter": "Syllabus",
+   "heading": "Comparisons",
+   "slug": "comparisons",
+   "level": 0,
+   "prerequisites": [
+    "basics",
+    "bools",
+    "conditionals"
+   ],
+   "exercise": "black-jack",
+   "status": "beta",
+   "url": "https://exercism.org/tracks/python/concepts/comparisons",
+   "order": 4
+  },
+  {
+   "chapter": "Syllabus",
+   "heading": "String Methods",
+   "slug": "string-methods",
+   "level": 0,
+   "prerequisites": [
+    "basics",
+    "strings"
+   ],
+   "exercise": "little-sisters-essay",
+   "status": "beta",
+   "url": "https://exercism.org/tracks/python/concepts/string-methods",
+   "order": 5
+  },
+  {
+   "chapter": "Syllabus",
+   "heading": "Strings",
+   "slug": "strings",
+   "level": 0,
+   "prerequisites": [
+    "basics",
+    "conditionals"
+   ],
+   "exercise": "little-sisters-vocab",
+   "status": "beta",
+   "url": "https://exercism.org/tracks/python/concepts/strings",
+   "order": 6
+  },
+  {
+   "chapter": "Syllabus",
+   "heading": "String Formatting",
+   "slug": "string-formatting",
+   "level": 0,
+   "prerequisites": [
+    "strings",
+    "loops",
+    "lists"
+   ],
+   "exercise": "pretty-leaflet",
+   "status": "wip",
+   "url": "https://exercism.org/tracks/python/concepts/string-formatting",
+   "order": 7
+  },
+  {
+   "chapter": "Syllabus",
+   "heading": "Lists",
+   "slug": "lists",
+   "level": 0,
+   "prerequisites": [
+    "conditionals",
+    "strings"
+   ],
+   "exercise": "card-games",
+   "status": "beta",
+   "url": "https://exercism.org/tracks/python/concepts/lists",
+   "order": 8
+  },
+  {
+   "chapter": "Syllabus",
+   "heading": "List Methods",
+   "slug": "list-methods",
+   "level": 0,
+   "prerequisites": [
+    "lists"
+   ],
+   "exercise": "chaitanas-colossal-coaster",
+   "status": "beta",
+   "url": "https://exercism.org/tracks/python/concepts/list-methods",
+   "order": 9
+  },
+  {
+   "chapter": "Syllabus",
+   "heading": "Loops",
+   "slug": "loops",
+   "level": 0,
+   "prerequisites": [
+    "basics",
+    "comparisons",
+    "lists",
+    "list-methods",
+    "strings"
+   ],
+   "exercise": "making-the-grade",
+   "status": "beta",
+   "url": "https://exercism.org/tracks/python/concepts/loops",
+   "order": 10
+  },
+  {
+   "chapter": "Syllabus",
+   "heading": "Tuples",
+   "slug": "tuples",
+   "level": 0,
+   "prerequisites": [
+    "bools",
+    "loops",
+    "conditionals",
+    "numbers"
+   ],
+   "exercise": "tisbury-treasure-hunt",
+   "status": "beta",
+   "url": "https://exercism.org/tracks/python/concepts/tuples",
+   "order": 11
+  },
+  {
+   "chapter": "Syllabus",
+   "heading": "Dicts",
+   "slug": "dicts",
+   "level": 0,
+   "prerequisites": [
+    "loops",
+    "lists",
+    "tuples"
+   ],
+   "exercise": "inventory-management",
+   "status": "beta",
+   "url": "https://exercism.org/tracks/python/concepts/dicts",
+   "order": 12
+  },
+  {
+   "chapter": "Syllabus",
+   "heading": "Dict Methods",
+   "slug": "dict-methods",
+   "level": 0,
+   "prerequisites": [
+    "dicts"
+   ],
+   "exercise": "mecha-munch-management",
+   "status": "beta",
+   "url": "https://exercism.org/tracks/python/concepts/dict-methods",
+   "order": 13
+  },
+  {
+   "chapter": "Syllabus",
+   "heading": "Unpacking And Multiple Assignment",
+   "slug": "unpacking-and-multiple-assignment",
+   "level": 0,
+   "prerequisites": [
+    "loops",
+    "lists",
+    "tuples",
+    "dicts"
+   ],
+   "exercise": "locomotive-engineer",
+   "status": "beta",
+   "url": "https://exercism.org/tracks/python/concepts/unpacking-and-multiple-assignment",
+   "order": 14
+  },
+  {
+   "chapter": "Syllabus",
+   "heading": "Sets",
+   "slug": "sets",
+   "level": 0,
+   "prerequisites": [
+    "basics",
+    "dicts",
+    "lists",
+    "loops",
+    "tuples"
+   ],
+   "exercise": "cater-waiter",
+   "status": "beta",
+   "url": "https://exercism.org/tracks/python/concepts/sets",
+   "order": 15
+  },
+  {
+   "chapter": "Syllabus",
+   "heading": "Classes",
+   "slug": "classes",
+   "level": 0,
+   "prerequisites": [
+    "basics",
+    "bools",
+    "comparisons",
+    "loops",
+    "dicts",
+    "lists",
+    "numbers",
+    "sets",
+    "strings",
+    "tuples"
+   ],
+   "exercise": "ellens-alien-game",
+   "status": "beta",
+   "url": "https://exercism.org/tracks/python/concepts/classes",
+   "order": 16
+  },
+  {
+   "chapter": "Syllabus",
+   "heading": "Generators",
+   "slug": "generators",
+   "level": 0,
+   "prerequisites": [
+    "conditionals",
+    "dicts",
+    "lists",
+    "loops",
+    "classes"
+   ],
+   "exercise": "plane-tickets",
+   "status": "beta",
+   "url": "https://exercism.org/tracks/python/concepts/generators",
+   "order": 17
+  },
+  {
+   "chapter": "Syllabus",
+   "heading": "Enums",
+   "slug": "enums",
+   "level": 0,
+   "prerequisites": [
+    "classes",
+    "conditionals",
+    "comprehensions",
+    "loops",
+    "sequences",
+    "string-methods",
+    "tuples"
+   ],
+   "exercise": "log-levels",
+   "status": "wip",
+   "url": "https://exercism.org/tracks/python/concepts/enums",
+   "order": 18
+  },
+  {
+   "chapter": "Syllabus",
+   "heading": "None",
+   "slug": "none",
+   "level": 0,
+   "prerequisites": [
+    "bools",
+    "conditionals",
+    "functions",
+    "dict-methods",
+    "list-methods",
+    "loops"
+   ],
+   "exercise": "restaurant-rozalynn",
+   "status": "wip",
+   "url": "https://exercism.org/tracks/python/concepts/none",
+   "order": 19
+  }
+ ]
+}

@@ -1,0 +1,1649 @@
+{
+ "courses": {
+  "kaggle_ml": {
+   "title": "Kaggle Learn ML track (Intro to ML, Intermediate ML, Pandas, Feature Engineering, Intro to Deep Learning)",
+   "files": 67,
+   "cells_parsed": 800,
+   "use": {
+    "strbasics": 66,
+    "variables": 67,
+    "listbasics": 55,
+    "kwargs": 64,
+    "unpacking": 33,
+    "formatmethod": 12,
+    "jupyter": 67,
+    "objmethods": 67,
+    "import": 67,
+    "listindex": 55,
+    "strmethods": 9,
+    "tuples": 45,
+    "numbers": 66,
+    "plotting": 20,
+    "bool": 37,
+    "comments": 66,
+    "listmethods": 16,
+    "listslice": 18,
+    "copying": 24,
+    "callfn": 51,
+    "print": 46,
+    "params": 22,
+    "splitjoin": 10,
+    "defaults": 11,
+    "def": 23,
+    "return": 22,
+    "arith": 35,
+    "iterators": 2,
+    "dictbasics": 17,
+    "concat": 7,
+    "exceptions": 2,
+    "convert": 3,
+    "if": 11,
+    "with": 1,
+    "tryexcept": 2,
+    "intdiv": 1,
+    "none": 2,
+    "logic": 10,
+    "for": 15,
+    "len": 8,
+    "listcomp": 14,
+    "fstrings": 9,
+    "range": 8,
+    "compare": 15,
+    "initattrs": 1,
+    "othercomp": 2,
+    "stdlib": 1,
+    "dictviews": 3,
+    "insearch": 7,
+    "lambda": 5,
+    "else": 2,
+    "classes": 1,
+    "varargs": 1,
+    "higherorder": 5,
+    "methods": 1,
+    "dictloop": 1,
+    "paths": 10,
+    "pass": 5,
+    "listfuncs": 3,
+    "nestedloops": 1,
+    "sets": 2,
+    "sorting": 1,
+    "enumzip": 1,
+    "docstrings": 2,
+    "nested": 1,
+    "types": 1
+   }
+  },
+  "handson": {
+   "title": "Hands-On Machine Learning, 3rd ed. (G\u00e9ron), chapter notebooks",
+   "files": 19,
+   "cells_parsed": 2099,
+   "use": {
+    "dictbasics": 16,
+    "strbasics": 19,
+    "variables": 19,
+    "listbasics": 19,
+    "kwargs": 19,
+    "logic": 15,
+    "for": 19,
+    "nested": 16,
+    "condexpr": 9,
+    "objmethods": 19,
+    "import": 19,
+    "params": 19,
+    "callfn": 19,
+    "print": 18,
+    "fstrings": 19,
+    "dictviews": 6,
+    "concat": 7,
+    "tuples": 19,
+    "numbers": 19,
+    "web": 6,
+    "comments": 19,
+    "if": 19,
+    "defaults": 19,
+    "insearch": 12,
+    "assert": 19,
+    "def": 19,
+    "unpacking": 19,
+    "listslice": 19,
+    "compare": 19,
+    "dictloop": 3,
+    "jupyter": 19,
+    "arith": 19,
+    "listindex": 19,
+    "strmethods": 18,
+    "paths": 17,
+    "listcomp": 14,
+    "plotting": 19,
+    "bool": 19,
+    "listmethods": 15,
+    "inherit": 11,
+    "sorting": 10,
+    "exceptions": 8,
+    "convert": 10,
+    "copying": 4,
+    "enumzip": 18,
+    "with": 11,
+    "classes": 12,
+    "range": 17,
+    "return": 17,
+    "tryexcept": 8,
+    "docstrings": 1,
+    "initattrs": 11,
+    "raise": 1,
+    "len": 16,
+    "splitjoin": 9,
+    "else": 15,
+    "varargs": 9,
+    "nestedif": 9,
+    "higherorder": 8,
+    "methods": 12,
+    "none": 16,
+    "pickle": 1,
+    "lambda": 8,
+    "sets": 4,
+    "breakcont": 5,
+    "pip": 5,
+    "othercomp": 2,
+    "recursion": 3,
+    "augassign": 14,
+    "rxbasics": 1,
+    "types": 4,
+    "listfuncs": 8,
+    "intdiv": 13,
+    "stdlib": 6,
+    "nestedloops": 15,
+    "readfiles": 5,
+    "dictget": 6,
+    "mathmod": 2,
+    "while": 2,
+    "pass": 7,
+    "genexpr": 2,
+    "help": 3,
+    "iterators": 1,
+    "organize": 1,
+    "formatmethod": 4,
+    "dunder": 2,
+    "setops": 1,
+    "decorators": 3,
+    "del": 1,
+    "datetime": 2,
+    "writefiles": 2,
+    "loopelse": 1,
+    "nestedcomp": 1,
+    "finally": 1,
+    "cliargs": 1,
+    "json": 1
+   }
+  },
+  "pydata": {
+   "title": "Python for Data Analysis, 3rd ed., ch. 4-13 (NumPy, pandas, plotting, modeling)",
+   "files": 10,
+   "cells_parsed": 960,
+   "use": {
+    "sets": 1,
+    "strbasics": 10,
+    "listmethods": 6,
+    "variables": 10,
+    "listbasics": 10,
+    "sorting": 2,
+    "random": 1,
+    "kwargs": 10,
+    "for": 6,
+    "nested": 6,
+    "condexpr": 1,
+    "objmethods": 10,
+    "augassign": 2,
+    "import": 10,
+    "copying": 3,
+    "enumzip": 3,
+    "callfn": 10,
+    "types": 4,
+    "tuples": 10,
+    "numbers": 10,
+    "comments": 7,
+    "range": 7,
+    "listslice": 10,
+    "unpacking": 7,
+    "compare": 7,
+    "jupyter": 10,
+    "arith": 9,
+    "listindex": 10,
+    "pass": 4,
+    "strmethods": 4,
+    "listcomp": 5,
+    "plotting": 10,
+    "bool": 10,
+    "dictbasics": 9,
+    "insearch": 4,
+    "def": 6,
+    "return": 6,
+    "params": 6,
+    "del": 1,
+    "fstrings": 2,
+    "breakcont": 1,
+    "othercomp": 2,
+    "len": 5,
+    "print": 5,
+    "web": 1,
+    "if": 3,
+    "with": 2,
+    "nestedloops": 2,
+    "varargs": 2,
+    "databases": 1,
+    "none": 7,
+    "readfiles": 2,
+    "dictget": 3,
+    "json": 2,
+    "paths": 2,
+    "csv": 1,
+    "rxbasics": 1,
+    "concat": 1,
+    "splitjoin": 4,
+    "intdiv": 1,
+    "datetime": 2,
+    "convert": 2,
+    "genexpr": 1,
+    "defaults": 3,
+    "stdlib": 1,
+    "dictviews": 1,
+    "else": 1
+   }
+  },
+  "fastbook": {
+   "title": "fast.ai Practical Deep Learning book (fastbook)",
+   "files": 20,
+   "cells_parsed": 922,
+   "use": {
+    "strbasics": 18,
+    "lambda": 3,
+    "variables": 18,
+    "listbasics": 18,
+    "kwargs": 18,
+    "def": 17,
+    "higherorder": 3,
+    "unpacking": 18,
+    "return": 16,
+    "jupyter": 20,
+    "objmethods": 20,
+    "import": 20,
+    "params": 17,
+    "arith": 18,
+    "listindex": 18,
+    "callfn": 16,
+    "print": 6,
+    "fstrings": 8,
+    "pass": 20,
+    "tuples": 18,
+    "numbers": 18,
+    "comments": 20,
+    "if": 9,
+    "with": 5,
+    "pip": 2,
+    "for": 10,
+    "len": 11,
+    "dictget": 3,
+    "paths": 3,
+    "logic": 7,
+    "bool": 13,
+    "dictbasics": 5,
+    "initattrs": 10,
+    "nested": 4,
+    "augassign": 7,
+    "enumzip": 7,
+    "defaults": 10,
+    "nestedloops": 4,
+    "classes": 10,
+    "varargs": 13,
+    "listslice": 13,
+    "range": 11,
+    "methods": 10,
+    "compare": 10,
+    "none": 10,
+    "listcomp": 9,
+    "splitjoin": 5,
+    "convert": 4,
+    "inherit": 8,
+    "types": 4,
+    "strmethods": 3,
+    "listmethods": 6,
+    "othercomp": 4,
+    "genexpr": 6,
+    "typehints": 1,
+    "else": 3,
+    "nestedif": 3,
+    "decorators": 3,
+    "listfuncs": 2,
+    "intdiv": 4,
+    "readfiles": 1,
+    "condexpr": 2,
+    "raise": 3,
+    "exceptions": 3,
+    "classattrs": 3,
+    "dunder": 3,
+    "assert": 1,
+    "mathmod": 1,
+    "encaps": 1,
+    "generators": 1,
+    "tryexcept": 1
+   }
+  },
+  "mlcc": {
+   "title": "Google Machine Learning Crash Course exercises",
+   "files": 35,
+   "cells_parsed": 450,
+   "use": {
+    "dictbasics": 11,
+    "strbasics": 34,
+    "listmethods": 5,
+    "variables": 35,
+    "listbasics": 23,
+    "othercomp": 6,
+    "kwargs": 30,
+    "for": 7,
+    "objmethods": 35,
+    "import": 35,
+    "params": 14,
+    "callfn": 35,
+    "print": 35,
+    "dictviews": 7,
+    "tuples": 13,
+    "numbers": 30,
+    "comments": 35,
+    "defaults": 7,
+    "def": 14,
+    "unpacking": 10,
+    "listslice": 13,
+    "return": 13,
+    "compare": 11,
+    "jupyter": 35,
+    "arith": 21,
+    "listindex": 18,
+    "none": 5,
+    "plotting": 11,
+    "bool": 7,
+    "docstrings": 11,
+    "pip": 7,
+    "len": 5,
+    "typehints": 2,
+    "fstrings": 1,
+    "dictloop": 2,
+    "listcomp": 2,
+    "sorting": 1,
+    "condexpr": 2,
+    "copying": 3,
+    "if": 3,
+    "higherorder": 6,
+    "formatmethod": 6,
+    "strmethods": 7,
+    "lambda": 6,
+    "nested": 8,
+    "enumzip": 1,
+    "concat": 4,
+    "pass": 7,
+    "listfuncs": 3,
+    "dictget": 2,
+    "range": 3,
+    "augassign": 4,
+    "else": 1,
+    "nestedloops": 1,
+    "convert": 1,
+    "exceptions": 7,
+    "tryexcept": 7,
+    "with": 11,
+    "types": 5
+   }
+  },
+  "sklearn": {
+   "title": "scikit-learn example gallery",
+   "files": 281,
+   "cells_parsed": 264,
+   "use": {
+    "dictbasics": 113,
+    "strbasics": 264,
+    "variables": 264,
+    "listbasics": 220,
+    "kwargs": 263,
+    "for": 181,
+    "objmethods": 261,
+    "import": 264,
+    "params": 95,
+    "enumzip": 129,
+    "callfn": 218,
+    "print": 116,
+    "fstrings": 104,
+    "splitjoin": 20,
+    "tuples": 263,
+    "numbers": 264,
+    "comments": 281,
+    "if": 71,
+    "defaults": 38,
+    "else": 40,
+    "nestedloops": 62,
+    "def": 95,
+    "nestedif": 3,
+    "higherorder": 7,
+    "unpacking": 246,
+    "listslice": 159,
+    "range": 77,
+    "return": 68,
+    "compare": 134,
+    "arith": 208,
+    "listindex": 228,
+    "none": 46,
+    "strmethods": 111,
+    "lambda": 9,
+    "listcomp": 60,
+    "plotting": 242,
+    "bool": 174,
+    "docstrings": 41,
+    "initattrs": 8,
+    "listmethods": 48,
+    "while": 3,
+    "inherit": 11,
+    "sorting": 21,
+    "logic": 11,
+    "len": 83,
+    "augassign": 62,
+    "rxbasics": 2,
+    "stdlib": 21,
+    "dictviews": 38,
+    "concat": 10,
+    "web": 1,
+    "insearch": 14,
+    "assert": 2,
+    "with": 13,
+    "generators": 1,
+    "classes": 11,
+    "varargs": 49,
+    "formatmethod": 79,
+    "methods": 11,
+    "listfuncs": 17,
+    "dictloop": 19,
+    "intdiv": 18,
+    "readfiles": 1,
+    "pass": 5,
+    "paths": 1,
+    "exceptions": 6,
+    "tryexcept": 4,
+    "convert": 30,
+    "copying": 20,
+    "genexpr": 13,
+    "dictget": 2,
+    "sets": 4,
+    "breakcont": 10,
+    "datetime": 2,
+    "othercomp": 6,
+    "infinite": 1,
+    "del": 1,
+    "condexpr": 22,
+    "raise": 3,
+    "decorators": 5,
+    "nested": 35,
+    "types": 7,
+    "pickle": 5,
+    "organize": 2,
+    "nestedcomp": 3,
+    "logging": 1,
+    "dunder": 3,
+    "iterators": 3,
+    "mathmod": 4,
+    "encaps": 1,
+    "classattrs": 1,
+    "recursion": 2
+   }
+  }
+ },
+ "points": {
+  "run": {
+   "measurable": false
+  },
+  "jupyter": {
+   "measurable": true,
+   "courses": 5,
+   "share": {
+    "kaggle_ml": 1.0,
+    "handson": 1.0,
+    "pydata": 1.0,
+    "fastbook": 1.0,
+    "mlcc": 1.0
+   }
+  },
+  "print": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.687,
+    "handson": 0.947,
+    "pydata": 0.5,
+    "fastbook": 0.3,
+    "mlcc": 1.0,
+    "sklearn": 0.413
+   }
+  },
+  "comments": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.985,
+    "handson": 1.0,
+    "pydata": 0.7,
+    "fastbook": 1.0,
+    "mlcc": 1.0,
+    "sklearn": 1.0
+   }
+  },
+  "tracebacks": {
+   "measurable": false
+  },
+  "help": {
+   "measurable": true,
+   "courses": 1,
+   "share": {
+    "handson": 0.158
+   }
+  },
+  "numbers": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.985,
+    "handson": 1.0,
+    "pydata": 1.0,
+    "fastbook": 0.9,
+    "mlcc": 0.857,
+    "sklearn": 0.94
+   }
+  },
+  "arith": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.522,
+    "handson": 1.0,
+    "pydata": 0.9,
+    "fastbook": 0.9,
+    "mlcc": 0.6,
+    "sklearn": 0.74
+   }
+  },
+  "precedence": {
+   "measurable": false
+  },
+  "intdiv": {
+   "measurable": true,
+   "courses": 3,
+   "share": {
+    "handson": 0.684,
+    "fastbook": 0.2,
+    "sklearn": 0.064
+   }
+  },
+  "floatprec": {
+   "measurable": false
+  },
+  "types": {
+   "measurable": true,
+   "courses": 5,
+   "share": {
+    "handson": 0.211,
+    "pydata": 0.4,
+    "fastbook": 0.2,
+    "mlcc": 0.143,
+    "sklearn": 0.025
+   }
+  },
+  "convert": {
+   "measurable": true,
+   "courses": 5,
+   "share": {
+    "kaggle_ml": 0.045,
+    "handson": 0.526,
+    "pydata": 0.2,
+    "fastbook": 0.2,
+    "sklearn": 0.107
+   }
+  },
+  "variables": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 1.0,
+    "handson": 1.0,
+    "pydata": 1.0,
+    "fastbook": 0.9,
+    "mlcc": 1.0,
+    "sklearn": 0.94
+   }
+  },
+  "augassign": {
+   "measurable": true,
+   "courses": 5,
+   "share": {
+    "handson": 0.737,
+    "pydata": 0.2,
+    "fastbook": 0.35,
+    "mlcc": 0.114,
+    "sklearn": 0.221
+   }
+  },
+  "names": {
+   "measurable": false
+  },
+  "exprstmt": {
+   "measurable": false
+  },
+  "input": {
+   "measurable": false
+  },
+  "none": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.03,
+    "handson": 0.842,
+    "pydata": 0.7,
+    "fastbook": 0.5,
+    "mlcc": 0.143,
+    "sklearn": 0.164
+   }
+  },
+  "mathmod": {
+   "measurable": true,
+   "courses": 2,
+   "share": {
+    "handson": 0.105,
+    "sklearn": 0.014
+   }
+  },
+  "bool": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.552,
+    "handson": 1.0,
+    "pydata": 1.0,
+    "fastbook": 0.65,
+    "mlcc": 0.2,
+    "sklearn": 0.619
+   }
+  },
+  "compare": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.224,
+    "handson": 1.0,
+    "pydata": 0.7,
+    "fastbook": 0.5,
+    "mlcc": 0.314,
+    "sklearn": 0.477
+   }
+  },
+  "logic": {
+   "measurable": true,
+   "courses": 4,
+   "share": {
+    "kaggle_ml": 0.149,
+    "handson": 0.789,
+    "fastbook": 0.35,
+    "sklearn": 0.039
+   }
+  },
+  "shortcirc": {
+   "measurable": false
+  },
+  "truthy": {
+   "measurable": false
+  },
+  "if": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.164,
+    "handson": 1.0,
+    "pydata": 0.3,
+    "fastbook": 0.45,
+    "mlcc": 0.086,
+    "sklearn": 0.253
+   }
+  },
+  "else": {
+   "measurable": true,
+   "courses": 4,
+   "share": {
+    "kaggle_ml": 0.03,
+    "handson": 0.789,
+    "fastbook": 0.15,
+    "sklearn": 0.142
+   }
+  },
+  "nestedif": {
+   "measurable": true,
+   "courses": 3,
+   "share": {
+    "handson": 0.474,
+    "fastbook": 0.15,
+    "sklearn": 0.011
+   }
+  },
+  "condexpr": {
+   "measurable": true,
+   "courses": 4,
+   "share": {
+    "handson": 0.474,
+    "fastbook": 0.1,
+    "mlcc": 0.057,
+    "sklearn": 0.078
+   }
+  },
+  "match": {
+   "measurable": false
+  },
+  "pass": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.075,
+    "handson": 0.368,
+    "pydata": 0.4,
+    "fastbook": 1.0,
+    "mlcc": 0.2,
+    "sklearn": 0.018
+   }
+  },
+  "while": {
+   "measurable": true,
+   "courses": 2,
+   "share": {
+    "handson": 0.105,
+    "sklearn": 0.011
+   }
+  },
+  "infinite": {
+   "measurable": true,
+   "courses": 0,
+   "share": {}
+  },
+  "breakcont": {
+   "measurable": true,
+   "courses": 2,
+   "share": {
+    "handson": 0.263,
+    "sklearn": 0.036
+   }
+  },
+  "for": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.224,
+    "handson": 1.0,
+    "pydata": 0.6,
+    "fastbook": 0.5,
+    "mlcc": 0.2,
+    "sklearn": 0.644
+   }
+  },
+  "range": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.119,
+    "handson": 0.895,
+    "pydata": 0.7,
+    "fastbook": 0.55,
+    "mlcc": 0.086,
+    "sklearn": 0.274
+   }
+  },
+  "nestedloops": {
+   "measurable": true,
+   "courses": 4,
+   "share": {
+    "handson": 0.789,
+    "pydata": 0.2,
+    "fastbook": 0.2,
+    "sklearn": 0.221
+   }
+  },
+  "loopelse": {
+   "measurable": true,
+   "courses": 0,
+   "share": {}
+  },
+  "enumzip": {
+   "measurable": true,
+   "courses": 4,
+   "share": {
+    "handson": 0.947,
+    "pydata": 0.3,
+    "fastbook": 0.35,
+    "sklearn": 0.459
+   }
+  },
+  "looppat": {
+   "measurable": false
+  },
+  "callfn": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.761,
+    "handson": 1.0,
+    "pydata": 1.0,
+    "fastbook": 0.8,
+    "mlcc": 1.0,
+    "sklearn": 0.776
+   }
+  },
+  "def": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.343,
+    "handson": 1.0,
+    "pydata": 0.6,
+    "fastbook": 0.85,
+    "mlcc": 0.4,
+    "sklearn": 0.338
+   }
+  },
+  "params": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.328,
+    "handson": 1.0,
+    "pydata": 0.6,
+    "fastbook": 0.85,
+    "mlcc": 0.4,
+    "sklearn": 0.338
+   }
+  },
+  "return": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.328,
+    "handson": 0.895,
+    "pydata": 0.6,
+    "fastbook": 0.8,
+    "mlcc": 0.371,
+    "sklearn": 0.242
+   }
+  },
+  "retprint": {
+   "measurable": false
+  },
+  "scope": {
+   "measurable": false
+  },
+  "defaults": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.164,
+    "handson": 1.0,
+    "pydata": 0.3,
+    "fastbook": 0.5,
+    "mlcc": 0.2,
+    "sklearn": 0.135
+   }
+  },
+  "kwargs": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.955,
+    "handson": 1.0,
+    "pydata": 1.0,
+    "fastbook": 0.9,
+    "mlcc": 0.857,
+    "sklearn": 0.936
+   }
+  },
+  "varargs": {
+   "measurable": true,
+   "courses": 4,
+   "share": {
+    "handson": 0.474,
+    "pydata": 0.2,
+    "fastbook": 0.65,
+    "sklearn": 0.174
+   }
+  },
+  "docstrings": {
+   "measurable": true,
+   "courses": 3,
+   "share": {
+    "kaggle_ml": 0.03,
+    "mlcc": 0.314,
+    "sklearn": 0.146
+   }
+  },
+  "callstack": {
+   "measurable": false
+  },
+  "recursion": {
+   "measurable": true,
+   "courses": 2,
+   "share": {
+    "handson": 0.158,
+    "sklearn": 0.007
+   }
+  },
+  "lambda": {
+   "measurable": true,
+   "courses": 5,
+   "share": {
+    "kaggle_ml": 0.075,
+    "handson": 0.421,
+    "fastbook": 0.15,
+    "mlcc": 0.171,
+    "sklearn": 0.032
+   }
+  },
+  "higherorder": {
+   "measurable": true,
+   "courses": 5,
+   "share": {
+    "kaggle_ml": 0.075,
+    "handson": 0.421,
+    "fastbook": 0.15,
+    "mlcc": 0.171,
+    "sklearn": 0.025
+   }
+  },
+  "typehints": {
+   "measurable": true,
+   "courses": 1,
+   "share": {
+    "mlcc": 0.057
+   }
+  },
+  "decomp": {
+   "measurable": false
+  },
+  "strbasics": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.985,
+    "handson": 1.0,
+    "pydata": 1.0,
+    "fastbook": 0.9,
+    "mlcc": 0.971,
+    "sklearn": 0.94
+   }
+  },
+  "escapes": {
+   "measurable": false
+  },
+  "multiline": {
+   "measurable": false
+  },
+  "concat": {
+   "measurable": true,
+   "courses": 4,
+   "share": {
+    "kaggle_ml": 0.104,
+    "handson": 0.368,
+    "mlcc": 0.114,
+    "sklearn": 0.036
+   }
+  },
+  "strindex": {
+   "measurable": false
+  },
+  "strslice": {
+   "measurable": false
+  },
+  "immut": {
+   "measurable": false
+  },
+  "len": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.119,
+    "handson": 0.842,
+    "pydata": 0.5,
+    "fastbook": 0.55,
+    "mlcc": 0.143,
+    "sklearn": 0.295
+   }
+  },
+  "strmethods": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.134,
+    "handson": 0.947,
+    "pydata": 0.4,
+    "fastbook": 0.15,
+    "mlcc": 0.2,
+    "sklearn": 0.395
+   }
+  },
+  "insearch": {
+   "measurable": true,
+   "courses": 4,
+   "share": {
+    "kaggle_ml": 0.104,
+    "handson": 0.632,
+    "pydata": 0.4,
+    "sklearn": 0.05
+   }
+  },
+  "splitjoin": {
+   "measurable": true,
+   "courses": 5,
+   "share": {
+    "kaggle_ml": 0.149,
+    "handson": 0.474,
+    "pydata": 0.4,
+    "fastbook": 0.25,
+    "sklearn": 0.071
+   }
+  },
+  "fstrings": {
+   "measurable": true,
+   "courses": 5,
+   "share": {
+    "kaggle_ml": 0.134,
+    "handson": 1.0,
+    "pydata": 0.2,
+    "fastbook": 0.4,
+    "sklearn": 0.37
+   }
+  },
+  "formatmethod": {
+   "measurable": true,
+   "courses": 4,
+   "share": {
+    "kaggle_ml": 0.179,
+    "handson": 0.211,
+    "mlcc": 0.171,
+    "sklearn": 0.281
+   }
+  },
+  "unicode": {
+   "measurable": false
+  },
+  "parsing": {
+   "measurable": false
+  },
+  "listbasics": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.821,
+    "handson": 1.0,
+    "pydata": 1.0,
+    "fastbook": 0.9,
+    "mlcc": 0.657,
+    "sklearn": 0.783
+   }
+  },
+  "listindex": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.821,
+    "handson": 1.0,
+    "pydata": 1.0,
+    "fastbook": 0.9,
+    "mlcc": 0.514,
+    "sklearn": 0.811
+   }
+  },
+  "listslice": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.269,
+    "handson": 1.0,
+    "pydata": 1.0,
+    "fastbook": 0.65,
+    "mlcc": 0.371,
+    "sklearn": 0.566
+   }
+  },
+  "listmodify": {
+   "measurable": false
+  },
+  "listmethods": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.239,
+    "handson": 0.789,
+    "pydata": 0.6,
+    "fastbook": 0.3,
+    "mlcc": 0.143,
+    "sklearn": 0.171
+   }
+  },
+  "sorting": {
+   "measurable": true,
+   "courses": 3,
+   "share": {
+    "handson": 0.526,
+    "pydata": 0.2,
+    "sklearn": 0.075
+   }
+  },
+  "listfuncs": {
+   "measurable": true,
+   "courses": 5,
+   "share": {
+    "kaggle_ml": 0.045,
+    "handson": 0.421,
+    "fastbook": 0.1,
+    "mlcc": 0.086,
+    "sklearn": 0.06
+   }
+  },
+  "nested": {
+   "measurable": true,
+   "courses": 5,
+   "share": {
+    "handson": 0.842,
+    "pydata": 0.6,
+    "fastbook": 0.2,
+    "mlcc": 0.229,
+    "sklearn": 0.125
+   }
+  },
+  "alias": {
+   "measurable": false
+  },
+  "copying": {
+   "measurable": true,
+   "courses": 5,
+   "share": {
+    "kaggle_ml": 0.358,
+    "handson": 0.211,
+    "pydata": 0.3,
+    "mlcc": 0.086,
+    "sklearn": 0.071
+   }
+  },
+  "mutateargs": {
+   "measurable": false
+  },
+  "stackqueue": {
+   "measurable": false
+  },
+  "del": {
+   "measurable": true,
+   "courses": 0,
+   "share": {}
+  },
+  "tuples": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.672,
+    "handson": 1.0,
+    "pydata": 1.0,
+    "fastbook": 0.9,
+    "mlcc": 0.371,
+    "sklearn": 0.936
+   }
+  },
+  "unpacking": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.493,
+    "handson": 1.0,
+    "pydata": 0.7,
+    "fastbook": 0.9,
+    "mlcc": 0.286,
+    "sklearn": 0.875
+   }
+  },
+  "sequences": {
+   "measurable": false
+  },
+  "mutable": {
+   "measurable": false
+  },
+  "dictbasics": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.254,
+    "handson": 0.842,
+    "pydata": 0.9,
+    "fastbook": 0.25,
+    "mlcc": 0.314,
+    "sklearn": 0.402
+   }
+  },
+  "dictviews": {
+   "measurable": true,
+   "courses": 4,
+   "share": {
+    "kaggle_ml": 0.045,
+    "handson": 0.316,
+    "mlcc": 0.2,
+    "sklearn": 0.135
+   }
+  },
+  "dictloop": {
+   "measurable": true,
+   "courses": 3,
+   "share": {
+    "handson": 0.158,
+    "mlcc": 0.057,
+    "sklearn": 0.068
+   }
+  },
+  "dictget": {
+   "measurable": true,
+   "courses": 5,
+   "share": {
+    "handson": 0.316,
+    "pydata": 0.3,
+    "fastbook": 0.15,
+    "mlcc": 0.057,
+    "sklearn": 0.007
+   }
+  },
+  "counting": {
+   "measurable": false
+  },
+  "nesteddata": {
+   "measurable": false
+  },
+  "sets": {
+   "measurable": true,
+   "courses": 3,
+   "share": {
+    "kaggle_ml": 0.03,
+    "handson": 0.211,
+    "sklearn": 0.014
+   }
+  },
+  "setops": {
+   "measurable": true,
+   "courses": 0,
+   "share": {}
+  },
+  "listcomp": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.209,
+    "handson": 0.737,
+    "pydata": 0.5,
+    "fastbook": 0.45,
+    "mlcc": 0.057,
+    "sklearn": 0.214
+   }
+  },
+  "othercomp": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 0.03,
+    "handson": 0.105,
+    "pydata": 0.2,
+    "fastbook": 0.2,
+    "mlcc": 0.171,
+    "sklearn": 0.021
+   }
+  },
+  "nestedcomp": {
+   "measurable": true,
+   "courses": 1,
+   "share": {
+    "sklearn": 0.011
+   }
+  },
+  "iterators": {
+   "measurable": true,
+   "courses": 2,
+   "share": {
+    "kaggle_ml": 0.03,
+    "sklearn": 0.011
+   }
+  },
+  "generators": {
+   "measurable": true,
+   "courses": 0,
+   "share": {}
+  },
+  "genexpr": {
+   "measurable": true,
+   "courses": 3,
+   "share": {
+    "handson": 0.105,
+    "fastbook": 0.3,
+    "sklearn": 0.046
+   }
+  },
+  "paths": {
+   "measurable": true,
+   "courses": 4,
+   "share": {
+    "kaggle_ml": 0.149,
+    "handson": 0.895,
+    "pydata": 0.2,
+    "fastbook": 0.15
+   }
+  },
+  "readfiles": {
+   "measurable": true,
+   "courses": 2,
+   "share": {
+    "handson": 0.263,
+    "pydata": 0.2
+   }
+  },
+  "writefiles": {
+   "measurable": true,
+   "courses": 1,
+   "share": {
+    "handson": 0.105
+   }
+  },
+  "with": {
+   "measurable": true,
+   "courses": 5,
+   "share": {
+    "handson": 0.579,
+    "pydata": 0.2,
+    "fastbook": 0.25,
+    "mlcc": 0.314,
+    "sklearn": 0.046
+   }
+  },
+  "csv": {
+   "measurable": true,
+   "courses": 0,
+   "share": {}
+  },
+  "json": {
+   "measurable": true,
+   "courses": 1,
+   "share": {
+    "pydata": 0.2
+   }
+  },
+  "organize": {
+   "measurable": true,
+   "courses": 1,
+   "share": {
+    "sklearn": 0.007
+   }
+  },
+  "pickle": {
+   "measurable": true,
+   "courses": 1,
+   "share": {
+    "sklearn": 0.018
+   }
+  },
+  "exceptions": {
+   "measurable": true,
+   "courses": 5,
+   "share": {
+    "kaggle_ml": 0.03,
+    "handson": 0.421,
+    "fastbook": 0.15,
+    "mlcc": 0.2,
+    "sklearn": 0.021
+   }
+  },
+  "tryexcept": {
+   "measurable": true,
+   "courses": 4,
+   "share": {
+    "kaggle_ml": 0.03,
+    "handson": 0.421,
+    "mlcc": 0.2,
+    "sklearn": 0.014
+   }
+  },
+  "raise": {
+   "measurable": true,
+   "courses": 2,
+   "share": {
+    "fastbook": 0.15,
+    "sklearn": 0.011
+   }
+  },
+  "finally": {
+   "measurable": true,
+   "courses": 0,
+   "share": {}
+  },
+  "customexc": {
+   "measurable": false
+  },
+  "assert": {
+   "measurable": true,
+   "courses": 2,
+   "share": {
+    "handson": 1.0,
+    "sklearn": 0.007
+   }
+  },
+  "debugging": {
+   "measurable": false
+  },
+  "logging": {
+   "measurable": true,
+   "courses": 0,
+   "share": {}
+  },
+  "testing": {
+   "measurable": false
+  },
+  "validation": {
+   "measurable": false
+  },
+  "import": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 1.0,
+    "handson": 1.0,
+    "pydata": 1.0,
+    "fastbook": 1.0,
+    "mlcc": 1.0,
+    "sklearn": 0.94
+   }
+  },
+  "random": {
+   "measurable": true,
+   "courses": 0,
+   "share": {}
+  },
+  "datetime": {
+   "measurable": true,
+   "courses": 3,
+   "share": {
+    "handson": 0.105,
+    "pydata": 0.2,
+    "sklearn": 0.007
+   }
+  },
+  "stdlib": {
+   "measurable": true,
+   "courses": 2,
+   "share": {
+    "handson": 0.316,
+    "sklearn": 0.075
+   }
+  },
+  "ownmodules": {
+   "measurable": false
+  },
+  "packages": {
+   "measurable": false
+  },
+  "pip": {
+   "measurable": true,
+   "courses": 3,
+   "share": {
+    "handson": 0.263,
+    "fastbook": 0.1,
+    "mlcc": 0.2
+   }
+  },
+  "venv": {
+   "measurable": false
+  },
+  "cliargs": {
+   "measurable": true,
+   "courses": 0,
+   "share": {}
+  },
+  "objmethods": {
+   "measurable": true,
+   "courses": 6,
+   "share": {
+    "kaggle_ml": 1.0,
+    "handson": 1.0,
+    "pydata": 1.0,
+    "fastbook": 1.0,
+    "mlcc": 1.0,
+    "sklearn": 0.929
+   }
+  },
+  "classes": {
+   "measurable": true,
+   "courses": 3,
+   "share": {
+    "handson": 0.632,
+    "fastbook": 0.5,
+    "sklearn": 0.039
+   }
+  },
+  "initattrs": {
+   "measurable": true,
+   "courses": 3,
+   "share": {
+    "handson": 0.579,
+    "fastbook": 0.5,
+    "sklearn": 0.028
+   }
+  },
+  "methods": {
+   "measurable": true,
+   "courses": 3,
+   "share": {
+    "handson": 0.632,
+    "fastbook": 0.5,
+    "sklearn": 0.039
+   }
+  },
+  "strrepr": {
+   "measurable": false
+  },
+  "dunder": {
+   "measurable": true,
+   "courses": 3,
+   "share": {
+    "handson": 0.105,
+    "fastbook": 0.15,
+    "sklearn": 0.011
+   }
+  },
+  "inherit": {
+   "measurable": true,
+   "courses": 3,
+   "share": {
+    "handson": 0.579,
+    "fastbook": 0.4,
+    "sklearn": 0.039
+   }
+  },
+  "encaps": {
+   "measurable": true,
+   "courses": 0,
+   "share": {}
+  },
+  "classattrs": {
+   "measurable": true,
+   "courses": 1,
+   "share": {
+    "fastbook": 0.15
+   }
+  },
+  "composition": {
+   "measurable": false
+  },
+  "dataclasses": {
+   "measurable": false
+  },
+  "rxbasics": {
+   "measurable": true,
+   "courses": 1,
+   "share": {
+    "sklearn": 0.007
+   }
+  },
+  "web": {
+   "measurable": true,
+   "courses": 1,
+   "share": {
+    "handson": 0.316
+   }
+  },
+  "databases": {
+   "measurable": true,
+   "courses": 0,
+   "share": {}
+  },
+  "plotting": {
+   "measurable": true,
+   "courses": 5,
+   "share": {
+    "kaggle_ml": 0.299,
+    "handson": 1.0,
+    "pydata": 1.0,
+    "mlcc": 0.314,
+    "sklearn": 0.861
+   }
+  },
+  "searchalg": {
+   "measurable": false
+  },
+  "sortalg": {
+   "measurable": false
+  },
+  "complexity": {
+   "measurable": false
+  },
+  "approx": {
+   "measurable": false
+  },
+  "decorators": {
+   "measurable": true,
+   "courses": 3,
+   "share": {
+    "handson": 0.158,
+    "fastbook": 0.15,
+    "sklearn": 0.018
+   }
+  },
+  "blocks": {
+   "measurable": false
+  },
+  "style": {
+   "measurable": false
+  },
+  "rxsyntax": {
+   "measurable": false
+  },
+  "rxextract": {
+   "measurable": false
+  }
+ }
+}

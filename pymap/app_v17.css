@@ -1,0 +1,80 @@
+
+/* ---------- v1.7: larger, easier type. Every size steps up about 15–25%; small grey text is darker so it stays readable. ---------- */
+:root { --muted: #575651; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --muted: #b4b3ad; } }
+:root[data-theme="dark"] { --muted: #b4b3ad; }
+body { font-size: 17px; line-height: 1.62; }
+.small { font-size: 0.97rem; }
+.lede { font-size: 1.2rem; line-height: 1.55; max-width: 64ch; }
+.hint { font-size: 1rem; }
+.eyebrow, label, .label, details > summary, .out-label, table.md th, .tab, .metrics { font-size: 1rem; }
+.eyebrow { font-size: 1.02rem; }
+.card .eyebrow { font-size: 0.9rem; }
+h2 { font-size: 3.8rem; }
+h3, .tutor h3, .note-head h3, .card h3 { font-size: 1.75rem; }
+.brand h1 { font-size: 1.35rem; }
+.pill { font-size: 0.8rem; }
+#topnav button { font-size: 1.12rem; }
+.save-status { font-size: 0.92rem; }
+.topbar-right button { font-size: 0.96rem; }
+button, a.btn { font-size: 1.04rem; padding: 12px 22px; }
+button.chip, .chip { font-size: 1rem; }
+button.link { font-size: inherit; }
+textarea, input[type="text"], select#pt-select { font-size: 1.05rem; }
+.choice { font-size: 1.05rem; }
+.choice strong { font-size: 1.22rem; }
+.subnav button { font-size: 1.02rem; }
+.lesson { font-size: 1.16rem; line-height: 1.75; }
+.lesson h3 { font-size: 2.35rem; }
+.lesson h4 { font-size: 1.32rem; }
+.code-wrap pre code { font-size: 0.98rem; }
+.copy { font-size: 0.78rem; }
+.note-head > span { font-size: 1.1rem; }
+.pt-note h4 { font-size: 1.28rem; }
+ul.note-points { font-size: 1.04rem; }
+.bubble.ai .bubble-text { font-size: 1.04rem; }
+.toast { font-size: 1.02rem; }
+.log li { font-size: 0.95rem; }
+
+/* the map's chrome and panel */
+#kmap { font-size: 16px; }
+#kmap .km-search { height: 42px; }
+#kmap .km-search input { font-size: 16px; }
+#kmap .km-search input::placeholder { font-size: 14.5px; }
+#kmap .km-gbtn { height: 42px; font-size: 15px; }
+#kmap .km-focus.on { height: 42px; font-size: 15px; }
+#kmap .km-legend { font-size: 14.5px; gap: 4px 18px; }
+#kmap .km-tip { font-size: 14.5px; max-width: 300px; }
+#kmap .km-tip b { font-size: 17px; }
+#kmap .km-blab { fill: #1f1f1d; }
+#kmap .km-ball.st-locked .km-blab, #kmap .km-dot.st-locked text { fill: #75716a; }
+#kmap .km-tabs button { font-size: 16.5px; }
+#kmap .km-pane p, #kmap .km-small, #kmap .km-note, #kmap .km-links, #kmap .km-src a, #kmap .km-src span, #kmap .km-foot, #kmap .km-prob { font-size: 15.5px; }
+#kmap .km-pane h2 { font-size: 44px; }
+#kmap .km-pane h3 { font-size: 14.5px; }
+#kmap .km-eyebrow { font-size: 14px; }
+#kmap .km-back { font-size: 14.5px; }
+#kmap .km-big b { font-size: 64px; }
+#kmap .km-big span { font-size: 15px; }
+#kmap .km-trio { font-size: 16px; }
+#kmap .km-trio b { font-size: 26px; }
+#kmap .km-pick b { font-size: 17px; }
+#kmap .km-pick span { font-size: 14px; }
+#kmap .km-status { font-size: 16px; }
+#kmap .km-btn { font-size: 15px; padding: 10px 16px; }
+#kmap .km-pill { font-size: 15px; padding: 5px 12px; }
+#kmap .km-tag { font-size: 13px; }
+#kmap .km-prow { padding: 8px 0; }
+#kmap .km-nm { font-size: 16.5px; }
+#kmap .km-src b { font-size: 16px; }
+#kmap .km-prob h4 { font-size: 16.5px; }
+#kmap .km-sev { font-size: 12.5px; }
+#kmap details.km-more > summary { font-size: 14.5px; }
+
+@media (max-width: 760px) {
+  h2 { font-size: 2.8rem; }
+  #topnav button { font-size: 1rem; }
+  #kmap .km-gbtn { font-size: 13px; }
+  #kmap .km-search input::placeholder { font-size: 13px; }
+  #kmap .km-legend { font-size: 13.5px; }
+}

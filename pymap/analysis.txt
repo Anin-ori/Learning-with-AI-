@@ -1,0 +1,38 @@
+{
+ "needs_A": 237,
+ "needs_B": 240,
+ "same_direct": 215,
+ "jaccard_direct": 0.821,
+ "one_draft_but_implied_by_other_chain": 19,
+ "needs_in_one_helps_in_other": 25,
+ "opposite_direction": 0,
+ "one_draft_only_not_implied": 28,
+ "needs_links_against_majority_order": 13,
+ "needs_links_with_order_evidence": 171,
+ "popular_point_pairs": 1711,
+ "pairs_sources_split_on_order": 109,
+ "human_links": 60,
+ "human_links_in_A_chain": 14,
+ "human_links_in_B_chain": 19,
+ "human_links_in_neither_needs_chain": 41,
+ "human_links_neither_but_soft": 6,
+ "human_links_AI_reversed": 2,
+ "points": 153,
+ "points_in_0_sources": 1,
+ "points_in_1_2_sources": 29,
+ "points_in_6_plus": 62
+}
+
+AGAINST ORDER: [('Numbers: int and float', 'Variables and assignment', '0 before / 6 after'), ('Strings: literals and quotes', 'Values and types, type()', '2 before / 6 after'), ('Comparison operators', 'if statements', '3 before / 4 after'), ('Numbers: int and float', 'Arithmetic operators', '1 before / 4 after'), ('Return values', 'Call stack and flow of execution', '1 before / 3 after'), ('Numbers: int and float', 'Values and types, type()', '2 before / 3 after'), ('Calling built-in functions', 'Defining functions', '1 before / 3 after'), ('Strings: literals and quotes', 'Type conversion: int(), str(), float()', '2 before / 3 after'), ('File paths and folders', 'Opening and reading files', '2 before / 3 after'), ('Strings: literals and quotes', 'Concatenation and repetition', '2 before / 3 after'), ('Dictionaries', 'Nested data structures', '2 before / 3 after'), ('Assertions', 'Testing your code', '0 before / 3 after'), ('Dictionaries', 'Counting with a dictionary', '1 before / 2 after')]
+
+SPLIT: [('if statements', 'Strings: literals and quotes', 5, 7), ('if statements', 'Defining functions', 7, 4), ('for loops', 'Defining functions', 5, 6), ('Defining functions', 'Strings: literals and quotes', 6, 5), ('Lists', 'Importing modules', 5, 5), ('List methods', 'Importing modules', 4, 6), ('Dictionaries', 'List comprehensions', 5, 5), ('Dictionaries', 'Importing modules', 5, 5), ('and, or, not', 'if statements', 5, 4), ('and, or, not', 'Strings: literals and quotes', 5, 4), ('while loops', 'Strings: literals and quotes', 4, 5), ('for loops', 'Return values', 5, 4), ('Local and global scope', 'List methods', 5, 4), ('Tuples', 'Importing modules', 4, 5), ('Numbers: int and float', 'Strings: literals and quotes', 5, 3), ('and, or, not', 'Defining functions', 3, 5), ('if statements', 'f-strings and formatting', 5, 3), ('while loops', 'Defining functions', 3, 5), ('while loops', 'Return values', 5, 3), ('for loops', 'Parameters and arguments', 5, 3), ('for loops', 'f-strings and formatting', 4, 4), ('Defining functions', 'Changing lists', 5, 3), ('Parameters and arguments', 'Strings: literals and quotes', 3, 5), ('Return values', 'Changing lists', 4, 4), ('Return values', 'Importing modules', 5, 3), ('f-strings and formatting', 'Lists', 5, 3), ('f-strings and formatting', 'List methods', 5, 3), ('f-strings and formatting', 'Dictionaries', 5, 3), ('List slicing', 'Importing modules', 3, 5), ('List methods', 'References and aliasing', 5, 3)]
+
+HUMAN MISSED: [('Boolean values', 'Defining classes', ''), ('Boolean values', 'None', 'soft'), ('Boolean values', 'Tuples', ''), ('Defining classes', 'Generators and yield', ''), ('Comparison operators', 'Defining classes', ''), ('Comparison operators', 'for loops', ''), ('Defining functions', 'None', ''), ('Dictionaries', 'Defining classes', ''), ('Dictionaries', 'Generators and yield', ''), ('Dictionaries', 'Sets', 'soft'), ('Dictionaries', 'Unpacking and multiple assignment', ''), ('keys(), values(), items()', 'None', ''), ('for loops', 'Defining classes', ''), ('for loops', 'Dictionaries', ''), ('for loops', 'f-strings and formatting', ''), ('for loops', 'None', ''), ('for loops', 'Sets', ''), ('for loops', 'Tuples', ''), ('for loops', 'Unpacking and multiple assignment', 'soft'), ('if statements', 'Comparison operators', ''), ('if statements', 'Generators and yield', ''), ('if statements', 'Lists', ''), ('if statements', 'None', ''), ('if statements', 'Strings: literals and quotes', ''), ('if statements', 'Tuples', ''), ('Lists', 'Defining classes', ''), ('Lists', 'Dictionaries', ''), ('Lists', 'for loops', 'soft'), ('Lists', 'f-strings and formatting', ''), ('Lists', 'Generators and yield', ''), ('List methods', 'for loops', ''), ('List methods', 'None', ''), ('Sets', 'Defining classes', ''), ('Strings: literals and quotes', 'Defining classes', ''), ('Strings: literals and quotes', 'for loops', 'soft'), ('Strings: literals and quotes', 'Lists', 'soft'), ('Tuples', 'Defining classes', ''), ('Tuples', 'Dictionaries', ''), ('Tuples', 'Sets', ''), ('Variables and assignment', 'Numbers: int and float', ''), ('Variables and assignment', 'Strings: literals and quotes', '')]
+
+HUMAN, AI REVERSED: [('if statements', 'Comparison operators'), ('Variables and assignment', 'Numbers: int and float')]
+
+OPPOSITE: []
+
+SAMPLE one-draft-only: [('Updating variables (+=)', 'Loop patterns: count, sum, find max', 'B'), ('Indentation and code blocks', 'The with statement', 'A'), ('Comparison operators', 'Assertions', 'B'), ('Comparison operators', 'if statements', 'B'), ('Comparison operators', 'while loops', 'B'), ('else and elif', 'Counting with a dictionary', 'B'), ('else and elif', 'else on loops', 'B'), ('Exceptions', 'Assertions', 'B'), ('for loops', 'Search algorithms', 'B'), ('if statements', 'Truthiness', 'B'), ('Importing modules', 'File paths and folders', 'A'), ('Integer division and modulus', 'Search algorithms', 'B'), ('Iterators and iterables', 'Generators and yield', 'A'), ('Iterators and iterables', 'Generator expressions', 'A'), ('Lists', 'Iterators and iterables', 'B'), ('Lists', 'Extracting: groups, findall, substitution', 'B'), ('Changing lists', 'del statement', 'B'), ('File paths and folders', 'Opening and reading files', 'B'), ('range()', 'Sorting algorithms', 'B'), ('Return values', 'Call stack and flow of execution', 'B'), ('Local and global scope', 'Decorators', 'B'), ('split() and join()', 'Parsing strings', 'B'), ('Strings: literals and quotes', 'Dictionaries', 'A'), ('Strings: literals and quotes', 'Values and types, type()', 'A'), ('Unpacking and multiple assignment', 'enumerate() and zip()', 'B'), ('Variables and assignment', 'Boolean values', 'B'), ('Variables and assignment', 'Calling built-in functions', 'B'), ('Variables and assignment', 'String indexing', 'B')]
+
+graph.json: 153 nodes 631 links

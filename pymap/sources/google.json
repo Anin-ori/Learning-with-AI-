@@ -1,0 +1,422 @@
+{
+ "id": "google",
+ "name": "Google's Python Class",
+ "author": "Nick Parlante (Google)",
+ "url": "https://developers.google.com/edu/python",
+ "kind": "Online class",
+ "items": [
+  {
+   "order": 0,
+   "chapter": "Python Introduction",
+   "heading": "Python Introduction",
+   "level": 0,
+   "url": "https://developers.google.com/edu/python/introduction"
+  },
+  {
+   "order": 1,
+   "chapter": "Python Introduction",
+   "heading": "Prelude",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/introduction"
+  },
+  {
+   "order": 2,
+   "chapter": "Python Introduction",
+   "heading": "Language Introduction",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/introduction"
+  },
+  {
+   "order": 3,
+   "chapter": "Python Introduction",
+   "heading": "Python source code",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/introduction"
+  },
+  {
+   "order": 4,
+   "chapter": "Python Introduction",
+   "heading": "Imports, Command-line arguments, and len()",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/introduction"
+  },
+  {
+   "order": 5,
+   "chapter": "Python Introduction",
+   "heading": "User-defined Functions",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/introduction"
+  },
+  {
+   "order": 6,
+   "chapter": "Python Introduction",
+   "heading": "Indentation",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/introduction"
+  },
+  {
+   "order": 7,
+   "chapter": "Python Introduction",
+   "heading": "Code Checked at Runtime",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/introduction"
+  },
+  {
+   "order": 8,
+   "chapter": "Python Introduction",
+   "heading": "Variable Names",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/introduction"
+  },
+  {
+   "order": 9,
+   "chapter": "Python Introduction",
+   "heading": "More on Modules and their Namespaces",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/introduction"
+  },
+  {
+   "order": 10,
+   "chapter": "Python Introduction",
+   "heading": "Online help, help(), and dir()",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/introduction"
+  },
+  {
+   "order": 11,
+   "chapter": "Python Strings",
+   "heading": "Python Strings",
+   "level": 0,
+   "url": "https://developers.google.com/edu/python/strings"
+  },
+  {
+   "order": 12,
+   "chapter": "Python Strings",
+   "heading": "String Methods",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/strings"
+  },
+  {
+   "order": 13,
+   "chapter": "Python Strings",
+   "heading": "String Slices",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/strings"
+  },
+  {
+   "order": 14,
+   "chapter": "Python Strings",
+   "heading": "String formatting",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/strings"
+  },
+  {
+   "order": 15,
+   "chapter": "Python Strings",
+   "heading": "Formatted string literals",
+   "level": 2,
+   "url": "https://developers.google.com/edu/python/strings"
+  },
+  {
+   "order": 16,
+   "chapter": "Python Strings",
+   "heading": "String %",
+   "level": 2,
+   "url": "https://developers.google.com/edu/python/strings"
+  },
+  {
+   "order": 17,
+   "chapter": "Python Strings",
+   "heading": "Strings (Unicode vs bytes)",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/strings"
+  },
+  {
+   "order": 18,
+   "chapter": "Python Strings",
+   "heading": "If Statement",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/strings"
+  },
+  {
+   "order": 19,
+   "chapter": "Python Lists",
+   "heading": "Python Lists",
+   "level": 0,
+   "url": "https://developers.google.com/edu/python/lists"
+  },
+  {
+   "order": 20,
+   "chapter": "Python Lists",
+   "heading": "FOR and IN",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/lists"
+  },
+  {
+   "order": 21,
+   "chapter": "Python Lists",
+   "heading": "Range",
+   "level": 2,
+   "url": "https://developers.google.com/edu/python/lists"
+  },
+  {
+   "order": 22,
+   "chapter": "Python Lists",
+   "heading": "While Loop",
+   "level": 2,
+   "url": "https://developers.google.com/edu/python/lists"
+  },
+  {
+   "order": 23,
+   "chapter": "Python Lists",
+   "heading": "List Methods",
+   "level": 2,
+   "url": "https://developers.google.com/edu/python/lists"
+  },
+  {
+   "order": 24,
+   "chapter": "Python Lists",
+   "heading": "List Build Up",
+   "level": 2,
+   "url": "https://developers.google.com/edu/python/lists"
+  },
+  {
+   "order": 25,
+   "chapter": "Python Lists",
+   "heading": "List Slices",
+   "level": 2,
+   "url": "https://developers.google.com/edu/python/lists"
+  },
+  {
+   "order": 26,
+   "chapter": "Python Sorting",
+   "heading": "Python Sorting",
+   "level": 0,
+   "url": "https://developers.google.com/edu/python/sorting"
+  },
+  {
+   "order": 27,
+   "chapter": "Python Sorting",
+   "heading": "Custom Sorting With key=",
+   "level": 2,
+   "url": "https://developers.google.com/edu/python/sorting"
+  },
+  {
+   "order": 28,
+   "chapter": "Python Sorting",
+   "heading": "sort() method",
+   "level": 2,
+   "url": "https://developers.google.com/edu/python/sorting"
+  },
+  {
+   "order": 29,
+   "chapter": "Python Sorting",
+   "heading": "Tuples",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/sorting"
+  },
+  {
+   "order": 30,
+   "chapter": "Python Sorting",
+   "heading": "List Comprehensions (optional)",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/sorting"
+  },
+  {
+   "order": 31,
+   "chapter": "Python Dict and File",
+   "heading": "Python Dict and File",
+   "level": 0,
+   "url": "https://developers.google.com/edu/python/dict-files"
+  },
+  {
+   "order": 32,
+   "chapter": "Python Dict and File",
+   "heading": "Dict Hash Table",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/dict-files"
+  },
+  {
+   "order": 33,
+   "chapter": "Python Dict and File",
+   "heading": "Dict Formatting",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/dict-files"
+  },
+  {
+   "order": 34,
+   "chapter": "Python Dict and File",
+   "heading": "Del",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/dict-files"
+  },
+  {
+   "order": 35,
+   "chapter": "Python Dict and File",
+   "heading": "Files",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/dict-files"
+  },
+  {
+   "order": 36,
+   "chapter": "Python Dict and File",
+   "heading": "Files Unicode",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/dict-files"
+  },
+  {
+   "order": 37,
+   "chapter": "Python Dict and File",
+   "heading": "Exercise Incremental Development",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/dict-files"
+  },
+  {
+   "order": 38,
+   "chapter": "Python Regular Expressions",
+   "heading": "Python Regular Expressions",
+   "level": 0,
+   "url": "https://developers.google.com/edu/python/regular-expressions"
+  },
+  {
+   "order": 39,
+   "chapter": "Python Regular Expressions",
+   "heading": "Basic Patterns",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/regular-expressions"
+  },
+  {
+   "order": 40,
+   "chapter": "Python Regular Expressions",
+   "heading": "Basic Examples",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/regular-expressions"
+  },
+  {
+   "order": 41,
+   "chapter": "Python Regular Expressions",
+   "heading": "Repetition",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/regular-expressions"
+  },
+  {
+   "order": 42,
+   "chapter": "Python Regular Expressions",
+   "heading": "Leftmost & Largest",
+   "level": 2,
+   "url": "https://developers.google.com/edu/python/regular-expressions"
+  },
+  {
+   "order": 43,
+   "chapter": "Python Regular Expressions",
+   "heading": "Repetition Examples",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/regular-expressions"
+  },
+  {
+   "order": 44,
+   "chapter": "Python Regular Expressions",
+   "heading": "Emails Example",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/regular-expressions"
+  },
+  {
+   "order": 45,
+   "chapter": "Python Regular Expressions",
+   "heading": "Square Brackets",
+   "level": 2,
+   "url": "https://developers.google.com/edu/python/regular-expressions"
+  },
+  {
+   "order": 46,
+   "chapter": "Python Regular Expressions",
+   "heading": "Group Extraction",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/regular-expressions"
+  },
+  {
+   "order": 47,
+   "chapter": "Python Regular Expressions",
+   "heading": "findall",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/regular-expressions"
+  },
+  {
+   "order": 48,
+   "chapter": "Python Regular Expressions",
+   "heading": "findall With Files",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/regular-expressions"
+  },
+  {
+   "order": 49,
+   "chapter": "Python Regular Expressions",
+   "heading": "findall and Groups",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/regular-expressions"
+  },
+  {
+   "order": 50,
+   "chapter": "Python Regular Expressions",
+   "heading": "RE Workflow and Debug",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/regular-expressions"
+  },
+  {
+   "order": 51,
+   "chapter": "Python Regular Expressions",
+   "heading": "Options",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/regular-expressions"
+  },
+  {
+   "order": 52,
+   "chapter": "Python Regular Expressions",
+   "heading": "Greedy vs. Non-Greedy (optional)",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/regular-expressions"
+  },
+  {
+   "order": 53,
+   "chapter": "Python Regular Expressions",
+   "heading": "Substitution (optional)",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/regular-expressions"
+  },
+  {
+   "order": 54,
+   "chapter": "Python Utilities",
+   "heading": "Python Utilities",
+   "level": 0,
+   "url": "https://developers.google.com/edu/python/utilities"
+  },
+  {
+   "order": 55,
+   "chapter": "Python Utilities",
+   "heading": "File System -- os, os.path, shutil",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/utilities"
+  },
+  {
+   "order": 56,
+   "chapter": "Python Utilities",
+   "heading": "Running External Processes -- subprocess",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/utilities"
+  },
+  {
+   "order": 57,
+   "chapter": "Python Utilities",
+   "heading": "Exceptions",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/utilities"
+  },
+  {
+   "order": 58,
+   "chapter": "Python Utilities",
+   "heading": "HTTP -- urllib and urlparse",
+   "level": 1,
+   "url": "https://developers.google.com/edu/python/utilities"
+  }
+ ]
+}

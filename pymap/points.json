@@ -1,0 +1,835 @@
+{
+ "areas": [
+  [
+   "start",
+   "Getting started"
+  ],
+  [
+   "values",
+   "Values & variables"
+  ],
+  [
+   "cond",
+   "Booleans & conditions"
+  ],
+  [
+   "loops",
+   "Loops"
+  ],
+  [
+   "func",
+   "Functions"
+  ],
+  [
+   "str",
+   "Strings"
+  ],
+  [
+   "list",
+   "Lists"
+  ],
+  [
+   "tuple",
+   "Tuples & sequences"
+  ],
+  [
+   "dict",
+   "Dictionaries & sets"
+  ],
+  [
+   "iter",
+   "Comprehensions & iterators"
+  ],
+  [
+   "files",
+   "Files & data formats"
+  ],
+  [
+   "err",
+   "Errors, debugging & testing"
+  ],
+  [
+   "mod",
+   "Modules & libraries"
+  ],
+  [
+   "oop",
+   "Classes & objects"
+  ],
+  [
+   "regex",
+   "Regular expressions"
+  ],
+  [
+   "beyond",
+   "Algorithms, web & data"
+  ]
+ ],
+ "points": [
+  {
+   "id": "run",
+   "area": "start",
+   "name": "Running Python: interpreter and scripts"
+  },
+  {
+   "id": "jupyter",
+   "area": "start",
+   "name": "Jupyter and IPython"
+  },
+  {
+   "id": "print",
+   "area": "start",
+   "name": "print()"
+  },
+  {
+   "id": "comments",
+   "area": "start",
+   "name": "Comments"
+  },
+  {
+   "id": "tracebacks",
+   "area": "start",
+   "name": "Reading error messages and tracebacks"
+  },
+  {
+   "id": "help",
+   "area": "start",
+   "name": "Getting help: help(), dir(), docs"
+  },
+  {
+   "id": "numbers",
+   "area": "values",
+   "name": "Numbers: int and float"
+  },
+  {
+   "id": "arith",
+   "area": "values",
+   "name": "Arithmetic operators"
+  },
+  {
+   "id": "precedence",
+   "area": "values",
+   "name": "Order of operations"
+  },
+  {
+   "id": "intdiv",
+   "area": "values",
+   "name": "Integer division and modulus"
+  },
+  {
+   "id": "floatprec",
+   "area": "values",
+   "name": "Floating-point precision"
+  },
+  {
+   "id": "types",
+   "area": "values",
+   "name": "Values and types, type()"
+  },
+  {
+   "id": "convert",
+   "area": "values",
+   "name": "Type conversion: int(), str(), float()"
+  },
+  {
+   "id": "variables",
+   "area": "values",
+   "name": "Variables and assignment"
+  },
+  {
+   "id": "augassign",
+   "area": "values",
+   "name": "Updating variables (+=)"
+  },
+  {
+   "id": "names",
+   "area": "values",
+   "name": "Naming rules and keywords"
+  },
+  {
+   "id": "exprstmt",
+   "area": "values",
+   "name": "Expressions vs statements"
+  },
+  {
+   "id": "input",
+   "area": "values",
+   "name": "Reading user input: input()"
+  },
+  {
+   "id": "none",
+   "area": "values",
+   "name": "None"
+  },
+  {
+   "id": "mathmod",
+   "area": "values",
+   "name": "The math module"
+  },
+  {
+   "id": "bool",
+   "area": "cond",
+   "name": "Boolean values"
+  },
+  {
+   "id": "compare",
+   "area": "cond",
+   "name": "Comparison operators"
+  },
+  {
+   "id": "logic",
+   "area": "cond",
+   "name": "and, or, not"
+  },
+  {
+   "id": "shortcirc",
+   "area": "cond",
+   "name": "Short-circuit evaluation"
+  },
+  {
+   "id": "truthy",
+   "area": "cond",
+   "name": "Truthiness"
+  },
+  {
+   "id": "if",
+   "area": "cond",
+   "name": "if statements"
+  },
+  {
+   "id": "else",
+   "area": "cond",
+   "name": "else and elif"
+  },
+  {
+   "id": "nestedif",
+   "area": "cond",
+   "name": "Nested conditionals"
+  },
+  {
+   "id": "condexpr",
+   "area": "cond",
+   "name": "Conditional expressions (x if c else y)"
+  },
+  {
+   "id": "match",
+   "area": "cond",
+   "name": "match statements"
+  },
+  {
+   "id": "pass",
+   "area": "cond",
+   "name": "pass and empty blocks"
+  },
+  {
+   "id": "while",
+   "area": "loops",
+   "name": "while loops"
+  },
+  {
+   "id": "infinite",
+   "area": "loops",
+   "name": "Infinite loops and while True"
+  },
+  {
+   "id": "breakcont",
+   "area": "loops",
+   "name": "break and continue"
+  },
+  {
+   "id": "for",
+   "area": "loops",
+   "name": "for loops"
+  },
+  {
+   "id": "range",
+   "area": "loops",
+   "name": "range()"
+  },
+  {
+   "id": "nestedloops",
+   "area": "loops",
+   "name": "Nested loops"
+  },
+  {
+   "id": "loopelse",
+   "area": "loops",
+   "name": "else on loops"
+  },
+  {
+   "id": "enumzip",
+   "area": "loops",
+   "name": "enumerate() and zip()"
+  },
+  {
+   "id": "looppat",
+   "area": "loops",
+   "name": "Loop patterns: count, sum, find max"
+  },
+  {
+   "id": "callfn",
+   "area": "func",
+   "name": "Calling built-in functions"
+  },
+  {
+   "id": "def",
+   "area": "func",
+   "name": "Defining functions"
+  },
+  {
+   "id": "params",
+   "area": "func",
+   "name": "Parameters and arguments"
+  },
+  {
+   "id": "return",
+   "area": "func",
+   "name": "Return values"
+  },
+  {
+   "id": "retprint",
+   "area": "func",
+   "name": "return vs print"
+  },
+  {
+   "id": "scope",
+   "area": "func",
+   "name": "Local and global scope"
+  },
+  {
+   "id": "defaults",
+   "area": "func",
+   "name": "Default arguments"
+  },
+  {
+   "id": "kwargs",
+   "area": "func",
+   "name": "Keyword arguments"
+  },
+  {
+   "id": "varargs",
+   "area": "func",
+   "name": "*args and **kwargs"
+  },
+  {
+   "id": "docstrings",
+   "area": "func",
+   "name": "Docstrings"
+  },
+  {
+   "id": "callstack",
+   "area": "func",
+   "name": "Call stack and flow of execution"
+  },
+  {
+   "id": "recursion",
+   "area": "func",
+   "name": "Recursion"
+  },
+  {
+   "id": "lambda",
+   "area": "func",
+   "name": "Lambda expressions"
+  },
+  {
+   "id": "higherorder",
+   "area": "func",
+   "name": "Functions as values (higher-order)"
+  },
+  {
+   "id": "typehints",
+   "area": "func",
+   "name": "Type hints"
+  },
+  {
+   "id": "decomp",
+   "area": "func",
+   "name": "Why functions: decomposition and abstraction"
+  },
+  {
+   "id": "strbasics",
+   "area": "str",
+   "name": "Strings: literals and quotes"
+  },
+  {
+   "id": "escapes",
+   "area": "str",
+   "name": "Escape sequences and raw strings"
+  },
+  {
+   "id": "multiline",
+   "area": "str",
+   "name": "Multiline strings"
+  },
+  {
+   "id": "concat",
+   "area": "str",
+   "name": "Concatenation and repetition"
+  },
+  {
+   "id": "strindex",
+   "area": "str",
+   "name": "String indexing"
+  },
+  {
+   "id": "strslice",
+   "area": "str",
+   "name": "String slicing"
+  },
+  {
+   "id": "immut",
+   "area": "str",
+   "name": "Immutability"
+  },
+  {
+   "id": "len",
+   "area": "str",
+   "name": "len()"
+  },
+  {
+   "id": "strmethods",
+   "area": "str",
+   "name": "String methods"
+  },
+  {
+   "id": "insearch",
+   "area": "str",
+   "name": "in operator and searching"
+  },
+  {
+   "id": "splitjoin",
+   "area": "str",
+   "name": "split() and join()"
+  },
+  {
+   "id": "fstrings",
+   "area": "str",
+   "name": "f-strings and formatting"
+  },
+  {
+   "id": "formatmethod",
+   "area": "str",
+   "name": "format() and % formatting"
+  },
+  {
+   "id": "unicode",
+   "area": "str",
+   "name": "Unicode and bytes"
+  },
+  {
+   "id": "parsing",
+   "area": "str",
+   "name": "Parsing strings"
+  },
+  {
+   "id": "listbasics",
+   "area": "list",
+   "name": "Lists"
+  },
+  {
+   "id": "listindex",
+   "area": "list",
+   "name": "List indexing"
+  },
+  {
+   "id": "listslice",
+   "area": "list",
+   "name": "List slicing"
+  },
+  {
+   "id": "listmodify",
+   "area": "list",
+   "name": "Changing lists"
+  },
+  {
+   "id": "listmethods",
+   "area": "list",
+   "name": "List methods"
+  },
+  {
+   "id": "sorting",
+   "area": "list",
+   "name": "Sorting: sort() and sorted()"
+  },
+  {
+   "id": "listfuncs",
+   "area": "list",
+   "name": "len, min, max, sum on lists"
+  },
+  {
+   "id": "nested",
+   "area": "list",
+   "name": "Lists of lists"
+  },
+  {
+   "id": "alias",
+   "area": "list",
+   "name": "References and aliasing"
+  },
+  {
+   "id": "copying",
+   "area": "list",
+   "name": "Copying lists"
+  },
+  {
+   "id": "mutateargs",
+   "area": "list",
+   "name": "Lists passed to functions"
+  },
+  {
+   "id": "stackqueue",
+   "area": "list",
+   "name": "Lists as stacks and queues"
+  },
+  {
+   "id": "del",
+   "area": "list",
+   "name": "del statement"
+  },
+  {
+   "id": "tuples",
+   "area": "tuple",
+   "name": "Tuples"
+  },
+  {
+   "id": "unpacking",
+   "area": "tuple",
+   "name": "Unpacking and multiple assignment"
+  },
+  {
+   "id": "sequences",
+   "area": "tuple",
+   "name": "Sequence types and shared operations"
+  },
+  {
+   "id": "mutable",
+   "area": "tuple",
+   "name": "Mutable vs immutable types"
+  },
+  {
+   "id": "dictbasics",
+   "area": "dict",
+   "name": "Dictionaries"
+  },
+  {
+   "id": "dictviews",
+   "area": "dict",
+   "name": "keys(), values(), items()"
+  },
+  {
+   "id": "dictloop",
+   "area": "dict",
+   "name": "Looping through a dictionary"
+  },
+  {
+   "id": "dictget",
+   "area": "dict",
+   "name": "get() and setdefault()"
+  },
+  {
+   "id": "counting",
+   "area": "dict",
+   "name": "Counting with a dictionary"
+  },
+  {
+   "id": "nesteddata",
+   "area": "dict",
+   "name": "Nested data structures"
+  },
+  {
+   "id": "sets",
+   "area": "dict",
+   "name": "Sets"
+  },
+  {
+   "id": "setops",
+   "area": "dict",
+   "name": "Set operations"
+  },
+  {
+   "id": "listcomp",
+   "area": "iter",
+   "name": "List comprehensions"
+  },
+  {
+   "id": "othercomp",
+   "area": "iter",
+   "name": "Dict and set comprehensions"
+  },
+  {
+   "id": "nestedcomp",
+   "area": "iter",
+   "name": "Nested comprehensions"
+  },
+  {
+   "id": "iterators",
+   "area": "iter",
+   "name": "Iterators and iterables"
+  },
+  {
+   "id": "generators",
+   "area": "iter",
+   "name": "Generators and yield"
+  },
+  {
+   "id": "genexpr",
+   "area": "iter",
+   "name": "Generator expressions"
+  },
+  {
+   "id": "paths",
+   "area": "files",
+   "name": "File paths and folders"
+  },
+  {
+   "id": "readfiles",
+   "area": "files",
+   "name": "Opening and reading files"
+  },
+  {
+   "id": "writefiles",
+   "area": "files",
+   "name": "Writing files"
+  },
+  {
+   "id": "with",
+   "area": "files",
+   "name": "The with statement"
+  },
+  {
+   "id": "csv",
+   "area": "files",
+   "name": "CSV files"
+  },
+  {
+   "id": "json",
+   "area": "files",
+   "name": "JSON"
+  },
+  {
+   "id": "organize",
+   "area": "files",
+   "name": "Copying, moving and deleting files"
+  },
+  {
+   "id": "pickle",
+   "area": "files",
+   "name": "Saving objects: pickle and shelve"
+  },
+  {
+   "id": "exceptions",
+   "area": "err",
+   "name": "Exceptions"
+  },
+  {
+   "id": "tryexcept",
+   "area": "err",
+   "name": "try and except"
+  },
+  {
+   "id": "raise",
+   "area": "err",
+   "name": "Raising exceptions"
+  },
+  {
+   "id": "finally",
+   "area": "err",
+   "name": "else and finally"
+  },
+  {
+   "id": "customexc",
+   "area": "err",
+   "name": "Custom exception classes"
+  },
+  {
+   "id": "assert",
+   "area": "err",
+   "name": "Assertions"
+  },
+  {
+   "id": "debugging",
+   "area": "err",
+   "name": "Debugging techniques"
+  },
+  {
+   "id": "logging",
+   "area": "err",
+   "name": "Logging"
+  },
+  {
+   "id": "testing",
+   "area": "err",
+   "name": "Testing your code"
+  },
+  {
+   "id": "validation",
+   "area": "err",
+   "name": "Input validation"
+  },
+  {
+   "id": "import",
+   "area": "mod",
+   "name": "Importing modules"
+  },
+  {
+   "id": "random",
+   "area": "mod",
+   "name": "random module"
+  },
+  {
+   "id": "datetime",
+   "area": "mod",
+   "name": "Dates and times"
+  },
+  {
+   "id": "stdlib",
+   "area": "mod",
+   "name": "Tour of the standard library"
+  },
+  {
+   "id": "ownmodules",
+   "area": "mod",
+   "name": "Writing your own modules"
+  },
+  {
+   "id": "packages",
+   "area": "mod",
+   "name": "Packages"
+  },
+  {
+   "id": "pip",
+   "area": "mod",
+   "name": "Installing third-party packages (pip)"
+  },
+  {
+   "id": "venv",
+   "area": "mod",
+   "name": "Virtual environments"
+  },
+  {
+   "id": "cliargs",
+   "area": "mod",
+   "name": "Command-line arguments"
+  },
+  {
+   "id": "objmethods",
+   "area": "oop",
+   "name": "Objects and methods (using them)"
+  },
+  {
+   "id": "classes",
+   "area": "oop",
+   "name": "Defining classes"
+  },
+  {
+   "id": "initattrs",
+   "area": "oop",
+   "name": "__init__ and attributes"
+  },
+  {
+   "id": "methods",
+   "area": "oop",
+   "name": "Defining methods and self"
+  },
+  {
+   "id": "strrepr",
+   "area": "oop",
+   "name": "__str__ and __repr__"
+  },
+  {
+   "id": "dunder",
+   "area": "oop",
+   "name": "Special methods and operator overloading"
+  },
+  {
+   "id": "inherit",
+   "area": "oop",
+   "name": "Inheritance"
+  },
+  {
+   "id": "encaps",
+   "area": "oop",
+   "name": "Encapsulation and properties"
+  },
+  {
+   "id": "classattrs",
+   "area": "oop",
+   "name": "Class attributes and class methods"
+  },
+  {
+   "id": "composition",
+   "area": "oop",
+   "name": "Objects inside objects (composition)"
+  },
+  {
+   "id": "dataclasses",
+   "area": "oop",
+   "name": "Dataclasses"
+  },
+  {
+   "id": "rxbasics",
+   "area": "regex",
+   "name": "Regex basics: patterns and search"
+  },
+  {
+   "id": "web",
+   "area": "beyond",
+   "name": "Web and HTTP"
+  },
+  {
+   "id": "databases",
+   "area": "beyond",
+   "name": "Databases and SQL"
+  },
+  {
+   "id": "plotting",
+   "area": "beyond",
+   "name": "Plotting"
+  },
+  {
+   "id": "searchalg",
+   "area": "beyond",
+   "name": "Search algorithms"
+  },
+  {
+   "id": "sortalg",
+   "area": "beyond",
+   "name": "Sorting algorithms"
+  },
+  {
+   "id": "complexity",
+   "area": "beyond",
+   "name": "Efficiency and complexity"
+  },
+  {
+   "id": "approx",
+   "area": "beyond",
+   "name": "Approximation methods"
+  },
+  {
+   "id": "decorators",
+   "area": "beyond",
+   "name": "Decorators"
+  },
+  {
+   "id": "blocks",
+   "area": "cond",
+   "name": "Indentation and code blocks"
+  },
+  {
+   "id": "style",
+   "area": "start",
+   "name": "Code style and PEP 8"
+  },
+  {
+   "id": "rxsyntax",
+   "area": "regex",
+   "name": "Pattern syntax: character classes, repetition, flags"
+  },
+  {
+   "id": "rxextract",
+   "area": "regex",
+   "name": "Extracting: groups, findall, substitution"
+  }
+ ]
+}

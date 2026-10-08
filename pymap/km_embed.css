@@ -1,0 +1,191 @@
+
+/* ---------- Knowledge map (v1.3): a night-sky canvas where brightness is progress. The sky fills the space under the
+   top bar, edge to edge, and stays dark in both themes; the side panel follows the app's theme. Scoped to #kmap. ---------- */
+.topbar-right { flex-wrap: wrap; }
+body.view-map .layout { display: none; }
+#kmap {
+  --sky: #0a0b0d; --sky-2: #12151a; --sky-line: rgba(255,255,255,.075); --star: #f4f2ec;
+  --ink-on-sky: rgba(255,255,255,.9); --muted-on-sky: rgba(255,255,255,.5); --glass: rgba(20,22,27,.62); --glass-line: rgba(255,255,255,.1);
+  --k-route: #ff5b4d; --k-map: var(--surface); --k-ink: var(--fg); --k-muted: var(--muted); --k-line: var(--line);
+  --k-good: var(--core); --k-good-soft: var(--core-soft); --k-warn: var(--warn); --k-warn-soft: var(--warn-bg); --k-bad: var(--bad); --k-bad-soft: var(--bad-bg);
+  display: grid; grid-template-columns: minmax(0, 1fr) 392px; gap: 0; padding: 0;
+  height: calc(100vh - var(--km-top, 57px)); height: calc(100dvh - var(--km-top, 57px)); min-height: 560px; font-size: 14px; line-height: 1.5;
+}
+#kmap[hidden] { display: none; }
+#kmap button { font: inherit; font-weight: 400; border: 0; border-radius: 0; padding: 0; background: none; color: inherit; cursor: pointer; }
+#kmap h2, #kmap h3, #kmap h4, #kmap p { margin: 0; }
+#kmap a { color: inherit; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); }
+#kmap code { font-family: var(--font-mono); font-size: .9em; }
+
+/* the sky */
+#kmap .km-mapwrap { position: relative; min-width: 0; overflow: hidden; color: var(--ink-on-sky);
+  background: radial-gradient(70% 70% at 50% 52%, var(--sky-2) 0%, var(--sky) 100%); }
+#kmap svg.km-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
+#kmap svg.km-svg:active { cursor: grabbing; }
+#kmap svg.km-svg text { font-family: var(--font-body); }
+#kmap .km-bar { position: absolute; z-index: 2; top: 14px; left: 14px; right: 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; pointer-events: none; }
+#kmap .km-bar > * { pointer-events: auto; }
+#kmap .km-glass { background: var(--glass); border: 1px solid var(--glass-line); -webkit-backdrop-filter: blur(16px) saturate(1.2); backdrop-filter: blur(16px) saturate(1.2); border-radius: 999px; color: var(--ink-on-sky); }
+#kmap .km-search { flex: 0 1 270px; min-width: 0; display: flex; align-items: center; gap: 9px; padding: 0 14px; height: 34px; }
+#kmap .km-search svg { flex: none; opacity: .5; }
+#kmap .km-search input { width: 100%; border: 0; background: transparent; color: var(--ink-on-sky); font: inherit; font-size: 13px; outline: none; padding: 0; }
+#kmap .km-search input::placeholder { color: var(--muted-on-sky); }
+#kmap .km-search:focus-within { border-color: rgba(255,255,255,.3); }
+#kmap .km-spacer { flex: 1; }
+#kmap .km-gbtn { height: 34px; padding: 0 14px; font-size: 12.5px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; color: var(--ink-on-sky); }
+#kmap .km-gbtn:hover { border-color: rgba(255,255,255,.24); }
+#kmap .km-gbtn:focus-visible, #kmap .km-search:focus-within { outline: 2px solid rgba(255,255,255,.55); outline-offset: 2px; }
+#kmap .km-flashbtn b { font-weight: inherit; }
+#kmap .km-flashbtn .km-narrow { display: none; }
+#kmap .km-flashbtn i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.28); }
+#kmap .km-flashbtn[aria-pressed="true"] i { background: #fff; box-shadow: 0 0 6px 2px rgba(255,255,255,.75); }
+#kmap .km-focus { display: none; }
+#kmap .km-focus.on { display: inline-flex; align-items: center; gap: 10px; padding: 0 5px 0 14px; height: 34px; font-size: 12.5px; max-width: 100%; }
+#kmap .km-focus span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#kmap .km-focus button { padding: 4px 10px; border-radius: 999px; background: rgba(255,255,255,.12); font-size: 12px; }
+#kmap .km-legend { position: absolute; z-index: 2; left: 14px; bottom: 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; max-width: calc(100% - 28px);
+  padding: 7px 14px; border-radius: 999px; font-size: 11.5px; color: var(--muted-on-sky); pointer-events: none; }
+#kmap .km-legend span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+#kmap .km-legend .km-sep { width: 1px; height: 12px; background: rgba(255,255,255,.14); }
+#kmap .km-tip { position: absolute; z-index: 3; pointer-events: none; padding: 8px 11px; font-size: 12px; max-width: 260px; display: none; border-radius: 12px;
+  background: rgba(18,20,24,.94); border: 1px solid var(--glass-line); color: var(--ink-on-sky); box-shadow: 0 12px 32px rgba(0,0,0,.45); }
+#kmap .km-tip b { display: block; font-size: 13px; font-weight: 500; }
+#kmap .km-tip span { color: var(--muted-on-sky); }
+
+/* marks: one circle per topic. Brightness = status, a thin white arc = share learned, a red ring = on the AI route */
+#kmap .km-ring { fill: none; stroke: rgba(255,255,255,.07); stroke-width: 1; vector-effect: non-scaling-stroke; }
+#kmap .km-blk { fill: none; stroke: var(--sky-line); stroke-width: 1; vector-effect: non-scaling-stroke; transition: opacity .3s, stroke .3s; }
+#kmap .km-blk.lit { stroke: rgba(255,255,255,.55); }
+#kmap .km-ball { transition: opacity .3s; }
+#kmap .km-hit { fill: transparent; cursor: pointer; }
+#kmap .km-body { fill: #14171b; stroke: rgba(255,255,255,.2); stroke-width: 1; vector-effect: non-scaling-stroke; transition: fill .35s, stroke .35s; pointer-events: none; }
+#kmap .km-ball.st-ready > .km-body { fill: #2b3038; stroke: rgba(255,255,255,.82); }
+#kmap .km-ball.st-learned > .km-body { fill: var(--star); stroke: none; }
+#kmap .km-ball:hover > .km-body { stroke: #fff; }
+#kmap .km-arc { fill: none; stroke: #fff; stroke-width: 2.2; stroke-linecap: round; vector-effect: non-scaling-stroke; pointer-events: none; }
+#kmap .km-ball.st-locked > .km-arc { stroke: rgba(255,255,255,.55); }
+#kmap .km-halo { fill: none; stroke: none; pointer-events: none; }
+#kmap .km-ball.route > .km-halo { stroke: var(--k-route); stroke-width: 1.3; vector-effect: non-scaling-stroke; }
+#kmap .km-ball.route.st-locked > .km-halo { stroke-opacity: .5; }
+#kmap .km-glow { opacity: 0; pointer-events: none; transition: opacity .4s; }
+#kmap .km-ball.st-learned > .km-glow { opacity: .11; }
+#kmap.km-flashon .km-ball.hot > .km-glow { animation: kmGlow 2.6s ease-in-out infinite; }
+#kmap.km-flashon .km-ball.hot > .km-body { stroke: #fff; stroke-width: 1.6; }
+@keyframes kmGlow { 0%, 100% { opacity: .3; } 50% { opacity: .85; } }
+@media (prefers-reduced-motion: reduce) { #kmap.km-flashon .km-ball.hot > .km-glow { animation: none; opacity: .45; } }
+#kmap .km-ball.open > .km-glow, #kmap.km-flashon .km-ball.hot.open > .km-glow { opacity: 0; animation: none; }
+#kmap .km-ball.open > .km-body, #kmap.km-flashon .km-ball.hot.open > .km-body { fill: #111317; stroke: rgba(255,255,255,.18); stroke-width: 1; }
+#kmap .km-ball.open > .km-halo { stroke: none; }
+#kmap .km-blab { fill: rgba(255,255,255,.9); font-weight: 450; letter-spacing: .005em; paint-order: stroke; stroke: var(--sky); stroke-linejoin: round; pointer-events: none; }
+#kmap .km-ball.st-locked .km-blab { fill: rgba(255,255,255,.42); }
+#kmap.km-flashon .km-ball.hot .km-blab { fill: #fff; font-weight: 550; }
+#kmap .km-ball.open .km-blab { fill: #fff; font-family: var(--font-display); font-weight: 400; letter-spacing: 0; }
+#kmap .km-prog { fill: var(--muted-on-sky); font-family: var(--font-mono); letter-spacing: .04em; pointer-events: none; }
+/* the points, shown around a topic once it is opened */
+#kmap .km-dot { pointer-events: none; }
+#kmap .km-ball.open .km-dot { pointer-events: auto; cursor: pointer; }
+#kmap .km-dot .km-core { fill: #15181d; stroke: rgba(255,255,255,.24); stroke-width: 1; vector-effect: non-scaling-stroke; transition: fill .3s; }
+#kmap .km-dot.st-ready .km-core { fill: #2b3038; stroke: rgba(255,255,255,.85); }
+#kmap .km-dot.st-learned .km-core { fill: var(--star); stroke: none; }
+#kmap .km-dot.route .km-halo { stroke: var(--k-route); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+#kmap .km-dot.route.st-locked .km-halo { stroke-opacity: .5; }
+#kmap .km-dot.sel .km-core { stroke: #fff; stroke-width: 2.4; }
+#kmap .km-dot:hover .km-core { stroke: #fff; }
+#kmap .km-dot text { fill: rgba(255,255,255,.88); font-weight: 450; paint-order: stroke; stroke: var(--sky); stroke-linejoin: round; }
+#kmap .km-dot.st-locked text { fill: rgba(255,255,255,.46); }
+#kmap .km-dot.sel text { fill: #fff; font-weight: 600; }
+#kmap .km-svg.dimmed .km-ball:not(.lit) { opacity: .14; }
+#kmap .km-svg.dimmed .km-blk:not(.lit) { opacity: .25; }
+#kmap .km-svg.dimmed .km-ring { opacity: .6; }
+
+/* the panel */
+#kmap .km-panel { min-width: 0; display: flex; flex-direction: column; background: var(--surface); border-left: 1px solid var(--line); overflow: hidden; }
+#kmap .km-tabs { display: flex; gap: 2px; margin: 16px 20px 0; padding: 3px; border-radius: 999px; background: var(--sunk); }
+#kmap .km-tabs button { flex: 1; padding: 7px 8px; border-radius: 999px; color: var(--muted); font-weight: 500; font-size: 13px; white-space: nowrap; }
+#kmap .km-tabs button[aria-selected="true"] { background: var(--surface); color: var(--fg); box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 0 0 1px var(--line); }
+#kmap .km-tabs .ct { display: none; }
+#kmap .km-pane { overflow-y: auto; padding: 26px 26px 32px; flex: 1; min-height: 0; scrollbar-width: thin; }
+#kmap .km-pane h2 { font-family: var(--font-display); font-weight: 400; font-size: 30px; line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 4px; text-wrap: balance; }
+#kmap .km-pane h3 { font: 500 11px/1.3 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 26px 0 10px; }
+#kmap .km-pane p { margin: 0 0 10px; }
+#kmap .km-small { font-size: 12.5px; color: var(--muted); }
+#kmap .km-eyebrow { font: 500 11px/1.3 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+#kmap .km-back { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
+#kmap .km-back:hover { color: var(--fg); }
+#kmap .km-big { display: flex; align-items: baseline; gap: 8px; margin: 18px 0 8px; }
+#kmap .km-big b { font: 400 44px/1 var(--font-display); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+#kmap .km-big span { color: var(--muted); font-size: 13px; }
+#kmap .km-bar2 { height: 4px; border-radius: 999px; background: var(--sunk); overflow: hidden; }
+#kmap .km-bar2 i { display: block; height: 100%; background: var(--fg); border-radius: 999px; }
+#kmap .km-trio { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 10px; font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+#kmap .km-trio b { color: var(--fg); font-weight: 500; }
+#kmap .km-note { border: 1px dashed var(--line); border-radius: 14px; padding: 12px 14px; font-size: 13px; display: grid; gap: 10px; margin: 18px 0 0; color: var(--muted); }
+#kmap .km-note b { color: var(--fg); font-weight: 500; }
+#kmap .km-btn { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 14px; font-size: 13px; color: var(--fg); }
+#kmap .km-btn:hover { border-color: color-mix(in srgb, var(--fg) 40%, var(--line)); }
+#kmap .km-btn.solid { background: var(--fg); border-color: var(--fg); color: var(--bg); font-weight: 500; }
+#kmap .km-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+#kmap .km-picks { display: grid; gap: 2px; }
+#kmap .km-pick { display: grid; grid-template-columns: 14px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 11px 12px; margin: 0 -12px; border-radius: 12px; text-align: left; }
+#kmap .km-pick:hover { background: var(--sunk); }
+#kmap .km-pick i { width: 10px; height: 10px; border-radius: 50%; background: var(--fg); justify-self: center; }
+#kmap .km-pick i { box-shadow: 0 0 0 2.5px var(--surface), 0 0 0 3.7px var(--k-route); }
+#kmap .km-pick.hot i { box-shadow: 0 0 0 2.5px var(--surface), 0 0 0 3.7px var(--k-route), 0 0 14px 5px color-mix(in srgb, var(--fg) 22%, transparent); }
+#kmap .km-pick b { font-weight: 500; font-size: 14px; }
+#kmap .km-pick span { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+#kmap .km-links { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 13px; }
+#kmap .km-links button { text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--fg) 25%, transparent); text-underline-offset: 3px; }
+#kmap .km-links button.next { text-decoration-color: var(--k-route); }
+#kmap .km-foot { margin-top: 26px; padding-top: 16px; border-top: 1px solid var(--line); display: grid; gap: 10px; font-size: 12.5px; color: var(--muted); }
+#kmap .km-card { border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 10px; margin: 14px 0; }
+#kmap .km-status { font-weight: 500; font-size: 13.5px; }
+#kmap .km-status .r { color: var(--k-route); font-weight: 400; }
+#kmap .km-ex { display: flex; flex-wrap: wrap; gap: 6px; }
+#kmap .km-pill { border: 1px solid var(--line); border-radius: 999px; padding: 3px 11px; font-size: 12.5px; background: var(--surface); }
+#kmap .km-pill:hover { border-color: color-mix(in srgb, var(--fg) 40%, var(--line)); }
+#kmap .km-pill.next { box-shadow: inset 0 0 0 1px var(--k-route); border-color: var(--k-route); }
+#kmap .km-pill.hot { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+#kmap .km-rows { display: grid; gap: 2px; }
+#kmap .km-prow { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 6px 0; border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent); }
+#kmap .km-prow:last-child { border-bottom: 0; }
+#kmap .km-prow input { accent-color: var(--fg); width: 16px; height: 16px; margin: 0; }
+#kmap .km-nm { text-align: left; color: var(--fg); }
+#kmap .km-nm:hover { text-decoration: underline; text-underline-offset: 3px; }
+#kmap .km-tag { font: 400 11px/1 var(--font-mono); padding: 4px 7px; border-radius: 999px; white-space: nowrap; color: var(--muted); background: var(--sunk); }
+#kmap .km-tag.learned { background: var(--fg); color: var(--bg); }
+#kmap .km-tag.route { color: var(--k-route); background: transparent; box-shadow: inset 0 0 0 1px var(--k-route); }
+#kmap .km-inline { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+#kmap .km-srcs { display: grid; gap: 10px; }
+#kmap .km-src { display: grid; gap: 2px; }
+#kmap .km-src b { font-size: 13px; font-weight: 500; }
+#kmap .km-src a, #kmap .km-src span { font-size: 13px; overflow-wrap: anywhere; color: var(--muted); }
+#kmap .km-empty { color: var(--muted); }
+#kmap details.km-more { margin-top: 18px; border-top: 1px solid var(--line); padding-top: 14px; }
+#kmap details.km-more > summary { cursor: pointer; font-size: 13px; font-weight: 500; }
+#kmap .km-prob { border-top: 1px solid var(--line); padding: 14px 0 12px; display: grid; gap: 6px; font-size: 13px; }
+#kmap .km-prob .head { display: flex; align-items: baseline; gap: 10px; }
+#kmap .km-prob .num { font: 400 22px/1 var(--font-display); font-variant-numeric: tabular-nums; min-width: 2.6ch; }
+#kmap .km-prob h4 { font-size: 14px; font-weight: 500; line-height: 1.3; }
+#kmap .km-sev { font: 400 10.5px/1 var(--font-mono); padding: 4px 7px; border-radius: 999px; margin-left: auto; white-space: nowrap; align-self: center; background: var(--sunk); color: var(--muted); }
+#kmap .km-sev.core { color: var(--k-bad); }
+#kmap .km-pairs { display: grid; gap: 2px; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+#kmap .km-pairs div { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px; }
+#kmap .km-pairs span:last-child { font-family: var(--font-mono); color: var(--muted); }
+#kmap .km-srclist { display: grid; gap: 12px; }
+#kmap .km-srclist .km-src { border-top: 1px solid var(--line); padding-top: 10px; }
+@media (max-width: 920px) {
+  #kmap { grid-template-columns: minmax(0, 1fr); height: auto; min-height: 0; }
+  #kmap .km-mapwrap { height: 68vh; height: 68dvh; min-height: 440px; }
+  #kmap .km-panel { border-left: 0; border-top: 1px solid var(--line); }
+  #kmap .km-pane { overflow: visible; padding: 22px 18px 32px; }
+  #kmap .km-tabs { margin: 14px 16px 0; }
+  #kmap .km-bar { top: 10px; left: 10px; right: 10px; flex-wrap: nowrap; gap: 6px; }
+  #kmap .km-search { flex: 1 1 120px; padding: 0 12px; }
+  #kmap .km-spacer { display: none; }
+  #kmap .km-gbtn { padding: 0 12px; }
+  #kmap .km-flashbtn .km-wide { display: none; }
+  #kmap .km-flashbtn .km-narrow { display: inline; }
+  #kmap .km-bar:has(.km-focus.on) { flex-wrap: wrap; }
+  #kmap .km-legend { left: 10px; right: 10px; bottom: 10px; border-radius: 16px; justify-content: center; gap: 4px 12px; }
+  #kmap .km-legend .km-sep { display: none; }
+}

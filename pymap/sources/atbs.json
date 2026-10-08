@@ -1,0 +1,1134 @@
+{
+ "id": "atbs",
+ "name": "Automate the Boring Stuff with Python, 3rd edition",
+ "author": "Al Sweigart",
+ "url": "https://automatetheboringstuff.com/3e/",
+ "kind": "Book",
+ "note": "Sections and key points for chapters 2-8 and 10 come from our checked outlines; other chapters are titles only.",
+ "items": [
+  {
+   "chapter": "1. Python Basics",
+   "heading": "Python Basics",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter1.html",
+   "order": 0
+  },
+  {
+   "chapter": "2. if-else and Flow Control",
+   "heading": "if-else and Flow Control",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter2.html",
+   "order": 1
+  },
+  {
+   "chapter": "2. if-else and Flow Control",
+   "heading": "Boolean values",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter2.html",
+   "objectives": [
+    "There are only two Boolean values, True and False, capitalized; lowercase true and false aren't valid (NameError)",
+    "True and False are keywords, so they can't be used as variable names (SyntaxError)",
+    "They aren't strings: True is different from 'True'",
+    "Boolean values can be stored in variables and used in expressions"
+   ],
+   "order": 2
+  },
+  {
+   "chapter": "2. if-else and Flow Control",
+   "heading": "Comparison operators",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter2.html",
+   "objectives": [
+    "The six comparison operators ==, !=, <, >, <=, >= each evaluate to True or False",
+    "== and != work with values of any type; <, >, <=, >= are meant for integers and floats",
+    "A number never equals a string, even one with the same digits, while an integer equals a float with the same value",
+    "== compares and = assigns; mixing them up is a classic mistake"
+   ],
+   "order": 3
+  },
+  {
+   "chapter": "2. if-else and Flow Control",
+   "heading": "Boolean operators: and, or, not",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter2.html",
+   "objectives": [
+    "and is True only when both sides are True; or is True when at least one side is; not flips one value (the truth table for each)",
+    "Comparisons can be combined with Boolean operators: each comparison gives a Boolean that the operator then works on",
+    "Order of operations: math and comparison operators first, then not, then and, then or",
+    "Boolean operators can be stacked, such as applying not more than once"
+   ],
+   "order": 4
+  },
+  {
+   "chapter": "2. if-else and Flow Control",
+   "heading": "Conditions and blocks of code",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter2.html",
+   "objectives": [
+    "A condition is an expression that evaluates to True or False and decides what a flow control statement does",
+    "Block rules: a block begins where indentation increases, can contain other blocks (nesting), and ends where indentation goes back to an enclosing level",
+    "Program execution normally runs top to bottom; flow control statements make it skip or jump",
+    "Flowcharts show branching: diamonds for decisions, rectangles for steps"
+   ],
+   "order": 5
+  },
+  {
+   "chapter": "2. if-else and Flow Control",
+   "heading": "The if statement",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter2.html",
+   "objectives": [
+    "Form: the if keyword, a condition, a colon, then an indented block (the clause)",
+    "The clause runs only when the condition is True; otherwise it's skipped",
+    "Every flow control statement ends with a colon followed by an indented block"
+   ],
+   "order": 6
+  },
+  {
+   "chapter": "2. if-else and Flow Control",
+   "heading": "The else statement",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter2.html",
+   "objectives": [
+    "else is optional, comes right after an if (or elif) clause, and has no condition",
+    "Its clause runs only when the condition before it was False, so exactly one of if and else runs"
+   ],
+   "order": 7
+  },
+  {
+   "chapter": "2. if-else and Flow Control",
+   "heading": "The elif statement, and why the order of elif branches matters",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter2.html",
+   "objectives": [
+    "elif gives another condition, checked only when every earlier condition in the chain was False",
+    "At most one clause in an if/elif chain runs: the first one whose condition is True",
+    "Order matters: a broad condition placed before a narrower one inside it makes the narrower one unreachable",
+    "Ending the chain with else guarantees exactly one clause runs"
+   ],
+   "order": 8
+  },
+  {
+   "chapter": "2. if-else and Flow Control",
+   "heading": "Short example programs that combine if, else and elif",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter2.html",
+   "objectives": [
+    "Separate if statements are each checked on their own, so several can run, unlike one if/elif chain",
+    "Flipping a Boolean variable with not",
+    "Accepting several possible inputs with or needs a full comparison on each side of or, not a bare value on the right",
+    "Converting input with float() and str() to do math with it",
+    "A variable that's assigned only in some branches doesn't exist when none of them ran, causing a NameError"
+   ],
+   "order": 9
+  },
+  {
+   "chapter": "3. Loops",
+   "heading": "Loops",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter3.html",
+   "order": 10
+  },
+  {
+   "chapter": "3. Loops",
+   "heading": "while loops",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter3.html",
+   "objectives": [
+    "A while clause repeats as long as its condition is True; the condition is checked before each pass",
+    "At the end of the clause, execution jumps back to the condition, unlike an if",
+    "The loop variable needs a value before the loop so the condition can be checked the first time",
+    "A condition that never becomes False makes an infinite loop; Ctrl-C stops a stuck program"
+   ],
+   "order": 11
+  },
+  {
+   "chapter": "3. Loops",
+   "heading": "break statements",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter3.html",
+   "objectives": [
+    "break leaves the loop immediately",
+    "The while True: ... break pattern loops forever and exits from inside",
+    "break only works inside loops"
+   ],
+   "order": 12
+  },
+  {
+   "chapter": "3. Loops",
+   "heading": "continue statements",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter3.html",
+   "objectives": [
+    "continue jumps back to the start of the loop and checks the condition again",
+    "It skips the rest of one pass",
+    "continue only works inside loops"
+   ],
+   "order": 13
+  },
+  {
+   "chapter": "3. Loops",
+   "heading": "for loops and the range() function",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter3.html",
+   "objectives": [
+    "for i in range(5): runs its block 5 times, with i from 0 to 4",
+    "range(n) goes up to, but doesn't include, n",
+    "for loops suit a known number of repetitions; while loops suit repeating until something changes"
+   ],
+   "order": 14
+  },
+  {
+   "chapter": "3. Loops",
+   "heading": "break and continue inside for loops",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter3.html",
+   "objectives": [
+    "break and continue work in for loops the same way as in while loops",
+    "In a for loop, continue moves on to the next value of the loop variable"
+   ],
+   "order": 15
+  },
+  {
+   "chapter": "3. Loops",
+   "heading": "Writing a for loop as an equivalent while loop",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter3.html",
+   "objectives": [
+    "A for i in range(5) loop can be written as a while loop with a counter set before it and increased at the end of each pass",
+    "The for version is shorter because it manages the counter for you"
+   ],
+   "order": 16
+  },
+  {
+   "chapter": "3. Loops",
+   "heading": "range() with start, stop and step arguments",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter3.html",
+   "objectives": [
+    "range(start, stop) starts at start and stops just before stop",
+    "A third argument is the step between the numbers",
+    "A negative step counts down",
+    "When left out, the start defaults to 0 and the step to 1"
+   ],
+   "order": 17
+  },
+  {
+   "chapter": "3. Loops",
+   "heading": "Importing modules from the standard library",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter3.html",
+   "objectives": [
+    "An import statement makes a module's functions available, called with the module's name and a dot",
+    "Several modules can be imported in one statement, separated by commas",
+    "from module import * drops the module name, but full names are more readable",
+    "Don't name your own file after a standard module, or Python imports yours instead"
+   ],
+   "order": 18
+  },
+  {
+   "chapter": "3. Loops",
+   "heading": "Ending a program early with sys.exit()",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter3.html",
+   "objectives": [
+    "A program ends after its last line; sys.exit() ends it early",
+    "sys has to be imported first"
+   ],
+   "order": 19
+  },
+  {
+   "chapter": "3. Loops",
+   "heading": "Short complete programs: a number guessing game and rock, paper, scissors",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter3.html",
+   "objectives": [
+    "random.randint(a, b) gives a random integer, including both ends",
+    "input() returns a string, so int() converts it before comparing numbers",
+    "A for loop with range limits the number of guesses, and break leaves early on a right guess",
+    "Rock, paper, scissors uses an outer game loop, an inner loop that repeats until the input is valid, and counters for wins, losses and ties"
+   ],
+   "order": 20
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Functions",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter4.html",
+   "order": 21
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Creating functions with def",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter4.html",
+   "objectives": [
+    "def defines a function; its code runs when the function is called, not when it's defined",
+    "A call is the function's name followed by parentheses; afterwards execution goes back to the line that called it",
+    "Functions remove duplicated code, so programs are shorter and easier to update"
+   ],
+   "order": 22
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Arguments and parameters",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter4.html",
+   "objectives": [
+    "Parameters are the variables in the definition; arguments are the values passed in a call",
+    "The terms define, call, pass, argument and parameter",
+    "Parameters are local: they're forgotten when the function returns, and using one outside it causes a NameError"
+   ],
+   "order": 23
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Return values and return statements",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter4.html",
+   "objectives": [
+    "return gives the value that the call evaluates to",
+    "A call can be used inside an expression, including as an argument to another call"
+   ],
+   "order": 24
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "The None value",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter4.html",
+   "objectives": [
+    "None means the absence of a value; it's the only value of the NoneType type, and is capitalized",
+    "print() returns None",
+    "A function without a return statement, or with a bare return, returns None"
+   ],
+   "order": 25
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Named parameters",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter4.html",
+   "objectives": [
+    "Keyword arguments are identified by name, not position",
+    "print()'s end= replaces the newline at the end, and sep= replaces the space between arguments"
+   ],
+   "order": 26
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "The call stack",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter4.html",
+   "objectives": [
+    "Each call adds a frame to the call stack that remembers where to return; returning removes it",
+    "The stack is last in, first out",
+    "When the stack is empty, execution is outside all functions"
+   ],
+   "order": 27
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Local and global scopes: the scope rules",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter4.html",
+   "objectives": [
+    "Variables assigned in a function are local to that call; there's one global scope and a new local scope for each call",
+    "Global code can't use local variables",
+    "One function can't use another function's local variables",
+    "Local code can read global variables",
+    "The same name can be different variables in different scopes",
+    "A local scope and its variables are destroyed when the call returns"
+   ],
+   "order": 28
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "The global statement, and working out a variable's scope",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter4.html",
+   "objectives": [
+    "global name at the start of a function makes assignments change the global variable",
+    "The rules: outside all functions it's global; with a global statement it's global; assigned in the function it's local; only read there, it's global",
+    "Using a local variable before assigning it raises UnboundLocalError instead of falling back to the global one"
+   ],
+   "order": 29
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Exception handling with try and except",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter4.html",
+   "objectives": [
+    "Code that might fail goes in try; the handling code goes in except, such as except ZeroDivisionError:",
+    "When an error happens, the rest of the try block is skipped and except runs; otherwise except is skipped",
+    "Errors raised inside functions called from the try block are caught too",
+    "int() on text that isn't a number raises ValueError, which except ValueError: catches"
+   ],
+   "order": 30
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Short programs: Zigzag and Spike",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter4.html",
+   "objectives": [
+    "time.sleep() pauses a program, and while True: runs until it's stopped",
+    "Catching KeyboardInterrupt lets Ctrl-C end the program cleanly with sys.exit()",
+    "String replication and range() with a negative step make the patterns"
+   ],
+   "order": 31
+  },
+  {
+   "chapter": "5. Debugging",
+   "heading": "Debugging",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter5.html",
+   "order": 32
+  },
+  {
+   "chapter": "5. Debugging",
+   "heading": "Raising exceptions with raise",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter5.html",
+   "objectives": [
+    "raise Exception('message') stops normal execution and jumps to an except clause",
+    "Without a try and except around it, the program crashes and shows the message; usually a function raises and its caller handles it",
+    "except Exception as err: stores the exception in a variable, and str(err) gives its message"
+   ],
+   "order": 33
+  },
+  {
+   "chapter": "5. Debugging",
+   "heading": "Assertions with assert",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter5.html",
+   "objectives": [
+    "An assert statement raises AssertionError when its condition is False",
+    "Assertions are sanity checks for programmer mistakes: don't catch them, let the program fail fast",
+    "Use exceptions, not assertions, for expected problems such as bad user input or a missing file"
+   ],
+   "order": 34
+  },
+  {
+   "chapter": "5. Debugging",
+   "heading": "Logging with the logging module, including logging levels",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter5.html",
+   "objectives": [
+    "Setup: import logging, then logging.basicConfig(level=logging.DEBUG, format=...)",
+    "Five levels from lowest to highest: DEBUG, INFO, WARNING, ERROR, CRITICAL, each with its own function such as logging.debug()",
+    "basicConfig's level hides messages below it; logging.disable(logging.CRITICAL) turns all messages off",
+    "basicConfig(filename=...) writes the log to a file",
+    "Logging is for the programmer and easy to switch off; print() is for the user"
+   ],
+   "order": 35
+  },
+  {
+   "chapter": "5. Debugging",
+   "heading": "Using the debugger: stepping through code and setting breakpoints",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter5.html",
+   "objectives": [
+    "The debugger runs a program one line at a time and shows the variables' values",
+    "Step Over runs the next line, running any function it calls at full speed; Step In goes into the function; Step Out finishes the current function",
+    "Continue runs normally until the program ends or reaches a breakpoint",
+    "A breakpoint, set by clicking a line number in Mu, pauses execution at that line"
+   ],
+   "order": 36
+  },
+  {
+   "chapter": "6. Lists",
+   "heading": "Lists",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter6.html",
+   "order": 37
+  },
+  {
+   "chapter": "6. Lists",
+   "heading": "The list data type: indexes and negative indexes",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter6.html",
+   "objectives": [
+    "A list is an ordered sequence in square brackets, and [] is the empty list",
+    "Indexes start at 0; an index past the end raises IndexError, and a float index raises TypeError",
+    "Negative indexes count from the end: index -1 is the last item",
+    "Lists can contain lists, reached with two indexes one after the other"
+   ],
+   "order": 38
+  },
+  {
+   "chapter": "6. Lists",
+   "heading": "Slices and the len() function",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter6.html",
+   "objectives": [
+    "A slice such as items[1:4] gives a new list of the items at 1, 2 and 3; the end index isn't included",
+    "Leaving out the start or end means from the beginning or to the end, so [:] copies the whole list",
+    "len() gives the number of items"
+   ],
+   "order": 39
+  },
+  {
+   "chapter": "6. Lists",
+   "heading": "Changing values, concatenation, replication and del",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter6.html",
+   "objectives": [
+    "Assigning to an index changes that item",
+    "+ joins lists and * repeats one",
+    "del with an index removes an item, and the items after it move down"
+   ],
+   "order": 40
+  },
+  {
+   "chapter": "6. Lists",
+   "heading": "for loops with lists",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter6.html",
+   "objectives": [
+    "for item in items loops over the items",
+    "for i in range(len(items)) loops over the indexes when you need them"
+   ],
+   "order": 41
+  },
+  {
+   "chapter": "6. Lists",
+   "heading": "The in and not in operators",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter6.html",
+   "objectives": [
+    "in and not in check whether a value is in a list and give True or False"
+   ],
+   "order": 42
+  },
+  {
+   "chapter": "6. Lists",
+   "heading": "The multiple assignment trick",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter6.html",
+   "objectives": [
+    "a, b, c = items unpacks a three-item list into variables in one line",
+    "The number of variables must match the number of items, or Python raises ValueError"
+   ],
+   "order": 43
+  },
+  {
+   "chapter": "6. Lists",
+   "heading": "Enumerating list items",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter6.html",
+   "objectives": [
+    "enumerate() gives the index and the item on each pass: for index, item in enumerate(items)"
+   ],
+   "order": 44
+  },
+  {
+   "chapter": "6. Lists",
+   "heading": "Random selection and ordering",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter6.html",
+   "objectives": [
+    "random.choice() returns one random item from a list",
+    "random.shuffle() reorders a list in place and doesn't return a new list"
+   ],
+   "order": 45
+  },
+  {
+   "chapter": "6. Lists",
+   "heading": "Augmented assignment operators",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter6.html",
+   "objectives": [
+    "x += 1 is short for x = x + 1; there are also -=, *=, /= and %=",
+    "+= and *= also work on strings and lists"
+   ],
+   "order": 46
+  },
+  {
+   "chapter": "6. Lists",
+   "heading": "List methods for finding, adding, removing, sorting and reversing values",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter6.html",
+   "objectives": [
+    "index() returns the first position of a value, and raises ValueError if it's missing",
+    "append() adds to the end; insert(i, value) adds at a position",
+    "remove() deletes the first matching value, and raises ValueError if it's missing",
+    "sort() sorts in place, with reverse=True for descending and key=str.lower to ignore case; it can't sort a mix of numbers and strings",
+    "These methods change the list in place and return None, so assigning a list to the result of its own sort() loses the list",
+    "reverse() reverses a list in place"
+   ],
+   "order": 47
+  },
+  {
+   "chapter": "6. Lists",
+   "heading": "Short-circuiting Boolean operators",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter6.html",
+   "objectives": [
+    "and doesn't evaluate its right side when the left side is False; or doesn't when the left side is True (short-circuiting)",
+    "This makes it safe to check a list's length and then index it in the same condition"
+   ],
+   "order": 48
+  },
+  {
+   "chapter": "6. Lists",
+   "heading": "Mutable and immutable data types",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter6.html",
+   "objectives": [
+    "Lists are mutable; strings and tuples are immutable, and assigning to a character of a string raises TypeError",
+    "To change a string, build a new one from slices and concatenation",
+    "Reassigning a variable replaces its value, while methods like append() modify the list itself"
+   ],
+   "order": 49
+  },
+  {
+   "chapter": "6. Lists",
+   "heading": "The tuple data type, and converting with list() and tuple()",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter6.html",
+   "objectives": [
+    "Tuples use parentheses and can't be changed",
+    "A one-item tuple needs a trailing comma; without it the parentheses just group a value",
+    "list() and tuple() convert between them, and list() on a string gives a list of its characters"
+   ],
+   "order": 50
+  },
+  {
+   "chapter": "6. Lists",
+   "heading": "References: passing lists to functions, copy() and deepcopy()",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter6.html",
+   "objectives": [
+    "Variables hold references to lists, so assigning a list to another variable doesn't copy it",
+    "A function that changes a list passed to it changes the caller's list",
+    "copy.copy() makes a separate copy; copy.deepcopy() also copies the lists inside a list"
+   ],
+   "order": 51
+  },
+  {
+   "chapter": "6. Lists",
+   "heading": "Short programs: a Magic 8 Ball with a list, and a Matrix-style screensaver",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter6.html",
+   "objectives": [
+    "Short programs that pick items from a list at random and print them in a loop"
+   ],
+   "order": 52
+  },
+  {
+   "chapter": "7. Dictionaries and Structuring Data",
+   "heading": "Dictionaries and Structuring Data",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter7.html",
+   "order": 53
+  },
+  {
+   "chapter": "7. Dictionaries and Structuring Data",
+   "heading": "Dictionary basics: keys, values and key-value pairs",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter7.html",
+   "objectives": [
+    "A dictionary maps keys to values inside curly braces",
+    "Keys can be many types, not just integers, and don't need to start at 0",
+    "d[key] gets a value; a key that isn't there raises KeyError"
+   ],
+   "order": 54
+  },
+  {
+   "chapter": "7. Dictionaries and Structuring Data",
+   "heading": "Dictionaries compared with lists",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter7.html",
+   "objectives": [
+    "Two dictionaries with the same key-value pairs are equal, whatever the order",
+    "Dictionaries can't be sliced like lists",
+    "Lists are reached by integer position; dictionaries by key"
+   ],
+   "order": 55
+  },
+  {
+   "chapter": "7. Dictionaries and Structuring Data",
+   "heading": "The in and not in operators with dictionaries",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter7.html",
+   "objectives": [
+    "key in d checks the keys, the same as key in d.keys()",
+    "value in d.values() checks the values"
+   ],
+   "order": 56
+  },
+  {
+   "chapter": "7. Dictionaries and Structuring Data",
+   "heading": "The keys(), values() and items() methods",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter7.html",
+   "objectives": [
+    "keys(), values() and items() give list-like values you can loop over but not change",
+    "list(d.keys()) makes a real list",
+    "for k, v in d.items(): unpacks each key-value pair"
+   ],
+   "order": 57
+  },
+  {
+   "chapter": "7. Dictionaries and Structuring Data",
+   "heading": "The get() method",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter7.html",
+   "objectives": [
+    "get(key, fallback) returns the fallback instead of raising KeyError when the key is missing"
+   ],
+   "order": 58
+  },
+  {
+   "chapter": "7. Dictionaries and Structuring Data",
+   "heading": "The setdefault() method",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter7.html",
+   "objectives": [
+    "setdefault(key, value) sets the value only if the key is missing, and returns the key's value either way",
+    "Counting characters: setdefault(character, 0), then add 1",
+    "pprint.pprint() prints a dictionary in a readable layout"
+   ],
+   "order": 59
+  },
+  {
+   "chapter": "7. Dictionaries and Structuring Data",
+   "heading": "Project: an interactive chessboard simulator",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter7.html",
+   "objectives": [
+    "The board is a dictionary with square names as keys and short strings naming each piece's color and type as values",
+    "Moving a piece copies the value to the new square and deletes the old key",
+    "Data structures model real things; this program doesn't enforce the rules of chess"
+   ],
+   "order": 60
+  },
+  {
+   "chapter": "7. Dictionaries and Structuring Data",
+   "heading": "Nested dictionaries and lists",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter7.html",
+   "objectives": [
+    "Dictionaries and lists can contain each other",
+    "Nested data is read with nested loops or items()"
+   ],
+   "order": 61
+  },
+  {
+   "chapter": "8. Strings and Text Editing",
+   "heading": "Strings and Text Editing",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter8.html",
+   "order": 62
+  },
+  {
+   "chapter": "8. Strings and Text Editing",
+   "heading": "String literals and quotes",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter8.html",
+   "objectives": [
+    "Strings can use single or double quotes; double quotes let a string contain a single quote without escaping"
+   ],
+   "order": 63
+  },
+  {
+   "chapter": "8. Strings and Text Editing",
+   "heading": "Escape characters",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter8.html",
+   "objectives": [
+    "A backslash starts an escape character: \\' and \\\" for quotes, \\n for a newline, \\t for a tab, \\\\ for a backslash"
+   ],
+   "order": 64
+  },
+  {
+   "chapter": "8. Strings and Text Editing",
+   "heading": "Raw strings",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter8.html",
+   "objectives": [
+    "An r before the opening quote makes a raw string, where backslashes are kept as they are; handy for Windows paths"
+   ],
+   "order": 65
+  },
+  {
+   "chapter": "8. Strings and Text Editing",
+   "heading": "Multiline strings",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter8.html",
+   "objectives": [
+    "Triple quotes make a string that spans several lines, newlines included",
+    "Triple-quoted strings are also used as multiline comments"
+   ],
+   "order": 66
+  },
+  {
+   "chapter": "8. Strings and Text Editing",
+   "heading": "Indexing and slicing strings",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter8.html",
+   "objectives": [
+    "Strings are indexed and sliced like lists, including negative indexes",
+    "Slicing doesn't change the original string"
+   ],
+   "order": 67
+  },
+  {
+   "chapter": "8. Strings and Text Editing",
+   "heading": "The in and not in operators with strings",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter8.html",
+   "objectives": [
+    "in and not in check for a substring, and the check is case-sensitive"
+   ],
+   "order": 68
+  },
+  {
+   "chapter": "8. Strings and Text Editing",
+   "heading": "f-strings",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter8.html",
+   "objectives": [
+    "f-strings put expressions in braces: f'My name is {name}'",
+    "{{ and }} give literal braces",
+    "Older styles still seen: '%s' % value and the format() method"
+   ],
+   "order": 69
+  },
+  {
+   "chapter": "8. Strings and Text Editing",
+   "heading": "String methods for case and validation",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter8.html",
+   "objectives": [
+    "upper() and lower() return new strings and leave the original unchanged",
+    "isupper() and islower() need at least one letter to be True",
+    "isalpha(), isalnum(), isdecimal(), isspace() and istitle() check what a string contains, which helps validate input",
+    "String methods can be chained, each working on the result of the one before"
+   ],
+   "order": 70
+  },
+  {
+   "chapter": "8. Strings and Text Editing",
+   "heading": "startswith() and endswith()",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter8.html",
+   "objectives": [
+    "startswith() and endswith() check how a string begins and ends"
+   ],
+   "order": 71
+  },
+  {
+   "chapter": "8. Strings and Text Editing",
+   "heading": "join() and split()",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter8.html",
+   "objectives": [
+    "join() is called on the separator string and takes a list of strings",
+    "split() splits on whitespace by default, or on a separator such as '\\n'"
+   ],
+   "order": 72
+  },
+  {
+   "chapter": "8. Strings and Text Editing",
+   "heading": "Justifying text with rjust(), ljust() and center()",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter8.html",
+   "objectives": [
+    "rjust(), ljust() and center() pad a string to a width, with an optional fill character"
+   ],
+   "order": 73
+  },
+  {
+   "chapter": "8. Strings and Text Editing",
+   "heading": "Removing whitespace with strip(), lstrip() and rstrip()",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter8.html",
+   "objectives": [
+    "strip() removes whitespace from both ends, lstrip() and rstrip() from one end",
+    "An argument gives the characters to remove from the ends instead"
+   ],
+   "order": 74
+  },
+  {
+   "chapter": "8. Strings and Text Editing",
+   "heading": "ord() and chr()",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter8.html",
+   "objectives": [
+    "ord('A') is 65 and chr(65) is 'A': every character has a number code"
+   ],
+   "order": 75
+  },
+  {
+   "chapter": "8. Strings and Text Editing",
+   "heading": "Copying and pasting with the pyperclip module",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter8.html",
+   "objectives": [
+    "pyperclip.copy() and pyperclip.paste() use the clipboard; the module is installed separately"
+   ],
+   "order": 76
+  },
+  {
+   "chapter": "8. Strings and Text Editing",
+   "heading": "Projects: adding bullets to wiki markup, and a Pig Latin translator",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter8.html",
+   "objectives": [
+    "Transforming clipboard text line by line: split on newlines, change each line in a loop, join and copy back",
+    "Transforming words letter by letter while keeping punctuation and capitalization"
+   ],
+   "order": 77
+  },
+  {
+   "chapter": "9. Text Pattern Matching with Regular Expressions",
+   "heading": "Text Pattern Matching with Regular Expressions",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter9.html",
+   "order": 78
+  },
+  {
+   "chapter": "10. Reading and Writing Files",
+   "heading": "Reading and Writing Files",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter10.html",
+   "order": 79
+  },
+  {
+   "chapter": "10. Reading and Writing Files",
+   "heading": "Files and file paths",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter10.html",
+   "objectives": [
+    "Windows separates folders with backslashes; macOS and Linux use forward slashes",
+    "pathlib's Path objects work on every system, and forward slashes are the best practice"
+   ],
+   "order": 80
+  },
+  {
+   "chapter": "10. Reading and Writing Files",
+   "heading": "The pathlib module",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter10.html",
+   "objectives": [
+    "from pathlib import Path; parts of a path are joined with the / operator",
+    "One of the first two values joined with / must be a Path object; joining two plain strings with / is an error",
+    "Path.home() is the user's home folder"
+   ],
+   "order": 81
+  },
+  {
+   "chapter": "10. Reading and Writing Files",
+   "heading": "The current working directory",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter10.html",
+   "objectives": [
+    "Path.cwd() (or os.getcwd()) gives the current working directory, and os.chdir() changes it",
+    "Paths that don't start at the root folder are relative to the working directory"
+   ],
+   "order": 82
+  },
+  {
+   "chapter": "10. Reading and Writing Files",
+   "heading": "Absolute and relative paths",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter10.html",
+   "objectives": [
+    "An absolute path starts at the root folder; a relative path is relative to the working directory",
+    ". means this folder and .. the parent folder",
+    "is_absolute() checks a path, and Path.cwd() / a relative path or absolute() makes it absolute"
+   ],
+   "order": 83
+  },
+  {
+   "chapter": "10. Reading and Writing Files",
+   "heading": "Creating new folders",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter10.html",
+   "objectives": [
+    "os.makedirs() creates every missing folder in a path",
+    "Path.mkdir() creates one folder, and mkdir(parents=True) creates missing parents too"
+   ],
+   "order": 84
+  },
+  {
+   "chapter": "10. Reading and Writing Files",
+   "heading": "Getting file and folder details",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter10.html",
+   "objectives": [
+    "A path's parts: anchor, parent, name, stem and suffix (and drive on Windows), plus the parts tuple",
+    "The parent is the directory name and the name is the base name",
+    "stat().st_size gives the size in bytes, and st_mtime the last-modified time"
+   ],
+   "order": 85
+  },
+  {
+   "chapter": "10. Reading and Writing Files",
+   "heading": "Finding files with glob patterns",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter10.html",
+   "objectives": [
+    "Glob patterns: * matches any text and ? one character, as in p.glob('*.txt')",
+    "glob() returns a generator, so loop over it or wrap it in list()"
+   ],
+   "order": 86
+  },
+  {
+   "chapter": "10. Reading and Writing Files",
+   "heading": "Checking whether files and folders exist",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter10.html",
+   "objectives": [
+    "exists(), is_file() and is_dir() check what a path points to"
+   ],
+   "order": 87
+  },
+  {
+   "chapter": "10. Reading and Writing Files",
+   "heading": "Opening files with open()",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter10.html",
+   "objectives": [
+    "open() returns a file object; its modes are 'r' (read, the default), 'w' (write) and 'a' (append)",
+    "Pass encoding='utf-8' when opening text files"
+   ],
+   "order": 88
+  },
+  {
+   "chapter": "10. Reading and Writing Files",
+   "heading": "Reading file contents",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter10.html",
+   "objectives": [
+    "read() returns the whole file as one string; readlines() returns a list of lines, each ending in \\n",
+    "Path.read_text() reads a text file in one call"
+   ],
+   "order": 89
+  },
+  {
+   "chapter": "10. Reading and Writing Files",
+   "heading": "Writing to files",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter10.html",
+   "objectives": [
+    "Write mode overwrites an existing file and append mode adds to its end; both create the file if it's missing",
+    "write() doesn't add a newline the way print() does",
+    "Path.write_text() writes a file in one call and returns the number of characters written"
+   ],
+   "order": 90
+  },
+  {
+   "chapter": "10. Reading and Writing Files",
+   "heading": "Closing files, and the with statement",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter10.html",
+   "objectives": [
+    "Every opened file should be closed",
+    "with open(...) as f: closes the file automatically when the block ends"
+   ],
+   "order": 91
+  },
+  {
+   "chapter": "10. Reading and Writing Files",
+   "heading": "Saving variables with the shelve module",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter10.html",
+   "objectives": [
+    "shelve.open() saves variables in binary files that work like a dictionary",
+    "A shelf can be read and written once it's open; list() turns its keys() and values() into lists"
+   ],
+   "order": 92
+  },
+  {
+   "chapter": "10. Reading and Writing Files",
+   "heading": "Project: generating random quiz files",
+   "level": 1,
+   "url": "https://automatetheboringstuff.com/3e/chapter10.html",
+   "objectives": [
+    "The project combines a dictionary, random.shuffle() and random.sample(), and writes many files in a loop"
+   ],
+   "order": 93
+  },
+  {
+   "chapter": "11. Organizing Files",
+   "heading": "Organizing Files",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter11.html",
+   "order": 94
+  },
+  {
+   "chapter": "12. Designing and Deploying Command Line Programs",
+   "heading": "Designing and Deploying Command Line Programs",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter12.html",
+   "order": 95
+  },
+  {
+   "chapter": "13. Web Scraping",
+   "heading": "Web Scraping",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter13.html",
+   "order": 96
+  },
+  {
+   "chapter": "14. Excel Spreadsheets",
+   "heading": "Excel Spreadsheets",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter14.html",
+   "order": 97
+  },
+  {
+   "chapter": "15. Google Sheets",
+   "heading": "Google Sheets",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter15.html",
+   "order": 98
+  },
+  {
+   "chapter": "16. SQLite Databases",
+   "heading": "SQLite Databases",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter16.html",
+   "order": 99
+  },
+  {
+   "chapter": "17. PDF and Word Documents",
+   "heading": "PDF and Word Documents",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter17.html",
+   "order": 100
+  },
+  {
+   "chapter": "18. CSV, JSON, and XML Files",
+   "heading": "CSV, JSON, and XML Files",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter18.html",
+   "order": 101
+  },
+  {
+   "chapter": "19. Keeping Time, Scheduling Tasks, and Launching Programs",
+   "heading": "Keeping Time, Scheduling Tasks, and Launching Programs",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter19.html",
+   "order": 102
+  },
+  {
+   "chapter": "20. Sending Email, Texts, and Push Notifications",
+   "heading": "Sending Email, Texts, and Push Notifications",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter20.html",
+   "order": 103
+  },
+  {
+   "chapter": "21. Making Graphs and Manipulating Images",
+   "heading": "Making Graphs and Manipulating Images",
+   "level": 0,
+   "url": "https://automatetheboringstuff.com/3e/chapter21.html",
+   "order": 104
+  }
+ ]
+}

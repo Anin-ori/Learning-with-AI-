@@ -1,0 +1,175 @@
+
+/* ---------- Knowledge map: a night-sky canvas where brightness is progress. The canvas is deliberately dark in both
+   themes; the side panel follows the app's theme. Everything is scoped to #kmap. ---------- */
+.topbar-right { flex-wrap: wrap; }
+body.view-map .layout { display: none; }
+#kmap {
+  --sky: #0b0c0f; --sky-2: #14171c; --sky-line: rgba(255,255,255,.08); --star: #f4f2ec; --star-dim: rgba(255,255,255,.16);
+  --ink-on-sky: rgba(255,255,255,.88); --muted-on-sky: rgba(255,255,255,.46); --glass: rgba(255,255,255,.06); --glass-line: rgba(255,255,255,.12);
+  --k-route: #ff5b4d; --k-map: var(--surface); --k-ink: var(--fg); --k-muted: var(--muted); --k-line: var(--line);
+  --k-good: var(--core); --k-good-soft: var(--core-soft); --k-warn: var(--warn); --k-warn-soft: var(--warn-bg); --k-bad: var(--bad); --k-bad-soft: var(--bad-bg);
+  display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 16px; padding-inline: 16px; padding-block: 16px;
+  height: max(620px, calc(100vh - 58px)); font-size: 14px; line-height: 1.5;
+}
+#kmap[hidden] { display: none; }
+#kmap button { font: inherit; font-weight: 400; border: 0; border-radius: 0; padding: 0; background: none; color: inherit; cursor: pointer; }
+#kmap h2, #kmap h3, #kmap h4, #kmap p { margin: 0; }
+#kmap a { color: inherit; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); }
+#kmap code { font-family: var(--font-mono); font-size: .9em; }
+
+/* the sky */
+#kmap .km-mapwrap { position: relative; min-width: 0; border-radius: 22px; overflow: hidden; color: var(--ink-on-sky);
+  background: radial-gradient(120% 90% at 50% 42%, var(--sky-2) 0%, var(--sky) 62%); border: 1px solid #1c1f25; }
+#kmap .km-mapwrap::after { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit; box-shadow: inset 0 0 120px rgba(0,0,0,.55); }
+#kmap svg.km-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
+#kmap svg.km-svg:active { cursor: grabbing; }
+#kmap .km-bar { position: absolute; z-index: 2; top: 14px; left: 14px; right: 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; pointer-events: none; }
+#kmap .km-bar > * { pointer-events: auto; }
+#kmap .km-glass { background: var(--glass); border: 1px solid var(--glass-line); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-radius: 999px; color: var(--ink-on-sky); }
+#kmap .km-search { flex: 0 1 260px; min-width: 0; display: flex; align-items: center; gap: 8px; padding: 0 14px; height: 36px; }
+#kmap .km-search svg { flex: none; opacity: .55; }
+#kmap .km-search input { width: 100%; border: 0; background: transparent; color: var(--ink-on-sky); font: inherit; font-size: 13.5px; outline: none; padding: 0; }
+#kmap .km-search input::placeholder { color: var(--muted-on-sky); }
+#kmap .km-search:focus-within { border-color: rgba(255,255,255,.35); }
+#kmap .km-spacer { flex: 1; }
+#kmap .km-gbtn { height: 36px; padding: 0 14px; font-size: 13px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+#kmap .km-gbtn:hover { background: rgba(255,255,255,.1); }
+#kmap .km-gbtn:focus-visible, #kmap .km-search:focus-within { outline: 2px solid rgba(255,255,255,.6); outline-offset: 2px; }
+#kmap .km-flashbtn i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,.25); }
+#kmap .km-flashbtn[aria-pressed="true"] i { background: #fff; box-shadow: 0 0 8px 2px rgba(255,255,255,.85); }
+#kmap .km-focus { display: none; }
+#kmap .km-focus.on { display: inline-flex; align-items: center; gap: 10px; padding: 0 6px 0 14px; height: 36px; font-size: 13px; max-width: 100%; }
+#kmap .km-focus span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#kmap .km-focus button { padding: 4px 10px; border-radius: 999px; background: rgba(255,255,255,.12); font-size: 12.5px; }
+#kmap .km-legend { position: absolute; z-index: 2; left: 14px; bottom: 14px; display: flex; flex-wrap: wrap; gap: 4px 16px; max-width: calc(100% - 28px);
+  padding: 8px 14px; border-radius: 14px; font-size: 12px; color: var(--muted-on-sky); pointer-events: none; }
+#kmap .km-legend span { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+#kmap .km-tip { position: absolute; z-index: 3; pointer-events: none; padding: 8px 11px; font-size: 12px; max-width: 260px; display: none; border-radius: 12px;
+  background: rgba(16,18,22,.92); border: 1px solid var(--glass-line); color: var(--ink-on-sky); box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+#kmap .km-tip b { display: block; font-size: 13px; font-weight: 500; }
+#kmap .km-tip span { color: var(--muted-on-sky); }
+
+/* marks */
+#kmap .km-ring { fill: none; stroke: rgba(255,255,255,.035); stroke-width: 1; }
+#kmap .km-blk { fill: none; stroke: var(--sky-line); stroke-width: 1; transition: opacity .25s, stroke .25s; }
+#kmap .km-blk.lit { stroke: rgba(255,255,255,.55); stroke-width: 1.3; marker-end: url(#km-arr); }
+#kmap .km-ball { cursor: pointer; transition: opacity .25s; }
+#kmap .km-body { fill: #111317; stroke: rgba(255,255,255,.13); stroke-width: 1; transition: fill .3s, stroke .3s; }
+#kmap .km-ball.st-ready > .km-body { fill: #171a1f; stroke: rgba(255,255,255,.82); stroke-width: 1.4; }
+#kmap .km-ball.st-learned > .km-body { fill: var(--star); stroke: #fff; stroke-width: 1; filter: drop-shadow(0 0 10px rgba(255,255,255,.28)); }
+#kmap .km-ball:hover > .km-body { stroke: #fff; }
+#kmap .km-halo { fill: none; stroke: none; pointer-events: none; }
+#kmap .km-ball.route > .km-halo { stroke: var(--k-route); stroke-width: 1.1; stroke-opacity: .5; }
+#kmap .km-ball.next > .km-halo { stroke-width: 2.4; stroke-opacity: 1; }
+#kmap .km-glow, #kmap .km-wash { fill: #fff; opacity: 0; pointer-events: none; }
+#kmap.km-flashon .km-ball.hot > .km-glow { animation: kmGlow 2.2s ease-in-out infinite; filter: blur(10px); }
+#kmap.km-flashon .km-ball.hot > .km-body { stroke: #fff; stroke-width: 1.8; }
+@keyframes kmGlow { 0%, 100% { opacity: .08; } 50% { opacity: .75; } }
+@media (prefers-reduced-motion: reduce) { #kmap.km-flashon .km-ball.hot > .km-glow { opacity: .5; } }
+#kmap .km-dot { pointer-events: none; transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+#kmap .km-dot .km-core { fill: rgba(255,255,255,.2); stroke: none; transition: fill .3s; }
+#kmap .km-dot.st-ready .km-core { fill: var(--sky); stroke: rgba(255,255,255,.9); stroke-width: 1.2; }
+#kmap .km-dot.st-learned .km-core { fill: #fff; }
+#kmap .km-ball.st-learned .km-dot .km-core { fill: rgba(11,12,15,.32); stroke: none; }
+#kmap .km-ball.open .km-dot .km-core { fill: rgba(255,255,255,.22); }
+#kmap .km-ball.open .km-dot.st-ready .km-core { fill: var(--sky); stroke: rgba(255,255,255,.9); stroke-width: 1.3; }
+#kmap .km-ball.open .km-dot.st-learned .km-core { fill: #fff; filter: drop-shadow(0 0 5px rgba(255,255,255,.6)); }
+#kmap .km-ball.open .km-dot { pointer-events: auto; cursor: pointer; }
+#kmap .km-ball.open .km-dot.route .km-halo { stroke: var(--k-route); stroke-width: 1; stroke-opacity: .55; }
+#kmap .km-ball.open .km-dot.next .km-halo { stroke-width: 2; stroke-opacity: 1; }
+#kmap .km-dot.sel .km-core { stroke: #fff; stroke-width: 2; }
+#kmap .km-dot text { display: none; fill: var(--ink-on-sky); font-family: var(--font-body); font-weight: 450; paint-order: stroke; stroke: var(--sky); stroke-linejoin: round; }
+#kmap .km-ball.open .km-dot text { display: inline; }
+#kmap .km-dot.st-locked text { fill: var(--muted-on-sky); }
+#kmap .km-blab { fill: var(--ink-on-sky); font-family: var(--font-body); font-weight: 500; letter-spacing: .01em; paint-order: stroke; stroke: var(--sky); stroke-linejoin: round; pointer-events: none; }
+#kmap .km-ball.st-locked .km-blab { fill: var(--muted-on-sky); }
+#kmap .km-prog { fill: var(--muted-on-sky); font-family: var(--font-mono); pointer-events: none; paint-order: stroke; stroke: var(--sky); stroke-linejoin: round; }
+#kmap .km-ball.open .km-blab { fill: var(--sky); stroke: none; }
+#kmap .km-ball.open.st-learned .km-blab, #kmap .km-ball.open .km-blab { fill: #fff; }
+#kmap .km-ball.open.st-learned .km-blab { fill: var(--sky); }
+#kmap .km-ball.open .km-prog { display: none; }
+#kmap .km-bcount { display: none; }
+#kmap .km-svg.dimmed .km-ball:not(.lit) { opacity: .16; }
+#kmap .km-svg.dimmed .km-blk:not(.lit) { opacity: .2; }
+
+/* the panel */
+#kmap .km-panel { min-width: 0; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
+#kmap .km-tabs { display: flex; gap: 2px; margin: 14px 14px 0; padding: 3px; border-radius: 999px; background: var(--sunk); }
+#kmap .km-tabs button { flex: 1; padding: 7px 8px; border-radius: 999px; color: var(--muted); font-weight: 500; font-size: 13px; white-space: nowrap; }
+#kmap .km-tabs button[aria-selected="true"] { background: var(--surface); color: var(--fg); box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 0 0 1px var(--line); }
+#kmap .km-tabs .ct { display: none; }
+#kmap .km-pane { overflow-y: auto; padding: 22px 22px 28px; flex: 1; min-height: 0; }
+#kmap .km-pane h2 { font-family: var(--font-display); font-weight: 400; font-size: 30px; line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 4px; text-wrap: balance; }
+#kmap .km-pane h3 { font: 500 11px/1.3 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 26px 0 10px; }
+#kmap .km-pane p { margin: 0 0 10px; }
+#kmap .km-small { font-size: 12.5px; color: var(--muted); }
+#kmap .km-eyebrow { font: 500 11px/1.3 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+#kmap .km-back { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
+#kmap .km-back:hover { color: var(--fg); }
+#kmap .km-big { display: flex; align-items: baseline; gap: 8px; margin: 18px 0 8px; }
+#kmap .km-big b { font: 400 44px/1 var(--font-display); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+#kmap .km-big span { color: var(--muted); font-size: 13px; }
+#kmap .km-bar2 { height: 4px; border-radius: 999px; background: var(--sunk); overflow: hidden; }
+#kmap .km-bar2 i { display: block; height: 100%; background: var(--fg); border-radius: 999px; }
+#kmap .km-trio { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 10px; font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+#kmap .km-trio b { color: var(--fg); font-weight: 500; }
+#kmap .km-note { border: 1px dashed var(--line); border-radius: 14px; padding: 12px 14px; font-size: 13px; display: grid; gap: 10px; margin: 18px 0 0; color: var(--muted); }
+#kmap .km-note b { color: var(--fg); font-weight: 500; }
+#kmap .km-btn { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 14px; font-size: 13px; color: var(--fg); }
+#kmap .km-btn:hover { border-color: color-mix(in srgb, var(--fg) 40%, var(--line)); }
+#kmap .km-btn.solid { background: var(--fg); border-color: var(--fg); color: var(--bg); font-weight: 500; }
+#kmap .km-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+#kmap .km-picks { display: grid; gap: 2px; }
+#kmap .km-pick { display: grid; grid-template-columns: 14px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 11px 12px; margin: 0 -12px; border-radius: 12px; text-align: left; }
+#kmap .km-pick:hover { background: var(--sunk); }
+#kmap .km-pick i { width: 10px; height: 10px; border-radius: 50%; background: var(--fg); justify-self: center; }
+#kmap .km-pick.hot i { background: var(--fg); box-shadow: 0 0 0 3px color-mix(in srgb, var(--fg) 12%, transparent), 0 0 12px 3px color-mix(in srgb, var(--fg) 28%, transparent); }
+#kmap .km-pick.next i { background: transparent; box-shadow: inset 0 0 0 2px var(--k-route); }
+#kmap .km-pick b { font-weight: 500; font-size: 14px; }
+#kmap .km-pick span { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+#kmap .km-links { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 13px; }
+#kmap .km-links button { text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--fg) 25%, transparent); text-underline-offset: 3px; }
+#kmap .km-links button.next { text-decoration-color: var(--k-route); }
+#kmap .km-foot { margin-top: 26px; padding-top: 16px; border-top: 1px solid var(--line); display: grid; gap: 10px; font-size: 12.5px; color: var(--muted); }
+#kmap .km-card { border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 10px; margin: 14px 0; }
+#kmap .km-status { font-weight: 500; font-size: 13.5px; }
+#kmap .km-status .r { color: var(--k-route); font-weight: 400; }
+#kmap .km-ex { display: flex; flex-wrap: wrap; gap: 6px; }
+#kmap .km-pill { border: 1px solid var(--line); border-radius: 999px; padding: 3px 11px; font-size: 12.5px; background: var(--surface); }
+#kmap .km-pill:hover { border-color: color-mix(in srgb, var(--fg) 40%, var(--line)); }
+#kmap .km-pill.next { box-shadow: inset 0 0 0 1px var(--k-route); border-color: var(--k-route); }
+#kmap .km-pill.hot { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+#kmap .km-rows { display: grid; gap: 2px; }
+#kmap .km-prow { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 6px 0; border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent); }
+#kmap .km-prow:last-child { border-bottom: 0; }
+#kmap .km-prow input { accent-color: var(--fg); width: 16px; height: 16px; margin: 0; }
+#kmap .km-nm { text-align: left; color: var(--fg); }
+#kmap .km-nm:hover { text-decoration: underline; text-underline-offset: 3px; }
+#kmap .km-tag { font: 400 11px/1 var(--font-mono); padding: 4px 7px; border-radius: 999px; white-space: nowrap; color: var(--muted); background: var(--sunk); }
+#kmap .km-tag.learned { background: var(--fg); color: var(--bg); }
+#kmap .km-tag.route { color: var(--k-route); background: transparent; box-shadow: inset 0 0 0 1px var(--k-route); }
+#kmap .km-inline { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+#kmap .km-srcs { display: grid; gap: 10px; }
+#kmap .km-src { display: grid; gap: 2px; }
+#kmap .km-src b { font-size: 13px; font-weight: 500; }
+#kmap .km-src a, #kmap .km-src span { font-size: 13px; overflow-wrap: anywhere; color: var(--muted); }
+#kmap .km-empty { color: var(--muted); }
+#kmap details.km-more { margin-top: 18px; border-top: 1px solid var(--line); padding-top: 14px; }
+#kmap details.km-more > summary { cursor: pointer; font-size: 13px; font-weight: 500; }
+#kmap .km-prob { border-top: 1px solid var(--line); padding: 14px 0 12px; display: grid; gap: 6px; font-size: 13px; }
+#kmap .km-prob .head { display: flex; align-items: baseline; gap: 10px; }
+#kmap .km-prob .num { font: 400 22px/1 var(--font-display); font-variant-numeric: tabular-nums; min-width: 2.6ch; }
+#kmap .km-prob h4 { font-size: 14px; font-weight: 500; line-height: 1.3; }
+#kmap .km-sev { font: 400 10.5px/1 var(--font-mono); padding: 4px 7px; border-radius: 999px; margin-left: auto; white-space: nowrap; align-self: center; background: var(--sunk); color: var(--muted); }
+#kmap .km-sev.core { color: var(--k-bad); }
+#kmap .km-pairs { display: grid; gap: 2px; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+#kmap .km-pairs div { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px; }
+#kmap .km-pairs span:last-child { font-family: var(--font-mono); color: var(--muted); }
+#kmap .km-srclist { display: grid; gap: 12px; }
+#kmap .km-srclist .km-src { border-top: 1px solid var(--line); padding-top: 10px; }
+@media (max-width: 920px) {
+  #kmap { grid-template-columns: minmax(0, 1fr); height: auto; padding-block: 10px 16px; }
+  #kmap .km-mapwrap { height: 72vh; min-height: 460px; }
+  #kmap .km-pane { overflow: visible; }
+  #kmap .km-legend { right: 14px; }
+}

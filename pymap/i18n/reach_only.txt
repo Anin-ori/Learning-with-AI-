@@ -1,0 +1,413 @@
+dq	AI_COPY	Asking Claude isn't allowed on this page. Allow it in the artifact's permissions to use the AI steps.
+dq	AI_COPY	Asking Claude isn't available in this view.
+dq	AI_COPY	Claude declined this request. Try rephrasing it.
+dq	AI_COPY	Claude isn't available for this account.
+dq	AI_COPY	Neither checker answered, even after a retry.
+dq	AI_COPY	No answer came back. Try asking for less at once.
+dq	AI_COPY	That's too much text at once. Shorten it and try again.
+dq	AI_COPY	The answer came back in a form the page couldn't read. Try again.
+dq	AI_COPY	The answer was cut off before it finished, even after a retry.
+dq	AI_COPY	The chapter couldn't be split into parts. Try again.
+dq	AI_COPY	This Claude app is too old for this page. Update it and try again.
+dq	AI_COPY	This page can no longer ask Claude.
+dq	AI_COPY	You've hit a usage or rate limit. Wait a while, then try again.
+dq	AI_COPY	Your session expired. Sign in again, then try again.
+dq	LEVELS	Comfortable with basics
+dq	LEVELS	Just starting
+dq	LEVELS	Ready for intermediate
+dq	PT_STAGES	Checker
+dq	PT_STAGES	Planner
+dq	PT_STAGES	Teacher
+dq	PT_STATUS	can learn now
+dq	PT_STATUS	not reachable yet
+dq	STYLES	Fastest to your goal
+dq	STYLES	One course as-is
+dq	STYLES	Project first
+dq	STYLES	Strong foundation
+dq	TRIAL_POOL	(prints nothing)
+dq	TRIAL_POOL	Ask for a mass in kilograms, as a whole number. Print the matching energy in joules from E = mc², using c = 300,000,000 m/s. Print the result as a whole number.
+dq	TRIAL_POOL	Deep Thought
+dq	TRIAL_POOL	Einstein
+dq	TRIAL_POOL	Fuel Gauge
+dq	TRIAL_POOL	Grocery List
+dq	TRIAL_POOL	Meal Time
+dq	TRIAL_POOL	Read grocery items, one per line, until the user presses Ctrl+D. Then print each item once, in uppercase and in alphabetical order, with the number of times it was entered in front. The same item typed in different capitals counts as one item.
+dq	TRIAL_POOL	breakfast time
+dq	TRIAL_POOL	lunch time
+dq	buildPointLesson	 fix rounds)
+dq	buildPointLesson	 is ready.
+dq	buildPointLesson	 requests, 
+dq	buildPointLesson	 rounds of fixes, so the lesson wasn't shown. Try again.
+dq	buildPointLesson	, fix: 
+dq	buildPointLesson	, problem: 
+dq	buildPointLesson	Checker
+dq	buildPointLesson	Planner
+dq	buildPointLesson	Point lesson delivered: 
+dq	buildPointLesson	Point lesson not delivered: 
+dq	buildPointLesson	Teacher
+dq	buildPointLesson	The checker still found problems after 
+dq	buildPointLesson	The lesson is shown but couldn't be saved.
+dq	buildPointLesson	The lesson wasn't finished. 
+dq	buildPointLesson	Your lesson on 
+dq	caution	 }, text || 
+dq	caution	, { class: 
+dq	codeBlock	Copied
+dq	codeBlock	Copy
+dq	codeBlock	Output
+dq	codeBlock	Selected
+dq	codeBlock	code-wrap output
+dq	errLine	, role: 
+dq	errLine	, { class: 
+dq	extLink	, rel: 
+dq	extLink	, { href, target: 
+dq	head	 }, relabel(eyebrow)), h(
+dq	head	, null, title), lede ? h(
+dq	head	, { class: 
+dq	inline	) nodes.push(h(
+dq	knowledgeMap	 + KD.against.length, title: 
+dq	knowledgeMap	 + S.human_links, title: 
+dq	knowledgeMap	 : bNext(id) ? 
+dq	knowledgeMap	 : f <= 0 ? `<circle class=
+dq	knowledgeMap	 : f >= 1 ? `<circle class=
+dq	knowledgeMap	 and 
+dq	knowledgeMap	 cy=
+dq	knowledgeMap	 data-ball=
+dq	knowledgeMap	 data-clearall=
+dq	knowledgeMap	 data-toggle=
+dq	knowledgeMap	 fill=
+dq	knowledgeMap	 intercept=
+dq	knowledgeMap	 mode=
+dq	knowledgeMap	 of 
+dq	knowledgeMap	 operator=
+dq	knowledgeMap	 points learned
+dq	knowledgeMap	 route
+dq	knowledgeMap	 seed=
+dq	knowledgeMap	 slope=
+dq	knowledgeMap	 stroke-width=
+dq	knowledgeMap	 stroke=
+dq	knowledgeMap	 transform=
+dq	knowledgeMap	 type=
+dq	knowledgeMap	 values=
+dq	knowledgeMap	 · glowing on the map
+dq	knowledgeMap	 · lists prerequisites, used as the human check
+dq	knowledgeMap	 · on the AI route
+dq	knowledgeMap	${Math.round(100 * f)}% of points learned
+dq	knowledgeMap	(prefers-reduced-motion: reduce)
+dq	knowledgeMap	) + (HOT.has(b.id) ? 
+dq	knowledgeMap	) + (bNext(b.id) ? 
+dq	knowledgeMap	) + (ks.open === b.id ? 
+dq	knowledgeMap	) + (ks.point === d.id ? 
+dq	knowledgeMap	) + (pNext(d.id) ? 
+dq	knowledgeMap	) + `</div><details class=
+dq	knowledgeMap	), gB = root.append(
+dq	knowledgeMap	), gL = root.append(
+dq	knowledgeMap	), l2 = w.slice(i).join(
+dq	knowledgeMap	).data((b) => b.dots).join(
+dq	knowledgeMap	); st.forEach(([o, c]) => m.append(
+dq	knowledgeMap	)}</div>` : 
+dq	knowledgeMap	)}</div>` : `<p class=
+dq	knowledgeMap	)}<div><span class=
+dq	knowledgeMap	, (d) => Math.cos(d.a) * 17 / K).attr(
+dq	knowledgeMap	, -DIAL + 22 + 14 / K).attr(
+dq	knowledgeMap	, 1).style(
+dq	knowledgeMap	, DIAL).attr(
+dq	knowledgeMap	, R + (5 + 13 * ts) / K); lab.selectAll(
+dq	knowledgeMap	, R).attr(
+dq	knowledgeMap	, ks.open ? 
+dq	knowledgeMap	, o).attr(
+dq	knowledgeMap	, title: 
+dq	knowledgeMap	, y0); lab.selectAll(
+dq	knowledgeMap	/></feComponentTransfer><feComposite in2=
+dq	knowledgeMap	/></filter></defs><g filter=
+dq	knowledgeMap	/><circle cx=
+dq	knowledgeMap	/><feBlend in2=
+dq	knowledgeMap	/><feColorMatrix type=
+dq	knowledgeMap	/><feComponentTransfer><feFuncR type=
+dq	knowledgeMap	/><feFuncA type=
+dq	knowledgeMap	/><feFuncB type=
+dq	knowledgeMap	/><feFuncG type=
+dq	knowledgeMap	/>` : `<path class=
+dq	knowledgeMap	>${st === 
+dq	knowledgeMap	>Clear this topic</button>` : 
+dq	knowledgeMap	>books putting the left one first : the right one first</span><span></span></div></div>` : 
+dq	knowledgeMap	>on the suggested route</span>` : 
+dq	knowledgeMap	Balls holding links against most books' order
+dq	knowledgeMap	Balls the books order differently
+dq	knowledgeMap	Balls touched by Exercism's human links
+dq	knowledgeMap	Balls with indexing and slicing
+dq	knowledgeMap	Balls with points in 0–2 sources
+dq	knowledgeMap	Balls with points the sources corrected
+dq	knowledgeMap	Exercism
+dq	knowledgeMap	MIT 6.100L
+dq	knowledgeMap	Map: example progress loaded
+dq	knowledgeMap	Map: progress cleared
+dq	knowledgeMap	Needed by route points such as 
+dq	knowledgeMap	None of its points are on the suggested route.
+dq	knowledgeMap	Not reachable yet
+dq	knowledgeMap	Python Tutorial
+dq	knowledgeMap	Taught in 
+dq	knowledgeMap	Too few books teach these points for a same-chapter figure.
+dq	knowledgeMap	grid-template-columns:minmax(0,1fr) auto
+dq	knowledgeMap	km-ball st-
+dq	knowledgeMap	km-btn solid
+dq	knowledgeMap	km-dot st-
+dq	knowledgeMap	km-pick${HOT.has(id) ? 
+dq	knowledgeMap	km-pill${bNext(id) ? 
+dq	knowledgeMap	km-ping p2
+dq	knowledgeMap	km-sev ${p.sev}
+dq	knowledgeMap	km-tag ${pNext(p) ? 
+dq	knowledgeMap	km-tag ${pStatus(p)}
+dq	knowledgeMap	needed first
+dq	knowledgeMap	not learned
+dq	knowledgeMap	} aria-label=
+dq	knowledgeMap	}${HOT.has(b.id) ? 
+dq	knowledgeMap	}${HOT.has(id) ? 
+dq	knowledgeMap	}${done ? `<button class=
+dq	knowledgeMap	}<button class=
+dq	laterLevels	, { class: 
+dq	laterLevels	card soft
+dq	md	 || fence[1] === 
+dq	md	), isOutput || fence[1] === 
+dq	md	).replace(/\r/g, 
+dq	md	, null, inline(para.join(
+dq	noteAiError	The connection dropped. Try again.
+dq	noteInline	 + (isCode ? 
+dq	noteInline	 code
+dq	noteInline	), type: 
+dq	noteInline	min-width: 
+dq	notify	 }[kind] || 
+dq	notify	, bad: 
+dq	notify	, warn: 
+dq	notify	toast 
+dq	paintNav	Escape
+dq	paintNav	Opened the map
+dq	paintNav	Progress can't be loaded right now
+dq	paintNav	Progress isn't saved in this view
+dq	paintNav	Progress restored
+dq	paintNav	Your notes appear after your first lesson on a point.
+dq	pickTasks	 of 3, topics: 
+dq	pickTasks	 trial tasks: 
+dq	pickTasks	(not given)
+dq	pickTasks	); by = 
+dq	pickTasks	, by = 
+dq	pickTasks	, difficulty 
+dq	pickTasks	AI picked
+dq	pickTasks	Default
+dq	pickTasks	Where they are now: 
+dq	plPick	 (from 
+dq	plPick	Chose a point to learn: 
+dq	ptTeamCard	 + (job.problems.length === 1 ? 
+dq	ptTeamCard	 + job.problems.length + 
+dq	ptTeamCard	 requests so far
+dq	ptTeamCard	 time
+dq	ptTeamCard	 times
+dq	ptTeamCard	 · fixed and rechecked 
+dq	ptTeamCard	) + who), 
+dq	ptTeamCard	, { class: 
+dq	ptTeamCard	muted small
+dq	ptTeamCard	row spread
+dq	renderBubble	 + i }, m.content || (m.pending ? 
+dq	renderBubble	 answers)
+dq	renderBubble	, id: 
+dq	renderBubble	, { class: 
+dq	renderBubble	Models agree
+dq	renderBubble	Models disagree
+dq	renderBubble	Models partly agree
+dq	renderBubble	bubble ai
+dq	renderBubble	bubble me
+dq	renderBubble	plain small
+dq	renderBubble	verdict 
+dq	renderGoal	 Optional: what you've done so far, what feels easy or hard
+dq	renderGoal	 · Background: 
+dq	renderGoal	, { class: 
+dq	renderGoal	Describe your goal in a sentence or two first.
+dq	renderGoal	Goal: 
+dq	renderGoal	Python
+dq	renderGoal	Step 1
+dq	renderGoal	new to programming
+dq	renderGoal	some basics
+dq	renderLog	 entries
+dq	renderLog	 }, db ? 
+dq	renderLog	, lessons: {}, mapTab: 
+dq	renderLog	, matToc: 
+dq	renderLog	, { class: 
+dq	renderLog	; renderLog(); notify(
+dq	renderLog	Cancel
+dq	renderLog	Note: 
+dq	renderLog	Started over
+dq	renderLog	Started over. Your test log was kept.
+dq	renderLog	card soft
+dq	renderLog	font-size: 1.3rem
+dq	renderLog	muted small
+dq	renderLog	row spread
+dq	renderPointLearn	 + (L.rounds > 1 ? 
+dq	renderPointLearn	 + (L.rounds ? 
+dq	renderPointLearn	 + L.requests + 
+dq	renderPointLearn	 + L.rounds + 
+dq	renderPointLearn	 is marked as learned on your map.
+dq	renderPointLearn	 }, cands.length ? 
+dq	renderPointLearn	 }, pid ? 
+dq	renderPointLearn	 · not learned yet: 
+dq	renderPointLearn	 · on the suggested route
+dq	renderPointLearn	, null, 
+dq	renderPointLearn	, { class: 
+dq	renderPointLearn	Enter
+dq	renderPointLearn	More human-written practice (
+dq	renderPointLearn	Step 5
+dq	renderPointLearn	Teach me “
+dq	renderPointLearn	The knowledge map couldn't load, so points can't be chosen here.
+dq	renderPointLearn	Try again
+dq	renderPointLearn	What the checker still found
+dq	renderPointLearn	card lesson-card
+dq	renderPointLearn	card practice
+dq	renderPointLearn	card soft
+dq	renderPointLearn	card tutor
+dq	renderPointLearn	chip accent
+dq	renderPointLearn	label small muted
+dq	renderPointLearn	muted small
+dq	renderPointLearn	panel reading-col
+dq	renderPointLearn	plain small
+dq	renderPointLearn	row spread
+dq	renderPointLearn	the list
+dq	renderPointLearn	top picks
+dq	renderPointNotes	 learned
+dq	renderPointNotes	 of 
+dq	renderPointNotes	 }, km.isLearned(p) ? 
+dq	renderPointNotes	, ...idx[p].practice.flatMap((q, j) => [j ? 
+dq	renderPointNotes	, extLink(q.url, P.SHORT[q.src] + 
+dq	renderPointNotes	, onclick: () => { ui.noteHide = false; render(); } }, 
+dq	renderPointNotes	, onclick: () => { ui.noteHide = true; ui.noteRevealed = {}; render(); } }, 
+dq	renderPointNotes	, { class: 
+dq	renderPointNotes	, { class: km.isLearned(p) ? 
+dq	renderPointNotes	: hide ? 
+dq	renderPointNotes	Couldn't copy directly, so the notes are selected. Press Ctrl+C or Cmd+C to copy them.
+dq	renderPointNotes	Notes appear here after your first lesson on a point.
+dq	renderPointNotes	Notes copied as plain text.
+dq	renderPointNotes	Step 6
+dq	renderPointNotes	Step 6 · Level 1
+dq	renderPointNotes	The knowledge map couldn't load.
+dq	renderPointNotes	card notes
+dq	renderPointNotes	link small
+dq	renderPointNotes	muted small
+dq	renderReach	 + g.spread + 
+dq	renderReach	 percent
+dq	renderReach	 }, g.share + 
+dq	renderReach	, { class: 
+dq	renderReach	Ask again
+dq	renderReach	Asking three models…
+dq	renderReach	Limits
+dq	renderReach	Start learning
+dq	renderReach	Step 4
+dq	renderReach	Strong at
+dq	renderReach	The models disagree
+dq	renderReach	The models partly agree
+dq	renderReach	The three models agree
+dq	renderReach	These are AI estimates of AI ability, and they can be wrong. The rest comes from your sources: read them, and do their exercises.
+dq	renderReach	card soft
+dq	renderReach	muted small
+dq	renderReach	plain small
+dq	renderReach	row spread
+dq	renderReach	verdict 
+dq	renderTrial	 + task.pset + 
+dq	renderTrial	 + task.title), 
+dq	renderTrial	, extLink(task.url, 
+dq	renderTrial	, null, 
+dq	renderTrial	, onclick: pickTasks }, 
+dq	renderTrial	, type: 
+dq	renderTrial	, { class: 
+dq	renderTrial	Almost
+dq	renderTrial	Based on what you told the guide only, so it's a rough estimate. It can be wrong.
+dq	renderTrial	Looks solid
+dq	renderTrial	Needs work
+dq	renderTrial	Next: how far the AI can guide you
+dq	renderTrial	Reading your code…
+dq	renderTrial	Step 2
+dq	renderTrial	This is one AI's reading of your code. It can be wrong, so also run your code with the example inputs.
+dq	renderTrial	What the trial shows
+dq	renderTrial	Works
+dq	renderTrial	card soft
+dq	renderTrial	chip 
+dq	renderTrial	chip accent
+dq	renderTrial	chip ok
+dq	renderTrial	chip warn
+dq	renderTrial	row spread
+dq	runGrade	 + x.r.share + 
+dq	runGrade	Fewer than two models answered, so there's nothing to cross-check. Try again.
+dq	runGrade	Involvement grade 
+dq	runGrade	up to 3 short phrases
+dq	runTrial	 + (state.trial.shaky.map(topicName).join(
+dq	runTrial	 + LEVELS[state.trial.level] + 
+dq	runTrial	 + TOPICS.map((t) => t.id + 
+dq	runTrial	 + t.name + 
+dq	runTrial	 gives 
+dq	runTrial	(not given)
+dq	runTrial	, from CS50P Problem Set 
+dq	runTrial	3 to 5 sentences: what they did well, what to watch, what to study next
+dq	runTrial	Example runs: 
+dq	runTrial	No feedback came back.
+dq	runTrial	Solve at least one task first, or skip the tasks.
+dq	runTrial	Task \"
+dq	runTrial	Their code:
+dq	runTrial	They skipped the tasks, so judge from what they said only, and say that this is a rougher estimate.
+dq	runTrial	Trial 
+dq	runTrial	Where they are now: 
+dq	runTrial	Your trial couldn't be assessed: 
+dq	runTrial	Your trial was assessed: 
+dq	runTrial	no result
+dq	runTrial	one or two sentences
+dq	runTrial	with 
+dq	sendPointChat	Asked the tutor about 
+tl	inline	const t = m[0];
+tl	inline	let last = 0, m;
+tl	knowledgeMap	" marked learned
+tl	knowledgeMap	% of points learned">
+tl	knowledgeMap	: ""}<button class="km-btn" type="button" data-toggle="
+tl	knowledgeMap	: "None of its points are on the suggested route."}
+tl	knowledgeMap	: "Too few books teach these points for a same-chapter figure."} ${r ?
+tl	knowledgeMap	<button class="km-back" type="button" data-ball="
+tl	knowledgeMap	<button class="km-nm" data-point="
+tl	knowledgeMap	<button class="km-pick
+tl	knowledgeMap	<button class="km-pill
+tl	knowledgeMap	<button class="km-pill" data-point="
+tl	knowledgeMap	<button class="next" data-ball="
+tl	knowledgeMap	<button data-ball="
+tl	knowledgeMap	<circle class="pie-off" r="
+tl	knowledgeMap	<circle class="pie-on" r="
+tl	knowledgeMap	<input type="checkbox" data-mark="
+tl	knowledgeMap	<option value="
+tl	knowledgeMap	<path class="pie-off" d="M0,0L
+tl	knowledgeMap	<path class="pie-on" transform="translate(
+tl	knowledgeMap	<span class="km-sev
+tl	knowledgeMap	<span class="km-tag
+tl	knowledgeMap	<svg class="km-pie" viewBox="-46 -46 92 92" role="img" aria-label="
+tl	knowledgeMap	Exercism's authors wrote
+tl	knowledgeMap	Map: whole topic "
+tl	knowledgeMap	Needed by ${n.usedBy.length ?
+tl	knowledgeMap	Needed first ${n.needs.length ?
+tl	knowledgeMap	Run A drew
+tl	knowledgeMap	Taught in
+tl	knowledgeMap	Topics sit on rings: the basics in the centre, more advanced topics further out. Brighter means further along; the thin arc shows how much of a topic you've learned, and the outer dial has one tick for each of the
+tl	knowledgeMap	Where the books teach it ${whereRows ?
+tl	knowledgeMap	Where the sources teach it ${srcRows ?
+tl	knowledgeMap	are identical and
+tl	knowledgeMap	are in neither AI run's strict “needed first” chain. Most are exercise gates. Brightness depends on these links, so link types must be defined.
+tl	knowledgeMap	arrive together in chapter 1, and each book orders their headings differently.
+tl	knowledgeMap	of the AI's links run against most books' order, and
+tl	knowledgeMap	of those sit inside this knot. The big balls absorb most of it.
+tl	knowledgeMap	pairs of widely taught points, the books split on
+tl	knowledgeMap	point opposite ways. Where they differ, it's about how strict a link is.
+tl	knowledgeMap	points appear in only 0–2 sources. They stay on the map, away from the route.
+tl	knowledgeMap	points learned
+tl	knowledgeMap	points learned${bOnRoute(id) ?
+tl	knowledgeMap	points taught in the two sources written for data work (Kaggle Learn and Python for Data Analysis) and the
+tl	knowledgeMap	points, lit once learned. The red ring is the AI's suggested route: the
+tl	knowledgeMap	prerequisite links by hand;
+tl	knowledgeMap	they build on. Top picks are where you can start the most route points now. It's a suggestion; open any topic you like.
+tl	knowledgeMap	“needed first” links and run B
+tl	md	const code = [];
+tl	noteInline	const bold = spans.map((m, i) => (m[0][0] === "*" ? i : -1)).filter((i) => i >= 0);
+tl	noteInline	const isCode = t[0] === "
+tl	noteInline	const spans = [...text.matchAll(re)];
+tl	noteInline	const t = m[0];
+tl	noteInline	const toHide = new Set(bold.length ? bold : spans.length ? [0] : []);
+tl	noteInline	let last = 0;

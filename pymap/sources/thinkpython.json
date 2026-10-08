@@ -1,0 +1,1248 @@
+{
+ "id": "thinkpython",
+ "name": "Think Python, 3rd edition",
+ "author": "Allen B. Downey",
+ "url": "https://allendowney.github.io/ThinkPython/",
+ "kind": "Book",
+ "items": [
+  {
+   "chapter": "0. Preface",
+   "heading": "Preface",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap00.html",
+   "order": 0
+  },
+  {
+   "chapter": "0. Preface",
+   "heading": "Who Is This Book For?",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap00.html",
+   "order": 1
+  },
+  {
+   "chapter": "0. Preface",
+   "heading": "Goals of the Book",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap00.html",
+   "order": 2
+  },
+  {
+   "chapter": "0. Preface",
+   "heading": "Navigating the Book",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap00.html",
+   "order": 3
+  },
+  {
+   "chapter": "0. Preface",
+   "heading": "What's new in the third edition?",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap00.html",
+   "order": 4
+  },
+  {
+   "chapter": "0. Preface",
+   "heading": "Getting started",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap00.html",
+   "order": 5
+  },
+  {
+   "chapter": "0. Preface",
+   "heading": "Resources for Teachers",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap00.html",
+   "order": 6
+  },
+  {
+   "chapter": "0. Preface",
+   "heading": "Acknowledgments",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap00.html",
+   "order": 7
+  },
+  {
+   "chapter": "1. Welcome",
+   "heading": "Welcome",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap01.html",
+   "order": 8
+  },
+  {
+   "chapter": "1. Welcome",
+   "heading": "Programming as a way of thinking",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap01.html",
+   "order": 9
+  },
+  {
+   "chapter": "1. Welcome",
+   "heading": "Arithmetic operators",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap01.html",
+   "order": 10
+  },
+  {
+   "chapter": "1. Welcome",
+   "heading": "Expressions",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap01.html",
+   "order": 11
+  },
+  {
+   "chapter": "1. Welcome",
+   "heading": "Arithmetic functions",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap01.html",
+   "order": 12
+  },
+  {
+   "chapter": "1. Welcome",
+   "heading": "Strings",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap01.html",
+   "order": 13
+  },
+  {
+   "chapter": "1. Welcome",
+   "heading": "Values and types",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap01.html",
+   "order": 14
+  },
+  {
+   "chapter": "1. Welcome",
+   "heading": "Formal and natural languages",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap01.html",
+   "order": 15
+  },
+  {
+   "chapter": "2. Variables and Statements",
+   "heading": "Variables and Statements",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap02.html",
+   "order": 16
+  },
+  {
+   "chapter": "2. Variables and Statements",
+   "heading": "Variables",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap02.html",
+   "order": 17
+  },
+  {
+   "chapter": "2. Variables and Statements",
+   "heading": "State diagrams",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap02.html",
+   "order": 18
+  },
+  {
+   "chapter": "2. Variables and Statements",
+   "heading": "Variable names",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap02.html",
+   "order": 19
+  },
+  {
+   "chapter": "2. Variables and Statements",
+   "heading": "The import statement",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap02.html",
+   "order": 20
+  },
+  {
+   "chapter": "2. Variables and Statements",
+   "heading": "Expressions and statements",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap02.html",
+   "order": 21
+  },
+  {
+   "chapter": "2. Variables and Statements",
+   "heading": "The print function",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap02.html",
+   "order": 22
+  },
+  {
+   "chapter": "2. Variables and Statements",
+   "heading": "Arguments",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap02.html",
+   "order": 23
+  },
+  {
+   "chapter": "2. Variables and Statements",
+   "heading": "Comments",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap02.html",
+   "order": 24
+  },
+  {
+   "chapter": "3. Functions",
+   "heading": "Functions",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap03.html",
+   "order": 25
+  },
+  {
+   "chapter": "3. Functions",
+   "heading": "Defining new functions",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap03.html",
+   "order": 26
+  },
+  {
+   "chapter": "3. Functions",
+   "heading": "Parameters",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap03.html",
+   "order": 27
+  },
+  {
+   "chapter": "3. Functions",
+   "heading": "Calling functions",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap03.html",
+   "order": 28
+  },
+  {
+   "chapter": "3. Functions",
+   "heading": "Repetition",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap03.html",
+   "order": 29
+  },
+  {
+   "chapter": "3. Functions",
+   "heading": "Variables and parameters are local",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap03.html",
+   "order": 30
+  },
+  {
+   "chapter": "3. Functions",
+   "heading": "Stack diagrams",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap03.html",
+   "order": 31
+  },
+  {
+   "chapter": "3. Functions",
+   "heading": "Tracebacks",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap03.html",
+   "order": 32
+  },
+  {
+   "chapter": "3. Functions",
+   "heading": "Why functions?",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap03.html",
+   "order": 33
+  },
+  {
+   "chapter": "4. Functions and Interfaces",
+   "heading": "Functions and Interfaces",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap04.html",
+   "order": 34
+  },
+  {
+   "chapter": "4. Functions and Interfaces",
+   "heading": "The jupyturtle module",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap04.html",
+   "order": 35
+  },
+  {
+   "chapter": "4. Functions and Interfaces",
+   "heading": "Making a square",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap04.html",
+   "order": 36
+  },
+  {
+   "chapter": "4. Functions and Interfaces",
+   "heading": "Encapsulation and generalization",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap04.html",
+   "order": 37
+  },
+  {
+   "chapter": "4. Functions and Interfaces",
+   "heading": "Approximating a circle",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap04.html",
+   "order": 38
+  },
+  {
+   "chapter": "4. Functions and Interfaces",
+   "heading": "Refactoring",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap04.html",
+   "order": 39
+  },
+  {
+   "chapter": "4. Functions and Interfaces",
+   "heading": "Stack diagram",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap04.html",
+   "order": 40
+  },
+  {
+   "chapter": "4. Functions and Interfaces",
+   "heading": "A development plan",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap04.html",
+   "order": 41
+  },
+  {
+   "chapter": "4. Functions and Interfaces",
+   "heading": "Docstrings",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap04.html",
+   "order": 42
+  },
+  {
+   "chapter": "5. Conditionals and Recursion",
+   "heading": "Conditionals and Recursion",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap05.html",
+   "order": 43
+  },
+  {
+   "chapter": "5. Conditionals and Recursion",
+   "heading": "Integer division and modulus",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap05.html",
+   "order": 44
+  },
+  {
+   "chapter": "5. Conditionals and Recursion",
+   "heading": "Boolean Expressions",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap05.html",
+   "order": 45
+  },
+  {
+   "chapter": "5. Conditionals and Recursion",
+   "heading": "Logical operators",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap05.html",
+   "order": 46
+  },
+  {
+   "chapter": "5. Conditionals and Recursion",
+   "heading": "if statements",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap05.html",
+   "order": 47
+  },
+  {
+   "chapter": "5. Conditionals and Recursion",
+   "heading": "The else clause",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap05.html",
+   "order": 48
+  },
+  {
+   "chapter": "5. Conditionals and Recursion",
+   "heading": "Chained conditionals",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap05.html",
+   "order": 49
+  },
+  {
+   "chapter": "5. Conditionals and Recursion",
+   "heading": "Nested Conditionals",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap05.html",
+   "order": 50
+  },
+  {
+   "chapter": "5. Conditionals and Recursion",
+   "heading": "Recursion",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap05.html",
+   "order": 51
+  },
+  {
+   "chapter": "5. Conditionals and Recursion",
+   "heading": "Stack diagrams for recursive functions",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap05.html",
+   "order": 52
+  },
+  {
+   "chapter": "5. Conditionals and Recursion",
+   "heading": "Infinite recursion",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap05.html",
+   "order": 53
+  },
+  {
+   "chapter": "5. Conditionals and Recursion",
+   "heading": "Keyboard input",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap05.html",
+   "order": 54
+  },
+  {
+   "chapter": "6. Return Values",
+   "heading": "Return Values",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap06.html",
+   "order": 55
+  },
+  {
+   "chapter": "6. Return Values",
+   "heading": "Some functions have return values",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap06.html",
+   "order": 56
+  },
+  {
+   "chapter": "6. Return Values",
+   "heading": "And some have None",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap06.html",
+   "order": 57
+  },
+  {
+   "chapter": "6. Return Values",
+   "heading": "Return values and conditionals",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap06.html",
+   "order": 58
+  },
+  {
+   "chapter": "6. Return Values",
+   "heading": "Incremental development",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap06.html",
+   "order": 59
+  },
+  {
+   "chapter": "6. Return Values",
+   "heading": "Boolean functions",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap06.html",
+   "order": 60
+  },
+  {
+   "chapter": "6. Return Values",
+   "heading": "Recursion with return values",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap06.html",
+   "order": 61
+  },
+  {
+   "chapter": "6. Return Values",
+   "heading": "Leap of faith",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap06.html",
+   "order": 62
+  },
+  {
+   "chapter": "6. Return Values",
+   "heading": "Fibonacci",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap06.html",
+   "order": 63
+  },
+  {
+   "chapter": "6. Return Values",
+   "heading": "Checking types",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap06.html",
+   "order": 64
+  },
+  {
+   "chapter": "7. Iteration and Search",
+   "heading": "Iteration and Search",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap07.html",
+   "order": 65
+  },
+  {
+   "chapter": "7. Iteration and Search",
+   "heading": "Loops and strings",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap07.html",
+   "order": 66
+  },
+  {
+   "chapter": "7. Iteration and Search",
+   "heading": "Reading the word list",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap07.html",
+   "order": 67
+  },
+  {
+   "chapter": "7. Iteration and Search",
+   "heading": "Updating variables",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap07.html",
+   "order": 68
+  },
+  {
+   "chapter": "7. Iteration and Search",
+   "heading": "Looping and counting",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap07.html",
+   "order": 69
+  },
+  {
+   "chapter": "7. Iteration and Search",
+   "heading": "The in operator",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap07.html",
+   "order": 70
+  },
+  {
+   "chapter": "7. Iteration and Search",
+   "heading": "Search",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap07.html",
+   "order": 71
+  },
+  {
+   "chapter": "7. Iteration and Search",
+   "heading": "Doctest",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap07.html",
+   "order": 72
+  },
+  {
+   "chapter": "8. Strings and Regular Expressions",
+   "heading": "Strings and Regular Expressions",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap08.html",
+   "order": 73
+  },
+  {
+   "chapter": "8. Strings and Regular Expressions",
+   "heading": "A string is a sequence",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap08.html",
+   "order": 74
+  },
+  {
+   "chapter": "8. Strings and Regular Expressions",
+   "heading": "String slices",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap08.html",
+   "order": 75
+  },
+  {
+   "chapter": "8. Strings and Regular Expressions",
+   "heading": "Strings are immutable",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap08.html",
+   "order": 76
+  },
+  {
+   "chapter": "8. Strings and Regular Expressions",
+   "heading": "String comparison",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap08.html",
+   "order": 77
+  },
+  {
+   "chapter": "8. Strings and Regular Expressions",
+   "heading": "String methods",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap08.html",
+   "order": 78
+  },
+  {
+   "chapter": "8. Strings and Regular Expressions",
+   "heading": "Writing files",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap08.html",
+   "order": 79
+  },
+  {
+   "chapter": "8. Strings and Regular Expressions",
+   "heading": "Find and replace",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap08.html",
+   "order": 80
+  },
+  {
+   "chapter": "8. Strings and Regular Expressions",
+   "heading": "Regular expressions",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap08.html",
+   "order": 81
+  },
+  {
+   "chapter": "8. Strings and Regular Expressions",
+   "heading": "String substitution",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap08.html",
+   "order": 82
+  },
+  {
+   "chapter": "9. Lists",
+   "heading": "Lists",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap09.html",
+   "order": 83
+  },
+  {
+   "chapter": "9. Lists",
+   "heading": "A list is a sequence",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap09.html",
+   "order": 84
+  },
+  {
+   "chapter": "9. Lists",
+   "heading": "Lists are mutable",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap09.html",
+   "order": 85
+  },
+  {
+   "chapter": "9. Lists",
+   "heading": "List slices",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap09.html",
+   "order": 86
+  },
+  {
+   "chapter": "9. Lists",
+   "heading": "List operations",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap09.html",
+   "order": 87
+  },
+  {
+   "chapter": "9. Lists",
+   "heading": "List methods",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap09.html",
+   "order": 88
+  },
+  {
+   "chapter": "9. Lists",
+   "heading": "Lists and strings",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap09.html",
+   "order": 89
+  },
+  {
+   "chapter": "9. Lists",
+   "heading": "Looping through a list",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap09.html",
+   "order": 90
+  },
+  {
+   "chapter": "9. Lists",
+   "heading": "Sorting lists",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap09.html",
+   "order": 91
+  },
+  {
+   "chapter": "9. Lists",
+   "heading": "Objects and values",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap09.html",
+   "order": 92
+  },
+  {
+   "chapter": "9. Lists",
+   "heading": "Aliasing",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap09.html",
+   "order": 93
+  },
+  {
+   "chapter": "9. Lists",
+   "heading": "List arguments",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap09.html",
+   "order": 94
+  },
+  {
+   "chapter": "9. Lists",
+   "heading": "Making a word list",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap09.html",
+   "order": 95
+  },
+  {
+   "chapter": "10. Dictionaries",
+   "heading": "Dictionaries",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap10.html",
+   "order": 96
+  },
+  {
+   "chapter": "10. Dictionaries",
+   "heading": "A dictionary is a mapping",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap10.html",
+   "order": 97
+  },
+  {
+   "chapter": "10. Dictionaries",
+   "heading": "Creating dictionaries",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap10.html",
+   "order": 98
+  },
+  {
+   "chapter": "10. Dictionaries",
+   "heading": "The in operator",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap10.html",
+   "order": 99
+  },
+  {
+   "chapter": "10. Dictionaries",
+   "heading": "A collection of counters",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap10.html",
+   "order": 100
+  },
+  {
+   "chapter": "10. Dictionaries",
+   "heading": "Looping and dictionaries",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap10.html",
+   "order": 101
+  },
+  {
+   "chapter": "10. Dictionaries",
+   "heading": "Lists and dictionaries",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap10.html",
+   "order": 102
+  },
+  {
+   "chapter": "10. Dictionaries",
+   "heading": "Accumulating a list",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap10.html",
+   "order": 103
+  },
+  {
+   "chapter": "10. Dictionaries",
+   "heading": "Memos",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap10.html",
+   "order": 104
+  },
+  {
+   "chapter": "11. Tuples",
+   "heading": "Tuples",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap11.html",
+   "order": 105
+  },
+  {
+   "chapter": "11. Tuples",
+   "heading": "Tuples are like lists",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap11.html",
+   "order": 106
+  },
+  {
+   "chapter": "11. Tuples",
+   "heading": "But tuples are immutable",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap11.html",
+   "order": 107
+  },
+  {
+   "chapter": "11. Tuples",
+   "heading": "Tuple assignment",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap11.html",
+   "order": 108
+  },
+  {
+   "chapter": "11. Tuples",
+   "heading": "Tuples as return values",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap11.html",
+   "order": 109
+  },
+  {
+   "chapter": "11. Tuples",
+   "heading": "Argument packing",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap11.html",
+   "order": 110
+  },
+  {
+   "chapter": "11. Tuples",
+   "heading": "Zip",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap11.html",
+   "order": 111
+  },
+  {
+   "chapter": "11. Tuples",
+   "heading": "Comparing and Sorting",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap11.html",
+   "order": 112
+  },
+  {
+   "chapter": "11. Tuples",
+   "heading": "Inverting a dictionary",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap11.html",
+   "order": 113
+  },
+  {
+   "chapter": "12. Text Analysis and Generation",
+   "heading": "Text Analysis and Generation",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap12.html",
+   "order": 114
+  },
+  {
+   "chapter": "12. Text Analysis and Generation",
+   "heading": "Unique words",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap12.html",
+   "order": 115
+  },
+  {
+   "chapter": "12. Text Analysis and Generation",
+   "heading": "Punctuation",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap12.html",
+   "order": 116
+  },
+  {
+   "chapter": "12. Text Analysis and Generation",
+   "heading": "Word frequencies",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap12.html",
+   "order": 117
+  },
+  {
+   "chapter": "12. Text Analysis and Generation",
+   "heading": "Optional parameters",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap12.html",
+   "order": 118
+  },
+  {
+   "chapter": "12. Text Analysis and Generation",
+   "heading": "Dictionary subtraction",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap12.html",
+   "order": 119
+  },
+  {
+   "chapter": "12. Text Analysis and Generation",
+   "heading": "Random numbers",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap12.html",
+   "order": 120
+  },
+  {
+   "chapter": "12. Text Analysis and Generation",
+   "heading": "Bigrams",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap12.html",
+   "order": 121
+  },
+  {
+   "chapter": "12. Text Analysis and Generation",
+   "heading": "Markov analysis",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap12.html",
+   "order": 122
+  },
+  {
+   "chapter": "12. Text Analysis and Generation",
+   "heading": "Generating text",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap12.html",
+   "order": 123
+  },
+  {
+   "chapter": "13. Files and Databases",
+   "heading": "Files and Databases",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap13.html",
+   "order": 124
+  },
+  {
+   "chapter": "13. Files and Databases",
+   "heading": "Filenames and paths",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap13.html",
+   "order": 125
+  },
+  {
+   "chapter": "13. Files and Databases",
+   "heading": "f-strings",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap13.html",
+   "order": 126
+  },
+  {
+   "chapter": "13. Files and Databases",
+   "heading": "YAML",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap13.html",
+   "order": 127
+  },
+  {
+   "chapter": "13. Files and Databases",
+   "heading": "Shelve",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap13.html",
+   "order": 128
+  },
+  {
+   "chapter": "13. Files and Databases",
+   "heading": "Storing data structures",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap13.html",
+   "order": 129
+  },
+  {
+   "chapter": "13. Files and Databases",
+   "heading": "Checking for equivalent files",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap13.html",
+   "order": 130
+  },
+  {
+   "chapter": "13. Files and Databases",
+   "heading": "Walking directories",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap13.html",
+   "order": 131
+  },
+  {
+   "chapter": "14. Classes and Functions",
+   "heading": "Classes and Functions",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap14.html",
+   "order": 132
+  },
+  {
+   "chapter": "14. Classes and Functions",
+   "heading": "Programmer-defined types",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap14.html",
+   "order": 133
+  },
+  {
+   "chapter": "14. Classes and Functions",
+   "heading": "Attributes",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap14.html",
+   "order": 134
+  },
+  {
+   "chapter": "14. Classes and Functions",
+   "heading": "Objects as return values",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap14.html",
+   "order": 135
+  },
+  {
+   "chapter": "14. Classes and Functions",
+   "heading": "Objects are mutable",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap14.html",
+   "order": 136
+  },
+  {
+   "chapter": "14. Classes and Functions",
+   "heading": "Copying",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap14.html",
+   "order": 137
+  },
+  {
+   "chapter": "14. Classes and Functions",
+   "heading": "Pure functions",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap14.html",
+   "order": 138
+  },
+  {
+   "chapter": "14. Classes and Functions",
+   "heading": "Prototype and patch",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap14.html",
+   "order": 139
+  },
+  {
+   "chapter": "14. Classes and Functions",
+   "heading": "Design-first development",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap14.html",
+   "order": 140
+  },
+  {
+   "chapter": "15. Classes and Methods",
+   "heading": "Classes and Methods",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap15.html",
+   "order": 141
+  },
+  {
+   "chapter": "15. Classes and Methods",
+   "heading": "Defining methods",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap15.html",
+   "order": 142
+  },
+  {
+   "chapter": "15. Classes and Methods",
+   "heading": "Another method",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap15.html",
+   "order": 143
+  },
+  {
+   "chapter": "15. Classes and Methods",
+   "heading": "Static methods",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap15.html",
+   "order": 144
+  },
+  {
+   "chapter": "15. Classes and Methods",
+   "heading": "Comparing Time objects",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap15.html",
+   "order": 145
+  },
+  {
+   "chapter": "15. Classes and Methods",
+   "heading": "The __str__ method",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap15.html",
+   "order": 146
+  },
+  {
+   "chapter": "15. Classes and Methods",
+   "heading": "The init method",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap15.html",
+   "order": 147
+  },
+  {
+   "chapter": "15. Classes and Methods",
+   "heading": "Operator overloading",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap15.html",
+   "order": 148
+  },
+  {
+   "chapter": "16. Classes and Objects",
+   "heading": "Classes and Objects",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap16.html",
+   "order": 149
+  },
+  {
+   "chapter": "16. Classes and Objects",
+   "heading": "Creating a Point",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap16.html",
+   "order": 150
+  },
+  {
+   "chapter": "16. Classes and Objects",
+   "heading": "Creating a Line",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap16.html",
+   "order": 151
+  },
+  {
+   "chapter": "16. Classes and Objects",
+   "heading": "Equivalence and identity",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap16.html",
+   "order": 152
+  },
+  {
+   "chapter": "16. Classes and Objects",
+   "heading": "Creating a Rectangle",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap16.html",
+   "order": 153
+  },
+  {
+   "chapter": "16. Classes and Objects",
+   "heading": "Changing rectangles",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap16.html",
+   "order": 154
+  },
+  {
+   "chapter": "16. Classes and Objects",
+   "heading": "Deep copy",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap16.html",
+   "order": 155
+  },
+  {
+   "chapter": "16. Classes and Objects",
+   "heading": "Polymorphism",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap16.html",
+   "order": 156
+  },
+  {
+   "chapter": "17. Inheritance",
+   "heading": "Inheritance",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap17.html",
+   "order": 157
+  },
+  {
+   "chapter": "17. Inheritance",
+   "heading": "Representing cards",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap17.html",
+   "order": 158
+  },
+  {
+   "chapter": "17. Inheritance",
+   "heading": "Card attributes",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap17.html",
+   "order": 159
+  },
+  {
+   "chapter": "17. Inheritance",
+   "heading": "Printing cards",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap17.html",
+   "order": 160
+  },
+  {
+   "chapter": "17. Inheritance",
+   "heading": "Comparing cards",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap17.html",
+   "order": 161
+  },
+  {
+   "chapter": "17. Inheritance",
+   "heading": "Decks",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap17.html",
+   "order": 162
+  },
+  {
+   "chapter": "17. Inheritance",
+   "heading": "Printing the deck",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap17.html",
+   "order": 163
+  },
+  {
+   "chapter": "17. Inheritance",
+   "heading": "Add, remove, shuffle and sort",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap17.html",
+   "order": 164
+  },
+  {
+   "chapter": "17. Inheritance",
+   "heading": "Parents and children",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap17.html",
+   "order": 165
+  },
+  {
+   "chapter": "17. Inheritance",
+   "heading": "Specialization",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap17.html",
+   "order": 166
+  },
+  {
+   "chapter": "18. Python Extras",
+   "heading": "Python Extras",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap18.html",
+   "order": 167
+  },
+  {
+   "chapter": "18. Python Extras",
+   "heading": "Sets",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap18.html",
+   "order": 168
+  },
+  {
+   "chapter": "18. Python Extras",
+   "heading": "Counters",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap18.html",
+   "order": 169
+  },
+  {
+   "chapter": "18. Python Extras",
+   "heading": "defaultdict",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap18.html",
+   "order": 170
+  },
+  {
+   "chapter": "18. Python Extras",
+   "heading": "Conditional expressions",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap18.html",
+   "order": 171
+  },
+  {
+   "chapter": "18. Python Extras",
+   "heading": "List comprehensions",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap18.html",
+   "order": 172
+  },
+  {
+   "chapter": "18. Python Extras",
+   "heading": "any and all",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap18.html",
+   "order": 173
+  },
+  {
+   "chapter": "18. Python Extras",
+   "heading": "Named tuples",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap18.html",
+   "order": 174
+  },
+  {
+   "chapter": "18. Python Extras",
+   "heading": "Packing keyword arguments",
+   "level": 1,
+   "url": "https://allendowney.github.io/ThinkPython/chap18.html",
+   "order": 175
+  },
+  {
+   "chapter": "19. Final thoughts",
+   "heading": "Final thoughts",
+   "level": 0,
+   "url": "https://allendowney.github.io/ThinkPython/chap19.html",
+   "order": 176
+  }
+ ]
+}

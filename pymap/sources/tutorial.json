@@ -1,0 +1,933 @@
+{
+ "id": "tutorial",
+ "name": "The Python Tutorial",
+ "author": "Python Software Foundation",
+ "url": "https://docs.python.org/3/tutorial/",
+ "kind": "Official tutorial",
+ "items": [
+  {
+   "chapter": "Whetting Your Appetite",
+   "heading": "Whetting Your Appetite",
+   "level": 0,
+   "url": "https://docs.python.org/3/tutorial/appetite.html",
+   "order": 0
+  },
+  {
+   "chapter": "Using the Python Interpreter",
+   "heading": "Using the Python Interpreter",
+   "level": 0,
+   "url": "https://docs.python.org/3/tutorial/interpreter.html",
+   "order": 1
+  },
+  {
+   "chapter": "Using the Python Interpreter",
+   "heading": "Invoking the Interpreter",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/interpreter.html",
+   "order": 2
+  },
+  {
+   "chapter": "Using the Python Interpreter",
+   "heading": "Argument Passing",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/interpreter.html",
+   "order": 3
+  },
+  {
+   "chapter": "Using the Python Interpreter",
+   "heading": "Interactive Mode",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/interpreter.html",
+   "order": 4
+  },
+  {
+   "chapter": "Using the Python Interpreter",
+   "heading": "The Interpreter and Its Environment",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/interpreter.html",
+   "order": 5
+  },
+  {
+   "chapter": "Using the Python Interpreter",
+   "heading": "Source Code Encoding",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/interpreter.html",
+   "order": 6
+  },
+  {
+   "chapter": "An Informal Introduction to Python",
+   "heading": "An Informal Introduction to Python",
+   "level": 0,
+   "url": "https://docs.python.org/3/tutorial/introduction.html",
+   "order": 7
+  },
+  {
+   "chapter": "An Informal Introduction to Python",
+   "heading": "Using Python as a Calculator",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/introduction.html",
+   "order": 8
+  },
+  {
+   "chapter": "An Informal Introduction to Python",
+   "heading": "Numbers",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/introduction.html",
+   "order": 9
+  },
+  {
+   "chapter": "An Informal Introduction to Python",
+   "heading": "Text",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/introduction.html",
+   "order": 10
+  },
+  {
+   "chapter": "An Informal Introduction to Python",
+   "heading": "Lists",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/introduction.html",
+   "order": 11
+  },
+  {
+   "chapter": "An Informal Introduction to Python",
+   "heading": "First Steps Towards Programming",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/introduction.html",
+   "order": 12
+  },
+  {
+   "chapter": "More Control Flow Tools",
+   "heading": "More Control Flow Tools",
+   "level": 0,
+   "url": "https://docs.python.org/3/tutorial/controlflow.html",
+   "order": 13
+  },
+  {
+   "chapter": "More Control Flow Tools",
+   "heading": "if Statements",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/controlflow.html",
+   "order": 14
+  },
+  {
+   "chapter": "More Control Flow Tools",
+   "heading": "for Statements",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/controlflow.html",
+   "order": 15
+  },
+  {
+   "chapter": "More Control Flow Tools",
+   "heading": "The range Function",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/controlflow.html",
+   "order": 16
+  },
+  {
+   "chapter": "More Control Flow Tools",
+   "heading": "break and continue Statements",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/controlflow.html",
+   "order": 17
+  },
+  {
+   "chapter": "More Control Flow Tools",
+   "heading": "else Clauses on Loops",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/controlflow.html",
+   "order": 18
+  },
+  {
+   "chapter": "More Control Flow Tools",
+   "heading": "pass Statements",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/controlflow.html",
+   "order": 19
+  },
+  {
+   "chapter": "More Control Flow Tools",
+   "heading": "match Statements",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/controlflow.html",
+   "order": 20
+  },
+  {
+   "chapter": "More Control Flow Tools",
+   "heading": "Defining Functions",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/controlflow.html",
+   "order": 21
+  },
+  {
+   "chapter": "More Control Flow Tools",
+   "heading": "More on Defining Functions",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/controlflow.html",
+   "order": 22
+  },
+  {
+   "chapter": "More Control Flow Tools",
+   "heading": "Default Argument Values",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/controlflow.html",
+   "order": 23
+  },
+  {
+   "chapter": "More Control Flow Tools",
+   "heading": "Keyword Arguments",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/controlflow.html",
+   "order": 24
+  },
+  {
+   "chapter": "More Control Flow Tools",
+   "heading": "Special parameters",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/controlflow.html",
+   "order": 25
+  },
+  {
+   "chapter": "More Control Flow Tools",
+   "heading": "Arbitrary Argument Lists",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/controlflow.html",
+   "order": 26
+  },
+  {
+   "chapter": "More Control Flow Tools",
+   "heading": "Unpacking Argument Lists",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/controlflow.html",
+   "order": 27
+  },
+  {
+   "chapter": "More Control Flow Tools",
+   "heading": "Lambda Expressions",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/controlflow.html",
+   "order": 28
+  },
+  {
+   "chapter": "More Control Flow Tools",
+   "heading": "Documentation Strings",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/controlflow.html",
+   "order": 29
+  },
+  {
+   "chapter": "More Control Flow Tools",
+   "heading": "Function Annotations",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/controlflow.html",
+   "order": 30
+  },
+  {
+   "chapter": "More Control Flow Tools",
+   "heading": "Intermezzo: Coding Style",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/controlflow.html",
+   "order": 31
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "Data Structures",
+   "level": 0,
+   "url": "https://docs.python.org/3/tutorial/datastructures.html",
+   "order": 32
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "More on Lists",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/datastructures.html",
+   "order": 33
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "Using Lists as Stacks",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/datastructures.html",
+   "order": 34
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "Using Lists as Queues",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/datastructures.html",
+   "order": 35
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "List Comprehensions",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/datastructures.html",
+   "order": 36
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "Nested List Comprehensions",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/datastructures.html",
+   "order": 37
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "Unpacking in Lists and List Comprehensions",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/datastructures.html",
+   "order": 38
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "The del statement",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/datastructures.html",
+   "order": 39
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "Tuples and Sequences",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/datastructures.html",
+   "order": 40
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "Sets",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/datastructures.html",
+   "order": 41
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "Dictionaries",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/datastructures.html",
+   "order": 42
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "Looping Techniques",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/datastructures.html",
+   "order": 43
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "More on Conditions",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/datastructures.html",
+   "order": 44
+  },
+  {
+   "chapter": "Data Structures",
+   "heading": "Comparing Sequences and Other Types",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/datastructures.html",
+   "order": 45
+  },
+  {
+   "chapter": "Modules",
+   "heading": "Modules",
+   "level": 0,
+   "url": "https://docs.python.org/3/tutorial/modules.html",
+   "order": 46
+  },
+  {
+   "chapter": "Modules",
+   "heading": "More on Modules",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/modules.html",
+   "order": 47
+  },
+  {
+   "chapter": "Modules",
+   "heading": "Executing modules as scripts",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/modules.html",
+   "order": 48
+  },
+  {
+   "chapter": "Modules",
+   "heading": "The Module Search Path",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/modules.html",
+   "order": 49
+  },
+  {
+   "chapter": "Modules",
+   "heading": "\"Compiled\" Python files",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/modules.html",
+   "order": 50
+  },
+  {
+   "chapter": "Modules",
+   "heading": "Standard Modules",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/modules.html",
+   "order": 51
+  },
+  {
+   "chapter": "Modules",
+   "heading": "The dir Function",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/modules.html",
+   "order": 52
+  },
+  {
+   "chapter": "Modules",
+   "heading": "Packages",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/modules.html",
+   "order": 53
+  },
+  {
+   "chapter": "Modules",
+   "heading": "Importing \\* From a Package",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/modules.html",
+   "order": 54
+  },
+  {
+   "chapter": "Modules",
+   "heading": "Intra-package References",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/modules.html",
+   "order": 55
+  },
+  {
+   "chapter": "Input and output",
+   "heading": "Input and output",
+   "level": 0,
+   "url": "https://docs.python.org/3/tutorial/inputoutput.html",
+   "order": 56
+  },
+  {
+   "chapter": "Input and output",
+   "heading": "Fancier output formatting",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/inputoutput.html",
+   "order": 57
+  },
+  {
+   "chapter": "Input and output",
+   "heading": "Formatted string literals",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/inputoutput.html",
+   "order": 58
+  },
+  {
+   "chapter": "Input and output",
+   "heading": "The string format() method",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/inputoutput.html",
+   "order": 59
+  },
+  {
+   "chapter": "Input and output",
+   "heading": "Manual string formatting",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/inputoutput.html",
+   "order": 60
+  },
+  {
+   "chapter": "Input and output",
+   "heading": "Old string formatting",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/inputoutput.html",
+   "order": 61
+  },
+  {
+   "chapter": "Input and output",
+   "heading": "Reading and writing files",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/inputoutput.html",
+   "order": 62
+  },
+  {
+   "chapter": "Input and output",
+   "heading": "Methods of file objects",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/inputoutput.html",
+   "order": 63
+  },
+  {
+   "chapter": "Input and output",
+   "heading": "Saving structured data with json",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/inputoutput.html",
+   "order": 64
+  },
+  {
+   "chapter": "Errors and Exceptions",
+   "heading": "Errors and Exceptions",
+   "level": 0,
+   "url": "https://docs.python.org/3/tutorial/errors.html",
+   "order": 65
+  },
+  {
+   "chapter": "Errors and Exceptions",
+   "heading": "Syntax Errors",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/errors.html",
+   "order": 66
+  },
+  {
+   "chapter": "Errors and Exceptions",
+   "heading": "Exceptions",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/errors.html",
+   "order": 67
+  },
+  {
+   "chapter": "Errors and Exceptions",
+   "heading": "Handling Exceptions",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/errors.html",
+   "order": 68
+  },
+  {
+   "chapter": "Errors and Exceptions",
+   "heading": "Raising Exceptions",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/errors.html",
+   "order": 69
+  },
+  {
+   "chapter": "Errors and Exceptions",
+   "heading": "Exception Chaining",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/errors.html",
+   "order": 70
+  },
+  {
+   "chapter": "Errors and Exceptions",
+   "heading": "User-defined Exceptions",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/errors.html",
+   "order": 71
+  },
+  {
+   "chapter": "Errors and Exceptions",
+   "heading": "Defining Clean-up Actions",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/errors.html",
+   "order": 72
+  },
+  {
+   "chapter": "Errors and Exceptions",
+   "heading": "Predefined Clean-up Actions",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/errors.html",
+   "order": 73
+  },
+  {
+   "chapter": "Errors and Exceptions",
+   "heading": "Raising and Handling Multiple Unrelated Exceptions",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/errors.html",
+   "order": 74
+  },
+  {
+   "chapter": "Errors and Exceptions",
+   "heading": "Enriching Exceptions with Notes",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/errors.html",
+   "order": 75
+  },
+  {
+   "chapter": "Classes",
+   "heading": "Classes",
+   "level": 0,
+   "url": "https://docs.python.org/3/tutorial/classes.html",
+   "order": 76
+  },
+  {
+   "chapter": "Classes",
+   "heading": "A Word About Names and Objects",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/classes.html",
+   "order": 77
+  },
+  {
+   "chapter": "Classes",
+   "heading": "Python Scopes and Namespaces",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/classes.html",
+   "order": 78
+  },
+  {
+   "chapter": "Classes",
+   "heading": "Scopes and Namespaces Example",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/classes.html",
+   "order": 79
+  },
+  {
+   "chapter": "Classes",
+   "heading": "A First Look at Classes",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/classes.html",
+   "order": 80
+  },
+  {
+   "chapter": "Classes",
+   "heading": "Class Definition Syntax",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/classes.html",
+   "order": 81
+  },
+  {
+   "chapter": "Classes",
+   "heading": "Class Objects",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/classes.html",
+   "order": 82
+  },
+  {
+   "chapter": "Classes",
+   "heading": "Instance Objects",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/classes.html",
+   "order": 83
+  },
+  {
+   "chapter": "Classes",
+   "heading": "Method Objects",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/classes.html",
+   "order": 84
+  },
+  {
+   "chapter": "Classes",
+   "heading": "Class and Instance Variables",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/classes.html",
+   "order": 85
+  },
+  {
+   "chapter": "Classes",
+   "heading": "Random Remarks",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/classes.html",
+   "order": 86
+  },
+  {
+   "chapter": "Classes",
+   "heading": "Inheritance",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/classes.html",
+   "order": 87
+  },
+  {
+   "chapter": "Classes",
+   "heading": "Multiple Inheritance",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/classes.html",
+   "order": 88
+  },
+  {
+   "chapter": "Classes",
+   "heading": "Private Variables",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/classes.html",
+   "order": 89
+  },
+  {
+   "chapter": "Classes",
+   "heading": "Odds and Ends",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/classes.html",
+   "order": 90
+  },
+  {
+   "chapter": "Classes",
+   "heading": "Iterators",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/classes.html",
+   "order": 91
+  },
+  {
+   "chapter": "Classes",
+   "heading": "Generators",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/classes.html",
+   "order": 92
+  },
+  {
+   "chapter": "Classes",
+   "heading": "Generator Expressions",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/classes.html",
+   "order": 93
+  },
+  {
+   "chapter": "Brief tour of the standard library",
+   "heading": "Brief tour of the standard library",
+   "level": 0,
+   "url": "https://docs.python.org/3/tutorial/stdlib.html",
+   "order": 94
+  },
+  {
+   "chapter": "Brief tour of the standard library",
+   "heading": "Operating system interface",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib.html",
+   "order": 95
+  },
+  {
+   "chapter": "Brief tour of the standard library",
+   "heading": "File wildcards",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib.html",
+   "order": 96
+  },
+  {
+   "chapter": "Brief tour of the standard library",
+   "heading": "Command-line arguments",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib.html",
+   "order": 97
+  },
+  {
+   "chapter": "Brief tour of the standard library",
+   "heading": "Error output redirection and program termination",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib.html",
+   "order": 98
+  },
+  {
+   "chapter": "Brief tour of the standard library",
+   "heading": "String pattern matching",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib.html",
+   "order": 99
+  },
+  {
+   "chapter": "Brief tour of the standard library",
+   "heading": "Mathematics",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib.html",
+   "order": 100
+  },
+  {
+   "chapter": "Brief tour of the standard library",
+   "heading": "Internet access",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib.html",
+   "order": 101
+  },
+  {
+   "chapter": "Brief tour of the standard library",
+   "heading": "Dates and times",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib.html",
+   "order": 102
+  },
+  {
+   "chapter": "Brief tour of the standard library",
+   "heading": "Data compression",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib.html",
+   "order": 103
+  },
+  {
+   "chapter": "Brief tour of the standard library",
+   "heading": "Performance measurement",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib.html",
+   "order": 104
+  },
+  {
+   "chapter": "Brief tour of the standard library",
+   "heading": "Quality control",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib.html",
+   "order": 105
+  },
+  {
+   "chapter": "Brief tour of the standard library",
+   "heading": "Batteries included",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib.html",
+   "order": 106
+  },
+  {
+   "chapter": "Brief tour of the standard library --- part II",
+   "heading": "Brief tour of the standard library --- part II",
+   "level": 0,
+   "url": "https://docs.python.org/3/tutorial/stdlib2.html",
+   "order": 107
+  },
+  {
+   "chapter": "Brief tour of the standard library --- part II",
+   "heading": "Output formatting",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib2.html",
+   "order": 108
+  },
+  {
+   "chapter": "Brief tour of the standard library --- part II",
+   "heading": "Templating",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib2.html",
+   "order": 109
+  },
+  {
+   "chapter": "Brief tour of the standard library --- part II",
+   "heading": "Working with binary data record layouts",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib2.html",
+   "order": 110
+  },
+  {
+   "chapter": "Brief tour of the standard library --- part II",
+   "heading": "Multi-threading",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib2.html",
+   "order": 111
+  },
+  {
+   "chapter": "Brief tour of the standard library --- part II",
+   "heading": "Logging",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib2.html",
+   "order": 112
+  },
+  {
+   "chapter": "Brief tour of the standard library --- part II",
+   "heading": "Weak references",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib2.html",
+   "order": 113
+  },
+  {
+   "chapter": "Brief tour of the standard library --- part II",
+   "heading": "Tools for working with lists",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib2.html",
+   "order": 114
+  },
+  {
+   "chapter": "Brief tour of the standard library --- part II",
+   "heading": "Decimal floating-point arithmetic",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/stdlib2.html",
+   "order": 115
+  },
+  {
+   "chapter": "Virtual Environments and Packages",
+   "heading": "Virtual Environments and Packages",
+   "level": 0,
+   "url": "https://docs.python.org/3/tutorial/venv.html",
+   "order": 116
+  },
+  {
+   "chapter": "Virtual Environments and Packages",
+   "heading": "Introduction",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/venv.html",
+   "order": 117
+  },
+  {
+   "chapter": "Virtual Environments and Packages",
+   "heading": "Creating Virtual Environments",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/venv.html",
+   "order": 118
+  },
+  {
+   "chapter": "Virtual Environments and Packages",
+   "heading": "Managing Packages with pip",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/venv.html",
+   "order": 119
+  },
+  {
+   "chapter": "What Now?",
+   "heading": "What Now?",
+   "level": 0,
+   "url": "https://docs.python.org/3/tutorial/whatnow.html",
+   "order": 120
+  },
+  {
+   "chapter": "Interactive Input Editing and History Substitution",
+   "heading": "Interactive Input Editing and History Substitution",
+   "level": 0,
+   "url": "https://docs.python.org/3/tutorial/interactive.html",
+   "order": 121
+  },
+  {
+   "chapter": "Interactive Input Editing and History Substitution",
+   "heading": "Tab Completion and History Editing",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/interactive.html",
+   "order": 122
+  },
+  {
+   "chapter": "Interactive Input Editing and History Substitution",
+   "heading": "Alternatives to the Interactive Interpreter",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/interactive.html",
+   "order": 123
+  },
+  {
+   "chapter": "Floating-Point Arithmetic: Issues and Limitations",
+   "heading": "Floating-Point Arithmetic: Issues and Limitations",
+   "level": 0,
+   "url": "https://docs.python.org/3/tutorial/floatingpoint.html",
+   "order": 124
+  },
+  {
+   "chapter": "Floating-Point Arithmetic: Issues and Limitations",
+   "heading": "Representation Error",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/floatingpoint.html",
+   "order": 125
+  },
+  {
+   "chapter": "Appendix",
+   "heading": "Appendix",
+   "level": 0,
+   "url": "https://docs.python.org/3/tutorial/appendix.html",
+   "order": 126
+  },
+  {
+   "chapter": "Appendix",
+   "heading": "Interactive Mode",
+   "level": 1,
+   "url": "https://docs.python.org/3/tutorial/appendix.html",
+   "order": 127
+  },
+  {
+   "chapter": "Appendix",
+   "heading": "Error Handling",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/appendix.html",
+   "order": 128
+  },
+  {
+   "chapter": "Appendix",
+   "heading": "Executable Python Scripts",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/appendix.html",
+   "order": 129
+  },
+  {
+   "chapter": "Appendix",
+   "heading": "The Interactive Startup File",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/appendix.html",
+   "order": 130
+  },
+  {
+   "chapter": "Appendix",
+   "heading": "The Customization Modules",
+   "level": 2,
+   "url": "https://docs.python.org/3/tutorial/appendix.html",
+   "order": 131
+  }
+ ]
+}

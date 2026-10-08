@@ -1,0 +1,1094 @@
+ (NOT learned yet)
+ (part by part) for
+ (source checker 
+ : f <= 0 ? `<circle class=
+ : f >= 1 ? `<circle class=
+ Include the author or edition if you can
+ Its text couldn't be kept in this browser, so lessons can't use it after a reload.
+ One chapter per line. The AI only reads what you paste.
+ Optional, taken from the file name otherwise
+ Optional: what you've done so far, what feels easy or hard
+ Other writers are writing the other parts at the same time. Write ONLY your part.
+ PDF, EPUB, text, Markdown or HTML
+ Still blocking: 
+ The book's own answers are in Appendix B, under this chapter.
+ The lesson is built part by part. Write ONLY your part.
+ What you have now stays until then.
+ You can keep reading the parts you already have.
+ and what you reliably know about this material. If you don't recognize it, say so in \"note\".
+ chapters matched)
+ chapters. Comparing with your path…
+ comes before 
+ final checks, 
+ for part 
+ found problems. 
+ in Markdown.
+ in its own order. A baseline to compare the AI's plans with.
+ is being built…
+ is marked as learned on your map.
+ is ready.
+ key points
+ match), so the page won't rely on either. Upload your copy instead.
+ must teach these items, with their key points:
+ now replaces \"
+ only once it passes the final check.
+ parts ready
+ path option
+ points apart)
+ points learned
+ rounds of fixes, so the lesson wasn't shown. Try again.
+ source switch
+ source switches
+ to correct.
+ trial tasks: 
+ with the parts you already have
+ worth adding, 
+ would teach, in teaching order.
+ · fixed and rechecked 
+ · glowing on the map
+ · lists prerequisites, used as the human check
+ · not built
+ · not learned yet: 
+ · on the AI route
+ · written by AI, can be wrong
+ · your choice
+$39.99 ebook, $49.99 print plus ebook.
+% (the higher, the more the AI explains itself; the lower, the more it points to the sources).
+(not given)
+(prints nothing)
+(the source checker didn't answer)
+) && typeof v === 
+) + `</div><details class=
+). Use ONLY unit ids from the list. Never invent a unit.
+).filter(Boolean)), B = new Set(b.split(
+); final check 
+)}<div><span class=
+**Block** rules: a block begins where **indentation** increases, can contain other blocks (**nesting**), and ends where indentation goes back to an enclosing level
+**Continue** runs normally until the program ends or reaches a **breakpoint**
+**Flowcharts** show branching: **diamonds** for decisions, **rectangles** for steps
+**Glob patterns**: `*` matches **any text** and `?` **one character**, as in `p.glob('*.txt')`
+**Keyword arguments** are identified by name, not position
+**Negative indexes** count from the end: index `-1` is the last item
+**Parameters** are the variables in the definition; **arguments** are the values passed in a call
+**Separate** `if` statements are each checked on their own, so several can run, unlike one `if`/`elif` chain
+**Step Over** runs the next line, running any function it calls at full speed; **Step In** goes into the function; **Step Out** finishes the current function
+**Triple quotes** make a string that spans several lines, newlines included
+**Tuples** use **parentheses** and can't be changed
+**Write mode overwrites** an existing file and **append mode adds** to its end; both create the file if it's missing
+**f-strings** put expressions in **braces**: `f'My name is {name}'`
+, a checker failed
+, and the original step is back.
+, at the end.
+, built one at a time
+, chapter text
+, checked outline with 
+, click to show
+, covering every part in the plan above, not only yours
+, is missing key points: 
+, no checked outline
+, { datetime: e.at }, new Date(e.at).toLocaleTimeString([], { hour: 
+- (no headings found)
+- 5 to 14 steps. Each step is one unit.
+- AI involvement for this path is about 
+- About 500 to 900 words of Markdown. No title line at the top.
+- Accuracy first. Every example's stated output must be exactly what the code prints. If something depends on the Python version, say so.
+- At least two of the three plans must combine units from two or more sources. Say in each step's \"why\" what makes that source the best choice for it.
+- Avoid needless back-and-forth: when two sources are about equally good, keep neighboring steps in the same source.
+- Don't introduce or summarize the other parts, and don't teach their items. When you build on an earlier part, refer back to it in a few words. When you mention something another part teaches, name that part by its number as the plan above has it (\"in Part 4\"), never \"later in this part\".
+- Every code example is short, runnable Python 3, and is followed by its exact output in a separate block that starts with the line \"Output:\". Show only output you are sure of.
+- Explain why things work, not only what to type. Address the pitfalls.
+- For each item, in order, a \"## \" section on what to focus on, with a short example for the hardest ones.
+- For each part give a short title, its item numbers, a brief for its writer (what to teach and how deep), and what it can assume from earlier parts.
+- Give each of your items its own \"## \" section, in order.
+- Keep the chapter's order. Each part is a run of consecutive items, and every item belongs to exactly one part.
+- Length: whatever your items need to be taught properly. Don't cut content to be short.
+- Markdown, with \"## \" section headings and code in ```python blocks. Show each example's output right after it as a line \"Output:\" followed by a plain ``` block. Tables, bold, italics and lists are fine.
+- Never invent practice questions or exercises. For practice, point them to the human-written practice listed under the lesson. If they paste an exercise, help with it directly.
+- Never write practice questions, exercises, quizzes, \"try it yourself\" tasks or solutions. Practice comes only from the source, and the page adds it.
+- No checked lesson has been delivered for this step yet.
+- No lesson has been built for this point yet.
+- Split only where ideas naturally separate, never in the middle of one idea.
+- Start with \"## What you'll be able to do\": 3 to 6 bullets for the whole lesson
+- Stay inside this chapter: teach its items fully, and don't add topics it doesn't teach.
+- Teach basics before what builds on them, in the order most courses use.
+- The lesson written for them:\n\"\"\"\n
+- They are reading 
+- This kind of lesson is short: use exactly 1 part.
+- Use the plan's sections as ## headings, in order. Start with the bridge if the plan has one.
+- Usually 3 parts; 2 for a short chapter, 4 for a long one. Keeping each part complete matters more than the number.
+- \"## Context\", then \"## Key terms\" with short, accurate definitions for every item, then \"## Read the original\".
+- \"error\": anything factually wrong, including an example whose stated output differs from what the code prints. Work through the code yourself.
+- \"rule\": practice questions, exercises, quizzes, \"try it yourself\" tasks or solutions written by the AI (not allowed: practice comes only from the source), text, code or examples copied from the book, or an answer to one of the chapter's practice questions.
+- coverage: for each item above, \"covered\" (taught well enough to learn from, for this kind of lesson, with every key point listed under it
+- issues: factual errors, code that wouldn't run, or stated output that differs from what the code prints (kind \"error\"); content well beyond what this chapter teaches (kind \"scope\"). Quote the exact passage, and only report real problems.
+- no checks yet
+/></feComponentTransfer><feComposite in2=
+/><circle cx=
+/><feBlend in2=
+/><feColorMatrix type=
+/><feComponentTransfer><feFuncR type=
+/><feFuncA type=
+/><feFuncB type=
+/><feFuncG type=
+1. An item the part must teach is missing or too thin to learn from, or one of the key points listed under it isn't taught. In an AI-led lesson, a rule that is only stated, without an example showing it change a result, isn't taught.
+2. A factual error, code that wouldn't run, or an example whose stated output is wrong.
+3 to 5 sentences: what they did well, what to watch, what to study next
+4. A rule break: practice questions, exercises or solutions written by the AI; text, code or examples copied from the book; or an answer to one of the chapter's own practice questions.
+: [topic ids], 
+: chapter number, 
+: task id, 
+: true or false, 
+; a rule counts only if an example shows it changing a result
+; key points not taught: 
+; what you already have is unchanged.
+>${p.num}</span><h4>${p.title}</h4><span class=
+><defs><filter id=
+>Clear this topic</button>` : 
+>books putting the left one first : the right one first</span><span></span></div></div>` : 
+>on the suggested route</span>` : 
+A **backslash** starts an **escape character**: `\\'` and `\\\"` for quotes, `\\n` for a **newline**, `\\t` for a **tab**, `\\\\` for a backslash
+A **breakpoint**, set by clicking a line number in Mu, **pauses** execution at that line
+A **call** is the function's name followed by parentheses; afterwards execution goes back to the line that called it
+A **condition** is an expression that evaluates to `True` or `False` and decides what a flow control statement does
+A **dictionary** maps **keys** to **values** inside **curly braces**
+A **list** is an ordered sequence in **square brackets**, and `[]` is the empty list
+A **negative step** counts down
+A **slice** such as `items[1:4]` gives a new list of the items at 1, 2 and 3; the **end index isn't included**
+A `for i in range(5)` loop can be written as a `while` loop with a **counter** set before it and increased at the end of each pass
+A `for` loop with `range` limits the number of guesses, and `break` leaves early on a right guess
+A `while` clause repeats **as long as** its condition is `True`; the condition is checked **before each pass**
+A blocking problem is \"core\" only if editing a few passages can't fix it: the part misreads the chapter, is mostly wrong, is written at the wrong level throughout, or misses most of its items. Everything else is fixable by editing, and must not be marked core.
+A call can be used inside an expression, including as an argument to another call
+A companion workbook with exercises and miniprojects
+A condition that never becomes `False` makes an **infinite loop**; **Ctrl-C** stops a stuck program
+A function **without a return** statement, or with a bare `return`, returns `None`
+A function that changes a list passed to it changes the **caller's list**
+A local scope and its variables are **destroyed** when the call returns
+A new path for the rest is ready to compare, at the top of this page.
+A number **never equals a string**, even one with the same digits, while an integer **equals a float** with the same value
+A one-item tuple needs a **trailing comma**; without it the parentheses just group a value
+A path's parts: `anchor`, `parent`, `name`, `stem` and `suffix` (and `drive` on Windows), plus the `parts` tuple
+A problem set every week, plus a final project
+A program ends after its last line; `sys.exit()` ends it **early**
+A shelf can be **read and written** once it's open; `list()` turns its `keys()` and `values()` into lists
+A third argument is the **step** between the numbers
+A variable that's assigned only in some branches doesn't exist when none of them ran, causing a `NameError`
+AI built 
+AI involvement about 
+AI picked
+AI plan 
+AI plans, AI teaches
+AI proposed a new remaining path (
+AI-led lesson
+Absolute and relative paths
+Accepted the new remaining path
+Accepting several possible inputs with `or` needs a **full comparison on each side** of `or`, not a bare value on the right
+Add a material
+Add and compare with my path
+Add to my path
+Add your own book or handouts
+Added from your material
+Agreed key terms (use these meanings):\n
+Al Sweigart
+Allen B. Downey
+Almost
+Already delivered
+Already solid: 
+Also blocking: Part 
+An **absolute path** starts at the **root folder**; a **relative path** is relative to the working directory
+An `assert` statement raises `AssertionError` when its condition is `False`
+An `import` statement makes a **module**'s functions available, called with the module's name and a **dot**
+An `r` before the opening quote makes a **raw string**, where backslashes are kept as they are; handy for Windows paths
+An argument gives the characters to remove from the ends instead
+Arguments and parameters
+Ask about this step\".
+Ask again
+Ask for a mass in kilograms, as a whole number. Print the matching energy in joules from E = mc², using c = 300,000,000 m/s. Print the result as a whole number.
+Ask for a time in 24-hour format, like 7:30 or 18:45. Print breakfast time from 7:00 to 8:00, lunch time from 12:00 to 13:00 and dinner time from 18:00 to 19:00. Print nothing at other times. Write a convert(time) function that turns \"7:30\" into 7.5, and call it from main().
+Asked the tutor about 
+Asking Claude isn't allowed on this page. Allow it in the artifact's permissions to use the AI steps.
+Asking Claude isn't available in this view.
+Asking three models…
+Assertions are **sanity checks** for **programmer mistakes**: don't catch them, let the program **fail fast**
+Assertions with assert
+Assign to a position in a list
+Assigning to an index changes that item
+At least one model doesn't know this book well enough to list its chapters reliably, so the page won't guess. Upload your copy instead.
+At most **one clause** in an `if`/`elif` chain runs: the **first** one whose condition is `True`
+At the end of the clause, execution **jumps back** to the condition, unlike an `if`
+Augmented assignment operators
+Back to the lesson
+Balls holding links against most books' order
+Balls the books order differently
+Balls touched by Exercism's human links
+Balls with indexing and slicing
+Balls with points in 0–2 sources
+Balls with points the sources corrected
+Based on what you told the guide only, so it's a rough estimate. It can be wrong.
+Basics: if statements
+Basics: user input and while loops
+Basics: variables and simple data types
+Being built by the team
+Better later
+Boolean operators can be stacked, such as applying `not` more than once
+Boolean operators: and, or, not
+Boolean values
+Boolean values can be stored in variables and used in expressions
+Both checkers
+Bridge first: 
+Build a checked lesson
+Build a string from a list's items with separators, handling an empty list
+Build part 
+Build this lesson
+Built on the chapter's checked outline
+Built on the chapter's text from your copy
+Call a function from a module after importing it
+Can replace a step
+Cancel
+Catch the ValueError that int() raises on text that isn't a number
+Catching `KeyboardInterrupt` lets **Ctrl-C** end the program cleanly with `sys.exit()`
+Changing values, concatenation, replication and del
+Chapters recalled by two models that agreed (
+Chapters with a checked outline link straight to the chapter. For the others, open the book and go to the chapter number.
+Check every reported problem against the part yourself. Drop it if it's wrong, a duplicate, or only advice. Keep each blocking problem once, with the exact passage. If a checker didn't answer, do that checker's job yourself.
+Check my list
+Check that a dictionary modeling something real is valid, display a dictionary of counts, and add a list of items to a dictionary of counts
+Checked against headings only
+Checked against the chapter's checked outline
+Checked against the chapter's text
+Checked by AI only (weaker)
+Checker
+Checking whether files and folders exist
+Checks run by the page
+Choose a file first.
+Choose a path first, then add your material.
+Choose a path first.
+Choose this path
+Chose a point to learn: 
+Classes and Functions
+Classes and Objects
+Claude declined this request. Try rephrasing it.
+Claude isn't available for this account.
+Closing files, and the with statement
+Code that might fail goes in `try`; the handling code goes in `except`, such as `except ZeroDivisionError:`
+Comfortable with basics
+Compare lists with strings, and lists with tuples
+Compare sources
+Comparing with your path…
+Comparison operators
+Comparisons can be combined with Boolean operators: each comparison gives a Boolean that the operator then works on
+Concept first, exercises in each chapter
+Conditionals and Recursion
+Conditions and blocks of code
+Continue with this path
+Controlling the Keyboard and Mouse
+Converting input with `float()` and `str()` to do math with it
+Copied
+Copy
+Copying and pasting with the pyperclip module
+Couldn't copy directly, so the notes are selected. Press Ctrl+C or Cmd+C to copy them.
+Couldn't plan your options: 
+Counting characters: `setdefault(character, 0)`, then add 1
+Covered
+Creating functions with def
+Creating new folders
+Cross-check of a tutor answer (
+Current remaining steps:
+Data structures **model** real things; this program doesn't enforce the rules of chess
+Debugging
+Deep Thought
+Default
+Delivered
+Describe your goal in a sentence or two first.
+Designing and Deploying Command Line Programs
+Dictionaries **can't be sliced** like lists
+Dictionaries and Structuring Data
+Dictionaries and lists can **contain each other**
+Dictionaries compared with lists
+Dictionary basics: keys, values and key-value pairs
+Didn't pass after 
+Doesn't fit now
+Don't name your own file after a standard module, or Python imports yours instead
+Each call adds a **frame** to the **call stack** that remembers where to return; returning removes it
+Each edit replaces one exact piece of the part. \"find\" must be copied exactly from the part and be long enough to appear only once (a full sentence or line, or a whole code block). To add something, find the sentence or block it should follow, and replace it with that same text plus the addition.
+Earlier parts of this lesson already teach:\n
+Editor
+Editor is fixing it
+Einstein
+End of the lesson · practice below
+Ending a program early with sys.exit()
+Ending the chain with `else` guarantees exactly one clause runs
+Enter
+Enumerating list items
+Eric Matthes, No Starch Press
+Errors raised **inside functions called** from the `try` block are caught too
+Escape
+Escape characters
+Evaluate chained case and validation methods
+Evaluate expressions that mix comparisons, and, or, not and parentheses
+Evaluate index, negative index and slice expressions, including ones whose index is itself an expression
+Evaluate indexing and slicing expressions on a string
+Evaluate split() and join() expressions
+Every flow control statement ends with a **colon** followed by an indented block
+Every opened file should be **closed**
+Every part is written at the same time, and the final check reads the whole chapter. You start reading when all of it is ready.
+Every step is a real unit from a source
+Everything else is advice and never blocks: more depth, more examples, style, or topics beyond the chapter. Missing exercises are never a problem.
+Example runs: 
+Excel Spreadsheets
+Exception handling with try and except
+Exercises for each topic, plus three capstone projects
+Exercises in each chapter
+Exercism
+Explain Step Over, Step In, Step Out, Continue and breakpoints
+Explain escape characters, what \\n and \\t mean, and how to put a backslash in a string
+Explain how checking with in on a dictionary compares with checking its keys() and its values()
+Explain how range()'s default start and step work
+Explain os.getcwd() and os.chdir(), and the . and .. folders
+Explain return values, and that a call can be part of an expression
+Explain the difference between == and =
+Explain the difference between break and continue
+Explain the main difference between a dictionary and a list
+Explain what an import statement does, and call a module's function (taught in the loops chapter)
+Explain what variables that 'contain' lists really hold
+Explain why a single quote inside a double-quoted string needs no escaping
+Explain why a value assigned once outside a function doesn't change between calls
+Explain why functions help, and whether their code runs when defined or when called
+Explain why logging is better than print() for debugging messages
+Fast basics, then three big projects
+Fastest to your goal
+Fewer than two models answered, so there's nothing to cross-check. Try again.
+File
+Files
+Files and Databases
+Files and file paths
+Fill a list with random values and scan it for runs of the same value
+Final checker
+Find and fix the bugs in a coin-toss guessing program
+Find it and compare with my path
+Find it by title
+Find the longest string in each column of a list of lists, and right-justify text to a width
+Finding files with glob patterns
+First list the 6 to 12 items a thorough textbook chapter on 
+First list the items this chapter teaches, in the chapter's order (usually 6 to 14).
+Five levels from lowest to highest: `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`, each with its own function such as `logging.debug()`
+Flipping a Boolean variable with `not`
+For example: Fluent Python, 2nd edition
+For example: why does this example print None?
+Form: the `if` keyword, a condition, a **colon**, then an indented block (the **clause**)
+Free
+Free online, CC BY-NC-SA 4.0.
+Free online. A practice workbook is sold separately.
+Free, part of the official Python 3.14 documentation.
+Free. An edX certificate is optional and paid.
+From a typed table of contents. Lessons for its chapters can't see the text.
+From the source, not the AI
+From your file 
+Fuel Gauge
+Functions
+Functions and Interfaces
+Functions remove **duplicated code**, so programs are shorter and easier to update
+Getting file and folder details
+Give the material a title and paste its table of contents, one chapter per line.
+Global code **can't** use local variables
+Go deeper and practice in 
+Go deeper in your copy of 
+Go to the next step
+Google Sheets
+Grocery List
+Guided reading
+Harvard University
+How human courses and books title this topic:\n
+How the team checked this lesson
+How to write it:
+I've finished this step
+Identify the blocks in code where an if block contains another if/else block
+Importing modules from the standard library
+In Learn, \"Replan the rest\" uses what this check found.
+In a `for` loop, `continue` moves on to the **next value** of the loop variable
+Indexes start at `0`; an index past the end raises `IndexError`, and a float index raises `TypeError`
+Indexing and slicing strings
+Introduction
+Involvement grade 
+It **skips the rest** of one pass
+It doesn't teach every topic of that step, so the page offers it as an extra step instead.
+It leads to: 
+It's written for a higher level than yours right now, so the page offers it for later.
+Items the lesson must teach, in order, with their key points:
+Iteration and Search
+Its clause runs only when the condition before it was `False`, so **exactly one** of `if` and `else` runs
+Its table of contents, as they pasted it (numbered here):
+Its text stays in this browser only, so lessons can be written from the real chapters.
+Judge from 
+Just starting
+Justifying text with rjust(), ljust() and center()
+Keep my current path
+Keeping Time, Scheduling Tasks, and Launching Programs
+Kept the current path
+Key points checked at the source in Automate the Boring Stuff, 3rd edition, for this topic. Cover the ones that belong to this point:\n- 
+Key points checked at the source on 
+Keys can be many types, not just integers, and don't need to start at `0`
+Kind of lesson: 
+Know how to stop a program stuck in an infinite loop
+Know the two lines needed to use logging.debug(), and the two to send its messages to a file
+Later parts of this lesson will teach:\n
+Lead
+Lead is deciding what must change
+Learner checker
+Learner checker, problems:
+Learner's goal: Python for machine learning (default, not set yet)
+Learner's key points:
+Leaving out the start or end means from the beginning or to the end, so `[:]` **copies** the whole list
+Lecture first, then problem sets
+Lesson parts
+Level 1 check for 
+List methods for finding, adding, removing, sorting and reversing values
+List the chapters of the book \"
+List the key points you learned first.
+List the six comparison operators
+Lists are **mutable**; strings and tuples are **immutable**, and assigning to a character of a string raises `TypeError`
+Lists are reached by integer **position**; dictionaries by **key**
+Lists can contain lists, reached with **two indexes** one after the other
+Local and global scopes: the scope rules
+Local code **can read** global variables
+Logging is for the **programmer** and easy to switch off; `print()` is for the **user**
+Logging with the logging module, including logging levels
+Machine-learning link: 
+Make a function use a global variable
+Making Graphs and Manipulating Images
+Map: example progress loaded
+Map: progress cleared
+Mark done and go to the next step
+Marked done: 
+Meal Time
+Missing exercises are never a problem.
+Models agree
+Models disagree
+Models partly agree
+More human-written practice (
+Moving a piece **copies the value** to the new square and **deletes the old key**
+Mutable and immutable data types
+My Python notes
+Name the directory name and the base name in a path
+Name the five logging levels, and the line that disables all logging
+Name the list concatenation and replication operators
+Name the methods that justify and center text, and those that trim whitespace
+Name the module and function that pretty-print dictionaries
+Name the three Boolean operators and give the full truth table for each
+Name the three open() modes for text files, and what write mode does to an existing file
+Name the two Boolean values and how they're written
+Named parameters
+Needed by route points such as 
+Needs work: 
+Neither checker answered, even after a retry.
+Nested data is read with **nested loops** or `items()`
+Nested dictionaries and lists
+Never insert into the middle of a list, table or paragraph, and never leave a list item, sentence or code block cut off. If an addition belongs inside a list, replace the whole list with a corrected one; otherwise add it after the whole list or paragraph it goes with.
+No answer came back. Try asking for less at once.
+No checked outline for this step
+No checked outline or text is available for this step.
+No checked outline or text is available. Judge from what you reliably know about this material.
+No checked outline or text is available. Use your own knowledge of this unit, and keep to its core points.
+No exercises. Pair it with another source's practice
+No feedback came back.
+No human-written practice was found for this point yet.
+No matching step was named, so the page offers it as an extra step.
+No readable text was found. A scanned PDF has no text layer, so paste its table of contents instead.
+None of its points are on the suggested route.
+Not a main topic
+Not added: 
+Not built yet
+Not delivered: 
+Not problems: wording, length, order, extra helpful detail.
+Not reachable yet
+Not saved in this view. It clears when you close the page.
+Notes appear here after your first lesson on a point.
+Notes copied as plain text.
+Nothing to review yet
+Nothing. Written for beginners
+Nothing. Written for people who have never programmed, or found it hard before
+Old version, never checked
+Older styles still seen: `'%s' % value` and the `format()` method
+One course as-is
+One function **can't** use another function's local variables
+One of the **first two values** joined with `/` must be a `Path` object; joining two plain strings with `/` is an error
+Open the book, then go to the chapter number.
+Open the practice questions
+Open the problem sets
+Open the source
+Opened the map
+Opening files with open()
+Order goes against every course that teaches these: 
+Order matters: a **broad** condition placed before a **narrower** one inside it makes the narrower one **unreachable**
+Order of operations: math and comparison operators first, then **not**, then **and**, then **or**
+Organizing Files
+PDF and Word Documents
+Paid
+Parameters are **local**: they're forgotten when the function returns, and using one outside it causes a `NameError`
+Part by part
+Pass `encoding='utf-8'` when opening text files
+Passed
+Passed the final check
+Path options
+Path sections
+Paths that don't start at the root folder are **relative to the working directory**
+Pitfalls to address: 
+Plan my options
+Plan three new options
+Planned the chapter in 
+Planner
+Point lesson delivered: 
+Point lesson not delivered: 
+Practice from the source
+Practice from your source
+Practice: the lesson ends with practice written by people. From the numbered list below, choose 2 to 4 items that best practise this point, or fewer if few fit. Never invent practice of your own.
+Predict a list after index(), append() and remove()
+Predict the result of joining paths with /, including when it fails
+Problems to fix:
+Program execution normally runs **top to bottom**; flow control statements make it skip or jump
+Programming as a Way of Thinking
+Progress can't be loaded right now
+Progress isn't saved in this view
+Progress not saved in this view
+Progress restored
+Project first
+Project first: basics, then real automation tasks
+Project: a web app
+Project: an arcade-style game
+Project: an interactive chessboard simulator
+Project: data visualization
+Project: generating random quiz files
+Projects: adding bullets to wiki markup, and a Pig Latin translator
+Python
+Python Basics
+Python Crash Course, 3rd edition
+Python Software Foundation
+Python Tutorial
+Questions about this step
+Raising exceptions with raise
+Random selection and ordering
+Raw strings
+Read a text file, replace placeholder words in it with the user's input, print the result and save it to a new file
+Read and compare with my path
+Read grocery items, one per line, until the user presses Ctrl+D. Then print each item once, in uppercase and in alphabetical order, with the number of times it was entered in front. The same item typed in different capitals counts as one item.
+Read the original in 
+Read this step in 
+Reading and Writing Files
+Reading file contents
+Reading page 
+Reading your code…
+Ready
+Ready for intermediate
+Reassigning a variable **replaces** its value, while methods like `append()` **modify** the list itself
+Rebuild
+Recognizing Text in Images
+Reference-style tour
+References: passing lists to functions, copy() and deepcopy()
+Regenerate this lesson
+Regular expressions
+Removing whitespace with strip(), lstrip() and rstrip()
+Replace that step
+Replan the rest
+Report gaps in items and key points in \"coverage\" only (status, and the key points not taught); don't repeat them in \"blocking\".
+Report only problems to fix in Part 
+Report only real problems, each with the exact passage quoted:
+Return Values
+Return the complete corrected part in Markdown, and nothing else.
+Return values and return statements
+Reviser
+Reviser is fixing it
+Rewrite
+Rewrite this lesson
+Rewrite this part
+Rewrote the part: 
+Rock, paper, scissors uses an outer game loop, an inner loop that repeats until the input is valid, and **counters** for wins, losses and ties
+Rules for every plan:
+Rules for everyone on the team:
+Running example idea you can reuse: 
+SQLite Databases
+Same steps, possibly in a new order.
+Saving variables with the shelve module
+Say how many global and local scopes a program has, and what happens to local variables when a call returns
+Say what [] is
+Say what a condition is and where one is used
+Say what a function without return returns, and the data type of None
+Say what a relative path is relative to, and what an absolute path starts with
+Say what data structure a shelf resembles
+Say what happens when you access a key that isn't there
+Search the lines of every text file in a folder for a pattern (regular expressions are taught in the chapter before this one)
+Section 10: Brief Tour of the Standard Library
+Section 11: Brief Tour of the Standard Library, Part II
+Section 12: Virtual Environments and Packages
+Section 3: An Informal Introduction to Python
+Section 4: More Control Flow Tools
+Section 5: Data Structures
+Section 7: Input and Output
+Section 8: Errors and Exceptions
+Selected
+Sending Email, Texts, and Push Notifications
+Setup: `import logging`, then `logging.basicConfig(level=logging.DEBUG, format=...)`
+Several modules can be imported in one statement, separated by **commas**
+Shared core covered, apart from what you already know
+Shared core missing: 
+Short complete programs: a number guessing game and rock, paper, scissors
+Short example programs that combine if, else and elif
+Short programs that pick items from a list at random and print them in a loop
+Short programs: Zigzag and Spike
+Short programs: a Magic 8 Ball with a list, and a Matrix-style screensaver
+Short-circuiting Boolean operators
+Skip to the next step
+Slicing **doesn't change** the original string
+Small differences in wording or detail count as agreement. Use \"agree\" when they give the same substance, \"partial\" when the core matches but there are real differences, and \"disagree\" when they conflict.
+Solve at least one task first, or skip the tasks.
+Something went wrong in the page: 
+Something went wrong while adding this material: 
+Source checker
+Source checker, coverage:
+Source checker, problems:
+Split the lesson into parts:
+Splitting the chapter into parts
+Standard (the tutor)
+Started over
+Started over. Your test log was kept.
+Stay consistent with it, and correct it plainly if you find a mistake in it.
+Steps already done:
+Stop a program from crashing on an error with try and except, and say what goes in each clause
+Stopped building 
+Stopped. Nothing was delivered.
+Stopping after the requests already running…
+String **replication** and `range()` with a negative step make the patterns
+String literals and quotes
+String methods can be **chained**, each working on the result of the one before
+String methods for case and validation
+Strings and Regular Expressions
+Strings and Text Editing
+Strings are **indexed and sliced** like lists, including negative indexes
+Strings can use **single or double quotes**; double quotes let a string contain a single quote **without escaping**
+Strong foundation
+Study this step in the original. The AI gives context and helps you look things up.
+Table of contents
+Taught in 
+Teacher
+Teaching team 
+Tell a function from a function call, and name the statement that creates a function
+Tell append() from insert(), and name two ways to remove values from a list
+Tell copy.copy() from copy.deepcopy()
+Tell read() from readlines()
+Text Analysis and Generation
+Text-to-Speech and Speech Recognition Engines
+That you already program in another language
+That's too much text at once. Shorten it and try again.
+The **debugger** runs a program **one line at a time** and shows the variables' values
+The AI gave no suggestion for this chapter.
+The AI isn't reachable right now.
+The AI isn't reachable, so it can't plan right now. You can still follow one course as-is below.
+The AI isn't reachable, so the lesson can't be built right now. You can still study the original.
+The AI plans paths for your goal from real units of five courses and books, taking each topic from the source that teaches it best for you. The page then checks every plan itself: every step must exist, the shared core must be covered, and the order mustn't go against every real course.
+The AI teaches this step for you, built on 
+The AI's options
+The None value
+The Python Tutorial (official)
+The \"What you'll be able to do\" list at the start of Part 1 is meant to cover the whole lesson, including what later parts teach. That's intended, not a problem.
+The `for` version is shorter because it **manages the counter** for you
+The `while True:` ... `break` pattern loops forever and exits from inside
+The answer came back in a form the page couldn't read. Try again.
+The answer was cut off before it finished, even after a retry.
+The bar. Only these block delivery:
+The board is a dictionary with **square names as keys** and short strings naming each piece's color and type as values
+The book's answers (Appendix B) ↗
+The call stack
+The chapter couldn't be split into parts. Try again.
+The chapter ends with 10 practice questions and 1 practice program: a table printer function.
+The chapter ends with 11 practice questions and 2 practice programs: a Mad Libs program, and a regular-expression search across text files.
+The chapter ends with 12 practice questions and 1 practice program: a coin toss guessing game full of bugs for you to find and fix.
+The chapter ends with 15 practice questions and 2 practice programs: The Collatz Sequence and Input Validation.
+The chapter ends with 17 practice questions and 2 practice programs: Comma Code and Coin Flip Streaks.
+The chapter ends with 5 practice questions, including printing the numbers 1 to 10 with both a for loop and a while loop. It has no separate practice programs; its guessing game and rock, paper, scissors programs are good ones to rebuild yourself.
+The chapter ends with 7 practice questions and 3 practice programs: a chessboard validator, and two inventory functions, display_inventory() and add_to_inventory().
+The chapter ends with 9 practice questions. Its example programs (vampire.py, vampire2.py, littleKid.py, oppositeday.py and dishonestcapacity.py) are worth typing in and changing yourself.
+The chapter's key points on one page, to keep and come back to. To test yourself, hide the key terms and try to recall each one before you click it.
+The chapter's outline, checked at the source, with the key points each item teaches:\n
+The checker still found problems after 
+The clause runs only when the condition is `True`; otherwise it's skipped
+The connection dropped. Try again.
+The current working directory
+The elif statement, and why the order of elif branches matters
+The else statement
+The get() method
+The global statement, and working out a variable's scope
+The if statement
+The in and not in operators
+The in and not in operators with dictionaries
+The in and not in operators with strings
+The keys(), values() and items() methods
+The knowledge map couldn't load, so points can't be chosen here.
+The knowledge map couldn't load.
+The lesson
+The lesson is shown but couldn't be saved.
+The lesson wasn't finished. 
+The lesson:
+The list data type: indexes and negative indexes
+The loop variable needs a value **before the loop** so the condition can be checked the first time
+The material couldn't be added. Try again.
+The models disagree
+The models partly agree
+The multiple assignment trick
+The number of variables must **match** the number of items, or Python raises `ValueError`
+The other parts cover: 
+The parent is the **directory name** and the name is the **base name**
+The part (Part 
+The part:
+The pathlib module
+The plan the lesson should follow:
+The plan:
+The project combines a dictionary, `random.shuffle()` and `random.sample()`, and writes many files in a loop
+The remaining steps of their current plan (id | source | title | topics):
+The rules: outside all functions it's **global**; with a `global` statement it's **global**; assigned in the function it's **local**; only read there, it's **global**
+The same name can be different variables in different scopes
+The setdefault() method
+The shared core: all five sources teach these
+The six **comparison operators** `==`, `!=`, `<`, `>`, `<=`, `>=` each evaluate to `True` or `False`
+The stack is **last in, first out**
+The step it would replace is no longer on your path, so nothing changed.
+The teaching team is building 
+The terms **define**, **call**, **pass**, **argument** and **parameter**
+The three models agree
+The three plans:
+The tuple data type, and converting with list() and tuple()
+The two models agree on 
+The two models remember this book's chapters differently (
+The unit's outline, checked at the source:\n
+The whole chapter is planned first, then built one checked part at a time. You can start reading sooner and build the next part when you're ready.
+Their code:
+There are only two **Boolean** values, `True` and `False`, capitalized; lowercase `true` and `false` aren't valid (`NameError`)
+There's no prepared check for this step yet, so list the key points you learned, like you would for an exam. The AI compares your list with the chapter.
+These are AI estimates of AI ability, and they can be wrong. The rest comes from your sources: read them, and do their exercises.
+These methods change the list **in place** and return `None`, so assigning a list to the result of its own `sort()` loses the list
+They aren't strings: `True` is different from `'True'`
+They skipped the tasks, so judge from what they said only, and say that this is a rougher estimate.
+This Claude app is too old for this page. Update it and try again.
+This file couldn't be read: 
+This is one AI's reading of your code. It can be wrong, so also run your code with the example inputs.
+This makes it safe to check a list's length and then index it in the same condition
+This page can no longer ask Claude.
+This part must teach these items:
+This part must teach:
+This path has no steps left.
+This point needs first: 
+This step's lesson hasn't been built yet.
+This step's lesson was made by the old single-model process and never passed the team's checks, so it isn't shown.
+This week leads into the course's final project.
+Three models estimate
+To change a string, **build a new one** from slices and concatenation
+Too few books teach these points for a same-chapter figure.
+Topic ids: 
+Topic order matches at least one real course
+Transforming clipboard text line by line: **split** on newlines, change each line in a loop, **join** and copy back
+Transforming words letter by letter while keeping punctuation and capitalization
+Trial tasks
+Triple-quoted strings are also used as **multiline comments**
+Try again
+Tuples
+Two checkers are reviewing it
+Two dictionaries with the same key-value pairs are **equal, whatever the order**
+Two models are recalling this book's chapters separately…
+Type the book's title first, ideally with its author or edition.
+Undo
+Unit names follow the publisher's description. Match them to the chapters in your copy.
+Units (id | source | title | topics | written for):
+Upload your copy
+Use **exceptions**, not assertions, for expected problems such as bad user input or a missing file
+Use setdefault() as a shortcut for setting a value only when the key is missing
+Use the exercises in this chapter of your copy of 
+Use the exercises that come with this part of 
+Use the new path
+Uses 1 request on your Claude account
+Using a local variable before assigning it raises `UnboundLocalError` instead of falling back to the global one
+Using the debugger: stepping through code and setting breakpoints
+Variables and Statements
+Variables assigned in a function are **local** to that call; there's **one global scope** and a **new local scope** for each call
+Variables hold **references** to lists, so assigning a list to another variable **doesn't copy** it
+Waiting
+Waiting for every part
+Waiting for part 
+Waiting to start
+Web Scraping
+Week 5: Unit Tests
+Week 6: File I/O
+Week 7: Regular Expressions
+Week 8: Object-Oriented Programming
+Week 9: Et Cetera
+What and why
+What did you learn in 
+What each source teaches. Shaded columns are taught by all five.
+What it will ask you to do
+What the checker still found
+What their level 1 checks showed:
+When an error happens, the **rest of the try block is skipped** and `except` runs; otherwise `except` is skipped
+When left out, the start defaults to `0` and the step to `1`
+When the stack is empty, execution is outside all functions
+Where they are now: 
+Where you are now
+Whole chapter at once
+Whole document
+Windows separates folders with **backslashes**; macOS and Linux use **forward slashes**
+Without a `try` and `except` around it, the program **crashes** and shows the message; usually a function raises and its **caller** handles it
+Works
+Write a counting loop with for, and rewrite it as an equivalent while loop
+Write a function that branches on whether a number is even or odd with % and //, call it in a loop until it returns a stopping value, convert input with int(), and print on one line with end= or sep=
+Write a one-item tuple, and convert between lists and tuples
+Write a string with newlines without using \\n
+Write an if/elif/else chain that prints a different message for different values of a variable
+Write assert statements: one checking a number, one comparing two strings regardless of case, and one that always fails
+Write dictionary values, including an empty one
+Write something in the note first.
+Writer
+Writer is drafting
+Writer is rewriting it (a core problem was found)
+Writers will write the parts at the same time, so your plan is what keeps the lesson whole.
+Writing a for loop as an equivalent while loop
+Writing to files
+YOUR PART: Part 
+You can assume from earlier parts: 
+You covered
+You teach ONE Python knowledge point in Learning Companion, following a plan written by a planning AI.
+You wrote the lesson below on ONE Python knowledge point. A checker found problems. Fix every one and change nothing else.
+You've hit a usage or rate limit. Wait a while, then try again.
+Your current path, with your changes
+Your lesson on 
+Your lesson:
+Your list couldn't be checked: 
+Your list was checked: 
+Your materials
+Your notes appear after your first lesson on a point.
+Your notes:
+Your path
+Your path: 
+Your path: one course as-is
+Your session expired. Sign in again, then try again.
+Your trial couldn't be assessed: 
+Your trial was assessed: 
+\" by title: a model didn't know it well enough
+\" by title: the two models disagreed (
+\" from what you reliably know. If you don't know this exact book well enough to list its chapters accurately, say so instead of guessing.\n\n
+\" is off your path
+\" is ready. It passed its final check (
+\" on your path.
+\" to your path
+\", together with: 
+\". It belongs to the topic \"
+\nAlready covered on their path:\n
+\nAn earlier version of this part was rejected because:\n
+\nEarlier final checks found these problems, and they were fixed. Confirm they're resolved, and report a new problem only if it clearly blocks under the bar:\n
+\nIn their own words: 
+\nReport a need as missing only if it belongs to Part 
+\nTeach from it in your own words.
+\nThe lesson must teach everything these need, but must never contain the questions, exercises or their solutions.
+\nThe whole lesson, as planned:\n
+\nThis is the last part to be built, so across the whole lesson everything these need must now be taught. Report anything missing as a problem in Part 
+\nWrite it again so that problem can't happen.
+\n\"\"\"\nStay consistent with it, and correct it plainly if you find a mistake in it.
+`+=` and `*=` also work on strings and lists
+`+` **joins** lists and `*` **repeats** one
+`.` means **this folder** and `..` the **parent folder**
+`==` and `!=` work with values of any type; `<`, `>`, `<=`, `>=` are meant for integers and floats
+`==` compares and `=` assigns; mixing them up is a classic mistake
+`None` means the **absence of a value**; it's the only value of the `NoneType` type, and is capitalized
+`Path.cwd()` (or `os.getcwd()`) gives the **current working directory**, and `os.chdir()` changes it
+`Path.home()` is the user's **home folder**
+`Path.mkdir()` creates **one folder**, and `mkdir(parents=True)` creates missing parents too
+`Path.read_text()` reads a text file in one call
+`Path.write_text()` writes a file in one call and returns the number of characters written
+`True` and `False` are **keywords**, so they can't be used as variable names (`SyntaxError`)
+`a, b, c = items` **unpacks** a three-item list into variables in one line
+`and` doesn't evaluate its right side when the left side is `False`; `or` doesn't when the left side is `True` (**short-circuiting**)
+`and` is `True` only when **both** sides are `True`; `or` is `True` when **at least one** side is; `not` **flips** one value (the truth table for each)
+`append()` adds to the **end**; `insert(i, value)` adds at a **position**
+`basicConfig(filename=...)` writes the log to a **file**
+`basicConfig`'s level **hides messages below it**; `logging.disable(logging.CRITICAL)` turns **all messages off**
+`break` **leaves the loop** immediately
+`break` and `continue` work in `for` loops the same way as in `while` loops
+`break` only works inside loops
+`continue` **jumps back to the start** of the loop and checks the condition again
+`continue` only works inside loops
+`copy.copy()` makes a separate copy; `copy.deepcopy()` also copies the **lists inside** a list
+`d[key]` gets a value; a key that isn't there raises `KeyError`
+`def` defines a function; its code runs when the function is **called**, not when it's defined
+`del` with an index removes an item, and the items after it **move down**
+`elif` gives another condition, checked only when every earlier condition in the chain was `False`
+`else` is optional, comes right after an `if` (or `elif`) clause, and has **no condition**
+`enumerate()` gives the **index and the item** on each pass: `for index, item in enumerate(items)`
+`except Exception as err:` stores the exception in a variable, and `str(err)` gives its message
+`exists()`, `is_file()` and `is_dir()` check what a path points to
+`for i in range(5):` runs its block **5 times**, with `i` from **0 to 4**
+`for i in range(len(items))` loops over the **indexes** when you need them
+`for item in items` loops over the items
+`for k, v in d.items():` unpacks each key-value pair
+`for` loops suit a **known number** of repetitions; `while` loops suit repeating **until something changes**
+`from module import *` drops the module name, but full names are more readable
+`from pathlib import Path`; parts of a path are joined with the `/` operator
+`get(key, fallback)` returns the **fallback** instead of raising `KeyError` when the key is missing
+`glob()` returns a **generator**, so loop over it or wrap it in `list()`
+`global name` at the start of a function makes assignments change the **global** variable
+`in` and `not in` check for a **substring**, and the check is **case-sensitive**
+`in` and `not in` check whether a value is in a list and give `True` or `False`
+`index()` returns the **first position** of a value, and raises `ValueError` if it's missing
+`input()` returns a **string**, so `int()` converts it before comparing numbers
+`int()` on text that isn't a number raises `ValueError`, which `except ValueError:` catches
+`is_absolute()` checks a path, and `Path.cwd() /` a relative path or `absolute()` makes it absolute
+`isalpha()`, `isalnum()`, `isdecimal()`, `isspace()` and `istitle()` check what a string contains, which helps **validate input**
+`isupper()` and `islower()` need **at least one letter** to be `True`
+`join()` is called on the **separator** string and takes a **list of strings**
+`key in d` checks the **keys**, the same as `key in d.keys()`
+`keys()`, `values()` and `items()` give list-like values you can **loop over but not change**
+`len()` gives the number of items
+`list()` and `tuple()` convert between them, and `list()` on a string gives a list of its **characters**
+`list(d.keys())` makes a real list
+`open()` returns a **file object**; its modes are `'r'` (read, the default), `'w'` (write) and `'a'` (append)
+`ord('A')` is `65` and `chr(65)` is `'A'`: every character has a **number code**
+`os.makedirs()` creates **every missing folder** in a path
+`pprint.pprint()` prints a dictionary in a **readable layout**
+`print()`'s `end=` replaces the **newline** at the end, and `sep=` replaces the **space** between arguments
+`pyperclip.copy()` and `pyperclip.paste()` use the **clipboard**; the module is **installed separately**
+`raise Exception('message')` **stops** normal execution and jumps to an `except` clause
+`random.choice()` returns **one random item** from a list
+`random.randint(a, b)` gives a random integer, **including both ends**
+`random.shuffle()` reorders a list **in place** and doesn't return a new list
+`range(n)` goes up to, but **doesn't include**, `n`
+`range(start, stop)` starts at `start` and stops **just before** `stop`
+`read()` returns the whole file as **one string**; `readlines()` returns a **list of lines**, each ending in `\\n`
+`remove()` deletes the **first matching** value, and raises `ValueError` if it's missing
+`return` gives the value that the call **evaluates to**
+`reverse()` reverses a list in place
+`rjust()`, `ljust()` and `center()` **pad** a string to a width, with an optional **fill character**
+`setdefault(key, value)` sets the value **only if the key is missing**, and returns the key's value either way
+`shelve.open()` saves variables in **binary files** that work like a **dictionary**
+`sort()` sorts in place, with `reverse=True` for descending and `key=str.lower` to ignore case; it **can't sort a mix** of numbers and strings
+`split()` splits on **whitespace** by default, or on a separator such as `'\\n'`
+`startswith()` and `endswith()` check how a string **begins and ends**
+`stat().st_size` gives the size in **bytes**, and `st_mtime` the **last-modified** time
+`strip()` removes **whitespace** from both ends, `lstrip()` and `rstrip()` from one end
+`sys` has to be **imported** first
+`time.sleep()` **pauses** a program, and `while True:` runs until it's stopped
+`upper()` and `lower()` return **new strings** and leave the original unchanged
+`value in d.values()` checks the **values**
+`with open(...) as f:` closes the file **automatically** when the block ends
+`write()` **doesn't add a newline** the way `print()` does
+`x += 1` is short for `x = x + 1`; there are also `-=`, `*=`, `/=` and `%=`
+`{{` and `}}` give literal braces
+a common mistake to address
+a lesson for 
+a short recap of one missing prerequisite idea
+about 7 to 9 requests for the plan and the first part, then about 6 to 8 for each next part
+anything they stated incorrectly, with the correct version
+break and continue inside for loops
+break statements
+breakfast time
+built part 
+built the whole lesson for
+can learn now
+card lesson-card
+card path-box
+card plan-card
+card practice
+card soft
+card tutor
+chapter titles in order, without numbers
+chip core
+chip ok
+chip warn
+choice compact
+continue statements
+count = 3\nwhile count > 0:\n    print(count)\n    count = count - 1
+counts = {}\nfor ch in 'banana':\n    counts.setdefault(ch, 0)\n    counts[ch] = counts[ch] + 1\nprint(counts)    # {'b': 1, 'a': 3, 'n': 2}
+def area(width, height):\n    return width * height\n\nprint(area(3, 4) + 1)    # 13
+dot no
+each part with the parts before it
+for loops and the range() function
+for loops with lists
+for n in range(10, 0, -3):\n    print(n)    # 10, 7, 4, 1
+found by title (two models agreed on 
+from a 
+from a typed table of contents
+from pathlib import Path\nreport = Path('archive') / 'notes.md'\nprint(report.name, report.stem, report.suffix)    # notes.md notes .md
+if-else and Flow Control
+import copy\noriginal = [[1, 2], [3]]\nclone = copy.deepcopy(original)\nclone[0].append(9)\nprint(original)    # [[1, 2], [3]]
+import logging\nlogging.basicConfig(level=logging.DEBUG, format='%(levelname)s - %(message)s')\nlogging.debug('starting')
+import math\nprint(math.floor(2.7))    # 2
+important points of the unit they left out
+it's checked against the parts you already have
+item = 'tea'\nprice = 2.5\nprint(f'{item} costs {price * 2} for two')    # tea costs 5.0 for two
+join() and split()
+key points they got right, short
+km-ball st-
+km-btn solid
+km-dot st-
+km-ping p2
+label small
+later in this part\" when another part teaches it). Text left broken by an edit also blocks: a list split by inserted material, or a sentence or list item cut off.
+link small
+lunch time
+muted small
+needed first
+new to programming
+not core, editing 
+not learned
+not reachable yet
+one encouraging sentence
+one or two sentences
+one plain sentence
+one sentence on what this material is and who it is for
+one sentence on where this shows up in machine-learning work
+one short sentence
+ord() and chr()
+parts\": [{\"title\": \"short\", \"items\": [item numbers], \"brief\": \"one or two sentences\", \"assumes\": \"what earlier parts taught that this part builds on, or empty\"}], \"terms\": [{\"term\": \"...\", \"meaning\": \"...\"}], \"example\": \"one sentence\"}
+pathlib's `Path` objects work on **every system**, and forward slashes are the best practice
+people who already program
+print(True or False and False)    # True: and goes first\nprint((True or False) and False)  # False
+range() with start, stop and step arguments
+rewrote part 
+short exact passage
+short heading
+short name
+short sentence per real difference
+single course 
+some basics
+speed = 40\nassert speed >= 0, 'speed can never be negative'
+startswith() and endswith()
+temp = 18\nif temp < 0:\n    print('freezing')\nelif temp < 20:\n    print('cool')\nelse:\n    print('warm')
+that step
+the AI's own knowledge of this unit, which is a weaker check
+the PDF reader couldn't be loaded
+the chapter titles
+the chapter's outline, checked at the source
+the chapter's text from your copy
+the edition you are describing, or an empty string
+the file reader couldn't be loaded
+the lesson
+the list
+the map
+the titles and openings
+the whole lesson
+the whole lesson goes through the final check
+their own copy of 
+thin\" (mentioned but too brief to learn from) or \"missing\". List any of its key points that aren't taught.
+thinking small
+this EPUB has no package file
+this lesson
+top picks
+try:\n    age = int('ten')\nexcept ValueError:\n    print('Please type a number.')
+unit id
+unknown error
+unknown reason
+up to 3 short phrases
+use strict
+what is wrong
+what it practises
+what the code example should show
+what to do
+what to explain and how
+with open('todo.txt', 'w', encoding='utf-8') as f:\n    f.write('buy milk\\n')\nwith open('todo.txt', encoding='utf-8') as f:\n    print(f.read())    # buy milk
+words = 'red green blue'.split()\nprint(' / '.join(words))    # red / green / blue
+}${done ? `<button class=
+}<button class=
+↻ Regenerate lesson

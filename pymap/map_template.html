@@ -1,0 +1,614 @@
+<title>Python Knowledge Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Schibsted+Grotesk:wght@600;700&display=swap">
+<style>
+/* Layout: map-first tool. The graph fills the left (rings = steps from the start, sectors = areas);
+   a reading panel on the right holds the problems found, the selected point, and the sources. */
+:root {
+  --bg: #f2f4f1; --surface: #ffffff; --map: #fafbf9; --ink: #16201b; --muted: #56645d; --faint: #8b9891; --line: #dbe2dd;
+  --accent: #0c6a64; --accent-soft: #d7edea; --warn: #9a610c; --warn-soft: #f5e8d2; --bad: #bd3822; --bad-soft: #f7dfd9;
+  --human: #6a48b6; --human-soft: #ebe5f8; --route: #d42f22; --locked: #d3dad6; --edge: rgba(22,32,27,.34); --edge-faint: rgba(22,32,27,.13); --ring: rgba(22,32,27,.07);
+  --as: 50%; --al: 47%;
+  --display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e1311; --surface: #141b18; --map: #111815; --ink: #e3eae6; --muted: #9eaba4; --faint: #6c7a73; --line: #25302b;
+  --accent: #5cc3ba; --accent-soft: #15322e; --warn: #e2a64c; --warn-soft: #382a13; --bad: #f07a63; --bad-soft: #3b1c16;
+  --human: #b29af2; --human-soft: #2a2343; --route: #ff6a55; --locked: #2a3430; --edge: rgba(227,234,230,.32); --edge-faint: rgba(227,234,230,.10); --ring: rgba(227,234,230,.06);
+  --as: 46%; --al: 63%; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0e1311; --surface: #141b18; --map: #111815; --ink: #e3eae6; --muted: #9eaba4; --faint: #6c7a73; --line: #25302b;
+  --accent: #5cc3ba; --accent-soft: #15322e; --warn: #e2a64c; --warn-soft: #382a13; --bad: #f07a63; --bad-soft: #3b1c16;
+  --human: #b29af2; --human-soft: #2a2343; --route: #ff6a55; --locked: #2a3430; --edge: rgba(227,234,230,.32); --edge-faint: rgba(227,234,230,.10); --ring: rgba(227,234,230,.06);
+  --as: 46%; --al: 63%; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 14px/1.5 var(--body); margin: 0; }
+button, input { font: inherit; color: inherit; }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 8px 24px; padding: 18px 16px 14px; }
+.top h1 { font: 700 26px/1.1 var(--display); letter-spacing: -0.01em; margin: 0 0 4px; text-wrap: balance; }
+.top p { margin: 0; color: var(--muted); max-width: 66ch; }
+.figs { display: flex; flex-wrap: wrap; gap: 6px 18px; font: 500 12px/1.3 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.figs b { display: block; font: 600 18px/1.1 var(--display); color: var(--ink); }
+
+.app { display: grid; grid-template-columns: minmax(0, 1fr) 410px; gap: 14px; padding-inline: 16px; padding-block: 0 16px;
+  height: max(560px, calc(100vh - 104px)); }
+.mapwrap { position: relative; min-width: 0; background: var(--map); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+.bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 10px 12px; border-bottom: 1px solid var(--line); background: var(--surface); }
+.search { position: relative; flex: 1 1 200px; min-width: 0; max-width: 300px; }
+.search input { width: 100%; padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--map); }
+.toggle { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 13px; cursor: pointer; white-space: nowrap; }
+.toggle input { accent-color: var(--accent); }
+.btn { border: 1px solid var(--line); background: var(--surface); border-radius: 6px; padding: 5px 10px; cursor: pointer; font-size: 13px; }
+.btn:hover { border-color: var(--accent); }
+.btn.solid { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; flex: none; }
+.seg button { border: 0; background: var(--surface); padding: 5px 11px; font-size: 13px; cursor: pointer; color: var(--muted); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--surface); }
+.stat3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 12px 0 4px; }
+.stat3 div { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 12px; color: var(--muted); }
+.stat3 b { display: block; font: 600 20px/1.1 var(--display); color: var(--ink); font-variant-numeric: tabular-nums; }
+.key { display: grid; gap: 8px; font-size: 13px; }
+.key div { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px; align-items: center; }
+.note { background: var(--warn-soft); color: var(--ink); border-radius: 8px; padding: 10px 12px; font-size: 13px; display: grid; gap: 8px; margin: 12px 0; }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 13px; }
+.focusnote { display: none; align-items: center; gap: 8px; font-size: 13px; color: var(--ink); background: var(--accent-soft); padding: 4px 6px 4px 10px; border-radius: 6px; max-width: 100%; }
+.focusnote.on { display: inline-flex; }
+.focusnote span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+svg#map { flex: 1; width: 100%; min-height: 0; display: block; cursor: grab; touch-action: none; }
+svg#map:active { cursor: grabbing; }
+
+.legend { position: absolute; left: 10px; bottom: 10px; display: flex; flex-wrap: wrap; gap: 4px 14px; max-width: calc(100% - 20px);
+  background: color-mix(in srgb, var(--surface) 88%, transparent); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; font-size: 12px; color: var(--muted); pointer-events: none; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.legend svg { overflow: visible; }
+
+.ring { fill: none; stroke: var(--ring); stroke-width: 1; }
+.ringlab { fill: var(--faint); font: 500 10px var(--mono); }
+.arealab { fill: var(--muted); font: 600 12px var(--display); letter-spacing: .04em; text-transform: uppercase; paint-order: stroke; stroke: var(--map); stroke-width: 4px; }
+.lk { fill: none; stroke-width: 1.1; transition: opacity .15s; }
+.lk.agreed { stroke: var(--edge); }
+.lk.contested { stroke: var(--warn); stroke-dasharray: 4 3; }
+.lk.helps { stroke: var(--edge-faint); stroke-dasharray: 1.5 3; display: none; }
+.showhelps .lk.helps { display: inline; }
+.lk.bad { stroke: var(--bad); stroke-width: 1.6; stroke-dasharray: none; }
+.lk.hum { stroke: var(--human); stroke-width: 1.5; stroke-dasharray: 5 3; }
+.lk.hum.found { opacity: .45; }
+.node .dot { fill: hsl(var(--h) var(--as) var(--al)); stroke: var(--map); stroke-width: 1.5; cursor: pointer; transition: fill .2s, stroke .2s; }
+.halo { fill: none; stroke: none; pointer-events: none; }
+.checkmode .node.thin .dot { stroke: hsl(var(--h) var(--as) var(--al)); stroke-width: 1.5; stroke-dasharray: 2 2; fill: var(--map); }
+.checkmode .node.none .dot { stroke: var(--bad); fill: var(--map); stroke-dasharray: 2 2; }
+.node.sel .dot { stroke: var(--ink); stroke-width: 2.5; stroke-dasharray: none; }
+.node text { fill: var(--ink); font: 500 11px var(--body); paint-order: stroke; stroke: var(--map); stroke-width: 3.5px; stroke-linejoin: round; pointer-events: none; display: none; }
+.node.big text, .zoomed .node text, .node.lit text, .node.sel text { display: inline; }
+.dimmed .node:not(.lit):not(.sel) { opacity: .14; }
+.learnmode .node.st-ready .dot { fill: color-mix(in srgb, hsl(var(--h) var(--as) var(--al)) 42%, var(--map)); stroke: hsl(var(--h) var(--as) var(--al)); stroke-width: 2.2; }
+.learnmode .node.st-locked .dot { fill: var(--locked); stroke: var(--map); opacity: .8; }
+.learnmode .node.st-locked text { fill: var(--faint); }
+.learnmode .node.sel .dot { stroke: var(--ink); stroke-width: 2.5; }
+.learnmode .node.route .halo { stroke: var(--route); stroke-width: 1.2; stroke-opacity: .5; }
+.learnmode .node.next .halo { stroke-width: 3.2; stroke-opacity: 1; }
+.learnmode .node.next text { display: inline; }
+.learnmode .lk { stroke: var(--edge-faint); stroke-dasharray: none; stroke-width: 1; marker-end: url(#m-helps); }
+.learnmode .lk.helps { display: none; }
+.learnmode .dimmed .lk.lit, .learnmode.dimmed .lk.lit { stroke: var(--edge); marker-end: url(#m-agreed); }
+.legend .forcheck, .legend .forlearn { display: contents; }
+.learnmode ~ .legend .forcheck, .mapwrap.learn .legend .forcheck { display: none; }
+.mapwrap.check .legend .forlearn { display: none; }
+.mapwrap.learn .bar .forcheck { display: none; }
+.dimmed .lk:not(.lit) { opacity: .06; }
+.dimmed .arealab { opacity: .35; }
+.dimmed .node:not(.lit):not(.sel) text { display: none; }
+
+.tip { position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 6px 9px; font-size: 12px; box-shadow: 0 4px 14px rgba(0,0,0,.12); max-width: 240px; display: none; z-index: 3; }
+.tip b { display: block; font-size: 13px; }
+.tip span { color: var(--muted); }
+
+.panel { min-width: 0; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.tabs { display: flex; border-bottom: 1px solid var(--line); }
+.tabs button { flex: 1; border: 0; background: none; padding: 11px 8px 10px; cursor: pointer; color: var(--muted); font-weight: 500; border-bottom: 2px solid transparent; }
+.tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+.tabs button .ct { font: 500 11px var(--mono); color: var(--faint); margin-left: 4px; }
+.pane { overflow-y: auto; padding: 16px 16px 24px; flex: 1; min-height: 0; }
+.pane h2 { font: 700 19px/1.2 var(--display); margin: 0 0 6px; text-wrap: balance; }
+.pane h3 { font: 600 12px/1.3 var(--body); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 20px 0 8px; }
+.pane p { margin: 0 0 10px; }
+.lead { font-size: 15px; line-height: 1.55; }
+.small { font-size: 12.5px; color: var(--muted); }
+
+.prob { border-top: 1px solid var(--line); padding: 14px 0 12px; display: grid; gap: 6px; }
+.prob:first-of-type { border-top: 0; }
+.prob .head { display: flex; align-items: baseline; gap: 10px; }
+.prob .num { font: 700 22px/1 var(--display); font-variant-numeric: tabular-nums; min-width: 2.6ch; }
+.prob h4 { margin: 0; font: 600 15px/1.3 var(--body); }
+.prob p { margin: 0; color: var(--ink); }
+.prob .so { color: var(--muted); font-size: 13px; }
+.prob .so b { color: var(--ink); font-weight: 600; }
+.sev { display: inline-block; font: 500 11px/1 var(--mono); padding: 3px 6px; border-radius: 4px; margin-left: auto; white-space: nowrap; align-self: center; }
+.sev.core { background: var(--bad-soft); color: var(--bad); }
+.sev.major { background: var(--warn-soft); color: var(--warn); }
+.sev.ok { background: var(--accent-soft); color: var(--accent); }
+.ex { display: flex; flex-wrap: wrap; gap: 4px; }
+.pill { border: 1px solid var(--line); border-radius: 999px; padding: 1px 8px; font-size: 12px; background: var(--map); cursor: pointer; }
+.pill:hover { border-color: var(--accent); }
+.prob .btn { justify-self: start; }
+.pairs { display: grid; gap: 2px; font-size: 13px; font-variant-numeric: tabular-nums; }
+.pairs div { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px; }
+.pairs span:last-child { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.chip i { width: 10px; height: 10px; border-radius: 50%; background: hsl(var(--h) var(--as) var(--al)); }
+.flags { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; }
+.flag { font-size: 12px; padding: 2px 8px; border-radius: 4px; background: var(--warn-soft); color: var(--warn); }
+.flag.bad { background: var(--bad-soft); color: var(--bad); }
+.flag.info { background: var(--accent-soft); color: var(--accent); }
+.rows { display: grid; gap: 6px; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; align-items: baseline; }
+.nm { background: none; border: 0; padding: 0; text-align: left; cursor: pointer; color: var(--ink); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+.nm:hover { text-decoration-color: var(--accent); }
+.row .why { grid-column: 1 / -1; font-size: 12px; color: var(--muted); }
+.row .why.bad { color: var(--bad); }
+.tag { font: 500 11px/1 var(--mono); padding: 3px 6px; border-radius: 4px; white-space: nowrap; }
+.tag.agreed { background: var(--accent-soft); color: var(--accent); }
+.tag.contested { background: var(--warn-soft); color: var(--warn); }
+.tag.helps { background: var(--map); color: var(--muted); border: 1px solid var(--line); }
+.inline { display: flex; flex-wrap: wrap; gap: 4px 8px; }
+.inline .nm { font-size: 13px; }
+.srcs { display: grid; gap: 8px; }
+.src { display: grid; gap: 2px; }
+.src b { font-size: 13px; font-weight: 600; }
+.src a { font-size: 13px; overflow-wrap: anywhere; }
+.empty { color: var(--muted); }
+.srclist { display: grid; gap: 12px; }
+.srclist .src { border-top: 1px solid var(--line); padding-top: 10px; }
+.srclist .src span { color: var(--muted); font-size: 12.5px; }
+
+@media (max-width: 920px) {
+  .app { grid-template-columns: minmax(0, 1fr); height: auto; }
+  .mapwrap { height: 68vh; min-height: 420px; }
+  .panel { max-height: none; }
+  .pane { overflow: visible; }
+  .legend { position: static; margin: 0 10px 10px; pointer-events: auto; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<header class="top">
+  <div>
+    <h1>Python Knowledge Map</h1>
+    <p>153 knowledge points from 13 human courses and books. Brightness shows what you've learned, what you can learn now, and what isn't reachable yet. Red rings mark the AI's suggested route; you choose what to study.</p>
+  </div>
+  <div class="figs" id="figs"></div>
+</header>
+
+<main class="app">
+  <section class="mapwrap learn" id="mapwrap" aria-label="Knowledge point map">
+    <div class="bar">
+      <div class="search">
+        <input id="q" type="search" list="names" placeholder="Find a point, e.g. slicing" aria-label="Find a point" autocomplete="off">
+        <datalist id="names"></datalist>
+      </div>
+      <span class="seg" role="group" aria-label="View"><button type="button" id="m-learn" aria-pressed="true">My map</button><button type="button" id="m-check" aria-pressed="false">Link check</button></span>
+      <label class="toggle forcheck"><input type="checkbox" id="helps"> “Helps” links</label>
+      <label class="toggle"><input type="checkbox" id="labels"> All names</label>
+      <span class="focusnote" id="focusnote"><span id="focustext"></span><button class="btn" id="clear" type="button">Clear</button></span>
+      <button class="btn" id="fit" type="button">Fit</button>
+    </div>
+    <svg id="map" role="img" aria-label="Force-directed map of Python knowledge points"></svg>
+    <div class="legend" id="legend">
+      <span class="forlearn"><span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="hsl(150 50% 45%)"/></svg>Learned</span>
+      <span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="color-mix(in srgb, hsl(150 50% 45%) 42%, var(--map))" stroke="hsl(150 50% 45%)" stroke-width="2"/></svg>Can learn now</span>
+      <span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="var(--locked)"/></svg>Not reachable yet</span>
+      <span><svg width="16" height="16"><circle cx="8" cy="8" r="4" fill="var(--locked)"/><circle cx="8" cy="8" r="7" fill="none" stroke="var(--route)" stroke-width="1.2" stroke-opacity=".5"/></svg>AI's suggested route</span>
+      <span><svg width="16" height="16"><circle cx="8" cy="8" r="4" fill="var(--locked)"/><circle cx="8" cy="8" r="6.5" fill="none" stroke="var(--route)" stroke-width="3"/></svg>Suggested next</span></span>
+      <span class="forcheck"><span><svg width="22" height="8"><line x1="0" y1="4" x2="22" y2="4" stroke="var(--edge)" stroke-width="1.4"/></svg>Needed first (both runs)</span>
+      <span><svg width="22" height="8"><line x1="0" y1="4" x2="22" y2="4" stroke="var(--warn)" stroke-width="1.4" stroke-dasharray="4 3"/></svg>One run only</span>
+      <span><svg width="22" height="8"><line x1="0" y1="4" x2="22" y2="4" stroke="var(--bad)" stroke-width="1.8"/></svg>Against most books' order</span>
+      <span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="none" stroke="var(--muted)" stroke-dasharray="2 2"/></svg>In 0–2 sources</span>
+      <span>Size = sources · Ring = steps from the start</span></span>
+    </div>
+    <div class="tip" id="tip"></div>
+  </section>
+
+  <aside class="panel">
+    <div class="tabs" role="tablist">
+      <button role="tab" id="t-mine" aria-selected="true" type="button">My map</button>
+      <button role="tab" id="t-point" aria-selected="false" type="button">Point</button>
+      <button role="tab" id="t-prob" aria-selected="false" type="button">Problems<span class="ct" id="ct-prob"></span></button>
+      <button role="tab" id="t-src" aria-selected="false" type="button">Sources<span class="ct">13</span></button>
+    </div>
+    <div class="pane" id="p-mine" role="tabpanel"></div>
+    <div class="pane" id="p-prob" role="tabpanel" hidden></div>
+    <div class="pane" id="p-point" role="tabpanel" hidden></div>
+    <div class="pane" id="p-src" role="tabpanel" hidden></div>
+  </aside>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+const D = /*__DATA__*/null;
+const SHORT = { atbs: "Automate the Boring Stuff", tutorial: "Python Tutorial", thinkpython: "Think Python", pcc: "Python Crash Course",
+  py4e: "Python for Everybody", cs50p: "CS50P", helsinki: "Helsinki MOOC", mit: "MIT 6.100L", kaggle: "Kaggle Learn",
+  pydata: "Python for Data Analysis", google: "Google's Python Class", byte: "A Byte of Python", exercism: "Exercism" };
+const AREA = {}; D.areas.forEach(([id, name], i) => AREA[id] = { id, name, i, h: Math.round((i * 360 / D.areas.length + 8) % 360) });
+const byId = {}; D.nodes.forEach(n => { byId[n.id] = n; n.needs = []; n.helps = []; n.usedBy = []; n.helpsFor = []; });
+const badKey = new Set(D.against.map(a => a[0] + ">" + a[1]));
+const LINKS = D.links.map(([s, t, k, A, B, bf, af, x]) => ({ s, t, k, A, B, bf, af, x, bad: badKey.has(s + ">" + t) }));
+LINKS.forEach(l => {
+  if (l.k === "helps") { byId[l.t].helps.push(l); byId[l.s].helpsFor.push(l); }
+  else { byId[l.t].needs.push(l); byId[l.s].usedBy.push(l); }
+});
+const NEEDS = LINKS.filter(l => l.k !== "helps");
+const S = D.stats;
+const fmt = n => n.toLocaleString("en-US");
+const nm = id => byId[id].name;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+function ancestors(id, withHelps) {
+  const out = new Set(), stack = [id];
+  while (stack.length) { const x = stack.pop(); for (const l of byId[x].needs.concat(withHelps ? byId[x].helps : [])) if (!out.has(l.s)) { out.add(l.s); stack.push(l.s); } }
+  return out;
+}
+
+/* ---------- header figures ---------- */
+const nHead = Object.values(D.sources).reduce((a, s) => a + s.n, 0);
+document.getElementById("figs").innerHTML = [[13, "sources"], [fmt(nHead), "headings"], [D.nodes.length, "points"], [NEEDS.length, "“needed first” links"]]
+  .map(([v, l]) => `<span><b>${v}</b>${l}</span>`).join("");
+
+/* ---------- map ---------- */
+const svg = d3.select("#map").classed("learnmode", true), root = svg.append("g");
+const RING = 64, maxD = d3.max(D.nodes, n => n.d);
+const rad = n => 3.5 + Math.sqrt(n.n) * 2.7;
+const angle = a => (AREA[a].i / D.areas.length) * Math.PI * 2 - Math.PI / 2;
+D.nodes.forEach((n, i) => {
+  const a = angle(n.area) + ((i * 0.618) % 1 - 0.5) * 0.25, r = (n.d + 0.55) * RING;
+  n.tx = Math.cos(a) * r; n.ty = Math.sin(a) * r; n.x = n.tx + (i % 7) - 3; n.y = n.ty + (i % 5) - 2;
+});
+const sim = d3.forceSimulation(D.nodes)
+  .force("link", d3.forceLink(NEEDS.map(l => ({ source: l.s, target: l.t }))).id(d => d.id).distance(34).strength(0.05))
+  .force("charge", d3.forceManyBody().strength(-34).distanceMax(220))
+  .force("collide", d3.forceCollide(d => rad(d) + 6).iterations(2))
+  .force("x", d3.forceX(d => d.tx).strength(0.2))
+  .force("y", d3.forceY(d => d.ty).strength(0.2))
+  .stop();
+for (let i = 0; i < 420; i++) sim.tick();
+
+const gRings = root.append("g");
+for (let d = 0; d <= maxD; d++) {
+  const r = (d + 0.55) * RING + RING * 0.42;
+  gRings.append("circle").attr("class", "ring").attr("r", r);
+  gRings.append("text").attr("class", "ringlab").attr("x", 4).attr("y", -r + 12).text(d === 0 ? "start" : d + (d === 1 ? " step" : " steps"));
+}
+const gAreas = root.append("g"), LABELS = [];
+D.areas.forEach(([id, name]) => {
+  const ns = D.nodes.filter(n => n.area === id); if (!ns.length) return;
+  const a = Math.atan2(d3.mean(ns, n => n.y), d3.mean(ns, n => n.x)), r = (d3.max(ns, n => Math.hypot(n.x, n.y)) || 0) + 26;
+  LABELS.push({ x: Math.cos(a) * r, y: Math.sin(a) * r, end: Math.cos(a) < -0.3, start: Math.cos(a) > 0.3 });
+  gAreas.append("text").attr("class", "arealab").attr("x", Math.cos(a) * r).attr("y", Math.sin(a) * r)
+    .attr("text-anchor", Math.abs(Math.cos(a)) < 0.3 ? "middle" : Math.cos(a) > 0 ? "start" : "end").attr("dominant-baseline", "middle").text(name);
+});
+
+const defs = svg.append("defs");
+[["agreed", "var(--edge)"], ["contested", "var(--warn)"], ["helps", "var(--edge-faint)"], ["bad", "var(--bad)"], ["hum", "var(--human)"]].forEach(([k, c]) =>
+  defs.append("marker").attr("id", "m-" + k).attr("viewBox", "0 0 8 8").attr("refX", 7).attr("refY", 4).attr("markerWidth", 6).attr("markerHeight", 6)
+    .attr("orient", "auto").append("path").attr("d", "M0,0.6 L7.4,4 L0,7.4 z").style("fill", c));
+const gLinks = root.append("g"), gHum = root.append("g"), gNodes = root.append("g");
+function seg(a, b) {
+  const dx = b.x - a.x, dy = b.y - a.y, L = Math.hypot(dx, dy) || 1, ra = rad(a) + 1, rb = rad(b) + 3;
+  return `M${a.x + dx / L * ra},${a.y + dy / L * ra}L${b.x - dx / L * rb},${b.y - dy / L * rb}`;
+}
+const linkSel = gLinks.selectAll("path").data(LINKS.slice().sort((a, b) => (a.k === "helps") - (b.k === "helps") ? -1 : 0)).join("path")
+  .attr("class", l => "lk " + l.k + (l.bad ? " bad" : ""))
+  .attr("d", l => seg(byId[l.s], byId[l.t]))
+  .attr("marker-end", l => `url(#m-${l.bad ? "bad" : l.k})`);
+const nodeSel = gNodes.selectAll("g").data(D.nodes).join("g")
+  .attr("class", n => "node" + (n.n === 0 ? " none" : n.n <= 2 ? " thin" : "") + (n.n >= 9 || n.d === 0 ? " big" : ""))
+  .attr("transform", n => `translate(${n.x},${n.y})`)
+  .style("--h", n => AREA[n.area].h);
+nodeSel.append("circle").attr("class", "halo").attr("r", n => rad(n) + 4.5);
+nodeSel.append("circle").attr("class", "dot").attr("r", rad);
+nodeSel.append("text").attr("x", n => rad(n) + 3).attr("dy", "0.35em").text(n => n.name);
+
+const zoom = d3.zoom().scaleExtent([0.25, 5]).on("zoom", e => { root.attr("transform", e.transform); svg.classed("zoomed", e.transform.k >= 1.7); });
+svg.call(zoom).on("dblclick.zoom", null);
+function fit(ids, ms = 450) {
+  const el = svg.node(), w = el.clientWidth, h = el.clientHeight; if (!w || !h) return;
+  const ns = ids && ids.size ? D.nodes.filter(n => ids.has(n.id)) : D.nodes;
+  let x0 = d3.min(ns, n => n.x) - 30, x1 = d3.max(ns, n => n.x) + 120, y0 = d3.min(ns, n => n.y) - 30, y1 = d3.max(ns, n => n.y) + 30;
+  if (!(ids && ids.size)) for (const l of LABELS) {
+    x0 = Math.min(x0, l.x - (l.end ? 170 : l.start ? 0 : 85)); x1 = Math.max(x1, l.x + (l.start ? 170 : l.end ? 0 : 85));
+    y0 = Math.min(y0, l.y - 14); y1 = Math.max(y1, l.y + 14);
+  }
+  const k = Math.min(1.6, 0.94 * Math.min(w / (x1 - x0), h / (y1 - y0)));
+  const t = d3.zoomIdentity.translate(w / 2 - k * (x0 + x1) / 2, h / 2 - k * (y0 + y1) / 2).scale(k);
+  (ms ? svg.transition().duration(matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : ms) : svg).call(zoom.transform, t);
+}
+
+/* ---------- state + highlighting ---------- */
+const state = { sel: null, focus: null, hover: null };
+function paint() {
+  let lit = null, litL = null;
+  if (state.focus) { lit = state.focus.nodes; litL = state.focus.links; }
+  else if (state.sel || state.hover) {
+    const id = state.hover || state.sel, n = byId[id];
+    lit = new Set([id]); litL = new Set();
+    for (const l of n.needs.concat(n.usedBy, svg.classed("showhelps") ? n.helps.concat(n.helpsFor) : [])) { lit.add(l.s); lit.add(l.t); litL.add(l); }
+  }
+  svg.classed("dimmed", !!lit);
+  nodeSel.classed("lit", n => !!lit && lit.has(n.id)).classed("sel", n => n.id === state.sel);
+  linkSel.classed("lit", l => !!litL && litL.has(l));
+  gHum.selectAll("*").remove();
+  if (state.focus && state.focus.human) drawHuman();
+}
+function drawHuman() {
+  gHum.selectAll("path").data(D.human).join("path")
+    .attr("class", h => "lk hum lit" + (h[2] || h[3] ? " found" : ""))
+    .attr("d", h => seg(byId[h[0]], byId[h[1]])).attr("marker-end", "url(#m-hum)");
+}
+const tip = document.getElementById("tip");
+nodeSel.on("pointerenter", (e, n) => {
+  if (e.pointerType === "touch") return;
+  state.hover = n.id; if (!state.focus) paint();
+  tip.innerHTML = `<b>${esc(n.name)}</b><span>${AREA[n.area].name} · in ${n.n} of 13 sources · ${n.d === 0 ? "start" : "step " + n.d}</span>`;
+  tip.style.display = "block";
+}).on("pointermove", e => {
+  const r = e.currentTarget.ownerSVGElement.parentNode.getBoundingClientRect();
+  let x = e.clientX - r.left + 14, y = e.clientY - r.top + 14;
+  if (x + 250 > r.width) x = e.clientX - r.left - 254;
+  tip.style.left = x + "px"; tip.style.top = y + "px";
+}).on("pointerleave", () => { state.hover = null; tip.style.display = "none"; if (!state.focus) paint(); })
+  .on("click", (e, n) => { e.stopPropagation(); select(n.id); });
+svg.on("click", () => { if (state.sel && !state.focus) { state.sel = null; paint(); } });
+
+function setFocus(f, label) {
+  state.focus = f; state.sel = null;
+  document.getElementById("focusnote").classList.toggle("on", !!f);
+  document.getElementById("focustext").textContent = label || "";
+  paint(); if (f) fit(f.nodes);
+}
+document.getElementById("clear").onclick = () => { setFocus(null); fit(); };
+document.getElementById("fit").onclick = () => fit(state.focus ? state.focus.nodes : null);
+document.getElementById("helps").onchange = e => { svg.classed("showhelps", e.target.checked); paint(); };
+document.getElementById("labels").onchange = e => svg.classed("zoomed", e.target.checked || d3.zoomTransform(svg.node()).k >= 1.7);
+const q = document.getElementById("q"), dl = document.getElementById("names");
+dl.innerHTML = D.nodes.slice().sort((a, b) => a.name.localeCompare(b.name)).map(n => `<option value="${esc(n.name)}">`).join("");
+q.addEventListener("change", () => {
+  const v = q.value.trim().toLowerCase(); if (!v) return;
+  const n = D.nodes.find(n => n.name.toLowerCase() === v) || D.nodes.find(n => n.name.toLowerCase().includes(v));
+  if (n) { select(n.id); fit(new Set([n.id, ...n.needs.map(l => l.s), ...n.usedBy.map(l => l.t)])); }
+});
+
+/* ---------- tabs ---------- */
+const TABS = { mine: "p-mine", point: "p-point", prob: "p-prob", src: "p-src" };
+function tab(which) {
+  for (const [k, p] of Object.entries(TABS)) {
+    document.getElementById("t-" + k).setAttribute("aria-selected", k === which);
+    document.getElementById(p).hidden = k !== which;
+  }
+}
+Object.keys(TABS).forEach(k => document.getElementById("t-" + k).onclick = () => tab(k));
+
+/* ---------- learner view: brightness = status, red ring = AI's suggested route ---------- */
+const LS_KEY = "pykm-learned-v1";
+const EXAMPLE = ["run", "print", "comments", "tracebacks", "numbers", "arith", "precedence", "variables", "names", "strbasics",
+  "types", "convert", "input", "bool", "compare", "logic", "if", "else", "blocks", "callfn", "while"];
+let learned = null, isExample = false;
+try { const v = localStorage.getItem(LS_KEY); if (v) learned = new Set(JSON.parse(v).filter(id => byId[id])); } catch (e) {}
+if (!learned) { learned = new Set(EXAMPLE); isExample = true; }
+function saveLearned() { isExample = false; try { localStorage.setItem(LS_KEY, JSON.stringify([...learned])); } catch (e) {} }
+const GOAL_SRC = ["kaggle", "pydata"];
+const GOAL = new Set(D.nodes.filter(n => GOAL_SRC.some(s => n.src[s])).map(n => n.id));
+const ROUTE = new Set(GOAL); GOAL.forEach(g => ancestors(g).forEach(a => ROUTE.add(a)));
+const status = id => learned.has(id) ? "learned" : byId[id].needs.every(l => learned.has(l.s)) ? "ready" : "locked";
+const missing = id => byId[id].needs.filter(l => !learned.has(l.s)).map(l => l.s);
+function whyRoute(id) {
+  if (GOAL.has(id)) return "Taught in " + GOAL_SRC.filter(s => byId[id].src[s]).map(s => SHORT[s]).join(" and ") + ".";
+  const by = [...GOAL].filter(g => ancestors(g).has(id)).slice(0, 3).map(nm);
+  return "Needed by route points such as " + by.join(", ") + ".";
+}
+function refreshLearn() {
+  nodeSel.classed("st-learned", n => status(n.id) === "learned").classed("st-ready", n => status(n.id) === "ready")
+    .classed("st-locked", n => status(n.id) === "locked")
+    .classed("route", n => ROUTE.has(n.id) && !learned.has(n.id))
+    .classed("next", n => ROUTE.has(n.id) && status(n.id) === "ready");
+  renderMine();
+  if (state.sel) renderPoint(state.sel);
+}
+function setLearned(id, on) { on ? learned.add(id) : learned.delete(id); saveLearned(); refreshLearn(); }
+function setMode(m) {
+  state.mode = m;
+  svg.classed("learnmode", m === "learn").classed("checkmode", m === "check");
+  const w = document.getElementById("mapwrap"); w.classList.toggle("learn", m === "learn"); w.classList.toggle("check", m === "check");
+  document.getElementById("m-learn").setAttribute("aria-pressed", m === "learn");
+  document.getElementById("m-check").setAttribute("aria-pressed", m === "check");
+  if (state.sel) renderPoint(state.sel);
+}
+document.getElementById("m-learn").onclick = () => { setFocus(null); setMode("learn"); tab("mine"); };
+document.getElementById("m-check").onclick = () => { setMode("check"); tab("prob"); };
+function renderMine() {
+  const all = D.nodes.map(n => n.id), cnt = { learned: 0, ready: 0, locked: 0 };
+  all.forEach(id => cnt[status(id)]++);
+  const bySrc = (a, b) => byId[b].n - byId[a].n;
+  const next = all.filter(id => ROUTE.has(id) && status(id) === "ready").sort(bySrc);
+  const off = all.filter(id => !ROUTE.has(id) && status(id) === "ready").sort(bySrc);
+  const left = all.filter(id => ROUTE.has(id) && !learned.has(id)).length;
+  const sw = (fill, stroke, ring) => `<svg width="22" height="22" viewBox="0 0 22 22">${ring ? `<circle cx="11" cy="11" r="9.5" fill="none" stroke="var(--route)" stroke-width="${ring}"/>` : ""}<circle cx="11" cy="11" r="6" fill="${fill}" ${stroke ? `stroke="${stroke}" stroke-width="1.5"` : ""}/></svg>`;
+  const c = "hsl(150 50% 45%)";
+  document.getElementById("p-mine").innerHTML = `
+    <p class="small" style="margin:0">Goal</p>
+    <h2>Python for machine learning</h2>
+    <div class="stat3"><div><b>${cnt.learned}</b>learned</div><div><b>${cnt.ready}</b>can learn now</div><div><b>${cnt.locked}</b>not reachable yet</div></div>
+    <p class="small">${left} of the ${ROUTE.size} points on the suggested route are still to learn.</p>
+    ${isExample ? `<div class="note"><span>This is <b>example progress</b> (roughly the first two chapters of a beginner book), not yours.</span><div class="btns"><button class="btn solid" type="button" id="fresh">Start with an empty map</button></div></div>` : ""}
+    <h3>Suggested next</h3>
+    ${next.length ? `<div class="ex">${next.slice(0, 10).map(pill).join("")}</div><p class="small" style="margin-top:8px">On the route and everything they need is learned. Thick red ring on the map.</p>` : `<p class="empty">Nothing on the route is reachable right now.</p>`}
+    ${off.length ? `<h3>Can learn now, off the route</h3><div class="ex">${off.slice(0, 8).map(pill).join("")}</div>` : ""}
+    <h3>How to read the map</h3>
+    <div class="key">
+      <div>${sw(c)}<span><b>Bright</b>: you've learned it.</span></div>
+      <div>${sw("color-mix(in srgb, " + c + " 42%, var(--map))", c)}<span><b>Pale with an outline</b>: you can learn it now. Everything it needs is learned.</span></div>
+      <div>${sw("var(--locked)")}<span><b>Grey</b>: not reachable yet. Something it needs is still missing. You can still open it and study it.</span></div>
+      <div>${sw("var(--locked)", "", 1.6)}<span><b>Red ring</b>: the AI's suggested route to your goal. A thick ring means a suggested next step.</span></div>
+    </div>
+    <h3>Where the route comes from</h3>
+    <p class="small">The route is the ${GOAL.size} points taught in the two sources written for data and machine-learning work (Kaggle Learn: Python and Python for Data Analysis, chapters 2–3), plus the ${ROUTE.size - GOAL.size} points they build on. It's a suggestion, not a plan: study any ball you like. Open a ball and use <b>Mark as learned</b> to update the map.</p>
+    <div class="btns"><button class="btn" type="button" id="fresh2">Clear my progress</button><button class="btn" type="button" id="example">Load example progress</button></div>
+    <p class="small" style="margin-top:8px">Progress is saved in this browser only.</p>`;
+  const f = () => { learned = new Set(); saveLearned(); refreshLearn(); };
+  ["fresh", "fresh2"].forEach(id => { const b = document.getElementById(id); if (b) b.onclick = f; });
+  document.getElementById("example").onclick = () => { learned = new Set(EXAMPLE); try { localStorage.removeItem(LS_KEY); } catch (e) {} isExample = true; refreshLearn(); };
+}
+
+/* ---------- point detail ---------- */
+const KNOT = new Set(["numbers", "variables", "strbasics", "types", "arith", "convert", "print", "compare", "if", "callfn", "def"]);
+const DUP = { strindex: "listindex", listindex: "strindex", strslice: "listslice", listslice: "strslice" };
+const ADDED = new Set(["blocks", "style"]);
+function orderText(l) {
+  const t = l.bf + l.af;
+  if (!t) return "No book gives both their own heading, so there is no order evidence.";
+  return `${l.bf} of ${t} books that cover both give “${nm(l.s)}” its heading first.` + (l.bad ? " Most books order them the other way." : "");
+}
+function runText(l) {
+  if (l.k === "agreed") return ["agreed", "both runs"];
+  const one = l.A === "needs" ? "A" : "B", other = one === "A" ? l.B : l.A;
+  return ["contested", `run ${one} only` + (other === "helps" ? `; ${one === "A" ? "B" : "A"} says “helps”` : "")];
+}
+function select(id) {
+  state.sel = id; state.focus = null;
+  document.getElementById("focusnote").classList.remove("on");
+  paint(); renderPoint(id); tab("point");
+}
+function renderPoint(id) {
+  const n = byId[id], a = AREA[n.area];
+  const flags = [];
+  if (n.n === 0) flags.push(["bad", "No source teaches this as a topic"]);
+  else if (n.n <= 2) flags.push(["", `Only ${n.n} source${n.n > 1 ? "s" : ""}: edge of the map`]);
+  if (KNOT.has(id)) flags.push(["", "Part of the first-chapter knot"]);
+  if (DUP[id]) flags.push(["", `Same idea as “${nm(DUP[id])}”`]);
+  if (ADDED.has(id)) flags.push(["info", "Missing from the AI's first list; added from the sources"]);
+  if (n.needs.some(l => l.bad)) flags.push(["bad", "Has a link against the books' order"]);
+  const route = ancestors(id);
+  const needRows = state.mode === "learn"
+    ? n.needs.map(l => `<div class="row"><button class="nm" data-id="${l.s}">${esc(nm(l.s))}</button><span class="tag ${learned.has(l.s) ? "agreed" : "helps"}">${learned.has(l.s) ? "learned" : "not yet"}</span></div>`).join("")
+    : n.needs.map(l => { const [c, t] = runText(l); return `<div class="row"><button class="nm" data-id="${l.s}">${esc(nm(l.s))}</button><span class="tag ${c}">${t}</span><span class="why${l.bad ? " bad" : ""}">${orderText(l)}</span></div>`; }).join("");
+  const helpRows = n.helps.map(l => `<button class="nm" data-id="${l.s}">${esc(nm(l.s))}</button>`).join("");
+  const usedRows = n.usedBy.map(l => `<button class="nm" data-id="${l.t}">${esc(nm(l.t))}</button>`).join("");
+  const srcRows = Object.entries(n.src).map(([s, hs]) => `<div class="src"><b>${SHORT[s]}</b>${hs.map(([h, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(h)}</a>`).join("")}</div>`).join("");
+  const st = status(id), miss = missing(id);
+  const stText = { learned: "You've learned this", ready: "You can learn this now", locked: "Not reachable yet" }[st];
+  const learnBlock = `<div class="note" style="background:var(--map);border:1px solid var(--line)">
+      <span class="status">${stText}${ROUTE.has(id) ? ` · <span style="color:var(--route)">on the suggested route</span>` : ""}</span>
+      ${st === "locked" ? `<span class="small">Still missing: </span><div class="ex">${miss.map(pill).join("")}</div>` : ""}
+      ${ROUTE.has(id) ? `<span class="small">${esc(whyRoute(id))}</span>` : ""}
+      <div class="btns"><button class="btn ${st === "learned" ? "" : "solid"}" type="button" id="mark">${st === "learned" ? "Mark as not learned" : "Mark as learned"}</button></div>
+    </div>`;
+  document.getElementById("p-point").innerHTML = `
+    <span class="chip" style="--h:${a.h}"><i></i>${esc(a.name)}</span>
+    <h2>${esc(n.name)}</h2>${learnBlock}
+    <p class="small">In ${n.n} of 13 sources · ${n.d === 0 ? "a starting point" : n.d + (n.d === 1 ? " step" : " steps") + " from the start"} · ${route.size} points on its route</p>
+    ${flags.length && state.mode === "check" ? `<div class="flags">${flags.map(([c, t]) => `<span class="flag ${c}">${esc(t)}</span>`).join("")}</div>` : ""}
+    ${route.size ? `<p style="margin-top:12px"><button class="btn" id="route" type="button">Show its route from the start</button></p>` : ""}
+    <h3>Needed first</h3>${needRows ? `<div class="rows">${needRows}</div>` : `<p class="empty">Nothing. Both runs treat this as a starting point.</p>`}
+    ${helpRows ? `<h3>Helps to know first</h3><div class="row inline">${helpRows}</div>` : ""}
+    <h3>Needed by</h3>${usedRows ? `<div class="inline">${usedRows}</div>` : `<p class="empty">No other point needs this one.</p>`}
+    <h3>Where the sources teach it</h3>${srcRows ? `<div class="srcs">${srcRows}</div>` : `<p class="empty">No source has a heading for this point.</p>`}`;
+  document.getElementById("mark").onclick = () => setLearned(id, st !== "learned");
+  const rb = document.getElementById("route");
+  if (rb) rb.onclick = () => {
+    const ns = new Set([id, ...route]), ls = new Set(NEEDS.filter(l => ns.has(l.s) && ns.has(l.t)));
+    setFocus({ nodes: ns, links: ls }, `Route to “${n.name}”: ${route.size} points`); state.sel = id; paint();
+  };
+}
+document.querySelector(".panel").addEventListener("click", e => {
+  const b = e.target.closest("[data-id]"); if (!b) return;
+  const id = b.dataset.id; select(id);
+  const n = byId[id]; fit(new Set([id, ...n.needs.map(l => l.s), ...n.usedBy.map(l => l.t)]));
+});
+
+/* ---------- problems ---------- */
+const thin = D.nodes.filter(n => n.n <= 2).sort((a, b) => a.n - b.n);
+const knotBad = D.against.filter(a => KNOT.has(a[0]) && KNOT.has(a[1]));
+const humAny = D.human.filter(h => ancestors(h[1], true).has(h[0])).length;
+const humNone = D.human.filter(h => !ancestors(h[1], true).has(h[0]));
+const contested = NEEDS.filter(l => l.k === "contested");
+const pill = id => `<button class="pill" data-id="${id}" type="button">${esc(nm(id))}</button>`;
+const nodesOf = ls => new Set(ls.flatMap(l => [l.s, l.t]));
+const PROBLEMS = [
+  { sev: ["core", "core"], num: knotBad.length + "/" + D.against.length, title: "The start is a knot, not a tree",
+    body: `Numbers, variables, strings, types and <code>print()</code> arrive together in chapter 1, and each book gives them headings in its own order. ${D.against.length} of the AI's links run against most books' order, and ${knotBad.length} of those sit inside this first-chapter knot. One example: the AI says variables need numbers, but 6 books put the “Variables” heading first.`,
+    so: "<b>So:</b> the centre of the map should be one “start here” bundle, not a strict chain.",
+    ex: knotBad.slice(0, 4).map(a => a[1]),
+    show: () => { const ls = new Set(LINKS.filter(l => l.bad)); return { nodes: nodesOf([...ls]), links: ls }; }, label: "Links against most books' order" },
+  { sev: ["core", "core"], num: fmt(S.human_links_in_neither_needs_chain) + "/" + S.human_links, title: "“Prerequisite” means different things",
+    body: `Exercism's authors wrote ${S.human_links} prerequisite links by hand. ${S.human_links_in_neither_needs_chain} of them are in neither AI run's strict “needed first” chain, and ${S.human_links - humAny} don't appear among the AI's links at all. Most of these are exercise gates. For example, “Booleans before classes” is there because their class exercise uses Booleans. ${S.human_links_AI_reversed} point the opposite way, both inside the first-chapter knot.`,
+    so: "<b>So:</b> a map needs named link types, such as <i>needed to understand</i>, <i>used in the practice</i> and <i>usually comes earlier</i>. People and AI both mix them unless told.",
+    ex: humNone.slice(0, 4).map(h => h[1]),
+    show: () => ({ nodes: new Set(D.human.flatMap(h => [h[0], h[1]])), links: new Set(), human: true }), label: "Exercism's human links (purple; faded = the AI has them too)" },
+  { sev: ["major", "major"], num: fmt(S.pairs_sources_split_on_order), title: "The books don't share one order",
+    body: `Of ${fmt(S.popular_point_pairs)} pairs of points that at least 6 books teach, the books split on ${S.pairs_sources_split_on_order}: at least a third put them the other way round.`,
+    pairs: D.split.slice(0, 6),
+    so: "<b>So:</b> good news for a map, because several routes are legitimate. But the links can't be borrowed from any one book's order.",
+    show: () => { const ns = new Set(D.split.slice(0, 14).flatMap(p => [p[0], p[1]])); return { nodes: ns, links: new Set() }; }, label: "Points the books order differently" },
+  { sev: ["major", "major"], num: fmt(thin.length), title: "The edge of the map is unclear",
+    body: `${thin.length} of ${D.nodes.length} points appear in only 0–2 sources. MIT adds algorithms, Python for Everybody adds databases and the web, and Kaggle stops at imports. The sources don't agree on what “Python basics” covers.`,
+    so: "<b>So:</b> the map's scope has to come from the learner's goal (Python for machine learning), not from everything the sources happen to include.",
+    ex: thin.slice(0, 6).map(n => n.id),
+    show: () => ({ nodes: new Set(thin.map(n => n.id)), links: new Set() }), label: "Points in 0–2 sources" },
+  { sev: ["major", "major"], num: "3", title: "The AI's own point list had gaps",
+    body: `My first AI-drafted list missed “Indentation and code blocks”, which 7 sources teach, and “Code style”, which 3 teach. It also included “Dataclasses”, which no source teaches. Matching the list against the headings caught all three.`,
+    so: "<b>So:</b> check both directions: every point needs a source, and every source heading needs a point.",
+    ex: ["blocks", "style", "dataclasses"],
+    show: () => ({ nodes: new Set(["blocks", "style", "dataclasses"]), links: new Set() }), label: "Points the sources corrected" },
+  { sev: ["major", "major"], num: "2×", title: "One idea, two balls",
+    body: `Indexing and slicing appear twice, once under strings and once under lists. The books split on which comes first (string slicing before lists in 4 books, after in 3). Learning one makes the other nearly free, and a plain map can't show that.`,
+    so: "<b>So:</b> the map needs a way to say “same idea, new type”, or these should be one point.",
+    ex: ["strindex", "listindex", "strslice", "listslice"],
+    show: () => { const ns = new Set(["strindex", "listindex", "strslice", "listslice", "strbasics", "listbasics"]); return { nodes: ns, links: new Set(NEEDS.filter(l => ns.has(l.s) && ns.has(l.t))) }; }, label: "Indexing and slicing, twice" },
+  { sev: ["major", "major"], num: "1 vs 38", title: "How big is a ball?",
+    body: `Sources show different amounts of detail. Only Google's class gives regex groups and <code>findall()</code> their own headings, so I folded regex into 3 points. One ball here is about one section heading, while our checked Automate lessons have 38 key points for the lists chapter alone.`,
+    so: "<b>So:</b> the map and the lessons need two levels: balls for finding your way, and key points inside each ball for teaching.",
+    ex: ["rxbasics", "rxsyntax", "rxextract", "listbasics"],
+    show: () => ({ nodes: new Set(["rxbasics", "rxsyntax", "rxextract", "listbasics", "listindex", "listslice", "listmodify", "listmethods"]), links: new Set() }), label: "Coarse balls" },
+  { sev: ["ok", "fine"], num: S.same_direct + "/" + NEEDS.length, title: "Two AI runs mostly agree",
+    body: `Run A drew ${S.needs_A} “needed first” links and run B drew ${S.needs_B}. ${S.same_direct} are identical and ${S.opposite_direction} point opposite ways. Of the differences, ${S.one_draft_but_implied_by_other_chain} are implied through other links, and in ${S.needs_in_one_helps_in_other} cases one run says “needed” where the other says “helps”.`,
+    so: "<b>So:</b> drawing links is not the hard part for AI. Deciding how strict a link is needs a rule or a human check.",
+    ex: contested.slice(0, 4).map(l => l.t),
+    show: () => { const ls = new Set(contested); return { nodes: nodesOf(contested), links: ls }; }, label: "Links only one run drew (dashed amber)" },
+];
+document.getElementById("ct-prob").textContent = PROBLEMS.filter(p => p.sev[0] !== "ok").length;
+document.getElementById("p-prob").innerHTML = `
+  <p class="lead"><b>Short answer:</b> pulling points out of courses and linking them is not hard for AI. It took minutes, and two separate runs drew nearly the same links. The hard part is deciding what counts as a point, how big it is, and what a link means. The human sources don't agree on any of these.</p>
+  ${PROBLEMS.map((p, i) => `<div class="prob">
+    <div class="head"><span class="num">${p.num}</span><h4>${p.title}</h4><span class="sev ${p.sev[0]}">${p.sev[1]}</span></div>
+    <p>${p.body}</p>
+    ${p.pairs ? `<div class="pairs">${p.pairs.map(([a, b, bf, af]) => `<div><span>${esc(nm(a))} → ${esc(nm(b))}</span><span>${bf} : ${af}</span></div>`).join("")}<div><span class="small">books putting the left one first : the right one first</span><span></span></div></div>` : ""}
+    ${p.ex ? `<div class="ex">${p.ex.map(pill).join("")}</div>` : ""}
+    <p class="so">${p.so}</p>
+    <button class="btn" type="button" data-show="${i}">Show on map</button>
+  </div>`).join("")}
+  <h3>How this was made</h3>
+  <p class="small">Section headings were collected from each source: 7 from the authors' own files on GitHub, 5 by reading the course pages, and Automate the Boring Stuff from our checked outlines (chapters 2–8 and 10 in detail, others by title). The points were drafted by AI and matched to headings with keyword rules over four correction passes. In a spot check of 45 random headings, about 4 were matched wrongly or loosely. Counts are lower bounds, because one heading can hide several points. The links were drawn by two AI runs that never saw the sources.</p>`;
+document.getElementById("p-prob").addEventListener("click", e => {
+  const b = e.target.closest("[data-show]"); if (!b) return;
+  const p = PROBLEMS[+b.dataset.show]; setMode("check"); setFocus(p.show(), p.label);
+});
+
+/* ---------- sources ---------- */
+document.getElementById("p-src").innerHTML = `<p class="small">Each source's section headings, in the authors' order. The order is what the “against the books' order” test uses.</p><div class="srclist">` +
+  Object.entries(D.sources).map(([id, s]) => {
+    const cnt = D.nodes.filter(n => n.src[id]).length;
+    return `<div class="src"><b><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a></b><span>${esc(s.author)} · ${esc(s.kind)}</span><span>${s.n} headings · teaches ${cnt} of the ${D.nodes.length} points${id === "exercism" ? " · lists prerequisites, used as the human check" : ""}</span></div>`;
+  }).join("") + `</div>`;
+
+/* ---------- start ---------- */
+state.mode = "learn"; refreshLearn(); setMode("learn");
+paint();
+requestAnimationFrame(() => fit(null, 0));
+let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => fit(state.focus ? state.focus.nodes : null, 0), 150); });
+</script>

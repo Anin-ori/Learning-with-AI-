@@ -1,0 +1,1136 @@
+{
+ "id": "py4e",
+ "name": "Python for Everybody",
+ "author": "Charles R. Severance",
+ "url": "https://www.py4e.com/book",
+ "kind": "Book + course",
+ "items": [
+  {
+   "chapter": "1. Why should you learn to write programs?",
+   "heading": "Why should you learn to write programs?",
+   "level": 0,
+   "url": "https://www.py4e.com/html3/01-intro",
+   "order": 0
+  },
+  {
+   "chapter": "1. Why should you learn to write programs?",
+   "heading": "Creativity and motivation",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/01-intro",
+   "order": 1
+  },
+  {
+   "chapter": "1. Why should you learn to write programs?",
+   "heading": "Computer hardware architecture",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/01-intro",
+   "order": 2
+  },
+  {
+   "chapter": "1. Why should you learn to write programs?",
+   "heading": "Understanding programming",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/01-intro",
+   "order": 3
+  },
+  {
+   "chapter": "1. Why should you learn to write programs?",
+   "heading": "Words and sentences",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/01-intro",
+   "order": 4
+  },
+  {
+   "chapter": "1. Why should you learn to write programs?",
+   "heading": "Conversing with Python",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/01-intro",
+   "order": 5
+  },
+  {
+   "chapter": "1. Why should you learn to write programs?",
+   "heading": "Terminology: Interpreter and compiler",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/01-intro",
+   "order": 6
+  },
+  {
+   "chapter": "1. Why should you learn to write programs?",
+   "heading": "Writing a program",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/01-intro",
+   "order": 7
+  },
+  {
+   "chapter": "1. Why should you learn to write programs?",
+   "heading": "What is a program?",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/01-intro",
+   "order": 8
+  },
+  {
+   "chapter": "1. Why should you learn to write programs?",
+   "heading": "The building blocks of programs",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/01-intro",
+   "order": 9
+  },
+  {
+   "chapter": "1. Why should you learn to write programs?",
+   "heading": "What could possibly go wrong?",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/01-intro",
+   "order": 10
+  },
+  {
+   "chapter": "1. Why should you learn to write programs?",
+   "heading": "The learning journey",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/01-intro",
+   "order": 11
+  },
+  {
+   "chapter": "2. Variables, expressions, and statements",
+   "heading": "Variables, expressions, and statements",
+   "level": 0,
+   "url": "https://www.py4e.com/html3/02-variables",
+   "order": 12
+  },
+  {
+   "chapter": "2. Variables, expressions, and statements",
+   "heading": "Values and types",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/02-variables",
+   "order": 13
+  },
+  {
+   "chapter": "2. Variables, expressions, and statements",
+   "heading": "Variables",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/02-variables",
+   "order": 14
+  },
+  {
+   "chapter": "2. Variables, expressions, and statements",
+   "heading": "Variable names and keywords",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/02-variables",
+   "order": 15
+  },
+  {
+   "chapter": "2. Variables, expressions, and statements",
+   "heading": "Statements",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/02-variables",
+   "order": 16
+  },
+  {
+   "chapter": "2. Variables, expressions, and statements",
+   "heading": "Operators and operands",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/02-variables",
+   "order": 17
+  },
+  {
+   "chapter": "2. Variables, expressions, and statements",
+   "heading": "Expressions",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/02-variables",
+   "order": 18
+  },
+  {
+   "chapter": "2. Variables, expressions, and statements",
+   "heading": "Order of operations",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/02-variables",
+   "order": 19
+  },
+  {
+   "chapter": "2. Variables, expressions, and statements",
+   "heading": "Modulus operator",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/02-variables",
+   "order": 20
+  },
+  {
+   "chapter": "2. Variables, expressions, and statements",
+   "heading": "String operations",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/02-variables",
+   "order": 21
+  },
+  {
+   "chapter": "2. Variables, expressions, and statements",
+   "heading": "Asking the user for input",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/02-variables",
+   "order": 22
+  },
+  {
+   "chapter": "2. Variables, expressions, and statements",
+   "heading": "Comments",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/02-variables",
+   "order": 23
+  },
+  {
+   "chapter": "2. Variables, expressions, and statements",
+   "heading": "Choosing mnemonic variable names",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/02-variables",
+   "order": 24
+  },
+  {
+   "chapter": "3. Conditional execution",
+   "heading": "Conditional execution",
+   "level": 0,
+   "url": "https://www.py4e.com/html3/03-conditional",
+   "order": 25
+  },
+  {
+   "chapter": "3. Conditional execution",
+   "heading": "Boolean expressions",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/03-conditional",
+   "order": 26
+  },
+  {
+   "chapter": "3. Conditional execution",
+   "heading": "Logical operators",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/03-conditional",
+   "order": 27
+  },
+  {
+   "chapter": "3. Conditional execution",
+   "heading": "Conditional execution",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/03-conditional",
+   "order": 28
+  },
+  {
+   "chapter": "3. Conditional execution",
+   "heading": "Alternative execution",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/03-conditional",
+   "order": 29
+  },
+  {
+   "chapter": "3. Conditional execution",
+   "heading": "Chained conditionals",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/03-conditional",
+   "order": 30
+  },
+  {
+   "chapter": "3. Conditional execution",
+   "heading": "Nested conditionals",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/03-conditional",
+   "order": 31
+  },
+  {
+   "chapter": "3. Conditional execution",
+   "heading": "Catching exceptions using try and except",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/03-conditional",
+   "order": 32
+  },
+  {
+   "chapter": "3. Conditional execution",
+   "heading": "Short-circuit evaluation of logical expressions",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/03-conditional",
+   "order": 33
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Functions",
+   "level": 0,
+   "url": "https://www.py4e.com/html3/04-functions",
+   "order": 34
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Function calls",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/04-functions",
+   "order": 35
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Built-in functions",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/04-functions",
+   "order": 36
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Type conversion functions",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/04-functions",
+   "order": 37
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Math functions",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/04-functions",
+   "order": 38
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Random numbers",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/04-functions",
+   "order": 39
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Adding new functions",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/04-functions",
+   "order": 40
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Definitions and uses",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/04-functions",
+   "order": 41
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Flow of execution",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/04-functions",
+   "order": 42
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Parameters and arguments",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/04-functions",
+   "order": 43
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Fruitful functions and void functions",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/04-functions",
+   "order": 44
+  },
+  {
+   "chapter": "4. Functions",
+   "heading": "Why functions?",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/04-functions",
+   "order": 45
+  },
+  {
+   "chapter": "5. Iteration",
+   "heading": "Iteration",
+   "level": 0,
+   "url": "https://www.py4e.com/html3/05-iterations",
+   "order": 46
+  },
+  {
+   "chapter": "5. Iteration",
+   "heading": "Updating variables",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/05-iterations",
+   "order": 47
+  },
+  {
+   "chapter": "5. Iteration",
+   "heading": "The while statement",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/05-iterations",
+   "order": 48
+  },
+  {
+   "chapter": "5. Iteration",
+   "heading": "Infinite loops",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/05-iterations",
+   "order": 49
+  },
+  {
+   "chapter": "5. Iteration",
+   "heading": "Finishing iterations with continue",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/05-iterations",
+   "order": 50
+  },
+  {
+   "chapter": "5. Iteration",
+   "heading": "Definite loops using for",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/05-iterations",
+   "order": 51
+  },
+  {
+   "chapter": "5. Iteration",
+   "heading": "Loop patterns",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/05-iterations",
+   "order": 52
+  },
+  {
+   "chapter": "5. Iteration",
+   "heading": "Counting and summing loops",
+   "level": 2,
+   "url": "https://www.py4e.com/html3/05-iterations",
+   "order": 53
+  },
+  {
+   "chapter": "5. Iteration",
+   "heading": "Maximum and minimum loops",
+   "level": 2,
+   "url": "https://www.py4e.com/html3/05-iterations",
+   "order": 54
+  },
+  {
+   "chapter": "6. Strings",
+   "heading": "Strings",
+   "level": 0,
+   "url": "https://www.py4e.com/html3/06-strings",
+   "order": 55
+  },
+  {
+   "chapter": "6. Strings",
+   "heading": "A string is a sequence",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/06-strings",
+   "order": 56
+  },
+  {
+   "chapter": "6. Strings",
+   "heading": "Getting the length of a string using len",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/06-strings",
+   "order": 57
+  },
+  {
+   "chapter": "6. Strings",
+   "heading": "Traversal through a string with a loop",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/06-strings",
+   "order": 58
+  },
+  {
+   "chapter": "6. Strings",
+   "heading": "String slices",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/06-strings",
+   "order": 59
+  },
+  {
+   "chapter": "6. Strings",
+   "heading": "Strings are immutable",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/06-strings",
+   "order": 60
+  },
+  {
+   "chapter": "6. Strings",
+   "heading": "Looping and counting",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/06-strings",
+   "order": 61
+  },
+  {
+   "chapter": "6. Strings",
+   "heading": "The in operator",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/06-strings",
+   "order": 62
+  },
+  {
+   "chapter": "6. Strings",
+   "heading": "String comparison",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/06-strings",
+   "order": 63
+  },
+  {
+   "chapter": "6. Strings",
+   "heading": "String methods",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/06-strings",
+   "order": 64
+  },
+  {
+   "chapter": "6. Strings",
+   "heading": "Parsing strings",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/06-strings",
+   "order": 65
+  },
+  {
+   "chapter": "6. Strings",
+   "heading": "Formatted String Literals",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/06-strings",
+   "order": 66
+  },
+  {
+   "chapter": "7. Files",
+   "heading": "Files",
+   "level": 0,
+   "url": "https://www.py4e.com/html3/07-files",
+   "order": 67
+  },
+  {
+   "chapter": "7. Files",
+   "heading": "Persistence",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/07-files",
+   "order": 68
+  },
+  {
+   "chapter": "7. Files",
+   "heading": "Opening files",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/07-files",
+   "order": 69
+  },
+  {
+   "chapter": "7. Files",
+   "heading": "Text files and lines",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/07-files",
+   "order": 70
+  },
+  {
+   "chapter": "7. Files",
+   "heading": "Reading files",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/07-files",
+   "order": 71
+  },
+  {
+   "chapter": "7. Files",
+   "heading": "Searching through a file",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/07-files",
+   "order": 72
+  },
+  {
+   "chapter": "7. Files",
+   "heading": "Letting the user choose the file name",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/07-files",
+   "order": 73
+  },
+  {
+   "chapter": "7. Files",
+   "heading": "Using try, except, and open",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/07-files",
+   "order": 74
+  },
+  {
+   "chapter": "7. Files",
+   "heading": "Writing files",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/07-files",
+   "order": 75
+  },
+  {
+   "chapter": "8. Lists",
+   "heading": "Lists",
+   "level": 0,
+   "url": "https://www.py4e.com/html3/08-lists",
+   "order": 76
+  },
+  {
+   "chapter": "8. Lists",
+   "heading": "A list is a sequence",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/08-lists",
+   "order": 77
+  },
+  {
+   "chapter": "8. Lists",
+   "heading": "Lists are mutable",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/08-lists",
+   "order": 78
+  },
+  {
+   "chapter": "8. Lists",
+   "heading": "Traversing a list",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/08-lists",
+   "order": 79
+  },
+  {
+   "chapter": "8. Lists",
+   "heading": "List operations",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/08-lists",
+   "order": 80
+  },
+  {
+   "chapter": "8. Lists",
+   "heading": "List slices",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/08-lists",
+   "order": 81
+  },
+  {
+   "chapter": "8. Lists",
+   "heading": "List methods",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/08-lists",
+   "order": 82
+  },
+  {
+   "chapter": "8. Lists",
+   "heading": "Deleting elements",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/08-lists",
+   "order": 83
+  },
+  {
+   "chapter": "8. Lists",
+   "heading": "Lists and functions",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/08-lists",
+   "order": 84
+  },
+  {
+   "chapter": "8. Lists",
+   "heading": "Lists and strings",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/08-lists",
+   "order": 85
+  },
+  {
+   "chapter": "8. Lists",
+   "heading": "Parsing lines",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/08-lists",
+   "order": 86
+  },
+  {
+   "chapter": "8. Lists",
+   "heading": "Objects and values",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/08-lists",
+   "order": 87
+  },
+  {
+   "chapter": "8. Lists",
+   "heading": "Aliasing",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/08-lists",
+   "order": 88
+  },
+  {
+   "chapter": "8. Lists",
+   "heading": "List arguments",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/08-lists",
+   "order": 89
+  },
+  {
+   "chapter": "9. Dictionaries",
+   "heading": "Dictionaries",
+   "level": 0,
+   "url": "https://www.py4e.com/html3/09-dictionaries",
+   "order": 90
+  },
+  {
+   "chapter": "9. Dictionaries",
+   "heading": "Dictionary as a set of counters",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/09-dictionaries",
+   "order": 91
+  },
+  {
+   "chapter": "9. Dictionaries",
+   "heading": "Dictionaries and files",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/09-dictionaries",
+   "order": 92
+  },
+  {
+   "chapter": "9. Dictionaries",
+   "heading": "Looping and dictionaries",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/09-dictionaries",
+   "order": 93
+  },
+  {
+   "chapter": "9. Dictionaries",
+   "heading": "Advanced text parsing",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/09-dictionaries",
+   "order": 94
+  },
+  {
+   "chapter": "10. Tuples",
+   "heading": "Tuples",
+   "level": 0,
+   "url": "https://www.py4e.com/html3/10-tuples",
+   "order": 95
+  },
+  {
+   "chapter": "10. Tuples",
+   "heading": "Tuples are immutable",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/10-tuples",
+   "order": 96
+  },
+  {
+   "chapter": "10. Tuples",
+   "heading": "Comparing tuples",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/10-tuples",
+   "order": 97
+  },
+  {
+   "chapter": "10. Tuples",
+   "heading": "Tuple assignment",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/10-tuples",
+   "order": 98
+  },
+  {
+   "chapter": "10. Tuples",
+   "heading": "Dictionaries and tuples",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/10-tuples",
+   "order": 99
+  },
+  {
+   "chapter": "10. Tuples",
+   "heading": "Multiple assignment with dictionaries",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/10-tuples",
+   "order": 100
+  },
+  {
+   "chapter": "10. Tuples",
+   "heading": "The most common words",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/10-tuples",
+   "order": 101
+  },
+  {
+   "chapter": "10. Tuples",
+   "heading": "Using tuples as keys in dictionaries",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/10-tuples",
+   "order": 102
+  },
+  {
+   "chapter": "10. Tuples",
+   "heading": "Sequences: strings, lists, and tuples - Oh My!",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/10-tuples",
+   "order": 103
+  },
+  {
+   "chapter": "10. Tuples",
+   "heading": "List comprehension",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/10-tuples",
+   "order": 104
+  },
+  {
+   "chapter": "11. Regular expressions",
+   "heading": "Regular expressions",
+   "level": 0,
+   "url": "https://www.py4e.com/html3/11-regex",
+   "order": 105
+  },
+  {
+   "chapter": "11. Regular expressions",
+   "heading": "Character matching in regular expressions",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/11-regex",
+   "order": 106
+  },
+  {
+   "chapter": "11. Regular expressions",
+   "heading": "Extracting data using regular expressions",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/11-regex",
+   "order": 107
+  },
+  {
+   "chapter": "11. Regular expressions",
+   "heading": "Combining searching and extracting",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/11-regex",
+   "order": 108
+  },
+  {
+   "chapter": "11. Regular expressions",
+   "heading": "Escape character",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/11-regex",
+   "order": 109
+  },
+  {
+   "chapter": "11. Regular expressions",
+   "heading": "Summary",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/11-regex",
+   "order": 110
+  },
+  {
+   "chapter": "11. Regular expressions",
+   "heading": "Bonus section for Unix / Linux users",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/11-regex",
+   "order": 111
+  },
+  {
+   "chapter": "12. Networked programs",
+   "heading": "Networked programs",
+   "level": 0,
+   "url": "https://www.py4e.com/html3/12-network",
+   "order": 112
+  },
+  {
+   "chapter": "12. Networked programs",
+   "heading": "Hypertext Transfer Protocol - HTTP",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/12-network",
+   "order": 113
+  },
+  {
+   "chapter": "12. Networked programs",
+   "heading": "The world's simplest web browser",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/12-network",
+   "order": 114
+  },
+  {
+   "chapter": "12. Networked programs",
+   "heading": "Retrieving an image over HTTP",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/12-network",
+   "order": 115
+  },
+  {
+   "chapter": "12. Networked programs",
+   "heading": "Retrieving web pages with urllib",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/12-network",
+   "order": 116
+  },
+  {
+   "chapter": "12. Networked programs",
+   "heading": "Reading binary files using urllib",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/12-network",
+   "order": 117
+  },
+  {
+   "chapter": "12. Networked programs",
+   "heading": "Parsing HTML and scraping the web",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/12-network",
+   "order": 118
+  },
+  {
+   "chapter": "12. Networked programs",
+   "heading": "Parsing HTML using regular expressions",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/12-network",
+   "order": 119
+  },
+  {
+   "chapter": "12. Networked programs",
+   "heading": "Parsing HTML using BeautifulSoup",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/12-network",
+   "order": 120
+  },
+  {
+   "chapter": "12. Networked programs",
+   "heading": "Bonus section for Unix / Linux users",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/12-network",
+   "order": 121
+  },
+  {
+   "chapter": "13. Using Web Services",
+   "heading": "Using Web Services",
+   "level": 0,
+   "url": "https://www.py4e.com/html3/13-web",
+   "order": 122
+  },
+  {
+   "chapter": "13. Using Web Services",
+   "heading": "eXtensible Markup Language - XML",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/13-web",
+   "order": 123
+  },
+  {
+   "chapter": "13. Using Web Services",
+   "heading": "Parsing XML",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/13-web",
+   "order": 124
+  },
+  {
+   "chapter": "13. Using Web Services",
+   "heading": "Looping through nodes",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/13-web",
+   "order": 125
+  },
+  {
+   "chapter": "13. Using Web Services",
+   "heading": "JavaScript Object Notation - JSON",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/13-web",
+   "order": 126
+  },
+  {
+   "chapter": "13. Using Web Services",
+   "heading": "Parsing JSON",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/13-web",
+   "order": 127
+  },
+  {
+   "chapter": "13. Using Web Services",
+   "heading": "Application Programming Interfaces",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/13-web",
+   "order": 128
+  },
+  {
+   "chapter": "13. Using Web Services",
+   "heading": "Security and API usage",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/13-web",
+   "order": 129
+  },
+  {
+   "chapter": "14. Object-oriented programming",
+   "heading": "Object-oriented programming",
+   "level": 0,
+   "url": "https://www.py4e.com/html3/14-objects",
+   "order": 130
+  },
+  {
+   "chapter": "14. Object-oriented programming",
+   "heading": "Managing larger programs",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/14-objects",
+   "order": 131
+  },
+  {
+   "chapter": "14. Object-oriented programming",
+   "heading": "Getting started",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/14-objects",
+   "order": 132
+  },
+  {
+   "chapter": "14. Object-oriented programming",
+   "heading": "Using objects",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/14-objects",
+   "order": 133
+  },
+  {
+   "chapter": "14. Object-oriented programming",
+   "heading": "Starting with programs",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/14-objects",
+   "order": 134
+  },
+  {
+   "chapter": "14. Object-oriented programming",
+   "heading": "Subdividing a problem",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/14-objects",
+   "order": 135
+  },
+  {
+   "chapter": "14. Object-oriented programming",
+   "heading": "Our first Python object",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/14-objects",
+   "order": 136
+  },
+  {
+   "chapter": "14. Object-oriented programming",
+   "heading": "Classes as types",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/14-objects",
+   "order": 137
+  },
+  {
+   "chapter": "14. Object-oriented programming",
+   "heading": "Object lifecycle",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/14-objects",
+   "order": 138
+  },
+  {
+   "chapter": "14. Object-oriented programming",
+   "heading": "Multiple instances",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/14-objects",
+   "order": 139
+  },
+  {
+   "chapter": "14. Object-oriented programming",
+   "heading": "Inheritance",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/14-objects",
+   "order": 140
+  },
+  {
+   "chapter": "14. Object-oriented programming",
+   "heading": "Summary",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/14-objects",
+   "order": 141
+  },
+  {
+   "chapter": "15. Using Databases and SQL",
+   "heading": "Using Databases and SQL",
+   "level": 0,
+   "url": "https://www.py4e.com/html3/15-database",
+   "order": 142
+  },
+  {
+   "chapter": "15. Using Databases and SQL",
+   "heading": "What is a database?",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/15-database",
+   "order": 143
+  },
+  {
+   "chapter": "15. Using Databases and SQL",
+   "heading": "Database concepts",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/15-database",
+   "order": 144
+  },
+  {
+   "chapter": "15. Using Databases and SQL",
+   "heading": "Database Browser for SQLite",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/15-database",
+   "order": 145
+  },
+  {
+   "chapter": "15. Using Databases and SQL",
+   "heading": "Creating a database table",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/15-database",
+   "order": 146
+  },
+  {
+   "chapter": "15. Using Databases and SQL",
+   "heading": "Structured Query Language summary",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/15-database",
+   "order": 147
+  },
+  {
+   "chapter": "15. Using Databases and SQL",
+   "heading": "Multiple tables and basic data modeling",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/15-database",
+   "order": 148
+  },
+  {
+   "chapter": "15. Using Databases and SQL",
+   "heading": "Data model diagrams",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/15-database",
+   "order": 149
+  },
+  {
+   "chapter": "15. Using Databases and SQL",
+   "heading": "Automatically creating primary keys",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/15-database",
+   "order": 150
+  },
+  {
+   "chapter": "15. Using Databases and SQL",
+   "heading": "Logical keys for fast lookup",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/15-database",
+   "order": 151
+  },
+  {
+   "chapter": "15. Using Databases and SQL",
+   "heading": "Adding constraints to the database",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/15-database",
+   "order": 152
+  },
+  {
+   "chapter": "15. Using Databases and SQL",
+   "heading": "Sample multi-table application",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/15-database",
+   "order": 153
+  },
+  {
+   "chapter": "15. Using Databases and SQL",
+   "heading": "Many to many relationships in databases",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/15-database",
+   "order": 154
+  },
+  {
+   "chapter": "15. Using Databases and SQL",
+   "heading": "Modeling data at the many-to-many connection",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/15-database",
+   "order": 155
+  },
+  {
+   "chapter": "15. Using Databases and SQL",
+   "heading": "Summary",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/15-database",
+   "order": 156
+  },
+  {
+   "chapter": "16. Visualizing data",
+   "heading": "Visualizing data",
+   "level": 0,
+   "url": "https://www.py4e.com/html3/16-viz",
+   "order": 157
+  },
+  {
+   "chapter": "16. Visualizing data",
+   "heading": "Building a OpenStreetMap from geocoded data",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/16-viz",
+   "order": 158
+  },
+  {
+   "chapter": "16. Visualizing data",
+   "heading": "Visualizing networks and interconnections",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/16-viz",
+   "order": 159
+  },
+  {
+   "chapter": "16. Visualizing data",
+   "heading": "Visualizing mail data",
+   "level": 1,
+   "url": "https://www.py4e.com/html3/16-viz",
+   "order": 160
+  }
+ ]
+}
