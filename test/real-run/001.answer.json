@@ -1,0 +1,337 @@
+{
+  "subject": "Python",
+  "scope": "This map takes a learner from no Python to training and evaluating scikit-learn models on their own data. It follows the order most Python-for-data-science courses use and the scientific Python stack itself is built on: core Python first, then NumPy, then pandas and plotting, then machine learning with scikit-learn. Core Python is covered in full because reading library code, error messages and documentation needs it. That includes a short topic on classes, because scikit-learn's estimators are objects with methods and fitted attributes. NumPy and pandas cover loading, cleaning, reshaping and exploring data. The machine learning part follows scikit-learn's own organisation: the estimator API, preprocessing and pipelines, supervised models, evaluation, model selection, ensembles and a little unsupervised learning, with concepts like overfitting and data leakage taught where the code needs them. Left out: deep learning frameworks (PyTorch, TensorFlow), the mathematical derivations behind the algorithms, web development, async, concurrency, packaging and publishing libraries, type hints and testing frameworks, and big-data tools. These are worth learning later but are not needed for the stated goal. Seaborn and other plotting libraries are left out in favour of matplotlib and pandas plotting, which are enough for exploring data.",
+  "profile": {
+    "name": "Python",
+    "trap": "a = [1, 2]; b = a; b.append(3); print(a) prints [1, 2, 3], even though the code never touched a. Assignment in Python never copies anything. It makes a name refer to an object, so a and b are two names for the same list, and changing the list through one name shows through the other. The same rule explains why a function can change a list you pass to it, and why a pandas DataFrame or NumPy slice you 'copied' with = changes the original.",
+    "slips": "Forgetting the colon after an if or for line, typing pirnt instead of print, a missing closing parenthesis, writing from sklearn.linear_model import LinearRegresion, or misspelling a column name like df['prcie'].",
+    "observe": "Run the code and print things: type(x) and id(x) show what an object is and whether two names share it, a is b tests sameness, and help(obj) or dir(obj) lists what it can do. For data, print df.shape, df.dtypes, df.head() and df.isna().sum() after every step. For models, print the fitted attributes such as model.coef_ or model.classes_. The key habit is to change one thing, run it again and compare the output.",
+    "shallow": "What does len([4, 5, 6]) return?",
+    "rich": "You are given a small DataFrame of houses with a price column, a size column that has some missing values and a text column for the neighbourhood. Split the data into training and test sets, build a pipeline that fills the missing sizes and one-hot encodes the neighbourhood, fit a linear regression, and print the test-set mean absolute error. Then explain why the imputer has to sit inside the pipeline and not be applied before the split.",
+    "examples": "Short, complete programs that run on their own, each followed by its exact output. Data is built in the code as a tiny list, array or DataFrame, never read from an outside file, and random_state is fixed so a model's printed numbers are the same on every run.",
+    "run": "python",
+    "format": ""
+  },
+  "areas": [
+    {
+      "name": "Python Foundations",
+      "topics": [
+        {
+          "name": "Getting Started",
+          "desc": "How to run Python code and see its results, the first step before anything else can be tried.",
+          "points": [
+            "Running code: scripts, the REPL and notebooks",
+            "print() and comments",
+            "Variables as names for values"
+          ]
+        },
+        {
+          "name": "Basic Types",
+          "desc": "The built-in kinds of values (numbers, text, truth values) and how to convert between them, since every program is built from them.",
+          "points": [
+            "Numbers: int, float and arithmetic",
+            "Floating-point rounding surprises",
+            "Strings and string methods",
+            "f-strings for formatting output",
+            "Booleans, comparisons and None",
+            "Converting between types"
+          ]
+        },
+        {
+          "name": "Control Flow",
+          "desc": "Making decisions and repeating work, which together decide the order a program's statements run in.",
+          "points": [
+            "if, elif and else",
+            "and, or, not and truthiness",
+            "for loops and range()",
+            "while loops",
+            "break and continue",
+            "Looping with enumerate() and zip()"
+          ]
+        },
+        {
+          "name": "Collections",
+          "desc": "Python's built-in containers for many values, and the shared rules for indexing, iterating over and changing them.",
+          "points": [
+            "Lists: creating, indexing and appending",
+            "Slicing sequences",
+            "Tuples and unpacking",
+            "Dictionaries: keys, values and lookup",
+            "Looping over dictionaries",
+            "Sets",
+            "List and dictionary comprehensions",
+            "Mutability: aliasing and copying"
+          ]
+        },
+        {
+          "name": "Functions",
+          "desc": "Packaging code into reusable named pieces with inputs and outputs, and how names are looked up inside them.",
+          "points": [
+            "Defining and calling functions",
+            "Return values",
+            "Default and keyword arguments",
+            "*args and **kwargs",
+            "Local and global scope",
+            "Mutable default arguments",
+            "Lambda functions",
+            "Docstrings and help()"
+          ]
+        },
+        {
+          "name": "Errors and Debugging",
+          "desc": "Reading what went wrong, handling failures in code, and finding bugs, the skills used every time code does not work.",
+          "points": [
+            "Reading a traceback",
+            "Common exceptions: TypeError, KeyError, IndexError, ValueError",
+            "try and except",
+            "Raising exceptions",
+            "Debugging with print() and assert"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Structuring Programs",
+      "topics": [
+        {
+          "name": "Modules and Packages",
+          "desc": "Using code from the standard library, installed packages and your own files, and keeping project dependencies separate.",
+          "points": [
+            "import and from ... import",
+            "Useful standard library modules: math, random, collections",
+            "Installing packages with pip",
+            "Virtual environments",
+            "Writing your own module"
+          ]
+        },
+        {
+          "name": "Working with Files",
+          "desc": "Getting data into and out of a program through files, which is where real datasets come from.",
+          "points": [
+            "Reading and writing text files with open() and with",
+            "File paths with pathlib",
+            "Reading CSV and JSON with the standard library"
+          ]
+        },
+        {
+          "name": "Classes and Objects",
+          "desc": "How objects bundle data with behaviour, the model behind every library object you use, including scikit-learn estimators.",
+          "points": [
+            "Objects, attributes and methods",
+            "Defining a class with __init__ and self",
+            "Inheritance and overriding methods",
+            "Special methods: __repr__, __len__ and friends",
+            "Duck typing: objects that share an interface"
+          ]
+        },
+        {
+          "name": "Iteration in Depth",
+          "desc": "What a for loop really does underneath, and how to produce values lazily.",
+          "points": [
+            "Iterables and iterators",
+            "Generators and yield"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Numerical Computing with NumPy",
+      "topics": [
+        {
+          "name": "NumPy Arrays",
+          "desc": "The array, the fixed-type grid of numbers that pandas and scikit-learn store data in, and how to pick out parts of it.",
+          "points": [
+            "Creating arrays",
+            "dtype and shape",
+            "Indexing and slicing arrays",
+            "Views versus copies in NumPy",
+            "Boolean masks",
+            "Fancy indexing with integer arrays"
+          ]
+        },
+        {
+          "name": "Array Computation",
+          "desc": "Computing on whole arrays at once instead of looping, which is how numerical Python is fast and how ML code is written.",
+          "points": [
+            "Vectorized arithmetic and ufuncs",
+            "Aggregations along an axis",
+            "Broadcasting",
+            "Reshaping, stacking and transposing",
+            "Matrix multiplication with @",
+            "NaN and infinity in arrays",
+            "Random numbers and seeds"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Data Handling with pandas",
+      "topics": [
+        {
+          "name": "pandas Fundamentals",
+          "desc": "Loading tabular data into a DataFrame, looking at it and selecting the parts you need.",
+          "points": [
+            "Series and DataFrame",
+            "The index",
+            "Loading data with read_csv",
+            "Inspecting data: head, info, describe",
+            "Selecting columns",
+            "Selecting rows with loc and iloc",
+            "Filtering rows with conditions",
+            "Adding and transforming columns",
+            "Chained assignment and SettingWithCopyWarning"
+          ]
+        },
+        {
+          "name": "Cleaning Data",
+          "desc": "Finding and fixing the problems real datasets have before they can be analysed or modelled.",
+          "points": [
+            "Finding missing values",
+            "Dropping and filling missing values in pandas",
+            "Fixing column types with astype and to_numeric",
+            "Removing duplicates",
+            "Cleaning text columns with .str",
+            "Parsing dates with to_datetime",
+            "Categorical columns and value_counts",
+            "Spotting outliers"
+          ]
+        },
+        {
+          "name": "Reshaping and Combining Data",
+          "desc": "Summarising, joining and restructuring tables to get data into the shape a question or model needs.",
+          "points": [
+            "Sorting rows",
+            "groupby and aggregation",
+            "Merging DataFrames",
+            "Concatenating DataFrames",
+            "Pivot tables and melt",
+            "apply and when to avoid it"
+          ]
+        },
+        {
+          "name": "Visualizing Data",
+          "desc": "Plotting data to understand distributions and relationships before modelling and to check results after.",
+          "points": [
+            "Line and scatter plots with matplotlib",
+            "Figures, axes and subplots",
+            "Histograms and box plots",
+            "Plotting directly from pandas",
+            "Correlation matrices and heatmaps"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Machine Learning with scikit-learn",
+      "topics": [
+        {
+          "name": "Machine Learning Concepts",
+          "desc": "The ideas every model rests on: what is being learned, from what, and how to tell whether it learned anything useful.",
+          "points": [
+            "What a model learns: features, target and parameters",
+            "Supervised versus unsupervised learning",
+            "Regression versus classification",
+            "Training and test sets",
+            "Overfitting, underfitting and the bias-variance tradeoff",
+            "Data leakage"
+          ]
+        },
+        {
+          "name": "The scikit-learn API",
+          "desc": "The shared interface all scikit-learn objects follow, so learning it once lets you use any model.",
+          "points": [
+            "The feature matrix X and target y",
+            "Estimators: fit and predict",
+            "Transformers: fit, transform and fit_transform",
+            "Splitting data with train_test_split",
+            "Hyperparameters versus fitted attributes (the trailing underscore)",
+            "random_state and reproducibility"
+          ]
+        },
+        {
+          "name": "Preprocessing and Pipelines",
+          "desc": "Turning cleaned data into model-ready numbers inside scikit-learn so the same steps apply to training and new data without leakage.",
+          "points": [
+            "Scaling features: StandardScaler and MinMaxScaler",
+            "Encoding categories with OneHotEncoder",
+            "Imputing missing values in a model with SimpleImputer",
+            "ColumnTransformer for mixed column types",
+            "Pipelines",
+            "Polynomial and interaction features"
+          ]
+        },
+        {
+          "name": "Regression Models",
+          "desc": "Predicting numbers, starting with linear models whose workings can be read directly from their coefficients.",
+          "points": [
+            "Linear regression",
+            "Reading coefficients and the intercept",
+            "Regularization: Ridge and Lasso",
+            "Regression metrics: MAE, MSE, RMSE and R²"
+          ]
+        },
+        {
+          "name": "Classification Models",
+          "desc": "Predicting categories with the standard families of classifiers and understanding how each draws its boundary.",
+          "points": [
+            "Logistic regression",
+            "k-nearest neighbors",
+            "Decision trees",
+            "Support vector machines",
+            "predict_proba and decision thresholds"
+          ]
+        },
+        {
+          "name": "Evaluating Classifiers",
+          "desc": "Measuring how good a classifier really is, beyond a single accuracy number.",
+          "points": [
+            "Baselines with DummyClassifier",
+            "Accuracy and its limits on imbalanced data",
+            "Confusion matrix",
+            "Precision, recall and F1",
+            "ROC curve and AUC"
+          ]
+        },
+        {
+          "name": "Model Selection and Tuning",
+          "desc": "Comparing models and choosing hyperparameters with reliable estimates, while keeping a fair final test.",
+          "points": [
+            "Cross-validation with cross_val_score",
+            "Choosing a splitter: KFold, StratifiedKFold and GroupKFold",
+            "Grid search with GridSearchCV",
+            "Randomized search with RandomizedSearchCV",
+            "Learning curves and validation curves",
+            "Keeping a final test set untouched"
+          ]
+        },
+        {
+          "name": "Ensemble Models",
+          "desc": "Combining many trees into stronger models, which are the usual best choice for tabular data.",
+          "points": [
+            "Random forests",
+            "Gradient boosting with HistGradientBoosting",
+            "Feature importances and permutation importance"
+          ]
+        },
+        {
+          "name": "Unsupervised Learning",
+          "desc": "Finding structure in data with no target, for exploration and for building features.",
+          "points": [
+            "k-means clustering",
+            "Choosing the number of clusters: inertia and silhouette",
+            "PCA for dimensionality reduction"
+          ]
+        },
+        {
+          "name": "Completing a Project",
+          "desc": "Putting everything together into a full workflow and keeping the result, so the learner can work on their own data.",
+          "points": [
+            "An end-to-end ML workflow from CSV to evaluated model",
+            "Saving and loading models with joblib",
+            "Reading the scikit-learn documentation"
+          ]
+        }
+      ]
+    }
+  ]
+}

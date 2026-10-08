@@ -1,0 +1,80 @@
+{"points": [
+{"id": "p99", "what": "Arrange data as a 2-D feature matrix X (rows are samples, columns are features) and a 1-D target y, and check their shapes before handing them to scikit-learn.", "needs": ["p93", "p53"], "helps": ["p65", "p69"]},
+{"id": "p100", "what": "Use the estimator pattern: create a model object, call fit(X, y) to learn from data, then predict(X_new) to get predictions.", "needs": ["p99", "p45"], "helps": ["p93", "p46"]},
+{"id": "p101", "what": "Explain how transformers learn something from data in fit, apply it in transform, and combine both with fit_transform, and why the fitted values are reused on new data.", "needs": ["p100"], "helps": ["p105"]},
+{"id": "p102", "what": "Split X and y into training and test portions with train_test_split, and control the test size and shuffling.", "needs": ["p96", "p99"], "helps": ["p104"]},
+{"id": "p103", "what": "Tell apart hyperparameters, which you set when creating the model, from fitted attributes ending in an underscore, which are learned by fit, and look at both with get_params and the attributes.", "needs": ["p100", "p45"], "helps": ["p93"]},
+{"id": "p104", "what": "Set random_state so splits and randomized models give the same results on every run, and know why results can differ without it.", "needs": ["p64", "p102"], "helps": []},
+{"id": "p105", "what": "Rescale numeric features with StandardScaler or MinMaxScaler, fitting only on training data, and explain why distance-based and regularized models need it.", "needs": ["p101", "p102"], "helps": ["p59", "p98"]},
+{"id": "p106", "what": "Turn categorical columns into 0/1 indicator columns with OneHotEncoder, and handle categories that appear only in new data.", "needs": ["p101"], "helps": ["p80"]},
+{"id": "p107", "what": "Fill missing values inside a model workflow with SimpleImputer so the fill values are learned from training data only.", "needs": ["p101", "p74"], "helps": ["p75"]},
+{"id": "p108", "what": "Apply different transformers to different columns (for example scale numbers and one-hot encode categories) with ColumnTransformer and get one combined feature matrix.", "needs": ["p101", "p69"], "helps": ["p105", "p106", "p107"]},
+{"id": "p109", "what": "Chain preprocessing steps and a final model into a single Pipeline that is fitted and used like one estimator, and see how this prevents leakage.", "needs": ["p100", "p101"], "helps": ["p98", "p108"]},
+{"id": "p110", "what": "Create squared and interaction features with PolynomialFeatures so a linear model can fit curved relationships, and recognise the risk of too many features.", "needs": ["p101"], "helps": ["p111", "p97"]},
+{"id": "p111", "what": "Fit a linear regression model with LinearRegression and understand that it finds the straight line or plane that minimizes squared error.", "needs": ["p95", "p100"], "helps": ["p62", "p88"]},
+{"id": "p112", "what": "Read coef_ and intercept_ to say how the prediction changes when a feature goes up by one unit, and know why scale affects how comparable coefficients are.", "needs": ["p111", "p103"], "helps": ["p105"]},
+{"id": "p113", "what": "Use Ridge and Lasso to penalize large coefficients, see how the alpha hyperparameter trades fit against simplicity, and know that Lasso can set coefficients to exactly zero.", "needs": ["p111", "p97"], "helps": ["p105", "p112"]},
+{"id": "p114", "what": "Compute MAE, MSE, RMSE and R² on predictions, explain what each one measures, and choose among them for a problem.", "needs": ["p95", "p100"], "helps": ["p102", "p111"]},
+{"id": "p115", "what": "Fit LogisticRegression for classification and explain that it models class probabilities from a weighted sum of features, with C controlling regularization.", "needs": ["p95", "p100"], "helps": ["p111", "p119"]},
+{"id": "p116", "what": "Classify a point by the majority class among its k closest training points, and see how k and feature scaling change the result.", "needs": ["p100"], "helps": ["p105", "p97"]},
+{"id": "p117", "what": "Fit a DecisionTreeClassifier, read the splits it makes, and use max_depth and similar settings to control overfitting.", "needs": ["p100", "p95"], "helps": ["p97"]},
+{"id": "p118", "what": "Use a support vector classifier to find a wide-margin boundary, and understand the roles of the kernel and C.", "needs": ["p100", "p95"], "helps": ["p105"]},
+{"id": "p119", "what": "Get class probabilities with predict_proba and turn them into labels with a chosen threshold instead of the default 0.5.", "needs": ["p115"], "helps": ["p116", "p117", "p123", "p124"]},
+{"id": "p120", "what": "Build a baseline with DummyClassifier (for example always predicting the most common class) and use it as the score a real model must beat.", "needs": ["p100", "p95"], "helps": ["p121"]},
+{"id": "p121", "what": "Compute accuracy and explain why it can look high while being useless when one class is much rarer than the other.", "needs": ["p95", "p96"], "helps": ["p120", "p122"]},
+{"id": "p122", "what": "Read a confusion matrix to count true and false positives and negatives and see which kinds of mistakes a classifier makes.", "needs": ["p121"], "helps": ["p95"]},
+{"id": "p123", "what": "Compute precision, recall and F1 from the confusion matrix, and pick which one matters for a given cost of mistakes.", "needs": ["p122"], "helps": ["p119"]},
+{"id": "p124", "what": "Read an ROC curve and AUC as a summary of how well a classifier ranks positives above negatives across all thresholds.", "needs": ["p119", "p122"], "helps": ["p123"]},
+{"id": "p125", "what": "Estimate model performance more reliably by splitting the training data into folds and averaging scores with cross_val_score.", "needs": ["p100", "p102"], "helps": ["p114", "p109", "p98"]},
+{"id": "p126", "what": "Pick a cross-validation splitter that suits the data: KFold in general, StratifiedKFold for imbalanced classes, GroupKFold when rows from one group must stay together.", "needs": ["p125"], "helps": ["p121", "p98"]},
+{"id": "p127", "what": "Search a grid of hyperparameter values with GridSearchCV, using cross-validation, and read best_params_ and best_score_.", "needs": ["p125", "p103"], "helps": ["p109", "p97"]},
+{"id": "p128", "what": "Sample hyperparameter combinations at random from distributions with RandomizedSearchCV to cover large search spaces at a fixed budget.", "needs": ["p127"], "helps": ["p64"]},
+{"id": "p129", "what": "Plot learning curves and validation curves to tell whether a model suffers from high bias or high variance and whether more data or a different setting would help.", "needs": ["p125", "p97"], "helps": ["p114"]},
+{"id": "p130", "what": "Set aside a final test set that is used once, after all tuning, and explain why repeated peeking at it makes the score too optimistic.", "needs": ["p98", "p125"], "helps": ["p127"]},
+{"id": "p131", "what": "Train a RandomForest, which averages many decorrelated trees built on random samples and features, and understand why this reduces overfitting compared with a single tree.", "needs": ["p117"], "helps": ["p97"]},
+{"id": "p132", "what": "Use HistGradientBoostingClassifier or Regressor, which builds trees one after another to correct earlier errors, and tune its main settings such as learning rate and number of iterations.", "needs": ["p117"], "helps": ["p131", "p107"]},
+{"id": "p133", "what": "Rank features by impurity-based importances and by permutation importance on held-out data, and know when each one can mislead.", "needs": ["p131", "p96"], "helps": ["p121", "p112"]}
+],
+"topics": [
+{"id": "t18", "where": [
+{"title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (Aurelien Geron)", "detail": "Chapter 2, End-to-End Machine Learning Project (Prepare the Data; Scikit-Learn design)", "url": ""},
+{"title": "scikit-learn MOOC (Inria)", "detail": "Module 1, Predictive modeling pipeline", "url": "https://inria.github.io/scikit-learn-mooc/"},
+{"title": "API design for machine learning software: experiences from the scikit-learn project (Buitinck et al.)", "detail": "Whole paper, on the estimator and transformer interfaces", "url": "https://arxiv.org/abs/1309.0238"},
+{"title": "scikit-learn documentation", "detail": "Getting Started", "url": ""}
+]},
+{"id": "t19", "where": [
+{"title": "scikit-learn User Guide", "detail": "Section 6.3 Preprocessing data; Section 6.1 Pipelines and composite estimators", "url": ""},
+{"title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (Aurelien Geron)", "detail": "Chapter 2, Transformation Pipelines", "url": ""},
+{"title": "Introduction to Machine Learning with Python (Andreas Muller and Sarah Guido)", "detail": "Chapter 4, Representing Data and Engineering Features; Chapter 6, Algorithm Chains and Pipelines", "url": ""},
+{"title": "Python Data Science Handbook (Jake VanderPlas)", "detail": "Chapter 5, Feature Engineering", "url": ""}
+]},
+{"id": "t20", "where": [
+{"title": "An Introduction to Statistical Learning (James, Witten, Hastie, Tibshirani)", "detail": "Chapter 3, Linear Regression; Chapter 6, Linear Model Selection and Regularization", "url": ""},
+{"title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (Aurelien Geron)", "detail": "Chapter 4, Training Models", "url": ""},
+{"title": "scikit-learn User Guide", "detail": "Section 1.1 Linear Models; Section 3.4 Metrics and scoring (regression metrics)", "url": ""}
+]},
+{"id": "t21", "where": [
+{"title": "An Introduction to Statistical Learning (James, Witten, Hastie, Tibshirani)", "detail": "Chapter 4, Classification; Chapter 8, Tree-Based Methods; Chapter 9, Support Vector Machines", "url": ""},
+{"title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (Aurelien Geron)", "detail": "Chapter 3, Classification; Chapter 5, Support Vector Machines; Chapter 6, Decision Trees", "url": ""},
+{"title": "scikit-learn User Guide", "detail": "Section 1.1.11 Logistic regression; Section 1.4 Support Vector Machines; Section 1.6 Nearest Neighbors; Section 1.10 Decision Trees", "url": ""}
+]},
+{"id": "t22", "where": [
+{"title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (Aurelien Geron)", "detail": "Chapter 3, Performance Measures (confusion matrix, precision and recall, ROC curve)", "url": ""},
+{"title": "scikit-learn User Guide", "detail": "Section 3.4 Metrics and scoring: quantifying the quality of predictions", "url": ""},
+{"title": "Data Science for Business (Foster Provost and Tom Fawcett)", "detail": "Chapter 7, Decision Analytic Thinking I: What Is a Good Model?; Chapter 8, Visualizing Model Performance", "url": ""},
+{"title": "An introduction to ROC analysis (Tom Fawcett, Pattern Recognition Letters, 2006)", "detail": "Whole paper", "url": ""}
+]},
+{"id": "t23", "where": [
+{"title": "scikit-learn User Guide", "detail": "Section 3.1 Cross-validation: evaluating estimator performance; Section 3.2 Tuning the hyper-parameters of an estimator; Section 3.5 Validation curves and learning curves", "url": ""},
+{"title": "Introduction to Machine Learning with Python (Andreas Muller and Sarah Guido)", "detail": "Chapter 5, Model Evaluation and Improvement", "url": ""},
+{"title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (Aurelien Geron)", "detail": "Chapter 2, Fine-Tune Your Model", "url": ""},
+{"title": "scikit-learn MOOC (Inria)", "detail": "Modules on model selection and hyperparameter tuning", "url": "https://inria.github.io/scikit-learn-mooc/"},
+{"title": "On over-fitting in model selection and subsequent selection bias in performance evaluation (Cawley and Talbot, JMLR, 2010)", "detail": "Whole paper, on why tuning needs held-out data", "url": ""}
+]},
+{"id": "t24", "where": [
+{"title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (Aurelien Geron)", "detail": "Chapter 7, Ensemble Learning and Random Forests", "url": ""},
+{"title": "An Introduction to Statistical Learning (James, Witten, Hastie, Tibshirani)", "detail": "Chapter 8, Tree-Based Methods (bagging, random forests, boosting)", "url": ""},
+{"title": "scikit-learn User Guide", "detail": "Section 1.11 Ensembles (including Histogram-Based Gradient Boosting); Section 4.2 Permutation feature importance", "url": ""},
+{"title": "Random Forests (Leo Breiman, Machine Learning, 2001)", "detail": "Whole paper", "url": ""}
+]}
+]}

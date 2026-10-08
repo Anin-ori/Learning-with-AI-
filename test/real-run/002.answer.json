@@ -1,0 +1,68 @@
+{"points": [
+{"id": "p1", "what": "Run Python code three ways: as a saved script from the command line, line by line in the REPL, and cell by cell in a notebook. You will know when each one is the right choice.", "needs": [], "helps": []},
+{"id": "p2", "what": "Use print() to show values on screen and write comments with # to explain code. You can then see what a program is doing and leave notes for yourself.", "needs": ["p1"], "helps": []},
+{"id": "p3", "what": "Understand that a variable is a name pointing at a value, not a box holding it. You can assign, reassign and choose good names.", "needs": ["p1"], "helps": ["p2"]},
+{"id": "p4", "what": "Work with ints and floats and use the arithmetic operators, including // and %, ** and operator precedence. You can predict what an expression evaluates to.", "needs": ["p1"], "helps": ["p2", "p3"]},
+{"id": "p5", "what": "Understand why 0.1 + 0.2 does not equal 0.3 exactly, because floats are stored in binary. You will compare floats safely with a tolerance and round for display.", "needs": ["p4"], "helps": ["p2", "p7"]},
+{"id": "p6", "what": "Create strings and use common methods such as upper, strip, split, join, replace and find. You know that strings are immutable and can be indexed.", "needs": ["p3"], "helps": ["p2"]},
+{"id": "p7", "what": "Build readable output with f-strings, embedding expressions and format specifiers such as {x:.2f}. You can print tidy tables and messages with values in them.", "needs": ["p3", "p6"], "helps": ["p4", "p2"]},
+{"id": "p8", "what": "Use True and False, the comparison operators (==, !=, <, >=) and the None value that means 'no value'. You can tell == from is and know what a comparison returns.", "needs": ["p3"], "helps": ["p4", "p6"]},
+{"id": "p9", "what": "Convert values with int(), float(), str() and bool(), and know when a conversion fails. You can turn user or file text into numbers before computing with it.", "needs": ["p4", "p6"], "helps": ["p8", "p33"]},
+{"id": "p10", "what": "Make code take different paths with if, elif and else. You can write branching logic and understand how indentation marks each block.", "needs": ["p8"], "helps": ["p2"]},
+{"id": "p11", "what": "Combine conditions with and, or and not, and know which values count as false (0, empty collections, None). You can write short conditions such as 'if items:' and understand short-circuit evaluation.", "needs": ["p8", "p10"], "helps": []},
+{"id": "p12", "what": "Repeat work with for loops over a range or over the items of a sequence. You can control the start, stop and step of range() and loop a fixed number of times.", "needs": ["p3"], "helps": ["p10", "p4", "p16"]},
+{"id": "p13", "what": "Repeat code while a condition holds, using a while loop. You can avoid infinite loops by updating the condition and know when while is better than for.", "needs": ["p8", "p10"], "helps": ["p12"]},
+{"id": "p14", "what": "Leave a loop early with break or skip to the next iteration with continue. You can use them to stop a search once you have found a result or to skip unwanted items.", "needs": ["p10", "p12"], "helps": ["p13"]},
+{"id": "p15", "what": "Use enumerate() to get an index with each item and zip() to walk several sequences in step. This replaces manual index counters and is common when pairing features with labels.", "needs": ["p12", "p16"], "helps": ["p18"]},
+{"id": "p16", "what": "Create lists, read items by index (including negative indexes) and add items with append and extend. You know that lists are ordered and can change.", "needs": ["p3"], "helps": ["p4", "p6", "p12"]},
+{"id": "p17", "what": "Take parts of a list or string with [start:stop:step], including negative indexes and the reverse slice [::-1]. You can predict which items a slice includes and excludes.", "needs": ["p16"], "helps": ["p6"]},
+{"id": "p18", "what": "Use tuples as fixed groups of values and unpack them into several names in one assignment. You can swap values and return multiple values neatly.", "needs": ["p16"], "helps": ["p17"]},
+{"id": "p19", "what": "Store and look up values by key in a dictionary, with d[key], get(), adding and deleting entries, and the `in` test for keys. You can model records as key-value pairs.", "needs": ["p3"], "helps": ["p6", "p16"]},
+{"id": "p20", "what": "Loop over a dictionary's keys, values or key-value pairs with keys(), values() and items(). You can pick the right view for the job.", "needs": ["p12", "p19"], "helps": ["p18"]},
+{"id": "p21", "what": "Use sets for unique items, fast membership tests and set operations such as union, intersection and difference. You can remove duplicates from a list.", "needs": ["p16"], "helps": ["p19"]},
+{"id": "p22", "what": "Build lists and dictionaries in one line with comprehensions, including an optional if filter. You can read and write them in place of simple loops that append.", "needs": ["p12", "p16", "p19"], "helps": ["p10"]},
+{"id": "p23", "what": "Understand that two names can point to the same mutable object, so changing one changes the other. You will know how to make a shallow or deep copy when you need an independent one.", "needs": ["p3", "p16"], "helps": ["p19", "p29"]},
+{"id": "p24", "what": "Define a function with def, give it parameters and call it with arguments. You can wrap repeated steps into a reusable, named block.", "needs": ["p3"], "helps": ["p2", "p12"]},
+{"id": "p25", "what": "Send results back from a function with return, including returning several values as a tuple. You know that a function without return gives None.", "needs": ["p24"], "helps": ["p18"]},
+{"id": "p26", "what": "Give parameters default values and call functions with keyword arguments. You can read calls such as f(x, n=3), which scikit-learn uses everywhere.", "needs": ["p24"], "helps": ["p25"]},
+{"id": "p27", "what": "Accept any number of positional arguments with *args and keyword arguments with **kwargs, and unpack a list or dict into a call with * and **. You can read function signatures that use them.", "needs": ["p26"], "helps": ["p18", "p19"]},
+{"id": "p28", "what": "Know which names a function can see: local names, global names and the order Python searches for them. You will understand why assigning inside a function does not change a global and when the global keyword applies.", "needs": ["p3", "p24"], "helps": ["p25"]},
+{"id": "p29", "what": "Recognise the bug that comes from using a mutable value such as [] as a default argument, because it is created once and shared between calls. You can use None as the default instead.", "needs": ["p23", "p26"], "helps": ["p28"]},
+{"id": "p30", "what": "Write small anonymous functions with lambda and pass them as arguments, for example as a key= for sorting. You can read lambdas in other people's code.", "needs": ["p24", "p25"], "helps": ["p22"]},
+{"id": "p31", "what": "Document a function with a docstring and read documentation with help() or ?. You can find out what any function does and what arguments it takes.", "needs": ["p24"], "helps": ["p6"]},
+{"id": "p32", "what": "Read a traceback from the bottom up: the exception type and message first, then the line and chain of calls that led to it. You can find where the error came from.", "needs": ["p24"], "helps": ["p1"]},
+{"id": "p33", "what": "Recognise what causes TypeError, KeyError, IndexError and ValueError, and the usual fix for each. You can diagnose most beginner errors from the message alone.", "needs": ["p32"], "helps": ["p9", "p16", "p19"]},
+{"id": "p34", "what": "Catch errors with try, except, else and finally and handle specific exception types. You can keep a program running when an expected failure happens, without hiding real bugs.", "needs": ["p33"], "helps": ["p10"]},
+{"id": "p35", "what": "Signal a problem yourself with raise and a clear message, for example when a function gets a bad argument. You can choose a suitable built-in exception type.", "needs": ["p34"], "helps": ["p24"]},
+{"id": "p36", "what": "Find bugs by printing intermediate values and checking assumptions with assert. You will learn a simple routine for narrowing down where a program goes wrong.", "needs": ["p2", "p8"], "helps": ["p32"]}
+],
+"topics": [
+{"id": "t1", "where": [
+{"title": "The Python Tutorial (python.org)", "detail": "Section 2, Using the Python Interpreter", "url": "https://docs.python.org/3/tutorial/interpreter.html"},
+{"title": "Automate the Boring Stuff with Python, by Al Sweigart", "detail": "Chapter 1, Python Basics", "url": "https://automatetheboringstuff.com/"}
+]},
+{"id": "t2", "where": [
+{"title": "The Python Tutorial (python.org)", "detail": "Section 3, An Informal Introduction to Python (numbers, text)", "url": "https://docs.python.org/3/tutorial/introduction.html"},
+{"title": "The Python Tutorial (python.org)", "detail": "Section 15, Floating-Point Arithmetic: Issues and Limitations", "url": "https://docs.python.org/3/tutorial/floatingpoint.html"},
+{"title": "Automate the Boring Stuff with Python, by Al Sweigart", "detail": "Chapter 1, Python Basics", "url": "https://automatetheboringstuff.com/"}
+]},
+{"id": "t3", "where": [
+{"title": "The Python Tutorial (python.org)", "detail": "Section 4, More Control Flow Tools", "url": "https://docs.python.org/3/tutorial/controlflow.html"},
+{"title": "Automate the Boring Stuff with Python, by Al Sweigart", "detail": "Chapter 2, Flow Control", "url": "https://automatetheboringstuff.com/"}
+]},
+{"id": "t4", "where": [
+{"title": "The Python Tutorial (python.org)", "detail": "Section 5, Data Structures", "url": "https://docs.python.org/3/tutorial/datastructures.html"},
+{"title": "Automate the Boring Stuff with Python, by Al Sweigart", "detail": "Chapter 6, Lists, and Chapter 7, Dictionaries and Structuring Data (numbering differs between editions)", "url": "https://automatetheboringstuff.com/"},
+{"title": "Fluent Python, by Luciano Ramalho (2nd edition)", "detail": "Chapter 2, An Array of Sequences, and Chapter 3, Dictionaries and Sets", "url": ""}
+]},
+{"id": "t5", "where": [
+{"title": "The Python Tutorial (python.org)", "detail": "Sections 4.7 and 4.8, Defining Functions and More on Defining Functions", "url": "https://docs.python.org/3/tutorial/controlflow.html"},
+{"title": "Python Crash Course, by Eric Matthes", "detail": "Chapter 8, Functions", "url": ""},
+{"title": "Automate the Boring Stuff with Python, by Al Sweigart", "detail": "Chapter 3, Functions", "url": "https://automatetheboringstuff.com/"}
+]},
+{"id": "t6", "where": [
+{"title": "The Python Tutorial (python.org)", "detail": "Section 8, Errors and Exceptions", "url": "https://docs.python.org/3/tutorial/errors.html"},
+{"title": "Python Crash Course, by Eric Matthes", "detail": "Chapter 10, Files and Exceptions (the section on exceptions)", "url": ""},
+{"title": "Automate the Boring Stuff with Python, by Al Sweigart", "detail": "Chapter 11, Debugging (2nd edition)", "url": "https://automatetheboringstuff.com/"}
+]}
+]}

@@ -1,0 +1,22 @@
+{"points": [
+{"id": "p134", "what": "Understand how k-means groups unlabeled rows by repeatedly assigning points to the nearest centroid and moving the centroids, and fit KMeans in scikit-learn to get cluster labels and centers. Know that you must choose the number of clusters yourself and that results depend on the starting centroids.", "needs": ["p94", "p99", "p100"], "helps": ["p105", "p104", "p64", "p59"]},
+{"id": "p135", "what": "Use inertia (the elbow plot) and the silhouette score to compare different values of k, and explain why neither gives a single certain answer. Be able to judge whether a clustering is sensible rather than just accepting the output.", "needs": ["p134"], "helps": ["p88", "p105"]},
+{"id": "p136", "what": "Use PCA to project many numeric features onto a few new directions that keep most of the variance, and read explained_variance_ratio_ to decide how many components to keep. Understand why features should usually be scaled first and that the components are mixtures of the original columns.", "needs": ["p94", "p99", "p101"], "helps": ["p105", "p62", "p59", "p92", "p89"]},
+{"id": "p137", "what": "Carry out a whole project: load a CSV with pandas, split off a test set, build a preprocessing and model pipeline, tune it with cross-validation, and report an honest score on untouched test data. Be able to explain what each stage does and why it comes in that order.", "needs": ["p67", "p108", "p109", "p125", "p130"], "helps": ["p68", "p75", "p120", "p127", "p114", "p123", "p98"]},
+{"id": "p138", "what": "Save a fitted model or whole pipeline to a file with joblib.dump and load it again with joblib.load to make predictions without retraining. Know that the file is tied to the library versions used and should only be loaded if you trust its source.", "needs": ["p100", "p109"], "helps": ["p42", "p43", "p40"]},
+{"id": "p139", "what": "Navigate the scikit-learn documentation: find an estimator's API page, read its parameters, attributes and examples, and use the user guide to learn an unfamiliar model. Be able to work out for yourself what a parameter does and how to use a class you have not met.", "needs": ["p100", "p103"], "helps": ["p31", "p32"]}
+],
+"topics": [
+{"id": "t25", "where": [
+{"title": "Hands-On Machine Learning with Scikit-Learn, Keras and TensorFlow (Aurelien Geron)", "detail": "Chapter 8 Dimensionality Reduction (PCA) and Chapter 9 Unsupervised Learning Techniques (k-means, choosing k, silhouette)", "url": ""},
+{"title": "Python Data Science Handbook (Jake VanderPlas)", "detail": "Chapter 5, In Depth: k-Means Clustering and In Depth: Principal Component Analysis", "url": ""},
+{"title": "scikit-learn User Guide: Clustering", "detail": "Section on K-means, including choosing the number of clusters and silhouette", "url": "https://scikit-learn.org/stable/modules/clustering.html"},
+{"title": "scikit-learn User Guide: Decomposing signals in components", "detail": "Section on PCA", "url": "https://scikit-learn.org/stable/modules/decomposition.html"}
+]},
+{"id": "t26", "where": [
+{"title": "Hands-On Machine Learning with Scikit-Learn, Keras and TensorFlow (Aurelien Geron)", "detail": "Chapter 2, End-to-End Machine Learning Project", "url": ""},
+{"title": "scikit-learn User Guide: Model persistence", "detail": "Saving a model with joblib, and the security and version caveats", "url": "https://scikit-learn.org/stable/model_persistence.html"},
+{"title": "scikit-learn User Guide: Common pitfalls and recommended practices", "detail": "Data leakage and pipelines in a complete workflow", "url": "https://scikit-learn.org/stable/common_pitfalls.html"},
+{"title": "scikit-learn API Reference", "detail": "How the reference pages are laid out: parameters, attributes, methods, examples", "url": "https://scikit-learn.org/stable/api/index.html"}
+]}
+]}

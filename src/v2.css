@@ -1,0 +1,22 @@
+/* ---------- v2.0: subjects ---------- */
+.subject-list { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
+.subject-list .card { gap: 10px; }
+.subject-list .card.subject-here::after { border-color: var(--blue); }
+#kmap .km-goal { margin: -4px 0 6px; }
+.pr-results .checks li > div p { margin: 2px 0 0; }
+.subnav { max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.subnav::-webkit-scrollbar { display: none; }
+.subnav button { white-space: nowrap; flex: none; }
+@media (max-width: 760px) { .subnav button { padding-inline: 12px; } }
+@media (max-width: 760px) {
+  #topnav { max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+  #topnav::-webkit-scrollbar { display: none; }
+  #topnav button { flex: none; padding-inline: 9px; letter-spacing: 0.04em; }
+}
+.topbar-right { flex-wrap: nowrap; white-space: nowrap; gap: 10px; }
+.topbar .save-status { font-size: 0.78rem; letter-spacing: 0.06em; }
+.topbar .save-status::after { width: 18px; height: 6px; }
+@media (max-width: 1180px) { .topbar-right .save-status { display: none; } }
+@media (max-width: 760px) { .topbar-right { flex-wrap: wrap; justify-content: flex-end; white-space: normal; } }
+/* practice is for every subject now: a pencil instead of a code sign */
+:root { --ico-practice: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 20l1.2-4.6L16.4 4.2a2 2 0 0 1 2.8 0l.6.6a2 2 0 0 1 0 2.8L8.6 18.8z M14.5 6l3.5 3.5 M4 20h16' fill='none' stroke='%23000' stroke-width='1.8' stroke-linejoin='round'/%3E%3C/svg%3E"); }

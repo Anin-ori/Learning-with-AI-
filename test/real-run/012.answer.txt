@@ -1,0 +1,329 @@
+## Two kinds of number
+
+Python has two main number types. An `int` such as `3` is a whole number and is exact, however large it gets. A `float` such as `3.0` or `0.1` can hold a fractional part. Many float values (like `0.1`) can only be stored approximately, while others (`3.0`, `0.5`, `0.25`) are stored exactly; this lesson shows which are which and why. Writing a decimal point makes a float, so `3` and `3.0` are different types.
+
+```python
+print(type(3), type(3.0))
+print(6 / 3, 7 // 2, 7 % 2, 1 + 0.5)
+```
+
+Output:
+```
+<class 'int'> <class 'float'>
+2.0 3 1 1.5
+```
+
+`/` always gives a float, `//` gives the whole-number quotient, `%` gives the remainder, and an int combined with a float gives a float. That is all you need from numbers here.
+
+## The surprise: 0.1 + 0.2
+
+In machine learning almost every number you handle is a float, so it is worth seeing early that float arithmetic can look wrong.
+
+```python
+print(0.1 + 0.2)
+print(0.1 + 0.2 == 0.3)
+print((0.1 + 0.2) - 0.3)
+print(1 + 2 == 3)
+```
+
+Output:
+```
+0.30000000000000004
+False
+5.551115123125783e-17
+True
+```
+
+The sum is not exactly `0.3`, and the gap is tiny but not zero. `e-17` means "times 10 to the power of minus 17", so the gap is about 0.0000000000000000555. The same integers add exactly (`1 + 2 == 3` is `True`) because ints are exact.
+
+This is not a bug in your code, and Python is doing what it was designed to do. You get the same answer in JavaScript, Java, C and most other languages, because they all use the same standard for floats, IEEE 754 "double precision" (64 bits). CPython uses the C `double` of the machine, which on essentially all current computers follows that standard. You can check this yourself in any other language you have installed.
+
+## Why: binary can't store 0.1 exactly
+
+The explanation takes three steps.
+
+**Step 1: decimal has the same problem.** In decimal, 1/3 is 0.3333... and never ends, so any written-down version is slightly off. That is a limit of the number system, not of the person writing.
+
+**Step 2: a computer counts in binary.** A float is stored with binary place values: 1/2, 1/4, 1/8, 1/16 and so on. A fraction can be written exactly only if its denominator, in lowest terms, is a power of 2. So 0.5 (1/2), 0.25 (1/4) and 0.375 (3/8) are exact. But 0.1 is 1/10, and 10 is not a power of 2, so in binary it repeats forever, like 0.0001100110011... It has to be cut off after a fixed number of bits (a 64-bit float keeps 53 significant bits).
+
+**Step 3: the stored number is the nearest one that fits.** For 0.1 that is a number slightly above 0.1.
+
+Why does `print(0.1)` show a clean `0.1`, then? Python prints the *shortest text that turns back into the same float*, not the full stored value. The display hides the error. To see the real value we can use `Decimal`, a number type from the `decimal` module of the standard library. Importing makes a tool from another module available in your program. `Decimal(0.1)` simply shows the exact value of the float it was given.
+
+```python
+from decimal import Decimal
+
+print(0.1)
+print(Decimal(0.1))
+print(Decimal(0.5))
+print(format(0.1, '.20f'))
+print(0.5 + 0.25 == 0.75)
+```
+
+Output:
+```
+0.1
+0.1000000000000000055511151231257827021181583404541015625
+0.5
+0.10000000000000000555
+True
+```
+
+`format(x, '.20f')` asks for 20 digits after the point. `0.5` is exact, and so is the sum `0.5 + 0.25`, because both are sums of powers of 2 that fit in the 53 significant bits. So the problem is not "all floats are wrong": it affects values that are not sums of powers of 2 that fit in 53 significant bits. (The extension below shows a case where even whole numbers stop fitting.)
+
+Now the three numbers behind `0.1 + 0.2 == 0.3`:
+
+```python
+print(Decimal(0.2))
+print(Decimal(0.3))
+print(Decimal(0.1 + 0.2))
+```
+
+Output:
+```
+0.200000000000000011102230246251565404236316680908203125
+0.299999999999999988897769753748434595763683319091796875
+0.3000000000000000444089209850062616169452667236328125
+```
+
+Stored `0.1` is about 5.55e-18 too big, stored `0.2` is about twice that too big (1.11e-17), and the sum of those two errors does not land on the float nearest to `0.3`. Python rounds each exact result to the nearest float. Here the exact sum of the stored `0.1` and the stored `0.2` is exactly halfway between two neighbouring floats: the stored `0.3` and the next float up. When the result is an exact tie, Python picks the float whose last binary digit is 0 (the "even" one), which happens to be the upper one. You will meet the same round-half-to-even rule again below with `round(2.5)`. So the stored `0.3` is slightly below 0.3, the stored sum slightly above, one float step apart. That step is the 5.55e-17 you saw as the difference earlier.
+
+## Errors add up
+
+The tiny error is not a one-off. Repeating an operation lets it build up. The loop below means "repeat this 10 times" (`_` is just a name for a counter we do not need), and `total += 0.1` means "add 0.1 to total".
+
+```python
+total = 0.0
+for _ in range(10):
+    total += 0.1
+print(total)
+print(total == 1.0)
+print(abs(total - 1.0))
+```
+
+Output:
+```
+0.9999999999999999
+False
+1.1102230246251565e-16
+```
+
+Errors can grow or can cancel, and how large they get depends on the numbers and on the order of the operations. Here the result is almost right (off by about 1e-16) but not bit-for-bit equal to `1.0`. That is why a test like `total == 1.0` is fragile.
+
+## Comparing floats safely
+
+Replace `==` with "close enough". By hand: `abs(a - b) < tolerance`, where `abs` gives the size of a number ignoring its sign, and the tolerance is a small number you choose (`1e-9` is scientific notation for 0.000000001). The standard library has the same idea built in as `math.isclose`; `math` is a module you must import.
+
+```python
+import math
+
+print(0.1 + 0.2 == 0.3)
+print(abs((0.1 + 0.2) - 0.3) < 1e-9)
+print(math.isclose(0.1 + 0.2, 0.3))
+```
+
+Output:
+```
+False
+True
+True
+```
+
+`isclose` uses a *relative* tolerance. Being off by 0.001 is huge for values near 0.001 but invisible for values near a billion. By default `isclose` allows a difference of up to 1e-09 times the larger of the two values (`rel_tol=1e-09`):
+
+```python
+print(math.isclose(0.001, 0.0015))
+print(math.isclose(1e9, 1e9 + 0.5))
+```
+
+Output:
+```
+False
+True
+```
+
+Both pairs differ by 0.0005 and 0.5, but only the second is small compared with its size. This explains an edge case that surprises people. With only a relative tolerance, no nonzero number is ever close to 0: the allowed gap is a billionth of the nonzero value, while the actual gap is the whole value. So with the default `abs_tol=0.0`, `isclose(x, 0.0)` is `True` only when `x` is exactly 0, because the difference `|x|` can never be at most 1e-9 times `|x|`:
+
+```python
+print(math.isclose(1e-12, 0.0))
+print(math.isclose(1.0, 0.0))
+print(math.isclose(1e-12, 0.0, abs_tol=1e-9))
+```
+
+Output:
+```
+False
+False
+True
+```
+
+Whenever an expected value may be zero (for example an error or residual that should vanish), you must supply `abs_tol`, a fixed allowed gap. The right tolerance depends on the problem and there is no universal number; the defaults suit roughly 9 digits of agreement. You can check the exact defaults yourself with `help(math.isclose)` and in the Python documentation for the `math` module.
+
+## Rounding is for display
+
+Keep two ideas apart: what is *stored* and what is *shown*. An f-string puts a value into text, and `:.2f` inside it means "a float with 2 digits after the point". `round(x, 2)` returns a new float rounded to 2 places. (f-strings get their own point in this topic.)
+
+```python
+x = 0.1 + 0.2
+print(x)
+print(f'{x:.2f}')
+print(round(x, 2))
+print(x == 0.3)
+print(round(x, 2) == 0.3)
+```
+
+Output:
+```
+0.30000000000000004
+0.30
+0.3
+False
+True
+```
+
+The f-string only changes the text; `x` itself is unchanged, so it still fails `== 0.3`. `round` makes a new float, which is itself only the nearest float to a decimal, so `round(x, 2) == 0.3` happens to work here. It is not a general substitute for a tolerance.
+
+Rounding also has a surprise that reveals the mechanism:
+
+```python
+print(round(2.675, 2))
+print(format(2.675, '.20f'))
+```
+
+Output:
+```
+2.67
+2.67499999999999982236
+```
+
+School rounding would give 2.68, but the float written `2.675` is stored just below 2.675 (the digits begin 2.67499999...), so it is not a tie at all and rounds down. Nothing is broken.
+
+A separate, genuine rule: when a value is exactly a tie, Python 3's `round()` rounds to the nearest *even* number, called banker's rounding. This is documented behaviour: the `round()` entry on the Built-in Functions page of the Python documentation says that when two multiples are equally close, rounding goes to the even choice, and it also has a note explaining the `round(2.675, 2)` case.
+
+```python
+print(round(0.5), round(1.5), round(2.5), round(3.5))
+```
+
+Output:
+```
+0 2 2 4
+```
+
+## Which tool for which job
+
+- Comparing two computed floats: use a tolerance, `math.isclose` (later `numpy.isclose` / `numpy.allclose` for arrays).
+- Showing a number to a reader: use an f-string or `round()`.
+- A value that must stay exactly decimal, money being the usual case: use whole numbers of cents, or the `Decimal` type, which you can look up later.
+
+`==` on floats is fine for a value you set directly with no arithmetic in between, and for exactly representable values as long as the results of the arithmetic also fit exactly (the extension on big numbers shows what happens when they do not). When the numbers come out of calculations, it is safer to make the tolerance habit automatic.
+
+Now test the explanation on new cases. Before reading on, predict the result of each comparison below: `0.5 + 0.25 == 0.75`, `0.1 * 3 == 0.3`, `1.1 + 2.2 == 3.3`. Which are sums of powers of 2? Then run:
+
+```python
+print(0.5 + 0.25 == 0.75)
+print(0.1 * 3 == 0.3)
+print(1.1 + 2.2 == 3.3)
+```
+
+Output:
+```
+True
+False
+False
+```
+
+The first is exact. In the other two the values are not exactly stored, and the results are `0.1 * 3` = `0.30000000000000004` and `1.1 + 2.2` = `3.3000000000000003`. With `isclose` all three agree:
+
+```python
+print(math.isclose(0.5 + 0.25, 0.75))
+print(math.isclose(0.1 * 3, 0.3))
+print(math.isclose(1.1 + 2.2, 3.3))
+```
+
+Output:
+```
+True
+True
+True
+```
+
+## Why this matters for machine learning
+
+In NumPy, pandas and scikit-learn nearly every number is a float. You will meet this when checking that two arrays or a model's outputs match (`np.isclose` and `np.allclose` are the array versions of `math.isclose`), when a computed total or accuracy prints with a long tail of digits, and when you format results for display.
+=== DEEPER ===
+### What a 64-bit float is made of
+
+A 64-bit float is one sign bit, 11 exponent bits and 52 stored fraction bits (with an implied leading 1, which gives the 53 significant bits mentioned above). It works like scientific notation in binary. I am certain of this layout and of the epsilon value below; you can check them in the Python tutorial section "Floating-Point Arithmetic: Issues and Limitations" and in the documentation for the `sys` module. You can observe the bits yourself:
+
+```python
+import sys
+
+print((0.1).hex())
+print(sys.float_info.epsilon)
+```
+
+Output:
+```
+0x1.999999999999ap-4
+2.220446049250313e-16
+```
+
+`hex()` shows the stored number in base 16: `1.999999999999a` times 2 to the power of -4. The repeating `1001` pattern of 0.1 in binary appears as `999...`, cut off and rounded up to `a` at the end. `epsilon` is the gap between `1.0` and the next float.
+
+### Big numbers and the order of addition
+
+The gap between neighbouring floats grows with the size of the number. A float has about 15 to 17 significant decimal digits, so beyond 2**53 (about 9.0e15) a float can no longer tell consecutive whole numbers apart. Ints do not have this limit: Python ints have no fixed size.
+
+```python
+print(2.0**53)
+print(2.0**53 + 1 == 2.0**53)
+print(2**53 + 1)
+```
+
+Output:
+```
+9007199254740992.0
+True
+9007199254740993
+```
+
+Float addition is also not always associative: the order of summing can change the last digits. `math.fsum` returns the correctly rounded sum of its values. As far as I recall, since Python 3.12 the built-in `sum()` of floats already compensates for rounding error, so it is no longer a "plain" sum; I am less sure of this detail, so check it in "What's New in Python 3.12" and in the documentation of `math.fsum`. The explicit loop from the lesson, which adds one number at a time with no compensation, shows the difference:
+
+```python
+import math
+
+print((0.1 + 0.2) + 0.3)
+print(0.1 + (0.2 + 0.3))
+total = 0.0
+for _ in range(10):
+    total += 0.1
+print(total)
+print(math.fsum([0.1] * 10))
+```
+
+Output:
+```
+0.6000000000000001
+0.6
+0.9999999999999999
+1.0
+```
+
+Two related things you will meet later: `float32`, used by many ML libraries, keeps far fewer digits than Python's float (about 7 decimal digits instead of 15 to 17), and `nan` (not a number) breaks `==` in a different way, since `nan == nan` is `False`. That is the next point in this topic.
+=== NOTES ===
+- A `float` is stored in binary, so most decimal fractions such as `0.1` cannot be stored exactly, while values like `3.0`, `0.5` and `0.25` are exact; an `int` is always exact.
+- `0.1 + 0.2 == 0.3` is `False` in Python because the stored sum is `0.30000000000000004`; this is not a bug, and other languages give the same result because of the **IEEE 754** double-precision standard.
+- A fraction is exact in binary only if its denominator in lowest terms is a power of 2: `0.5`, `0.25` and `0.375` are exact, `0.1` is not.
+- Each result is rounded to the nearest float; the exact sum of the stored `0.1` and `0.2` is an exact tie, and ties go to the float with last binary digit 0 (**round half to even**), which is the upper one.
+- `print(0.1)` shows the **shortest text** that gives back the same float, which hides the error; `Decimal(0.1)` (from `from decimal import Decimal`) or `format(0.1, '.20f')` shows the stored value.
+- Rounding errors can build up when an operation is repeated, so `total == 1.0` after adding `0.1` ten times is `False` (`0.9999999999999999`).
+- Compare computed floats with `math.isclose(a, b)` or `abs(a - b) < tolerance`, not `==`.
+- **Relative tolerance**: `math.isclose` defaults to `rel_tol=1e-09`, a billionth of the larger value, so with the default `abs_tol=0.0` only exactly 0 is close to 0 (`math.isclose(1e-12, 0.0)` is `False`); near zero pass `abs_tol`, for example `abs_tol=1e-9`.
+- The right tolerance depends on the problem; check the defaults with `help(math.isclose)`.
+- `f'{x:.2f}'` and `round(x, 2)` are for **display**; the f-string changes only the text, not the stored number.
+- `round(2.675, 2)` gives `2.67` because the stored float is just below 2.675; `round(0.5)` and `round(2.5)` give `0` and `2` because Python 3 rounds exact ties to the nearest even number (**banker's rounding**), as the `round()` entry on the Built-in Functions page of the Python documentation states.
+- Use a tolerance to compare, an f-string or `round()` to show, and whole cents or `Decimal` for exact decimal values such as money.
+- `==` on floats is fine for values you set directly and for exactly representable values whose results also stay exactly representable, but a tolerance is the safer habit after calculations.
+- `numpy.isclose` and `numpy.allclose` are the array versions of `math.isclose`.
+- A 64-bit float has 1 sign bit, 11 exponent bits and 52 fraction bits; `sys.float_info.epsilon` is `2.220446049250313e-16`, and beyond `2**53` floats cannot tell consecutive whole numbers apart.
+- The order of float addition can change the last digits; `math.fsum` gives the correctly rounded sum (adding one number at a time in a loop gives `0.9999999999999999` for ten times `0.1`, `math.fsum([0.1] * 10)` gives `1.0`), and as far as I recall the built-in `sum()` also compensates for float error since Python 3.12.

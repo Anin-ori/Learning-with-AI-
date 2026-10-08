@@ -1,0 +1,181 @@
+You write the details of part of a knowledge map in Learning Companion, a study tool for self-learners. An architect AI planned the whole map; other writers are doing the other topics at the same time.
+Subject: Python
+The learner's goal: Use Python for machine learning: load and clean data, train models with scikit-learn, and understand what the code does.
+Where they are now, in their own words: (not given)
+
+The whole map, every point with its id:
+Topic t1: Getting Started
+  p1 | Running code: scripts, the REPL and notebooks
+  p2 | print() and comments
+  p3 | Variables as names for values
+Topic t2: Basic Types
+  p4 | Numbers: int, float and arithmetic
+  p5 | Floating-point rounding surprises
+  p6 | Strings and string methods
+  p7 | f-strings for formatting output
+  p8 | Booleans, comparisons and None
+  p9 | Converting between types
+Topic t3: Control Flow
+  p10 | if, elif and else
+  p11 | and, or, not and truthiness
+  p12 | for loops and range()
+  p13 | while loops
+  p14 | break and continue
+  p15 | Looping with enumerate() and zip()
+Topic t4: Collections
+  p16 | Lists: creating, indexing and appending
+  p17 | Slicing sequences
+  p18 | Tuples and unpacking
+  p19 | Dictionaries: keys, values and lookup
+  p20 | Looping over dictionaries
+  p21 | Sets
+  p22 | List and dictionary comprehensions
+  p23 | Mutability: aliasing and copying
+Topic t5: Functions
+  p24 | Defining and calling functions
+  p25 | Return values
+  p26 | Default and keyword arguments
+  p27 | *args and **kwargs
+  p28 | Local and global scope
+  p29 | Mutable default arguments
+  p30 | Lambda functions
+  p31 | Docstrings and help()
+Topic t6: Errors and Debugging
+  p32 | Reading a traceback
+  p33 | Common exceptions: TypeError, KeyError, IndexError, ValueError
+  p34 | try and except
+  p35 | Raising exceptions
+  p36 | Debugging with print() and assert
+Topic t7: Modules and Packages
+  p37 | import and from ... import
+  p38 | Useful standard library modules: math, random, collections
+  p39 | Installing packages with pip
+  p40 | Virtual environments
+  p41 | Writing your own module
+Topic t8: Working with Files
+  p42 | Reading and writing text files with open() and with
+  p43 | File paths with pathlib
+  p44 | Reading CSV and JSON with the standard library
+Topic t9: Classes and Objects
+  p45 | Objects, attributes and methods
+  p46 | Defining a class with __init__ and self
+  p47 | Inheritance and overriding methods
+  p48 | Special methods: __repr__, __len__ and friends
+  p49 | Duck typing: objects that share an interface
+Topic t10: Iteration in Depth
+  p50 | Iterables and iterators
+  p51 | Generators and yield
+Topic t11: NumPy Arrays
+  p52 | Creating arrays
+  p53 | dtype and shape
+  p54 | Indexing and slicing arrays
+  p55 | Views versus copies in NumPy
+  p56 | Boolean masks
+  p57 | Fancy indexing with integer arrays
+Topic t12: Array Computation
+  p58 | Vectorized arithmetic and ufuncs
+  p59 | Aggregations along an axis
+  p60 | Broadcasting
+  p61 | Reshaping, stacking and transposing
+  p62 | Matrix multiplication with @
+  p63 | NaN and infinity in arrays
+  p64 | Random numbers and seeds
+Topic t13: pandas Fundamentals
+  p65 | Series and DataFrame
+  p66 | The index
+  p67 | Loading data with read_csv
+  p68 | Inspecting data: head, info, describe
+  p69 | Selecting columns
+  p70 | Selecting rows with loc and iloc
+  p71 | Filtering rows with conditions
+  p72 | Adding and transforming columns
+  p73 | Chained assignment and SettingWithCopyWarning
+Topic t14: Cleaning Data
+  p74 | Finding missing values
+  p75 | Dropping and filling missing values in pandas
+  p76 | Fixing column types with astype and to_numeric
+  p77 | Removing duplicates
+  p78 | Cleaning text columns with .str
+  p79 | Parsing dates with to_datetime
+  p80 | Categorical columns and value_counts
+  p81 | Spotting outliers
+Topic t15: Reshaping and Combining Data
+  p82 | Sorting rows
+  p83 | groupby and aggregation
+  p84 | Merging DataFrames
+  p85 | Concatenating DataFrames
+  p86 | Pivot tables and melt
+  p87 | apply and when to avoid it
+Topic t16: Visualizing Data
+  p88 | Line and scatter plots with matplotlib
+  p89 | Figures, axes and subplots
+  p90 | Histograms and box plots
+  p91 | Plotting directly from pandas
+  p92 | Correlation matrices and heatmaps
+Topic t17: Machine Learning Concepts
+  p93 | What a model learns: features, target and parameters
+  p94 | Supervised versus unsupervised learning
+  p95 | Regression versus classification
+  p96 | Training and test sets
+  p97 | Overfitting, underfitting and the bias-variance tradeoff
+  p98 | Data leakage
+Topic t18: The scikit-learn API
+  p99 | The feature matrix X and target y
+  p100 | Estimators: fit and predict
+  p101 | Transformers: fit, transform and fit_transform
+  p102 | Splitting data with train_test_split
+  p103 | Hyperparameters versus fitted attributes (the trailing underscore)
+  p104 | random_state and reproducibility
+Topic t19: Preprocessing and Pipelines
+  p105 | Scaling features: StandardScaler and MinMaxScaler
+  p106 | Encoding categories with OneHotEncoder
+  p107 | Imputing missing values in a model with SimpleImputer
+  p108 | ColumnTransformer for mixed column types
+  p109 | Pipelines
+  p110 | Polynomial and interaction features
+Topic t20: Regression Models
+  p111 | Linear regression
+  p112 | Reading coefficients and the intercept
+  p113 | Regularization: Ridge and Lasso
+  p114 | Regression metrics: MAE, MSE, RMSE and R²
+Topic t21: Classification Models
+  p115 | Logistic regression
+  p116 | k-nearest neighbors
+  p117 | Decision trees
+  p118 | Support vector machines
+  p119 | predict_proba and decision thresholds
+Topic t22: Evaluating Classifiers
+  p120 | Baselines with DummyClassifier
+  p121 | Accuracy and its limits on imbalanced data
+  p122 | Confusion matrix
+  p123 | Precision, recall and F1
+  p124 | ROC curve and AUC
+Topic t23: Model Selection and Tuning
+  p125 | Cross-validation with cross_val_score
+  p126 | Choosing a splitter: KFold, StratifiedKFold and GroupKFold
+  p127 | Grid search with GridSearchCV
+  p128 | Randomized search with RandomizedSearchCV
+  p129 | Learning curves and validation curves
+  p130 | Keeping a final test set untouched
+Topic t24: Ensemble Models
+  p131 | Random forests
+  p132 | Gradient boosting with HistGradientBoosting
+  p133 | Feature importances and permutation importance
+Topic t25: Unsupervised Learning
+  p134 | k-means clustering
+  p135 | Choosing the number of clusters: inertia and silhouette
+  p136 | PCA for dimensionality reduction
+Topic t26: Completing a Project
+  p137 | An end-to-end ML workflow from CSV to evaluated model
+  p138 | Saving and loading models with joblib
+  p139 | Reading the scikit-learn documentation
+
+Your topics: t18 (The scikit-learn API), t19 (Preprocessing and Pipelines), t20 (Regression Models), t21 (Classification Models), t22 (Evaluating Classifiers), t23 (Model Selection and Tuning), t24 (Ensemble Models).
+For every point in your topics:
+- what: one or two sentences on what the learner will understand or be able to do once they have learned it.
+- needs: the ids of points that must be learned first because this point can't be understood without them. Points anywhere on the map count. Only direct needs: if A needs B and B needs C, A lists B, not C. A point that only makes this one easier is not a need.
+- helps: the ids of points that make this one easier or are often learned first, but aren't required.
+For every one of your topics:
+- where: real books, courses or references that teach it well, with the chapter or section where you know it. Add a URL only if you are sure it is right. Name only sources you are confident exist; an empty list is better than a guess.
+
+Reply with only JSON: {"points": [{"id": "the point id", "what": "", "needs": ["ids"], "helps": ["ids"]}], "topics": [{"id": "the topic id", "where": [{"title": "", "detail": "chapter or section, or empty", "url": "or empty"}]}]}

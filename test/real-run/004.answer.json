@@ -1,0 +1,66 @@
+{"points": [
+{"id": "p65", "what": "Explain what a Series (one labeled column of values) and a DataFrame (a table of Series sharing an index) are, and build small ones from lists and dictionaries.", "needs": ["p16", "p19"], "helps": ["p52", "p53"]},
+{"id": "p66", "what": "Understand that every Series and DataFrame carries an index of row labels, and how to set, reset and use it so that labels (not just positions) identify rows.", "needs": ["p65"], "helps": ["p17"]},
+{"id": "p67", "what": "Load a CSV file into a DataFrame with pd.read_csv and use its common options such as sep, header, index_col, usecols and dtype.", "needs": ["p37", "p65"], "helps": ["p43", "p44", "p42"]},
+{"id": "p68", "what": "Get a quick first look at a dataset with head, tail, shape, info and describe, and read from the output the column types, non-null counts and basic statistics.", "needs": ["p65"], "helps": ["p67", "p53"]},
+{"id": "p69", "what": "Select one column with df['col'] or several with df[['a', 'b']], and know when you get back a Series and when a DataFrame.", "needs": ["p65"], "helps": ["p16", "p19"]},
+{"id": "p70", "what": "Select rows and columns by label with loc and by integer position with iloc, and explain how slices differ between the two.", "needs": ["p66", "p69"], "helps": ["p17", "p54"]},
+{"id": "p71", "what": "Keep only the rows that meet one or more conditions using boolean expressions, combining them with & and | and brackets.", "needs": ["p69", "p8"], "helps": ["p11", "p56"]},
+{"id": "p72", "what": "Create new columns and transform existing ones from other columns with vectorized arithmetic and simple column methods such as map and replace.", "needs": ["p69"], "helps": ["p4", "p58"]},
+{"id": "p73", "what": "Recognize why chained indexing like df[df.x > 0]['y'] = 1 can fail to change the original DataFrame, what SettingWithCopyWarning means, and how to assign safely with loc or an explicit copy.", "needs": ["p70", "p71", "p72"], "helps": ["p23", "p55"]},
+{"id": "p74", "what": "Find missing values (NaN/None) with isna and notna, and count them per column and per row to see how much of a dataset is incomplete.", "needs": ["p65", "p69"], "helps": ["p63", "p68", "p71"]},
+{"id": "p75", "what": "Handle missing data in pandas by dropping rows or columns with dropna and by filling with fillna (a constant, the mean, or neighbouring values), and judge which choice suits a given column.", "needs": ["p74"], "helps": ["p107"]},
+{"id": "p76", "what": "Convert columns to the right type with astype and pd.to_numeric (including errors='coerce' for messy strings) so that numeric work and models treat them correctly.", "needs": ["p9", "p69"], "helps": ["p68", "p74"]},
+{"id": "p77", "what": "Detect duplicate rows with duplicated, remove them with drop_duplicates, and choose which columns define a duplicate and which copy to keep.", "needs": ["p69"], "helps": ["p71", "p83"]},
+{"id": "p78", "what": "Clean text columns in bulk using the .str accessor: strip whitespace, change case, replace and extract patterns, and split strings.", "needs": ["p69", "p6"], "helps": ["p72"]},
+{"id": "p79", "what": "Turn date and time strings into real datetime values with pd.to_datetime, handle formats and unparseable entries, and pull out parts such as year or weekday with .dt.", "needs": ["p69"], "helps": ["p76", "p74"]},
+{"id": "p80", "what": "Inspect and tidy categorical columns with value_counts and unique, spot inconsistent labels or rare categories, and use the category dtype.", "needs": ["p69"], "helps": ["p78", "p83"]},
+{"id": "p81", "what": "Spot unusual values using summary statistics, the IQR rule and z-scores, and decide whether an outlier is an error to fix or a real value to keep.", "needs": ["p68", "p71"], "helps": ["p90", "p59"]},
+{"id": "p82", "what": "Order a DataFrame by one or more columns or by its index with sort_values and sort_index, in ascending or descending order.", "needs": ["p66", "p69"], "helps": ["p70"]},
+{"id": "p83", "what": "Split data into groups with groupby, compute summaries such as mean, count or several statistics per group with agg, and read the result.", "needs": ["p69"], "helps": ["p19", "p59", "p80"]},
+{"id": "p84", "what": "Combine two DataFrames side by side on shared keys with merge or join, and explain inner, left, right and outer joins and what happens to unmatched rows.", "needs": ["p66", "p69"], "helps": ["p83"]},
+{"id": "p85", "what": "Stack DataFrames on top of each other (or side by side) with pd.concat, and handle mismatched columns and the resulting index.", "needs": ["p65", "p66"], "helps": ["p61", "p84"]},
+{"id": "p86", "what": "Reshape tables between wide and long form with pivot_table and melt, and summarize one measure across two categories.", "needs": ["p66", "p83"], "helps": ["p84"]},
+{"id": "p87", "what": "Use apply to run your own function over the rows or columns of a DataFrame, and explain why built-in vectorized operations are usually faster and clearer.", "needs": ["p24", "p58", "p72"], "helps": ["p30"]},
+{"id": "p88", "what": "Draw line plots and scatter plots with matplotlib and add titles, axis labels, legends and colours so a plot can be read by someone else.", "needs": ["p16", "p37"], "helps": ["p52", "p65"]},
+{"id": "p89", "what": "Explain the Figure and Axes objects, create several plots in one figure with plt.subplots, and draw on a chosen Axes.", "needs": ["p88"], "helps": ["p45"]},
+{"id": "p90", "what": "Show how a numeric variable is distributed with histograms and compare groups or find outliers with box plots, and read both.", "needs": ["p88"], "helps": ["p68", "p89"]},
+{"id": "p91", "what": "Make quick plots straight from a Series or DataFrame with the .plot methods (line, bar, hist, scatter, box) and pass them an Axes.", "needs": ["p65", "p88"], "helps": ["p89", "p90"]},
+{"id": "p92", "what": "Compute a correlation matrix with df.corr, draw it as a heatmap, and interpret what correlation does and does not say, including its link to features and target.", "needs": ["p65", "p89"], "helps": ["p88", "p90", "p93"]},
+{"id": "p93", "what": "Describe a model as a function that maps input features to a target, whose parameters are fitted from example data rather than written by hand.", "needs": [], "helps": ["p24", "p65", "p52"]},
+{"id": "p94", "what": "Tell supervised learning (examples come with known targets) from unsupervised learning (finding structure with no target) and classify a problem as one or the other.", "needs": ["p93"], "helps": ["p134"]},
+{"id": "p95", "what": "Decide whether a problem is regression (predict a number) or classification (predict a category) and name typical examples of each.", "needs": ["p94"], "helps": ["p111", "p115"]},
+{"id": "p96", "what": "Explain why data is split into a training set to fit the model and a test set to estimate how it performs on new data, and why testing on the training data misleads.", "needs": ["p93"], "helps": ["p95", "p102", "p64"]},
+{"id": "p97", "what": "Recognize overfitting (memorizing the training data) and underfitting (too simple), connect them to model complexity and the bias-variance tradeoff, and tell them apart by comparing training and test scores.", "needs": ["p93", "p96"], "helps": ["p113", "p129"]},
+{"id": "p98", "what": "Understand data leakage, where information from the test set or the future gets into training, give common examples such as scaling before splitting, and see why it inflates scores.", "needs": ["p96"], "helps": ["p97", "p101", "p109"]}
+],
+"topics": [
+{"id": "t13", "where": [
+{"title": "Python for Data Analysis (Wes McKinney), 3rd edition", "detail": "Chapter 5 Getting Started with pandas; Chapter 6 Data Loading, Storage, and File Formats", "url": ""},
+{"title": "Python Data Science Handbook (Jake VanderPlas)", "detail": "Chapter 3 Data Manipulation with Pandas: introducing pandas objects, data indexing and selection", "url": "https://jakevdp.github.io/PythonDataScienceHandbook/"},
+{"title": "pandas documentation: 10 minutes to pandas", "detail": "Whole page; then the User Guide section on Indexing and selecting data", "url": "https://pandas.pydata.org/docs/user_guide/10min.html"},
+{"title": "Kaggle Learn: Pandas course", "detail": "Lessons on creating, reading and writing; indexing, selecting and assigning", "url": ""}
+]},
+{"id": "t14", "where": [
+{"title": "Python for Data Analysis (Wes McKinney), 3rd edition", "detail": "Chapter 7 Data Cleaning and Preparation; Chapter 11 Time Series for to_datetime and dates", "url": ""},
+{"title": "pandas documentation User Guide", "detail": "Working with missing data; Working with text data; Duplicate labels", "url": ""},
+{"title": "Kaggle Learn: Data Cleaning course", "detail": "Handling missing values, parsing dates, character encodings, inconsistent data entry", "url": ""}
+]},
+{"id": "t15", "where": [
+{"title": "Python for Data Analysis (Wes McKinney), 3rd edition", "detail": "Chapter 8 Data Wrangling: Join, Combine, and Reshape; Chapter 10 Data Aggregation and Group Operations", "url": ""},
+{"title": "Python Data Science Handbook (Jake VanderPlas)", "detail": "Chapter 3: Combining Datasets (concat, append, merge, join); Aggregation and Grouping; Pivot Tables", "url": "https://jakevdp.github.io/PythonDataScienceHandbook/"},
+{"title": "pandas documentation User Guide", "detail": "Merge, join, concatenate and compare; Reshaping and pivot tables; Group by: split-apply-combine", "url": ""}
+]},
+{"id": "t16", "where": [
+{"title": "Python for Data Analysis (Wes McKinney), 3rd edition", "detail": "Chapter 9 Plotting and Visualization", "url": ""},
+{"title": "Python Data Science Handbook (Jake VanderPlas)", "detail": "Chapter 4 Visualization with Matplotlib: simple line plots, simple scatter plots, histograms, multiple subplots", "url": "https://jakevdp.github.io/PythonDataScienceHandbook/"},
+{"title": "Matplotlib documentation: Quick start guide", "detail": "Parts of a Figure; Coding styles; Plotting types", "url": ""},
+{"title": "Kaggle Learn: Data Visualization course", "detail": "Lessons on line charts, bar charts and heatmaps, scatter plots, distributions (uses seaborn)", "url": ""}
+]},
+{"id": "t17", "where": [
+{"title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (Aurelien Geron)", "detail": "Chapter 1 The Machine Learning Landscape (supervised vs unsupervised, overfitting and underfitting, testing and validating)", "url": ""},
+{"title": "An Introduction to Statistical Learning (James, Witten, Hastie, Tibshirani)", "detail": "Chapter 2 Statistical Learning: prediction, the bias-variance trade-off, regression versus classification", "url": "https://www.statlearning.com"},
+{"title": "Machine Learning Specialization (Andrew Ng, DeepLearning.AI and Stanford Online)", "detail": "Course 1, Supervised Machine Learning: Regression and Classification, week 1 and the overfitting material in week 3", "url": ""},
+{"title": "scikit-learn User Guide: Common pitfalls and recommended practices", "detail": "Data leakage section", "url": ""}
+]}
+]}

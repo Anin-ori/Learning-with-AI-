@@ -1,0 +1,189 @@
+{
+ "goal": [
+  "p1",
+  "p2",
+  "p7",
+  "p9",
+  "p10",
+  "p12",
+  "p15",
+  "p18",
+  "p22",
+  "p23",
+  "p25",
+  "p26",
+  "p27",
+  "p31",
+  "p32",
+  "p33",
+  "p36",
+  "p39",
+  "p40",
+  "p45",
+  "p46",
+  "p47",
+  "p49",
+  "p54",
+  "p56",
+  "p59",
+  "p60",
+  "p61",
+  "p62",
+  "p63",
+  "p64",
+  "p67",
+  "p68",
+  "p69",
+  "p70",
+  "p71",
+  "p72",
+  "p73",
+  "p74",
+  "p75",
+  "p76",
+  "p77",
+  "p78",
+  "p79",
+  "p80",
+  "p81",
+  "p83",
+  "p90",
+  "p91",
+  "p92",
+  "p93",
+  "p94",
+  "p95",
+  "p96",
+  "p97",
+  "p98",
+  "p99",
+  "p100",
+  "p101",
+  "p102",
+  "p103",
+  "p104",
+  "p105",
+  "p106",
+  "p107",
+  "p108",
+  "p109",
+  "p111",
+  "p112",
+  "p113",
+  "p114",
+  "p115",
+  "p116",
+  "p117",
+  "p119",
+  "p120",
+  "p121",
+  "p122",
+  "p123",
+  "p124",
+  "p125",
+  "p126",
+  "p127",
+  "p129",
+  "p130",
+  "p131",
+  "p132",
+  "p133",
+  "p137",
+  "p139"
+ ],
+ "why": [
+  {
+   "topic": "t1",
+   "why": "The learner needs to run code in scripts and notebooks and use print() to see what the code is doing."
+  },
+  {
+   "topic": "t2",
+   "why": "Formatted output with f-strings and converting text to numbers are everyday steps when working with data and model results."
+  },
+  {
+   "topic": "t3",
+   "why": "Branching and loops, including enumerate and zip for pairing features with labels, are needed to read and write ML code."
+  },
+  {
+   "topic": "t4",
+   "why": "Tuple unpacking (as in train_test_split), comprehensions and an understanding of aliasing and copying are needed to follow typical ML code."
+  },
+  {
+   "topic": "t5",
+   "why": "Return values, keyword arguments, *args/**kwargs and docstrings are how scikit-learn functions are called and documented."
+  },
+  {
+   "topic": "t6",
+   "why": "Reading tracebacks and common exceptions and debugging with print and assert are essential for fixing code that fails on real data."
+  },
+  {
+   "topic": "t7",
+   "why": "The learner must install pandas and scikit-learn with pip and keep project packages apart in virtual environments."
+  },
+  {
+   "topic": "t9",
+   "why": "scikit-learn models are objects of classes with shared interfaces, so understanding objects, classes, inheritance and duck typing explains what the code does."
+  },
+  {
+   "topic": "t11",
+   "why": "Feature matrices are NumPy arrays, so indexing, slicing and boolean masks are needed to work with them."
+  },
+  {
+   "topic": "t12",
+   "why": "Aggregation, broadcasting, reshaping, matrix multiplication, NaN handling and seeds underlie scaling, linear models and reproducible experiments."
+  },
+  {
+   "topic": "t13",
+   "why": "Loading, inspecting, selecting, filtering and transforming columns with pandas is the core of loading data, and chained assignment is a common cleaning pitfall."
+  },
+  {
+   "topic": "t14",
+   "why": "Cleaning data is a named part of the goal: missing values, types, duplicates, text, dates, categories and outliers."
+  },
+  {
+   "topic": "t15",
+   "why": "Grouping and aggregating gives summaries by category that help in understanding a dataset before modelling."
+  },
+  {
+   "topic": "t16",
+   "why": "Distributions, quick pandas plots and correlation heatmaps are how data is explored before training models."
+  },
+  {
+   "topic": "t17",
+   "why": "The learner needs the core ideas of features, targets, train and test sets, overfitting and leakage to train models sensibly."
+  },
+  {
+   "topic": "t18",
+   "why": "The estimator and transformer API, X and y, splitting, hyperparameters and random_state are how every scikit-learn model is used."
+  },
+  {
+   "topic": "t19",
+   "why": "Scaling, encoding, imputing, column transformers and pipelines prepare cleaned data for models without leakage."
+  },
+  {
+   "topic": "t20",
+   "why": "Regression models, their coefficients, regularization and metrics are a main use of scikit-learn."
+  },
+  {
+   "topic": "t21",
+   "why": "Logistic regression, nearest neighbors, trees and probabilities are the standard classification models to train."
+  },
+  {
+   "topic": "t22",
+   "why": "Training a classifier is only useful if it can be evaluated honestly, with baselines, confusion matrices, precision and recall, and AUC."
+  },
+  {
+   "topic": "t23",
+   "why": "Cross-validation, hyperparameter search, learning curves and a final test set are how models are tuned and scored reliably."
+  },
+  {
+   "topic": "t24",
+   "why": "Random forests and gradient boosting are strong, widely used scikit-learn models, and importances help explain them."
+  },
+  {
+   "topic": "t26",
+   "why": "An end-to-end project and reading the scikit-learn documentation tie everything together and let the learner continue on their own."
+  }
+ ],
+ "note": "No current level was given, so I picked the points the goal itself uses (pandas loading and cleaning, the scikit-learn workflow, evaluation) plus the Python and NumPy ideas needed to read ML code, and left prerequisites to the page. I left out files with the standard library, generators, string-only details, PCA and clustering, and other topics the goal does not use."
+}

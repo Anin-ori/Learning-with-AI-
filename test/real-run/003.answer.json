@@ -1,0 +1,66 @@
+{"points": [
+{"id": "p37", "what": "Bring code from another module into your program with import, import ... as and from ... import, and know how each form changes the names you can use. Recognise how Python finds the module and why you write math.sqrt but sqrt after a from-import.", "needs": ["p3"], "helps": ["p1", "p24"]},
+{"id": "p38", "what": "Use a handful of standard library modules for everyday jobs: math for functions like sqrt and pi, random for random choices and numbers, and collections for tools like Counter and defaultdict. Look up other modules in the library reference when you need them.", "needs": ["p37"], "helps": ["p19", "p12"]},
+{"id": "p39", "what": "Install third-party packages such as numpy, pandas and scikit-learn with pip install, check what is installed with pip list, and pin versions. Understand that pip downloads packages from PyPI into the Python you are running.", "needs": ["p37"], "helps": ["p1"]},
+{"id": "p40", "what": "Create and activate a virtual environment so each project has its own packages and versions. Explain why this avoids version conflicts and how to recreate an environment from a requirements file.", "needs": ["p39"], "helps": ["p1"]},
+{"id": "p41", "what": "Put functions in your own .py file and import them from another script or notebook. Understand the role of the if __name__ == '__main__' guard and where Python looks for your module.", "needs": ["p37", "p24"], "helps": ["p31", "p1"]},
+{"id": "p42", "what": "Open a text file with open() inside a with block, read it whole or line by line, and write or append to it. Explain why with closes the file for you and how modes ('r', 'w', 'a') and encoding matter.", "needs": ["p6"], "helps": ["p12", "p34"]},
+{"id": "p43", "what": "Build and inspect file paths with pathlib.Path: join parts with /, check whether a path exists, list files with glob, and read a file's name or suffix. Write paths that work on any operating system instead of gluing strings together.", "needs": ["p37", "p6"], "helps": ["p42", "p45"]},
+{"id": "p44", "what": "Read and write CSV files with the csv module and JSON files with the json module, turning rows and objects into lists and dictionaries and back. Understand how this differs from pandas, which you will use later for the same job.", "needs": ["p42", "p16", "p19"], "helps": ["p67", "p20"]},
+{"id": "p45", "what": "See that every value in Python is an object with attributes (data) and methods (functions that belong to it), reached with dot notation. Use methods on strings, lists and other built-in objects and tell an attribute from a method call.", "needs": ["p3", "p24"], "helps": ["p6", "p16"]},
+{"id": "p46", "what": "Write a class with an __init__ method that sets attributes on self, add methods, and create instances from it. Understand what self refers to and that each instance keeps its own data, as in scikit-learn estimators.", "needs": ["p45", "p24"], "helps": ["p26"]},
+{"id": "p47", "what": "Create a subclass that inherits attributes and methods from a parent class, override a method, and call the parent's version with super(). Understand why scikit-learn models are built as classes that inherit shared behaviour.", "needs": ["p46"], "helps": ["p48"]},
+{"id": "p48", "what": "Define special (dunder) methods such as __repr__, __str__, __len__ and __getitem__ so your objects work with print(), len() and indexing. Understand that built-in functions and operators call these methods behind the scenes.", "needs": ["p46"], "helps": ["p47", "p50"]},
+{"id": "p49", "what": "Explain duck typing: code works with any object that has the methods it needs, whatever its class. Recognise this in practice, such as any estimator with fit and predict being usable in the same code.", "needs": ["p46"], "helps": ["p47", "p48", "p100"]},
+{"id": "p50", "what": "Distinguish an iterable (something you can loop over) from an iterator (something that hands out values one at a time with next()). Explain what a for loop does with them and why an iterator can be used up once.", "needs": ["p12", "p16"], "helps": ["p15", "p48"]},
+{"id": "p51", "what": "Write a generator function with yield that produces values one at a time without building a whole list, and use generator expressions. Understand how this saves memory when working through large data.", "needs": ["p50", "p25"], "helps": ["p22"]},
+{"id": "p52", "what": "Create NumPy arrays from lists with np.array, and with np.zeros, np.ones, np.arange and np.linspace. Explain how an array differs from a Python list.", "needs": ["p16", "p37"], "helps": ["p4", "p39"]},
+{"id": "p53", "what": "Read an array's dtype, shape, ndim and size, and explain what they mean for 1-D, 2-D and higher arrays. Choose or change a dtype with astype and see how it affects memory and results.", "needs": ["p52"], "helps": ["p4", "p9"]},
+{"id": "p54", "what": "Pick out elements, rows, columns and sub-blocks of an array with index and slice notation such as a[1, 2] and a[:, 0]. Extend what you know about list slicing to several dimensions.", "needs": ["p53", "p17"], "helps": ["p16"]},
+{"id": "p55", "what": "Know that a basic slice of an array is a view that shares memory with the original, while fancy indexing, boolean masks and .copy() make copies. Predict when changing one array changes another and use .copy() to avoid surprises.", "needs": ["p54", "p23"], "helps": ["p73"]},
+{"id": "p56", "what": "Build a boolean array from a comparison like a > 0 and use it to select matching elements or assign to them. Combine conditions with & and | and count matches with sum.", "needs": ["p54", "p8"], "helps": ["p11", "p71"]},
+{"id": "p57", "what": "Select or reorder array elements by passing a list or array of integer positions, for example a[[0, 2, 5]]. Understand that the result is a copy and how this differs from slicing.", "needs": ["p54"], "helps": ["p55", "p56"]},
+{"id": "p58", "what": "Do arithmetic on whole arrays at once with +, *, ** and ufuncs such as np.sqrt, np.exp and np.log, with no explicit loop. Explain why this is faster and shorter than looping over a list.", "needs": ["p53", "p4"], "helps": ["p12", "p22"]},
+{"id": "p59", "what": "Compute sum, mean, min, max and std over a whole array or along an axis, for example one value per column or per row. Say which axis to choose and what shape the result has.", "needs": ["p58", "p53"], "helps": ["p83"]},
+{"id": "p60", "what": "Predict how NumPy combines arrays of different shapes, such as subtracting a column mean from every row, by applying the broadcasting rules. Spot when shapes are incompatible and fix them.", "needs": ["p58", "p53"], "helps": ["p61", "p105"]},
+{"id": "p61", "what": "Change an array's shape with reshape (including -1), flatten or ravel, transpose with .T, and join arrays with np.concatenate, np.vstack and np.hstack. Use newaxis or reshape to turn a 1-D array into a column.", "needs": ["p53", "p54"], "helps": ["p60", "p99"]},
+{"id": "p62", "what": "Multiply matrices and compute dot products with the @ operator and np.dot, and check that the shapes line up. Tell it apart from element-wise * and see how it underlies linear models.", "needs": ["p53", "p58"], "helps": ["p61", "p111"]},
+{"id": "p63", "what": "Recognise np.nan and np.inf, see how they spread through calculations, and detect them with np.isnan and np.isinf. Use nan-aware functions like np.nanmean and understand that nan != nan.", "needs": ["p58", "p5"], "helps": ["p59", "p74"]},
+{"id": "p64", "what": "Generate random numbers and samples with NumPy's random generator (np.random.default_rng), and set a seed so results repeat. Explain why seeding matters for reproducible experiments.", "needs": ["p52", "p53"], "helps": ["p38", "p104"]}
+],
+"topics": [
+{"id": "t7", "where": [
+{"title": "The Python Tutorial (python.org)", "detail": "Section 6, Modules, and Section 12, Virtual Environments and Packages", "url": "https://docs.python.org/3/tutorial/modules.html"},
+{"title": "Python Packaging User Guide", "detail": "Tutorial: Installing Packages", "url": "https://packaging.python.org/"},
+{"title": "The Python Standard Library reference", "detail": "math, random and collections module pages", "url": "https://docs.python.org/3/library/"},
+{"title": "Real Python: Python Modules and Packages - An Introduction", "detail": "", "url": "https://realpython.com/python-modules-packages/"}
+]},
+{"id": "t8", "where": [
+{"title": "The Python Tutorial (python.org)", "detail": "Section 7.2, Reading and Writing Files", "url": "https://docs.python.org/3/tutorial/inputoutput.html"},
+{"title": "Automate the Boring Stuff with Python, 2nd edition (Al Sweigart)", "detail": "Chapter 9, Reading and Writing Files, and Chapter 16, Working with CSV Files and JSON Data", "url": "https://automatetheboringstuff.com/"},
+{"title": "Python documentation: pathlib", "detail": "Basic use", "url": "https://docs.python.org/3/library/pathlib.html"},
+{"title": "Python documentation: csv and json modules", "detail": "", "url": ""}
+]},
+{"id": "t9", "where": [
+{"title": "The Python Tutorial (python.org)", "detail": "Section 9, Classes", "url": "https://docs.python.org/3/tutorial/classes.html"},
+{"title": "Think Python, 2nd edition (Allen Downey)", "detail": "Chapters 15 to 18: Classes and objects, Classes and functions, Classes and methods, Inheritance", "url": ""},
+{"title": "Fluent Python, 2nd edition (Luciano Ramalho)", "detail": "Chapter 1, The Python Data Model", "url": ""},
+{"title": "Python Language Reference: Data model", "detail": "Special method names", "url": "https://docs.python.org/3/reference/datamodel.html"}
+]},
+{"id": "t10", "where": [
+{"title": "The Python Tutorial (python.org)", "detail": "Section 9.8, Iterators, and Section 9.9, Generators", "url": "https://docs.python.org/3/tutorial/classes.html"},
+{"title": "Fluent Python, 2nd edition (Luciano Ramalho)", "detail": "Chapter 17, Iterators, Generators, and Classic Coroutines", "url": ""}
+]},
+{"id": "t11", "where": [
+{"title": "NumPy: the absolute basics for beginners", "detail": "", "url": "https://numpy.org/doc/stable/user/absolute_beginners.html"},
+{"title": "NumPy quickstart tutorial", "detail": "The Basics, Indexing, slicing and iterating, Copies and views", "url": "https://numpy.org/doc/stable/user/quickstart.html"},
+{"title": "Python Data Science Handbook (Jake VanderPlas)", "detail": "Chapter 2, Introduction to NumPy: understanding data types, basics of arrays, fancy indexing", "url": "https://jakevdp.github.io/PythonDataScienceHandbook/"},
+{"title": "Python for Data Analysis, 3rd edition (Wes McKinney)", "detail": "Chapter 4, NumPy Basics: Arrays and Vectorized Computation", "url": ""}
+]},
+{"id": "t12", "where": [
+{"title": "NumPy user guide: Broadcasting", "detail": "", "url": "https://numpy.org/doc/stable/user/basics.broadcasting.html"},
+{"title": "Python Data Science Handbook (Jake VanderPlas)", "detail": "Chapter 2: Computation on NumPy Arrays (universal functions), Aggregations, Broadcasting", "url": "https://jakevdp.github.io/PythonDataScienceHandbook/"},
+{"title": "Python for Data Analysis, 3rd edition (Wes McKinney)", "detail": "Chapter 4, NumPy Basics: Arrays and Vectorized Computation", "url": ""},
+{"title": "NumPy reference: Random sampling", "detail": "Generator and default_rng", "url": "https://numpy.org/doc/stable/reference/random/index.html"}
+]}
+]}

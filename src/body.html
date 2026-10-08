@@ -1,0 +1,45 @@
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">L</span>
+    <h1>Learning Companion</h1>
+    <span class="pill" id="subject-pill">v2.0</span>
+  </div>
+  <nav id="topnav" aria-label="Sections"><button type="button" data-sec="map">Map</button><button type="button" data-sec="learn">Learn</button><button type="button" data-sec="practice">Practice</button><button type="button" data-sec="notes">Notes</button><button type="button" data-sec="profile">Profile</button></nav>
+  <div class="topbar-right">
+    <span class="save-status" id="save-status">Connecting…</span>
+    <button class="quiet lang-btn" id="lang-btn" type="button" data-i18n-skip aria-label="Switch language / 切换语言">中文</button>
+    <button class="quiet" id="log-btn" type="button" aria-controls="log" aria-expanded="false">Test log</button>
+  </div>
+</header>
+<p class="banner" id="ai-banner" hidden>This page can only ask Claude when it's open in Claude. Open it from claude.ai or the Claude app to use the AI steps.</p>
+<div class="layout">
+  <main class="panel" id="main"></main>
+</div>
+<section id="kmap" aria-label="Knowledge map" hidden>
+  <div class="km-mapwrap">
+    <svg class="km-svg" id="km-svg" role="img" aria-label="Knowledge map"></svg>
+    <div class="km-bar">
+      <label class="km-search km-glass"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><input id="km-q" type="search" list="km-names" placeholder="Find a topic or point" aria-label="Find a topic or point" autocomplete="off"></label><datalist id="km-names"></datalist>
+      <span class="km-focus km-glass" id="km-focus"><span id="km-focustext"></span><button id="km-clear" type="button">Clear</button></span>
+      <span class="km-spacer"></span>
+      <button class="km-gbtn km-glass km-flashbtn" id="km-flash" type="button" aria-pressed="true"><i></i><span>Top picks glowing</span></button>
+      <button class="km-gbtn km-glass" id="km-fit" type="button">Reset view</button>
+    </div>
+    <div class="km-legend" id="km-legend"></div>
+    <div class="km-tip" id="km-tip"></div>
+  </div>
+  <aside class="km-panel">
+    <div class="km-tabs" role="tablist">
+      <button role="tab" id="km-t-mine" aria-selected="true" type="button">Overview</button>
+      <button role="tab" id="km-t-det" aria-selected="false" type="button">Details</button>
+      <button role="tab" id="km-t-src" aria-selected="false" type="button">About</button>
+    </div>
+    <div class="km-pane" id="km-p-mine" role="tabpanel"></div>
+    <div class="km-pane" id="km-p-det" role="tabpanel" hidden><p class="km-empty">Click a topic on the map to see what's inside.</p></div>
+    <div class="km-pane" id="km-p-src" role="tabpanel" hidden></div>
+  </aside>
+</section>
+<div class="backdrop" id="backdrop" hidden></div>
+<aside class="log" id="log" aria-label="Test log"></aside>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+

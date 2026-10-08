@@ -1,0 +1,4286 @@
+{
+ "v": 2,
+ "sid": "smuzne9slqvx7",
+ "mid": "mmuzneazemicv",
+ "subject": "Python",
+ "goal": "Use Python for machine learning: load and clean data, train models with scikit-learn, and understand what the code does.",
+ "lang": "en",
+ "built": "2026-10-08T14:44:54.938Z",
+ "scope": "This map takes a learner from no Python to training and evaluating scikit-learn models on their own data. It follows the order most Python-for-data-science courses use and the scientific Python stack itself is built on: core Python first, then NumPy, then pandas and plotting, then machine learning with scikit-learn. Core Python is covered in full because reading library code, error messages and documentation needs it. That includes a short topic on classes, because scikit-learn's estimators are objects with methods and fitted attributes. NumPy and pandas cover loading, cleaning, reshaping and exploring data. The machine learning part follows scikit-learn's own organisation: the estimator API, preprocessing and pipelines, supervised models, evaluation, model selection, ensembles and a little unsupervised learning, with concepts like overfitting and data leakage taught where the code needs them. Left out: deep learning frameworks (PyTorch, TensorFlow), the mathematical derivations behind the algorithms, web development, async, concurrency, packaging and publishing libraries, type hints and testing frameworks, and big-data tools. These are worth learning later but are not needed for the stated goal. Seaborn and other plotting libraries are left out in favour of matplotlib and pandas plotting, which are enough for exploring data.",
+ "profile": {
+  "name": "Python",
+  "trap": "a = [1, 2]; b = a; b.append(3); print(a) prints [1, 2, 3], even though the code never touched a. Assignment in Python never copies anything. It makes a name refer to an object, so a and b are two names for the same list, and changing the list through one name shows through the other. The same rule explains why a function can change a list you pass to it, and why a pandas DataFrame or NumPy slice you 'copied' with = changes the original.",
+  "slips": "Forgetting the colon after an if or for line, typing pirnt instead of print, a missing closing parenthesis, writing from sklearn.linear_model import LinearRegresion, or misspelling a column name like df['prcie'].",
+  "observe": "Run the code and print things: type(x) and id(x) show what an object is and whether two names share it, a is b tests sameness, and help(obj) or dir(obj) lists what it can do. For data, print df.shape, df.dtypes, df.head() and df.isna().sum() after every step. For models, print the fitted attributes such as model.coef_ or model.classes_. The key habit is to change one thing, run it again and compare the output.",
+  "shallow": "What does len([4, 5, 6]) return?",
+  "rich": "You are given a small DataFrame of houses with a price column, a size column that has some missing values and a text column for the neighbourhood. Split the data into training and test sets, build a pipeline that fills the missing sizes and one-hot encodes the neighbourhood, fit a linear regression, and print the test-set mean absolute error. Then explain why the imputer has to sit inside the pipeline and not be applied before the split.",
+  "examples": "Short, complete programs that run on their own, each followed by its exact output. Data is built in the code as a tiny list, array or DataFrame, never read from an outside file, and random_state is fixed so a model's printed numbers are the same on every run.",
+  "format": "",
+  "run": "python"
+ },
+ "areas": [
+  [
+   "a1",
+   "Python Foundations"
+  ],
+  [
+   "a2",
+   "Structuring Programs"
+  ],
+  [
+   "a3",
+   "Numerical Computing with NumPy"
+  ],
+  [
+   "a4",
+   "Data Handling with pandas"
+  ],
+  [
+   "a5",
+   "Machine Learning with scikit-learn"
+  ]
+ ],
+ "balls": [
+  {
+   "id": "t1",
+   "name": "Getting Started",
+   "area": "a1",
+   "desc": "How to run Python code and see its results, the first step before anything else can be tried.",
+   "pts": [
+    "p1",
+    "p2",
+    "p3"
+   ],
+   "d": 0,
+   "where": [
+    {
+     "title": "The Python Tutorial (python.org)",
+     "detail": "Section 2, Using the Python Interpreter",
+     "url": "https://docs.python.org/3/tutorial/interpreter.html"
+    },
+    {
+     "title": "Automate the Boring Stuff with Python, by Al Sweigart",
+     "detail": "Chapter 1, Python Basics",
+     "url": "https://automatetheboringstuff.com/"
+    }
+   ]
+  },
+  {
+   "id": "t2",
+   "name": "Basic Types",
+   "area": "a1",
+   "desc": "The built-in kinds of values (numbers, text, truth values) and how to convert between them, since every program is built from them.",
+   "pts": [
+    "p4",
+    "p5",
+    "p6",
+    "p7",
+    "p8",
+    "p9"
+   ],
+   "d": 1,
+   "where": [
+    {
+     "title": "The Python Tutorial (python.org)",
+     "detail": "Section 3, An Informal Introduction to Python (numbers, text)",
+     "url": "https://docs.python.org/3/tutorial/introduction.html"
+    },
+    {
+     "title": "The Python Tutorial (python.org)",
+     "detail": "Section 15, Floating-Point Arithmetic: Issues and Limitations",
+     "url": "https://docs.python.org/3/tutorial/floatingpoint.html"
+    },
+    {
+     "title": "Automate the Boring Stuff with Python, by Al Sweigart",
+     "detail": "Chapter 1, Python Basics",
+     "url": "https://automatetheboringstuff.com/"
+    }
+   ]
+  },
+  {
+   "id": "t3",
+   "name": "Control Flow",
+   "area": "a1",
+   "desc": "Making decisions and repeating work, which together decide the order a program's statements run in.",
+   "pts": [
+    "p10",
+    "p11",
+    "p12",
+    "p13",
+    "p14",
+    "p15"
+   ],
+   "d": 2,
+   "where": [
+    {
+     "title": "The Python Tutorial (python.org)",
+     "detail": "Section 4, More Control Flow Tools",
+     "url": "https://docs.python.org/3/tutorial/controlflow.html"
+    },
+    {
+     "title": "Automate the Boring Stuff with Python, by Al Sweigart",
+     "detail": "Chapter 2, Flow Control",
+     "url": "https://automatetheboringstuff.com/"
+    }
+   ]
+  },
+  {
+   "id": "t4",
+   "name": "Collections",
+   "area": "a1",
+   "desc": "Python's built-in containers for many values, and the shared rules for indexing, iterating over and changing them.",
+   "pts": [
+    "p16",
+    "p17",
+    "p18",
+    "p19",
+    "p20",
+    "p21",
+    "p22",
+    "p23"
+   ],
+   "d": 3,
+   "where": [
+    {
+     "title": "The Python Tutorial (python.org)",
+     "detail": "Section 5, Data Structures",
+     "url": "https://docs.python.org/3/tutorial/datastructures.html"
+    },
+    {
+     "title": "Automate the Boring Stuff with Python, by Al Sweigart",
+     "detail": "Chapter 6, Lists, and Chapter 7, Dictionaries and Structuring Data (numbering differs between editions)",
+     "url": "https://automatetheboringstuff.com/"
+    },
+    {
+     "title": "Fluent Python, by Luciano Ramalho (2nd edition)",
+     "detail": "Chapter 2, An Array of Sequences, and Chapter 3, Dictionaries and Sets",
+     "url": ""
+    }
+   ]
+  },
+  {
+   "id": "t5",
+   "name": "Functions",
+   "area": "a1",
+   "desc": "Packaging code into reusable named pieces with inputs and outputs, and how names are looked up inside them.",
+   "pts": [
+    "p24",
+    "p25",
+    "p26",
+    "p27",
+    "p28",
+    "p29",
+    "p30",
+    "p31"
+   ],
+   "d": 4,
+   "where": [
+    {
+     "title": "The Python Tutorial (python.org)",
+     "detail": "Sections 4.7 and 4.8, Defining Functions and More on Defining Functions",
+     "url": "https://docs.python.org/3/tutorial/controlflow.html"
+    },
+    {
+     "title": "Python Crash Course, by Eric Matthes",
+     "detail": "Chapter 8, Functions",
+     "url": ""
+    },
+    {
+     "title": "Automate the Boring Stuff with Python, by Al Sweigart",
+     "detail": "Chapter 3, Functions",
+     "url": "https://automatetheboringstuff.com/"
+    }
+   ]
+  },
+  {
+   "id": "t6",
+   "name": "Errors and Debugging",
+   "area": "a1",
+   "desc": "Reading what went wrong, handling failures in code, and finding bugs, the skills used every time code does not work.",
+   "pts": [
+    "p32",
+    "p33",
+    "p34",
+    "p35",
+    "p36"
+   ],
+   "d": 5,
+   "where": [
+    {
+     "title": "The Python Tutorial (python.org)",
+     "detail": "Section 8, Errors and Exceptions",
+     "url": "https://docs.python.org/3/tutorial/errors.html"
+    },
+    {
+     "title": "Python Crash Course, by Eric Matthes",
+     "detail": "Chapter 10, Files and Exceptions (the section on exceptions)",
+     "url": ""
+    },
+    {
+     "title": "Automate the Boring Stuff with Python, by Al Sweigart",
+     "detail": "Chapter 11, Debugging (2nd edition)",
+     "url": "https://automatetheboringstuff.com/"
+    }
+   ]
+  },
+  {
+   "id": "t7",
+   "name": "Modules and Packages",
+   "area": "a2",
+   "desc": "Using code from the standard library, installed packages and your own files, and keeping project dependencies separate.",
+   "pts": [
+    "p37",
+    "p38",
+    "p39",
+    "p40",
+    "p41"
+   ],
+   "d": 5,
+   "where": [
+    {
+     "title": "The Python Tutorial (python.org)",
+     "detail": "Section 6, Modules, and Section 12, Virtual Environments and Packages",
+     "url": "https://docs.python.org/3/tutorial/modules.html"
+    },
+    {
+     "title": "Python Packaging User Guide",
+     "detail": "Tutorial: Installing Packages",
+     "url": "https://packaging.python.org/"
+    },
+    {
+     "title": "The Python Standard Library reference",
+     "detail": "math, random and collections module pages",
+     "url": "https://docs.python.org/3/library/"
+    },
+    {
+     "title": "Real Python: Python Modules and Packages - An Introduction",
+     "detail": "",
+     "url": "https://realpython.com/python-modules-packages/"
+    }
+   ]
+  },
+  {
+   "id": "t8",
+   "name": "Working with Files",
+   "area": "a2",
+   "desc": "Getting data into and out of a program through files, which is where real datasets come from.",
+   "pts": [
+    "p42",
+    "p43",
+    "p44"
+   ],
+   "d": 6,
+   "where": [
+    {
+     "title": "The Python Tutorial (python.org)",
+     "detail": "Section 7.2, Reading and Writing Files",
+     "url": "https://docs.python.org/3/tutorial/inputoutput.html"
+    },
+    {
+     "title": "Automate the Boring Stuff with Python, 2nd edition (Al Sweigart)",
+     "detail": "Chapter 9, Reading and Writing Files, and Chapter 16, Working with CSV Files and JSON Data",
+     "url": "https://automatetheboringstuff.com/"
+    },
+    {
+     "title": "Python documentation: pathlib",
+     "detail": "Basic use",
+     "url": "https://docs.python.org/3/library/pathlib.html"
+    },
+    {
+     "title": "Python documentation: csv and json modules",
+     "detail": "",
+     "url": ""
+    }
+   ]
+  },
+  {
+   "id": "t9",
+   "name": "Classes and Objects",
+   "area": "a2",
+   "desc": "How objects bundle data with behaviour, the model behind every library object you use, including scikit-learn estimators.",
+   "pts": [
+    "p45",
+    "p46",
+    "p47",
+    "p48",
+    "p49"
+   ],
+   "d": 5,
+   "where": [
+    {
+     "title": "The Python Tutorial (python.org)",
+     "detail": "Section 9, Classes",
+     "url": "https://docs.python.org/3/tutorial/classes.html"
+    },
+    {
+     "title": "Think Python, 2nd edition (Allen Downey)",
+     "detail": "Chapters 15 to 18: Classes and objects, Classes and functions, Classes and methods, Inheritance",
+     "url": ""
+    },
+    {
+     "title": "Fluent Python, 2nd edition (Luciano Ramalho)",
+     "detail": "Chapter 1, The Python Data Model",
+     "url": ""
+    },
+    {
+     "title": "Python Language Reference: Data model",
+     "detail": "Special method names",
+     "url": "https://docs.python.org/3/reference/datamodel.html"
+    }
+   ]
+  },
+  {
+   "id": "t10",
+   "name": "Iteration in Depth",
+   "area": "a2",
+   "desc": "What a for loop really does underneath, and how to produce values lazily.",
+   "pts": [
+    "p50",
+    "p51"
+   ],
+   "d": 5,
+   "where": [
+    {
+     "title": "The Python Tutorial (python.org)",
+     "detail": "Section 9.8, Iterators, and Section 9.9, Generators",
+     "url": "https://docs.python.org/3/tutorial/classes.html"
+    },
+    {
+     "title": "Fluent Python, 2nd edition (Luciano Ramalho)",
+     "detail": "Chapter 17, Iterators, Generators, and Classic Coroutines",
+     "url": ""
+    }
+   ]
+  },
+  {
+   "id": "t11",
+   "name": "NumPy Arrays",
+   "area": "a3",
+   "desc": "The array, the fixed-type grid of numbers that pandas and scikit-learn store data in, and how to pick out parts of it.",
+   "pts": [
+    "p52",
+    "p53",
+    "p54",
+    "p55",
+    "p56",
+    "p57"
+   ],
+   "d": 6,
+   "where": [
+    {
+     "title": "NumPy: the absolute basics for beginners",
+     "detail": "",
+     "url": "https://numpy.org/doc/stable/user/absolute_beginners.html"
+    },
+    {
+     "title": "NumPy quickstart tutorial",
+     "detail": "The Basics, Indexing, slicing and iterating, Copies and views",
+     "url": "https://numpy.org/doc/stable/user/quickstart.html"
+    },
+    {
+     "title": "Python Data Science Handbook (Jake VanderPlas)",
+     "detail": "Chapter 2, Introduction to NumPy: understanding data types, basics of arrays, fancy indexing",
+     "url": "https://jakevdp.github.io/PythonDataScienceHandbook/"
+    },
+    {
+     "title": "Python for Data Analysis, 3rd edition (Wes McKinney)",
+     "detail": "Chapter 4, NumPy Basics: Arrays and Vectorized Computation",
+     "url": ""
+    }
+   ]
+  },
+  {
+   "id": "t12",
+   "name": "Array Computation",
+   "area": "a3",
+   "desc": "Computing on whole arrays at once instead of looping, which is how numerical Python is fast and how ML code is written.",
+   "pts": [
+    "p58",
+    "p59",
+    "p60",
+    "p61",
+    "p62",
+    "p63",
+    "p64"
+   ],
+   "d": 7,
+   "where": [
+    {
+     "title": "NumPy user guide: Broadcasting",
+     "detail": "",
+     "url": "https://numpy.org/doc/stable/user/basics.broadcasting.html"
+    },
+    {
+     "title": "Python Data Science Handbook (Jake VanderPlas)",
+     "detail": "Chapter 2: Computation on NumPy Arrays (universal functions), Aggregations, Broadcasting",
+     "url": "https://jakevdp.github.io/PythonDataScienceHandbook/"
+    },
+    {
+     "title": "Python for Data Analysis, 3rd edition (Wes McKinney)",
+     "detail": "Chapter 4, NumPy Basics: Arrays and Vectorized Computation",
+     "url": ""
+    },
+    {
+     "title": "NumPy reference: Random sampling",
+     "detail": "Generator and default_rng",
+     "url": "https://numpy.org/doc/stable/reference/random/index.html"
+    }
+   ]
+  },
+  {
+   "id": "t13",
+   "name": "pandas Fundamentals",
+   "area": "a4",
+   "desc": "Loading tabular data into a DataFrame, looking at it and selecting the parts you need.",
+   "pts": [
+    "p65",
+    "p66",
+    "p67",
+    "p68",
+    "p69",
+    "p70",
+    "p71",
+    "p72",
+    "p73"
+   ],
+   "d": 6,
+   "where": [
+    {
+     "title": "Python for Data Analysis (Wes McKinney), 3rd edition",
+     "detail": "Chapter 5 Getting Started with pandas; Chapter 6 Data Loading, Storage, and File Formats",
+     "url": ""
+    },
+    {
+     "title": "Python Data Science Handbook (Jake VanderPlas)",
+     "detail": "Chapter 3 Data Manipulation with Pandas: introducing pandas objects, data indexing and selection",
+     "url": "https://jakevdp.github.io/PythonDataScienceHandbook/"
+    },
+    {
+     "title": "pandas documentation: 10 minutes to pandas",
+     "detail": "Whole page; then the User Guide section on Indexing and selecting data",
+     "url": "https://pandas.pydata.org/docs/user_guide/10min.html"
+    },
+    {
+     "title": "Kaggle Learn: Pandas course",
+     "detail": "Lessons on creating, reading and writing; indexing, selecting and assigning",
+     "url": ""
+    }
+   ]
+  },
+  {
+   "id": "t14",
+   "name": "Cleaning Data",
+   "area": "a4",
+   "desc": "Finding and fixing the problems real datasets have before they can be analysed or modelled.",
+   "pts": [
+    "p74",
+    "p75",
+    "p76",
+    "p77",
+    "p78",
+    "p79",
+    "p80",
+    "p81"
+   ],
+   "d": 7,
+   "where": [
+    {
+     "title": "Python for Data Analysis (Wes McKinney), 3rd edition",
+     "detail": "Chapter 7 Data Cleaning and Preparation; Chapter 11 Time Series for to_datetime and dates",
+     "url": ""
+    },
+    {
+     "title": "pandas documentation User Guide",
+     "detail": "Working with missing data; Working with text data; Duplicate labels",
+     "url": ""
+    },
+    {
+     "title": "Kaggle Learn: Data Cleaning course",
+     "detail": "Handling missing values, parsing dates, character encodings, inconsistent data entry",
+     "url": ""
+    }
+   ]
+  },
+  {
+   "id": "t15",
+   "name": "Reshaping and Combining Data",
+   "area": "a4",
+   "desc": "Summarising, joining and restructuring tables to get data into the shape a question or model needs.",
+   "pts": [
+    "p82",
+    "p83",
+    "p84",
+    "p85",
+    "p86",
+    "p87"
+   ],
+   "d": 8,
+   "where": [
+    {
+     "title": "Python for Data Analysis (Wes McKinney), 3rd edition",
+     "detail": "Chapter 8 Data Wrangling: Join, Combine, and Reshape; Chapter 10 Data Aggregation and Group Operations",
+     "url": ""
+    },
+    {
+     "title": "Python Data Science Handbook (Jake VanderPlas)",
+     "detail": "Chapter 3: Combining Datasets (concat, append, merge, join); Aggregation and Grouping; Pivot Tables",
+     "url": "https://jakevdp.github.io/PythonDataScienceHandbook/"
+    },
+    {
+     "title": "pandas documentation User Guide",
+     "detail": "Merge, join, concatenate and compare; Reshaping and pivot tables; Group by: split-apply-combine",
+     "url": ""
+    }
+   ]
+  },
+  {
+   "id": "t16",
+   "name": "Visualizing Data",
+   "area": "a4",
+   "desc": "Plotting data to understand distributions and relationships before modelling and to check results after.",
+   "pts": [
+    "p88",
+    "p89",
+    "p90",
+    "p91",
+    "p92"
+   ],
+   "d": 7,
+   "where": [
+    {
+     "title": "Python for Data Analysis (Wes McKinney), 3rd edition",
+     "detail": "Chapter 9 Plotting and Visualization",
+     "url": ""
+    },
+    {
+     "title": "Python Data Science Handbook (Jake VanderPlas)",
+     "detail": "Chapter 4 Visualization with Matplotlib: simple line plots, simple scatter plots, histograms, multiple subplots",
+     "url": "https://jakevdp.github.io/PythonDataScienceHandbook/"
+    },
+    {
+     "title": "Matplotlib documentation: Quick start guide",
+     "detail": "Parts of a Figure; Coding styles; Plotting types",
+     "url": ""
+    },
+    {
+     "title": "Kaggle Learn: Data Visualization course",
+     "detail": "Lessons on line charts, bar charts and heatmaps, scatter plots, distributions (uses seaborn)",
+     "url": ""
+    }
+   ]
+  },
+  {
+   "id": "t17",
+   "name": "Machine Learning Concepts",
+   "area": "a5",
+   "desc": "The ideas every model rests on: what is being learned, from what, and how to tell whether it learned anything useful.",
+   "pts": [
+    "p93",
+    "p94",
+    "p95",
+    "p96",
+    "p97",
+    "p98"
+   ],
+   "d": 0,
+   "where": [
+    {
+     "title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (Aurelien Geron)",
+     "detail": "Chapter 1 The Machine Learning Landscape (supervised vs unsupervised, overfitting and underfitting, testing and validating)",
+     "url": ""
+    },
+    {
+     "title": "An Introduction to Statistical Learning (James, Witten, Hastie, Tibshirani)",
+     "detail": "Chapter 2 Statistical Learning: prediction, the bias-variance trade-off, regression versus classification",
+     "url": "https://www.statlearning.com"
+    },
+    {
+     "title": "Machine Learning Specialization (Andrew Ng, DeepLearning.AI and Stanford Online)",
+     "detail": "Course 1, Supervised Machine Learning: Regression and Classification, week 1 and the overfitting material in week 3",
+     "url": ""
+    },
+    {
+     "title": "scikit-learn User Guide: Common pitfalls and recommended practices",
+     "detail": "Data leakage section",
+     "url": ""
+    }
+   ]
+  },
+  {
+   "id": "t18",
+   "name": "The scikit-learn API",
+   "area": "a5",
+   "desc": "The shared interface all scikit-learn objects follow, so learning it once lets you use any model.",
+   "pts": [
+    "p99",
+    "p100",
+    "p101",
+    "p102",
+    "p103",
+    "p104"
+   ],
+   "d": 8,
+   "where": [
+    {
+     "title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (Aurelien Geron)",
+     "detail": "Chapter 2, End-to-End Machine Learning Project (Prepare the Data; Scikit-Learn design)",
+     "url": ""
+    },
+    {
+     "title": "scikit-learn MOOC (Inria)",
+     "detail": "Module 1, Predictive modeling pipeline",
+     "url": "https://inria.github.io/scikit-learn-mooc/"
+    },
+    {
+     "title": "API design for machine learning software: experiences from the scikit-learn project (Buitinck et al.)",
+     "detail": "Whole paper, on the estimator and transformer interfaces",
+     "url": "https://arxiv.org/abs/1309.0238"
+    },
+    {
+     "title": "scikit-learn documentation",
+     "detail": "Getting Started",
+     "url": ""
+    }
+   ]
+  },
+  {
+   "id": "t19",
+   "name": "Preprocessing and Pipelines",
+   "area": "a5",
+   "desc": "Turning cleaned data into model-ready numbers inside scikit-learn so the same steps apply to training and new data without leakage.",
+   "pts": [
+    "p105",
+    "p106",
+    "p107",
+    "p108",
+    "p109",
+    "p110"
+   ],
+   "d": 9,
+   "where": [
+    {
+     "title": "scikit-learn User Guide",
+     "detail": "Section 6.3 Preprocessing data; Section 6.1 Pipelines and composite estimators",
+     "url": ""
+    },
+    {
+     "title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (Aurelien Geron)",
+     "detail": "Chapter 2, Transformation Pipelines",
+     "url": ""
+    },
+    {
+     "title": "Introduction to Machine Learning with Python (Andreas Muller and Sarah Guido)",
+     "detail": "Chapter 4, Representing Data and Engineering Features; Chapter 6, Algorithm Chains and Pipelines",
+     "url": ""
+    },
+    {
+     "title": "Python Data Science Handbook (Jake VanderPlas)",
+     "detail": "Chapter 5, Feature Engineering",
+     "url": ""
+    }
+   ]
+  },
+  {
+   "id": "t20",
+   "name": "Regression Models",
+   "area": "a5",
+   "desc": "Predicting numbers, starting with linear models whose workings can be read directly from their coefficients.",
+   "pts": [
+    "p111",
+    "p112",
+    "p113",
+    "p114"
+   ],
+   "d": 9,
+   "where": [
+    {
+     "title": "An Introduction to Statistical Learning (James, Witten, Hastie, Tibshirani)",
+     "detail": "Chapter 3, Linear Regression; Chapter 6, Linear Model Selection and Regularization",
+     "url": ""
+    },
+    {
+     "title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (Aurelien Geron)",
+     "detail": "Chapter 4, Training Models",
+     "url": ""
+    },
+    {
+     "title": "scikit-learn User Guide",
+     "detail": "Section 1.1 Linear Models; Section 3.4 Metrics and scoring (regression metrics)",
+     "url": ""
+    }
+   ]
+  },
+  {
+   "id": "t21",
+   "name": "Classification Models",
+   "area": "a5",
+   "desc": "Predicting categories with the standard families of classifiers and understanding how each draws its boundary.",
+   "pts": [
+    "p115",
+    "p116",
+    "p117",
+    "p118",
+    "p119"
+   ],
+   "d": 10,
+   "where": [
+    {
+     "title": "An Introduction to Statistical Learning (James, Witten, Hastie, Tibshirani)",
+     "detail": "Chapter 4, Classification; Chapter 8, Tree-Based Methods; Chapter 9, Support Vector Machines",
+     "url": ""
+    },
+    {
+     "title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (Aurelien Geron)",
+     "detail": "Chapter 3, Classification; Chapter 5, Support Vector Machines; Chapter 6, Decision Trees",
+     "url": ""
+    },
+    {
+     "title": "scikit-learn User Guide",
+     "detail": "Section 1.1.11 Logistic regression; Section 1.4 Support Vector Machines; Section 1.6 Nearest Neighbors; Section 1.10 Decision Trees",
+     "url": ""
+    }
+   ]
+  },
+  {
+   "id": "t22",
+   "name": "Evaluating Classifiers",
+   "area": "a5",
+   "desc": "Measuring how good a classifier really is, beyond a single accuracy number.",
+   "pts": [
+    "p120",
+    "p121",
+    "p122",
+    "p123",
+    "p124"
+   ],
+   "d": 11,
+   "where": [
+    {
+     "title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (Aurelien Geron)",
+     "detail": "Chapter 3, Performance Measures (confusion matrix, precision and recall, ROC curve)",
+     "url": ""
+    },
+    {
+     "title": "scikit-learn User Guide",
+     "detail": "Section 3.4 Metrics and scoring: quantifying the quality of predictions",
+     "url": ""
+    },
+    {
+     "title": "Data Science for Business (Foster Provost and Tom Fawcett)",
+     "detail": "Chapter 7, Decision Analytic Thinking I: What Is a Good Model?; Chapter 8, Visualizing Model Performance",
+     "url": ""
+    },
+    {
+     "title": "An introduction to ROC analysis (Tom Fawcett, Pattern Recognition Letters, 2006)",
+     "detail": "Whole paper",
+     "url": ""
+    }
+   ]
+  },
+  {
+   "id": "t23",
+   "name": "Model Selection and Tuning",
+   "area": "a5",
+   "desc": "Comparing models and choosing hyperparameters with reliable estimates, while keeping a fair final test.",
+   "pts": [
+    "p125",
+    "p126",
+    "p127",
+    "p128",
+    "p129",
+    "p130"
+   ],
+   "d": 9,
+   "where": [
+    {
+     "title": "scikit-learn User Guide",
+     "detail": "Section 3.1 Cross-validation: evaluating estimator performance; Section 3.2 Tuning the hyper-parameters of an estimator; Section 3.5 Validation curves and learning curves",
+     "url": ""
+    },
+    {
+     "title": "Introduction to Machine Learning with Python (Andreas Muller and Sarah Guido)",
+     "detail": "Chapter 5, Model Evaluation and Improvement",
+     "url": ""
+    },
+    {
+     "title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (Aurelien Geron)",
+     "detail": "Chapter 2, Fine-Tune Your Model",
+     "url": ""
+    },
+    {
+     "title": "scikit-learn MOOC (Inria)",
+     "detail": "Modules on model selection and hyperparameter tuning",
+     "url": "https://inria.github.io/scikit-learn-mooc/"
+    },
+    {
+     "title": "On over-fitting in model selection and subsequent selection bias in performance evaluation (Cawley and Talbot, JMLR, 2010)",
+     "detail": "Whole paper, on why tuning needs held-out data",
+     "url": ""
+    }
+   ]
+  },
+  {
+   "id": "t24",
+   "name": "Ensemble Models",
+   "area": "a5",
+   "desc": "Combining many trees into stronger models, which are the usual best choice for tabular data.",
+   "pts": [
+    "p131",
+    "p132",
+    "p133"
+   ],
+   "d": 11,
+   "where": [
+    {
+     "title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (Aurelien Geron)",
+     "detail": "Chapter 7, Ensemble Learning and Random Forests",
+     "url": ""
+    },
+    {
+     "title": "An Introduction to Statistical Learning (James, Witten, Hastie, Tibshirani)",
+     "detail": "Chapter 8, Tree-Based Methods (bagging, random forests, boosting)",
+     "url": ""
+    },
+    {
+     "title": "scikit-learn User Guide",
+     "detail": "Section 1.11 Ensembles (including Histogram-Based Gradient Boosting); Section 4.2 Permutation feature importance",
+     "url": ""
+    },
+    {
+     "title": "Random Forests (Leo Breiman, Machine Learning, 2001)",
+     "detail": "Whole paper",
+     "url": ""
+    }
+   ]
+  },
+  {
+   "id": "t25",
+   "name": "Unsupervised Learning",
+   "area": "a5",
+   "desc": "Finding structure in data with no target, for exploration and for building features.",
+   "pts": [
+    "p134",
+    "p135",
+    "p136"
+   ],
+   "d": 9,
+   "where": [
+    {
+     "title": "Hands-On Machine Learning with Scikit-Learn, Keras and TensorFlow (Aurelien Geron)",
+     "detail": "Chapter 8 Dimensionality Reduction (PCA) and Chapter 9 Unsupervised Learning Techniques (k-means, choosing k, silhouette)",
+     "url": ""
+    },
+    {
+     "title": "Python Data Science Handbook (Jake VanderPlas)",
+     "detail": "Chapter 5, In Depth: k-Means Clustering and In Depth: Principal Component Analysis",
+     "url": ""
+    },
+    {
+     "title": "scikit-learn User Guide: Clustering",
+     "detail": "Section on K-means, including choosing the number of clusters and silhouette",
+     "url": "https://scikit-learn.org/stable/modules/clustering.html"
+    },
+    {
+     "title": "scikit-learn User Guide: Decomposing signals in components",
+     "detail": "Section on PCA",
+     "url": "https://scikit-learn.org/stable/modules/decomposition.html"
+    }
+   ]
+  },
+  {
+   "id": "t26",
+   "name": "Completing a Project",
+   "area": "a5",
+   "desc": "Putting everything together into a full workflow and keeping the result, so the learner can work on their own data.",
+   "pts": [
+    "p137",
+    "p138",
+    "p139"
+   ],
+   "d": 10,
+   "where": [
+    {
+     "title": "Hands-On Machine Learning with Scikit-Learn, Keras and TensorFlow (Aurelien Geron)",
+     "detail": "Chapter 2, End-to-End Machine Learning Project",
+     "url": ""
+    },
+    {
+     "title": "scikit-learn User Guide: Model persistence",
+     "detail": "Saving a model with joblib, and the security and version caveats",
+     "url": "https://scikit-learn.org/stable/model_persistence.html"
+    },
+    {
+     "title": "scikit-learn User Guide: Common pitfalls and recommended practices",
+     "detail": "Data leakage and pipelines in a complete workflow",
+     "url": "https://scikit-learn.org/stable/common_pitfalls.html"
+    },
+    {
+     "title": "scikit-learn API Reference",
+     "detail": "How the reference pages are laid out: parameters, attributes, methods, examples",
+     "url": "https://scikit-learn.org/stable/api/index.html"
+    }
+   ]
+  }
+ ],
+ "nodes": [
+  {
+   "id": "p1",
+   "name": "Running code: scripts, the REPL and notebooks",
+   "what": "Run Python code three ways: as a saved script from the command line, line by line in the REPL, and cell by cell in a notebook. You will know when each one is the right choice."
+  },
+  {
+   "id": "p2",
+   "name": "print() and comments",
+   "what": "Use print() to show values on screen and write comments with # to explain code. You can then see what a program is doing and leave notes for yourself."
+  },
+  {
+   "id": "p3",
+   "name": "Variables as names for values",
+   "what": "Understand that a variable is a name pointing at a value, not a box holding it. You can assign, reassign and choose good names."
+  },
+  {
+   "id": "p4",
+   "name": "Numbers: int, float and arithmetic",
+   "what": "Work with ints and floats and use the arithmetic operators, including // and %, ** and operator precedence. You can predict what an expression evaluates to."
+  },
+  {
+   "id": "p5",
+   "name": "Floating-point rounding surprises",
+   "what": "Understand why 0.1 + 0.2 does not equal 0.3 exactly, because floats are stored in binary. You will compare floats safely with a tolerance and round for display."
+  },
+  {
+   "id": "p6",
+   "name": "Strings and string methods",
+   "what": "Create strings and use common methods such as upper, strip, split, join, replace and find. You know that strings are immutable and can be indexed."
+  },
+  {
+   "id": "p7",
+   "name": "f-strings for formatting output",
+   "what": "Build readable output with f-strings, embedding expressions and format specifiers such as {x:.2f}. You can print tidy tables and messages with values in them."
+  },
+  {
+   "id": "p8",
+   "name": "Booleans, comparisons and None",
+   "what": "Use True and False, the comparison operators (==, !=, <, >=) and the None value that means 'no value'. You can tell == from is and know what a comparison returns."
+  },
+  {
+   "id": "p9",
+   "name": "Converting between types",
+   "what": "Convert values with int(), float(), str() and bool(), and know when a conversion fails. You can turn user or file text into numbers before computing with it."
+  },
+  {
+   "id": "p10",
+   "name": "if, elif and else",
+   "what": "Make code take different paths with if, elif and else. You can write branching logic and understand how indentation marks each block."
+  },
+  {
+   "id": "p11",
+   "name": "and, or, not and truthiness",
+   "what": "Combine conditions with and, or and not, and know which values count as false (0, empty collections, None). You can write short conditions such as 'if items:' and understand short-circuit evaluation."
+  },
+  {
+   "id": "p12",
+   "name": "for loops and range()",
+   "what": "Repeat work with for loops over a range or over the items of a sequence. You can control the start, stop and step of range() and loop a fixed number of times."
+  },
+  {
+   "id": "p13",
+   "name": "while loops",
+   "what": "Repeat code while a condition holds, using a while loop. You can avoid infinite loops by updating the condition and know when while is better than for."
+  },
+  {
+   "id": "p14",
+   "name": "break and continue",
+   "what": "Leave a loop early with break or skip to the next iteration with continue. You can use them to stop a search once you have found a result or to skip unwanted items."
+  },
+  {
+   "id": "p15",
+   "name": "Looping with enumerate() and zip()",
+   "what": "Use enumerate() to get an index with each item and zip() to walk several sequences in step. This replaces manual index counters and is common when pairing features with labels."
+  },
+  {
+   "id": "p16",
+   "name": "Lists: creating, indexing and appending",
+   "what": "Create lists, read items by index (including negative indexes) and add items with append and extend. You know that lists are ordered and can change."
+  },
+  {
+   "id": "p17",
+   "name": "Slicing sequences",
+   "what": "Take parts of a list or string with [start:stop:step], including negative indexes and the reverse slice [::-1]. You can predict which items a slice includes and excludes."
+  },
+  {
+   "id": "p18",
+   "name": "Tuples and unpacking",
+   "what": "Use tuples as fixed groups of values and unpack them into several names in one assignment. You can swap values and return multiple values neatly."
+  },
+  {
+   "id": "p19",
+   "name": "Dictionaries: keys, values and lookup",
+   "what": "Store and look up values by key in a dictionary, with d[key], get(), adding and deleting entries, and the `in` test for keys. You can model records as key-value pairs."
+  },
+  {
+   "id": "p20",
+   "name": "Looping over dictionaries",
+   "what": "Loop over a dictionary's keys, values or key-value pairs with keys(), values() and items(). You can pick the right view for the job."
+  },
+  {
+   "id": "p21",
+   "name": "Sets",
+   "what": "Use sets for unique items, fast membership tests and set operations such as union, intersection and difference. You can remove duplicates from a list."
+  },
+  {
+   "id": "p22",
+   "name": "List and dictionary comprehensions",
+   "what": "Build lists and dictionaries in one line with comprehensions, including an optional if filter. You can read and write them in place of simple loops that append."
+  },
+  {
+   "id": "p23",
+   "name": "Mutability: aliasing and copying",
+   "what": "Understand that two names can point to the same mutable object, so changing one changes the other. You will know how to make a shallow or deep copy when you need an independent one."
+  },
+  {
+   "id": "p24",
+   "name": "Defining and calling functions",
+   "what": "Define a function with def, give it parameters and call it with arguments. You can wrap repeated steps into a reusable, named block."
+  },
+  {
+   "id": "p25",
+   "name": "Return values",
+   "what": "Send results back from a function with return, including returning several values as a tuple. You know that a function without return gives None."
+  },
+  {
+   "id": "p26",
+   "name": "Default and keyword arguments",
+   "what": "Give parameters default values and call functions with keyword arguments. You can read calls such as f(x, n=3), which scikit-learn uses everywhere."
+  },
+  {
+   "id": "p27",
+   "name": "*args and **kwargs",
+   "what": "Accept any number of positional arguments with *args and keyword arguments with **kwargs, and unpack a list or dict into a call with * and **. You can read function signatures that use them."
+  },
+  {
+   "id": "p28",
+   "name": "Local and global scope",
+   "what": "Know which names a function can see: local names, global names and the order Python searches for them. You will understand why assigning inside a function does not change a global and when the global keyword applies."
+  },
+  {
+   "id": "p29",
+   "name": "Mutable default arguments",
+   "what": "Recognise the bug that comes from using a mutable value such as [] as a default argument, because it is created once and shared between calls. You can use None as the default instead."
+  },
+  {
+   "id": "p30",
+   "name": "Lambda functions",
+   "what": "Write small anonymous functions with lambda and pass them as arguments, for example as a key= for sorting. You can read lambdas in other people's code."
+  },
+  {
+   "id": "p31",
+   "name": "Docstrings and help()",
+   "what": "Document a function with a docstring and read documentation with help() or ?. You can find out what any function does and what arguments it takes."
+  },
+  {
+   "id": "p32",
+   "name": "Reading a traceback",
+   "what": "Read a traceback from the bottom up: the exception type and message first, then the line and chain of calls that led to it. You can find where the error came from."
+  },
+  {
+   "id": "p33",
+   "name": "Common exceptions: TypeError, KeyError, IndexError, ValueError",
+   "what": "Recognise what causes TypeError, KeyError, IndexError and ValueError, and the usual fix for each. You can diagnose most beginner errors from the message alone."
+  },
+  {
+   "id": "p34",
+   "name": "try and except",
+   "what": "Catch errors with try, except, else and finally and handle specific exception types. You can keep a program running when an expected failure happens, without hiding real bugs."
+  },
+  {
+   "id": "p35",
+   "name": "Raising exceptions",
+   "what": "Signal a problem yourself with raise and a clear message, for example when a function gets a bad argument. You can choose a suitable built-in exception type."
+  },
+  {
+   "id": "p36",
+   "name": "Debugging with print() and assert",
+   "what": "Find bugs by printing intermediate values and checking assumptions with assert. You will learn a simple routine for narrowing down where a program goes wrong."
+  },
+  {
+   "id": "p37",
+   "name": "import and from ... import",
+   "what": "Bring code from another module into your program with import, import ... as and from ... import, and know how each form changes the names you can use. Recognise how Python finds the module and why you write math.sqrt but sqrt after a from-import."
+  },
+  {
+   "id": "p38",
+   "name": "Useful standard library modules: math, random, collections",
+   "what": "Use a handful of standard library modules for everyday jobs: math for functions like sqrt and pi, random for random choices and numbers, and collections for tools like Counter and defaultdict. Look up other modules in the library reference when you need them."
+  },
+  {
+   "id": "p39",
+   "name": "Installing packages with pip",
+   "what": "Install third-party packages such as numpy, pandas and scikit-learn with pip install, check what is installed with pip list, and pin versions. Understand that pip downloads packages from PyPI into the Python you are running."
+  },
+  {
+   "id": "p40",
+   "name": "Virtual environments",
+   "what": "Create and activate a virtual environment so each project has its own packages and versions. Explain why this avoids version conflicts and how to recreate an environment from a requirements file."
+  },
+  {
+   "id": "p41",
+   "name": "Writing your own module",
+   "what": "Put functions in your own .py file and import them from another script or notebook. Understand the role of the if __name__ == '__main__' guard and where Python looks for your module."
+  },
+  {
+   "id": "p42",
+   "name": "Reading and writing text files with open() and with",
+   "what": "Open a text file with open() inside a with block, read it whole or line by line, and write or append to it. Explain why with closes the file for you and how modes ('r', 'w', 'a') and encoding matter."
+  },
+  {
+   "id": "p43",
+   "name": "File paths with pathlib",
+   "what": "Build and inspect file paths with pathlib.Path: join parts with /, check whether a path exists, list files with glob, and read a file's name or suffix. Write paths that work on any operating system instead of gluing strings together."
+  },
+  {
+   "id": "p44",
+   "name": "Reading CSV and JSON with the standard library",
+   "what": "Read and write CSV files with the csv module and JSON files with the json module, turning rows and objects into lists and dictionaries and back. Understand how this differs from pandas, which you will use later for the same job."
+  },
+  {
+   "id": "p45",
+   "name": "Objects, attributes and methods",
+   "what": "See that every value in Python is an object with attributes (data) and methods (functions that belong to it), reached with dot notation. Use methods on strings, lists and other built-in objects and tell an attribute from a method call."
+  },
+  {
+   "id": "p46",
+   "name": "Defining a class with __init__ and self",
+   "what": "Write a class with an __init__ method that sets attributes on self, add methods, and create instances from it. Understand what self refers to and that each instance keeps its own data, as in scikit-learn estimators."
+  },
+  {
+   "id": "p47",
+   "name": "Inheritance and overriding methods",
+   "what": "Create a subclass that inherits attributes and methods from a parent class, override a method, and call the parent's version with super(). Understand why scikit-learn models are built as classes that inherit shared behaviour."
+  },
+  {
+   "id": "p48",
+   "name": "Special methods: __repr__, __len__ and friends",
+   "what": "Define special (dunder) methods such as __repr__, __str__, __len__ and __getitem__ so your objects work with print(), len() and indexing. Understand that built-in functions and operators call these methods behind the scenes."
+  },
+  {
+   "id": "p49",
+   "name": "Duck typing: objects that share an interface",
+   "what": "Explain duck typing: code works with any object that has the methods it needs, whatever its class. Recognise this in practice, such as any estimator with fit and predict being usable in the same code."
+  },
+  {
+   "id": "p50",
+   "name": "Iterables and iterators",
+   "what": "Distinguish an iterable (something you can loop over) from an iterator (something that hands out values one at a time with next()). Explain what a for loop does with them and why an iterator can be used up once."
+  },
+  {
+   "id": "p51",
+   "name": "Generators and yield",
+   "what": "Write a generator function with yield that produces values one at a time without building a whole list, and use generator expressions. Understand how this saves memory when working through large data."
+  },
+  {
+   "id": "p52",
+   "name": "Creating arrays",
+   "what": "Create NumPy arrays from lists with np.array, and with np.zeros, np.ones, np.arange and np.linspace. Explain how an array differs from a Python list."
+  },
+  {
+   "id": "p53",
+   "name": "dtype and shape",
+   "what": "Read an array's dtype, shape, ndim and size, and explain what they mean for 1-D, 2-D and higher arrays. Choose or change a dtype with astype and see how it affects memory and results."
+  },
+  {
+   "id": "p54",
+   "name": "Indexing and slicing arrays",
+   "what": "Pick out elements, rows, columns and sub-blocks of an array with index and slice notation such as a[1, 2] and a[:, 0]. Extend what you know about list slicing to several dimensions."
+  },
+  {
+   "id": "p55",
+   "name": "Views versus copies in NumPy",
+   "what": "Know that a basic slice of an array is a view that shares memory with the original, while fancy indexing, boolean masks and .copy() make copies. Predict when changing one array changes another and use .copy() to avoid surprises."
+  },
+  {
+   "id": "p56",
+   "name": "Boolean masks",
+   "what": "Build a boolean array from a comparison like a > 0 and use it to select matching elements or assign to them. Combine conditions with & and | and count matches with sum."
+  },
+  {
+   "id": "p57",
+   "name": "Fancy indexing with integer arrays",
+   "what": "Select or reorder array elements by passing a list or array of integer positions, for example a[[0, 2, 5]]. Understand that the result is a copy and how this differs from slicing."
+  },
+  {
+   "id": "p58",
+   "name": "Vectorized arithmetic and ufuncs",
+   "what": "Do arithmetic on whole arrays at once with +, *, ** and ufuncs such as np.sqrt, np.exp and np.log, with no explicit loop. Explain why this is faster and shorter than looping over a list."
+  },
+  {
+   "id": "p59",
+   "name": "Aggregations along an axis",
+   "what": "Compute sum, mean, min, max and std over a whole array or along an axis, for example one value per column or per row. Say which axis to choose and what shape the result has."
+  },
+  {
+   "id": "p60",
+   "name": "Broadcasting",
+   "what": "Predict how NumPy combines arrays of different shapes, such as subtracting a column mean from every row, by applying the broadcasting rules. Spot when shapes are incompatible and fix them."
+  },
+  {
+   "id": "p61",
+   "name": "Reshaping, stacking and transposing",
+   "what": "Change an array's shape with reshape (including -1), flatten or ravel, transpose with .T, and join arrays with np.concatenate, np.vstack and np.hstack. Use newaxis or reshape to turn a 1-D array into a column."
+  },
+  {
+   "id": "p62",
+   "name": "Matrix multiplication with @",
+   "what": "Multiply matrices and compute dot products with the @ operator and np.dot, and check that the shapes line up. Tell it apart from element-wise * and see how it underlies linear models."
+  },
+  {
+   "id": "p63",
+   "name": "NaN and infinity in arrays",
+   "what": "Recognise np.nan and np.inf, see how they spread through calculations, and detect them with np.isnan and np.isinf. Use nan-aware functions like np.nanmean and understand that nan != nan."
+  },
+  {
+   "id": "p64",
+   "name": "Random numbers and seeds",
+   "what": "Generate random numbers and samples with NumPy's random generator (np.random.default_rng), and set a seed so results repeat. Explain why seeding matters for reproducible experiments."
+  },
+  {
+   "id": "p65",
+   "name": "Series and DataFrame",
+   "what": "Explain what a Series (one labeled column of values) and a DataFrame (a table of Series sharing an index) are, and build small ones from lists and dictionaries."
+  },
+  {
+   "id": "p66",
+   "name": "The index",
+   "what": "Understand that every Series and DataFrame carries an index of row labels, and how to set, reset and use it so that labels (not just positions) identify rows."
+  },
+  {
+   "id": "p67",
+   "name": "Loading data with read_csv",
+   "what": "Load a CSV file into a DataFrame with pd.read_csv and use its common options such as sep, header, index_col, usecols and dtype."
+  },
+  {
+   "id": "p68",
+   "name": "Inspecting data: head, info, describe",
+   "what": "Get a quick first look at a dataset with head, tail, shape, info and describe, and read from the output the column types, non-null counts and basic statistics."
+  },
+  {
+   "id": "p69",
+   "name": "Selecting columns",
+   "what": "Select one column with df['col'] or several with df[['a', 'b']], and know when you get back a Series and when a DataFrame."
+  },
+  {
+   "id": "p70",
+   "name": "Selecting rows with loc and iloc",
+   "what": "Select rows and columns by label with loc and by integer position with iloc, and explain how slices differ between the two."
+  },
+  {
+   "id": "p71",
+   "name": "Filtering rows with conditions",
+   "what": "Keep only the rows that meet one or more conditions using boolean expressions, combining them with & and | and brackets."
+  },
+  {
+   "id": "p72",
+   "name": "Adding and transforming columns",
+   "what": "Create new columns and transform existing ones from other columns with vectorized arithmetic and simple column methods such as map and replace."
+  },
+  {
+   "id": "p73",
+   "name": "Chained assignment and Copy-on-Write",
+   "what": "Recognize why chained indexing like df[df.x > 0]['y'] = 1 does not change the original DataFrame: since pandas 3.0, Copy-on-Write is the default, so every indexing result behaves as a copy and chained assignment never writes back (older versions sometimes did and showed SettingWithCopyWarning instead). Assign safely in one step with df.loc[rows, col] = value, or work on an explicit .copy()."
+  },
+  {
+   "id": "p74",
+   "name": "Finding missing values",
+   "what": "Find missing values (NaN/None) with isna and notna, and count them per column and per row to see how much of a dataset is incomplete."
+  },
+  {
+   "id": "p75",
+   "name": "Dropping and filling missing values in pandas",
+   "what": "Handle missing data in pandas by dropping rows or columns with dropna and by filling with fillna (a constant, the mean, or neighbouring values), and judge which choice suits a given column."
+  },
+  {
+   "id": "p76",
+   "name": "Fixing column types with astype and to_numeric",
+   "what": "Convert columns to the right type with astype and pd.to_numeric (including errors='coerce' for messy strings) so that numeric work and models treat them correctly."
+  },
+  {
+   "id": "p77",
+   "name": "Removing duplicates",
+   "what": "Detect duplicate rows with duplicated, remove them with drop_duplicates, and choose which columns define a duplicate and which copy to keep."
+  },
+  {
+   "id": "p78",
+   "name": "Cleaning text columns with .str",
+   "what": "Clean text columns in bulk using the .str accessor: strip whitespace, change case, replace and extract patterns, and split strings."
+  },
+  {
+   "id": "p79",
+   "name": "Parsing dates with to_datetime",
+   "what": "Turn date and time strings into real datetime values with pd.to_datetime, handle formats and unparseable entries, and pull out parts such as year or weekday with .dt."
+  },
+  {
+   "id": "p80",
+   "name": "Categorical columns and value_counts",
+   "what": "Inspect and tidy categorical columns with value_counts and unique, spot inconsistent labels or rare categories, and use the category dtype."
+  },
+  {
+   "id": "p81",
+   "name": "Spotting outliers",
+   "what": "Spot unusual values using summary statistics, the IQR rule and z-scores, and decide whether an outlier is an error to fix or a real value to keep."
+  },
+  {
+   "id": "p82",
+   "name": "Sorting rows",
+   "what": "Order a DataFrame by one or more columns or by its index with sort_values and sort_index, in ascending or descending order."
+  },
+  {
+   "id": "p83",
+   "name": "groupby and aggregation",
+   "what": "Split data into groups with groupby, compute summaries such as mean, count or several statistics per group with agg, and read the result."
+  },
+  {
+   "id": "p84",
+   "name": "Merging DataFrames",
+   "what": "Combine two DataFrames side by side on shared keys with merge or join, and explain inner, left, right and outer joins and what happens to unmatched rows."
+  },
+  {
+   "id": "p85",
+   "name": "Concatenating DataFrames",
+   "what": "Stack DataFrames on top of each other (or side by side) with pd.concat, and handle mismatched columns and the resulting index."
+  },
+  {
+   "id": "p86",
+   "name": "Pivot tables and melt",
+   "what": "Reshape tables between wide and long form with pivot_table and melt, and summarize one measure across two categories."
+  },
+  {
+   "id": "p87",
+   "name": "apply and when to avoid it",
+   "what": "Use apply to run your own function over the rows or columns of a DataFrame, and explain why built-in vectorized operations are usually faster and clearer."
+  },
+  {
+   "id": "p88",
+   "name": "Line and scatter plots with matplotlib",
+   "what": "Draw line plots and scatter plots with matplotlib and add titles, axis labels, legends and colours so a plot can be read by someone else."
+  },
+  {
+   "id": "p89",
+   "name": "Figures, axes and subplots",
+   "what": "Explain the Figure and Axes objects, create several plots in one figure with plt.subplots, and draw on a chosen Axes."
+  },
+  {
+   "id": "p90",
+   "name": "Histograms and box plots",
+   "what": "Show how a numeric variable is distributed with histograms and compare groups or find outliers with box plots, and read both."
+  },
+  {
+   "id": "p91",
+   "name": "Plotting directly from pandas",
+   "what": "Make quick plots straight from a Series or DataFrame with the .plot methods (line, bar, hist, scatter, box) and pass them an Axes."
+  },
+  {
+   "id": "p92",
+   "name": "Correlation matrices and heatmaps",
+   "what": "Compute a correlation matrix with df.corr, draw it as a heatmap, and interpret what correlation does and does not say, including its link to features and target."
+  },
+  {
+   "id": "p93",
+   "name": "What a model learns: features, target and parameters",
+   "what": "Describe a model as a function that maps input features to a target, whose parameters are fitted from example data rather than written by hand."
+  },
+  {
+   "id": "p94",
+   "name": "Supervised versus unsupervised learning",
+   "what": "Tell supervised learning (examples come with known targets) from unsupervised learning (finding structure with no target) and classify a problem as one or the other."
+  },
+  {
+   "id": "p95",
+   "name": "Regression versus classification",
+   "what": "Decide whether a problem is regression (predict a number) or classification (predict a category) and name typical examples of each."
+  },
+  {
+   "id": "p96",
+   "name": "Training and test sets",
+   "what": "Explain why data is split into a training set to fit the model and a test set to estimate how it performs on new data, and why testing on the training data misleads."
+  },
+  {
+   "id": "p97",
+   "name": "Overfitting, underfitting and the bias-variance tradeoff",
+   "what": "Recognize overfitting (memorizing the training data) and underfitting (too simple), connect them to model complexity and the bias-variance tradeoff, and tell them apart by comparing training and test scores."
+  },
+  {
+   "id": "p98",
+   "name": "Data leakage",
+   "what": "Understand data leakage, where information from the test set or the future gets into training, give common examples such as scaling before splitting, and see why it inflates scores."
+  },
+  {
+   "id": "p99",
+   "name": "The feature matrix X and target y",
+   "what": "Arrange data as a 2-D feature matrix X (rows are samples, columns are features) and a 1-D target y, and check their shapes before handing them to scikit-learn."
+  },
+  {
+   "id": "p100",
+   "name": "Estimators: fit and predict",
+   "what": "Use the estimator pattern: create a model object, call fit(X, y) to learn from data, then predict(X_new) to get predictions."
+  },
+  {
+   "id": "p101",
+   "name": "Transformers: fit, transform and fit_transform",
+   "what": "Explain how transformers learn something from data in fit, apply it in transform, and combine both with fit_transform, and why the fitted values are reused on new data."
+  },
+  {
+   "id": "p102",
+   "name": "Splitting data with train_test_split",
+   "what": "Split X and y into training and test portions with train_test_split, and control the test size and shuffling."
+  },
+  {
+   "id": "p103",
+   "name": "Hyperparameters versus fitted attributes (the trailing underscore)",
+   "what": "Tell apart hyperparameters, which you set when creating the model, from fitted attributes ending in an underscore, which are learned by fit, and look at both with get_params and the attributes."
+  },
+  {
+   "id": "p104",
+   "name": "random_state and reproducibility",
+   "what": "Set random_state so splits and randomized models give the same results on every run, and know why results can differ without it."
+  },
+  {
+   "id": "p105",
+   "name": "Scaling features: StandardScaler and MinMaxScaler",
+   "what": "Rescale numeric features with StandardScaler or MinMaxScaler, fitting only on training data, and explain why distance-based and regularized models need it."
+  },
+  {
+   "id": "p106",
+   "name": "Encoding categories with OneHotEncoder",
+   "what": "Turn categorical columns into 0/1 indicator columns with OneHotEncoder, and handle categories that appear only in new data."
+  },
+  {
+   "id": "p107",
+   "name": "Imputing missing values in a model with SimpleImputer",
+   "what": "Fill missing values inside a model workflow with SimpleImputer so the fill values are learned from training data only."
+  },
+  {
+   "id": "p108",
+   "name": "ColumnTransformer for mixed column types",
+   "what": "Apply different transformers to different columns (for example scale numbers and one-hot encode categories) with ColumnTransformer and get one combined feature matrix."
+  },
+  {
+   "id": "p109",
+   "name": "Pipelines",
+   "what": "Chain preprocessing steps and a final model into a single Pipeline that is fitted and used like one estimator, and see how this prevents leakage."
+  },
+  {
+   "id": "p110",
+   "name": "Polynomial and interaction features",
+   "what": "Create squared and interaction features with PolynomialFeatures so a linear model can fit curved relationships, and recognise the risk of too many features."
+  },
+  {
+   "id": "p111",
+   "name": "Linear regression",
+   "what": "Fit a linear regression model with LinearRegression and understand that it finds the straight line or plane that minimizes squared error."
+  },
+  {
+   "id": "p112",
+   "name": "Reading coefficients and the intercept",
+   "what": "Read coef_ and intercept_ to say how the prediction changes when a feature goes up by one unit, and know why scale affects how comparable coefficients are."
+  },
+  {
+   "id": "p113",
+   "name": "Regularization: Ridge and Lasso",
+   "what": "Use Ridge and Lasso to penalize large coefficients, see how the alpha hyperparameter trades fit against simplicity, and know that Lasso can set coefficients to exactly zero."
+  },
+  {
+   "id": "p114",
+   "name": "Regression metrics: MAE, MSE, RMSE and R²",
+   "what": "Compute MAE, MSE, RMSE and R² on predictions, explain what each one measures, and choose among them for a problem."
+  },
+  {
+   "id": "p115",
+   "name": "Logistic regression",
+   "what": "Fit LogisticRegression for classification and explain that it models class probabilities from a weighted sum of features, with C controlling regularization."
+  },
+  {
+   "id": "p116",
+   "name": "k-nearest neighbors",
+   "what": "Classify a point by the majority class among its k closest training points, and see how k and feature scaling change the result."
+  },
+  {
+   "id": "p117",
+   "name": "Decision trees",
+   "what": "Fit a DecisionTreeClassifier, read the splits it makes, and use max_depth and similar settings to control overfitting."
+  },
+  {
+   "id": "p118",
+   "name": "Support vector machines",
+   "what": "Use a support vector classifier to find a wide-margin boundary, and understand the roles of the kernel and C."
+  },
+  {
+   "id": "p119",
+   "name": "predict_proba and decision thresholds",
+   "what": "Get class probabilities with predict_proba and turn them into labels with a chosen threshold instead of the default 0.5."
+  },
+  {
+   "id": "p120",
+   "name": "Baselines with DummyClassifier",
+   "what": "Build a baseline with DummyClassifier (for example always predicting the most common class) and use it as the score a real model must beat."
+  },
+  {
+   "id": "p121",
+   "name": "Accuracy and its limits on imbalanced data",
+   "what": "Compute accuracy and explain why it can look high while being useless when one class is much rarer than the other."
+  },
+  {
+   "id": "p122",
+   "name": "Confusion matrix",
+   "what": "Read a confusion matrix to count true and false positives and negatives and see which kinds of mistakes a classifier makes."
+  },
+  {
+   "id": "p123",
+   "name": "Precision, recall and F1",
+   "what": "Compute precision, recall and F1 from the confusion matrix, and pick which one matters for a given cost of mistakes."
+  },
+  {
+   "id": "p124",
+   "name": "ROC curve and AUC",
+   "what": "Read an ROC curve and AUC as a summary of how well a classifier ranks positives above negatives across all thresholds."
+  },
+  {
+   "id": "p125",
+   "name": "Cross-validation with cross_val_score",
+   "what": "Estimate model performance more reliably by splitting the training data into folds and averaging scores with cross_val_score."
+  },
+  {
+   "id": "p126",
+   "name": "Choosing a splitter: KFold, StratifiedKFold and GroupKFold",
+   "what": "Pick a cross-validation splitter that suits the data: KFold in general, StratifiedKFold for imbalanced classes, GroupKFold when rows from one group must stay together."
+  },
+  {
+   "id": "p127",
+   "name": "Grid search with GridSearchCV",
+   "what": "Search a grid of hyperparameter values with GridSearchCV, using cross-validation, and read best_params_ and best_score_."
+  },
+  {
+   "id": "p128",
+   "name": "Randomized search with RandomizedSearchCV",
+   "what": "Sample hyperparameter combinations at random from distributions with RandomizedSearchCV to cover large search spaces at a fixed budget."
+  },
+  {
+   "id": "p129",
+   "name": "Learning curves and validation curves",
+   "what": "Plot learning curves and validation curves to tell whether a model suffers from high bias or high variance and whether more data or a different setting would help."
+  },
+  {
+   "id": "p130",
+   "name": "Keeping a final test set untouched",
+   "what": "Set aside a final test set that is used once, after all tuning, and explain why repeated peeking at it makes the score too optimistic."
+  },
+  {
+   "id": "p131",
+   "name": "Random forests",
+   "what": "Train a RandomForest, which averages many decorrelated trees built on random samples and features, and understand why this reduces overfitting compared with a single tree."
+  },
+  {
+   "id": "p132",
+   "name": "Gradient boosting with HistGradientBoosting",
+   "what": "Use HistGradientBoostingClassifier or Regressor, which builds trees one after another to correct earlier errors, and tune its main settings such as learning rate and number of iterations."
+  },
+  {
+   "id": "p133",
+   "name": "Feature importances and permutation importance",
+   "what": "Rank features by impurity-based importances and by permutation importance on held-out data, and know when each one can mislead."
+  },
+  {
+   "id": "p134",
+   "name": "k-means clustering",
+   "what": "Understand how k-means groups unlabeled rows by repeatedly assigning points to the nearest centroid and moving the centroids, and fit KMeans in scikit-learn to get cluster labels and centers. Know that you must choose the number of clusters yourself and that results depend on the starting centroids."
+  },
+  {
+   "id": "p135",
+   "name": "Choosing the number of clusters: inertia and silhouette",
+   "what": "Use inertia (the elbow plot) and the silhouette score to compare different values of k, and explain why neither gives a single certain answer. Be able to judge whether a clustering is sensible rather than just accepting the output."
+  },
+  {
+   "id": "p136",
+   "name": "PCA for dimensionality reduction",
+   "what": "Use PCA to project many numeric features onto a few new directions that keep most of the variance, and read explained_variance_ratio_ to decide how many components to keep. Understand why features should usually be scaled first and that the components are mixtures of the original columns."
+  },
+  {
+   "id": "p137",
+   "name": "An end-to-end ML workflow from CSV to evaluated model",
+   "what": "Carry out a whole project: load a CSV with pandas, split off a test set, build a preprocessing and model pipeline, tune it with cross-validation, and report an honest score on untouched test data. Be able to explain what each stage does and why it comes in that order."
+  },
+  {
+   "id": "p138",
+   "name": "Saving and loading models with joblib",
+   "what": "Save a fitted model or whole pipeline to a file with joblib.dump and load it again with joblib.load to make predictions without retraining. Know that the file is tied to the library versions used and should only be loaded if you trust its source."
+  },
+  {
+   "id": "p139",
+   "name": "Reading the scikit-learn documentation",
+   "what": "Navigate the scikit-learn documentation: find an estimator's API page, read its parameters, attributes and examples, and use the user guide to learn an unfamiliar model. Be able to work out for yourself what a parameter does and how to use a class you have not met."
+  }
+ ],
+ "links": [
+  [
+   "p1",
+   "p2",
+   "needs"
+  ],
+  [
+   "p1",
+   "p3",
+   "needs"
+  ],
+  [
+   "p2",
+   "p3",
+   "helps"
+  ],
+  [
+   "p1",
+   "p4",
+   "needs"
+  ],
+  [
+   "p2",
+   "p4",
+   "helps"
+  ],
+  [
+   "p3",
+   "p4",
+   "helps"
+  ],
+  [
+   "p4",
+   "p5",
+   "needs"
+  ],
+  [
+   "p2",
+   "p5",
+   "helps"
+  ],
+  [
+   "p7",
+   "p5",
+   "helps"
+  ],
+  [
+   "p3",
+   "p6",
+   "needs"
+  ],
+  [
+   "p2",
+   "p6",
+   "helps"
+  ],
+  [
+   "p3",
+   "p7",
+   "needs"
+  ],
+  [
+   "p6",
+   "p7",
+   "needs"
+  ],
+  [
+   "p4",
+   "p7",
+   "helps"
+  ],
+  [
+   "p2",
+   "p7",
+   "helps"
+  ],
+  [
+   "p3",
+   "p8",
+   "needs"
+  ],
+  [
+   "p4",
+   "p8",
+   "helps"
+  ],
+  [
+   "p6",
+   "p8",
+   "helps"
+  ],
+  [
+   "p4",
+   "p9",
+   "needs"
+  ],
+  [
+   "p6",
+   "p9",
+   "needs"
+  ],
+  [
+   "p8",
+   "p9",
+   "helps"
+  ],
+  [
+   "p33",
+   "p9",
+   "helps"
+  ],
+  [
+   "p8",
+   "p10",
+   "needs"
+  ],
+  [
+   "p2",
+   "p10",
+   "helps"
+  ],
+  [
+   "p8",
+   "p11",
+   "needs"
+  ],
+  [
+   "p10",
+   "p11",
+   "needs"
+  ],
+  [
+   "p3",
+   "p12",
+   "needs"
+  ],
+  [
+   "p10",
+   "p12",
+   "helps"
+  ],
+  [
+   "p4",
+   "p12",
+   "helps"
+  ],
+  [
+   "p16",
+   "p12",
+   "helps"
+  ],
+  [
+   "p8",
+   "p13",
+   "needs"
+  ],
+  [
+   "p10",
+   "p13",
+   "needs"
+  ],
+  [
+   "p12",
+   "p13",
+   "helps"
+  ],
+  [
+   "p10",
+   "p14",
+   "needs"
+  ],
+  [
+   "p12",
+   "p14",
+   "needs"
+  ],
+  [
+   "p13",
+   "p14",
+   "helps"
+  ],
+  [
+   "p12",
+   "p15",
+   "needs"
+  ],
+  [
+   "p16",
+   "p15",
+   "needs"
+  ],
+  [
+   "p18",
+   "p15",
+   "helps"
+  ],
+  [
+   "p3",
+   "p16",
+   "needs"
+  ],
+  [
+   "p4",
+   "p16",
+   "helps"
+  ],
+  [
+   "p6",
+   "p16",
+   "helps"
+  ],
+  [
+   "p12",
+   "p16",
+   "helps"
+  ],
+  [
+   "p16",
+   "p17",
+   "needs"
+  ],
+  [
+   "p6",
+   "p17",
+   "helps"
+  ],
+  [
+   "p16",
+   "p18",
+   "needs"
+  ],
+  [
+   "p17",
+   "p18",
+   "helps"
+  ],
+  [
+   "p3",
+   "p19",
+   "needs"
+  ],
+  [
+   "p6",
+   "p19",
+   "helps"
+  ],
+  [
+   "p16",
+   "p19",
+   "helps"
+  ],
+  [
+   "p12",
+   "p20",
+   "needs"
+  ],
+  [
+   "p19",
+   "p20",
+   "needs"
+  ],
+  [
+   "p18",
+   "p20",
+   "helps"
+  ],
+  [
+   "p16",
+   "p21",
+   "needs"
+  ],
+  [
+   "p19",
+   "p21",
+   "helps"
+  ],
+  [
+   "p12",
+   "p22",
+   "needs"
+  ],
+  [
+   "p16",
+   "p22",
+   "needs"
+  ],
+  [
+   "p19",
+   "p22",
+   "needs"
+  ],
+  [
+   "p10",
+   "p22",
+   "helps"
+  ],
+  [
+   "p3",
+   "p23",
+   "needs"
+  ],
+  [
+   "p16",
+   "p23",
+   "needs"
+  ],
+  [
+   "p19",
+   "p23",
+   "helps"
+  ],
+  [
+   "p29",
+   "p23",
+   "helps"
+  ],
+  [
+   "p3",
+   "p24",
+   "needs"
+  ],
+  [
+   "p2",
+   "p24",
+   "helps"
+  ],
+  [
+   "p12",
+   "p24",
+   "helps"
+  ],
+  [
+   "p24",
+   "p25",
+   "needs"
+  ],
+  [
+   "p18",
+   "p25",
+   "helps"
+  ],
+  [
+   "p24",
+   "p26",
+   "needs"
+  ],
+  [
+   "p25",
+   "p26",
+   "helps"
+  ],
+  [
+   "p26",
+   "p27",
+   "needs"
+  ],
+  [
+   "p18",
+   "p27",
+   "helps"
+  ],
+  [
+   "p19",
+   "p27",
+   "helps"
+  ],
+  [
+   "p3",
+   "p28",
+   "needs"
+  ],
+  [
+   "p24",
+   "p28",
+   "needs"
+  ],
+  [
+   "p25",
+   "p28",
+   "helps"
+  ],
+  [
+   "p23",
+   "p29",
+   "needs"
+  ],
+  [
+   "p26",
+   "p29",
+   "needs"
+  ],
+  [
+   "p28",
+   "p29",
+   "helps"
+  ],
+  [
+   "p24",
+   "p30",
+   "needs"
+  ],
+  [
+   "p25",
+   "p30",
+   "needs"
+  ],
+  [
+   "p22",
+   "p30",
+   "helps"
+  ],
+  [
+   "p24",
+   "p31",
+   "needs"
+  ],
+  [
+   "p6",
+   "p31",
+   "helps"
+  ],
+  [
+   "p24",
+   "p32",
+   "needs"
+  ],
+  [
+   "p1",
+   "p32",
+   "helps"
+  ],
+  [
+   "p32",
+   "p33",
+   "needs"
+  ],
+  [
+   "p9",
+   "p33",
+   "helps"
+  ],
+  [
+   "p16",
+   "p33",
+   "helps"
+  ],
+  [
+   "p19",
+   "p33",
+   "helps"
+  ],
+  [
+   "p33",
+   "p34",
+   "needs"
+  ],
+  [
+   "p10",
+   "p34",
+   "helps"
+  ],
+  [
+   "p34",
+   "p35",
+   "needs"
+  ],
+  [
+   "p24",
+   "p35",
+   "helps"
+  ],
+  [
+   "p2",
+   "p36",
+   "needs"
+  ],
+  [
+   "p8",
+   "p36",
+   "needs"
+  ],
+  [
+   "p32",
+   "p36",
+   "helps"
+  ],
+  [
+   "p3",
+   "p37",
+   "needs"
+  ],
+  [
+   "p1",
+   "p37",
+   "helps"
+  ],
+  [
+   "p24",
+   "p37",
+   "helps"
+  ],
+  [
+   "p37",
+   "p38",
+   "needs"
+  ],
+  [
+   "p19",
+   "p38",
+   "helps"
+  ],
+  [
+   "p12",
+   "p38",
+   "helps"
+  ],
+  [
+   "p37",
+   "p39",
+   "needs"
+  ],
+  [
+   "p1",
+   "p39",
+   "helps"
+  ],
+  [
+   "p39",
+   "p40",
+   "needs"
+  ],
+  [
+   "p1",
+   "p40",
+   "helps"
+  ],
+  [
+   "p37",
+   "p41",
+   "needs"
+  ],
+  [
+   "p24",
+   "p41",
+   "needs"
+  ],
+  [
+   "p31",
+   "p41",
+   "helps"
+  ],
+  [
+   "p1",
+   "p41",
+   "helps"
+  ],
+  [
+   "p6",
+   "p42",
+   "needs"
+  ],
+  [
+   "p12",
+   "p42",
+   "helps"
+  ],
+  [
+   "p34",
+   "p42",
+   "helps"
+  ],
+  [
+   "p37",
+   "p43",
+   "needs"
+  ],
+  [
+   "p6",
+   "p43",
+   "needs"
+  ],
+  [
+   "p42",
+   "p43",
+   "helps"
+  ],
+  [
+   "p45",
+   "p43",
+   "helps"
+  ],
+  [
+   "p42",
+   "p44",
+   "needs"
+  ],
+  [
+   "p16",
+   "p44",
+   "needs"
+  ],
+  [
+   "p19",
+   "p44",
+   "needs"
+  ],
+  [
+   "p67",
+   "p44",
+   "helps"
+  ],
+  [
+   "p20",
+   "p44",
+   "helps"
+  ],
+  [
+   "p3",
+   "p45",
+   "needs"
+  ],
+  [
+   "p24",
+   "p45",
+   "needs"
+  ],
+  [
+   "p6",
+   "p45",
+   "helps"
+  ],
+  [
+   "p16",
+   "p45",
+   "helps"
+  ],
+  [
+   "p45",
+   "p46",
+   "needs"
+  ],
+  [
+   "p24",
+   "p46",
+   "needs"
+  ],
+  [
+   "p26",
+   "p46",
+   "helps"
+  ],
+  [
+   "p46",
+   "p47",
+   "needs"
+  ],
+  [
+   "p48",
+   "p47",
+   "helps"
+  ],
+  [
+   "p46",
+   "p48",
+   "needs"
+  ],
+  [
+   "p47",
+   "p48",
+   "helps"
+  ],
+  [
+   "p50",
+   "p48",
+   "helps"
+  ],
+  [
+   "p46",
+   "p49",
+   "needs"
+  ],
+  [
+   "p47",
+   "p49",
+   "helps"
+  ],
+  [
+   "p48",
+   "p49",
+   "helps"
+  ],
+  [
+   "p100",
+   "p49",
+   "helps"
+  ],
+  [
+   "p12",
+   "p50",
+   "needs"
+  ],
+  [
+   "p16",
+   "p50",
+   "needs"
+  ],
+  [
+   "p15",
+   "p50",
+   "helps"
+  ],
+  [
+   "p48",
+   "p50",
+   "helps"
+  ],
+  [
+   "p50",
+   "p51",
+   "needs"
+  ],
+  [
+   "p25",
+   "p51",
+   "needs"
+  ],
+  [
+   "p22",
+   "p51",
+   "helps"
+  ],
+  [
+   "p16",
+   "p52",
+   "needs"
+  ],
+  [
+   "p37",
+   "p52",
+   "needs"
+  ],
+  [
+   "p4",
+   "p52",
+   "helps"
+  ],
+  [
+   "p39",
+   "p52",
+   "helps"
+  ],
+  [
+   "p52",
+   "p53",
+   "needs"
+  ],
+  [
+   "p4",
+   "p53",
+   "helps"
+  ],
+  [
+   "p9",
+   "p53",
+   "helps"
+  ],
+  [
+   "p53",
+   "p54",
+   "needs"
+  ],
+  [
+   "p17",
+   "p54",
+   "needs"
+  ],
+  [
+   "p16",
+   "p54",
+   "helps"
+  ],
+  [
+   "p54",
+   "p55",
+   "needs"
+  ],
+  [
+   "p23",
+   "p55",
+   "needs"
+  ],
+  [
+   "p73",
+   "p55",
+   "helps"
+  ],
+  [
+   "p54",
+   "p56",
+   "needs"
+  ],
+  [
+   "p8",
+   "p56",
+   "needs"
+  ],
+  [
+   "p11",
+   "p56",
+   "helps"
+  ],
+  [
+   "p71",
+   "p56",
+   "helps"
+  ],
+  [
+   "p54",
+   "p57",
+   "needs"
+  ],
+  [
+   "p55",
+   "p57",
+   "helps"
+  ],
+  [
+   "p56",
+   "p57",
+   "helps"
+  ],
+  [
+   "p53",
+   "p58",
+   "needs"
+  ],
+  [
+   "p4",
+   "p58",
+   "needs"
+  ],
+  [
+   "p12",
+   "p58",
+   "helps"
+  ],
+  [
+   "p22",
+   "p58",
+   "helps"
+  ],
+  [
+   "p58",
+   "p59",
+   "needs"
+  ],
+  [
+   "p53",
+   "p59",
+   "needs"
+  ],
+  [
+   "p83",
+   "p59",
+   "helps"
+  ],
+  [
+   "p58",
+   "p60",
+   "needs"
+  ],
+  [
+   "p53",
+   "p60",
+   "needs"
+  ],
+  [
+   "p61",
+   "p60",
+   "helps"
+  ],
+  [
+   "p105",
+   "p60",
+   "helps"
+  ],
+  [
+   "p53",
+   "p61",
+   "needs"
+  ],
+  [
+   "p54",
+   "p61",
+   "needs"
+  ],
+  [
+   "p60",
+   "p61",
+   "helps"
+  ],
+  [
+   "p99",
+   "p61",
+   "helps"
+  ],
+  [
+   "p53",
+   "p62",
+   "needs"
+  ],
+  [
+   "p58",
+   "p62",
+   "needs"
+  ],
+  [
+   "p61",
+   "p62",
+   "helps"
+  ],
+  [
+   "p111",
+   "p62",
+   "helps"
+  ],
+  [
+   "p58",
+   "p63",
+   "needs"
+  ],
+  [
+   "p5",
+   "p63",
+   "needs"
+  ],
+  [
+   "p59",
+   "p63",
+   "helps"
+  ],
+  [
+   "p74",
+   "p63",
+   "helps"
+  ],
+  [
+   "p52",
+   "p64",
+   "needs"
+  ],
+  [
+   "p53",
+   "p64",
+   "needs"
+  ],
+  [
+   "p38",
+   "p64",
+   "helps"
+  ],
+  [
+   "p104",
+   "p64",
+   "helps"
+  ],
+  [
+   "p16",
+   "p65",
+   "needs"
+  ],
+  [
+   "p19",
+   "p65",
+   "needs"
+  ],
+  [
+   "p37",
+   "p65",
+   "needs"
+  ],
+  [
+   "p52",
+   "p65",
+   "helps"
+  ],
+  [
+   "p53",
+   "p65",
+   "helps"
+  ],
+  [
+   "p65",
+   "p66",
+   "needs"
+  ],
+  [
+   "p17",
+   "p66",
+   "helps"
+  ],
+  [
+   "p37",
+   "p67",
+   "needs"
+  ],
+  [
+   "p65",
+   "p67",
+   "needs"
+  ],
+  [
+   "p43",
+   "p67",
+   "helps"
+  ],
+  [
+   "p44",
+   "p67",
+   "helps"
+  ],
+  [
+   "p42",
+   "p67",
+   "helps"
+  ],
+  [
+   "p65",
+   "p68",
+   "needs"
+  ],
+  [
+   "p67",
+   "p68",
+   "helps"
+  ],
+  [
+   "p53",
+   "p68",
+   "helps"
+  ],
+  [
+   "p65",
+   "p69",
+   "needs"
+  ],
+  [
+   "p16",
+   "p69",
+   "helps"
+  ],
+  [
+   "p19",
+   "p69",
+   "helps"
+  ],
+  [
+   "p66",
+   "p70",
+   "needs"
+  ],
+  [
+   "p69",
+   "p70",
+   "needs"
+  ],
+  [
+   "p17",
+   "p70",
+   "helps"
+  ],
+  [
+   "p54",
+   "p70",
+   "helps"
+  ],
+  [
+   "p69",
+   "p71",
+   "needs"
+  ],
+  [
+   "p8",
+   "p71",
+   "needs"
+  ],
+  [
+   "p11",
+   "p71",
+   "helps"
+  ],
+  [
+   "p56",
+   "p71",
+   "helps"
+  ],
+  [
+   "p69",
+   "p72",
+   "needs"
+  ],
+  [
+   "p4",
+   "p72",
+   "helps"
+  ],
+  [
+   "p58",
+   "p72",
+   "helps"
+  ],
+  [
+   "p70",
+   "p73",
+   "needs"
+  ],
+  [
+   "p71",
+   "p73",
+   "needs"
+  ],
+  [
+   "p72",
+   "p73",
+   "needs"
+  ],
+  [
+   "p23",
+   "p73",
+   "helps"
+  ],
+  [
+   "p55",
+   "p73",
+   "helps"
+  ],
+  [
+   "p65",
+   "p74",
+   "needs"
+  ],
+  [
+   "p69",
+   "p74",
+   "needs"
+  ],
+  [
+   "p63",
+   "p74",
+   "helps"
+  ],
+  [
+   "p68",
+   "p74",
+   "helps"
+  ],
+  [
+   "p71",
+   "p74",
+   "helps"
+  ],
+  [
+   "p74",
+   "p75",
+   "needs"
+  ],
+  [
+   "p107",
+   "p75",
+   "helps"
+  ],
+  [
+   "p9",
+   "p76",
+   "needs"
+  ],
+  [
+   "p69",
+   "p76",
+   "needs"
+  ],
+  [
+   "p68",
+   "p76",
+   "helps"
+  ],
+  [
+   "p74",
+   "p76",
+   "helps"
+  ],
+  [
+   "p69",
+   "p77",
+   "needs"
+  ],
+  [
+   "p71",
+   "p77",
+   "helps"
+  ],
+  [
+   "p83",
+   "p77",
+   "helps"
+  ],
+  [
+   "p69",
+   "p78",
+   "needs"
+  ],
+  [
+   "p6",
+   "p78",
+   "needs"
+  ],
+  [
+   "p72",
+   "p78",
+   "helps"
+  ],
+  [
+   "p69",
+   "p79",
+   "needs"
+  ],
+  [
+   "p76",
+   "p79",
+   "helps"
+  ],
+  [
+   "p74",
+   "p79",
+   "helps"
+  ],
+  [
+   "p69",
+   "p80",
+   "needs"
+  ],
+  [
+   "p78",
+   "p80",
+   "helps"
+  ],
+  [
+   "p83",
+   "p80",
+   "helps"
+  ],
+  [
+   "p68",
+   "p81",
+   "needs"
+  ],
+  [
+   "p71",
+   "p81",
+   "needs"
+  ],
+  [
+   "p90",
+   "p81",
+   "helps"
+  ],
+  [
+   "p59",
+   "p81",
+   "helps"
+  ],
+  [
+   "p66",
+   "p82",
+   "needs"
+  ],
+  [
+   "p69",
+   "p82",
+   "needs"
+  ],
+  [
+   "p70",
+   "p82",
+   "helps"
+  ],
+  [
+   "p69",
+   "p83",
+   "needs"
+  ],
+  [
+   "p19",
+   "p83",
+   "helps"
+  ],
+  [
+   "p59",
+   "p83",
+   "helps"
+  ],
+  [
+   "p80",
+   "p83",
+   "helps"
+  ],
+  [
+   "p66",
+   "p84",
+   "needs"
+  ],
+  [
+   "p69",
+   "p84",
+   "needs"
+  ],
+  [
+   "p83",
+   "p84",
+   "helps"
+  ],
+  [
+   "p65",
+   "p85",
+   "needs"
+  ],
+  [
+   "p66",
+   "p85",
+   "needs"
+  ],
+  [
+   "p61",
+   "p85",
+   "helps"
+  ],
+  [
+   "p84",
+   "p85",
+   "helps"
+  ],
+  [
+   "p66",
+   "p86",
+   "needs"
+  ],
+  [
+   "p83",
+   "p86",
+   "needs"
+  ],
+  [
+   "p84",
+   "p86",
+   "helps"
+  ],
+  [
+   "p24",
+   "p87",
+   "needs"
+  ],
+  [
+   "p58",
+   "p87",
+   "needs"
+  ],
+  [
+   "p72",
+   "p87",
+   "needs"
+  ],
+  [
+   "p30",
+   "p87",
+   "helps"
+  ],
+  [
+   "p16",
+   "p88",
+   "needs"
+  ],
+  [
+   "p37",
+   "p88",
+   "needs"
+  ],
+  [
+   "p52",
+   "p88",
+   "helps"
+  ],
+  [
+   "p65",
+   "p88",
+   "helps"
+  ],
+  [
+   "p88",
+   "p89",
+   "needs"
+  ],
+  [
+   "p45",
+   "p89",
+   "helps"
+  ],
+  [
+   "p88",
+   "p90",
+   "needs"
+  ],
+  [
+   "p68",
+   "p90",
+   "helps"
+  ],
+  [
+   "p89",
+   "p90",
+   "helps"
+  ],
+  [
+   "p65",
+   "p91",
+   "needs"
+  ],
+  [
+   "p88",
+   "p91",
+   "needs"
+  ],
+  [
+   "p89",
+   "p91",
+   "helps"
+  ],
+  [
+   "p90",
+   "p91",
+   "helps"
+  ],
+  [
+   "p65",
+   "p92",
+   "needs"
+  ],
+  [
+   "p89",
+   "p92",
+   "needs"
+  ],
+  [
+   "p88",
+   "p92",
+   "helps"
+  ],
+  [
+   "p90",
+   "p92",
+   "helps"
+  ],
+  [
+   "p93",
+   "p92",
+   "helps"
+  ],
+  [
+   "p24",
+   "p93",
+   "helps"
+  ],
+  [
+   "p65",
+   "p93",
+   "helps"
+  ],
+  [
+   "p52",
+   "p93",
+   "helps"
+  ],
+  [
+   "p93",
+   "p94",
+   "needs"
+  ],
+  [
+   "p134",
+   "p94",
+   "helps"
+  ],
+  [
+   "p94",
+   "p95",
+   "needs"
+  ],
+  [
+   "p111",
+   "p95",
+   "helps"
+  ],
+  [
+   "p115",
+   "p95",
+   "helps"
+  ],
+  [
+   "p93",
+   "p96",
+   "needs"
+  ],
+  [
+   "p95",
+   "p96",
+   "helps"
+  ],
+  [
+   "p102",
+   "p96",
+   "helps"
+  ],
+  [
+   "p64",
+   "p96",
+   "helps"
+  ],
+  [
+   "p93",
+   "p97",
+   "needs"
+  ],
+  [
+   "p96",
+   "p97",
+   "needs"
+  ],
+  [
+   "p113",
+   "p97",
+   "helps"
+  ],
+  [
+   "p129",
+   "p97",
+   "helps"
+  ],
+  [
+   "p96",
+   "p98",
+   "needs"
+  ],
+  [
+   "p97",
+   "p98",
+   "helps"
+  ],
+  [
+   "p101",
+   "p98",
+   "helps"
+  ],
+  [
+   "p109",
+   "p98",
+   "helps"
+  ],
+  [
+   "p93",
+   "p99",
+   "needs"
+  ],
+  [
+   "p53",
+   "p99",
+   "needs"
+  ],
+  [
+   "p65",
+   "p99",
+   "helps"
+  ],
+  [
+   "p69",
+   "p99",
+   "helps"
+  ],
+  [
+   "p99",
+   "p100",
+   "needs"
+  ],
+  [
+   "p45",
+   "p100",
+   "needs"
+  ],
+  [
+   "p93",
+   "p100",
+   "helps"
+  ],
+  [
+   "p46",
+   "p100",
+   "helps"
+  ],
+  [
+   "p100",
+   "p101",
+   "needs"
+  ],
+  [
+   "p105",
+   "p101",
+   "helps"
+  ],
+  [
+   "p96",
+   "p102",
+   "needs"
+  ],
+  [
+   "p99",
+   "p102",
+   "needs"
+  ],
+  [
+   "p18",
+   "p102",
+   "needs"
+  ],
+  [
+   "p104",
+   "p102",
+   "helps"
+  ],
+  [
+   "p100",
+   "p103",
+   "needs"
+  ],
+  [
+   "p45",
+   "p103",
+   "needs"
+  ],
+  [
+   "p93",
+   "p103",
+   "helps"
+  ],
+  [
+   "p64",
+   "p104",
+   "needs"
+  ],
+  [
+   "p102",
+   "p104",
+   "needs"
+  ],
+  [
+   "p101",
+   "p105",
+   "needs"
+  ],
+  [
+   "p102",
+   "p105",
+   "needs"
+  ],
+  [
+   "p59",
+   "p105",
+   "helps"
+  ],
+  [
+   "p98",
+   "p105",
+   "helps"
+  ],
+  [
+   "p101",
+   "p106",
+   "needs"
+  ],
+  [
+   "p80",
+   "p106",
+   "helps"
+  ],
+  [
+   "p101",
+   "p107",
+   "needs"
+  ],
+  [
+   "p74",
+   "p107",
+   "needs"
+  ],
+  [
+   "p75",
+   "p107",
+   "helps"
+  ],
+  [
+   "p101",
+   "p108",
+   "needs"
+  ],
+  [
+   "p69",
+   "p108",
+   "needs"
+  ],
+  [
+   "p105",
+   "p108",
+   "helps"
+  ],
+  [
+   "p106",
+   "p108",
+   "helps"
+  ],
+  [
+   "p107",
+   "p108",
+   "helps"
+  ],
+  [
+   "p100",
+   "p109",
+   "needs"
+  ],
+  [
+   "p101",
+   "p109",
+   "needs"
+  ],
+  [
+   "p98",
+   "p109",
+   "needs"
+  ],
+  [
+   "p108",
+   "p109",
+   "helps"
+  ],
+  [
+   "p101",
+   "p110",
+   "needs"
+  ],
+  [
+   "p111",
+   "p110",
+   "helps"
+  ],
+  [
+   "p97",
+   "p110",
+   "helps"
+  ],
+  [
+   "p95",
+   "p111",
+   "needs"
+  ],
+  [
+   "p100",
+   "p111",
+   "needs"
+  ],
+  [
+   "p62",
+   "p111",
+   "helps"
+  ],
+  [
+   "p88",
+   "p111",
+   "helps"
+  ],
+  [
+   "p111",
+   "p112",
+   "needs"
+  ],
+  [
+   "p103",
+   "p112",
+   "needs"
+  ],
+  [
+   "p105",
+   "p112",
+   "helps"
+  ],
+  [
+   "p111",
+   "p113",
+   "needs"
+  ],
+  [
+   "p97",
+   "p113",
+   "needs"
+  ],
+  [
+   "p105",
+   "p113",
+   "helps"
+  ],
+  [
+   "p112",
+   "p113",
+   "helps"
+  ],
+  [
+   "p95",
+   "p114",
+   "needs"
+  ],
+  [
+   "p100",
+   "p114",
+   "needs"
+  ],
+  [
+   "p102",
+   "p114",
+   "helps"
+  ],
+  [
+   "p111",
+   "p114",
+   "helps"
+  ],
+  [
+   "p95",
+   "p115",
+   "needs"
+  ],
+  [
+   "p100",
+   "p115",
+   "needs"
+  ],
+  [
+   "p111",
+   "p115",
+   "helps"
+  ],
+  [
+   "p119",
+   "p115",
+   "helps"
+  ],
+  [
+   "p100",
+   "p116",
+   "needs"
+  ],
+  [
+   "p105",
+   "p116",
+   "needs"
+  ],
+  [
+   "p97",
+   "p116",
+   "helps"
+  ],
+  [
+   "p100",
+   "p117",
+   "needs"
+  ],
+  [
+   "p95",
+   "p117",
+   "needs"
+  ],
+  [
+   "p97",
+   "p117",
+   "helps"
+  ],
+  [
+   "p100",
+   "p118",
+   "needs"
+  ],
+  [
+   "p95",
+   "p118",
+   "needs"
+  ],
+  [
+   "p105",
+   "p118",
+   "helps"
+  ],
+  [
+   "p115",
+   "p119",
+   "needs"
+  ],
+  [
+   "p116",
+   "p119",
+   "helps"
+  ],
+  [
+   "p117",
+   "p119",
+   "helps"
+  ],
+  [
+   "p123",
+   "p119",
+   "helps"
+  ],
+  [
+   "p124",
+   "p119",
+   "helps"
+  ],
+  [
+   "p100",
+   "p120",
+   "needs"
+  ],
+  [
+   "p95",
+   "p120",
+   "needs"
+  ],
+  [
+   "p121",
+   "p120",
+   "helps"
+  ],
+  [
+   "p95",
+   "p121",
+   "needs"
+  ],
+  [
+   "p96",
+   "p121",
+   "needs"
+  ],
+  [
+   "p100",
+   "p121",
+   "needs"
+  ],
+  [
+   "p120",
+   "p121",
+   "helps"
+  ],
+  [
+   "p122",
+   "p121",
+   "helps"
+  ],
+  [
+   "p121",
+   "p122",
+   "needs"
+  ],
+  [
+   "p95",
+   "p122",
+   "helps"
+  ],
+  [
+   "p122",
+   "p123",
+   "needs"
+  ],
+  [
+   "p119",
+   "p123",
+   "helps"
+  ],
+  [
+   "p119",
+   "p124",
+   "needs"
+  ],
+  [
+   "p122",
+   "p124",
+   "needs"
+  ],
+  [
+   "p123",
+   "p124",
+   "helps"
+  ],
+  [
+   "p100",
+   "p125",
+   "needs"
+  ],
+  [
+   "p102",
+   "p125",
+   "needs"
+  ],
+  [
+   "p114",
+   "p125",
+   "helps"
+  ],
+  [
+   "p109",
+   "p125",
+   "helps"
+  ],
+  [
+   "p98",
+   "p125",
+   "helps"
+  ],
+  [
+   "p125",
+   "p126",
+   "needs"
+  ],
+  [
+   "p121",
+   "p126",
+   "helps"
+  ],
+  [
+   "p98",
+   "p126",
+   "helps"
+  ],
+  [
+   "p125",
+   "p127",
+   "needs"
+  ],
+  [
+   "p103",
+   "p127",
+   "needs"
+  ],
+  [
+   "p109",
+   "p127",
+   "helps"
+  ],
+  [
+   "p97",
+   "p127",
+   "helps"
+  ],
+  [
+   "p127",
+   "p128",
+   "needs"
+  ],
+  [
+   "p64",
+   "p128",
+   "helps"
+  ],
+  [
+   "p125",
+   "p129",
+   "needs"
+  ],
+  [
+   "p97",
+   "p129",
+   "needs"
+  ],
+  [
+   "p88",
+   "p129",
+   "needs"
+  ],
+  [
+   "p114",
+   "p129",
+   "helps"
+  ],
+  [
+   "p98",
+   "p130",
+   "needs"
+  ],
+  [
+   "p125",
+   "p130",
+   "needs"
+  ],
+  [
+   "p127",
+   "p130",
+   "helps"
+  ],
+  [
+   "p117",
+   "p131",
+   "needs"
+  ],
+  [
+   "p97",
+   "p131",
+   "helps"
+  ],
+  [
+   "p117",
+   "p132",
+   "needs"
+  ],
+  [
+   "p131",
+   "p132",
+   "helps"
+  ],
+  [
+   "p107",
+   "p132",
+   "helps"
+  ],
+  [
+   "p131",
+   "p133",
+   "needs"
+  ],
+  [
+   "p96",
+   "p133",
+   "needs"
+  ],
+  [
+   "p121",
+   "p133",
+   "helps"
+  ],
+  [
+   "p112",
+   "p133",
+   "helps"
+  ],
+  [
+   "p94",
+   "p134",
+   "needs"
+  ],
+  [
+   "p99",
+   "p134",
+   "needs"
+  ],
+  [
+   "p100",
+   "p134",
+   "needs"
+  ],
+  [
+   "p105",
+   "p134",
+   "helps"
+  ],
+  [
+   "p104",
+   "p134",
+   "helps"
+  ],
+  [
+   "p64",
+   "p134",
+   "helps"
+  ],
+  [
+   "p59",
+   "p134",
+   "helps"
+  ],
+  [
+   "p134",
+   "p135",
+   "needs"
+  ],
+  [
+   "p88",
+   "p135",
+   "helps"
+  ],
+  [
+   "p105",
+   "p135",
+   "helps"
+  ],
+  [
+   "p94",
+   "p136",
+   "needs"
+  ],
+  [
+   "p99",
+   "p136",
+   "needs"
+  ],
+  [
+   "p101",
+   "p136",
+   "needs"
+  ],
+  [
+   "p105",
+   "p136",
+   "helps"
+  ],
+  [
+   "p62",
+   "p136",
+   "helps"
+  ],
+  [
+   "p59",
+   "p136",
+   "helps"
+  ],
+  [
+   "p92",
+   "p136",
+   "helps"
+  ],
+  [
+   "p89",
+   "p136",
+   "helps"
+  ],
+  [
+   "p67",
+   "p137",
+   "needs"
+  ],
+  [
+   "p108",
+   "p137",
+   "needs"
+  ],
+  [
+   "p109",
+   "p137",
+   "needs"
+  ],
+  [
+   "p125",
+   "p137",
+   "needs"
+  ],
+  [
+   "p130",
+   "p137",
+   "needs"
+  ],
+  [
+   "p127",
+   "p137",
+   "needs"
+  ],
+  [
+   "p68",
+   "p137",
+   "helps"
+  ],
+  [
+   "p75",
+   "p137",
+   "helps"
+  ],
+  [
+   "p120",
+   "p137",
+   "helps"
+  ],
+  [
+   "p114",
+   "p137",
+   "helps"
+  ],
+  [
+   "p123",
+   "p137",
+   "helps"
+  ],
+  [
+   "p98",
+   "p137",
+   "helps"
+  ],
+  [
+   "p100",
+   "p138",
+   "needs"
+  ],
+  [
+   "p109",
+   "p138",
+   "needs"
+  ],
+  [
+   "p42",
+   "p138",
+   "helps"
+  ],
+  [
+   "p43",
+   "p138",
+   "helps"
+  ],
+  [
+   "p40",
+   "p138",
+   "helps"
+  ],
+  [
+   "p100",
+   "p139",
+   "needs"
+  ],
+  [
+   "p103",
+   "p139",
+   "needs"
+  ],
+  [
+   "p31",
+   "p139",
+   "helps"
+  ],
+  [
+   "p32",
+   "p139",
+   "helps"
+  ]
+ ],
+ "blinks": [
+  [
+   "t1",
+   "t2",
+   4
+  ],
+  [
+   "t2",
+   "t3",
+   3
+  ],
+  [
+   "t3",
+   "t4",
+   2
+  ],
+  [
+   "t4",
+   "t5",
+   1
+  ],
+  [
+   "t5",
+   "t6",
+   1
+  ],
+  [
+   "t5",
+   "t7",
+   1
+  ],
+  [
+   "t7",
+   "t8",
+   1
+  ],
+  [
+   "t5",
+   "t9",
+   2
+  ],
+  [
+   "t5",
+   "t10",
+   1
+  ],
+  [
+   "t7",
+   "t11",
+   1
+  ],
+  [
+   "t11",
+   "t12",
+   8
+  ],
+  [
+   "t7",
+   "t13",
+   2
+  ],
+  [
+   "t13",
+   "t14",
+   9
+  ],
+  [
+   "t13",
+   "t15",
+   9
+  ],
+  [
+   "t12",
+   "t15",
+   1
+  ],
+  [
+   "t13",
+   "t16",
+   2
+  ],
+  [
+   "t17",
+   "t18",
+   2
+  ],
+  [
+   "t9",
+   "t18",
+   2
+  ],
+  [
+   "t12",
+   "t18",
+   1
+  ],
+  [
+   "t18",
+   "t19",
+   8
+  ],
+  [
+   "t14",
+   "t19",
+   1
+  ],
+  [
+   "t18",
+   "t20",
+   3
+  ],
+  [
+   "t19",
+   "t21",
+   1
+  ],
+  [
+   "t21",
+   "t22",
+   1
+  ],
+  [
+   "t18",
+   "t23",
+   3
+  ],
+  [
+   "t16",
+   "t23",
+   1
+  ],
+  [
+   "t21",
+   "t24",
+   2
+  ],
+  [
+   "t18",
+   "t25",
+   4
+  ],
+  [
+   "t19",
+   "t26",
+   3
+  ],
+  [
+   "t23",
+   "t26",
+   3
+  ]
+ ],
+ "route": {
+  "goal": [
+   "p1",
+   "p2",
+   "p7",
+   "p9",
+   "p10",
+   "p12",
+   "p15",
+   "p18",
+   "p22",
+   "p23",
+   "p25",
+   "p26",
+   "p27",
+   "p31",
+   "p32",
+   "p33",
+   "p36",
+   "p39",
+   "p40",
+   "p45",
+   "p46",
+   "p47",
+   "p49",
+   "p54",
+   "p56",
+   "p59",
+   "p60",
+   "p61",
+   "p62",
+   "p63",
+   "p64",
+   "p67",
+   "p68",
+   "p69",
+   "p70",
+   "p71",
+   "p72",
+   "p73",
+   "p74",
+   "p75",
+   "p76",
+   "p77",
+   "p78",
+   "p79",
+   "p80",
+   "p81",
+   "p83",
+   "p90",
+   "p91",
+   "p92",
+   "p93",
+   "p94",
+   "p95",
+   "p96",
+   "p97",
+   "p98",
+   "p99",
+   "p100",
+   "p101",
+   "p102",
+   "p103",
+   "p104",
+   "p105",
+   "p106",
+   "p107",
+   "p108",
+   "p109",
+   "p111",
+   "p112",
+   "p113",
+   "p114",
+   "p115",
+   "p116",
+   "p117",
+   "p119",
+   "p120",
+   "p121",
+   "p122",
+   "p123",
+   "p124",
+   "p125",
+   "p126",
+   "p127",
+   "p129",
+   "p130",
+   "p131",
+   "p132",
+   "p133",
+   "p137",
+   "p139"
+  ],
+  "why": {
+   "t1": "The learner needs to run code in scripts and notebooks and use print() to see what the code is doing.",
+   "t2": "Formatted output with f-strings and converting text to numbers are everyday steps when working with data and model results.",
+   "t3": "Branching and loops, including enumerate and zip for pairing features with labels, are needed to read and write ML code.",
+   "t4": "Tuple unpacking (as in train_test_split), comprehensions and an understanding of aliasing and copying are needed to follow typical ML code.",
+   "t5": "Return values, keyword arguments, *args/**kwargs and docstrings are how scikit-learn functions are called and documented.",
+   "t6": "Reading tracebacks and common exceptions and debugging with print and assert are essential for fixing code that fails on real data.",
+   "t7": "The learner must install pandas and scikit-learn with pip and keep project packages apart in virtual environments.",
+   "t9": "scikit-learn models are objects of classes with shared interfaces, so understanding objects, classes, inheritance and duck typing explains what the code does.",
+   "t11": "Feature matrices are NumPy arrays, so indexing, slicing and boolean masks are needed to work with them.",
+   "t12": "Aggregation, broadcasting, reshaping, matrix multiplication, NaN handling and seeds underlie scaling, linear models and reproducible experiments.",
+   "t13": "Loading, inspecting, selecting, filtering and transforming columns with pandas is the core of loading data, and chained assignment is a common cleaning pitfall.",
+   "t14": "Cleaning data is a named part of the goal: missing values, types, duplicates, text, dates, categories and outliers.",
+   "t15": "Grouping and aggregating gives summaries by category that help in understanding a dataset before modelling.",
+   "t16": "Distributions, quick pandas plots and correlation heatmaps are how data is explored before training models.",
+   "t17": "The learner needs the core ideas of features, targets, train and test sets, overfitting and leakage to train models sensibly.",
+   "t18": "The estimator and transformer API, X and y, splitting, hyperparameters and random_state are how every scikit-learn model is used.",
+   "t19": "Scaling, encoding, imputing, column transformers and pipelines prepare cleaned data for models without leakage.",
+   "t20": "Regression models, their coefficients, regularization and metrics are a main use of scikit-learn.",
+   "t21": "Logistic regression, nearest neighbors, trees and probabilities are the standard classification models to train.",
+   "t22": "Training a classifier is only useful if it can be evaluated honestly, with baselines, confusion matrices, precision and recall, and AUC.",
+   "t23": "Cross-validation, hyperparameter search, learning curves and a final test set are how models are tuned and scored reliably.",
+   "t24": "Random forests and gradient boosting are strong, widely used scikit-learn models, and importances help explain them.",
+   "t26": "An end-to-end project and reading the scikit-learn documentation tie everything together and let the learner continue on their own."
+  },
+  "note": "No current level was given, so I picked the points the goal itself uses (pandas loading and cleaning, the scikit-learn workflow, evaluation) plus the Python and NumPy ideas needed to read ML code, and left prerequisites to the page. I left out files with the standard library, generators, string-only details, PCA and clustering, and other topics the goal does not use."
+ },
+ "checks": {
+  "fixes": [
+   {
+    "done": true,
+    "text": "Renamed \"Chained assignment and SettingWithCopyWarning\" to \"Chained assignment and Copy-on-Write\" (Since pandas 3.0, Copy-on-Write is the default and SettingWithCopyWarning has been removed. Chained assignment now always fails to update the original, so 'can fail' and the warning describe the old behaviour.)"
+   },
+   {
+    "done": true,
+    "text": "\"Pipelines\" now needs \"Data leakage\" first (The point says pipelines prevent leakage, and that makes no sense without first knowing what data leakage is.)"
+   },
+   {
+    "done": true,
+    "text": "\"An end-to-end ML workflow from CSV to evaluated model\" now needs \"Grid search with GridSearchCV\" first (The end-to-end project tunes the pipeline with cross-validation, which is the grid search taught in p127. p125 alone only scores a model and does not tune it.)"
+   },
+   {
+    "done": true,
+    "text": "\"Splitting data with train_test_split\" now needs \"Tuples and unpacking\" first (train_test_split returns four arrays that are unpacked in one assignment (X_train, X_test, y_train, y_test = ...), so it relies on tuple unpacking.)"
+   },
+   {
+    "done": true,
+    "text": "\"Learning curves and validation curves\" now needs \"Line and scatter plots with matplotlib\" first (The point asks the learner to plot learning and validation curves, which needs basic matplotlib plotting.)"
+   },
+   {
+    "done": true,
+    "text": "\"k-nearest neighbors\" now needs \"Scaling features: StandardScaler and MinMaxScaler\" first (Seeing how feature scaling changes k-nearest neighbors needs the scalers, and the reason distance-based models need them, taught in p105.)"
+   },
+   {
+    "done": true,
+    "text": "\"Accuracy and its limits on imbalanced data\" now needs \"Estimators: fit and predict\" first (Computing accuracy compares a model's predictions with the true labels, so it needs fit and predict first.)"
+   },
+   {
+    "done": true,
+    "text": "\"Series and DataFrame\" now needs \"import and from ... import\" first (Building a Series or DataFrame starts with import pandas as pd. Every other library entry point on the map (p52, p67, p88) needs p37, and this one should too.)"
+   }
+  ],
+  "verdict": "The map is sound. Its scope, order and route fit the goal well. The fixes update one point that described pandas behaviour from before Copy-on-Write became the default, and fill in a few missing prerequisite links, mainly in the machine-learning topics.",
+  "notes": [],
+  "loopsDropped": 0
+ },
+ "requests": 8
+}

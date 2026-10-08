@@ -1,0 +1,292 @@
+You wrote the lesson below on ONE knowledge point of Python. An editor reviewed it.
+Fix every error.
+Consider each suggested improvement and make it where it helps this learner; you may leave one out if you think the lesson is better without it.
+Change nothing else.
+Point: "What a model learns: features, target and parameters".
+Subject: Python
+Learner's goal: Use Python for machine learning: load and clean data, train models with scikit-learn, and understand what the code does.
+The plan:
+Aim: Describe a model as a function that maps input features to a target through parameters fitted from example data, and point to the features, the target and the fitted parameters in a simple scikit-learn LinearRegression fit.
+Approach: Start from something the learner already knows, a hand-written Python function with fixed numbers in it, and let the one real question appear: where do those numbers come from when nobody knows them? Then make the learner score three candidate sets of numbers by hand, so 'fitting' becomes 'choosing the numbers with the smallest error on the examples', and only then show scikit-learn doing the same job and reproduce its answer with a few lines of plain Python. The smallest possible case (one feature, a straight line, four rows) is used because every number can be checked by eye, and the aim is that model.fit(X, y) stops being a black box.
+1. A function with numbers you have to know. Teach: Open with a plain Python function the learner can read: def predict(size, w, b): return w * size + b, so price = w × size + b. Say what a function does here (takes an input, returns an output) in one sentence, in case the learner is new to def. Then pose the problem: if you write w = 2 and b = 50 yourself, you are guessing. A model is exactly this kind of function, with the difference that the numbers w and b are not typed in by a person but worked out from examples of houses whose price is already known. Name the three parts as a small table: feature (the input the function receives: floor area in m²), target (the output we want it to produce: price in thousands), parameters (the numbers inside the function that are fitted: w and b). Mention that with several features the function simply has one weight per feature, e.g. price = w1 × size + w2 × rooms + b, with the same idea. Also name hyperparameters in one sentence (settings a person chooses before fitting, e.g. whether to include b) and say they are a different thing from parameters; they come back in a later topic. Example: Show the data as two lists, sizes = [50, 70, 90, 110] and prices = [160, 210, 270, 310], and the predict function. Print predict(80, 2, 50) which gives 210, and note that nothing says 2 and 50 are right. No fitting yet; the example only sets up the vocabulary and the question.
+2. Fitting is choosing parameters that make the error small. Teach: Define the error of one prediction as predicted minus actual, and the mean squared error as the average of the squares of those errors (squaring so over- and under-predictions do not cancel and big misses count more). Explain that 'fitting' or 'training' means: among all possible (w, b), find the pair with the smallest error on the example data. The learner should see this by trying candidates, not take it on trust. Briefly explain zip (walks two lists in step) and the list comprehension where they appear. Example: Program: sizes and prices as above; predict(size, w, b); mean_squared_error(w, b) built with errors = [predict(s, w, b) - p for s, p in zip(sizes, prices)] and sum(e * e for e in errors) / len(errors); then loop over the pairs (2, 50), (3, 0), (2.55, 33.5) and print f"w={w}, b={b}: mean squared error = {round(mean_squared_error(w, b), 2)}". Exact output: 'w=2, b=50: mean squared error = 925.0', 'w=3, b=0: mean squared error = 125.0', 'w=2.55, b=33.5: mean squared error = 17.5'. Point out that the third pair is not magic: it is the pair the next section gets from scikit-learn, and no pair of numbers does better on these four rows.
+3. Letting scikit-learn do the fitting. Teach: Show the same job with LinearRegression. Explain line by line: X is the table of features with one row per example and one column per feature, which is why a single feature still goes in as [[50], [70], ...] (a list of rows); y is the list of targets; model = LinearRegression() creates the function with no parameters chosen yet; model.fit(X, y) is the fitting step, which sets the parameters; model.coef_ holds the weight(s), one per feature, and model.intercept_ holds b; the trailing underscore is scikit-learn's convention for 'a value that exists only after fit' (stated in its glossary; the learner can check there). Show model.predict taking features only, never the target: at prediction time the target is exactly what we do not know. Say that X and y get their own lesson right after this one, so the learner only needs the picture here. Keep printed values wrapped in round(float(...), 2) so the output is exact and free of floating-point noise. Example: Program: from sklearn.linear_model import LinearRegression; X = [[50], [70], [90], [110]]; y = [160, 210, 270, 310]; model = LinearRegression(); model.fit(X, y); print(round(float(model.coef_[0]), 2)); print(round(float(model.intercept_), 2)); print(round(float(model.predict([[80]])[0]), 2)). Exact output: 2.55, then 33.5, then 237.5. Tie back: the numbers equal the best pair from the previous example, and 2.55 × 80 + 33.5 = 237.5, so predict for a new house of 80 m² is just the formula with the fitted numbers.
+4. The surprise: after fitting, the model is only numbers. Teach: Show what fitting really produced. Rebuild the prediction with the earlier hand-written predict function, feeding it model.coef_[0] and model.intercept_, and show that it gives the same answer as model.predict. Conclusion the learner should be able to say in their own words: the examples are used once, to choose the parameters, and are not looked up again when predicting; what the model 'learned' is w and b. Then show that the same code on different data gives a different function: change the targets to [110, 150, 190, 230] (which follow price = 2 × size + 10) and fit again; the parameters change to 2.0 and 10.0 while not one line of the model code changed. This is the sense in which the function is 'fitted from data rather than written by hand'. Be honest about scope: this picture (a small fixed set of numbers that replaces the data) is exact for linear regression; some models work differently, e.g. k-nearest neighbours keeps the training rows and looks them up at prediction time, and a decision tree stores split thresholds rather than weights, so 'parameters' is looser there. Mention that these are met later. Example: Program continuing the previous one: w = model.coef_[0]; b = model.intercept_; print(round(float(predict(100, w, b)), 2)); print(round(float(model.predict([[100]])[0]), 2)); then model2 = LinearRegression().fit(X, [110, 150, 190, 230]) (explain that fit returns the model itself, so this one-liner works); print(round(float(model2.coef_[0]), 2), round(float(model2.intercept_), 2)). Exact output: 288.5, 288.5, then '2.0 10.0'.
+5. Where 2.55 and 33.5 actually come from. Teach: Make 'fitting' something the learner could rebuild. For one feature and a straight line, the pair with the smallest mean squared error has a closed form: slope w = Σ(x − x̄)(y − ȳ) / Σ(x − x̄)², intercept b = ȳ − w × x̄, where x̄ and ȳ are the averages. Explain in words: the slope measures how much x and y move together, relative to how much x moves on its own, and the intercept makes the line pass through the point of averages. Walk the arithmetic for the example: x̄ = 80, ȳ = 237.5, Σ(x − x̄)(y − ȳ) = 5100, Σ(x − x̄)² = 2000, so w = 5100 / 2000 = 2.55 and b = 237.5 − 2.55 × 80 = 33.5. Say plainly that this exact formula exists for straight-line least squares only; other models find parameters by searching step by step (see beyond). Example: Program: mx = sum(sizes) / len(sizes); my = sum(prices) / len(prices); sxy = sum((s - mx) * (p - my) for s, p in zip(sizes, prices)); sxx = sum((s - mx) ** 2 for s in sizes); w = sxy / sxx; b = my - w * mx; print(sxy, sxx, w, round(b, 2)). Exact output: '5100.0 2000.0 2.55 33.5'. Then print the four residuals (predicted minus actual) as -1, -2, 7, -4 using the rounded fitted line and note they are not zero: the line does not hit every point, and it is still the best straight line for these rows.
+Beyond this lesson: Worth knowing, with the first two deserving a proper extension after the lesson. (1) How fit finds the parameters when no neat formula exists: most models start from a guess and repeatedly nudge the parameters in the direction that lowers the error (gradient descent is the best-known version), while linear regression can be solved directly by least squares; I believe scikit-learn's LinearRegression does this with a linear-algebra routine from SciPy (scipy.linalg.lstsq) but I am not fully certain of the exact routine in every version, so the learner can check the source or the User Guide page on Linear Models. The learner can observe the effect by printing model.coef_ and model.intercept_ after every fit and changing one thing in the data at a time. (2) What 'parameter' means and where the idea stops being tidy: parameters are fitted, hyperparameters are chosen by the person (the boundary is clear in LinearRegression and blurrier for models such as nearest neighbours or trees); inspecting any fitted scikit-learn object with vars(model) or dir(model) shows the attributes ending in an underscore that fit created, which the learner can use as a habit with every later model. (3) A thing the lesson does not claim: a small error on the rows used for fitting does not by itself show the model learned something useful, for example a straight line through only two rows always has zero error; this is the subject of the training and test sets and overfitting lessons, so only a pointer is needed, not an extension here.
+Link to the learner's goal: Every scikit-learn model you train follows this shape: you pass features X and a target y to model.fit(X, y), it sets fitted parameters you can read from attributes such as coef_ and intercept_, and model.predict(X_new) uses only those parameters.
+
+Errors:
+1. "which agrees with the fact that the best pair (2.55, 33.5) has both larger": False. The best w (2.55) is larger than 2, but the best b (33.5) is smaller than 50. The negative slope for b at (2, 50) only says that raising b lowers the error near that point. It does not say which way the best b lies. Fix: Say that the best pair has a larger w but a smaller b. Explain that the slopes only give the downhill direction at the current point: early steps raise b because w is still too small, and later steps bring b down to 33.5 as w approaches 2.55. Each step is local, so the direction is recomputed every time.
+2. "['n_features_in_', 'coef_', '_residues', 'rank_', 'singular_', 'intercept_']": The stated output cannot be right. The filter keeps only names that end with "_", and '_residues' starts with an underscore but does not end with one, so it can never be in this list in any version. The hedge about versions does not cover this. The claim that follows, "every attribute created by fit ends in an underscore", is also false: fit can create private attributes such as one starting with an underscore, which this filter hides. Fix: Remove '_residues' from the output, e.g. ['n_features_in_', 'coef_', 'rank_', 'singular_', 'intercept_'], and keep the hedge about versions. Replace the claim with: the public attributes that fit estimates end in an underscore, and private names that start with an underscore are internal and not meant to be used.
+3. "This "numbers replace the data" picture is exact for linear regression only": Wrong note. A fixed set of fitted numbers replaces the training data in many other models too, for example logistic regression, linear SVMs and neural networks. Even a decision tree keeps only its thresholds and leaf values, not the rows. k-nearest neighbours is the real exception. The lesson body has a milder version of the same overreach: "Other models work differently." Fix: Change the note to: this picture is exact for linear regression and for other models with a fixed set of fitted parameters (e.g. logistic regression). k-nearest neighbours is different because it keeps the training rows, and a tree stores thresholds rather than weights. In the body, write "Some models work differently".
+4. "A straight line through only two rows always has zero error.": Stated as absolute but only true when the two rows have different sizes. Two houses with the same size and different prices cannot both lie on one line. Fix: Write "through two rows with different sizes always has zero error".
+
+Suggested improvements:
+1. "**Hyperparameters** are settings a person chooses before fitting": scikit-learn's own documentation uses "parameters" for the constructor settings (the "Parameters" section of every class page, get_params(), set_params()). It calls the fitted values such as coef_ and intercept_ "attributes". The learner will read those pages right away and find the lesson's key word used for the opposite thing. The extension also calls every constructor argument a hyperparameter, but copy_X and n_jobs do not change the fitted model at all. Suggestion: Add one or two sentences: in scikit-learn's docs, the settings you pass to LinearRegression(...) are listed under "Parameters" (that is, hyperparameters in this lesson's sense), and the fitted numbers are listed under "Attributes"; you can see both with model.get_params() and with coef_/intercept_. In the extension, say that some constructor arguments, such as copy_X and n_jobs, only control how the computation runs and are not modelling choices.
+2. "and no pair of numbers does better on these four rows": The learner tries three pairs and is then told that the third is the best of all possible pairs. Section 5 gives the formula but not why it gives the minimum, so the central idea ('fitting = smallest error') ends up taken on trust, which is what the plan wanted to avoid. Suggestion: Add a short check with the existing mean_squared_error: nudging each number in either direction raises the error. (2.55, 32.5) and (2.55, 34.5) both give 18.5, and (2.54, 33.5) and (2.56, 33.5) both give 18.19, against 17.5 at the best pair. Point out the two facts that mark the minimum: the errors 1, 2, -7, 4 sum to 0, and the sum of error × size, 50 + 140 - 630 + 440, is also 0. These are the two conditions the closed form solves, and they link straight to the gradient extension.
+3. "Other models find their parameters by searching step by step (see below).": Too broad (honest scope), and repeated in the notes. Linear regression with many features and ridge regression also have direct least-squares solutions. Decision trees are built by greedy splitting, not by gradually nudging numbers, and k-nearest neighbours does no search at all. Step-by-step gradient-based search is typical of models such as logistic regression and neural networks. Suggestion: Say that many models, such as logistic regression and neural networks, have no closed form and find their parameters step by step. Note that linear regression with several features is still solved directly, and that trees and k-NN fit in other ways. Change the note to match.
+4. "Repeating the update many times walks the pair toward the smallest error.": The extension describes gradient descent but gives the learner nothing to run or observe, so it reads more as a description than something the learner could rebuild. It also hides a real effect the learner will hit when trying it: with step 0.0001, b moves only about 0.0055 per step while w moves fast, because sizes are around 100 and b's input is 1. Reaching (2.55, 33.5) takes hundreds of thousands of steps, and a step much above about 0.00014 makes it diverge. Suggestion: Add a short loop that computes the two numbers from the errors, updates w and b, and prints them every 50,000 steps. Also give a check of the gradient formula itself: mean_squared_error(2.001, 50) is about 920.06, a drop of about 4.94 for a 0.001 change in w, which matches -4950 per unit. Say plainly that convergence is slow here because the feature is not scaled, and that centring or scaling the sizes (a later topic) is the usual fix.
+Your lesson:
+<<<
+## A function with numbers you have to know
+
+You can already read a Python function. Here is one for pricing a house:
+
+```python
+def predict(size, w, b):
+    return w * size + b
+
+sizes = [50, 70, 90, 110]     # floor area in m²
+prices = [160, 210, 270, 310] # price in thousands
+
+print(predict(80, 2, 50))
+```
+
+Output:
+```
+210
+```
+
+A function with `def` takes an input (here `size`, `w` and `b`) and returns an output, so this one says: price = w × size + b.
+
+Look at `2` and `50`. A person typed them in, and nothing says they are right. That is the whole problem of machine learning in small form. A **model** is a function like `predict`, with one difference: the numbers `w` and `b` are not typed by a person. They are worked out from examples of houses whose price is already known (the two lists above).
+
+The three parts have names you will see in every scikit-learn program:
+
+| Part | What it is | In our example |
+|---|---|---|
+| **feature** | the input the function receives | floor area in m² (`size`) |
+| **target** | the output we want the function to produce | price in thousands |
+| **parameters** | the numbers inside the function that get fitted | `w` and `b` |
+
+With several features the idea is the same, with one weight per feature: price = w1 × size + w2 × rooms + b.
+
+One more word so it does not get mixed up with parameters. **Hyperparameters** are settings a person chooses before fitting, for example whether the model should include `b` at all. They are not fitted from the data. They come back in a later topic.
+
+So the one real question is: where do `w` and `b` come from when nobody knows them?
+
+## Fitting is choosing parameters that make the error small
+
+Say how wrong a pair `(w, b)` is, and you can compare pairs. For one house, the **error** is predicted minus actual. For all the examples, the **mean squared error** (MSE) is the average of the squared errors. We square so that a +10 miss and a −10 miss do not cancel each other out, and so that big misses count more than small ones.
+
+**Fitting** (also called **training**) then means: among all possible pairs `(w, b)`, find the one with the smallest error on the example data.
+
+Before reading the code, two small Python tools in it. `zip(sizes, prices)` walks the two lists in step, giving `(50, 160)`, then `(70, 210)`, and so on. The list comprehension `[... for s, p in zip(...)]` builds a new list with one value per pair.
+
+Here are three candidate pairs. Which one do you expect to have the smallest error? (`2, 50` is the one we guessed earlier.)
+
+```python
+sizes = [50, 70, 90, 110]
+prices = [160, 210, 270, 310]
+
+def predict(size, w, b):
+    return w * size + b
+
+def mean_squared_error(w, b):
+    errors = [predict(s, w, b) - p for s, p in zip(sizes, prices)]
+    return sum(e * e for e in errors) / len(errors)
+
+for w, b in [(2, 50), (3, 0), (2.55, 33.5)]:
+    print(f"w={w}, b={b}: mean squared error = {round(mean_squared_error(w, b), 2)}")
+```
+
+Output:
+```
+w=2, b=50: mean squared error = 925.0
+w=3, b=0: mean squared error = 125.0
+w=2.55, b=33.5: mean squared error = 17.5
+```
+
+The guess `2, 50` is far off. `3, 0` is much better, and the third pair is better again. That third pair is not magic: it is the pair scikit-learn will give us in the next section, and no pair of numbers does better on these four rows. Fitting is nothing more mysterious than this search for the smallest error.
+
+## Letting scikit-learn do the fitting
+
+Now the same job with `LinearRegression`, line by line:
+
+```python
+from sklearn.linear_model import LinearRegression
+
+X = [[50], [70], [90], [110]]
+y = [160, 210, 270, 310]
+
+model = LinearRegression()
+model.fit(X, y)
+
+print(round(float(model.coef_[0]), 2))
+print(round(float(model.intercept_), 2))
+print(round(float(model.predict([[80]])[0]), 2))
+```
+
+Output:
+```
+2.55
+33.5
+237.5
+```
+
+- `X` is the table of features: **one row per example, one column per feature**. That is why a single feature still goes in as `[[50], [70], ...]`, a list of rows, each row holding one number. `X` and `y` get their own lesson right after this one, so for now the picture is enough.
+- `y` is the list of targets, one per row.
+- `model = LinearRegression()` creates the function with no parameters chosen yet.
+- `model.fit(X, y)` is the fitting step. It sets the parameters.
+- `model.coef_` holds the weight or weights, one per feature, so `coef_[0]` is our `w`. `model.intercept_` holds `b`.
+- The trailing underscore is scikit-learn's convention for "a value that exists only after `fit`". It is described in scikit-learn's glossary, where you can check it.
+- `float(...)` and `round(..., 2)` are only there to print clean numbers, since the stored values are NumPy numbers that can carry tiny floating-point noise.
+
+Compare with the previous section: `2.55` and `33.5` are exactly the best pair we found. And `2.55 × 80 + 33.5 = 237.5`, so predicting for a new 80 m² house is just the formula with the fitted numbers.
+
+Notice also that `model.predict` takes features only, never the target. At prediction time the target is exactly what we do not know.
+
+## The surprise: after fitting, the model is only numbers
+
+Let us check that claim about "just the formula". We continue the previous program and feed the fitted numbers to our hand-written `predict`:
+
+```python
+def predict(size, w, b):
+    return w * size + b
+
+w = model.coef_[0]
+b = model.intercept_
+
+print(round(float(predict(100, w, b)), 2))
+print(round(float(model.predict([[100]])[0]), 2))
+```
+
+Output:
+```
+288.5
+288.5
+```
+
+The same answer. After `fit`, the four example houses are not looked up again. They were used once, to choose `w` and `b`, and what the model "learned" is those two numbers. The model is the function `predict` plus two stored numbers.
+
+Now change the data and leave every line of model code alone. These new targets follow price = 2 × size + 10 exactly. Before running it: what do you expect `coef_` and `intercept_` to be?
+
+```python
+model2 = LinearRegression().fit(X, [110, 150, 190, 230])
+print(round(float(model2.coef_[0]), 2), round(float(model2.intercept_), 2))
+```
+
+Output:
+```
+2.0 10.0
+```
+
+This one-liner works because `fit` returns the model itself, so `LinearRegression().fit(X, y)` creates and fits in one step. The point: not one line of the model code changed, and the function changed. That is what "fitted from data rather than written by hand" means.
+
+**Where this picture holds.** A small fixed set of numbers that replaces the data is exact for linear regression. Other models work differently. k-nearest neighbours keeps the training rows and looks them up when predicting. A decision tree stores split thresholds rather than weights, so the word "parameters" is looser there. You will meet both later.
+
+## Where 2.55 and 33.5 actually come from
+
+You could rebuild the fitting step yourself. For one feature and a straight line, the pair with the smallest mean squared error has a closed form:
+
+```
+slope     w = Σ(x − x̄)(y − ȳ) / Σ(x − x̄)²
+intercept b = ȳ − w × x̄
+```
+
+where x̄ and ȳ are the averages of the sizes and of the prices. In words: the slope measures how much x and y move together, relative to how much x moves on its own. The intercept makes the line pass through the point of averages (x̄, ȳ).
+
+For our data, x̄ = 80 and ȳ = 237.5. The two sums come out as Σ(x − x̄)(y − ȳ) = 5100 and Σ(x − x̄)² = 2000. So w = 5100 / 2000 = 2.55 and b = 237.5 − 2.55 × 80 = 33.5.
+
+```python
+sizes = [50, 70, 90, 110]
+prices = [160, 210, 270, 310]
+
+mx = sum(sizes) / len(sizes)
+my = sum(prices) / len(prices)
+sxy = sum((s - mx) * (p - my) for s, p in zip(sizes, prices))
+sxx = sum((s - mx) ** 2 for s in sizes)
+w = sxy / sxx
+b = my - w * mx
+print(sxy, sxx, w, round(b, 2))
+```
+
+Output:
+```
+5100.0 2000.0 2.55 33.5
+```
+
+Plain Python, no scikit-learn, same answer. This exact formula exists for straight-line least squares only. Other models find their parameters by searching step by step (see below).
+
+The line does not hit every point. Here are the four errors (predicted minus actual) of the fitted line:
+
+```python
+print([round(w * s + b, 2) - p for s, p in zip(sizes, prices)])
+```
+
+Output:
+```
+[1.0, 2.0, -7.0, 4.0]
+```
+
+None is zero, and that is fine: these four prices do not lie on one straight line, and this is still the best straight line for these rows in the mean-squared-error sense. One caution for later: a small error on the rows used for fitting does not by itself show that the model learned something useful. A straight line through only two rows always has zero error. That is the subject of the lessons on training and test sets and on overfitting.
+
+Every scikit-learn model you train follows the shape you have just seen: you pass features `X` and a target `y` to `model.fit(X, y)`, it sets fitted parameters you can read from attributes such as `coef_` and `intercept_`, and `model.predict(X_new)` uses only those parameters.
+>>>
+Your extensions:
+### How fit finds parameters when there is no neat formula
+
+Most models start from a guess and repeatedly nudge the parameters in the direction that lowers the error. The best-known version is **gradient descent**. For our line with errors e = predicted − actual over n examples, the slope of the MSE with respect to each parameter is:
+
+```
+change in MSE per unit change in w:  (2/n) × Σ(e × x)
+change in MSE per unit change in b:  (2/n) × Σ(e)
+update:  w ← w − step × (that number for w),  b ← b − step × (that number for b)
+```
+
+Check it on the bad guess (2, 50). Its errors are −10, −20, −40, −40. So for w the number is (2/4) × (−500 − 1400 − 3600 − 4400) = −4950, and for b it is (2/4) × (−110) = −55. Both are negative, meaning "raising w and raising b lowers the error", which agrees with the fact that the best pair (2.55, 33.5) has both larger. The `step` (often called the learning rate) is a number the person chooses, and it has to be small: with sizes around 100, a step of 0.0001 moves w from 2 to 2.495, while a large step would overshoot and make the error grow. Repeating the update many times walks the pair toward the smallest error.
+
+Linear regression does not need this, because it can be solved directly by least squares. I believe scikit-learn's `LinearRegression` does this with a linear-algebra routine from SciPy (`scipy.linalg.lstsq`), but I am not fully certain of the exact routine in every version. You can check the source of `LinearRegression.fit`, or the User Guide page on Linear Models.
+
+To observe the effect yourself, print `model.coef_` and `model.intercept_` after every fit and change one thing in the data at a time, as we did with `[110, 150, 190, 230]`.
+
+### What "parameter" means, and where the idea stops being tidy
+
+Parameters are fitted by `fit`. Hyperparameters are chosen by the person before fitting, for example `LinearRegression(fit_intercept=False)`, which fits a line forced through zero (so no `b`). For `LinearRegression` the boundary is clear: `coef_` and `intercept_` are parameters, the arguments you pass to the constructor are hyperparameters. For nearest neighbours or trees it is blurrier, since a k-nearest-neighbours model's "learned" content is the stored rows themselves.
+
+A habit that works with every later model: after fitting, look at what `fit` created.
+
+```python
+print([name for name in vars(model) if name.endswith("_")])
+```
+
+Output:
+```
+['n_features_in_', 'coef_', '_residues', 'rank_', 'singular_', 'intercept_']
+```
+
+I am not certain of the exact list: the attribute names and their order can differ between scikit-learn versions, so treat the output above as an example of what to expect, and run it yourself. The ones that matter here are `coef_` and `intercept_`, and you will see that every attribute created by `fit` ends in an underscore. `dir(model)` shows the same and also the methods.
+Your notes:
+- A **model** is a function that maps input **features** to a **target** through **parameters** that are fitted from example data, not typed in by a person.
+- **Feature**: the input (here floor area). **Target**: the output we want to predict (here price). **Parameters**: the fitted numbers inside the function (here `w` and `b`).
+- With several features there is one weight per feature: `price = w1 × size + w2 × rooms + b`.
+- **Hyperparameters** are settings a person chooses before fitting (for example `fit_intercept`); they are not the same as parameters.
+- Error of one prediction = predicted − actual. **Mean squared error** = average of the squared errors; squaring stops over- and under-predictions cancelling and makes big misses count more.
+- **Fitting** (training) means choosing the parameters with the smallest error on the example data.
+- `zip(a, b)` walks two lists in step; `[expr for s, p in zip(a, b)]` is a list comprehension that builds a list with one value per pair.
+- `X` is a table with one row per example and one column per feature, so one feature still goes in as `[[50], [70], ...]`; `y` is the list of targets.
+- `model = LinearRegression()` creates the function with no parameters chosen; `model.fit(X, y)` sets them; `model.predict(X_new)` takes features only, never the target.
+- `model.coef_` holds one weight per feature and `model.intercept_` holds `b`; a trailing underscore marks a value that exists only after `fit`.
+- `fit` returns the model itself, so `LinearRegression().fit(X, y)` creates and fits in one line.
+- After fitting, linear regression is only its numbers: the training rows are not used again at prediction time. Same code on different data gives different parameters.
+- This "numbers replace the data" picture is exact for linear regression only; k-nearest neighbours keeps the training rows, and a decision tree stores split thresholds.
+- For a straight line, the best fit has a closed form: `w = Σ(x − x̄)(y − ȳ) / Σ(x − x̄)²` and `b = ȳ − w × x̄`; other models search step by step (for example **gradient descent**).
+- The best line does not have to hit every point (here the errors are 1, 2, −7, 4), and a small error on the fitting rows alone does not show the model is useful.
+Teaching standards. They hold for every subject. The illustrations come from Python; they show the standard and are not content to reuse. Use your own judgement about how to meet them.
+- Depth. Aim for understanding the learner could rebuild on their own: why it works, not only what to do.
+- Surprises. A surprising case is worth showing when explaining it reveals how Python works underneath, as in a = [1, 2]; b = a; b.append(3); print(a) prints [1, 2, 3], even though the code never touched a. Assignment in Python never copies anything. It makes a name refer to an object, so a and b are two names for the same list, and changing the list through one name shows through the other. The same rule explains why a function can change a list you pass to it, and why a pandas DataFrame or NumPy slice you 'copied' with = changes the original.. A mistake that reveals nothing, such as a slip (Forgetting the colon after an if or for line, typing pirnt instead of print, a missing closing parenthesis, writing from sklearn.linear_model import LinearRegresion, or misspelling a column name like df['prcie'].) or a wrong idea no reasonable learner holds, teaches nothing, so leave it out. Don't claim how common a mistake is: there is no data on that.
+- Honest scope. When a rule has exceptions, say where it holds rather than stating it as absolute.
+- Extensions go down, not sideways. After the lesson, the most valuable extension usually explains what happens underneath: the steps actually taken, what the idea is built on, why it behaves the way it does, and how the learner can observe that for themselves (Run the code and print things: type(x) and id(x) show what an object is and whether two names share it, a is b tests sameness, and help(obj) or dir(obj) lists what it can do. For data, print df.shape, df.dtypes, df.head() and df.isna().sum() after every step. For models, print the fitted attributes such as model.coef_ or model.classes_. The key habit is to change one thing, run it again and compare the output.). A tour of more uses or later topics only adds breadth the learner will meet in later lessons anyway. Explain an extension properly or leave it out: concrete and exact, like a good reference entry, never a passing hint such as "a clearer way comes later". Under the hood, be exact about what you know, say plainly where your certainty ends, and say where it can be checked. The learner doesn't have to master it.
+- New things. If you use something the learner hasn't learned, explain it briefly where it appears.
+- Honest about yourself. You are an AI teaching without a textbook in front of you. Where a claim is one you are less sure of, or one that experts dispute, say so plainly and say where it can be checked.
+Format:
+- Write for this learner. Remind them of what they already know in one line at most; don't re-teach it.
+- The plan is a starting point. Follow its approach, and improve on it wherever you see a better way to teach this learner.
+- Use ## headings for the sections. Start with the bridge if the plan has one.
+- Every code example is short, runnable Python, and is followed by its exact output in a separate block that starts with the line "Output:". Show only output you are sure of.
+- A predict-then-see moment, with the answer right after it, is welcome. Don't write exercises, quizzes or "try it yourself" tasks: practice has its own section. Don't copy text from any book.
+- As long as this point needs for real understanding and no longer: cut what doesn't serve understanding, keep what does. Markdown, no title line at the top. The page renders Markdown: headings, lists, tables, code blocks, bold and italics, but not LaTeX. Write any formula in plain text with Unicode symbols (x², √, ≤, →, ∑), in a code block if it needs alignment.
+- Extensions, if you write any, go after the lesson, after a line containing only === DEEPER ===, each under a ### heading.
+- Then write a line containing only === NOTES === and the notes for the learner to keep, one per line starting with "- ": each note is one fact worth remembering from this lesson, with `code` or exact notation in backticks and the key **terms** in bold. Write as many as the lesson has such facts, no padding.
+Reply with the whole lesson, then the === DEEPER === line and the extensions if there are any, then the === NOTES === line and the notes.
