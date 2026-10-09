@@ -1,0 +1,4642 @@
+{
+  "areas": [
+    [
+      "a1",
+      "The Probability Model: Outcomes, Events and Axioms"
+    ],
+    [
+      "a2",
+      "Conditioning, Independence and Bayes' Rule"
+    ],
+    [
+      "a3",
+      "Random Variables and Their Distributions"
+    ],
+    [
+      "a4",
+      "Expectation, Variance and Moments"
+    ],
+    [
+      "a5",
+      "The Common Distribution Families"
+    ],
+    [
+      "a6",
+      "Several Random Variables Together"
+    ],
+    [
+      "a7",
+      "Limit Theorems: Laws of Large Numbers and the Central Limit Theorem"
+    ],
+    [
+      "a8",
+      "Where This Leads: Probability in Statistics and Machine Learning"
+    ]
+  ],
+  "balls": [
+    {
+      "area": "a1",
+      "d": 0,
+      "desc": "The basic apparatus of probability: modelling an experiment with a sample space, treating events as sets, using the axioms and their consequences, and counting equally likely outcomes, which together give the vocabulary and the habit of naming the sample space before computing.",
+      "id": "t1",
+      "name": "The Probability Model: Outcomes, Events and Axioms",
+      "pts": [
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5",
+        "p6",
+        "p7",
+        "p8",
+        "p9",
+        "p10",
+        "p11"
+      ],
+      "where": [
+        {
+          "detail": "Chapter 1: Probability and counting",
+          "title": "Introduction to Probability (Blitzstein & Hwang)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 1: Combinatorial Analysis; Chapter 2: Axioms of Probability",
+          "title": "A First Course in Probability (Sheldon Ross)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 1: Probability",
+          "title": "All of Statistics (Larry Wasserman)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 1: Sample Space and Probability",
+          "title": "Introduction to Probability (Bertsekas & Tsitsiklis)",
+          "url": ""
+        },
+        {
+          "detail": "Lectures 1-2: Probability and counting; Story proofs, axioms of probability",
+          "title": "Harvard Stat 110 (Joe Blitzstein), lecture videos and notes",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "area": "a2",
+      "d": 1,
+      "desc": "Conditional probability as restriction to a reduced sample space, together with the multiplication rule and chain rule that let a learner build joint probabilities step by step while keeping the conditioning event explicit.",
+      "id": "t4",
+      "name": "Conditional Probability and Chain Rules",
+      "pts": [
+        "p31",
+        "p32",
+        "p33",
+        "p34"
+      ],
+      "where": [
+        {
+          "detail": "Chapter 2, Conditional probability: sections on the definition of conditional probability, probability of the intersection of two events, and the chain rule",
+          "title": "Introduction to Probability (Blitzstein & Hwang)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 3, Conditional Probability and Independence: sections on conditional probabilities and the multiplication rule",
+          "title": "A First Course in Probability (Sheldon Ross)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 1, Probability: section on conditional probability",
+          "title": "All of Statistics (Larry Wasserman)",
+          "url": ""
+        },
+        {
+          "detail": "Lectures on conditioning and the chain rule",
+          "title": "Harvard Stat 110 (Joe Blitzstein), lectures on conditional probability",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "area": "a2",
+      "d": 2,
+      "desc": "How to combine conditional probabilities over a partition of cases and reverse a conditioning, from the law of total probability through Bayes' rule and its odds form to updating as evidence arrives, which together form the core mechanism of Bayesian inference.",
+      "id": "t5",
+      "name": "Total Probability and Bayes' Rule",
+      "pts": [
+        "p35",
+        "p36",
+        "p37",
+        "p39",
+        "p40",
+        "p41",
+        "p42"
+      ],
+      "where": [
+        {
+          "detail": "Chapter 2, Conditional probability: sections on the law of total probability, Bayes' rule and odds form, and conditioning as a problem-solving tool",
+          "title": "Introduction to Probability (Blitzstein & Hwang), 2nd edition",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 3, Conditional Probability and Independence: sections on Bayes's formula and on conditional probabilities as probabilities",
+          "title": "A First Course in Probability (Sheldon Ross)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 1, Probability: sections on conditional probability, the law of total probability and Bayes' theorem",
+          "title": "All of Statistics (Larry Wasserman)",
+          "url": ""
+        },
+        {
+          "detail": "Lectures on conditional probability, the law of total probability and Bayes' rule",
+          "title": "Harvard Stat 110 (Joe Blitzstein), lecture videos and handouts",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "area": "a2",
+      "d": 3,
+      "desc": "Independence of events, what it means in terms of conditioning, and how conditional independence differs from it, a short run of ideas that share one definition-and-contrast structure and underlie naive Bayes and graphical models.",
+      "id": "t6",
+      "name": "Independence and Conditional Independence",
+      "pts": [
+        "p43",
+        "p44",
+        "p45",
+        "p46",
+        "p47"
+      ],
+      "where": [
+        {
+          "detail": "Chapter 2, Section 2.5 (Independence of events) and Section 2.5 on conditional independence",
+          "title": "Introduction to Probability (Blitzstein & Hwang), 2nd edition",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 3, Section 3.5 (Independent events)",
+          "title": "A First Course in Probability (Sheldon Ross)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 1, Section 1.5 (Independent events)",
+          "title": "All of Statistics (Larry Wasserman)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 1, Section 1.5 (Independence), including conditional independence",
+          "title": "Introduction to Probability (Bertsekas & Tsitsiklis)",
+          "url": ""
+        },
+        {
+          "detail": "Lectures on conditioning and independence",
+          "title": "Harvard Stat 110 (Joe Blitzstein), lectures on independence and conditional independence",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "area": "a2",
+      "d": 3,
+      "desc": "Four classic worked cases (diagnostic tests, courtroom reasoning, Simpson's paradox and Monty Hall) in which the rules of conditioning, total probability and Bayes' rule give answers that contradict first intuition, studied together to train careful setup of the sample space and conditioning event.",
+      "id": "t7",
+      "name": "Classic Traps and Paradoxes in Conditioning",
+      "pts": [
+        "p48",
+        "p49",
+        "p50",
+        "p51",
+        "p52"
+      ],
+      "where": [
+        {
+          "detail": "Chapter 2, Conditional probability: sections on Monty Hall, the prosecutor's fallacy, Simpson's paradox and the conditioning pitfalls",
+          "title": "Introduction to Probability (Blitzstein & Hwang), 2nd edition",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 3, Conditional Probability and Independence: examples on diagnostic tests and the Monty Hall problem",
+          "title": "A First Course in Probability (Sheldon Ross)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 1, Probability: sections on Bayes' theorem and the Monty Hall problem",
+          "title": "All of Statistics (Larry Wasserman)",
+          "url": ""
+        },
+        {
+          "detail": "Lectures on conditional probability and Bayes' rule, covering Monty Hall and Simpson's paradox",
+          "title": "Harvard Stat 110 (Joe Blitzstein) lecture videos",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "area": "a3",
+      "d": 1,
+      "desc": "Random variables as functions on the sample space, and the three ways of describing their distributions (pmf, pdf, cdf), together with quantiles and the rules for finding the distribution of a function of a single random variable; these ideas form one chain, from defining the object to describing it to transforming it.",
+      "id": "t2",
+      "name": "Random Variables and Their Distributions",
+      "pts": [
+        "p12",
+        "p13",
+        "p14",
+        "p15",
+        "p16",
+        "p17",
+        "p18",
+        "p19",
+        "p20",
+        "p21",
+        "p126",
+        "p127"
+      ],
+      "where": [
+        {
+          "detail": "Chapter 3 (Random variables and their distributions) and Chapter 5 (Continuous random variables)",
+          "title": "Introduction to Probability (Blitzstein & Hwang), 2nd edition",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 4 (Random Variables) and Chapter 5 (Continuous Random Variables)",
+          "title": "A First Course in Probability (Sheldon Ross)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 2 (Random Variables)",
+          "title": "All of Statistics (Larry Wasserman)",
+          "url": ""
+        },
+        {
+          "detail": "Lectures on random variables, CDFs, PDFs and universality of the uniform",
+          "title": "Harvard Stat 110 (Joe Blitzstein) lectures",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "area": "a4",
+      "d": 2,
+      "desc": "Expectation as the probability-weighted average of a random variable, how to compute it for discrete and continuous variables and for functions of them, and why linearity makes it such a powerful counting tool; these ideas form one chain, from definition to computation to technique.",
+      "id": "t8",
+      "name": "Expectation: Weighted Averages and Linearity",
+      "pts": [
+        "p53",
+        "p54",
+        "p55",
+        "p56",
+        "p57",
+        "p58"
+      ],
+      "where": [
+        {
+          "detail": "Chapter 4: Expectation (definition, linearity, LOTUS, indicator random variables)",
+          "title": "Introduction to Probability (Blitzstein & Hwang), 2nd edition",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 4 (Random Variables: expectation, expectation of a function of a random variable, properties) and Chapter 7 (Properties of Expectation, sums of indicator variables)",
+          "title": "A First Course in Probability (Sheldon Ross)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 3: Expectation",
+          "title": "All of Statistics (Larry Wasserman)",
+          "url": ""
+        },
+        {
+          "detail": "Lectures on expectation, linearity and indicator random variables",
+          "title": "Harvard Stat 110 (Joe Blitzstein) lectures",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "area": "a4",
+      "d": 3,
+      "desc": "Variance and its relatives measure how spread out and how shaped a distribution is, and these points build from the definition of variance through standardisation to higher moments and the moment generating function as one connected set of summary quantities.",
+      "id": "t9",
+      "name": "Variance, Standard Deviation and Higher Moments",
+      "pts": [
+        "p59",
+        "p60",
+        "p61",
+        "p62",
+        "p64",
+        "p65"
+      ],
+      "where": [
+        {
+          "detail": "Chapter 4 (Expectation), sections on variance; Chapter 6 (Moments), sections on moments, skewness, kurtosis and moment generating functions",
+          "title": "Introduction to Probability (Blitzstein & Hwang)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 4, section on variance; Chapter 7, section on moment generating functions",
+          "title": "A First Course in Probability (Sheldon Ross)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 3, Expectation (variance and moments, moment generating function)",
+          "title": "All of Statistics (Larry Wasserman)",
+          "url": ""
+        },
+        {
+          "detail": "Lectures on variance and on moments and moment generating functions",
+          "title": "Harvard Stat 110 (Joe Blitzstein) lectures",
+          "url": "https://projects.iq.harvard.edu/stat110"
+        }
+      ]
+    },
+    {
+      "area": "a5",
+      "d": 6,
+      "desc": "The standard discrete distribution families, each taught through the story that generates it, its pmf, mean and variance, and the links between them, so the learner can recognise which model fits a counting situation.",
+      "id": "t12",
+      "name": "Discrete Distribution Families",
+      "pts": [
+        "p84",
+        "p85",
+        "p86",
+        "p87",
+        "p88",
+        "p89",
+        "p91",
+        "p93"
+      ],
+      "where": [
+        {
+          "detail": "Chapter 3 (Random variables and their distributions: Bernoulli, binomial, hypergeometric, discrete uniform), Chapter 4 (Expectation: geometric, negative binomial, Poisson), Chapter 4 also covers Poisson approximation",
+          "title": "Introduction to Probability (Blitzstein & Hwang), 2nd edition",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 4, Random Variables: sections on Bernoulli and binomial, Poisson, other discrete distributions (geometric, negative binomial, hypergeometric)",
+          "title": "A First Course in Probability (Sheldon Ross)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 2, Random Variables: section on important discrete random variables",
+          "title": "All of Statistics (Larry Wasserman)",
+          "url": ""
+        },
+        {
+          "detail": "Lectures on the Bernoulli and binomial, hypergeometric, geometric and negative binomial, and Poisson distributions",
+          "title": "Harvard Stat 110 (Joe Blitzstein), lecture videos and notes",
+          "url": "https://stat110.hsites.harvard.edu"
+        }
+      ]
+    },
+    {
+      "area": "a5",
+      "d": 7,
+      "desc": "The standard continuous families, each learned through its story, density, mean and variance, and the links between them, from the simple uniform to the normal that underlies so much of statistics and machine learning.",
+      "id": "t13",
+      "name": "Continuous Distribution Families",
+      "pts": [
+        "p94",
+        "p95",
+        "p96",
+        "p97",
+        "p98",
+        "p99",
+        "p100",
+        "p101",
+        "p102"
+      ],
+      "where": [
+        {
+          "detail": "Chapter 5 (Continuous random variables: uniform, normal, exponential and memorylessness); Chapter 8 (Transformations, including gamma and beta)",
+          "title": "Introduction to Probability (Blitzstein & Hwang), 2nd edition",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 5 (Continuous Random Variables): uniform, normal, exponential, gamma and beta distributions",
+          "title": "A First Course in Probability (Sheldon Ross)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 3 (Random Variables): important continuous distributions",
+          "title": "All of Statistics (Larry Wasserman)",
+          "url": ""
+        },
+        {
+          "detail": "Lectures on the uniform and normal, the exponential, and the gamma and beta distributions",
+          "title": "Harvard Stat 110 (Joe Blitzstein) lectures",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "area": "a5",
+      "d": 8,
+      "desc": "A first, outline-level look at the multivariate normal distribution: how it is specified, what its density looks like, and the closure properties that make Gaussian models so tractable in regression and machine learning.",
+      "id": "t14",
+      "name": "The Multivariate Normal in Outline",
+      "pts": [
+        "p103",
+        "p104",
+        "p105",
+        "p106",
+        "p107",
+        "p128"
+      ],
+      "where": [
+        {
+          "detail": "Chapter 7, section on the Multivariate Normal (MVN)",
+          "title": "Introduction to Probability (Blitzstein & Hwang), 2nd edition",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 2, section on multivariate normal in the discussion of important multivariate distributions",
+          "title": "All of Statistics (Wasserman)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 7, section on joint distribution of functions and the multivariate normal (bivariate normal material)",
+          "title": "A First Course in Probability (Ross)",
+          "url": ""
+        },
+        {
+          "detail": "Section 2.3, The Gaussian Distribution",
+          "title": "Pattern Recognition and Machine Learning (Bishop)",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "area": "a6",
+      "d": 4,
+      "desc": "Extends the pmf, pdf and CDF from one random variable to several, then shows how to marginalise, condition and average over one variable given another, which is how multivariate models are written and how regression is defined.",
+      "id": "t10",
+      "name": "Joint, Marginal and Conditional Distributions",
+      "pts": [
+        "p66",
+        "p67",
+        "p68",
+        "p69",
+        "p70",
+        "p71",
+        "p72",
+        "p73",
+        "p74",
+        "p131"
+      ],
+      "where": [
+        {
+          "detail": "Chapter 7 (Joint distributions) and Chapter 9 (Conditional expectation)",
+          "title": "Introduction to Probability (Blitzstein & Hwang)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 6 (Jointly distributed random variables) and Chapter 7, sections on conditional expectation",
+          "title": "A First Course in Probability (Sheldon Ross)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 2 (Random variables), sections on bivariate distributions, marginal and conditional distributions; Chapter 3 (Expectation), section on conditional expectation",
+          "title": "All of Statistics (Larry Wasserman)",
+          "url": ""
+        },
+        {
+          "detail": "Lectures on joint, conditional and marginal distributions and on conditional expectation",
+          "title": "Harvard Stat 110 (Joe Blitzstein)",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "area": "a6",
+      "d": 5,
+      "desc": "Extends expectation and variance to pairs and collections of random variables: how covariance and correlation measure linear co-movement, how the variance of a sum depends on them, how to find the distribution of a sum or other function of several variables, and how i.i.d. samples define the sample mean as a random variable.",
+      "id": "t11",
+      "name": "Covariance, Correlation and Functions of Several Variables",
+      "pts": [
+        "p75",
+        "p76",
+        "p77",
+        "p78",
+        "p79",
+        "p80",
+        "p81",
+        "p82",
+        "p83",
+        "p129"
+      ],
+      "where": [
+        {
+          "detail": "Chapter 7: Joint distributions (covariance and correlation, transformations, convolutions); Chapter 4 for the sample mean's mean and variance via linearity",
+          "title": "Introduction to Probability (Blitzstein & Hwang), 2nd edition",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 7: Properties of Expectation (covariance, variance of sums, correlation); Chapter 6 for sums of independent random variables",
+          "title": "A First Course in Probability (Sheldon Ross)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 3: Expectation (covariance and correlation, variance of sums, sample mean); Chapter 2 for transformations of several variables",
+          "title": "All of Statistics (Larry Wasserman)",
+          "url": ""
+        },
+        {
+          "detail": "Lectures on covariance and correlation, and on transformations and convolutions",
+          "title": "Harvard Stat 110 (Joe Blitzstein) lectures",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "area": "a7",
+      "d": 4,
+      "desc": "Tail bounds from the mean and variance (Markov and Chebyshev) and the two ideas of convergence, in probability and in distribution, that give precise meaning to 'the sample mean settles down' and 'looks normal', studied together because the inequalities lead directly into the first convergence notion.",
+      "id": "t15",
+      "name": "Tail Bounds and Modes of Convergence",
+      "pts": [
+        "p108",
+        "p109",
+        "p110",
+        "p111",
+        "p112",
+        "p113",
+        "p130"
+      ],
+      "where": [
+        {
+          "detail": "Chapter 10, Inequalities and Limit Theorems (inequalities and modes of convergence sections)",
+          "title": "Introduction to Probability (Blitzstein & Hwang), 2nd edition",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 4, Inequalities; Chapter 5, Convergence of Random Variables",
+          "title": "All of Statistics (Wasserman)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 8, Limit Theorems (Markov and Chebyshev inequalities, and modes of convergence)",
+          "title": "A First Course in Probability (Ross)",
+          "url": ""
+        },
+        {
+          "detail": "",
+          "title": "Harvard Stat 110 (Joe Blitzstein), lectures on inequalities and limit theorems",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "area": "a7",
+      "d": 8,
+      "desc": "The two limit theorems that say what happens to the sample mean as the sample grows: it settles on the true mean (law of large numbers), and its fluctuations become normal with a width shrinking like 1/sqrt(n) (central limit theorem), together with the limits of what those guarantees mean.",
+      "id": "t16",
+      "name": "The Law of Large Numbers and the Central Limit Theorem",
+      "pts": [
+        "p115",
+        "p117",
+        "p118",
+        "p119",
+        "p120",
+        "p121"
+      ],
+      "where": [
+        {
+          "detail": "Chapter 10: Inequalities and limit theorems (LLN and CLT sections)",
+          "title": "Introduction to Probability (Blitzstein & Hwang), 2nd edition",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 8: Limit Theorems (weak and strong laws, central limit theorem)",
+          "title": "A First Course in Probability (Sheldon Ross)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 5: Convergence of Random Variables (law of large numbers and central limit theorem)",
+          "title": "All of Statistics (Larry Wasserman)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 5: Limit Theorems",
+          "title": "Introduction to Probability (Bertsekas & Tsitsiklis)",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "area": "a7",
+      "d": 9,
+      "desc": "Shows how the central limit theorem is turned into numerical answers and approximate distributions: first for binomial probabilities, then for smooth functions of a sample mean.",
+      "id": "t17",
+      "name": "Using the Limit Theorems: Approximations and the Delta Method",
+      "pts": [
+        "p122",
+        "p124"
+      ],
+      "where": [
+        {
+          "detail": "Chapter 10, Inequalities and Limit Theorems, section on the central limit theorem and normal approximation",
+          "title": "Introduction to Probability (Blitzstein & Hwang), 2nd edition",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 8, Limit Theorems, central limit theorem and the normal approximation to the binomial",
+          "title": "A First Course in Probability (Sheldon Ross)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 5, Convergence of Random Variables, section on the delta method",
+          "title": "All of Statistics (Larry Wasserman)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 9, Central Limit Theorem, including the approximation of binomial distributions",
+          "title": "Introduction to Probability (Grinstead & Snell)",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "area": "a8",
+      "d": 9,
+      "desc": "A short closing orientation showing where the earlier parts of probability are used in statistics and machine learning: sampling distributions and confidence intervals from the CLT, likelihood and Bayesian posteriors from Bayes' rule, Monte Carlo and the bootstrap from the law of large numbers, and cross-entropy and probabilistic models in outline.",
+      "id": "t3",
+      "name": "Where This Leads: Probability in Statistics and Machine Learning",
+      "pts": [
+        "p22",
+        "p23",
+        "p24",
+        "p25",
+        "p26",
+        "p27",
+        "p28",
+        "p29",
+        "p132"
+      ],
+      "where": [
+        {
+          "detail": "Chapter 10 (Inequalities and limit theorems) and Chapter 11 (Markov chains), with the Monte Carlo discussion in the simulation sections; an orientation to later uses of probability",
+          "title": "Introduction to Probability (Blitzstein & Hwang)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 6 (Models, statistical inference and learning), Chapter 9 (Parametric inference: maximum likelihood), Chapter 8 (The bootstrap), Chapter 11 (Bayesian inference), Chapter 24 (Simulation methods)",
+          "title": "All of Statistics (Larry Wasserman)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 1 (Introduction, including probability theory and information theory) and Chapter 4 (linear models for classification)",
+          "title": "Pattern Recognition and Machine Learning (Christopher Bishop)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 2 (Probability), Chapter 3 (Statistics) and Chapter 6 (Information theory)",
+          "title": "Probabilistic Machine Learning: An Introduction (Kevin Murphy)",
+          "url": ""
+        },
+        {
+          "detail": "Chapter 2 (Probability, entropy and inference) and Chapter 29 (Monte Carlo methods)",
+          "title": "Information Theory, Inference, and Learning Algorithms (David MacKay)",
+          "url": ""
+        }
+      ]
+    }
+  ],
+  "blinks": [
+    [
+      "t1",
+      "t4",
+      5
+    ],
+    [
+      "t4",
+      "t5",
+      4
+    ],
+    [
+      "t5",
+      "t6",
+      1
+    ],
+    [
+      "t5",
+      "t7",
+      9
+    ],
+    [
+      "t1",
+      "t2",
+      5
+    ],
+    [
+      "t2",
+      "t8",
+      4
+    ],
+    [
+      "t8",
+      "t9",
+      9
+    ],
+    [
+      "t11",
+      "t12",
+      2
+    ],
+    [
+      "t12",
+      "t13",
+      2
+    ],
+    [
+      "t13",
+      "t14",
+      2
+    ],
+    [
+      "t6",
+      "t10",
+      1
+    ],
+    [
+      "t9",
+      "t10",
+      2
+    ],
+    [
+      "t10",
+      "t11",
+      18
+    ],
+    [
+      "t9",
+      "t15",
+      2
+    ],
+    [
+      "t15",
+      "t16",
+      4
+    ],
+    [
+      "t13",
+      "t16",
+      1
+    ],
+    [
+      "t16",
+      "t17",
+      3
+    ],
+    [
+      "t16",
+      "t3",
+      3
+    ]
+  ],
+  "built": "2026-10-09T04:37:57.349Z",
+  "checks": {
+    "fixes": [
+      {
+        "done": true,
+        "text": "Merged \"Conditional probability as restriction to a reduced sample space\" into \"The definition P(A|B) and reading it correctly\" ('Restriction to a reduced sample space' is the meaning of the definition P(A|B), not a separate sitting's worth of material; together they are one point.)"
+      },
+      {
+        "done": true,
+        "text": "Merged \"Bayes' rule with a partition: computing the denominator by total probability\" into \"Bayes' rule: reversing a conditional probability\" (Computing the Bayes denominator by total probability is a step inside using Bayes' rule, already supported by p35; as its own point it is below the grain.)"
+      },
+      {
+        "done": true,
+        "text": "Merged \"Variance of a sum of independent random variables\" into \"Variance of a sum, including the covariance term\" (Variance of a sum of independent variables is the special case of p78 ('variance of a sum, including the covariance term'); teaching it twice in two areas duplicates the same idea.)"
+      },
+      {
+        "done": true,
+        "text": "Merged \"The sample mean as a random variable with mean mu and variance sigma^2/n\" into \"The sample mean as a random variable: its mean and variance\" (p82 and p114 state the identical fact about the mean and variance of the sample mean in two different areas.)"
+      },
+      {
+        "done": true,
+        "text": "Merged \"Proving the weak law of large numbers with Chebyshev's inequality\" into \"The weak law of large numbers: statement and what it promises\" (The Chebyshev proof is a step of the weak law, not an idea a learner would name separately; the statement and its one-line proof fit one sitting.)"
+      },
+      {
+        "done": true,
+        "text": "Merged \"The continuity correction for discrete counts\" into \"Normal approximation to the binomial: when it works and how to standardise\" (The continuity correction is a detail of the normal approximation to the binomial, below the grain as a standalone point.)"
+      },
+      {
+        "done": true,
+        "text": "Merged \"Using the delta method: approximate variance and standard error of g(X̄)\" into \"The delta method: approximate distribution of a smooth function of a sample mean\" (Computing the approximate variance of g(X̄) is just the use of the delta method stated in p124; the two are one technique.)"
+      },
+      {
+        "done": true,
+        "text": "Merged \"The Poisson as the limit of rare binomial trials\" into \"The Poisson distribution: counts of rare events\" (The rare-binomial limit is the Poisson's story; p91 and p92 cover the same named distribution and should be one point at this grain.)"
+      },
+      {
+        "done": true,
+        "text": "Merged \"Binomial versus hypergeometric: with and without replacement\" into \"The hypergeometric distribution and sampling without replacement\" (The binomial-versus-hypergeometric comparison is the point of introducing the hypergeometric (sampling without replacement) and does not stand alone.)"
+      },
+      {
+        "done": true,
+        "text": "Renamed \"Bernoulli distribution and indicator random variables\" to \"The Bernoulli distribution: story, mean and variance\" (Indicator random variables are already taught as a technique in p57; dropping them from the name removes the overlap.)"
+      },
+      {
+        "done": true,
+        "text": "Added \"Equality in distribution: when two random variables have the same distribution\" to Random Variables and Their Distributions (Later points (i.i.d. samples, convergence in distribution, 'sums of normals are normal') rest on distinguishing a random variable from its distribution, and no point states this.)"
+      },
+      {
+        "done": true,
+        "text": "Added \"Shifting and scaling a random variable: location-scale families\" to Random Variables and Their Distributions (Standardisation to Z, the uniform and exponential families and normal tables all assume this idea, and the random-variable area is also thinner than its stated fifth of the map.)"
+      },
+      {
+        "done": true,
+        "text": "In Expectation, Variance and Moments: Corrected the description of \"Expectation of a function of a random variable (the law of the unconscious statistician)\" (The part rests informally on E[c] = c and on the distinction between E[X^2] and (E[X])^2 (used in the computational formula for variance); LOTUS is the natural home for these, and stating them here closes the gap flagged as N8.)"
+      },
+      {
+        "done": true,
+        "text": "In Expectation, Variance and Moments: \"When expectation fails to exist or is infinite (e.g. the Cauchy distribution)\" doesn't need \"Convergence of infinite series and improper integrals (absolute convergence, divergence), needed to decide whether an expectation exists\" after all (Convergence of series and improper integrals is single-variable calculus, which the map's scope explicitly assumes and does not teach; p58 only needs it flagged at the point of use, which its description already does.)"
+      },
+      {
+        "done": true,
+        "text": "In Expectation, Variance and Moments: \"The moment generating function and computing moments from it\" doesn't need \"Differentiating a function repeatedly and the Taylor/power series of e^x (used to expand the MGF and justify that derivatives at 0 give moments); calculus is assumed but series are not explicitly flagged\" after all (Repeated differentiation and the series for e^x fall under the assumed single-variable calculus background; teaching them would pull the map outside its stated scope, and p65 only uses derivatives at 0, which it already flags.)"
+      },
+      {
+        "done": false,
+        "text": "In Expectation, Variance and Moments: Couldn't change what p57 needs (Redundant: p57 already requires p56, which itself requires p12, and the indicator technique works precisely because linearity needs no independence.)"
+      },
+      {
+        "done": true,
+        "text": "In Expectation, Variance and Moments: \"Standardisation to zero mean and unit variance\" no longer needs \"Linearity of expectation and why it needs no independence\" first (Redundant: standardisation follows directly from p61 (which already requires p56) and p59, so the extra link adds no prerequisite.)"
+      },
+      {
+        "done": true,
+        "text": "In Conditioning, Independence and Bayes' Rule: \"Independence of two events and what it says about conditioning\" no longer needs \"The multiplication rule: P(A ∩ B) = P(B)P(A|B)\" first (Independence of two events can be stated and checked from the definition of conditional probability (p31) and the axioms (p3) alone; the multiplication rule P(A∩B)=P(B)P(A|B) is not needed to understand P(A∩B)=P(A)P(B) or P(A|B)=P(A).)"
+      },
+      {
+        "done": true,
+        "text": "In Conditioning, Independence and Bayes' Rule: \"Bayes factors and likelihood ratios as the weight of evidence\" now needs \"Prior, likelihood and posterior: reading Bayes' rule as updating\" first (Reading a Bayes factor as evidence 'independent of the prior' presupposes the prior/likelihood/posterior vocabulary introduced in p37; without it the contrast with the prior has no meaning.)"
+      },
+      {
+        "done": true,
+        "text": "In Conditioning, Independence and Bayes' Rule: \"Independence versus conditional independence: neither implies the other\" now needs \"The law of total probability as a partition of the sample space\" first (The common-cause and explaining-away counterexamples are built by averaging over the cause with the law of total probability; the learner cannot verify that conditional independence fails to give unconditional independence without it.)"
+      },
+      {
+        "done": false,
+        "text": "In The Common Distribution Families: Couldn't change what p100 needs (p100 (the normal density and its parameters) is a basic distribution point; p127 lies in the later closing/limit material, so this is a forward reference the learner cannot have met and does not need to understand the normal density.)"
+      },
+      {
+        "done": true,
+        "text": "In The Common Distribution Families: \"The beta distribution and its use as a prior for a probability\" now needs \"The binomial distribution as a sum of independent Bernoulli trials\" first (p99 explains why the beta is a natural prior for an unknown probability and how it updates with binomial data; the binomial pmf (p85) is needed for that update to make sense.)"
+      },
+      {
+        "done": true,
+        "text": "In The Common Distribution Families: Added \"Vectors and matrices needed for the multivariate normal\" to The Multivariate Normal in Outline (The multivariate normal points (p103-p107) rest on matrix notation, inverses, determinants, positive definiteness and eigen-decomposition, yet the map assumes only single-variable calculus and no point teaches these.)"
+      },
+      {
+        "done": true,
+        "text": "In The Common Distribution Families: \"The geometric distribution: waiting for the first success\" doesn't need \"Geometric series and the identity for summing a series (and the exponential series e^x = sum x^k/k!), used to verify the geometric and Poisson pmfs sum to 1 and to derive their means and variances\" after all (The geometric and exponential series are standard single-variable analysis facts of the kind the map explicitly assumes and flags rather than teaches; p87 and p91 only need the resulting pmf sums and moments, which are stated there.)"
+      },
+      {
+        "done": true,
+        "text": "In The Common Distribution Families: \"The Poisson distribution: counts of rare events\" doesn't need \"The limit (1 - lambda/n)^n tends to e^(-lambda), used in the Poisson limit of the binomial\" after all (The limit (1 - lambda/n)^n -> e^(-lambda) is a standard calculus limit inside the assumed background; p91 can present the Poisson limit of the binomial citing it, consistent with the map's policy of flagging rather than teaching calculus.)"
+      },
+      {
+        "done": true,
+        "text": "In The Common Distribution Families: \"The gamma distribution as a sum of exponentials\" doesn't need \"The Gaussian integral, showing the normal density integrates to 1 (needed to justify the normalising constant), as well as the gamma function used in the gamma and beta normalising constants; both go beyond single-variable integration and are not taught by any point.\" after all (Normalising constants for the normal, gamma and beta are stated, not derived, at this level; the Gaussian integral and the gamma function are explicitly outside the goal (statistics and ML use), so no point need teach them.)"
+      },
+      {
+        "done": true,
+        "text": "In Several Random Variables Together: Added \"Expectation of a function of two random variables\" to Covariance, Correlation and Functions of Several Variables (Covariance (p75), the computational formula E[XY]-E[X]E[Y], convolution and the variance of a sum all rest on taking expectations against a joint distribution, and no point on the map teaches this.)"
+      },
+      {
+        "done": true,
+        "text": "In Several Random Variables Together: \"Covariance: definition, computational formula and properties\" now needs \"Independence of random variables and how to check it from the joint distribution\" first (The covariance section's key fact that independence gives zero covariance (used in p77 and p78) requires independence of random variables, which p75 currently does not depend on.)"
+      },
+      {
+        "done": false,
+        "text": "In Several Random Variables Together: Couldn't change what p81 needs (p126 lies outside this part and after it in the sequence (the closing or limit-theorem material); i.i.d. samples are fully defined from independence (p70) and identical distribution, so this forward link is wrong.)"
+      },
+      {
+        "done": true,
+        "text": "In Several Random Variables Together: \"The sample mean as a random variable: its mean and variance\" now needs \"Independence of random variables and how to check it from the joint distribution\" first (The variance formula Var(X̄)=σ²/n depends on the cross-covariance terms vanishing under independence, so independence of random variables is needed directly, not only through p81.)"
+      },
+      {
+        "done": true,
+        "text": "In Limit Theorems: Laws of Large Numbers and the Central Limit Theorem: \"Convergence in probability: a sequence of random variables settling near a value\" doesn't need \"Limits of sequences and the epsilon-style meaning of 'tends to a limit' (including limits of functions at a point and continuity), used to define convergence of probabilities and CDFs\" after all (Limits of sequences and the epsilon-style meaning of 'tends to a limit' are part of the single-variable calculus the map explicitly assumes and does not teach; the convergence definitions only flag their use.)"
+      },
+      {
+        "done": true,
+        "text": "In Limit Theorems: Laws of Large Numbers and the Central Limit Theorem: Added \"Slutsky-type facts: shifting, scaling and negligible terms in a limit\" to Tail Bounds and Modes of Convergence (The delta method drops the Taylor remainder and rescales the limit; no point on the map justifies this, so the step is currently unsupported.)"
+      },
+      {
+        "done": false,
+        "text": "In Limit Theorems: Laws of Large Numbers and the Central Limit Theorem: Couldn't change what p124 needs (The delta method's derivation needs the rule that a vanishing remainder and a constant rescaling leave the limiting distribution unchanged.)"
+      },
+      {
+        "done": false,
+        "text": "In Limit Theorems: Laws of Large Numbers and the Central Limit Theorem: Couldn't change what p110 needs (The point compares Markov and Chebyshev bounds with exact normal tail probabilities, which cannot be computed without the standard normal and its table/CDF.)"
+      },
+      {
+        "done": false,
+        "text": "In Limit Theorems: Laws of Large Numbers and the Central Limit Theorem: Couldn't change what p119 needs (The square-root-of-n scaling rests on Var(X-bar) = sigma^2/n, which requires the variance of a sum of independent variables, not just the definition of variance.)"
+      },
+      {
+        "done": true,
+        "text": "\"Covariance matrix of a random vector\" now needs \"Vectors and matrices needed for the multivariate normal\" first (The covariance matrix of a random vector and the computation of the covariance of AX cannot be done without the matrix notation taught in p128; this link crosses the piece boundary and was missing.)"
+      },
+      {
+        "done": true,
+        "text": "Added \"Double integrals, iterated sums and the Jacobian: the calculus needed for two variables\" to Joint, Marginal and Conditional Distributions (The map assumes only single-variable calculus, yet p68, p69, p75, p79, p80 and p129 all require iterated integration over regions and p80 requires a Jacobian; this toolbox point mirrors p128 and closes the gap at the point of first use.)"
+      },
+      {
+        "done": true,
+        "text": "Added \"Parameters, statistics and estimators\" to Where This Leads: Probability in Statistics and Machine Learning (p22, p23, p24 and p27 all use the words parameter, statistic, estimator and sampling distribution, but no point introduces this vocabulary; it is the hinge between the probability map and the closing statistics part.)"
+      },
+      {
+        "done": true,
+        "text": "\"Probabilistic models in machine learning: naive Bayes, logistic regression and Markov chains in outline\" doesn't need \"Markov chains: states, transition probabilities and the Markov property. The map only mentions them in outline and teaches no point on them.\" after all (Markov chains are explicitly outside the scope (stochastic processes beyond a mention), and p29 treats them at outline level only, so no point on them is required.)"
+      },
+      {
+        "done": true,
+        "text": "\"Probabilistic models in machine learning: naive Bayes, logistic regression and Markov chains in outline\" doesn't need \"The logistic (sigmoid) function and the idea of modelling a conditional probability P(Y|x) as a function of features. No point teaches it.\" after all (p29 is an outline-level preview of ML models; the sigmoid can be described in that preview without a separate point, and teaching it would pull ML content into a map that excludes it.)"
+      },
+      {
+        "done": true,
+        "text": "\"Likelihood and maximum likelihood estimation\" doesn't need \"Logarithms and their properties, including the log of a product and the idea of maximising a function. Assumed from calculus but not flagged on the map.\" after all (Logarithms and maximising a differentiable function fall under the stated calculus prerequisite that the map assumes rather than teaches.)"
+      },
+      {
+        "done": true,
+        "text": "\"Seeing the CLT at work: how sample size and the shape of the distribution affect the normal approximation\" now needs \"Simulating a random variable by the inverse CDF method (universality of the uniform)\" first (Seeing the CLT at work through simulation rests on knowing how to generate draws from a given distribution, taught in p21 (inverse CDF method).)"
+      },
+      {
+        "done": true,
+        "text": "\"The Poisson distribution: counts of rare events\" now needs \"Independence of several events: pairwise versus mutual independence\" first (The Poisson as the limit of Binomial(n,p) with np fixed inherits the independent-trials assumption; the binomial need p44 is listed on p85 but the Poisson point states the rare-event story without it.)"
+      },
+      {
+        "done": true,
+        "text": "\"Exponential waiting times and the Poisson process\" now needs \"Independent and identically distributed (i.i.d.) samples\" first (The interarrival times of a Poisson process are described as i.i.d. exponentials, so the i.i.d. notion from p81 is required.)"
+      },
+      {
+        "done": true,
+        "text": "\"The gamma distribution as a sum of exponentials\" now needs \"Independent and identically distributed (i.i.d.) samples\" first (The gamma is defined as a sum of r i.i.d. exponentials; p79 gives convolution but the i.i.d. vocabulary comes from p81.)"
+      },
+      {
+        "done": true,
+        "text": "\"The multivariate normal: mean vector, covariance matrix and the density formula\" now needs \"Covariance matrix of a random vector\" first (Already listed; no change needed.)"
+      },
+      {
+        "done": true,
+        "text": "\"The multivariate normal: mean vector, covariance matrix and the density formula\" no longer needs \"Covariance matrix of a random vector\" first (Duplicate of the link already present in p103's list; kept once.)"
+      },
+      {
+        "done": true,
+        "text": "\"Monte Carlo estimation as the law of large numbers in use\" now needs \"Standard error and the square-root-of-n scaling\" first (Already listed; no change.)"
+      },
+      {
+        "done": true,
+        "text": "\"Monte Carlo estimation as the law of large numbers in use\" no longer needs \"Standard error and the square-root-of-n scaling\" first (Duplicate operation; the existing link is correct and is kept.)"
+      },
+      {
+        "done": true,
+        "text": "\"Likelihood and maximum likelihood estimation\" now needs \"Independence of random variables and how to check it from the joint distribution\" first (The likelihood of a sample is formed as a product over observations, which rests on the factorisation of a joint density/pmf under independence (p70), not merely on the i.i.d. label.)"
+      },
+      {
+        "done": true,
+        "text": "\"Entropy, cross-entropy and KL divergence in outline\" now needs \"Expectation of a continuous random variable as an integral against the density\" first (Entropy and KL divergence are expectations of log-ratios; the point should rest on the expectation machinery, not only on the pmf (p14) and LOTUS (p55) — the continuous/expectation framing in p54 completes it.)"
+      },
+      {
+        "done": true,
+        "text": "\"Entropy, cross-entropy and KL divergence in outline\" no longer needs \"Expectation of a continuous random variable as an integral against the density\" first (On reflection the point is restricted to discrete distributions, so p14 and p55 suffice and the extra link would be wrong.)"
+      },
+      {
+        "done": true,
+        "text": "\"Normal approximation to the binomial: when it works and how to standardise\" now needs \"Variance of a sum, including the covariance term\" first (Matching the binomial variance np(1-p) for the normal approximation uses the variance of a sum of independent Bernoullis (p78), which the point cites but does not list.)"
+      },
+      {
+        "done": true,
+        "text": "\"Normal approximation to the binomial: when it works and how to standardise\" no longer needs \"Linearity of expectation and why it needs no independence\" first (The normal approximation needs the binomial mean and variance, which p85 already supplies; the bare linearity-of-expectation link adds nothing the learner must have first.)"
+      },
+      {
+        "done": true,
+        "text": "\"Independence versus conditional independence: neither implies the other\" now needs \"Conditioning on extra background information: total probability and Bayes' rule given an event E\" first (Explaining-away and common-cause arguments are carried out with Bayes' rule and total probability conditioned on background information, which is p42; p35 alone is not enough.)"
+      },
+      {
+        "done": true,
+        "text": "\"Independence versus conditional independence: neither implies the other\" no longer needs \"Conditioning on extra background information: total probability and Bayes' rule given an event E\" first (Withdrawn: the counterexamples can be built from a joint table using p35 and p46 alone, so the extra link is not required.)"
+      },
+      {
+        "done": true,
+        "text": "\"Uncorrelated jointly normal variables are independent, and why joint normality is required\" now needs \"Equality in distribution: when two random variables have the same distribution\" first (The counterexample with normal marginals that are uncorrelated yet dependent is stated in terms of variables having the same distribution, which is p126.)"
+      },
+      {
+        "done": true,
+        "text": "\"Uncorrelated jointly normal variables are independent, and why joint normality is required\" no longer needs \"Equality in distribution: when two random variables have the same distribution\" first (Withdrawn: the counterexample only needs the marginal densities and p77, so the link is not necessary.)"
+      },
+      {
+        "done": true,
+        "text": "\"Confidence intervals as a consequence of the normal approximation\" now needs \"The sample mean as a random variable: its mean and variance\" first (A confidence interval for a mean or proportion is built from the standard error of the sample mean; the chain through p22 covers this, so no further link is needed.)"
+      },
+      {
+        "done": true,
+        "text": "\"Confidence intervals as a consequence of the normal approximation\" no longer needs \"The sample mean as a random variable: its mean and variance\" first (Withdrawn: p22 already carries p82, so the direct link is redundant.)"
+      }
+    ],
+    "loopsDropped": 0,
+    "notes": [
+      "A writer found \"Normal approximation to the binomial: when it works and how to standardise\" needs \"Continuity correction: why approximating a discrete integer-valued variable by a continuous density requires shifting the cutoff by 1/2, and how to apply it to P(X <= k), P(X >= k) and P(X = k)\", which no point teaches, and no reviewer settled it.",
+      "A writer found \"The delta method: approximate distribution of a smooth function of a sample mean\" needs \"First-order Taylor (linear) approximation of a differentiable function near a point, used to replace g(X-bar) by g(mu) + g'(mu)(X-bar - mu)\", which no point teaches, and no reviewer settled it."
+    ],
+    "verdict": "With the two prerequisite toolbox points added (two-variable calculus and the parameter/statistic/estimator vocabulary) and the missing p83–p128 link restored, the map's cross-piece dependencies now hold: conditioning feeds the distribution families, joint distributions feed the multivariate normal and the limit theorems, and the closing part rests on points that are actually taught. The remaining unmet ideas are legitimately out of scope or already covered inside the points that use them."
+  },
+  "goal": "Understand probability well enough for statistics and machine learning: events, conditional probability and Bayes' rule, random variables, expectation and variance, the common distributions, and the law of large numbers and central limit theorem.",
+  "lang": "en",
+  "links": [
+    [
+      "p1",
+      "p2",
+      "needs"
+    ],
+    [
+      "p1",
+      "p3",
+      "needs"
+    ],
+    [
+      "p2",
+      "p3",
+      "needs"
+    ],
+    [
+      "p3",
+      "p4",
+      "needs"
+    ],
+    [
+      "p4",
+      "p5",
+      "needs"
+    ],
+    [
+      "p3",
+      "p6",
+      "needs"
+    ],
+    [
+      "p4",
+      "p6",
+      "needs"
+    ],
+    [
+      "p1",
+      "p7",
+      "needs"
+    ],
+    [
+      "p7",
+      "p8",
+      "needs"
+    ],
+    [
+      "p8",
+      "p9",
+      "needs"
+    ],
+    [
+      "p7",
+      "p10",
+      "needs"
+    ],
+    [
+      "p8",
+      "p10",
+      "needs"
+    ],
+    [
+      "p9",
+      "p10",
+      "needs"
+    ],
+    [
+      "p6",
+      "p10",
+      "needs"
+    ],
+    [
+      "p6",
+      "p11",
+      "needs"
+    ],
+    [
+      "p10",
+      "p11",
+      "needs"
+    ],
+    [
+      "p1",
+      "p11",
+      "helps"
+    ],
+    [
+      "p3",
+      "p11",
+      "helps"
+    ],
+    [
+      "p3",
+      "p31",
+      "needs"
+    ],
+    [
+      "p4",
+      "p31",
+      "needs"
+    ],
+    [
+      "p2",
+      "p31",
+      "needs"
+    ],
+    [
+      "p6",
+      "p31",
+      "helps"
+    ],
+    [
+      "p1",
+      "p31",
+      "helps"
+    ],
+    [
+      "p31",
+      "p32",
+      "needs"
+    ],
+    [
+      "p3",
+      "p32",
+      "needs"
+    ],
+    [
+      "p4",
+      "p32",
+      "needs"
+    ],
+    [
+      "p5",
+      "p32",
+      "helps"
+    ],
+    [
+      "p31",
+      "p33",
+      "needs"
+    ],
+    [
+      "p7",
+      "p33",
+      "helps"
+    ],
+    [
+      "p33",
+      "p34",
+      "needs"
+    ],
+    [
+      "p7",
+      "p34",
+      "helps"
+    ],
+    [
+      "p10",
+      "p34",
+      "helps"
+    ],
+    [
+      "p2",
+      "p34",
+      "helps"
+    ],
+    [
+      "p33",
+      "p35",
+      "needs"
+    ],
+    [
+      "p4",
+      "p35",
+      "needs"
+    ],
+    [
+      "p2",
+      "p35",
+      "needs"
+    ],
+    [
+      "p34",
+      "p35",
+      "helps"
+    ],
+    [
+      "p3",
+      "p35",
+      "helps"
+    ],
+    [
+      "p32",
+      "p35",
+      "helps"
+    ],
+    [
+      "p33",
+      "p36",
+      "needs"
+    ],
+    [
+      "p35",
+      "p36",
+      "needs"
+    ],
+    [
+      "p31",
+      "p36",
+      "needs"
+    ],
+    [
+      "p34",
+      "p36",
+      "helps"
+    ],
+    [
+      "p36",
+      "p37",
+      "needs"
+    ],
+    [
+      "p35",
+      "p37",
+      "helps"
+    ],
+    [
+      "p36",
+      "p39",
+      "needs"
+    ],
+    [
+      "p37",
+      "p39",
+      "needs"
+    ],
+    [
+      "p4",
+      "p39",
+      "helps"
+    ],
+    [
+      "p39",
+      "p40",
+      "needs"
+    ],
+    [
+      "p37",
+      "p40",
+      "needs"
+    ],
+    [
+      "p37",
+      "p41",
+      "needs"
+    ],
+    [
+      "p39",
+      "p41",
+      "needs"
+    ],
+    [
+      "p46",
+      "p41",
+      "needs"
+    ],
+    [
+      "p40",
+      "p41",
+      "helps"
+    ],
+    [
+      "p35",
+      "p42",
+      "needs"
+    ],
+    [
+      "p36",
+      "p42",
+      "needs"
+    ],
+    [
+      "p32",
+      "p42",
+      "needs"
+    ],
+    [
+      "p41",
+      "p42",
+      "helps"
+    ],
+    [
+      "p46",
+      "p42",
+      "helps"
+    ],
+    [
+      "p3",
+      "p43",
+      "needs"
+    ],
+    [
+      "p31",
+      "p43",
+      "needs"
+    ],
+    [
+      "p4",
+      "p43",
+      "helps"
+    ],
+    [
+      "p6",
+      "p43",
+      "helps"
+    ],
+    [
+      "p43",
+      "p44",
+      "needs"
+    ],
+    [
+      "p5",
+      "p44",
+      "helps"
+    ],
+    [
+      "p34",
+      "p44",
+      "helps"
+    ],
+    [
+      "p43",
+      "p45",
+      "needs"
+    ],
+    [
+      "p4",
+      "p45",
+      "needs"
+    ],
+    [
+      "p2",
+      "p45",
+      "needs"
+    ],
+    [
+      "p31",
+      "p45",
+      "helps"
+    ],
+    [
+      "p43",
+      "p46",
+      "needs"
+    ],
+    [
+      "p32",
+      "p46",
+      "needs"
+    ],
+    [
+      "p33",
+      "p46",
+      "needs"
+    ],
+    [
+      "p42",
+      "p46",
+      "helps"
+    ],
+    [
+      "p35",
+      "p46",
+      "helps"
+    ],
+    [
+      "p44",
+      "p46",
+      "helps"
+    ],
+    [
+      "p43",
+      "p47",
+      "needs"
+    ],
+    [
+      "p46",
+      "p47",
+      "needs"
+    ],
+    [
+      "p35",
+      "p47",
+      "needs"
+    ],
+    [
+      "p36",
+      "p47",
+      "helps"
+    ],
+    [
+      "p45",
+      "p47",
+      "helps"
+    ],
+    [
+      "p36",
+      "p48",
+      "needs"
+    ],
+    [
+      "p35",
+      "p48",
+      "needs"
+    ],
+    [
+      "p37",
+      "p48",
+      "needs"
+    ],
+    [
+      "p39",
+      "p48",
+      "helps"
+    ],
+    [
+      "p40",
+      "p48",
+      "helps"
+    ],
+    [
+      "p6",
+      "p48",
+      "helps"
+    ],
+    [
+      "p31",
+      "p48",
+      "helps"
+    ],
+    [
+      "p31",
+      "p49",
+      "needs"
+    ],
+    [
+      "p36",
+      "p49",
+      "needs"
+    ],
+    [
+      "p37",
+      "p49",
+      "helps"
+    ],
+    [
+      "p48",
+      "p49",
+      "helps"
+    ],
+    [
+      "p39",
+      "p49",
+      "helps"
+    ],
+    [
+      "p43",
+      "p49",
+      "helps"
+    ],
+    [
+      "p31",
+      "p50",
+      "needs"
+    ],
+    [
+      "p35",
+      "p50",
+      "needs"
+    ],
+    [
+      "p33",
+      "p50",
+      "helps"
+    ],
+    [
+      "p43",
+      "p50",
+      "helps"
+    ],
+    [
+      "p46",
+      "p50",
+      "helps"
+    ],
+    [
+      "p47",
+      "p50",
+      "helps"
+    ],
+    [
+      "p31",
+      "p51",
+      "needs"
+    ],
+    [
+      "p35",
+      "p51",
+      "needs"
+    ],
+    [
+      "p36",
+      "p51",
+      "needs"
+    ],
+    [
+      "p1",
+      "p51",
+      "needs"
+    ],
+    [
+      "p34",
+      "p51",
+      "helps"
+    ],
+    [
+      "p37",
+      "p51",
+      "helps"
+    ],
+    [
+      "p42",
+      "p51",
+      "helps"
+    ],
+    [
+      "p41",
+      "p51",
+      "helps"
+    ],
+    [
+      "p1",
+      "p52",
+      "needs"
+    ],
+    [
+      "p31",
+      "p52",
+      "needs"
+    ],
+    [
+      "p35",
+      "p52",
+      "needs"
+    ],
+    [
+      "p36",
+      "p52",
+      "needs"
+    ],
+    [
+      "p34",
+      "p52",
+      "helps"
+    ],
+    [
+      "p42",
+      "p52",
+      "helps"
+    ],
+    [
+      "p48",
+      "p52",
+      "helps"
+    ],
+    [
+      "p49",
+      "p52",
+      "helps"
+    ],
+    [
+      "p50",
+      "p52",
+      "helps"
+    ],
+    [
+      "p51",
+      "p52",
+      "helps"
+    ],
+    [
+      "p11",
+      "p52",
+      "helps"
+    ],
+    [
+      "p1",
+      "p12",
+      "needs"
+    ],
+    [
+      "p2",
+      "p12",
+      "needs"
+    ],
+    [
+      "p3",
+      "p12",
+      "needs"
+    ],
+    [
+      "p4",
+      "p12",
+      "helps"
+    ],
+    [
+      "p12",
+      "p13",
+      "needs"
+    ],
+    [
+      "p12",
+      "p14",
+      "needs"
+    ],
+    [
+      "p13",
+      "p14",
+      "needs"
+    ],
+    [
+      "p3",
+      "p14",
+      "needs"
+    ],
+    [
+      "p6",
+      "p14",
+      "helps"
+    ],
+    [
+      "p9",
+      "p14",
+      "helps"
+    ],
+    [
+      "p13",
+      "p15",
+      "needs"
+    ],
+    [
+      "p3",
+      "p15",
+      "needs"
+    ],
+    [
+      "p14",
+      "p15",
+      "helps"
+    ],
+    [
+      "p14",
+      "p16",
+      "needs"
+    ],
+    [
+      "p15",
+      "p16",
+      "needs"
+    ],
+    [
+      "p4",
+      "p16",
+      "helps"
+    ],
+    [
+      "p16",
+      "p17",
+      "needs"
+    ],
+    [
+      "p16",
+      "p18",
+      "needs"
+    ],
+    [
+      "p17",
+      "p18",
+      "needs"
+    ],
+    [
+      "p14",
+      "p19",
+      "needs"
+    ],
+    [
+      "p12",
+      "p19",
+      "helps"
+    ],
+    [
+      "p15",
+      "p20",
+      "needs"
+    ],
+    [
+      "p16",
+      "p20",
+      "needs"
+    ],
+    [
+      "p17",
+      "p20",
+      "needs"
+    ],
+    [
+      "p19",
+      "p20",
+      "helps"
+    ],
+    [
+      "p18",
+      "p21",
+      "needs"
+    ],
+    [
+      "p20",
+      "p21",
+      "needs"
+    ],
+    [
+      "p16",
+      "p126",
+      "needs"
+    ],
+    [
+      "p12",
+      "p126",
+      "helps"
+    ],
+    [
+      "p20",
+      "p126",
+      "helps"
+    ],
+    [
+      "p20",
+      "p127",
+      "needs"
+    ],
+    [
+      "p126",
+      "p127",
+      "helps"
+    ],
+    [
+      "p14",
+      "p53",
+      "needs"
+    ],
+    [
+      "p12",
+      "p53",
+      "helps"
+    ],
+    [
+      "p6",
+      "p53",
+      "helps"
+    ],
+    [
+      "p15",
+      "p54",
+      "needs"
+    ],
+    [
+      "p53",
+      "p54",
+      "needs"
+    ],
+    [
+      "p16",
+      "p54",
+      "helps"
+    ],
+    [
+      "p53",
+      "p55",
+      "needs"
+    ],
+    [
+      "p54",
+      "p55",
+      "needs"
+    ],
+    [
+      "p19",
+      "p55",
+      "helps"
+    ],
+    [
+      "p20",
+      "p55",
+      "helps"
+    ],
+    [
+      "p55",
+      "p56",
+      "needs"
+    ],
+    [
+      "p12",
+      "p56",
+      "needs"
+    ],
+    [
+      "p66",
+      "p56",
+      "helps"
+    ],
+    [
+      "p56",
+      "p57",
+      "needs"
+    ],
+    [
+      "p12",
+      "p57",
+      "needs"
+    ],
+    [
+      "p9",
+      "p57",
+      "helps"
+    ],
+    [
+      "p84",
+      "p57",
+      "helps"
+    ],
+    [
+      "p54",
+      "p58",
+      "needs"
+    ],
+    [
+      "p53",
+      "p58",
+      "needs"
+    ],
+    [
+      "p55",
+      "p58",
+      "helps"
+    ],
+    [
+      "p53",
+      "p59",
+      "needs"
+    ],
+    [
+      "p54",
+      "p59",
+      "needs"
+    ],
+    [
+      "p55",
+      "p59",
+      "needs"
+    ],
+    [
+      "p56",
+      "p59",
+      "helps"
+    ],
+    [
+      "p14",
+      "p59",
+      "helps"
+    ],
+    [
+      "p15",
+      "p59",
+      "helps"
+    ],
+    [
+      "p59",
+      "p60",
+      "needs"
+    ],
+    [
+      "p55",
+      "p60",
+      "needs"
+    ],
+    [
+      "p56",
+      "p60",
+      "needs"
+    ],
+    [
+      "p57",
+      "p60",
+      "helps"
+    ],
+    [
+      "p59",
+      "p61",
+      "needs"
+    ],
+    [
+      "p56",
+      "p61",
+      "needs"
+    ],
+    [
+      "p60",
+      "p61",
+      "helps"
+    ],
+    [
+      "p127",
+      "p61",
+      "helps"
+    ],
+    [
+      "p61",
+      "p62",
+      "needs"
+    ],
+    [
+      "p59",
+      "p62",
+      "needs"
+    ],
+    [
+      "p127",
+      "p62",
+      "helps"
+    ],
+    [
+      "p101",
+      "p62",
+      "helps"
+    ],
+    [
+      "p55",
+      "p64",
+      "needs"
+    ],
+    [
+      "p59",
+      "p64",
+      "needs"
+    ],
+    [
+      "p62",
+      "p64",
+      "needs"
+    ],
+    [
+      "p60",
+      "p64",
+      "helps"
+    ],
+    [
+      "p58",
+      "p64",
+      "helps"
+    ],
+    [
+      "p55",
+      "p65",
+      "needs"
+    ],
+    [
+      "p64",
+      "p65",
+      "needs"
+    ],
+    [
+      "p56",
+      "p65",
+      "needs"
+    ],
+    [
+      "p84",
+      "p65",
+      "helps"
+    ],
+    [
+      "p91",
+      "p65",
+      "helps"
+    ],
+    [
+      "p126",
+      "p65",
+      "helps"
+    ],
+    [
+      "p14",
+      "p84",
+      "needs"
+    ],
+    [
+      "p53",
+      "p84",
+      "needs"
+    ],
+    [
+      "p59",
+      "p84",
+      "needs"
+    ],
+    [
+      "p57",
+      "p84",
+      "helps"
+    ],
+    [
+      "p60",
+      "p84",
+      "helps"
+    ],
+    [
+      "p55",
+      "p84",
+      "helps"
+    ],
+    [
+      "p84",
+      "p85",
+      "needs"
+    ],
+    [
+      "p9",
+      "p85",
+      "needs"
+    ],
+    [
+      "p44",
+      "p85",
+      "needs"
+    ],
+    [
+      "p56",
+      "p85",
+      "needs"
+    ],
+    [
+      "p78",
+      "p85",
+      "needs"
+    ],
+    [
+      "p57",
+      "p85",
+      "helps"
+    ],
+    [
+      "p61",
+      "p85",
+      "helps"
+    ],
+    [
+      "p81",
+      "p85",
+      "helps"
+    ],
+    [
+      "p14",
+      "p86",
+      "needs"
+    ],
+    [
+      "p53",
+      "p86",
+      "needs"
+    ],
+    [
+      "p59",
+      "p86",
+      "needs"
+    ],
+    [
+      "p6",
+      "p86",
+      "helps"
+    ],
+    [
+      "p60",
+      "p86",
+      "helps"
+    ],
+    [
+      "p84",
+      "p87",
+      "needs"
+    ],
+    [
+      "p14",
+      "p87",
+      "needs"
+    ],
+    [
+      "p16",
+      "p87",
+      "needs"
+    ],
+    [
+      "p44",
+      "p87",
+      "needs"
+    ],
+    [
+      "p53",
+      "p87",
+      "needs"
+    ],
+    [
+      "p96",
+      "p87",
+      "helps"
+    ],
+    [
+      "p60",
+      "p87",
+      "helps"
+    ],
+    [
+      "p87",
+      "p88",
+      "needs"
+    ],
+    [
+      "p9",
+      "p88",
+      "needs"
+    ],
+    [
+      "p56",
+      "p88",
+      "needs"
+    ],
+    [
+      "p78",
+      "p88",
+      "needs"
+    ],
+    [
+      "p85",
+      "p88",
+      "helps"
+    ],
+    [
+      "p98",
+      "p88",
+      "helps"
+    ],
+    [
+      "p9",
+      "p89",
+      "needs"
+    ],
+    [
+      "p10",
+      "p89",
+      "needs"
+    ],
+    [
+      "p6",
+      "p89",
+      "needs"
+    ],
+    [
+      "p14",
+      "p89",
+      "needs"
+    ],
+    [
+      "p85",
+      "p89",
+      "helps"
+    ],
+    [
+      "p57",
+      "p89",
+      "helps"
+    ],
+    [
+      "p14",
+      "p91",
+      "needs"
+    ],
+    [
+      "p85",
+      "p91",
+      "needs"
+    ],
+    [
+      "p53",
+      "p91",
+      "needs"
+    ],
+    [
+      "p59",
+      "p91",
+      "needs"
+    ],
+    [
+      "p44",
+      "p91",
+      "needs"
+    ],
+    [
+      "p97",
+      "p91",
+      "helps"
+    ],
+    [
+      "p65",
+      "p91",
+      "helps"
+    ],
+    [
+      "p84",
+      "p93",
+      "needs"
+    ],
+    [
+      "p85",
+      "p93",
+      "needs"
+    ],
+    [
+      "p86",
+      "p93",
+      "needs"
+    ],
+    [
+      "p87",
+      "p93",
+      "needs"
+    ],
+    [
+      "p88",
+      "p93",
+      "needs"
+    ],
+    [
+      "p89",
+      "p93",
+      "needs"
+    ],
+    [
+      "p91",
+      "p93",
+      "needs"
+    ],
+    [
+      "p52",
+      "p93",
+      "helps"
+    ],
+    [
+      "p118",
+      "p93",
+      "helps"
+    ],
+    [
+      "p15",
+      "p94",
+      "needs"
+    ],
+    [
+      "p16",
+      "p94",
+      "needs"
+    ],
+    [
+      "p54",
+      "p94",
+      "needs"
+    ],
+    [
+      "p60",
+      "p94",
+      "needs"
+    ],
+    [
+      "p21",
+      "p94",
+      "helps"
+    ],
+    [
+      "p127",
+      "p94",
+      "helps"
+    ],
+    [
+      "p15",
+      "p95",
+      "needs"
+    ],
+    [
+      "p16",
+      "p95",
+      "needs"
+    ],
+    [
+      "p54",
+      "p95",
+      "needs"
+    ],
+    [
+      "p60",
+      "p95",
+      "needs"
+    ],
+    [
+      "p91",
+      "p95",
+      "helps"
+    ],
+    [
+      "p87",
+      "p95",
+      "helps"
+    ],
+    [
+      "p20",
+      "p95",
+      "helps"
+    ],
+    [
+      "p95",
+      "p96",
+      "needs"
+    ],
+    [
+      "p31",
+      "p96",
+      "needs"
+    ],
+    [
+      "p87",
+      "p96",
+      "helps"
+    ],
+    [
+      "p95",
+      "p97",
+      "needs"
+    ],
+    [
+      "p96",
+      "p97",
+      "needs"
+    ],
+    [
+      "p91",
+      "p97",
+      "needs"
+    ],
+    [
+      "p70",
+      "p97",
+      "needs"
+    ],
+    [
+      "p81",
+      "p97",
+      "needs"
+    ],
+    [
+      "p98",
+      "p97",
+      "helps"
+    ],
+    [
+      "p85",
+      "p97",
+      "helps"
+    ],
+    [
+      "p95",
+      "p98",
+      "needs"
+    ],
+    [
+      "p97",
+      "p98",
+      "needs"
+    ],
+    [
+      "p79",
+      "p98",
+      "needs"
+    ],
+    [
+      "p54",
+      "p98",
+      "needs"
+    ],
+    [
+      "p81",
+      "p98",
+      "needs"
+    ],
+    [
+      "p88",
+      "p98",
+      "helps"
+    ],
+    [
+      "p56",
+      "p98",
+      "helps"
+    ],
+    [
+      "p78",
+      "p98",
+      "helps"
+    ],
+    [
+      "p15",
+      "p99",
+      "needs"
+    ],
+    [
+      "p54",
+      "p99",
+      "needs"
+    ],
+    [
+      "p37",
+      "p99",
+      "needs"
+    ],
+    [
+      "p85",
+      "p99",
+      "needs"
+    ],
+    [
+      "p94",
+      "p99",
+      "helps"
+    ],
+    [
+      "p25",
+      "p99",
+      "helps"
+    ],
+    [
+      "p41",
+      "p99",
+      "helps"
+    ],
+    [
+      "p15",
+      "p100",
+      "needs"
+    ],
+    [
+      "p16",
+      "p100",
+      "needs"
+    ],
+    [
+      "p54",
+      "p100",
+      "needs"
+    ],
+    [
+      "p59",
+      "p100",
+      "needs"
+    ],
+    [
+      "p127",
+      "p100",
+      "needs"
+    ],
+    [
+      "p62",
+      "p100",
+      "helps"
+    ],
+    [
+      "p100",
+      "p101",
+      "needs"
+    ],
+    [
+      "p62",
+      "p101",
+      "needs"
+    ],
+    [
+      "p61",
+      "p101",
+      "needs"
+    ],
+    [
+      "p16",
+      "p101",
+      "needs"
+    ],
+    [
+      "p17",
+      "p101",
+      "helps"
+    ],
+    [
+      "p127",
+      "p101",
+      "helps"
+    ],
+    [
+      "p101",
+      "p102",
+      "needs"
+    ],
+    [
+      "p18",
+      "p102",
+      "needs"
+    ],
+    [
+      "p110",
+      "p102",
+      "helps"
+    ],
+    [
+      "p109",
+      "p102",
+      "helps"
+    ],
+    [
+      "p23",
+      "p102",
+      "helps"
+    ],
+    [
+      "p100",
+      "p103",
+      "needs"
+    ],
+    [
+      "p101",
+      "p103",
+      "needs"
+    ],
+    [
+      "p68",
+      "p103",
+      "needs"
+    ],
+    [
+      "p54",
+      "p103",
+      "needs"
+    ],
+    [
+      "p128",
+      "p103",
+      "needs"
+    ],
+    [
+      "p75",
+      "p103",
+      "helps"
+    ],
+    [
+      "p76",
+      "p103",
+      "helps"
+    ],
+    [
+      "p62",
+      "p103",
+      "helps"
+    ],
+    [
+      "p127",
+      "p103",
+      "helps"
+    ],
+    [
+      "p103",
+      "p104",
+      "needs"
+    ],
+    [
+      "p76",
+      "p104",
+      "needs"
+    ],
+    [
+      "p62",
+      "p104",
+      "helps"
+    ],
+    [
+      "p103",
+      "p105",
+      "needs"
+    ],
+    [
+      "p67",
+      "p105",
+      "needs"
+    ],
+    [
+      "p69",
+      "p105",
+      "needs"
+    ],
+    [
+      "p56",
+      "p105",
+      "needs"
+    ],
+    [
+      "p78",
+      "p105",
+      "needs"
+    ],
+    [
+      "p83",
+      "p105",
+      "needs"
+    ],
+    [
+      "p127",
+      "p105",
+      "helps"
+    ],
+    [
+      "p20",
+      "p105",
+      "helps"
+    ],
+    [
+      "p103",
+      "p106",
+      "needs"
+    ],
+    [
+      "p105",
+      "p106",
+      "needs"
+    ],
+    [
+      "p71",
+      "p106",
+      "needs"
+    ],
+    [
+      "p72",
+      "p106",
+      "needs"
+    ],
+    [
+      "p76",
+      "p106",
+      "needs"
+    ],
+    [
+      "p74",
+      "p106",
+      "helps"
+    ],
+    [
+      "p104",
+      "p106",
+      "helps"
+    ],
+    [
+      "p103",
+      "p107",
+      "needs"
+    ],
+    [
+      "p105",
+      "p107",
+      "needs"
+    ],
+    [
+      "p77",
+      "p107",
+      "needs"
+    ],
+    [
+      "p70",
+      "p107",
+      "needs"
+    ],
+    [
+      "p106",
+      "p107",
+      "helps"
+    ],
+    [
+      "p68",
+      "p107",
+      "helps"
+    ],
+    [
+      "p12",
+      "p66",
+      "needs"
+    ],
+    [
+      "p14",
+      "p66",
+      "needs"
+    ],
+    [
+      "p3",
+      "p66",
+      "needs"
+    ],
+    [
+      "p2",
+      "p66",
+      "helps"
+    ],
+    [
+      "p33",
+      "p66",
+      "helps"
+    ],
+    [
+      "p66",
+      "p67",
+      "needs"
+    ],
+    [
+      "p35",
+      "p67",
+      "helps"
+    ],
+    [
+      "p15",
+      "p68",
+      "needs"
+    ],
+    [
+      "p16",
+      "p68",
+      "needs"
+    ],
+    [
+      "p66",
+      "p68",
+      "needs"
+    ],
+    [
+      "p131",
+      "p68",
+      "needs"
+    ],
+    [
+      "p17",
+      "p68",
+      "helps"
+    ],
+    [
+      "p68",
+      "p69",
+      "needs"
+    ],
+    [
+      "p67",
+      "p69",
+      "needs"
+    ],
+    [
+      "p66",
+      "p70",
+      "needs"
+    ],
+    [
+      "p67",
+      "p70",
+      "needs"
+    ],
+    [
+      "p43",
+      "p70",
+      "needs"
+    ],
+    [
+      "p68",
+      "p70",
+      "helps"
+    ],
+    [
+      "p69",
+      "p70",
+      "helps"
+    ],
+    [
+      "p67",
+      "p71",
+      "needs"
+    ],
+    [
+      "p69",
+      "p71",
+      "needs"
+    ],
+    [
+      "p31",
+      "p71",
+      "needs"
+    ],
+    [
+      "p32",
+      "p71",
+      "needs"
+    ],
+    [
+      "p70",
+      "p71",
+      "helps"
+    ],
+    [
+      "p36",
+      "p71",
+      "helps"
+    ],
+    [
+      "p71",
+      "p72",
+      "needs"
+    ],
+    [
+      "p53",
+      "p72",
+      "needs"
+    ],
+    [
+      "p54",
+      "p72",
+      "needs"
+    ],
+    [
+      "p55",
+      "p72",
+      "needs"
+    ],
+    [
+      "p12",
+      "p72",
+      "helps"
+    ],
+    [
+      "p72",
+      "p73",
+      "needs"
+    ],
+    [
+      "p56",
+      "p73",
+      "needs"
+    ],
+    [
+      "p35",
+      "p73",
+      "helps"
+    ],
+    [
+      "p73",
+      "p74",
+      "needs"
+    ],
+    [
+      "p59",
+      "p74",
+      "needs"
+    ],
+    [
+      "p60",
+      "p74",
+      "needs"
+    ],
+    [
+      "p55",
+      "p75",
+      "needs"
+    ],
+    [
+      "p56",
+      "p75",
+      "needs"
+    ],
+    [
+      "p59",
+      "p75",
+      "needs"
+    ],
+    [
+      "p60",
+      "p75",
+      "needs"
+    ],
+    [
+      "p66",
+      "p75",
+      "needs"
+    ],
+    [
+      "p68",
+      "p75",
+      "needs"
+    ],
+    [
+      "p129",
+      "p75",
+      "needs"
+    ],
+    [
+      "p70",
+      "p75",
+      "needs"
+    ],
+    [
+      "p131",
+      "p75",
+      "needs"
+    ],
+    [
+      "p57",
+      "p75",
+      "helps"
+    ],
+    [
+      "p67",
+      "p75",
+      "helps"
+    ],
+    [
+      "p69",
+      "p75",
+      "helps"
+    ],
+    [
+      "p75",
+      "p76",
+      "needs"
+    ],
+    [
+      "p62",
+      "p76",
+      "needs"
+    ],
+    [
+      "p61",
+      "p76",
+      "needs"
+    ],
+    [
+      "p59",
+      "p76",
+      "helps"
+    ],
+    [
+      "p75",
+      "p77",
+      "needs"
+    ],
+    [
+      "p70",
+      "p77",
+      "needs"
+    ],
+    [
+      "p76",
+      "p77",
+      "needs"
+    ],
+    [
+      "p107",
+      "p77",
+      "helps"
+    ],
+    [
+      "p75",
+      "p78",
+      "needs"
+    ],
+    [
+      "p60",
+      "p78",
+      "needs"
+    ],
+    [
+      "p61",
+      "p78",
+      "needs"
+    ],
+    [
+      "p56",
+      "p78",
+      "needs"
+    ],
+    [
+      "p77",
+      "p78",
+      "helps"
+    ],
+    [
+      "p85",
+      "p78",
+      "helps"
+    ],
+    [
+      "p57",
+      "p78",
+      "helps"
+    ],
+    [
+      "p70",
+      "p79",
+      "needs"
+    ],
+    [
+      "p67",
+      "p79",
+      "needs"
+    ],
+    [
+      "p69",
+      "p79",
+      "needs"
+    ],
+    [
+      "p66",
+      "p79",
+      "needs"
+    ],
+    [
+      "p68",
+      "p79",
+      "needs"
+    ],
+    [
+      "p19",
+      "p79",
+      "helps"
+    ],
+    [
+      "p20",
+      "p79",
+      "helps"
+    ],
+    [
+      "p98",
+      "p79",
+      "helps"
+    ],
+    [
+      "p85",
+      "p79",
+      "helps"
+    ],
+    [
+      "p20",
+      "p80",
+      "needs"
+    ],
+    [
+      "p68",
+      "p80",
+      "needs"
+    ],
+    [
+      "p69",
+      "p80",
+      "needs"
+    ],
+    [
+      "p131",
+      "p80",
+      "needs"
+    ],
+    [
+      "p79",
+      "p80",
+      "helps"
+    ],
+    [
+      "p19",
+      "p80",
+      "helps"
+    ],
+    [
+      "p70",
+      "p81",
+      "needs"
+    ],
+    [
+      "p126",
+      "p81",
+      "needs"
+    ],
+    [
+      "p85",
+      "p81",
+      "helps"
+    ],
+    [
+      "p12",
+      "p81",
+      "helps"
+    ],
+    [
+      "p81",
+      "p82",
+      "needs"
+    ],
+    [
+      "p56",
+      "p82",
+      "needs"
+    ],
+    [
+      "p78",
+      "p82",
+      "needs"
+    ],
+    [
+      "p61",
+      "p82",
+      "needs"
+    ],
+    [
+      "p70",
+      "p82",
+      "needs"
+    ],
+    [
+      "p62",
+      "p82",
+      "helps"
+    ],
+    [
+      "p75",
+      "p83",
+      "needs"
+    ],
+    [
+      "p78",
+      "p83",
+      "needs"
+    ],
+    [
+      "p128",
+      "p83",
+      "needs"
+    ],
+    [
+      "p103",
+      "p83",
+      "helps"
+    ],
+    [
+      "p66",
+      "p129",
+      "needs"
+    ],
+    [
+      "p68",
+      "p129",
+      "needs"
+    ],
+    [
+      "p70",
+      "p129",
+      "needs"
+    ],
+    [
+      "p53",
+      "p108",
+      "needs"
+    ],
+    [
+      "p54",
+      "p108",
+      "needs"
+    ],
+    [
+      "p56",
+      "p108",
+      "needs"
+    ],
+    [
+      "p57",
+      "p108",
+      "helps"
+    ],
+    [
+      "p3",
+      "p108",
+      "helps"
+    ],
+    [
+      "p108",
+      "p109",
+      "needs"
+    ],
+    [
+      "p59",
+      "p109",
+      "needs"
+    ],
+    [
+      "p60",
+      "p109",
+      "needs"
+    ],
+    [
+      "p55",
+      "p109",
+      "helps"
+    ],
+    [
+      "p61",
+      "p109",
+      "helps"
+    ],
+    [
+      "p62",
+      "p109",
+      "helps"
+    ],
+    [
+      "p108",
+      "p110",
+      "needs"
+    ],
+    [
+      "p109",
+      "p110",
+      "needs"
+    ],
+    [
+      "p100",
+      "p110",
+      "helps"
+    ],
+    [
+      "p102",
+      "p110",
+      "helps"
+    ],
+    [
+      "p109",
+      "p111",
+      "needs"
+    ],
+    [
+      "p12",
+      "p111",
+      "needs"
+    ],
+    [
+      "p110",
+      "p111",
+      "helps"
+    ],
+    [
+      "p82",
+      "p111",
+      "helps"
+    ],
+    [
+      "p16",
+      "p112",
+      "needs"
+    ],
+    [
+      "p12",
+      "p112",
+      "needs"
+    ],
+    [
+      "p100",
+      "p112",
+      "helps"
+    ],
+    [
+      "p101",
+      "p112",
+      "helps"
+    ],
+    [
+      "p126",
+      "p112",
+      "helps"
+    ],
+    [
+      "p111",
+      "p112",
+      "helps"
+    ],
+    [
+      "p111",
+      "p113",
+      "needs"
+    ],
+    [
+      "p112",
+      "p113",
+      "needs"
+    ],
+    [
+      "p117",
+      "p113",
+      "helps"
+    ],
+    [
+      "p111",
+      "p130",
+      "needs"
+    ],
+    [
+      "p112",
+      "p130",
+      "needs"
+    ],
+    [
+      "p113",
+      "p130",
+      "needs"
+    ],
+    [
+      "p82",
+      "p115",
+      "needs"
+    ],
+    [
+      "p109",
+      "p115",
+      "needs"
+    ],
+    [
+      "p111",
+      "p115",
+      "needs"
+    ],
+    [
+      "p81",
+      "p115",
+      "needs"
+    ],
+    [
+      "p110",
+      "p115",
+      "helps"
+    ],
+    [
+      "p26",
+      "p115",
+      "helps"
+    ],
+    [
+      "p115",
+      "p117",
+      "needs"
+    ],
+    [
+      "p113",
+      "p117",
+      "needs"
+    ],
+    [
+      "p81",
+      "p118",
+      "needs"
+    ],
+    [
+      "p82",
+      "p118",
+      "needs"
+    ],
+    [
+      "p62",
+      "p118",
+      "needs"
+    ],
+    [
+      "p112",
+      "p118",
+      "needs"
+    ],
+    [
+      "p101",
+      "p118",
+      "needs"
+    ],
+    [
+      "p60",
+      "p118",
+      "needs"
+    ],
+    [
+      "p65",
+      "p118",
+      "helps"
+    ],
+    [
+      "p100",
+      "p118",
+      "helps"
+    ],
+    [
+      "p115",
+      "p118",
+      "helps"
+    ],
+    [
+      "p82",
+      "p119",
+      "needs"
+    ],
+    [
+      "p59",
+      "p119",
+      "needs"
+    ],
+    [
+      "p118",
+      "p119",
+      "helps"
+    ],
+    [
+      "p22",
+      "p119",
+      "helps"
+    ],
+    [
+      "p118",
+      "p120",
+      "needs"
+    ],
+    [
+      "p119",
+      "p120",
+      "needs"
+    ],
+    [
+      "p21",
+      "p120",
+      "needs"
+    ],
+    [
+      "p64",
+      "p120",
+      "helps"
+    ],
+    [
+      "p85",
+      "p120",
+      "helps"
+    ],
+    [
+      "p95",
+      "p120",
+      "helps"
+    ],
+    [
+      "p115",
+      "p121",
+      "needs"
+    ],
+    [
+      "p118",
+      "p121",
+      "needs"
+    ],
+    [
+      "p58",
+      "p121",
+      "needs"
+    ],
+    [
+      "p117",
+      "p121",
+      "helps"
+    ],
+    [
+      "p120",
+      "p121",
+      "helps"
+    ],
+    [
+      "p77",
+      "p121",
+      "helps"
+    ],
+    [
+      "p85",
+      "p122",
+      "needs"
+    ],
+    [
+      "p118",
+      "p122",
+      "needs"
+    ],
+    [
+      "p101",
+      "p122",
+      "needs"
+    ],
+    [
+      "p60",
+      "p122",
+      "needs"
+    ],
+    [
+      "p78",
+      "p122",
+      "needs"
+    ],
+    [
+      "p120",
+      "p122",
+      "helps"
+    ],
+    [
+      "p119",
+      "p122",
+      "helps"
+    ],
+    [
+      "p121",
+      "p122",
+      "helps"
+    ],
+    [
+      "p57",
+      "p122",
+      "helps"
+    ],
+    [
+      "p102",
+      "p122",
+      "helps"
+    ],
+    [
+      "p118",
+      "p124",
+      "needs"
+    ],
+    [
+      "p119",
+      "p124",
+      "needs"
+    ],
+    [
+      "p61",
+      "p124",
+      "needs"
+    ],
+    [
+      "p112",
+      "p124",
+      "needs"
+    ],
+    [
+      "p82",
+      "p124",
+      "needs"
+    ],
+    [
+      "p130",
+      "p124",
+      "needs"
+    ],
+    [
+      "p111",
+      "p124",
+      "helps"
+    ],
+    [
+      "p121",
+      "p124",
+      "helps"
+    ],
+    [
+      "p20",
+      "p124",
+      "helps"
+    ],
+    [
+      "p100",
+      "p124",
+      "helps"
+    ],
+    [
+      "p82",
+      "p22",
+      "needs"
+    ],
+    [
+      "p118",
+      "p22",
+      "needs"
+    ],
+    [
+      "p119",
+      "p22",
+      "needs"
+    ],
+    [
+      "p132",
+      "p22",
+      "needs"
+    ],
+    [
+      "p81",
+      "p22",
+      "helps"
+    ],
+    [
+      "p120",
+      "p22",
+      "helps"
+    ],
+    [
+      "p101",
+      "p22",
+      "helps"
+    ],
+    [
+      "p22",
+      "p23",
+      "needs"
+    ],
+    [
+      "p101",
+      "p23",
+      "needs"
+    ],
+    [
+      "p102",
+      "p23",
+      "needs"
+    ],
+    [
+      "p122",
+      "p23",
+      "helps"
+    ],
+    [
+      "p18",
+      "p23",
+      "helps"
+    ],
+    [
+      "p81",
+      "p24",
+      "needs"
+    ],
+    [
+      "p14",
+      "p24",
+      "needs"
+    ],
+    [
+      "p15",
+      "p24",
+      "needs"
+    ],
+    [
+      "p84",
+      "p24",
+      "needs"
+    ],
+    [
+      "p70",
+      "p24",
+      "needs"
+    ],
+    [
+      "p85",
+      "p24",
+      "helps"
+    ],
+    [
+      "p91",
+      "p24",
+      "helps"
+    ],
+    [
+      "p100",
+      "p24",
+      "helps"
+    ],
+    [
+      "p37",
+      "p24",
+      "helps"
+    ],
+    [
+      "p37",
+      "p25",
+      "needs"
+    ],
+    [
+      "p41",
+      "p25",
+      "needs"
+    ],
+    [
+      "p99",
+      "p25",
+      "needs"
+    ],
+    [
+      "p24",
+      "p25",
+      "needs"
+    ],
+    [
+      "p85",
+      "p25",
+      "helps"
+    ],
+    [
+      "p71",
+      "p25",
+      "helps"
+    ],
+    [
+      "p115",
+      "p26",
+      "needs"
+    ],
+    [
+      "p21",
+      "p26",
+      "needs"
+    ],
+    [
+      "p57",
+      "p26",
+      "helps"
+    ],
+    [
+      "p82",
+      "p26",
+      "helps"
+    ],
+    [
+      "p55",
+      "p26",
+      "helps"
+    ],
+    [
+      "p22",
+      "p27",
+      "needs"
+    ],
+    [
+      "p26",
+      "p27",
+      "needs"
+    ],
+    [
+      "p10",
+      "p27",
+      "needs"
+    ],
+    [
+      "p81",
+      "p27",
+      "helps"
+    ],
+    [
+      "p23",
+      "p27",
+      "helps"
+    ],
+    [
+      "p14",
+      "p28",
+      "needs"
+    ],
+    [
+      "p55",
+      "p28",
+      "needs"
+    ],
+    [
+      "p24",
+      "p28",
+      "helps"
+    ],
+    [
+      "p60",
+      "p28",
+      "helps"
+    ],
+    [
+      "p36",
+      "p29",
+      "needs"
+    ],
+    [
+      "p46",
+      "p29",
+      "needs"
+    ],
+    [
+      "p24",
+      "p29",
+      "needs"
+    ],
+    [
+      "p28",
+      "p29",
+      "helps"
+    ],
+    [
+      "p25",
+      "p29",
+      "helps"
+    ],
+    [
+      "p37",
+      "p29",
+      "helps"
+    ],
+    [
+      "p71",
+      "p29",
+      "helps"
+    ],
+    [
+      "p81",
+      "p132",
+      "needs"
+    ],
+    [
+      "p82",
+      "p132",
+      "needs"
+    ],
+    [
+      "p12",
+      "p132",
+      "needs"
+    ]
+  ],
+  "mid": "mmv0h5lnpngrb",
+  "nodes": [
+    {
+      "id": "p1",
+      "name": "Experiments, sample spaces, outcomes and events",
+      "what": "Describe a random experiment and list its sample space, outcomes and events. Write an event as a subset of the sample space, for both finite and infinite sample spaces."
+    },
+    {
+      "id": "p2",
+      "name": "Events as sets: union, intersection, complement and De Morgan's laws",
+      "what": "Combine events with union, intersection and complement, and translate between words ('at least one', 'both', 'neither') and set notation. Apply De Morgan's laws to rewrite complicated events."
+    },
+    {
+      "id": "p3",
+      "name": "The axioms of probability and the probability function",
+      "what": "State the axioms of probability (non-negativity, normalisation, additivity for disjoint events) and understand a probability function as an assignment of numbers to events. Check whether a proposed assignment is a valid probability function."
+    },
+    {
+      "id": "p4",
+      "name": "Rules that follow from the axioms: complement, monotonicity and the addition rule",
+      "what": "Derive and use P(A^c) = 1 - P(A), monotonicity, and P(A ∪ B) = P(A) + P(B) - P(A ∩ B) directly from the axioms. Choose the complement or addition rule to simplify a calculation."
+    },
+    {
+      "id": "p5",
+      "name": "Inclusion-exclusion for several events",
+      "what": "Compute the probability of a union of three or more events with inclusion-exclusion, alternating single, pairwise and higher-order intersections. Recognise when it is easier to use the complement."
+    },
+    {
+      "id": "p6",
+      "name": "Equally likely outcomes and the naive definition of probability",
+      "what": "Apply P(A) = |A|/|S| when outcomes are equally likely, and recognise the assumption that makes this valid. Reduce a probability question to a counting question."
+    },
+    {
+      "id": "p7",
+      "name": "The multiplication rule for counting",
+      "what": "Count the outcomes of a multi-stage procedure by multiplying the number of choices at each stage. Justify the rule with a tree of possibilities."
+    },
+    {
+      "id": "p8",
+      "name": "Permutations and ordered selection",
+      "what": "Count ordered selections of k items from n distinct items, with factorials and the formula n!/(n-k)!. Know when order matters and how to handle the case where all n are arranged."
+    },
+    {
+      "id": "p9",
+      "name": "Combinations and the binomial coefficient",
+      "what": "Count unordered selections with the binomial coefficient C(n,k), explaining it as permutations divided by the k! orderings. Use its symmetry and compute it for small cases."
+    },
+    {
+      "id": "p10",
+      "name": "Sampling with and without replacement, ordered versus unordered",
+      "what": "Distinguish sampling with and without replacement and ordered versus unordered samples, and choose the right counting formula for each of the four cases. Compute probabilities for simple draws from an urn or deck."
+    },
+    {
+      "id": "p11",
+      "name": "Choosing and checking a sample space: when counting fails because outcomes are not equally likely",
+      "what": "Check whether a sample space's outcomes are equally likely before using counting. Fix models that fail, such as treating 'number of heads' or 'sum of two dice' outcomes as equally likely, by choosing a finer sample space or assigning unequal probabilities."
+    },
+    {
+      "id": "p31",
+      "name": "The definition P(A|B) and reading it correctly",
+      "what": "Define P(A|B) = P(A ∩ B)/P(B) for P(B) > 0, and read it as the probability of A once we know B occurred, i.e. restricting attention to B and renormalising. Distinguish P(A|B) from P(A ∩ B) and from P(B|A), and compute it in simple examples."
+    },
+    {
+      "id": "p32",
+      "name": "Conditional probability is a probability: P(·|B) satisfies the axioms",
+      "what": "See that for a fixed event B with P(B) > 0, the function P(·|B) satisfies the three axioms, so every rule derived from the axioms (complement, addition rule, etc.) also holds after conditioning."
+    },
+    {
+      "id": "p33",
+      "name": "The multiplication rule: P(A ∩ B) = P(B)P(A|B)",
+      "what": "Use P(A ∩ B) = P(B)P(A|B) = P(A)P(B|A) to compute the probability of two events occurring together from a marginal and a conditional probability, and recognise when a problem is giving the pieces in this form."
+    },
+    {
+      "id": "p34",
+      "name": "The chain rule for several events and tree diagrams",
+      "what": "Extend the multiplication rule to P(A1 ∩ ... ∩ An) = P(A1)P(A2|A1)...P(An|A1...An-1), and use tree diagrams to organise sequential experiments and read off path probabilities."
+    },
+    {
+      "id": "p35",
+      "name": "The law of total probability as a partition of the sample space",
+      "what": "Learner can split the sample space into a partition A1..An and compute P(B) = sum of P(B|Ai)P(Ai), choosing a partition that makes a hard probability easy by conditioning on cases. They understand why the pieces must be disjoint and cover everything."
+    },
+    {
+      "id": "p36",
+      "name": "Bayes' rule: reversing a conditional probability",
+      "what": "Learner can derive Bayes' rule from the multiplication rule and use it to turn P(B|A) into P(A|B), expanding the denominator with total probability. They can compute a reversed conditional from given numbers."
+    },
+    {
+      "id": "p37",
+      "name": "Prior, likelihood and posterior: reading Bayes' rule as updating",
+      "what": "Learner can name the prior, likelihood, evidence and posterior in Bayes' rule and interpret the formula as revising belief after seeing data. They can say how a strong prior or weak likelihood affects the posterior."
+    },
+    {
+      "id": "p39",
+      "name": "Odds and the odds form of Bayes' rule",
+      "what": "Learner can convert between probability and odds and apply the odds form: posterior odds = prior odds times likelihood ratio. They can use it to update quickly without computing the denominator."
+    },
+    {
+      "id": "p40",
+      "name": "Bayes factors and likelihood ratios as the weight of evidence",
+      "what": "Learner can compute a Bayes factor or likelihood ratio and read it as the strength of evidence for one hypothesis over another, independent of the prior. They can say why it multiplies the prior odds."
+    },
+    {
+      "id": "p41",
+      "name": "Sequential updating: using one posterior as the next prior",
+      "what": "Learner can update repeatedly as evidence arrives, using each posterior as the next prior, and see that the result matches updating on all the data at once when the pieces of evidence are conditionally independent given the hypothesis. They can carry this out in either probability or odds form."
+    },
+    {
+      "id": "p42",
+      "name": "Conditioning on extra background information: total probability and Bayes' rule given an event E",
+      "what": "Learner can write and use total probability and Bayes' rule with every term conditioned on a background event E, e.g. P(A|B,E). They can recognise this as applying the ordinary rules to the conditional probability function P(·|E)."
+    },
+    {
+      "id": "p43",
+      "name": "Independence of two events and what it says about conditioning",
+      "what": "The learner can state that events A and B are independent when P(A ∩ B) = P(A)P(B), and explain that this means learning B does not change the probability of A (P(A|B) = P(A) when P(B) > 0). They can check independence in a concrete example by computing the three probabilities."
+    },
+    {
+      "id": "p44",
+      "name": "Independence of several events: pairwise versus mutual independence",
+      "what": "The learner can distinguish pairwise independence from mutual independence of several events, state the full product condition over every subcollection, and recognise an example where events are pairwise but not mutually independent."
+    },
+    {
+      "id": "p45",
+      "name": "Independence and complements, and why disjoint events are not independent",
+      "what": "The learner can show that if A and B are independent then so are A and Bᶜ, Aᶜ and B, and Aᶜ and Bᶜ. They can explain why disjoint events with positive probability are never independent, since one occurring rules out the other."
+    },
+    {
+      "id": "p46",
+      "name": "Conditional independence given an event",
+      "what": "The learner can define conditional independence of A and B given E as P(A ∩ B | E) = P(A|E)P(B|E), interpret it as independence under the probability function P(·|E), and use it to compute probabilities in simple multi-stage examples."
+    },
+    {
+      "id": "p47",
+      "name": "Independence versus conditional independence: neither implies the other",
+      "what": "The learner can explain, using concrete counterexamples, that independence does not imply conditional independence and conditional independence does not imply independence. They can recognise the common-cause and explaining-away patterns that produce each case."
+    },
+    {
+      "id": "p48",
+      "name": "Base-rate neglect in diagnostic tests: sensitivity, specificity and positive predictive value",
+      "what": "The learner can compute the positive predictive value of a diagnostic test from sensitivity, specificity and the base rate, and explain why a positive result for a rare condition can still mean a low chance of disease."
+    },
+    {
+      "id": "p49",
+      "name": "Confusing P(A|B) with P(B|A): the prosecutor's fallacy and the defence attorney's fallacy",
+      "what": "The learner can tell P(A|B) from P(B|A) in a worded problem, and recognise the prosecutor's and defence attorney's fallacies as mistakes of swapping or ignoring base rates in evidence."
+    },
+    {
+      "id": "p50",
+      "name": "Simpson's paradox: reversal of an association when groups are combined, and lurking variables",
+      "what": "The learner can explain and construct an example where an association holds within every subgroup but reverses when the groups are combined, and use the law of total probability with group sizes to see why."
+    },
+    {
+      "id": "p51",
+      "name": "The Monty Hall problem: defining the host's rule and conditioning on what is revealed",
+      "what": "The learner can state the host's rule explicitly, compute the probability of winning by switching by conditioning on what the host reveals, and see how changing the rule changes the answer."
+    },
+    {
+      "id": "p52",
+      "name": "A checklist for setting up conditioning problems: name the sample space, the conditioning event and the information-generating process",
+      "what": "The learner can apply a routine to any conditioning problem: name the sample space, identify the conditioning event, model how the information was generated, and then compute and sanity-check the answer."
+    },
+    {
+      "id": "p12",
+      "name": "Random variables as functions on the sample space",
+      "what": "Understand a random variable as a function that assigns a number to each outcome in the sample space, so that events like {X = 3} or {X ≤ 2} are subsets of the sample space. Be able to write simple random variables (e.g. number of heads, sum of two dice) as functions."
+    },
+    {
+      "id": "p13",
+      "name": "Discrete versus continuous random variables",
+      "what": "Distinguish discrete random variables (countable support) from continuous ones (values filling an interval, no point masses), and decide which type a given situation produces. Know why each type needs a different tool for describing probabilities."
+    },
+    {
+      "id": "p14",
+      "name": "Probability mass functions and their properties",
+      "what": "Define and use the pmf P(X = x), check that it is nonnegative and sums to 1, and compute probabilities of events by summing the pmf. Build the pmf of a simple random variable from a sample space."
+    },
+    {
+      "id": "p15",
+      "name": "Probability density functions and why P(X = x) = 0 for continuous X",
+      "what": "Understand the pdf as a density whose integral over an interval gives the probability, check that it is nonnegative and integrates to 1, and explain why P(X = x) = 0 for continuous X while the density can still exceed 1."
+    },
+    {
+      "id": "p16",
+      "name": "The cumulative distribution function for discrete and continuous variables",
+      "what": "Define the CDF F(x) = P(X ≤ x) for both types, sketch it (a step function for discrete, a continuous curve for continuous), and state its properties: nondecreasing, right-continuous, limits 0 and 1."
+    },
+    {
+      "id": "p17",
+      "name": "Recovering a pmf or pdf from a CDF, and probabilities of intervals",
+      "what": "Compute P(a < X ≤ b) as F(b) − F(a), recover a pmf from the jumps of a CDF, and recover a pdf by differentiating the CDF. Practise moving between the pmf/pdf and the CDF."
+    },
+    {
+      "id": "p18",
+      "name": "Quantiles, the median and the inverse CDF",
+      "what": "Define the quantile function, median and other quantiles as the inverse of the CDF, and compute them for continuous distributions. Understand how to handle flat or jumping CDFs by taking the smallest x reaching the level."
+    },
+    {
+      "id": "p19",
+      "name": "Functions of a discrete random variable: finding the distribution of g(X)",
+      "what": "Find the pmf of Y = g(X) for discrete X by collecting the probability of all x values that map to each y, including the case where g is not one-to-one."
+    },
+    {
+      "id": "p20",
+      "name": "Change of variables for a continuous random variable: the CDF method and the density formula",
+      "what": "Find the distribution of Y = g(X) for continuous X using the CDF method (write P(Y ≤ y) in terms of F_X and differentiate), and use the density formula f_Y(y) = f_X(x)|dx/dy| for monotone g. Calculus (differentiation, chain rule) is used here."
+    },
+    {
+      "id": "p21",
+      "name": "Simulating a random variable by the inverse CDF method (universality of the uniform)",
+      "what": "Use the inverse CDF method to generate a random variable with a given CDF from a Uniform(0,1) variable, and understand why F(X) is uniform (universality of the uniform). Apply it, for instance, to simulate an exponential variable."
+    },
+    {
+      "id": "p126",
+      "name": "Equality in distribution: when two random variables have the same distribution",
+      "what": "Understand that two random variables are equal in distribution when they have the same CDF, even if they are different functions on the sample space or are not equal as variables. Recognise examples such as the number of heads and the number of tails of a fair coin."
+    },
+    {
+      "id": "p127",
+      "name": "Shifting and scaling a random variable: location-scale families",
+      "what": "Describe Y = a + bX as a shift and scale of X, and write how its CDF and pdf relate to those of X. Understand location-scale families, where every member comes from a standard one by shifting and scaling."
+    },
+    {
+      "id": "p53",
+      "name": "Expectation as a probability-weighted average (discrete case)",
+      "what": "Compute the expectation of a discrete random variable as the sum of each value times its probability, and interpret it as the long-run average or balance point of the distribution."
+    },
+    {
+      "id": "p54",
+      "name": "Expectation of a continuous random variable as an integral against the density",
+      "what": "Compute the expectation of a continuous random variable as the integral of x times the density, and see it as the continuous analogue of the discrete weighted average."
+    },
+    {
+      "id": "p55",
+      "name": "Expectation of a function of a random variable (the law of the unconscious statistician)",
+      "what": "Compute E[g(X)] directly from the distribution of X, by summing or integrating g(x) against the pmf or pdf, without first finding the distribution of g(X). Note the basic cases E[c] = c for a constant and E[X^2] computed by LOTUS, and understand that E[g(X)] is generally not g(E[X]) — in particular E[X^2] is generally larger than (E[X])^2, which is why variance comes out nonnegative."
+    },
+    {
+      "id": "p56",
+      "name": "Linearity of expectation and why it needs no independence",
+      "what": "Use E[X+Y] = E[X]+E[Y] and E[aX+b] = aE[X]+b for any random variables, and understand why this holds whether or not they are independent."
+    },
+    {
+      "id": "p57",
+      "name": "Indicator random variables and expectation as a counting technique",
+      "what": "Write a count of events as a sum of indicator random variables and use linearity to find its expected value, since E[I_A] = P(A). Apply this to problems such as matches, fixed points and the binomial mean."
+    },
+    {
+      "id": "p58",
+      "name": "When expectation fails to exist or is infinite (e.g. the Cauchy distribution)",
+      "what": "Recognise that the defining sum or integral for expectation may diverge or fail to converge absolutely, so the expectation is infinite or undefined, as with the Cauchy distribution. Check for this before using expectation."
+    },
+    {
+      "id": "p59",
+      "name": "Variance and standard deviation: definition and meaning as spread",
+      "what": "Define variance as the expected squared deviation from the mean, E[(X - E[X])^2], and standard deviation as its square root. Interpret both as measures of spread and see why the deviation is squared and why the standard deviation is in the original units."
+    },
+    {
+      "id": "p60",
+      "name": "The computational formula Var(X) = E[X^2] - (E[X])^2",
+      "what": "Derive and use the computational formula Var(X) = E[X^2] - (E[X])^2 by expanding the square and applying linearity. Use it to compute variances of discrete and continuous variables more easily than from the definition."
+    },
+    {
+      "id": "p61",
+      "name": "Scaling and shifting: Var(aX + b) = a^2 Var(X)",
+      "what": "Show and use the fact that Var(aX + b) = a^2 Var(X): shifting leaves the spread unchanged and scaling by a multiplies variance by a^2 (standard deviation by |a|). Explain why the sign of a and the constant b do not matter."
+    },
+    {
+      "id": "p62",
+      "name": "Standardisation to zero mean and unit variance",
+      "what": "Standardise a random variable to Z = (X - mu)/sigma and show that Z has mean 0 and variance 1. Use this to put variables on a common scale and to compare values in units of standard deviations."
+    },
+    {
+      "id": "p64",
+      "name": "Moments, skewness and kurtosis in brief",
+      "what": "Define the k-th moment, central moment and standardised moment. Interpret skewness (third standardised moment) as asymmetry and kurtosis (fourth) as tail heaviness, and compute them for simple distributions."
+    },
+    {
+      "id": "p65",
+      "name": "The moment generating function and computing moments from it",
+      "what": "Define the moment generating function M(t) = E[e^{tX}], compute it for simple distributions, and obtain moments by differentiating at t = 0. Understand that, where it exists near 0, it determines the distribution."
+    },
+    {
+      "id": "p84",
+      "name": "The Bernoulli distribution: story, mean and variance",
+      "what": "Learner can describe the Bernoulli distribution as a single yes/no trial with success probability p, write its pmf, and derive its mean p and variance p(1-p). They can use indicator variables as Bernoulli variables."
+    },
+    {
+      "id": "p85",
+      "name": "The binomial distribution as a sum of independent Bernoulli trials",
+      "what": "Learner can recognise a count of successes in n independent trials with the same success probability as Binomial(n,p), write the pmf using the binomial coefficient, and derive mean np and variance np(1-p) from the sum of Bernoullis."
+    },
+    {
+      "id": "p86",
+      "name": "The discrete uniform distribution",
+      "what": "Learner can model a choice among k equally likely labelled values with the discrete uniform distribution, write its pmf, and compute its mean and variance for consecutive integers."
+    },
+    {
+      "id": "p87",
+      "name": "The geometric distribution: waiting for the first success",
+      "what": "Learner can model the number of trials (or failures) until the first success in independent trials as geometric, write the pmf and CDF, state the mean and variance, and distinguish the two common conventions for counting. They can also state the memoryless property."
+    },
+    {
+      "id": "p88",
+      "name": "The negative binomial distribution: waiting for the r-th success",
+      "what": "Learner can model the waiting time for the r-th success as negative binomial, write the pmf using a binomial coefficient, and see it as a sum of r independent geometric waiting times to get its mean and variance."
+    },
+    {
+      "id": "p89",
+      "name": "The hypergeometric distribution and sampling without replacement",
+      "what": "Learner can model the number of successes when drawing without replacement from a finite population with two types as hypergeometric, write the pmf from counting, and explain how it differs from the binomial and when the binomial is a good approximation."
+    },
+    {
+      "id": "p91",
+      "name": "The Poisson distribution: counts of rare events",
+      "what": "Learner can use the Poisson distribution for counts of rare events in a fixed interval, write the pmf with rate parameter lambda, state that mean and variance both equal lambda, and see it as the limit of Binomial(n,p) with np fixed."
+    },
+    {
+      "id": "p93",
+      "name": "Choosing a discrete family from the story of the problem",
+      "what": "Learner can read the story of a problem (fixed number of trials, waiting for success, sampling without replacement, counting rare events, equally likely values) and choose the right discrete family and parameters, checking the assumptions such as independence and constant probability."
+    },
+    {
+      "id": "p94",
+      "name": "The continuous uniform distribution",
+      "what": "Learner can describe the continuous uniform distribution on [a,b], write its density and CDF, compute interval probabilities as length ratios, and state its mean and variance."
+    },
+    {
+      "id": "p95",
+      "name": "The exponential distribution as a waiting time",
+      "what": "Learner can describe the exponential distribution as the waiting time for an event occurring at constant rate, write its pdf and CDF, compute probabilities and the mean 1/lambda and variance, and interpret the rate parameter."
+    },
+    {
+      "id": "p96",
+      "name": "Memorylessness of the exponential distribution",
+      "what": "Learner can state and prove memorylessness, P(X > s+t | X > s) = P(X > t), explain what it means for waiting, and recognise that the exponential is the only continuous distribution with this property."
+    },
+    {
+      "id": "p97",
+      "name": "Exponential waiting times and the Poisson process",
+      "what": "Learner can connect the Poisson count and the exponential interarrival time: in a Poisson process with rate lambda, counts in an interval are Poisson and gaps between arrivals are i.i.d. exponential, and can use either to answer questions."
+    },
+    {
+      "id": "p98",
+      "name": "The gamma distribution as a sum of exponentials",
+      "what": "Learner can describe the gamma distribution as the waiting time for the r-th arrival (a sum of r i.i.d. exponentials), write its pdf with shape and rate parameters, and state its mean and variance."
+    },
+    {
+      "id": "p99",
+      "name": "The beta distribution and its use as a prior for a probability",
+      "what": "Learner can describe the beta distribution on [0,1], read the effect of its two shape parameters on the density, state its mean, and explain why it is a natural prior for an unknown probability and how it updates with binomial data."
+    },
+    {
+      "id": "p100",
+      "name": "The normal distribution: density, parameters and shape",
+      "what": "Learner can write the normal density, explain the roles of mean and standard deviation, describe its symmetric bell shape, and recognise how changing the parameters shifts and scales the curve."
+    },
+    {
+      "id": "p101",
+      "name": "Standardisation to Z and reading normal probabilities",
+      "what": "Learner can standardise a normal variable to Z = (X - mu)/sigma and use the standard normal CDF (table or software) to compute probabilities for any normal variable."
+    },
+    {
+      "id": "p102",
+      "name": "The empirical rule (68-95-99.7) and normal quantiles",
+      "what": "Learner can state and apply the 68-95-99.7 rule for quick estimates, and find normal quantiles using the inverse CDF, such as the 1.96 cutoff for the central 95%."
+    },
+    {
+      "id": "p103",
+      "name": "The multivariate normal: mean vector, covariance matrix and the density formula",
+      "what": "The learner can state what a multivariate normal vector is, read off its mean vector and covariance matrix, and write and interpret the density formula, including the quadratic form and the normalising constant. They can evaluate the bivariate case."
+    },
+    {
+      "id": "p104",
+      "name": "Geometry of the multivariate normal: contours as ellipses and the role of the covariance matrix",
+      "what": "The learner can explain why the density's contours are ellipses (ellipsoids in higher dimensions), how the covariance matrix sets their axes, orientation and spread, and how correlation tilts and narrows them. They can sketch contours for a given bivariate covariance matrix."
+    },
+    {
+      "id": "p105",
+      "name": "Marginals and linear transformations of a multivariate normal are normal",
+      "what": "The learner can use the facts that any subvector of a multivariate normal is normal and that a linear map AX + b of a multivariate normal vector is normal with mean Aμ + b and covariance AΣAᵀ. They can read marginals directly off the mean vector and covariance matrix."
+    },
+    {
+      "id": "p106",
+      "name": "Conditionals of a multivariate normal are normal (statement and the bivariate case)",
+      "what": "The learner can state that conditioning one block of a multivariate normal on another gives a normal with an updated mean and reduced covariance. They can derive and apply the bivariate case: E[Y|X=x] is linear in x and Var(Y|X) does not depend on x."
+    },
+    {
+      "id": "p107",
+      "name": "Uncorrelated jointly normal variables are independent, and why joint normality is required",
+      "what": "The learner can show that for jointly normal variables zero covariance implies independence, because the density factorises. They can also give a counterexample with normal marginals that are uncorrelated but dependent, showing that joint normality is required."
+    },
+    {
+      "id": "p128",
+      "name": "Vectors and matrices needed for the multivariate normal",
+      "what": "Learner can multiply matrices and vectors, take a transpose, read a determinant and an inverse for small matrices, recognise a symmetric positive definite matrix, and interpret eigenvalues and eigenvectors of a symmetric matrix as axis directions and scales. Used only as the notation for mean vectors, covariance matrices, quadratic forms and the ellipse geometry that follow."
+    },
+    {
+      "id": "p66",
+      "name": "Joint pmfs and the joint distribution of two discrete random variables",
+      "what": "Describe the joint distribution of two discrete random variables with a joint pmf P(X=x, Y=y), build it as a table, check it is nonnegative and sums to 1, and use it to find probabilities of events involving both variables."
+    },
+    {
+      "id": "p67",
+      "name": "Marginal distributions: summing out a variable",
+      "what": "Obtain the marginal pmf of one variable by summing the joint pmf over the other, and see why this is the law of total probability applied to the values of the other variable."
+    },
+    {
+      "id": "p68",
+      "name": "Joint pdfs and joint CDFs for continuous random variables",
+      "what": "Define the joint pdf and joint CDF for two continuous variables, compute probabilities as double integrals over regions, and relate the joint pdf to the joint CDF by differentiation."
+    },
+    {
+      "id": "p69",
+      "name": "Marginal densities: integrating out a variable",
+      "what": "Obtain the marginal density of one continuous variable by integrating the joint pdf over the other, including finding the correct limits when the support is not a rectangle."
+    },
+    {
+      "id": "p70",
+      "name": "Independence of random variables and how to check it from the joint distribution",
+      "what": "Decide whether two random variables are independent by checking whether the joint pmf or pdf factorises into the product of the marginals for all values, taking account of the support, and state what independence implies about joint probabilities."
+    },
+    {
+      "id": "p71",
+      "name": "Conditional distributions: conditional pmf and conditional pdf",
+      "what": "Define and compute the conditional pmf and conditional pdf of Y given X = x as the joint divided by the marginal, and see each as a legitimate distribution in y for fixed x."
+    },
+    {
+      "id": "p72",
+      "name": "Conditional expectation E[Y | X = x] and E[Y | X] as a random variable",
+      "what": "Compute E[Y | X = x] as the mean of the conditional distribution, and understand E[Y | X] as a random variable that is a function of X."
+    },
+    {
+      "id": "p73",
+      "name": "Adam's law (the tower property) and computing an expectation by conditioning",
+      "what": "Use Adam's law, E[E[Y|X]] = E[Y], to compute an expectation by conditioning on a convenient variable and averaging the conditional means."
+    },
+    {
+      "id": "p74",
+      "name": "Eve's law: the law of total variance",
+      "what": "State and use Eve's law, Var(Y) = E[Var(Y|X)] + Var(E[Y|X]), to split variance into within-group and between-group parts and compute variances by conditioning."
+    },
+    {
+      "id": "p131",
+      "name": "Double integrals, iterated sums and the Jacobian: the calculus needed for two variables",
+      "what": "Set up and evaluate a double sum or double integral over a region in the plane, choosing limits for non-rectangular supports and changing the order of integration; evaluate a 2x2 determinant and use the Jacobian determinant of an invertible map (x,y) -> (u,v) as the local area-scaling factor. Used only as the computational notation for joint densities, expectations of functions of two variables, convolution and change of variables."
+    },
+    {
+      "id": "p75",
+      "name": "Covariance: definition, computational formula and properties",
+      "what": "Define covariance as E[(X-E X)(Y-E Y)], derive the computational formula E[XY]-E[X]E[Y], and use its properties (symmetry, Cov(X,X)=Var(X), bilinearity, Cov(aX+b,Y)=a Cov(X,Y)). The learner can compute covariance from a joint distribution and interpret its sign."
+    },
+    {
+      "id": "p76",
+      "name": "Correlation as standardised covariance, and what it cannot see",
+      "what": "Define correlation as Cov(X,Y)/(SD(X)SD(Y)), know it lies in [-1,1] and is unit-free, and see that it measures only linear association. The learner can explain why a strong nonlinear dependence can still give correlation near zero."
+    },
+    {
+      "id": "p77",
+      "name": "Uncorrelated versus independent",
+      "what": "Show that independence implies zero covariance but not the reverse, using a counterexample such as Y=X^2 with symmetric X. The learner can state exactly what each property does and does not guarantee."
+    },
+    {
+      "id": "p78",
+      "name": "Variance of a sum, including the covariance term",
+      "what": "Compute Var(X+Y)=Var(X)+Var(Y)+2Cov(X,Y) and its extension to many variables and to linear combinations. The learner sees the cross term vanishes for uncorrelated variables and uses this to find variances of sums such as binomial counts."
+    },
+    {
+      "id": "p79",
+      "name": "Distribution of a sum of independent variables: convolution",
+      "what": "Find the distribution of X+Y for independent variables by convolution of pmfs (sums) or pdfs (integrals). The learner can carry this out for simple cases such as sums of two discrete or uniform variables."
+    },
+    {
+      "id": "p80",
+      "name": "Distribution of a function of several random variables (transformations of two variables)",
+      "what": "Find the distribution of a function of two random variables, such as the sum, ratio, max or min, using the CDF method and, for invertible maps, the change-of-variables formula with the Jacobian. The learner can set up the region of integration and derive the new density."
+    },
+    {
+      "id": "p81",
+      "name": "Independent and identically distributed (i.i.d.) samples",
+      "what": "Define i.i.d. random variables as independent copies drawn from the same distribution, and understand this as the model for a random sample or repeated trials. The learner can recognise when the assumption is reasonable and when it is not."
+    },
+    {
+      "id": "p82",
+      "name": "The sample mean as a random variable: its mean and variance",
+      "what": "Treat the sample mean of i.i.d. variables as a random variable, with E[X̄]=μ and Var(X̄)=σ²/n. The learner can compute these and see why averaging reduces spread."
+    },
+    {
+      "id": "p83",
+      "name": "Covariance matrix of a random vector",
+      "what": "Collect the variances and covariances of a random vector into a covariance matrix, know it is symmetric and positive semidefinite, and compute the covariance matrix of AX. The learner can read it and write it for a small example."
+    },
+    {
+      "id": "p129",
+      "name": "Expectation of a function of two random variables",
+      "what": "Compute E[g(X,Y)] by summing or integrating g(x,y) against the joint pmf or joint pdf (the two-dimensional law of the unconscious statistician), and derive E[XY]=E[X]E[Y] when X and Y are independent."
+    },
+    {
+      "id": "p108",
+      "name": "Markov's inequality: tail bounds from the mean of a nonnegative variable",
+      "what": "State Markov's inequality P(X >= a) <= E[X]/a for a nonnegative variable X and a > 0, see why nonnegativity is required, and use it to bound a tail probability knowing only the mean."
+    },
+    {
+      "id": "p109",
+      "name": "Chebyshev's inequality: tail bounds from the variance",
+      "what": "State Chebyshev's inequality P(|X - mu| >= k*sigma) <= 1/k^2 (equivalently P(|X-mu| >= a) <= Var(X)/a^2), derive it by applying Markov to (X - mu)^2, and use it to bound deviations from the mean."
+    },
+    {
+      "id": "p110",
+      "name": "What tail bounds can and cannot tell you: loose bounds and their uses",
+      "what": "Judge when Markov and Chebyshev bounds are useful: compare them with exact tail probabilities (e.g. for the normal), see that they are loose but hold for any distribution with the given mean/variance, and see them as tools for proofs and guarantees rather than precise estimates."
+    },
+    {
+      "id": "p111",
+      "name": "Convergence in probability: a sequence of random variables settling near a value",
+      "what": "Define convergence in probability (P(|X_n - c| > epsilon) -> 0 for every epsilon > 0), check it in simple examples using Chebyshev's inequality, and interpret it as a sequence settling near a value with high probability."
+    },
+    {
+      "id": "p112",
+      "name": "Convergence in distribution: CDFs approaching a limit CDF",
+      "what": "Define convergence in distribution as convergence of CDFs at the continuity points of the limit CDF, and recognise it as a statement about distributions rather than about the variables' values, using simple examples."
+    },
+    {
+      "id": "p113",
+      "name": "Comparing the modes of convergence, with almost-sure convergence and the strong law mentioned",
+      "what": "Compare convergence in probability and in distribution (which implies which, and the special case of a constant limit), and know that almost-sure convergence is a stronger mode, which underlies the strong law, without proving it."
+    },
+    {
+      "id": "p130",
+      "name": "Slutsky-type facts: shifting, scaling and negligible terms in a limit",
+      "what": "Know the facts that let limits be manipulated: if Y_n converges in distribution to Y then a + b*Y_n converges in distribution to a + b*Y, and adding a term that converges in probability to 0 (or multiplying by a factor converging in probability to 1) does not change the limiting distribution. Apply them to simplify standardised expressions and to discard negligible remainder terms, without proof."
+    },
+    {
+      "id": "p115",
+      "name": "The weak law of large numbers: statement and what it promises",
+      "what": "State the weak law of large numbers: for i.i.d. variables with finite mean, the sample mean converges in probability to the true mean. The learner can say what this promises (the chance of a deviation larger than any fixed size shrinks to 0) and sketch why it follows from Chebyshev when the variance is finite."
+    },
+    {
+      "id": "p117",
+      "name": "The strong law of large numbers: how it differs from the weak law",
+      "what": "Explain how the strong law differs from the weak law: the sample mean converges to the mean with probability 1, which is a statement about whole sequences of observations rather than about each fixed n. The learner can say in words why this is a stronger guarantee, without proving it."
+    },
+    {
+      "id": "p118",
+      "name": "The central limit theorem: statement, conditions and standardised sums",
+      "what": "State the central limit theorem: for i.i.d. variables with finite mean and finite variance, the standardised sum or sample mean converges in distribution to the standard normal. The learner can identify the conditions, write the standardised form, and use it to approximate probabilities for sums and averages."
+    },
+    {
+      "id": "p119",
+      "name": "Standard error and the square-root-of-n scaling",
+      "what": "Compute and interpret the standard error of a sample mean, sigma divided by the square root of n, and understand that precision improves only with the square root of the sample size (four times the data to halve the error)."
+    },
+    {
+      "id": "p120",
+      "name": "Seeing the CLT at work: how sample size and the shape of the distribution affect the normal approximation",
+      "what": "See through simulation and examples how the normal approximation to a sample mean improves as n grows and how it depends on the shape of the underlying distribution (symmetric versus skewed, discrete versus continuous). The learner can judge roughly when n is large enough for a given case."
+    },
+    {
+      "id": "p121",
+      "name": "What the limit theorems do not promise: heavy tails, dependence, small n and individual observations",
+      "what": "Recognise the limits of the theorems: they fail or mislead with heavy tails (such as the Cauchy distribution, where the mean does not exist), with strongly dependent observations, and with small n. The learner also understands that they describe averages and long-run frequencies, not the next individual observation or a 'law of averages' that corrects past results."
+    },
+    {
+      "id": "p122",
+      "name": "Normal approximation to the binomial: when it works and how to standardise",
+      "what": "Approximate binomial probabilities with a normal distribution by matching the mean np and variance np(1-p), standardising to Z, and applying a continuity correction. The learner can state when the approximation is reliable (n large, p not near 0 or 1, e.g. np and n(1-p) both at least about 10) and when it is not."
+    },
+    {
+      "id": "p124",
+      "name": "The delta method: approximate distribution of a smooth function of a sample mean",
+      "what": "Approximate the distribution of a smooth function g of a sample mean as normal with mean g(mu) and variance g'(mu)^2 sigma^2/n, using a first-order Taylor expansion of g. The learner can apply this to find an approximate standard error of g(X-bar) and knows it needs g'(mu) nonzero."
+    },
+    {
+      "id": "p22",
+      "name": "Sampling distributions and standard error as the CLT in use",
+      "what": "Understand that a statistic such as the sample mean has its own distribution across repeated samples, and that the standard error measures its spread. Be able to compute the standard error of a mean and see it as the CLT and the square-root-of-n scaling in use."
+    },
+    {
+      "id": "p23",
+      "name": "Confidence intervals as a consequence of the normal approximation",
+      "what": "Build an approximate confidence interval for a mean or proportion from the normal approximation, and interpret the confidence level correctly as a statement about the procedure over repeated samples, not about one fixed interval."
+    },
+    {
+      "id": "p24",
+      "name": "Likelihood and maximum likelihood estimation",
+      "what": "Write the likelihood of observed data as a function of a parameter, and find the maximum likelihood estimate in simple cases such as Bernoulli, Poisson or normal samples, using the log-likelihood and single-variable calculus."
+    },
+    {
+      "id": "p25",
+      "name": "The Bayesian posterior as Bayes' rule applied to parameters",
+      "what": "See how Bayes' rule applies to an unknown parameter: prior times likelihood gives posterior. Work through the beta-binomial example to see a posterior update from data."
+    },
+    {
+      "id": "p26",
+      "name": "Monte Carlo estimation as the law of large numbers in use",
+      "what": "Estimate a probability or expectation by simulating many random draws and averaging, and judge the accuracy of the estimate through the law of large numbers and the standard error."
+    },
+    {
+      "id": "p27",
+      "name": "The bootstrap: resampling to approximate a sampling distribution",
+      "what": "Approximate a sampling distribution by resampling the observed data with replacement, and use the result to estimate a standard error or interval without a formula."
+    },
+    {
+      "id": "p28",
+      "name": "Entropy, cross-entropy and KL divergence in outline",
+      "what": "Define entropy, cross-entropy and KL divergence for discrete distributions, and interpret them as average surprise, the cost of using the wrong distribution, and a measure of how one distribution differs from another. See why cross-entropy appears as a loss in machine learning."
+    },
+    {
+      "id": "p29",
+      "name": "Probabilistic models in machine learning: naive Bayes, logistic regression and Markov chains in outline",
+      "what": "See how naive Bayes, logistic regression and Markov chains are probabilistic models: each defines a distribution over data and is fitted or used through conditioning, independence assumptions and likelihood. Gain an outline-level picture only, with no full treatment."
+    },
+    {
+      "id": "p132",
+      "name": "Parameters, statistics and estimators",
+      "what": "Distinguish a parameter (a fixed unknown number describing the distribution or population) from a statistic (a function of the sample, hence a random variable) and from an estimate (its value on the data at hand). Recognise the sample mean as an estimator of mu and see why a statistic has a distribution while a parameter does not."
+    }
+  ],
+  "profile": {
+    "examples": "Each example states a concrete scenario, makes the probability model explicit (what the sample space or random variable is, and what is assumed), shows the computation line by line with the numbers carried through to a final value, and ends with one sentence saying what the number means and which assumption it would break. Where a simulation would settle a dispute, the example names the simulation and its expected outcome, so the formula and the frequency it predicts sit side by side.",
+    "format": "An exercise is a short scenario with one to three questions that require setting up a model, not just plugging in. The answer is a written solution: first the model in symbols (define the random variable or the events), then the chain of steps with the rule named at each step ('by the law of total probability...'), then the numeric result to two or three significant figures, then a one-line sanity check (a bound, a limiting case, or what a simulation would show). Answers that reach the right number without naming the assumption that licensed it are marked incomplete.",
+    "name": "Probability",
+    "observe": "Simulate. Flip a real coin 20 times and record the running proportion of heads, then do it again; the jitter at n = 20 and its shrinkage by n = 200 is the law of large numbers happening in front of the learner. Draw repeated samples of size 5 from a deliberately skewed set of numbers (say, mostly 0 with an occasional 100), histogram the sample means, then repeat with samples of size 50 and watch the histogram become bell-shaped while the spread halves as n quadruples. For conditioning, write out all 36 outcomes of two dice on paper and physically cross out those that fail the condition; the conditional probability is literally the fraction of what remains.",
+    "rich": "A spam filter sees that 30% of messages are spam. The word 'offer' appears in 60% of spam and 5% of other mail; the word 'meeting' appears in 2% of spam and 20% of other mail. A message contains both words. (a) Under the assumption that the two words are conditionally independent given the class, compute the probability that the message is spam. (b) State plainly where that assumption could fail and in which direction the answer would move. (c) If the filter processes 10,000 such messages a day, use a suitable distribution to describe the number of spam messages it lets through at a threshold of 0.5, and give its mean and standard deviation. The learner must choose Bayes' rule, notice that the conditional-independence assumption is the thing doing the work, pick a binomial model and justify it, and connect a probability to a count.",
+    "run": "none",
+    "shallow": "'The variance of a Bernoulli(p) random variable is ___.' One step, one remembered formula, no decision about what to do.",
+    "slips": "Writing C(5,2) = 20 instead of 10 from an arithmetic error while the counting argument is correct; calling the Poisson distribution the 'Pascal' distribution while using it correctly; dropping a minus sign in E[X^2] - (E[X])^2 but setting the computation up right; writing 0.68 instead of 0.95 for two standard deviations by misremembering the number. None of these show a misunderstanding of the model.",
+    "trap": "A disease affects 1 in 1000 people. A test is 99% accurate in both directions. Someone tests positive; most learners answer that they are about 99% likely to have the disease. The true answer is about 9%. Out of 100,000 people, 100 have the disease and 99 of them test positive, while 99,900 are healthy and about 999 of them still test positive; the positive group is dominated by false positives. The explanation reveals the engine of the whole subject: a conditional probability is a ratio computed inside a restricted sample space, so P(disease | positive) and P(positive | disease) are ratios with different denominators and need not be close. Every Bayesian update is this restriction made into a formula."
+  },
+  "requests": 48,
+  "route": {
+    "goal": [
+      "p11",
+      "p36",
+      "p37",
+      "p39",
+      "p41",
+      "p48",
+      "p51",
+      "p52",
+      "p46",
+      "p47",
+      "p25",
+      "p29",
+      "p56",
+      "p57",
+      "p60",
+      "p62",
+      "p65",
+      "p64",
+      "p93",
+      "p85",
+      "p91",
+      "p87",
+      "p89",
+      "p95",
+      "p99",
+      "p102",
+      "p103",
+      "p105",
+      "p106",
+      "p107",
+      "p73",
+      "p74",
+      "p121",
+      "p118",
+      "p120",
+      "p122",
+      "p124",
+      "p21",
+      "p26",
+      "p28",
+      "p24",
+      "p72",
+      "p76",
+      "p77",
+      "p83",
+      "p79",
+      "p110",
+      "p117",
+      "p130",
+      "p58",
+      "p98",
+      "p97",
+      "p50",
+      "p49",
+      "p23",
+      "p27",
+      "p22",
+      "p44",
+      "p96",
+      "p113",
+      "p40",
+      "p42",
+      "p104",
+      "p88",
+      "p86",
+      "p94"
+    ],
+    "note": "The learner gave no starting point and the goal covers nearly the whole subject through statistics and machine learning, so I included most of the map and left out only a few narrow items (such as inclusion-exclusion for several events, quantiles and some counting detail), which the page adds anyway where they are prerequisites. I included the applied statistics and machine learning topics because the goal names them as the purpose.",
+    "why": {
+      "t1": "Events, the axioms and counting with equally likely outcomes are the foundation, and checking whether a sample space is valid is needed to model problems correctly.",
+      "t10": "Joint, marginal and conditional distributions and conditional expectation are required for multivariate models, Bayesian inference and the law of total variance.",
+      "t11": "Covariance, correlation, variance of sums, convolution and i.i.d. samples lead directly to the sample mean, the law of large numbers and the CLT.",
+      "t12": "The common discrete distributions (Bernoulli, binomial, geometric, Poisson and related) are part of the goal's common distributions item.",
+      "t13": "The common continuous distributions (uniform, exponential, gamma, beta, normal) are part of the goal's common distributions item and are used constantly in statistics and machine learning.",
+      "t14": "The multivariate normal is the standard model for continuous multivariate data in machine learning.",
+      "t15": "Chebyshev's inequality and the modes of convergence give the precise meaning and proof of the law of large numbers and the CLT.",
+      "t16": "The law of large numbers, the central limit theorem and the cautions about their limits are explicitly named in the goal.",
+      "t17": "Normal approximations and the delta method show how the limit theorems are used in practice in statistics.",
+      "t2": "Random variables, pmfs, pdfs, CDFs, transformations and inverse-CDF simulation are the language of the goal's random variables item and the distributions that follow.",
+      "t3": "Sampling distributions, maximum likelihood, Bayesian posteriors, Monte Carlo, the bootstrap, information measures and model outlines connect probability directly to statistics and machine learning.",
+      "t4": "Conditional probability and the multiplication and chain rules are the core of the goal's conditional probability item and underlie Bayes' rule.",
+      "t5": "Total probability, Bayes' rule, priors, posteriors and sequential updating are directly named in the goal and central to Bayesian machine learning.",
+      "t6": "Independence and conditional independence are required for binomial and i.i.d. models and for naive Bayes and graphical models in machine learning.",
+      "t7": "Base-rate neglect, the prosecutor's fallacy, Simpson's paradox and Monty Hall build the practical skill of applying Bayes' rule and conditioning correctly.",
+      "t8": "Expectation, linearity and indicator variables are named in the goal and used in nearly every later result.",
+      "t9": "Variance, standardisation and moments are named in the goal and are needed for the CLT and for distribution families."
+    }
+  },
+  "scope": "The map covers probability as the mathematical language needed for statistics and machine learning. Included: the sample-space model and the axioms, enough counting to build discrete models, conditional probability, independence and Bayes' rule, random variables both discrete and continuous (pmf, pdf, cdf), expectation, variance and other moments, the standard families of distributions (Bernoulli, binomial, geometric, Poisson, uniform, exponential, normal, and the multivariate normal in outline), joint and conditional distributions, covariance, correlation and conditional expectation, transformations and sums of random variables, the inequalities and modes of convergence that make limit theorems precise, and the weak law of large numbers and the central limit theorem with their uses. A short closing part shows where this leads: sampling distributions and confidence intervals, likelihood and Bayesian inference, Monte Carlo, and the probabilistic view of machine-learning models, so the learner sees the destination without being taught statistics or ML here. Left out, as not needed for the goal: measure-theoretic probability (sigma-algebras, Lebesgue integration, martingales), characteristic-function proofs beyond a sketch, stochastic processes and Markov chains beyond a mention, combinatorics past the basic counting rules, and the mechanics of statistical tests. Calculus is assumed at the level of single-variable integration and differentiation and is not taught, though each place it is used is flagged. The organisation follows the standard modern sequence used in texts such as Blitzstein & Hwang, Ross, and Wasserman (events, then conditioning, then random variables, then limits); an alternative is to introduce expectation before distributions, but the common ordering is used here.",
+  "sid": "smv0gxd29imrb",
+  "src": "en",
+  "subject": "Probability",
+  "tree": {
+    "agents": 47,
+    "levels": 3,
+    "linked": 9,
+    "parts": 6,
+    "topics": 17
+  },
+  "v": 2
+}

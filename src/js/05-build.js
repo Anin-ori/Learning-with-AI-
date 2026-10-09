@@ -274,7 +274,12 @@
       B.open = B.open.filter((o) => o.pt !== id);
       delete B.byId[id];
     };
-    parr(r && r.fixes).forEach((f) => {
+    // a reviewer sometimes adds a link and then withdraws it in the same answer: the pair cancels out, so the link that
+    // was already there stays (applied one after the other, the withdrawal would remove it)
+    const key = (f) => pstr(f && f.id) + ">" + pstr(f && f.need);
+    const adds = new Set(parr(r && r.fixes).filter((f) => pstr(f && f.op) === "add_need").map(key));
+    const pairs = new Set(parr(r && r.fixes).filter((f) => pstr(f && f.op) === "remove_need" && adds.has(key(f))).map(key));
+    parr(r && r.fixes).filter((f) => !((pstr(f && f.op) === "add_need" || pstr(f && f.op) === "remove_need") && pairs.has(key(f)))).forEach((f) => {
       const op = pstr(f && f.op), why = pstr(f && f.why), id = pstr(f && f.id), tail = why ? " (" + why + ")" : "", P = inPart();
       if (op === "link") {
         const o = openOf(pstr(f.need)), to = pstr(f.to);
@@ -321,7 +326,7 @@
       } else if (op === "add_need" || op === "remove_need") {
         const x = B.byId[id], need = pstr(f.need);
         if (!P.has(id) || !P.has(need) || id === need) return skip("Couldn't change what " + id + " needs" + tail);
-        if (op === "add_need") { if (!x.needs.includes(need)) x.needs.push(need); x.helps = x.helps.filter((y) => y !== need); ok(nameOf(id) + " now needs " + nameOf(need) + " first" + tail); }
+        if (op === "add_need") { if (x.needs.includes(need)) return; x.needs.push(need); x.helps = x.helps.filter((y) => y !== need); ok(nameOf(id) + " now needs " + nameOf(need) + " first" + tail); }
         else { x.needs = x.needs.filter((y) => y !== need); ok(nameOf(id) + " no longer needs " + nameOf(need) + " first" + tail); }
       } else if (op) skip("Unknown change \"" + op + "\"" + tail);
     });
