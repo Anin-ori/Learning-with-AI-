@@ -6,6 +6,8 @@ Open-source AI teaching software for self-directed learners. The AI creates; the
 
 **v2.1** adds a translation layer. Every agent works in English. When the learner reads another language (now Simplified Chinese), a translator agent turns what was built (the map, lessons, notes, practice, the level check, AI guidance) into that language after it is delivered. The English original is always kept, and one switch shows it. The tutor answers directly in the learner's language so its replies still stream.
 
+**v2.2** builds the map with a tree of agents: a master divides the subject into parts, planners divide each part until it is small enough to write as one topic, and reviewers check and join the parts on the way back up, ending with the whole map. Every finished agent's work is saved, so a build that stops continues where it left off.
+
 v1.18 (tag `v1.18`, files in `v1/`) is the earlier design: a Python map built from 13 human sources.
 
 ## Layout

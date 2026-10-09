@@ -1,6 +1,6 @@
 # Learning Companion: handoff for a new chat
 
-Current version: **v2.1** (Oct 8, 2026). Read this first, then the requirements doc.
+Current version: **v2.2** (Oct 8, 2026). Read this first, then the requirements doc.
 
 ## Links
 - App (always update this one; never create a new artifact): https://claude.ai/artifact/S3F4yxSMJYgxZovEzKixxo
@@ -42,7 +42,11 @@ Current version: **v2.1** (Oct 8, 2026). Read this first, then the requirements 
 - Tests: `node test/v2_test.js` (and `L=zh`). They need Playwright (`/opt/npm-tools/node_modules/playwright`, Chromium in `/opt/pw-browsers`) and Pyodide 0.26.4 core at `/home/claude/pyo/pyodide`: npm is blocked here, so download `pyodide-core-0.26.4.tar.bz2` from Pyodide's GitHub release.
 - Real-prompt checks: `test/capture.js` runs the page and writes each prompt to `test/cap/NNN.<kind>.prompt.txt`, then waits for `NNN.answer.json` (or `.txt`). Fresh agents answer them; tell them to write the file in one go, because the page reads it as soon as it appears. `SUBJECT`, `GOAL`, `POINT` set the run. The first run is in `test/real-run`.
 
-## v2.1 (latest)
+## v2.2 (latest)
+- The map is built by a tree of agents (R64, `05-build.js`): master → planners (divide, or write one topic) → reviewers join parts on the way up → router → page checks. Saved after each agent in `builds/<sid>`; Continue building / Start over. Usage limits stop the build (no retry).
+- Open: I42, maps grow large (point-grain guidance added, unverified); I43, builds are slow (about two requests at a time per viewer).
+
+## v2.1
 - Translation layer: every agent works in English; a translator agent turns built content into the learner's language after delivery; the English original is kept, with one switch; the tutor answers in the learner's language directly. A failed translation never blocks ("Translate it" retries). Long texts are sent in parts between paragraphs; only code comments are translated. Real-prompt check in `test/real-run/translate`. I41: translations are not checked.
 
 ## v2.0
@@ -51,7 +55,7 @@ Current version: **v2.1** (Oct 8, 2026). Read this first, then the requirements 
 - In Python, the page runs every lesson example and gives the checker the results (added after the first real lesson failed to converge on an unrun calculation).
 
 ## Open items
-- Proposed, awaiting the author: a recursive agent tree for the map (a master agent splits the subject into areas, sub-agents subdivide down to the smallest units, results checked and consolidated on the way up), later for every component. Waiting for the go-ahead and an acceptable cost per map.
+- The author wants the same tree model for every component (lessons and practice next), one at a time.
 - I37: the route covered 90 of 139 points in the real run; whether it should be narrower is the author's call.
 - I39: package loading (NumPy, pandas, scikit-learn) and the JavaScript runner need a check in claude.ai.
 - I38: subjects that can't be run have only the checker; I40: lessons run long.

@@ -79,6 +79,7 @@
       "",
       "When you write:",
       "- A point is one idea a learner can learn in one focused sitting and then use: small enough for one lesson, big enough to stand on its own. Name it the way a learner would recognise it, briefly. No two points teach the same idea. List them in a sensible teaching order.",
+      "- Keep that grain however small your part is: a small part simply has few points. Don't split one idea into its steps, cases or examples because your part is narrow; those belong inside the point's lesson.",
       "- what: one or two sentences on what the learner will understand or be able to do once they have learned it.",
       "- needs: the numbers (1 for the first point you list, and so on) of points in this topic that must be learned first because this point can't be understood without them. Only direct needs: if A needs B and B needs C, A lists B, not C.",
       "- outside: ideas outside this topic that this point can't be understood without, each described in a few words, exactly enough that another AI can find the point that teaches it. Only direct needs; an idea that only makes this point easier doesn't count. Reviewers link them.",
