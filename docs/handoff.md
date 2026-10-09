@@ -16,6 +16,7 @@ Current version: **v2.1** (Oct 8, 2026). Read this first, then the requirements 
 ## Roles and standing rules
 - The author makes product and teaching decisions; Claude makes technical ones.
 - Don't just agree. Point out issues, write them in the doc, and flag anything that shakes the core.
+- **No test that spends AI quota without the author's explicit approval of that run and its size** (real-prompt runs, agents answering the page's prompts). Ask first, and keep it to the smallest check that answers the question (one branch, a few requests). The mock-AI tests use no quota.
 - Efficiency and specificity are the only reasons to use AI (principle 4).
 - Guidance instead of fixed counts is core (principle 6). Numbers live only in code, as safety limits.
 - We guide and constrain the AI's creation. No preset libraries, slots, if-then rule patches or template content for the AI to fill.
