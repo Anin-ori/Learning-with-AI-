@@ -590,9 +590,49 @@
   "Your current map stays until the new one is finished.": "新地图完成之前，当前地图保持不变。",
   "Continue building": "继续生成",
   "The map is part-built.": "地图已构建了一部分。",
-  "Too many requests were waiting at once. Wait a moment, then try again.": "同时等待的请求太多。请稍等，再试一次。"
+  "Too many requests were waiting at once. Wait a moment, then try again.": "同时等待的请求太多。请稍等，再试一次。",
+  "Check": "检查",
+  "Checking your map": "正在检查你的地图",
+  "check each area, then the whole map, and fix what's wrong": "先逐个检查每个领域，再检查整张地图，并修正错误",
+  "Your progress, lessons and notes stay with their points. If the check stops, your map is unchanged.": "你的进度、课程和笔记都会留在对应的知识点上。如果检查中途停下，地图保持不变。",
+  "Build a new map from your saved goal? Your progress, lessons, notes and practice on this map won't carry over.": "按你保存的目标生成一张新地图？这张地图上的进度、课程、笔记和练习不会保留。",
+  "Nothing: no errors were found.": "没有：没有发现错误。",
+  "The check is done: no errors were found.": "检查完成：没有发现错误。",
+  "The map is checked, but it couldn't be translated again, so some of it may show in English. You can translate it again from its About tab.": "地图已检查完，但没能重新翻译，所以部分内容可能显示为英文。你可以在它的“关于”页里重新翻译。"
  },
  "patterns": [
+  [
+   "Uses about (\\d+) requests on your Claude account",
+   "大约使用你 Claude 账户的 \\1 次请求"
+  ],
+  [
+   "What the check on (.+) changed",
+   "\\1 的检查改了什么"
+  ],
+  [
+   "The check is done: (\\d+) changes? to your map\\. See them on the map's About tab\\.",
+   "检查完成：地图有 \\1 处修改。可以在地图的“关于”页查看。"
+  ],
+  [
+   "The check wasn't finished, so your map is unchanged\\. (Reviewer|Translator): (.+)",
+   "检查没有完成，地图保持不变。⟦\\1⟧：⟦\\2⟧"
+  ],
+  [
+   "The check wasn't finished, so your map is unchanged\\. (.+)",
+   "检查没有完成，地图保持不变。⟦\\1⟧"
+  ],
+  [
+   "Checking the map for (.+)",
+   "正在检查 \\1 的地图"
+  ],
+  [
+   "Map checked for (.+?): (\\d+) changes?, (\\d+) links added; (\\d+) requests",
+   "已检查 \\1 的地图：\\2 处修改，新增 \\3 条连线；\\4 次请求"
+  ],
+  [
+   "Map check not finished for (.+?)\\. (.+)",
+   "\\1 的地图检查没有完成。⟦\\2⟧"
+  ],
   [
    "The map wasn't finished\\. (Master|Planner|Reviewer|Router|Translator): (.+) Everything done so far is saved\\.",
    "地图没有构建完。⟦\\1⟧：⟦\\2⟧ 已完成的部分都已保存。"

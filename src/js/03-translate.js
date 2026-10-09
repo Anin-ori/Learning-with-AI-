@@ -106,6 +106,12 @@
       T.notes = [];
       (M.checks.notes || []).forEach((n, i) => P.push([n, (v) => { T.notes[i] = v; }]));
     }
+    T.checked = [];
+    (M.checked || []).forEach((c, k) => {
+      const tc = T.checked[k] = { fixes: [] };
+      P.push([c.verdict, (v) => { tc.verdict = v; }]);
+      c.fixes.forEach((f, i) => P.push([f.text, (v) => { tc.fixes[i] = v; }]));
+    });
     return P;
   }
   function routePairs(M, T) {
@@ -131,6 +137,7 @@
     });
     D.nodes.forEach((n) => { const t = (T.nodes || {})[n.id]; if (t) { n.name = pickT(t.name, n.name); n.what = pickT(t.what, n.what); } });
     if (T.route) D.route = { ...D.route, why: Object.fromEntries(Object.entries(D.route.why || {}).map(([k, v]) => [k, pickT(T.route.why[k], v)])), note: pickT(T.route.note, D.route.note) };
+    if (D.checked) D.checked = D.checked.map((c, k) => { const tc = (T.checked || [])[k] || { fixes: [] }; return { ...c, verdict: pickT(tc.verdict, c.verdict), fixes: c.fixes.map((f, i) => ({ ...f, text: pickT(tc.fixes[i], f.text) })) }; });
     if (D.checks) D.checks = { ...D.checks, verdict: pickT(T.verdict, D.checks.verdict), fixes: (D.checks.fixes || []).map((f, i) => ({ ...f, text: pickT((T.fixes || [])[i], f.text), translated: !!(T.fixes || [])[i] })), notes: (D.checks.notes || []).map((n, i) => pickT((T.notes || [])[i], n)) };
     return D;
   }

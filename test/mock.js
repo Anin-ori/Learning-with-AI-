@@ -85,6 +85,11 @@ module.exports = function mock(opts = {}) {
       return { write: { desc: t[1], points: t[2].map((name, k) => ({ name, what: "Understand and use " + name + ".", needs: k ? [k] : [], outside: !k && prev ? ["the idea of " + prev] : [], helps: k > 1 ? [k - 1] : [] })),
         where: ti % 2 ? [] : [{ title: "Think Python", detail: "Chapter 2", url: "https://example.com/book" }] } };
     }
+    if (text.startsWith("You check one part of a knowledge map")) {
+      window.__checks = (window.__checks || 0) + 1;
+      const all = pointsOf(text), root = /Your part is the whole map/.test(text);
+      return { verdict: root ? "The map is sound." : "This area is sound.", fixes: root && all.length > 3 ? [{ op: "rename", id: all[3].id, name: all[3].name + " (checked)", why: "clearer" }] : [] };
+    }
     if (text.startsWith("You review one part of a knowledge map")) {
       window.__reviewers = (window.__reviewers || 0) + 1;
       const all = pointsOf(text), root = /nothing is above you/.test(text);

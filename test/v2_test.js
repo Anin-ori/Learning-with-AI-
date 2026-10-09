@@ -157,6 +157,16 @@ const ok = (c, msg) => { if (!c) { console.log("FAIL:", msg); process.exitCode =
   ok(await page.evaluate(() => !!document.querySelector(".verdict")), "AI guidance shows the three models' estimate");
   await shot("v2-12-reach", true);
 
+  // ---- Check from Your subjects: reviewers per area, then the whole map; progress kept ----
+  await clickText(".subnav button", ZH ? "科目|Subjects" : "Subjects"); await page.waitForTimeout(200);
+  await clickText(".subject-list button", ZH ? "^检查$|^Check$" : "^Check$");
+  await page.waitForFunction(() => window.__checks === 4, null, { timeout: 15000 }); await page.waitForTimeout(600);
+  const chk = await page.evaluate(() => { const s = JSON.parse(localStorage.getItem("lc-mock-db")); const sid = s["app2/index"].current; const M = s["maps/" + sid]; return { checked: (M.checked || []).length, renamed: M.nodes.some((n) => / \(checked\)$/.test(n.name)), learned: s["subjects/" + sid].learned.length }; });
+  ok(chk.checked === 1 && chk.renamed && chk.learned === 4, "Check: 3 area reviewers and a whole-map reviewer changed the map and kept progress " + JSON.stringify(chk));
+  await clickText(".subject-list button", ZH ? "^重新构建$|^Rebuild$" : "^Rebuild$"); await page.waitForTimeout(150);
+  ok(await page.evaluate(() => /won.t carry over|不会保留/.test(document.querySelector(".subject-list").innerText)), "Rebuild asks first");
+  await clickText(".subject-list button", ZH ? "取消|Cancel" : "Cancel"); await page.waitForTimeout(100);
+
   // ---- a second subject that can't be run ----
   await clickText(".subnav button", ZH ? "科目|Subjects" : "Subjects"); await page.waitForTimeout(200);
   await page.fill("#subject", ZH ? "乐理" : "Music theory");

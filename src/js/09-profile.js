@@ -71,7 +71,11 @@
         h("div", { class: "row spread" }, ai("h3", null, s.name), here ? h("span", { class: "chip accent" }, "Open now") : null),
         s.goal ? ai("p", { class: "small" }, s.goal) : null,
         h("p", { class: "small muted" }, s.built ? (M ? (s.learned || []).length + " of " + M.nodes.length + " points learned" : (s.learned || []).length + " points learned") : pausedBuild(s.sid) ? "The map is part-built." : "The map isn't built yet."),
-        ui.confirmDelete === s.sid
+        ui.confirmRebuild === s.sid && ui.step === "subjects"
+          ? h("div", { class: "row" }, h("span", { class: "small" }, "Build a new map from your saved goal? Your progress, lessons, notes and practice on this map won't carry over."),
+              h("button", { class: "primary", type: "button", disabled: !aiReady(), onclick: () => { ui.confirmRebuild = null; app.current = s.sid; saveApp(); buildMap(s.sid, null, { fresh: true }); } }, "Rebuild"),
+              h("button", { class: "quiet", type: "button", onclick: () => { ui.confirmRebuild = null; render(); } }, "Cancel"))
+        : ui.confirmDelete === s.sid
           ? h("div", { class: "row" }, h("span", { class: "small" }, "Delete this subject, its map and its progress?"),
               h("button", { class: "primary", type: "button", onclick: () => deleteSubject(s.sid) }, "Delete"),
               h("button", { class: "quiet", type: "button", onclick: () => { ui.confirmDelete = null; render(); } }, "Cancel"))
@@ -79,6 +83,8 @@
               !here && s.built ? h("button", { class: "primary", type: "button", onclick: () => switchSubject(s.sid) }, "Open") : null,
               here && s.built ? h("button", { class: "quiet", type: "button", onclick: () => setView("map") }, "Open the map") : null,
               !s.built ? h("button", { class: "primary", type: "button", disabled: !aiReady() || (ui.build && ui.build.running), onclick: () => { app.current = s.sid; saveApp(); buildMap(s.sid); } }, pausedBuild(s.sid) ? "Continue building" : "Build the map") : null,
+              s.built ? h("button", { class: "quiet", type: "button", disabled: !aiReady() || (ui.build && ui.build.running), title: M ? I18N.t("Uses about " + checkCost(M) + " requests on your Claude account") : null, onclick: () => checkMap(s.sid) }, "Check") : null,
+              s.built ? h("button", { class: "quiet", type: "button", disabled: !aiReady() || (ui.build && ui.build.running), onclick: () => { ui.confirmRebuild = s.sid; render(); } }, "Rebuild") : null,
               h("button", { class: "link", type: "button", disabled: ui.build && ui.build.running && ui.build.sid === s.sid, onclick: () => { ui.confirmDelete = s.sid; render(); } }, "Delete")));
     };
     return h("section", { class: "panel" },

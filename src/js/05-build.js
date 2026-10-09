@@ -98,14 +98,16 @@
   const ballsUnder = (B, id) => { const n = B.nodes[id]; return n.kids ? n.kids.flatMap((k) => ballsUnder(B, k)) : n.ball && B.balls[n.ball] ? [n.ball] : []; };
   const ptsUnder = (B, id) => ballsUnder(B, id).flatMap((t) => B.balls[t].pts);
 
-  const reviewerPrompt = (s, B, n) => {
+  const reviewerPrompt = (s, B, n, check) => {
     const root = n.depth === 0;
     const inPart = new Set(ptsUnder(B, n.id));
     const open = B.open.filter((o) => inPart.has(o.pt));
     const ptLine = (p) => { const x = B.byId[p]; return "  " + p + " | " + x.name + " | " + (x.what || "") + " | needs: " + (x.needs.join(", ") || "nothing"); };
     const pieces = kidsOf(B, n.id).map((k) => "Piece: " + B.nodes[k].name + "\n" + ballsUnder(B, k).map((t) => "Topic " + t + ": " + B.balls[t].name + "\n" + B.balls[t].pts.map(ptLine).join("\n")).join("\n")).join("\n\n");
     return [
-      "You review one part of a knowledge map in Learning Companion, an open-source study tool for self-learners, before the learner sees it. The map is built by a tree of AIs: the pieces of this part were planned and written by separate AIs, each seeing only its own piece. You are the first to see them together" + (root ? ". Your part is the whole map, and nothing is above you." : "; the reviewer above you will see this part beside its neighbours."),
+      check
+        ? "You check one part of a knowledge map in Learning Companion, an open-source study tool for self-learners. The learner is already using this map and asked for another check of it: AIs built it without a textbook, and earlier reviews may have missed things. " + (root ? "Your part is the whole map; reviewers have just checked each area on its own, so look most closely at what lies between areas." : "Another AI will then check the whole map.") + " The learner keeps their progress, so fix only what is really wrong. Write new names and descriptions in the language the map is written in."
+        : "You review one part of a knowledge map in Learning Companion, an open-source study tool for self-learners, before the learner sees it. The map is built by a tree of AIs: the pieces of this part were planned and written by separate AIs, each seeing only its own piece. You are the first to see them together" + (root ? ". Your part is the whole map, and nothing is above you." : "; the reviewer above you will see this part beside its neighbours."),
       learnerAbout(s), "",
       root ? "Scope the master chose: " + (B.scope || "(not stated)") : "Where this part sits:\n" + pathLines(B, n), "",
       "This part, piece by piece. Every point with its id, what it is, and the points it needs first:", pieces, "",
@@ -474,6 +476,80 @@
     }
   }
 
+  // ----- Check: reviewers go over a map the learner already uses, one per area side by side, then one for the whole map.
+  // The learner's progress, lessons and notes stay with their points; only real errors are changed. -----
+  function treeFromMap(M, s) {
+    const B = { sid: M.sid, subject: M.subject, scope: M.scope, nodes: { n1: { id: "n1", parent: null, depth: 0, name: s.name, state: "split", kids: [] } }, balls: {}, byId: {},
+      open: [], fixes: [], notes: [], verdicts: {}, linked: 0, nPoint: M.nodes.reduce((m, n) => Math.max(m, +n.id.slice(1) || 0), 0) };
+    M.nodes.forEach((n) => { B.byId[n.id] = { id: n.id, name: n.name, what: n.what || "", needs: [], helps: [] }; });
+    M.links.forEach(([a, b, k]) => { if (B.byId[a] && B.byId[b]) (k === "helps" ? B.byId[b].helps : B.byId[b].needs).push(a); });
+    M.areas.forEach(([aid, name]) => {
+      const an = { id: "n_" + aid, parent: "n1", depth: 1, name, brief: "", state: "split", kids: [] };
+      B.nodes[an.id] = an; B.nodes.n1.kids.push(an.id);
+      M.balls.filter((b) => b.area === aid).forEach((b) => {
+        B.balls[b.id] = { id: b.id, name: b.name, desc: b.desc, pts: b.pts.slice(), where: b.where || [], area: aid };
+        const tn = { id: "n_" + b.id, parent: an.id, depth: 2, name: b.name, brief: b.desc || "", state: "topic", ball: b.id };
+        B.nodes[tn.id] = tn; an.kids.push(tn.id);
+      });
+    });
+    return B;
+  }
+  async function checkMap(sid) {
+    const s = subjects[sid];
+    if (!s || !aiReady() || (ui.build && ui.build.running)) return;
+    await ensureMap(sid);
+    const M0 = maps[sid];
+    if (!M0) return;
+    const job = { id: "check:" + sid, sid, requests: 0, cancel: false, running: true, stage: "check", only: "check", error: null, done: 0, parts: 0 };
+    job.paint = () => { if (ui.view !== "map") render(); };
+    ui.build = job; render();
+    logEvent("map", "Checking the map for " + s.name);
+    try {
+      const B = treeFromMap(M0, s), areas = B.nodes.n1.kids;
+      job.parts = areas.length + 1; job.paint();
+      // each area on its own, side by side; then the whole map
+      const res = await Promise.allSettled(areas.map(async (aid) => {
+        applyReview(B, B.nodes[aid], await askValid(job, "Reviewer", reviewerPrompt(s, B, B.nodes[aid], true), "complex", (d) => d && Array.isArray(d.fixes)));
+        job.done++; job.paint();
+      }));
+      const bad = res.find((x) => x.status === "rejected");
+      if (bad) throw bad.reason;
+      applyReview(B, B.nodes.n1, await askValid(job, "Reviewer", reviewerPrompt(s, B, B.nodes.n1, true), "complex", (d) => d && Array.isArray(d.fixes)));
+      job.done++; job.paint();
+      // the checked map, through the page's structure checks; the route keeps what is still on the map
+      const W = { scope: M0.scope, subject: M0.subject, profile: M0.profile, areas: M0.areas.map(([id, name]) => ({ id, name })), byId: B.byId,
+        balls: M0.balls.map((b) => ({ ...b, pts: B.balls[b.id].pts.slice() })).filter((b) => b.pts.length), order: [],
+        route: { goal: M0.route.goal.filter((id) => B.byId[id]), why: M0.route.why, note: M0.route.note }, notes: B.notes, fixes: B.fixes };
+      W.areas = W.areas.filter((a) => W.balls.some((b) => b.area === a.id));
+      const fin = finishMap(W);
+      const M = { ...M0, areas: fin.areas, balls: fin.balls, nodes: fin.nodes, links: fin.links, blinks: fin.blinks, route: fin.route,
+        checked: (M0.checked || []).concat([{ at: new Date().toISOString(), fixes: B.fixes, verdict: B.verdicts.n1 || "", notes: B.notes }]) };
+      maps[sid] = M;
+      if (trLang() && M.src === "en") {
+        job.stage = "translate"; job.paint();
+        try { await translateMap(sid, job); } catch (e) { if (e && e.code === "cancelled") throw e; notify("The map is checked, but it couldn't be translated again, so some of it may show in English. You can translate it again from its About tab.", "warn"); }
+      }
+      M.requests = (M0.requests || 0) + job.requests;
+      // progress stays with the points that are still there
+      const known = new Set(M.nodes.map((n) => n.id));
+      s.learned = (s.learned || []).filter((id) => known.has(id));
+      saveMap(sid); saveSubject(sid);
+      job.stage = "done";
+      const n = B.fixes.filter((f) => f.done).length;
+      logEvent("map", "Map checked for " + s.name + ": " + n + (n === 1 ? " change" : " changes") + ", " + B.linked + " links added; " + job.requests + " requests");
+      notify(n ? "The check is done: " + n + (n === 1 ? " change" : " changes") + " to your map. See them on the map's About tab." : "The check is done: no errors were found.");
+      if (sid === app.current) mountMap();
+    } catch (e) {
+      job.stage = "error";
+      job.error = jobError(e);
+      logEvent("map", "Map check not finished for " + s.name + ". " + job.error);
+      if (!(e && e.code === "cancelled")) notify("The check wasn't finished, so your map is unchanged. " + job.error, "bad");
+    } finally {
+      job.running = false; render();
+    }
+  }
+  const checkCost = (M) => M.areas.length + 1;
+
   // ----- progress, while the tree works and when it has stopped part-way -----
   function treeCounts(B) {
     const ns = Object.values(B.nodes);
@@ -485,6 +561,15 @@
   const treeLine = (c) => c.planned + " of " + c.parts + " parts planned · " + c.topics + " topics written · " + c.reviewed + " of " + c.joins + " parts checked";
   function buildCard(job) {
     const TRS = trLang() ? [["translate", "Translator", "translates the map into your language, keeping the English original"]] : [];
+    if (job.only === "check") {
+      const at = { check: 0, translate: 1, done: 2 }[job.stage];
+      return h("div", { class: "card", "aria-live": "polite" },
+        h("div", { class: "row spread" }, h("h3", null, "Checking your map"), h("span", { class: "muted small" }, job.requests + " requests so far")),
+        h("ol", { class: "plain" }, [["check", "Reviewers", "check each area, then the whole map, and fix what's wrong", job.parts ? job.done + " of " + job.parts + " parts checked" : null]].concat(TRS.map((x) => x.concat([null]))).map(([id, who, what, sub], i) =>
+          h("li", null, h("strong", null, (i < at ? "✓ " : i === at ? "… " : "") + who), " " + what, sub ? h("span", { class: "muted small" }, " · " + sub) : null))),
+        h("p", { class: "small muted" }, "Your progress, lessons and notes stay with their points. If the check stops, your map is unchanged."),
+        h("div", { class: "row" }, h("button", { class: "quiet", type: "button", onclick: () => { job.cancel = true; } }, "Stop")));
+    }
     if (job.only === "route") {
       const at = { route: 0, translate: 1, done: 2 }[job.stage];
       return h("div", { class: "card", "aria-live": "polite" },
@@ -537,6 +622,9 @@
       "<h3>" + T(tree ? "What the reviewers changed" : "What the checker changed") + "</h3>" +
       (M.checks && M.checks.verdict ? '<p class="km-small" data-ai>' + esc(M.checks.verdict) + "</p>" : "") +
       (done.length ? '<ul class="km-notelist">' + done.map((f) => "<li>" + esc(I18N.t(f.text)) + "</li>").join("") + "</ul>" : '<p class="km-empty">' + T(tree ? "Nothing: they found no errors to fix." : "Nothing: it found no errors to fix.") + "</p>") +
+      (M.checked || []).map((c) => "<h3>" + esc(I18N.t("What the check on " + new Date(c.at).toLocaleDateString(I18N.lang === "zh" ? "zh-CN" : "en-US", { year: "numeric", month: "short", day: "numeric" }) + " changed")) + "</h3>" +
+        (c.verdict ? '<p class="km-small" data-ai>' + esc(c.verdict) + "</p>" : "") +
+        (c.fixes.filter((f) => f.done).length ? '<ul class="km-notelist">' + c.fixes.filter((f) => f.done).map((f) => "<li>" + esc(I18N.t(f.text)) + "</li>").join("") + "</ul>" : '<p class="km-empty">' + T("Nothing: no errors were found.") + "</p>")).join("") +
       (notes.length ? "<h3>" + T("What the page's structure check changed") + '</h3><ul class="km-notelist">' + notes.map((n) => "<li>" + esc(I18N.t(n)) + "</li>").join("") + "</ul>" : "") +
       '<p class="km-small">' + esc(I18N.t("Built " + new Date(M.built).toLocaleDateString(I18N.lang === "zh" ? "zh-CN" : "en-US", { year: "numeric", month: "short", day: "numeric" }) + ".")) + "</p>" +
       (trLang() && M.tr && M.tr[trLang()] ? '<div class="km-btns"><button class="km-btn" type="button" data-about="orig">' + T(showOrigFlag ? "Show the translation" : "Show the English original") + "</button></div>"
