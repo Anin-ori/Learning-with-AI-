@@ -44,6 +44,8 @@ Current version: **v2.2** (Oct 8, 2026). Read this first, then the requirements 
 
 ## v2.2 (latest)
 - The map is built by a tree of agents (R64, `05-build.js`): master → planners (divide, or write one topic) → reviewers join parts on the way up → router → page checks. Saved after each agent in `builds/<sid>`; Continue building / Start over. Usage limits stop the build (no retry).
+- Content follows the interface language both ways (`03-translate.js`: `curLang`, `srcOf`, `needsTr`, `trLine`, `autoTranslate`): anything shown in a language it wasn't written in is translated the first time it is shown; the original is one switch away.
+- `test/look.js <map.json> <subject.json> [zh]` renders saved real data locally (no AI calls) for checking the interface by eye; read the author's data with ArtifactData (read-only).
 - Open: I42, maps grow large (point-grain guidance added, unverified); I43, builds are slow (about two requests at a time per viewer).
 
 ## v2.1
