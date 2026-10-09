@@ -9,7 +9,14 @@
   // original stays one switch away.
   const LANG_NAMES = { en: "English", zh: "Simplified Chinese (简体中文)" };
   const curLang = () => (LANG_NAMES[I18N.lang] ? I18N.lang : "en");
-  const trLang = () => (curLang() !== "en" ? curLang() : null);   // new content is written in English, then translated into this
+  const trLang = () => (curLang() !== "en" ? curLang() : null);   // a new map is written in English, then translated into this
+  // v2.2: lessons, practice, the level check and AI guidance are written in the language of the subject's map (English for
+  // every map built since v2.1; Chinese for maps built in Chinese before it), because the agents are given the map's own
+  // names and descriptions. A lesson on a Chinese map once came back in Chinese while marked as English, and was
+  // "translated" from Chinese into Chinese.
+  const workLang = () => { const M = typeof curMap === "function" && curMap(); return (M && (M.src || M.lang)) || "en"; };
+  const outLang = () => (curLang() !== workLang() ? curLang() : null);   // what new content is translated into after delivery
+  const inLang = (prompt) => (workLang() === "en" ? prompt : prompt + "\n\nWrite everything you write for the learner in " + LANG_NAMES[workLang()] + ", the language of their map; keep JSON keys and the === lines as they are.");
   // the language an item was written in: its own mark, else its map's (maps from v2.0 recorded only that), else English
   const srcOf = (item) => (item && (item.src || item.lang)) || (typeof curMap === "function" && curMap() && (curMap().src || curMap().lang)) || "en";
   const needsTr = (item) => !!item && srcOf(item) !== curLang();

@@ -62,7 +62,7 @@
     const P = km.data, n = P.byId[pid], ball = enBall(P.BALL_OF[pid]), M = curMap();
     return [
       "Point: \"" + enName(pid) + "\"" + (enWhat(pid) ? ": " + enWhat(pid) : "") + ".",
-      "It belongs to the topic \"" + ball.name + "\"" + (ball.desc ? " (" + ball.desc + ")" : "") + ", together with: " + (ball.pts.filter((x) => x !== pid).map(enName).join(", ") || "nothing else") + ".",
+      "It belongs to the topic \"" + ball.name + "\"" + (ball.desc ? " (" + ball.desc + ")" : "") + ", together with these points, each taught in its own lesson:" + (ball.pts.filter((x) => x !== pid).map((x) => "\n- " + enName(x) + (enWhat(x) ? ": " + enWhat(x) : "")).join("") || " nothing else") ,
       ptLearner(),
       "Points the learner has marked as learned on their map: " + ptLearned() + ".",
       "This point needs first: " + (n.needs.map((x) => enName(x) + (km.isLearned(x) ? " (learned)" : " (NOT learned yet)")).join("; ") || "nothing") + ".",
@@ -74,14 +74,14 @@
     "You lead the teaching of ONE knowledge point of " + S.name + " in Learning Companion, a study tool for self-learners. The learner reads the lesson on their own and thinks it through; it is not a conversation. You set what this learner should come away with; writers decide how to teach it, and a reviewer will then learn from the lesson as this learner would.",
     pointContext(pid), "",
     STANDARDS.guide(S), "",
-    "Your job:",
-    "- goals: what this learner should understand or be able to do after the lesson, each in one sentence. Goals, not an outline: say what, not how.",
-    "- frame: what every writer must share so the parts read as one lesson: the notation and terms to use, any example the goals share, what may be assumed, and a brief bridge for anything needed that isn't learned yet.",
+    "Your job is to say what, never how: how to teach it, in what order and with what structure is the writers' choice, so none of it goes into the goals, the frame or the notes.",
+    "- goals: what this learner should understand or be able to do after the lesson, each in one sentence. Teach this point only: what another point on the map covers belongs to that point's lesson; a lesson may point to it, not teach it.",
+    "- frame: only what the writers must share so the parts read as one lesson: the notation and terms to use, an example the goals share if they share one, what may be assumed, and a brief bridge for anything needed that isn't learned yet.",
     "- parts: who writes what, in order. One writer for the whole lesson is often best, because a lesson is one line of reasoning; split only where a part can be taught well on its own. Each part lists the numbers of its goals (1 for the first goal).",
     "- together: \"sequence\" if each part builds on the text of the parts before it (each writer then sees them), \"parallel\" if the parts can be written side by side.",
-    "- beyond: what lies beyond this lesson that is worth knowing (where its rules stop holding, a mechanism underneath), if anything; empty if nothing.",
+    "- beyond: what lies underneath this point that is worth knowing (the mechanism that makes it work, where its rules stop holding), if anything; empty if nothing. Down into this point, not sideways into other topics.",
     "- goal_link: one sentence on where this point shows up in the learner's goal.",
-    'Reply with only JSON: {"goals": [""], "frame": "", "parts": [{"goals": [numbers], "note": "anything this writer should know, or empty"}], "together": "sequence or parallel", "beyond": "", "goal_link": ""}',
+    'Reply with only JSON: {"goals": [""], "frame": "", "parts": [{"goals": [numbers], "note": "what this writer must know that the goals and frame do not say, such as where their part starts and ends; usually empty"}], "together": "sequence or parallel", "beyond": "", "goal_link": ""}',
   ].join("\n"); };
   function normLead(d) {
     const goals = parr(d && d.goals).map(pstr).filter(Boolean).slice(0, 12);
@@ -141,7 +141,7 @@
     "- false: anything false, as above;",
     "- stuck: where this learner would get stuck, and what would let them through;",
     "- goals: each goal you could not reach from the lesson, and what is missing;",
-    "- rules: an exercise, quiz or practice task written into the lesson (a question to think about, with its answer after it, is fine), a claim that some mistake is common, text copied from a book, missing notes.",
+    "- rules: an exercise, quiz or practice task written into the lesson (a question to think about, with its answer after it, is fine), a claim that some mistake is common, an extension that goes sideways into other topics instead of down into what lies underneath this point, text copied from a book, missing notes.",
     "Don't report matters of taste. If the lesson works, say so and report nothing.",
     'Reply with only JSON: {"reading": "two or three sentences on how learning from it went", "false": [{"quote": "", "problem": "", "fix": ""}], "stuck": [{"quote": "", "problem": "", "fix": ""}], "goals": [{"goal": number, "problem": "", "fix": ""}], "rules": [{"quote": "", "problem": "", "fix": ""}]}',
   ].filter((x) => x !== "").join("\n"); };
@@ -169,23 +169,23 @@
     ui.pjobs[key] = job; render();
     try {
       // 1. the lead: goals, frame, and how the writing is split
-      job.plan = normLead(await ask(job, "Lead", leadPromptPt(pid), "complex", true));
+      job.plan = normLead(await ask(job, "Lead", inLang(leadPromptPt(pid)), "complex", true));
       // 2. the writers: in sequence (each sees the parts before it) or side by side
       job.stage = "teach"; job.parts = job.plan.parts.length; paint();
       let parts = [];
-      const write = async (k, before) => { const t = splitLesson(await ask(job, "Writer", writerPromptPt(pid, job.plan, k, before), "default", false)); job.written++; paint(); return t; };
+      const write = async (k, before) => { const t = splitLesson(await ask(job, "Writer", inLang(writerPromptPt(pid, job.plan, k, before)), "default", false)); job.written++; paint(); return t; };
       if (job.plan.together === "parallel") parts = await Promise.all(job.plan.parts.map((_, k) => write(k, "")));
       else for (let k = 0; k < job.plan.parts.length; k++) parts.push(await write(k, parts.map((p) => p.lesson).join("\n\n")));
       // 3. the lead joins several parts into one lesson
       let L = parts[0];
-      if (parts.length > 1) { job.stage = "stitch"; paint(); L = splitLesson(await ask(job, "Lead", stitchPromptPt(pid, job.plan, parts), "default", false)); }
+      if (parts.length > 1) { job.stage = "stitch"; paint(); L = splitLesson(await ask(job, "Lead", inLang(stitchPromptPt(pid, job.plan, parts)), "default", false)); }
       // 4. the page runs the examples; 5. the reviewer learns from the lesson, and revises what it found
       for (let round = 0; ; round++) {
         job.stage = "check"; paint();
         const run = profileOf().run === "python" ? await runLessonExamples(L).catch(() => null) : null;
         job.ran = run && run.ran ? { n: run.n, of: run.of } : null;
         let F;
-        if (round === 0) { F = normFindings(await ask(job, "Reviewer", reviewPromptPt(pid, job.plan, L, run), "complex", true), job.plan); job.reading = F.reading; }
+        if (round === 0) { F = normFindings(await ask(job, "Reviewer", inLang(reviewPromptPt(pid, job.plan, L, run)), "complex", true), job.plan); job.reading = F.reading; }
         else F = { reading: "", false: [], stuck: [], goals: [], rules: [] };   // after a revision only the page's checks run again
         if (run && run.errs.length) F.false = run.errs.concat(F.false);
         if (!L.notes.length) F.rules.push({ quote: "", problem: "The notes are missing.", fix: "Add the === NOTES === line and the notes worth keeping." });
@@ -193,10 +193,10 @@
         if (!hasFindings(F)) break;
         if (round >= PL_ROUNDS) throw { code: "not_compliant", agent: "Reviewer" };
         job.stage = "fix"; job.rounds++; paint();
-        L = splitLesson(await ask(job, "Reviewer", revisePromptPt(pid, job.plan, L, F), "default", false));
+        L = splitLesson(await ask(job, "Reviewer", inLang(revisePromptPt(pid, job.plan, L, F)), "default", false));
       }
-      const doc = { v: 2, src: "en", pid, key, at: new Date().toISOString(), plan: job.plan, reading: job.reading || "", lesson: L.lesson, deeper: L.deeper || "", notes: L.notes, advice: [], requests: job.requests, rounds: job.rounds, ran: job.ran };
-      if (trLang()) {
+      const doc = { v: 2, src: workLang(), pid, key, at: new Date().toISOString(), plan: job.plan, reading: job.reading || "", lesson: L.lesson, deeper: L.deeper || "", notes: L.notes, advice: [], requests: job.requests, rounds: job.rounds, ran: job.ran };
+      if (outLang()) {
         job.stage = "translate"; paint();
         try { await translateLesson(doc, job); }
         catch (e) { if (e && e.code === "cancelled") throw e; notify("The lesson is ready, but it couldn't be translated, so it's shown in English. You can translate it again.", "warn"); }
@@ -204,7 +204,7 @@
       doc.requests = job.requests;
       ui.plessons[key] = doc;
       const s = cur();
-      s.pointIndex[pid] = { at: doc.at, notes: doc.notes, src: "en", tr: doc.tr ? { [trLang()]: doc.tr[trLang()].notes } : undefined };
+      s.pointIndex[pid] = { at: doc.at, notes: doc.notes, src: doc.src, tr: doc.tr && doc.tr[curLang()] ? { [curLang()]: doc.tr[curLang()].notes } : undefined };
       if (db) db.doc("lessons2/" + key).set(clone(doc)).catch(() => notify("The lesson is shown but couldn't be saved.", "warn"));
       saveSubject();
       job.stage = "done";
@@ -329,7 +329,7 @@
   function ptTeamCard(job) {
     const order = { plan: 0, teach: 1, stitch: 1, check: 2, fix: 2, translate: 3, done: 4, error: -1 };
     const at = order[job.stage];
-    const stages = trLang() ? PT_STAGES.concat([["translate", "Translator", "translates it into your language, keeping the English original"]]) : PT_STAGES;
+    const stages = outLang() ? PT_STAGES.concat([["translate", "Translator", "translates it into your language, keeping the English original"]]) : PT_STAGES;
     return h("div", { class: "card", id: "pt-team", "aria-live": "polite" },
       h("div", { class: "row spread" }, h("h3", null, "Building your lesson"), h("span", { class: "muted small" }, job.requests + " requests so far")),
       h("ol", { class: "plain" }, stages.map(([id, who, what], i) => h("li", null,

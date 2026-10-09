@@ -163,11 +163,11 @@
     const job = { requests: 0, cancel: false };
     ui.busy.trialPick = true; ui.errors.trial = null; render();
     try {
-      const d = await ask(job, "Level check", levelTasksPrompt(), "default", true);
+      const d = await ask(job, "Level check", inLang(levelTasksPrompt()), "default", true);
       const tasks = parr(d && d.tasks).map((t) => ({ title: pstr(t && t.title), task: pstr(t && t.task), probes: parr(t && t.probes).map(pstr).filter((id) => km.data.byId[id]) })).filter((t) => t.title && t.task).slice(0, 8);
       if (!tasks.length) throw { code: "invalid_json", agent: "Level check" };
-      const TT = { src: "en", why: pstr(d.why), tasks, at: new Date().toISOString() };
-      if (trLang()) { try { const tmp = { why: TT.why, titles: tasks.map((t) => t.title), bodies: tasks.map((t) => t.task) }; await translateRecord(job, tmp, ["why"], ["titles", "bodies"], subjectAbout("a short level check: tasks for the learner")); TT.tr = tmp.tr; } catch (_) {} }
+      const TT = { src: workLang(), why: pstr(d.why), tasks, at: new Date().toISOString() };
+      if (outLang()) { try { const tmp = { src: TT.src, why: TT.why, titles: tasks.map((t) => t.title), bodies: tasks.map((t) => t.task) }; await translateRecord(job, tmp, ["why"], ["titles", "bodies"], subjectAbout("a short level check: tasks for the learner")); TT.tr = tmp.tr; } catch (_) {} }
       s.trialTasks = TT; s.trial = null; ui.trialAnswers = {};
       saveSubject();
       logEvent("trial", "Level check tasks for " + s.name + ": " + tasks.map((t) => t.title).join("; "));
@@ -181,12 +181,12 @@
     if (withTasks && !answers.some((a) => a.trim())) { ui.errors.trial = "Answer at least one task first, or skip the tasks."; render(); return; }
     ui.busy.trial = true; ui.errors.trial = null; render();
     try {
-      const d = await ask({ requests: 0, cancel: false }, "Level check", levelAssessPrompt(tasks, answers, withTasks), "default", true);
+      const d = await ask({ requests: 0, cancel: false }, "Level check", inLang(levelAssessPrompt(tasks, answers, withTasks)), "default", true);
       const ids = (v) => parr(v).map(pstr).filter((id) => km.data.byId[id]);
       const results = {};
       parr(d && d.tasks).forEach((r) => { const n = Number(r && r.n); if (n >= 1 && n <= tasks.length) results[n - 1] = { result: ["works", "almost", "not yet"].includes(pstr(r.result)) ? pstr(r.result) : "almost", note: pstr(r.note) }; });
-      const TR = { src: "en", summary: pstr(d && d.summary), solid: ids(d && d.solid), shaky: ids(d && d.shaky), feedback: pstr(d && d.feedback) || "No feedback came back.", results, withTasks, at: new Date().toISOString() };
-      if (trLang()) { try { const tmp = { summary: TR.summary, feedback: TR.feedback, notes: tasks.map((_, k) => (results[k] || {}).note || "") }; await translateRecord({ requests: 0, cancel: false }, tmp, ["summary", "feedback"], ["notes"], subjectAbout("feedback on a level check")); TR.tr = tmp.tr; } catch (_) {} }
+      const TR = { src: workLang(), summary: pstr(d && d.summary), solid: ids(d && d.solid), shaky: ids(d && d.shaky), feedback: pstr(d && d.feedback) || "No feedback came back.", results, withTasks, at: new Date().toISOString() };
+      if (outLang()) { try { const tmp = { src: TR.src, summary: TR.summary, feedback: TR.feedback, notes: tasks.map((_, k) => (results[k] || {}).note || "") }; await translateRecord({ requests: 0, cancel: false }, tmp, ["summary", "feedback"], ["notes"], subjectAbout("feedback on a level check")); TR.tr = tmp.tr; } catch (_) {} }
       s.trial = TR;
       saveSubject();
       logEvent("trial", "Level check for " + s.name + (withTasks ? "" : " (from description only)") + ": " + s.trial.summary + " Solid: " + s.trial.solid.length + ", shaky: " + s.trial.shaky.length);
@@ -258,7 +258,7 @@
     ].join("\n");
     await Promise.all(TIERS.map(async (t) => {
       try {
-        const data = await sample.json(prompt, { modelTier: t.id, cache: false });
+        const data = await sample.json(inLang(prompt), { modelTier: t.id, cache: false });
         const share = Math.max(0, Math.min(100, Math.round(Number(data && data.share))));
         if (!Number.isFinite(share)) throw { code: "invalid_json" };
         ui.tierResults[t.id] = { state: "done", share, strong: parr(data.strong).slice(0, 6).map(String), limits: parr(data.limits).slice(0, 6).map(String), statement: String(data.statement || "") };
@@ -274,13 +274,13 @@
       const spread = shares[shares.length - 1] - shares[0];
       const agreement = spread <= 15 ? "agree" : spread <= 30 ? "partial" : "disagree";
       const std = done.find((x) => x.tier.id === "default") || done[0];
-      s.grade = { src: "en", share: mid, spread, agreement, statement: std.r.statement, shares: Object.fromEntries(done.map((x) => [x.tier.id, x.r.share])) };
-      if (trLang()) {
+      s.grade = { src: workLang(), share: mid, spread, agreement, statement: std.r.statement, shares: Object.fromEntries(done.map((x) => [x.tier.id, x.r.share])) };
+      if (outLang()) {
         try {
-          const L = trLang(), G = {}, P = [[s.grade.statement, (v) => { G.statement = v; }]];
+          const L = outLang(), G = {}, P = [[s.grade.statement, (v) => { G.statement = v; }]];
           done.forEach((x) => { const t = { strong: [], limits: [] }; x.r.tr = { [L]: t };
             x.r.strong.forEach((v0, k) => P.push([v0, (v) => { t.strong[k] = v; }])); x.r.limits.forEach((v0, k) => P.push([v0, (v) => { t.limits[k] = v; }])); });
-          await trPairs({ requests: 0, cancel: false }, P, subjectAbout("AI estimates of how far an AI can guide this learner"));
+          await trPairs({ requests: 0, cancel: false }, P, subjectAbout("AI estimates of how far an AI can guide this learner"), workLang());
           s.grade.tr = { [L]: G };
         } catch (_) {}
       }
@@ -317,7 +317,7 @@
         caution("These are AI estimates of AI ability, and they can be wrong.")) : null,
       h("div", { class: "row" },
         h("button", { class: g ? "quiet" : "primary", type: "button", disabled: ui.busy.grade || !aiReady(), onclick: runGrade }, ui.busy.grade ? "Asking three models…" : g ? "Ask again" : "Ask the three models"),
-        h("span", { class: "muted small" }, trLang() ? "Uses 3 requests on your Claude account, and one more to translate" : "Uses 3 requests on your Claude account")),
+        h("span", { class: "muted small" }, outLang() ? "Uses 3 requests on your Claude account, and one more to translate" : "Uses 3 requests on your Claude account")),
       errLine("reach"),
       h("div", { class: "tiers" }, tierCards),
       g ? h("div", { class: "row" }, h("button", { class: "primary", type: "button", onclick: () => go("learn") }, "Start learning")) : null);

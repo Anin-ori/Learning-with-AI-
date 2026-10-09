@@ -335,9 +335,9 @@
     const job = { id: "pjudge", requests: 0, cancel: false, running: true };
     ui.pjudge = job; render();
     try {
-      const R = normReady(await ask(job, "Judge", readinessPrompt(), "default", true));
-      const rec = { sig: learnedSig(), at: new Date().toISOString(), src: "en", ...R };
-      if (trLang()) { try { await translateRecord(job, rec, ["why", "shape"], ["focus", "review", "next"], subjectAbout("a judgement on whether the learner should practise now")); } catch (e) { if (e && e.code === "cancelled") throw e; } }
+      const R = normReady(await ask(job, "Judge", inLang(readinessPrompt()), "default", true));
+      const rec = { sig: learnedSig(), at: new Date().toISOString(), src: workLang(), ...R };
+      if (outLang()) { try { await translateRecord(job, rec, ["why", "shape"], ["focus", "review", "next"], subjectAbout("a judgement on whether the learner should practise now")); } catch (e) { if (e && e.code === "cancelled") throw e; } }
       s.practiceReady = rec;
       saveSubject();
       logEvent("practice", "Practice check: " + (R.enough ? "worth practising now" : "not yet") + ". " + R.why);
@@ -358,9 +358,9 @@
     ui.pjob = job; render();
     try {
       // 1. plan the set, then write each exercise with its own call (they run side by side)
-      const O = normOutline(await ask(job, "Designer", designPrompt(focus), "default", true));
+      const O = normOutline(await ask(job, "Designer", inLang(designPrompt(focus)), "default", true));
       job.planned = O.exercises.length; paint();
-      let EX = await Promise.all(O.exercises.map((_, i) => ask(job, "Designer", exercisePrompt(focus, O, i, kind), "default", true).then((x) => normEx(x, kind)).catch((e) => {
+      let EX = await Promise.all(O.exercises.map((_, i) => ask(job, "Designer", inLang(exercisePrompt(focus, O, i, kind)), "default", true).then((x) => normEx(x, kind)).catch((e) => {
         if (e && e.code === "cancelled") throw e;
         job.dropped.push(O.exercises[i].title); job.why.push(O.exercises[i].title + ": " + (e && e.code || "error")); return null; })));
       const polished = new Set();
@@ -384,7 +384,7 @@
         job.ran = ran;
         // 3. the editor: errors must be fixed, improvements get one revision
         job.stage = "check"; paint();
-        const rv = await ask(job, "Checker", practiceCheckPrompt(focus, S, ran, kind), "complex", true);
+        const rv = await ask(job, "Checker", inLang(practiceCheckPrompt(focus, S, ran, kind)), "complex", true);
         const errs = runErrs.concat(normProblemsPr(rv && (rv.errors || rv.problems)));
         const imps = normProblemsPr(rv && rv.improvements);
         advice = imps;
@@ -407,21 +407,21 @@
           const f = fixes[i];
           if (!f.errs.length && !f.imps.length) return x;
           if (f.imps.length) polished.add(i);
-          return ask(job, "Designer", exerciseFixPrompt(focus, O, x, i, f.errs, f.imps), "default", true).then((y) => normEx(y, kind)).catch((e) => { if (e && e.code === "cancelled") throw e; return x; });
+          return ask(job, "Designer", inLang(exerciseFixPrompt(focus, O, x, i, f.errs, f.imps)), "default", true).then((y) => normEx(y, kind)).catch((e) => { if (e && e.code === "cancelled") throw e; return x; });
         }));
       }
-      const set = { v: 2, src: "en", id: newId("s"), sid: s.sid, kind, at: new Date().toISOString(), focus: focus.focus, review: focus.review, when: O.when, how: O.how,
+      const set = { v: 2, src: workLang(), id: newId("s"), sid: s.sid, kind, at: new Date().toISOString(), focus: focus.focus, review: focus.review, when: O.when, how: O.how,
         exercises: EX.map((x) => ({ ...x, mine: x.starter || "", solved: false, hintsShown: 0, revealed: false })),
         advice: advice.map((p) => (p.exercise ? "Exercise " + p.exercise + ": " : "") + p.problem), dropped: job.dropped,
         verified: !!job.verified, requests: job.requests, rounds: job.rounds };
-      if (trLang()) {
+      if (outLang()) {
         job.stage = "translate"; paint();
         try { await translateSet(set, job); }
         catch (e) { if (e && e.code === "cancelled") throw e; notify("The practice set is ready, but it couldn't be translated, so it's shown in English. You can translate it again.", "warn"); }
         set.requests = job.requests;
       }
       ui.pset = set; ui.prun = {};
-      s.practice = (s.practice || []).concat([{ id: set.id, at: set.at, titles: set.exercises.map((x) => x.title), focus: set.focus, tr: set.tr ? { [trLang()]: set.tr[trLang()].exercises.map((x) => x.title) } : undefined }]).slice(-30);
+      s.practice = (s.practice || []).concat([{ id: set.id, at: set.at, titles: set.exercises.map((x) => x.title), focus: set.focus, tr: set.tr && set.tr[curLang()] ? { [curLang()]: set.tr[curLang()].exercises.map((x) => x.title) } : undefined }]).slice(-30);
       s.practiceCurrent = set.id;
       if (db) db.doc("practice2/" + set.id).set(clone(set)).catch(() => notify("The practice set is shown but couldn't be saved.", "warn"));
       saveSubject();
@@ -467,10 +467,10 @@
     if (!canRun(S.kind)) {
       if (!aiReady() || !(x.mine || "").trim()) { ui.prun[i] = null; render(); return; }
       try {
-        const d = await sample.json(answerCheckPrompt(x, x.mine), { modelTier: "default", cache: false });
+        const d = await sample.json(inLang(answerCheckPrompt(x, x.mine)), { modelTier: "default", cache: false });
         const results = parr(d && d.results).map((r) => ({ n: Number(r && r.criterion) || 0, met: ["yes", "partly", "no"].includes(pstr(r && r.met).toLowerCase()) ? pstr(r.met).toLowerCase() : "partly", note: pstr(r && r.note) }));
         const fb = { results, text: pstr(d && d.feedback), notes: results.map((r) => r.note) };
-        if (trLang()) { try { await translateRecord({ requests: 0, cancel: false }, fb, ["text"], ["notes"], subjectAbout("feedback on the learner's answer to a practice exercise")); } catch (_) {} }
+        if (outLang()) { try { await translateRecord({ requests: 0, cancel: false }, fb, ["text"], ["notes"], subjectAbout("feedback on the learner's answer to a practice exercise")); } catch (_) {} }
         ui.prun[i] = { running: false, feedback: fb };
         const all = x.criteria.every((_, j) => (results.find((r) => r.n === j + 1) || {}).met === "yes");
         if (all && !x.solved) { x.solved = true; notify("The feedback says your answer meets every criterion. Compare with the model answer when you like."); logEvent("practice", "Solved (by AI feedback): " + x.title); }
@@ -497,7 +497,7 @@
     const stages = [["design", "Designer", "plans the set from what you've learned, then writes each exercise"]]
       .concat(runnable ? [["run", "Runner", "runs the designer's own solution against the tests"]] : [])
       .concat([["check", "Editor", runnable ? "checks that you can do each exercise and that it's worth doing" : "checks each exercise, its criteria and its model answer"]]);
-    if (trLang()) stages.push(["translate", "Translator", "translates the set into your language, keeping the English original"]);
+    if (outLang()) stages.push(["translate", "Translator", "translates the set into your language, keeping the English original"]);
     const order = runnable ? { design: 0, run: 1, check: 2, fix: 2, translate: 3, done: 4, error: -1 } : { design: 0, check: 1, fix: 1, translate: 2, done: 3, error: -1 };
     const at = order[job.stage];
     return h("div", { class: "card", "aria-live": "polite" },

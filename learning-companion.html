@@ -2050,7 +2050,14 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
   // original stays one switch away.
   const LANG_NAMES = { en: "English", zh: "Simplified Chinese (简体中文)" };
   const curLang = () => (LANG_NAMES[I18N.lang] ? I18N.lang : "en");
-  const trLang = () => (curLang() !== "en" ? curLang() : null);   // new content is written in English, then translated into this
+  const trLang = () => (curLang() !== "en" ? curLang() : null);   // a new map is written in English, then translated into this
+  // v2.2: lessons, practice, the level check and AI guidance are written in the language of the subject's map (English for
+  // every map built since v2.1; Chinese for maps built in Chinese before it), because the agents are given the map's own
+  // names and descriptions. A lesson on a Chinese map once came back in Chinese while marked as English, and was
+  // "translated" from Chinese into Chinese.
+  const workLang = () => { const M = typeof curMap === "function" && curMap(); return (M && (M.src || M.lang)) || "en"; };
+  const outLang = () => (curLang() !== workLang() ? curLang() : null);   // what new content is translated into after delivery
+  const inLang = (prompt) => (workLang() === "en" ? prompt : prompt + "\n\nWrite everything you write for the learner in " + LANG_NAMES[workLang()] + ", the language of their map; keep JSON keys and the === lines as they are.");
   // the language an item was written in: its own mark, else its map's (maps from v2.0 recorded only that), else English
   const srcOf = (item) => (item && (item.src || item.lang)) || (typeof curMap === "function" && curMap() && (curMap().src || curMap().lang)) || "en";
   const needsTr = (item) => !!item && srcOf(item) !== curLang();
@@ -3655,7 +3662,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     const P = km.data, n = P.byId[pid], ball = enBall(P.BALL_OF[pid]), M = curMap();
     return [
       "Point: \"" + enName(pid) + "\"" + (enWhat(pid) ? ": " + enWhat(pid) : "") + ".",
-      "It belongs to the topic \"" + ball.name + "\"" + (ball.desc ? " (" + ball.desc + ")" : "") + ", together with: " + (ball.pts.filter((x) => x !== pid).map(enName).join(", ") || "nothing else") + ".",
+      "It belongs to the topic \"" + ball.name + "\"" + (ball.desc ? " (" + ball.desc + ")" : "") + ", together with these points, each taught in its own lesson:" + (ball.pts.filter((x) => x !== pid).map((x) => "\n- " + enName(x) + (enWhat(x) ? ": " + enWhat(x) : "")).join("") || " nothing else") ,
       ptLearner(),
       "Points the learner has marked as learned on their map: " + ptLearned() + ".",
       "This point needs first: " + (n.needs.map((x) => enName(x) + (km.isLearned(x) ? " (learned)" : " (NOT learned yet)")).join("; ") || "nothing") + ".",
@@ -3667,14 +3674,14 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     "You lead the teaching of ONE knowledge point of " + S.name + " in Learning Companion, a study tool for self-learners. The learner reads the lesson on their own and thinks it through; it is not a conversation. You set what this learner should come away with; writers decide how to teach it, and a reviewer will then learn from the lesson as this learner would.",
     pointContext(pid), "",
     STANDARDS.guide(S), "",
-    "Your job:",
-    "- goals: what this learner should understand or be able to do after the lesson, each in one sentence. Goals, not an outline: say what, not how.",
-    "- frame: what every writer must share so the parts read as one lesson: the notation and terms to use, any example the goals share, what may be assumed, and a brief bridge for anything needed that isn't learned yet.",
+    "Your job is to say what, never how: how to teach it, in what order and with what structure is the writers' choice, so none of it goes into the goals, the frame or the notes.",
+    "- goals: what this learner should understand or be able to do after the lesson, each in one sentence. Teach this point only: what another point on the map covers belongs to that point's lesson; a lesson may point to it, not teach it.",
+    "- frame: only what the writers must share so the parts read as one lesson: the notation and terms to use, an example the goals share if they share one, what may be assumed, and a brief bridge for anything needed that isn't learned yet.",
     "- parts: who writes what, in order. One writer for the whole lesson is often best, because a lesson is one line of reasoning; split only where a part can be taught well on its own. Each part lists the numbers of its goals (1 for the first goal).",
     "- together: \"sequence\" if each part builds on the text of the parts before it (each writer then sees them), \"parallel\" if the parts can be written side by side.",
-    "- beyond: what lies beyond this lesson that is worth knowing (where its rules stop holding, a mechanism underneath), if anything; empty if nothing.",
+    "- beyond: what lies underneath this point that is worth knowing (the mechanism that makes it work, where its rules stop holding), if anything; empty if nothing. Down into this point, not sideways into other topics.",
     "- goal_link: one sentence on where this point shows up in the learner's goal.",
-    'Reply with only JSON: {"goals": [""], "frame": "", "parts": [{"goals": [numbers], "note": "anything this writer should know, or empty"}], "together": "sequence or parallel", "beyond": "", "goal_link": ""}',
+    'Reply with only JSON: {"goals": [""], "frame": "", "parts": [{"goals": [numbers], "note": "what this writer must know that the goals and frame do not say, such as where their part starts and ends; usually empty"}], "together": "sequence or parallel", "beyond": "", "goal_link": ""}',
   ].join("\n"); };
   function normLead(d) {
     const goals = parr(d && d.goals).map(pstr).filter(Boolean).slice(0, 12);
@@ -3734,7 +3741,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     "- false: anything false, as above;",
     "- stuck: where this learner would get stuck, and what would let them through;",
     "- goals: each goal you could not reach from the lesson, and what is missing;",
-    "- rules: an exercise, quiz or practice task written into the lesson (a question to think about, with its answer after it, is fine), a claim that some mistake is common, text copied from a book, missing notes.",
+    "- rules: an exercise, quiz or practice task written into the lesson (a question to think about, with its answer after it, is fine), a claim that some mistake is common, an extension that goes sideways into other topics instead of down into what lies underneath this point, text copied from a book, missing notes.",
     "Don't report matters of taste. If the lesson works, say so and report nothing.",
     'Reply with only JSON: {"reading": "two or three sentences on how learning from it went", "false": [{"quote": "", "problem": "", "fix": ""}], "stuck": [{"quote": "", "problem": "", "fix": ""}], "goals": [{"goal": number, "problem": "", "fix": ""}], "rules": [{"quote": "", "problem": "", "fix": ""}]}',
   ].filter((x) => x !== "").join("\n"); };
@@ -3762,23 +3769,23 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     ui.pjobs[key] = job; render();
     try {
       // 1. the lead: goals, frame, and how the writing is split
-      job.plan = normLead(await ask(job, "Lead", leadPromptPt(pid), "complex", true));
+      job.plan = normLead(await ask(job, "Lead", inLang(leadPromptPt(pid)), "complex", true));
       // 2. the writers: in sequence (each sees the parts before it) or side by side
       job.stage = "teach"; job.parts = job.plan.parts.length; paint();
       let parts = [];
-      const write = async (k, before) => { const t = splitLesson(await ask(job, "Writer", writerPromptPt(pid, job.plan, k, before), "default", false)); job.written++; paint(); return t; };
+      const write = async (k, before) => { const t = splitLesson(await ask(job, "Writer", inLang(writerPromptPt(pid, job.plan, k, before)), "default", false)); job.written++; paint(); return t; };
       if (job.plan.together === "parallel") parts = await Promise.all(job.plan.parts.map((_, k) => write(k, "")));
       else for (let k = 0; k < job.plan.parts.length; k++) parts.push(await write(k, parts.map((p) => p.lesson).join("\n\n")));
       // 3. the lead joins several parts into one lesson
       let L = parts[0];
-      if (parts.length > 1) { job.stage = "stitch"; paint(); L = splitLesson(await ask(job, "Lead", stitchPromptPt(pid, job.plan, parts), "default", false)); }
+      if (parts.length > 1) { job.stage = "stitch"; paint(); L = splitLesson(await ask(job, "Lead", inLang(stitchPromptPt(pid, job.plan, parts)), "default", false)); }
       // 4. the page runs the examples; 5. the reviewer learns from the lesson, and revises what it found
       for (let round = 0; ; round++) {
         job.stage = "check"; paint();
         const run = profileOf().run === "python" ? await runLessonExamples(L).catch(() => null) : null;
         job.ran = run && run.ran ? { n: run.n, of: run.of } : null;
         let F;
-        if (round === 0) { F = normFindings(await ask(job, "Reviewer", reviewPromptPt(pid, job.plan, L, run), "complex", true), job.plan); job.reading = F.reading; }
+        if (round === 0) { F = normFindings(await ask(job, "Reviewer", inLang(reviewPromptPt(pid, job.plan, L, run)), "complex", true), job.plan); job.reading = F.reading; }
         else F = { reading: "", false: [], stuck: [], goals: [], rules: [] };   // after a revision only the page's checks run again
         if (run && run.errs.length) F.false = run.errs.concat(F.false);
         if (!L.notes.length) F.rules.push({ quote: "", problem: "The notes are missing.", fix: "Add the === NOTES === line and the notes worth keeping." });
@@ -3786,10 +3793,10 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
         if (!hasFindings(F)) break;
         if (round >= PL_ROUNDS) throw { code: "not_compliant", agent: "Reviewer" };
         job.stage = "fix"; job.rounds++; paint();
-        L = splitLesson(await ask(job, "Reviewer", revisePromptPt(pid, job.plan, L, F), "default", false));
+        L = splitLesson(await ask(job, "Reviewer", inLang(revisePromptPt(pid, job.plan, L, F)), "default", false));
       }
-      const doc = { v: 2, src: "en", pid, key, at: new Date().toISOString(), plan: job.plan, reading: job.reading || "", lesson: L.lesson, deeper: L.deeper || "", notes: L.notes, advice: [], requests: job.requests, rounds: job.rounds, ran: job.ran };
-      if (trLang()) {
+      const doc = { v: 2, src: workLang(), pid, key, at: new Date().toISOString(), plan: job.plan, reading: job.reading || "", lesson: L.lesson, deeper: L.deeper || "", notes: L.notes, advice: [], requests: job.requests, rounds: job.rounds, ran: job.ran };
+      if (outLang()) {
         job.stage = "translate"; paint();
         try { await translateLesson(doc, job); }
         catch (e) { if (e && e.code === "cancelled") throw e; notify("The lesson is ready, but it couldn't be translated, so it's shown in English. You can translate it again.", "warn"); }
@@ -3797,7 +3804,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
       doc.requests = job.requests;
       ui.plessons[key] = doc;
       const s = cur();
-      s.pointIndex[pid] = { at: doc.at, notes: doc.notes, src: "en", tr: doc.tr ? { [trLang()]: doc.tr[trLang()].notes } : undefined };
+      s.pointIndex[pid] = { at: doc.at, notes: doc.notes, src: doc.src, tr: doc.tr && doc.tr[curLang()] ? { [curLang()]: doc.tr[curLang()].notes } : undefined };
       if (db) db.doc("lessons2/" + key).set(clone(doc)).catch(() => notify("The lesson is shown but couldn't be saved.", "warn"));
       saveSubject();
       job.stage = "done";
@@ -3922,7 +3929,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
   function ptTeamCard(job) {
     const order = { plan: 0, teach: 1, stitch: 1, check: 2, fix: 2, translate: 3, done: 4, error: -1 };
     const at = order[job.stage];
-    const stages = trLang() ? PT_STAGES.concat([["translate", "Translator", "translates it into your language, keeping the English original"]]) : PT_STAGES;
+    const stages = outLang() ? PT_STAGES.concat([["translate", "Translator", "translates it into your language, keeping the English original"]]) : PT_STAGES;
     return h("div", { class: "card", id: "pt-team", "aria-live": "polite" },
       h("div", { class: "row spread" }, h("h3", null, "Building your lesson"), h("span", { class: "muted small" }, job.requests + " requests so far")),
       h("ol", { class: "plain" }, stages.map(([id, who, what], i) => h("li", null,
@@ -4361,9 +4368,9 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     const job = { id: "pjudge", requests: 0, cancel: false, running: true };
     ui.pjudge = job; render();
     try {
-      const R = normReady(await ask(job, "Judge", readinessPrompt(), "default", true));
-      const rec = { sig: learnedSig(), at: new Date().toISOString(), src: "en", ...R };
-      if (trLang()) { try { await translateRecord(job, rec, ["why", "shape"], ["focus", "review", "next"], subjectAbout("a judgement on whether the learner should practise now")); } catch (e) { if (e && e.code === "cancelled") throw e; } }
+      const R = normReady(await ask(job, "Judge", inLang(readinessPrompt()), "default", true));
+      const rec = { sig: learnedSig(), at: new Date().toISOString(), src: workLang(), ...R };
+      if (outLang()) { try { await translateRecord(job, rec, ["why", "shape"], ["focus", "review", "next"], subjectAbout("a judgement on whether the learner should practise now")); } catch (e) { if (e && e.code === "cancelled") throw e; } }
       s.practiceReady = rec;
       saveSubject();
       logEvent("practice", "Practice check: " + (R.enough ? "worth practising now" : "not yet") + ". " + R.why);
@@ -4384,9 +4391,9 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     ui.pjob = job; render();
     try {
       // 1. plan the set, then write each exercise with its own call (they run side by side)
-      const O = normOutline(await ask(job, "Designer", designPrompt(focus), "default", true));
+      const O = normOutline(await ask(job, "Designer", inLang(designPrompt(focus)), "default", true));
       job.planned = O.exercises.length; paint();
-      let EX = await Promise.all(O.exercises.map((_, i) => ask(job, "Designer", exercisePrompt(focus, O, i, kind), "default", true).then((x) => normEx(x, kind)).catch((e) => {
+      let EX = await Promise.all(O.exercises.map((_, i) => ask(job, "Designer", inLang(exercisePrompt(focus, O, i, kind)), "default", true).then((x) => normEx(x, kind)).catch((e) => {
         if (e && e.code === "cancelled") throw e;
         job.dropped.push(O.exercises[i].title); job.why.push(O.exercises[i].title + ": " + (e && e.code || "error")); return null; })));
       const polished = new Set();
@@ -4410,7 +4417,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
         job.ran = ran;
         // 3. the editor: errors must be fixed, improvements get one revision
         job.stage = "check"; paint();
-        const rv = await ask(job, "Checker", practiceCheckPrompt(focus, S, ran, kind), "complex", true);
+        const rv = await ask(job, "Checker", inLang(practiceCheckPrompt(focus, S, ran, kind)), "complex", true);
         const errs = runErrs.concat(normProblemsPr(rv && (rv.errors || rv.problems)));
         const imps = normProblemsPr(rv && rv.improvements);
         advice = imps;
@@ -4433,21 +4440,21 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
           const f = fixes[i];
           if (!f.errs.length && !f.imps.length) return x;
           if (f.imps.length) polished.add(i);
-          return ask(job, "Designer", exerciseFixPrompt(focus, O, x, i, f.errs, f.imps), "default", true).then((y) => normEx(y, kind)).catch((e) => { if (e && e.code === "cancelled") throw e; return x; });
+          return ask(job, "Designer", inLang(exerciseFixPrompt(focus, O, x, i, f.errs, f.imps)), "default", true).then((y) => normEx(y, kind)).catch((e) => { if (e && e.code === "cancelled") throw e; return x; });
         }));
       }
-      const set = { v: 2, src: "en", id: newId("s"), sid: s.sid, kind, at: new Date().toISOString(), focus: focus.focus, review: focus.review, when: O.when, how: O.how,
+      const set = { v: 2, src: workLang(), id: newId("s"), sid: s.sid, kind, at: new Date().toISOString(), focus: focus.focus, review: focus.review, when: O.when, how: O.how,
         exercises: EX.map((x) => ({ ...x, mine: x.starter || "", solved: false, hintsShown: 0, revealed: false })),
         advice: advice.map((p) => (p.exercise ? "Exercise " + p.exercise + ": " : "") + p.problem), dropped: job.dropped,
         verified: !!job.verified, requests: job.requests, rounds: job.rounds };
-      if (trLang()) {
+      if (outLang()) {
         job.stage = "translate"; paint();
         try { await translateSet(set, job); }
         catch (e) { if (e && e.code === "cancelled") throw e; notify("The practice set is ready, but it couldn't be translated, so it's shown in English. You can translate it again.", "warn"); }
         set.requests = job.requests;
       }
       ui.pset = set; ui.prun = {};
-      s.practice = (s.practice || []).concat([{ id: set.id, at: set.at, titles: set.exercises.map((x) => x.title), focus: set.focus, tr: set.tr ? { [trLang()]: set.tr[trLang()].exercises.map((x) => x.title) } : undefined }]).slice(-30);
+      s.practice = (s.practice || []).concat([{ id: set.id, at: set.at, titles: set.exercises.map((x) => x.title), focus: set.focus, tr: set.tr && set.tr[curLang()] ? { [curLang()]: set.tr[curLang()].exercises.map((x) => x.title) } : undefined }]).slice(-30);
       s.practiceCurrent = set.id;
       if (db) db.doc("practice2/" + set.id).set(clone(set)).catch(() => notify("The practice set is shown but couldn't be saved.", "warn"));
       saveSubject();
@@ -4493,10 +4500,10 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     if (!canRun(S.kind)) {
       if (!aiReady() || !(x.mine || "").trim()) { ui.prun[i] = null; render(); return; }
       try {
-        const d = await sample.json(answerCheckPrompt(x, x.mine), { modelTier: "default", cache: false });
+        const d = await sample.json(inLang(answerCheckPrompt(x, x.mine)), { modelTier: "default", cache: false });
         const results = parr(d && d.results).map((r) => ({ n: Number(r && r.criterion) || 0, met: ["yes", "partly", "no"].includes(pstr(r && r.met).toLowerCase()) ? pstr(r.met).toLowerCase() : "partly", note: pstr(r && r.note) }));
         const fb = { results, text: pstr(d && d.feedback), notes: results.map((r) => r.note) };
-        if (trLang()) { try { await translateRecord({ requests: 0, cancel: false }, fb, ["text"], ["notes"], subjectAbout("feedback on the learner's answer to a practice exercise")); } catch (_) {} }
+        if (outLang()) { try { await translateRecord({ requests: 0, cancel: false }, fb, ["text"], ["notes"], subjectAbout("feedback on the learner's answer to a practice exercise")); } catch (_) {} }
         ui.prun[i] = { running: false, feedback: fb };
         const all = x.criteria.every((_, j) => (results.find((r) => r.n === j + 1) || {}).met === "yes");
         if (all && !x.solved) { x.solved = true; notify("The feedback says your answer meets every criterion. Compare with the model answer when you like."); logEvent("practice", "Solved (by AI feedback): " + x.title); }
@@ -4523,7 +4530,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     const stages = [["design", "Designer", "plans the set from what you've learned, then writes each exercise"]]
       .concat(runnable ? [["run", "Runner", "runs the designer's own solution against the tests"]] : [])
       .concat([["check", "Editor", runnable ? "checks that you can do each exercise and that it's worth doing" : "checks each exercise, its criteria and its model answer"]]);
-    if (trLang()) stages.push(["translate", "Translator", "translates the set into your language, keeping the English original"]);
+    if (outLang()) stages.push(["translate", "Translator", "translates the set into your language, keeping the English original"]);
     const order = runnable ? { design: 0, run: 1, check: 2, fix: 2, translate: 3, done: 4, error: -1 } : { design: 0, check: 1, fix: 1, translate: 2, done: 3, error: -1 };
     const at = order[job.stage];
     return h("div", { class: "card", "aria-live": "polite" },
@@ -4919,11 +4926,11 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     const job = { requests: 0, cancel: false };
     ui.busy.trialPick = true; ui.errors.trial = null; render();
     try {
-      const d = await ask(job, "Level check", levelTasksPrompt(), "default", true);
+      const d = await ask(job, "Level check", inLang(levelTasksPrompt()), "default", true);
       const tasks = parr(d && d.tasks).map((t) => ({ title: pstr(t && t.title), task: pstr(t && t.task), probes: parr(t && t.probes).map(pstr).filter((id) => km.data.byId[id]) })).filter((t) => t.title && t.task).slice(0, 8);
       if (!tasks.length) throw { code: "invalid_json", agent: "Level check" };
-      const TT = { src: "en", why: pstr(d.why), tasks, at: new Date().toISOString() };
-      if (trLang()) { try { const tmp = { why: TT.why, titles: tasks.map((t) => t.title), bodies: tasks.map((t) => t.task) }; await translateRecord(job, tmp, ["why"], ["titles", "bodies"], subjectAbout("a short level check: tasks for the learner")); TT.tr = tmp.tr; } catch (_) {} }
+      const TT = { src: workLang(), why: pstr(d.why), tasks, at: new Date().toISOString() };
+      if (outLang()) { try { const tmp = { src: TT.src, why: TT.why, titles: tasks.map((t) => t.title), bodies: tasks.map((t) => t.task) }; await translateRecord(job, tmp, ["why"], ["titles", "bodies"], subjectAbout("a short level check: tasks for the learner")); TT.tr = tmp.tr; } catch (_) {} }
       s.trialTasks = TT; s.trial = null; ui.trialAnswers = {};
       saveSubject();
       logEvent("trial", "Level check tasks for " + s.name + ": " + tasks.map((t) => t.title).join("; "));
@@ -4937,12 +4944,12 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     if (withTasks && !answers.some((a) => a.trim())) { ui.errors.trial = "Answer at least one task first, or skip the tasks."; render(); return; }
     ui.busy.trial = true; ui.errors.trial = null; render();
     try {
-      const d = await ask({ requests: 0, cancel: false }, "Level check", levelAssessPrompt(tasks, answers, withTasks), "default", true);
+      const d = await ask({ requests: 0, cancel: false }, "Level check", inLang(levelAssessPrompt(tasks, answers, withTasks)), "default", true);
       const ids = (v) => parr(v).map(pstr).filter((id) => km.data.byId[id]);
       const results = {};
       parr(d && d.tasks).forEach((r) => { const n = Number(r && r.n); if (n >= 1 && n <= tasks.length) results[n - 1] = { result: ["works", "almost", "not yet"].includes(pstr(r.result)) ? pstr(r.result) : "almost", note: pstr(r.note) }; });
-      const TR = { src: "en", summary: pstr(d && d.summary), solid: ids(d && d.solid), shaky: ids(d && d.shaky), feedback: pstr(d && d.feedback) || "No feedback came back.", results, withTasks, at: new Date().toISOString() };
-      if (trLang()) { try { const tmp = { summary: TR.summary, feedback: TR.feedback, notes: tasks.map((_, k) => (results[k] || {}).note || "") }; await translateRecord({ requests: 0, cancel: false }, tmp, ["summary", "feedback"], ["notes"], subjectAbout("feedback on a level check")); TR.tr = tmp.tr; } catch (_) {} }
+      const TR = { src: workLang(), summary: pstr(d && d.summary), solid: ids(d && d.solid), shaky: ids(d && d.shaky), feedback: pstr(d && d.feedback) || "No feedback came back.", results, withTasks, at: new Date().toISOString() };
+      if (outLang()) { try { const tmp = { src: TR.src, summary: TR.summary, feedback: TR.feedback, notes: tasks.map((_, k) => (results[k] || {}).note || "") }; await translateRecord({ requests: 0, cancel: false }, tmp, ["summary", "feedback"], ["notes"], subjectAbout("feedback on a level check")); TR.tr = tmp.tr; } catch (_) {} }
       s.trial = TR;
       saveSubject();
       logEvent("trial", "Level check for " + s.name + (withTasks ? "" : " (from description only)") + ": " + s.trial.summary + " Solid: " + s.trial.solid.length + ", shaky: " + s.trial.shaky.length);
@@ -5014,7 +5021,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     ].join("\n");
     await Promise.all(TIERS.map(async (t) => {
       try {
-        const data = await sample.json(prompt, { modelTier: t.id, cache: false });
+        const data = await sample.json(inLang(prompt), { modelTier: t.id, cache: false });
         const share = Math.max(0, Math.min(100, Math.round(Number(data && data.share))));
         if (!Number.isFinite(share)) throw { code: "invalid_json" };
         ui.tierResults[t.id] = { state: "done", share, strong: parr(data.strong).slice(0, 6).map(String), limits: parr(data.limits).slice(0, 6).map(String), statement: String(data.statement || "") };
@@ -5030,13 +5037,13 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
       const spread = shares[shares.length - 1] - shares[0];
       const agreement = spread <= 15 ? "agree" : spread <= 30 ? "partial" : "disagree";
       const std = done.find((x) => x.tier.id === "default") || done[0];
-      s.grade = { src: "en", share: mid, spread, agreement, statement: std.r.statement, shares: Object.fromEntries(done.map((x) => [x.tier.id, x.r.share])) };
-      if (trLang()) {
+      s.grade = { src: workLang(), share: mid, spread, agreement, statement: std.r.statement, shares: Object.fromEntries(done.map((x) => [x.tier.id, x.r.share])) };
+      if (outLang()) {
         try {
-          const L = trLang(), G = {}, P = [[s.grade.statement, (v) => { G.statement = v; }]];
+          const L = outLang(), G = {}, P = [[s.grade.statement, (v) => { G.statement = v; }]];
           done.forEach((x) => { const t = { strong: [], limits: [] }; x.r.tr = { [L]: t };
             x.r.strong.forEach((v0, k) => P.push([v0, (v) => { t.strong[k] = v; }])); x.r.limits.forEach((v0, k) => P.push([v0, (v) => { t.limits[k] = v; }])); });
-          await trPairs({ requests: 0, cancel: false }, P, subjectAbout("AI estimates of how far an AI can guide this learner"));
+          await trPairs({ requests: 0, cancel: false }, P, subjectAbout("AI estimates of how far an AI can guide this learner"), workLang());
           s.grade.tr = { [L]: G };
         } catch (_) {}
       }
@@ -5073,7 +5080,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
         caution("These are AI estimates of AI ability, and they can be wrong.")) : null,
       h("div", { class: "row" },
         h("button", { class: g ? "quiet" : "primary", type: "button", disabled: ui.busy.grade || !aiReady(), onclick: runGrade }, ui.busy.grade ? "Asking three models…" : g ? "Ask again" : "Ask the three models"),
-        h("span", { class: "muted small" }, trLang() ? "Uses 3 requests on your Claude account, and one more to translate" : "Uses 3 requests on your Claude account")),
+        h("span", { class: "muted small" }, outLang() ? "Uses 3 requests on your Claude account, and one more to translate" : "Uses 3 requests on your Claude account")),
       errLine("reach"),
       h("div", { class: "tiers" }, tierCards),
       g ? h("div", { class: "row" }, h("button", { class: "primary", type: "button", onclick: () => go("learn") }, "Start learning")) : null);
