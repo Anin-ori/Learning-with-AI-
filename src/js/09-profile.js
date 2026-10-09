@@ -44,13 +44,14 @@
     km = null; $("kmap").hidden = true;
     saveApp(); saveSubject(sid);
     logEvent("subject", "Started a subject: " + name + " · Goal: " + goal);
-    buildMap(sid);
+    buildMap(sid, null, { fresh: true });
   }
   async function deleteSubject(sid) {
     const s = subjects[sid]; if (!s) return;
     const mid = maps[sid] && maps[sid].mid;
     app.order = app.order.filter((x) => x !== sid);
     delete subjects[sid]; delete maps[sid];
+    dropBuild(sid);
     if (db) ["subjects/" + sid, "maps/" + sid].concat(mid ? ["qa2/" + mid] : []).forEach((p) => { try { const d = db.doc(p); if (d.delete) d.delete().catch(() => {}); else d.set({ deleted: true }).catch(() => {}); } catch (_) {} });
     logEvent("subject", "Deleted the subject " + s.name);
     ui.confirmDelete = null;
@@ -69,7 +70,7 @@
       return h("article", { class: "card" + (here ? " subject-here" : "") },
         h("div", { class: "row spread" }, ai("h3", null, s.name), here ? h("span", { class: "chip accent" }, "Open now") : null),
         s.goal ? ai("p", { class: "small" }, s.goal) : null,
-        h("p", { class: "small muted" }, s.built ? (M ? (s.learned || []).length + " of " + M.nodes.length + " points learned" : (s.learned || []).length + " points learned") : "The map isn't built yet."),
+        h("p", { class: "small muted" }, s.built ? (M ? (s.learned || []).length + " of " + M.nodes.length + " points learned" : (s.learned || []).length + " points learned") : pausedBuild(s.sid) ? "The map is part-built." : "The map isn't built yet."),
         ui.confirmDelete === s.sid
           ? h("div", { class: "row" }, h("span", { class: "small" }, "Delete this subject, its map and its progress?"),
               h("button", { class: "primary", type: "button", onclick: () => deleteSubject(s.sid) }, "Delete"),
@@ -77,13 +78,14 @@
           : h("div", { class: "row" },
               !here && s.built ? h("button", { class: "primary", type: "button", onclick: () => switchSubject(s.sid) }, "Open") : null,
               here && s.built ? h("button", { class: "quiet", type: "button", onclick: () => setView("map") }, "Open the map") : null,
-              !s.built ? h("button", { class: "primary", type: "button", disabled: !aiReady() || (ui.build && ui.build.running), onclick: () => { app.current = s.sid; saveApp(); buildMap(s.sid); } }, "Build the map") : null,
+              !s.built ? h("button", { class: "primary", type: "button", disabled: !aiReady() || (ui.build && ui.build.running), onclick: () => { app.current = s.sid; saveApp(); buildMap(s.sid); } }, pausedBuild(s.sid) ? "Continue building" : "Build the map") : null,
               h("button", { class: "link", type: "button", disabled: ui.build && ui.build.running && ui.build.sid === s.sid, onclick: () => { ui.confirmDelete = s.sid; render(); } }, "Delete")));
     };
     return h("section", { class: "panel" },
       head("Profile · Subjects", list.length ? "Your subjects" : "What do you want to learn, and why?",
         "Name any subject and your goal. An AI builds a knowledge map for you: the topics and points your goal needs, what each builds on, and a suggested route. You choose what to study."),
       job ? (job.running ? buildCard(job) : h("div", { class: "card soft" }, h("p", { class: "msg" }, job.error))) : null,
+      app.current ? pausedCard(app.current) : null,
       list.length ? h("div", { class: "subject-list" }, list.map(card)) : null,
       h("div", { class: "card" },
         h("h3", null, list.length ? "Start another subject" : "Start a subject"),
@@ -97,7 +99,7 @@
           h("label", { for: "situation" }, "Where are you now?", h("span", { class: "hint" }, " Optional: what you've done so far, what feels easy or hard")),
           h("textarea", { id: "situation", rows: 3, value: f.situation, oninput: (e) => { f.situation = e.target.value; } })),
         errLine("subject"),
-        h("p", { class: "small muted" }, "Building a map usually takes 6 to 15 AI requests: one to plan, one for each group of topics, one for your route and one to check the whole map. No human source is used, so the map is one AI's view of the subject, checked by a second AI."),
+        h("p", { class: "small muted" }, "AIs build the map as a tree: a master divides the subject into parts, planners divide each part until it's small enough to write, and on the way back up a reviewer checks and joins each part. A small subject takes a dozen or so AI requests, a large one many more; the count shows as it builds. No human source is used, so the map is the AIs' view of the subject."),
         h("div", { class: "row" }, h("button", { class: "primary", type: "button", disabled: !aiReady() || (ui.build && ui.build.running), onclick: startSubject }, "Build my map"))));
   }
 
@@ -111,7 +113,7 @@
     const save = () => { s.goal = g.goal.trim(); s.situation = g.situation.trim(); saveSubject(); logEvent("goal", "Goal for " + s.name + ": " + s.goal); notify("Your goal is saved."); render(); };
     return h("section", { class: "panel" },
       head("Profile · Your goal", ai("span", null, s.name), "Your goal decides the map's scope and the red route. Change it here, then update the route, or rebuild the whole map."),
-      job ? buildCard(job) : null,
+      job ? buildCard(job) : pausedCard(s.sid),
       h("div", { class: "card" },
         h("div", { class: "field" }, h("label", { for: "goal-edit" }, "Your goal"),
           h("textarea", { id: "goal-edit", rows: 3, value: g.goal, oninput: (e) => { g.goal = e.target.value; } })),
@@ -127,7 +129,7 @@
         h("h3", null, M ? "Rebuild the whole map" : "Build the map"),
         M ? h("p", { class: "small" }, "The AI builds a new map from your saved goal. Your progress, lessons, notes and practice on this map won't carry over to the new one.") : h("p", { class: "small" }, "This subject has no map yet."),
         ui.confirmRebuild === s.sid
-          ? h("div", { class: "row" }, h("button", { class: "primary", type: "button", disabled: !aiReady() || changed, onclick: () => { ui.confirmRebuild = null; buildMap(s.sid); } }, "Rebuild"), h("button", { class: "quiet", type: "button", onclick: () => { ui.confirmRebuild = null; render(); } }, "Cancel"))
+          ? h("div", { class: "row" }, h("button", { class: "primary", type: "button", disabled: !aiReady() || changed, onclick: () => { ui.confirmRebuild = null; buildMap(s.sid, null, { fresh: true }); } }, "Rebuild"), h("button", { class: "quiet", type: "button", onclick: () => { ui.confirmRebuild = null; render(); } }, "Cancel"))
           : h("div", { class: "row" }, h("button", { class: "quiet", type: "button", disabled: !aiReady() || changed || (ui.build && ui.build.running), onclick: () => { if (M) { ui.confirmRebuild = s.sid; render(); } else buildMap(s.sid); } }, M ? "Rebuild the map" : "Build the map"),
               changed ? h("span", { class: "small muted" }, "Save your goal first.") : null)));
   }

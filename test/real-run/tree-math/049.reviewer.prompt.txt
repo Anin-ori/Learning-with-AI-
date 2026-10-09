@@ -1,0 +1,171 @@
+You review one part of a knowledge map in Learning Companion, an open-source study tool for self-learners, before the learner sees it. The map is built by a tree of AIs: the pieces of this part were planned and written by separate AIs, each seeing only its own piece. You are the first to see them together; the reviewer above you will see this part beside its neighbours.
+Subject: Mathematical analysis
+The learner's goal: Understand real analysis rigorously at the level of a first university course: limits, continuity, differentiation, integration and series, and be able to read and write the proofs.
+Where they are now, in their own words: (not given)
+
+Where this part sits:
+Subject: Mathematical analysis. Scope: The map covers single-variable real analysis as taught in a standard first university course (the organisation of textbooks such as Abbott, Bartle and Sherbert, Spivak and the analysis part of Rudin): the real numbers and completeness, sequences, series of numbers, the topology of the real line, limits of functions and continuity, differentiation, the Riemann integral, and sequences and series of functions including power series. The learner's goal names limits, continuity, differentiation, integration and series, and asks them to read and write proofs, so the map starts with a foundations part on logic, quantifiers, proof techniques, sets and functions. No starting level was given, so this part is included in full but kept practical: it covers only the logic and set language the later proofs use. Formal logic and axiomatic set theory are left out. The real numbers are treated axiomatically as a complete ordered field. Building them from the rationals (Dedekind cuts or Cauchy sequences) is only mentioned, because most first courses do it this way and the construction is not needed to use completeness. The integral is the Riemann integral, set up with Darboux upper and lower sums. That is the most common choice; the equivalent tagged-sum definition is mentioned, not developed. The topology of the real line (open, closed, compact and connected sets) gets its own short part, as in Abbott and Rudin, because compactness and connectedness are the real reasons behind the extreme value and intermediate value theorems. Some books, such as Spivak, fold this into continuity instead. Exponential, logarithm and trigonometric functions may be used as examples from the start with their familiar properties; they are defined rigorously in the part on series of functions. Left out: multivariable analysis, metric spaces beyond a mention, Lebesgue measure and integration, complex analysis, Fourier analysis and differential equations. These are named in a short final part so the learner can see where the course leads, but they are not taught. Computational calculus technique (long integration drills, many differentiation rules) is also left out, except where a rule needs a proof.
+- Sequences (your part): This part covers sequences of real numbers: the epsilon-N definition of a limit, proofs of convergence from the definition, uniqueness of limits, bounded sequences, the limit laws (sum, product, quotient) with full proofs, the order and squeeze theorems, and divergence to infinity. Also the monotone convergence theorem, subsequences, the Bolzano-Weierstrass theorem, Cauchy sequences and the Cauchy criterion (completeness in sequence form), limit superior and limit inferior, and standard limits (n^(1/n), r^n, (1 + 1/n)^n as the source of e). Edges: only sequences of numbers. Series of numbers are the next part, although the Cauchy criterion proved here is what they use. Sequences of functions belong to 'Sequences and series of functions'. The sequential characterisation of limits of functions and continuity is proved in 'Limits of functions and continuity' using results from here. Compactness is in 'Topology of the real line', which builds on Bolzano-Weierstrass from here. What matters for this learner: this is where the epsilon-N way of thinking is learned. Give it room for writing many proofs from the definition, including how to find N in scratch work and the epsilon/2 and epsilon/3 techniques.
+
+This part, piece by piece. Every point with its id, what it is, and the points it needs first:
+Piece: Convergence from the definition
+Topic t8: Convergence from the definition
+  p84 | What a sequence is | The learner understands a sequence as a function from the natural numbers to the reals, reads the notations (a_n), a_n and a: N -> R, and can work with sequences given by a formula (1/n, (-1)^n, n^2) or by a recursion (a_1 = 1, a_{n+1} = (a_n + 2)/2), computing and plotting early terms. | needs: nothing
+  p85 | The epsilon-N definition of convergence | The learner can state the definition a_n -> L (for every epsilon > 0 there is N such that |a_n - L| < epsilon for all n >= N), read it quantifier by quantifier, and draw it as an epsilon-band around L that the tail of the sequence enters and never leaves. | needs: p84
+  p86 | What N depends on, and harmless variations of the definition | The learner understands that N may depend on epsilon (but not on n), that any larger N also works, and that replacing < epsilon by <= epsilon, or epsilon by a fixed multiple such as 2 epsilon, gives an equivalent definition, so a proof may end with |a_n - L| < C epsilon. | needs: p85
+  p87 | Tails: finitely many terms do not matter | The learner can show from the definition that changing, adding or deleting finitely many terms, or shifting the index (a_{n+k} instead of a_n), does not change whether a sequence converges or what its limit is, and so can use 'eventually' arguments. | needs: p85
+  p88 | Finding N in scratch work: first examples | The learner can find N for simple sequences such as 1/n, 5/n^2 and 1/sqrt(n) by writing |a_n - L| < epsilon, solving for n, and using the Archimedean property to choose a natural number N that is large enough. | needs: p85
+  p89 | Writing the final proof from the scratch work | The learner can turn scratch work into a clean proof that reads in the order 'let epsilon > 0, choose N = ..., then for n >= N, |a_n - L| <= ... < epsilon', and understands why the scratch work (which runs backwards from the goal) is not itself the proof. | needs: p88
+  p90 | Bounding |a_n - L| by something simpler | The learner can handle rational sequences such as (3n+1)/(2n+5) -> 3/2 and (n^2+1)/(n^2-n) -> 1 by simplifying |a_n - L| and overestimating it (shrinking the denominator, enlarging the numerator, assuming n is past some threshold), then taking N as the maximum of the several thresholds needed. | needs: p89
+  p91 | Square roots and rationalising: sqrt(n+1) - sqrt(n) | The learner can prove limits involving square roots, such as sqrt(n+1) - sqrt(n) -> 0, by multiplying by the conjugate to get 1/(sqrt(n+1) + sqrt(n)) and bounding it by 1/(2 sqrt(n)), choosing N from the simpler bound. | needs: p90
+  p92 | Negating the definition: a_n does not converge to L | The learner can write the negation 'there exists epsilon > 0 such that for every N there is n >= N with |a_n - L| >= epsilon' and use it to prove that a given sequence does not converge to a given number, by exhibiting one bad epsilon. | needs: p85
+  p93 | Proving a sequence diverges: (-1)^n | The learner understands that a divergent sequence is one that converges to no L at all, and can prove that (-1)^n diverges by showing, for every candidate L, that epsilon = 1 (or 1/2) is a bad epsilon because consecutive terms are 2 apart. | needs: p92
+  p94 | Uniqueness of limits | The learner can prove that a sequence has at most one limit, using the epsilon/2 technique (choose N for epsilon/2 for each limit, take the larger N and apply the triangle inequality), which justifies writing lim a_n = L. | needs: p86
+  p95 | Convergent sequences are bounded | The learner can prove that every convergent sequence is bounded (use epsilon = 1 to bound the tail by |L| + 1, then take the maximum with the finitely many earlier terms), and use the contrapositive to show that an unbounded sequence such as n diverges. | needs: p85
+  p96 | Divergence to infinity: the M-N definition | The learner can state a_n -> +infinity (for every M there is N such that a_n > M for all n >= N) and the matching definition for -infinity, and prove such statements from the definition for examples like sqrt(n), n^2 - 5n and -n^3 + n, using the same scratch-work method with M in place of epsilon. | needs: p89
+  p97 | Tending to infinity versus unbounded versus divergent | The learner understands that a sequence tending to plus or minus infinity does not converge (it is divergent), that unbounded does not imply tending to infinity, as (-1)^n n shows, and can prove such a sequence does not tend to infinity by negating the M-N definition. | needs: p95, p96, p92
+
+Piece: Limit laws, order and squeeze
+Topic t11: Limit laws, order and squeeze
+  p126 | Constant multiple law | The learner can prove that if a_n -> L then c*a_n -> cL by running the definition with epsilon/|c|, treat the case c = 0 separately, and see this as the simplest example of choosing the epsilon to feed into a known limit. | needs: nothing
+  p127 | Sum and difference law (the epsilon/2 technique) | The learner can prove that if a_n -> a and b_n -> b then a_n + b_n -> a + b and a_n - b_n -> a - b, by applying each hypothesis with epsilon/2, taking N as the larger of the two thresholds and combining with the triangle inequality. They can reuse this splitting pattern in other proofs. | needs: nothing
+  p128 | Null sequences and bounded times null | The learner knows that a_n -> L exactly when a_n - L -> 0, and that a_n -> 0 exactly when |a_n| -> 0. They can prove that a bounded sequence times a sequence tending to 0 tends to 0, and use this on examples such as sin(n)/n. | needs: nothing
+  p129 | Product law | The learner can prove that a_n b_n -> ab by writing a_n b_n - ab = a_n(b_n - b) + b(a_n - a), bounding |a_n| by a constant M because convergent sequences are bounded, and choosing the two thresholds so that each piece is below epsilon/2. They understand why boundedness is needed and can reproduce and adapt the add-and-subtract step. | needs: p127
+  p130 | A nonzero limit keeps the sequence away from zero | The learner can prove that if b_n -> b with b != 0, then from some N on |b_n| > |b|/2, by applying the definition with epsilon = |b|/2 and the reverse triangle inequality. They see why this fails when b = 0. | needs: nothing
+  p131 | Reciprocal and quotient law | The learner can prove that 1/b_n -> 1/b when b_n -> b and b != 0 (with b_n != 0), by bounding |1/b_n - 1/b| = |b - b_n|/(|b_n||b|) using the lower bound on |b_n|. They then obtain a_n/b_n -> a/b from the product law, and know exactly which hypotheses the quotient law needs. | needs: p129, p130
+  p132 | Using the algebraic limit theorem | The learner can compute limits such as (3n^2 + 1)/(2n^2 - n) by dividing by the highest power and applying the laws step by step, justifying each step. They know that the laws need the component limits to exist, and can give counterexamples to false converses (for example a_n + b_n can converge while a_n and b_n do not). | needs: p126, p127, p129, p131
+  p133 | Order limit theorem | The learner can prove by contradiction that if a_n >= 0 for all large n and a_n -> a then a >= 0, and deduce that a_n <= b_n implies lim a_n <= lim b_n and that c <= a_n <= d implies c <= lim a_n <= d. They know that strict inequalities can become equalities in the limit, as 1/n > 0 with limit 0 shows. | needs: p127
+  p134 | Squeeze theorem | The learner can prove that if a_n <= x_n <= b_n eventually and a_n, b_n both tend to L, then x_n -> L, directly from the definition (and see why the order limit theorem alone does not give it, since it assumes the limit exists). They can apply it to examples such as sin(n)/n and sqrt(n^2 + 1) - n. | needs: nothing
+  p135 | Limit of |a_n| | The learner can prove that a_n -> a implies |a_n| -> |a| using the reverse triangle inequality, and knows that the converse fails in general (for example (-1)^n) but holds when a = 0. | needs: nothing
+  p136 | Limit of sqrt(a_n) | The learner can prove that if a_n >= 0 and a_n -> a then sqrt(a_n) -> sqrt(a), handling a = 0 directly from the definition and a > 0 by rationalising: |sqrt(a_n) - sqrt(a)| = |a_n - a|/(sqrt(a_n) + sqrt(a)) <= |a_n - a|/sqrt(a). | needs: p133
+  p137 | The epsilon/3 technique | The learner can bound a distance by a chain of three terms with the triangle inequality, |x - z| <= |x - y| + |y - w| + |w - z|, and make each term less than epsilon/3, working through an example such as the limit of a_n + b_n + c_n or of a_n b_n c_n. They recognise this as the general pattern of splitting epsilon into as many pieces as the estimate has, which later proofs (Cauchy criterion, uniform limits) reuse. | needs: p127
+  p138 | Limit laws for sequences tending to infinity | The learner can prove that if a_n -> +infinity then a_n + b_n -> +infinity when b_n is bounded below, c*a_n -> +infinity for c > 0, a_n b_n -> +infinity when b_n -> b > 0, and 1/a_n -> 0; and conversely that 1/a_n -> +infinity when a_n -> 0 with a_n > 0. They can use comparison: a_n <= b_n and a_n -> +infinity imply b_n -> +infinity. | needs: p130
+  p139 | Indeterminate forms | The learner knows why no general law exists for infinity - infinity, 0 * infinity, infinity/infinity and 0/0, and can give pairs of sequences showing that each form can lead to any finite limit, to infinity or to no limit. They can resolve such limits by algebraic rewriting before applying the laws. | needs: p132, p138
+  p140 | Bernoulli's inequality and r^n for |r| < 1 | The learner can prove Bernoulli's inequality (1 + h)^n >= 1 + nh for h >= -1 by induction, and use it to show r^n -> 0 for |r| < 1 by writing 1/|r| = 1 + h and squeezing |r|^n between 0 and 1/(nh). They can also show that r^n diverges for |r| > 1 and for r = -1. | needs: p134, p138
+  p141 | c^(1/n) tends to 1 | The learner can prove that c^(1/n) -> 1 for c > 1 by writing c^(1/n) = 1 + h_n and using Bernoulli's inequality to get 0 <= h_n <= (c - 1)/n, then handle 0 < c < 1 with the reciprocal law. | needs: p131, p134, p140
+  p142 | n^(1/n) tends to 1 | The learner can prove that n^(1/n) -> 1 by writing n^(1/n) = 1 + h_n, keeping only the second term of the binomial expansion to get n >= n(n-1)/2 * h_n^2, so that 0 <= h_n <= sqrt(2/(n-1)), and finishing with the squeeze theorem. | needs: p134, p136
+  p143 | Polynomial versus exponential growth | The learner can prove that n/2^n -> 0 and more generally n^k/a^n -> 0 for a > 1 and fixed k, by bounding a^n below with one term of the binomial expansion and squeezing (or by reducing n^k/a^n to the k-th power of n/b^n with b = a^(1/k) and using the product law). They can use this to compare growth rates in limit computations. | needs: p129, p134
+
+Piece: Monotone sequences and completeness
+Topic t9: Monotone sequences and completeness
+  p98 | Monotone sequences | Know the definitions of increasing, decreasing, strictly monotone and eventually monotone sequences. Be able to check monotonicity by the sign of a_{n+1} - a_n or by comparing a_{n+1}/a_n with 1 for positive terms. | needs: nothing
+  p99 | The monotone convergence theorem | State and prove from the completeness (supremum) axiom that a bounded increasing sequence converges to the supremum of its terms, and a bounded decreasing one to its infimum, using the approximation property of the supremum to find N. Recognise this as an existence theorem that does not need a candidate limit, and that it also holds for eventually monotone sequences. | needs: p98
+  p100 | Unbounded monotone sequences diverge to infinity | Prove that an increasing sequence that is not bounded above diverges to plus infinity (and the decreasing analogue), so a monotone sequence converges exactly when it is bounded. | needs: p98
+  p101 | Proving a recursive sequence monotone and bounded by induction | For a recursion such as a_1 = sqrt 2, a_{n+1} = sqrt(2 + a_n), prove by induction that the sequence is bounded (for example a_n < 2) and monotone (a_n < a_{n+1}), choosing the bound from scratch work and arranging the two inductions so each step uses the hypothesis. | needs: p98
+  p102 | Finding the limit by passing to the limit in the recursion | Once convergence is known from the monotone convergence theorem, find the limit by letting n tend to infinity on both sides of the recursion. This uses that the shifted sequence (a_{n+1}) has the same limit, the limit laws, and the order limit theorem to choose the right root (for example L = 2 from L = sqrt(2 + L)). | needs: p99, p101
+  p103 | Why the fixed-point equation is not a proof | Understand that solving L = f(L) only gives the possible limits if a limit exists. See counterexamples such as a_1 = 2, a_{n+1} = a_n^2, where L = L^2 suggests 0 or 1 but the sequence diverges to infinity, so convergence must be proved first. | needs: p102
+  p104 | The Babylonian iteration for sqrt 2 | Prove that a_1 = 2, a_{n+1} = (a_n + 2/a_n)/2 is bounded below by sqrt 2 (by the AM-GM inequality) and decreasing from the second term, so it converges, and that the limit is sqrt 2. This shows the monotone convergence theorem producing a number as the limit of a computable sequence. | needs: p102
+  p105 | The number e as the limit of (1 + 1/n)^n | Prove with the binomial theorem that (1 + 1/n)^n is increasing, by comparing the terms of the expansion term by term, and bounded above by 3, by comparing with sum 1/k! and a geometric sum. So the sequence converges, and its limit is defined to be e. | needs: p99
+  p106 | e as the limit of the sums of 1/k! | Show that the partial sums s_n = sum_{k=0}^n 1/k! increase and are bounded, so they converge, and that their limit is the same e. For this, prove (1 + 1/n)^n <= s_n and, for fixed m, let n go to infinity in a truncated binomial expansion to get e >= s_m. | needs: p105
+  p107 | Monotone convergence fails in the rationals | See that in Q the theorem is false: the Babylonian iterates (or the decimal truncations of sqrt 2) form a bounded monotone sequence of rationals with no rational limit. The theorem therefore depends on completeness and is not a consequence of the ordered field axioms alone. | needs: p104
+  p108 | Monotone convergence and the nested interval property | Prove that, given the Archimedean property, the monotone convergence theorem implies the nested interval property (the left endpoints increase and are bounded) and conversely (trap a bounded increasing sequence in bisected nested intervals). Conclude that monotone convergence is an equivalent form of completeness. | needs: p99
+
+Piece: Subsequences, Bolzano-Weierstrass and Cauchy sequences
+Topic t10: Subsequences, Bolzano-Weierstrass and Cauchy sequences
+  p109 | Subsequences | Define a subsequence (a_{n_k}) using a strictly increasing sequence of indices n_1 < n_2 < ..., tell subsequences apart from sequences that are not subsequences (repeated or reordered terms), and prove by induction that n_k >= k. | needs: nothing
+  p110 | Subsequences of a convergent sequence | Prove from the epsilon-N definition that every subsequence of a sequence converging to L also converges to L, using n_k >= k to carry the N over from the sequence to the subsequence. | needs: p109
+  p111 | Proving divergence with subsequences | Prove that a sequence diverges by finding two subsequences with different limits, or one subsequence that does not converge, for example (-1)^n or sin(n pi / 3), and explain why this works. | needs: p110
+  p112 | Every sequence has a monotone subsequence | Prove the peak-point lemma: using peak terms (terms larger than every later term), every real sequence has a monotone subsequence, splitting into the cases of infinitely many and finitely many peaks. | needs: p109
+  p113 | The Bolzano-Weierstrass theorem | State and prove that every bounded sequence of reals has a convergent subsequence, by combining the monotone subsequence lemma with the monotone convergence theorem, and see that the limit is not named in advance. | needs: p112
+  p114 | Bolzano-Weierstrass by bisection | Prove Bolzano-Weierstrass a second way: repeatedly halve an interval containing the sequence, keep a half holding infinitely many terms, pick one term from each interval with increasing indices, and use the nested interval property to find the limit of the chosen subsequence. | needs: p109
+  p115 | Subsequential limits | Define a subsequential limit (limit point of a sequence), find all of them for examples such as (-1)^n + 1/n, and prove that a bounded sequence converges exactly when all its convergent subsequences have the same limit. | needs: p110, p113
+  p116 | Cauchy sequences | State the definition of a Cauchy sequence (for every epsilon > 0 there is N with |a_m - a_n| < epsilon for all m, n >= N), compare it with the definition of convergence, which needs a limit L, and prove that every Cauchy sequence is bounded. | needs: nothing
+  p117 | Convergent sequences are Cauchy | Prove with the epsilon/2 technique that every convergent sequence is Cauchy, by passing through the limit: |a_m - a_n| <= |a_m - L| + |L - a_n|. | needs: p116
+  p118 | The Cauchy criterion | Prove that every Cauchy sequence of reals converges: Bolzano-Weierstrass gives a convergent subsequence, and the Cauchy property pulls the whole sequence to its limit. Understand that this lets one prove convergence without knowing or guessing the limit. | needs: p113, p116, p117
+  p119 | Cauchy criterion and completeness | Give a Cauchy sequence of rationals with no rational limit, such as the decimal truncations of sqrt 2. Explain that the Cauchy criterion is a form of completeness that holds in the reals but not in the rationals, alongside the supremum axiom, the nested interval property and monotone convergence. | needs: p117, p118
+  p120 | Contractive sequences | Prove that a contractive sequence, with |a_{n+1} - a_n| <= c|a_n - a_{n-1}| for a fixed c < 1, is Cauchy and so converges, by bounding |a_m - a_n| with a geometric sum. Apply this to a recursion such as a_{n+1} = 1/(2 + a_n), including an error bound for the limit. | needs: p118
+  p121 | Limit superior and limit inferior | For a bounded sequence, define limsup a_n and liminf a_n as the limits of the decreasing sequence sup_{k>=n} a_k and the increasing sequence inf_{k>=n} a_k, prove that both limits exist and that liminf <= limsup, and compute them for examples. | needs: nothing
+  p122 | Epsilon characterisation of limsup and liminf | Prove and use the characterisation: for every epsilon > 0, a_n < limsup + epsilon for all large n, and a_n > limsup - epsilon for infinitely many n, with the matching statement for liminf. | needs: p121
+  p123 | limsup and liminf as extreme subsequential limits | Prove that limsup a_n is the largest subsequential limit and liminf a_n the smallest, by building a subsequence that converges to limsup and showing that no subsequence can have a larger limit. | needs: p115, p122
+  p124 | Convergence exactly when limsup equals liminf | Prove that a bounded sequence converges if and only if limsup a_n = liminf a_n, and that the common value is then the limit, by squeezing a_n between the tail infimum and the tail supremum. | needs: p121
+  p125 | limsup and liminf of unbounded sequences | Extend limsup and liminf to every sequence using plus and minus infinity (limsup = +infinity exactly when the sequence is unbounded above), and check that the earlier results still hold, including that a_n tends to +infinity exactly when liminf a_n = +infinity. | needs: p121, p124
+
+Open needs: ideas a point here was written to need from outside its own topic, not linked yet:
+N99 | p84 (What a sequence is) | functions: domain, codomain and rule
+N100 | p84 (What a sequence is) | the natural numbers and mathematical induction
+N101 | p85 (The epsilon-N definition of convergence) | reading nested quantifiers (for all, there exists) and their order
+N102 | p85 (The epsilon-N definition of convergence) | absolute value |x - y| as the distance between x and y
+N103 | p88 (Finding N in scratch work: first examples) | the Archimedean property: for every real x there is a natural number larger than x
+N104 | p89 (Writing the final proof from the scratch work) | direct proof of a 'for all ... there exists' statement: take an arbitrary element, then construct a witness
+N105 | p90 (Bounding |a_n - L| by something simpler) | manipulating inequalities in an ordered field (multiplying by positives, comparing fractions)
+N106 | p92 (Negating the definition: a_n does not converge to L) | negating statements with nested quantifiers
+N107 | p93 (Proving a sequence diverges: (-1)^n) | proof by contradiction or proof for an arbitrary element
+N108 | p94 (Uniqueness of limits) | the triangle inequality |x + y| <= |x| + |y|
+N109 | p94 (Uniqueness of limits) | a number x with |x| < epsilon for every epsilon > 0 is zero
+N110 | p95 (Convergent sequences are bounded) | bounded sets and sequences: upper and lower bounds
+N111 | p95 (Convergent sequences are bounded) | the triangle inequality |x + y| <= |x| + |y|
+N112 | p96 (Divergence to infinity: the M-N definition) | the Archimedean property: for every real x there is a natural number larger than x
+N113 | p98 (Monotone sequences) | definition of a sequence of real numbers
+N114 | p99 (The monotone convergence theorem) | supremum and infimum with the approximation property (for every epsilon there is an element above sup - epsilon)
+N115 | p99 (The monotone convergence theorem) | completeness axiom of the real numbers
+N116 | p99 (The monotone convergence theorem) | epsilon-N definition of convergence of a sequence
+N117 | p100 (Unbounded monotone sequences diverge to infinity) | definition of divergence to plus or minus infinity (M-N definition)
+N118 | p101 (Proving a recursive sequence monotone and bounded by induction) | proof by mathematical induction
+N119 | p102 (Finding the limit by passing to the limit in the recursion) | algebraic limit theorem for sequences
+N120 | p102 (Finding the limit by passing to the limit in the recursion) | order limit theorem for sequences
+N121 | p102 (Finding the limit by passing to the limit in the recursion) | limit of sqrt(a_n) when a_n converges to a nonnegative limit
+N122 | p105 (The number e as the limit of (1 + 1/n)^n) | binomial theorem
+N123 | p105 (The number e as the limit of (1 + 1/n)^n) | finite geometric sum formula
+N124 | p106 (e as the limit of the sums of 1/k!) | order limit theorem for sequences
+N125 | p106 (e as the limit of the sums of 1/k!) | algebraic limit theorem for sequences
+N126 | p107 (Monotone convergence fails in the rationals) | irrationality of sqrt 2
+N127 | p108 (Monotone convergence and the nested interval property) | nested interval property
+N128 | p108 (Monotone convergence and the nested interval property) | Archimedean property
+N129 | p109 (Subsequences) | a sequence as a function from the natural numbers to the reals
+N130 | p109 (Subsequences) | proof by induction
+N131 | p110 (Subsequences of a convergent sequence) | epsilon-N definition of convergence of a sequence
+N132 | p111 (Proving divergence with subsequences) | uniqueness of limits of sequences
+N133 | p112 (Every sequence has a monotone subsequence) | increasing and decreasing (monotone) sequences
+N134 | p113 (The Bolzano-Weierstrass theorem) | monotone convergence theorem
+N135 | p114 (Bolzano-Weierstrass by bisection) | nested interval property
+N136 | p114 (Bolzano-Weierstrass by bisection) | squeeze theorem for sequences
+N137 | p116 (Cauchy sequences) | epsilon-N definition of convergence of a sequence
+N138 | p116 (Cauchy sequences) | triangle inequality
+N139 | p117 (Convergent sequences are Cauchy) | epsilon/2 technique for splitting a bound
+N140 | p119 (Cauchy criterion and completeness) | irrationality of sqrt 2
+N141 | p119 (Cauchy criterion and completeness) | completeness (supremum) axiom of the reals
+N142 | p120 (Contractive sequences) | finite geometric sum formula
+N143 | p120 (Contractive sequences) | r^n tends to 0 for |r| < 1
+N144 | p121 (Limit superior and limit inferior) | supremum and infimum of a set
+N145 | p121 (Limit superior and limit inferior) | monotone convergence theorem
+N146 | p122 (Epsilon characterisation of limsup and liminf) | approximation property of the supremum (sup - epsilon is not an upper bound)
+N147 | p123 (limsup and liminf as extreme subsequential limits) | order limit theorem for sequences
+N148 | p124 (Convergence exactly when limsup equals liminf) | squeeze theorem for sequences
+N149 | p125 (limsup and liminf of unbounded sequences) | divergence of a sequence to plus or minus infinity
+N150 | p126 (Constant multiple law) | epsilon-N definition of convergence of a sequence
+N151 | p127 (Sum and difference law (the epsilon/2 technique)) | epsilon-N definition of convergence of a sequence
+N152 | p127 (Sum and difference law (the epsilon/2 technique)) | triangle inequality for absolute value
+N153 | p128 (Null sequences and bounded times null) | epsilon-N definition of convergence of a sequence
+N154 | p128 (Null sequences and bounded times null) | definition of a bounded sequence
+N155 | p129 (Product law) | convergent sequences are bounded
+N156 | p129 (Product law) | triangle inequality for absolute value
+N157 | p130 (A nonzero limit keeps the sequence away from zero) | epsilon-N definition of convergence of a sequence
+N158 | p130 (A nonzero limit keeps the sequence away from zero) | reverse triangle inequality ||x| - |y|| <= |x - y|
+N159 | p132 (Using the algebraic limit theorem) | 1/n tends to 0 (Archimedean property)
+N160 | p133 (Order limit theorem) | epsilon-N definition of convergence of a sequence
+N161 | p133 (Order limit theorem) | proof by contradiction
+N162 | p134 (Squeeze theorem) | epsilon-N definition of convergence of a sequence
+N163 | p135 (Limit of |a_n|) | reverse triangle inequality ||x| - |y|| <= |x - y|
+N164 | p135 (Limit of |a_n|) | epsilon-N definition of convergence of a sequence
+N165 | p136 (Limit of sqrt(a_n)) | epsilon-N definition of convergence of a sequence
+N166 | p137 (The epsilon/3 technique) | triangle inequality for absolute value
+N167 | p138 (Limit laws for sequences tending to infinity) | definition of divergence to plus or minus infinity (M-N definition)
+N168 | p140 (Bernoulli's inequality and r^n for |r| < 1) | proof by mathematical induction
+N169 | p140 (Bernoulli's inequality and r^n for |r| < 1) | Archimedean property
+N170 | p142 (n^(1/n) tends to 1) | binomial theorem
+N171 | p143 (Polynomial versus exponential growth) | binomial theorem
+
+Your job:
+1. Link each open need you can to the point in this part that teaches that idea. If the idea belongs outside this part, leave the need open: the reviewer above you will link it. If it belongs inside this part but no point teaches it, add the point.
+2. Fix what only someone who sees the pieces together can see: two points in different pieces that teach the same idea, a point in the wrong piece, an idea this part rests on that no piece has, a "needs" link between pieces that is missing or wrong.
+3. Fix any other real error you notice: a point that is wrong, misnamed, or doesn't belong to this subject. Leave reasonable choices of scope, order, grouping and naming alone.
+Give each change as one operation:
+- {"op": "link", "need": "open need id", "to": "point id"}
+- {"op": "drop_need", "need": "open need id", "why": ""}
+- {"op": "add_point", "topic": "topic id", "name": "", "what": "", "needs": ["point ids"], "for": ["open need ids it meets"], "why": ""}
+- {"op": "merge", "id": "the point to remove", "into": "the point that keeps the idea", "why": ""}
+- {"op": "rename", "id": "", "name": "", "what": "", "why": ""}
+- {"op": "move", "id": "", "topic": "topic id", "why": ""}
+- {"op": "remove_point", "id": "", "why": ""}
+- {"op": "add_need", "id": "", "need": "", "why": ""} and {"op": "remove_need", "id": "", "need": "", "why": ""}
+Reply with only JSON: {"fixes": [operations], "verdict": "one or two sentences on how sound this part is now"}

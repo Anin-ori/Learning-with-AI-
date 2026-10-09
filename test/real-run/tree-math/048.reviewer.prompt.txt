@@ -1,0 +1,114 @@
+You review one part of a knowledge map in Learning Companion, an open-source study tool for self-learners, before the learner sees it. The map is built by a tree of AIs: the pieces of this part were planned and written by separate AIs, each seeing only its own piece. You are the first to see them together; the reviewer above you will see this part beside its neighbours.
+Subject: Mathematical analysis
+The learner's goal: Understand real analysis rigorously at the level of a first university course: limits, continuity, differentiation, integration and series, and be able to read and write the proofs.
+Where they are now, in their own words: (not given)
+
+Where this part sits:
+Subject: Mathematical analysis. Scope: The map covers single-variable real analysis as taught in a standard first university course (the organisation of textbooks such as Abbott, Bartle and Sherbert, Spivak and the analysis part of Rudin): the real numbers and completeness, sequences, series of numbers, the topology of the real line, limits of functions and continuity, differentiation, the Riemann integral, and sequences and series of functions including power series. The learner's goal names limits, continuity, differentiation, integration and series, and asks them to read and write proofs, so the map starts with a foundations part on logic, quantifiers, proof techniques, sets and functions. No starting level was given, so this part is included in full but kept practical: it covers only the logic and set language the later proofs use. Formal logic and axiomatic set theory are left out. The real numbers are treated axiomatically as a complete ordered field. Building them from the rationals (Dedekind cuts or Cauchy sequences) is only mentioned, because most first courses do it this way and the construction is not needed to use completeness. The integral is the Riemann integral, set up with Darboux upper and lower sums. That is the most common choice; the equivalent tagged-sum definition is mentioned, not developed. The topology of the real line (open, closed, compact and connected sets) gets its own short part, as in Abbott and Rudin, because compactness and connectedness are the real reasons behind the extreme value and intermediate value theorems. Some books, such as Spivak, fold this into continuity instead. Exponential, logarithm and trigonometric functions may be used as examples from the start with their familiar properties; they are defined rigorously in the part on series of functions. Left out: multivariable analysis, metric spaces beyond a mention, Lebesgue measure and integration, complex analysis, Fourier analysis and differential equations. These are named in a short final part so the learner can see where the course leads, but they are not taught. Computational calculus technique (long integration drills, many differentiation rules) is also left out, except where a rule needs a proof.
+- The real numbers (your part): This part covers the real numbers as a complete ordered field: the field and order axioms, absolute value, the triangle inequality and its reverse form, and how to work with inequalities (bounding, 'it suffices to show', the 'for every epsilon > 0, a <= b + epsilon implies a <= b' trick). Upper and lower bounds, supremum and infimum, and the completeness (least upper bound) axiom, including the epsilon characterisation of the supremum. Consequences: the Archimedean property, density of the rationals and irrationals, existence of square roots (sqrt 2), the nested interval property, and uncountability of the reals. The extended reals and the symbols plus and minus infinity are introduced as notation only. The construction of the reals from the rationals is only mentioned. Edges: sequences and their limits belong to 'Sequences'. The nested interval property is proved here directly from the supremum, and 'Sequences' will relate it to monotone convergence. Open and closed sets belong to 'Topology of the real line'. What matters for this learner: completeness is the single fact that separates the reals from the rationals, and every existence theorem later (monotone convergence, Bolzano-Weierstrass, the intermediate and extreme value theorems, integrability) depends on it. Learners must be able to prove statements about sup and inf directly from the definition.
+
+This part, piece by piece. Every point with its id, what it is, and the points it needs first:
+Piece: Ordered field axioms, absolute value and inequalities
+Topic t2: Ordered field axioms, absolute value and inequalities
+  p9 | The field axioms | State the field axioms for addition and multiplication (associativity, commutativity, identities 0 and 1, additive and multiplicative inverses, distributivity) and see that the reals, the rationals and other systems satisfy them. | needs: nothing
+  p10 | Deriving algebra from the field axioms | Prove a few familiar facts directly from the axioms, such as uniqueness of 0, 1 and inverses, 0 * a = 0, (-1)a = -a, (-a)(-b) = ab, and ab = 0 implies a = 0 or b = 0, citing an axiom at each step; and know that the rest of school algebra follows in the same way. | needs: p9
+  p11 | The order axioms and ordered fields | State the order axioms (a set of positives closed under + and * with trichotomy, or equivalently a total order compatible with + and *), define <, <=, > and >= from them, and know what an ordered field is. | needs: p9
+  p12 | Rules for inequalities from the order axioms | Prove from the axioms that a^2 >= 0, 1 > 0, inequalities can be added, multiplying by a positive keeps and by a negative reverses an inequality, 0 < a < b implies 0 < 1/b < 1/a, and 0 <= a < b implies a^2 < b^2, and use these rules confidently. | needs: p10, p11
+  p13 | The rationals are an ordered field too | Recognise that Q satisfies every field and order axiom, so nothing so far separates R from Q and a further axiom (completeness) is needed; and see why the complex numbers cannot be made an ordered field (i^2 = -1 would have to be positive). | needs: p12
+  p14 | Absolute value and its basic properties | Define |a| by cases and prove |a| >= 0, |-a| = |a|, |ab| = |a||b|, -|a| <= a <= |a|, and |a| <= c exactly when -c <= a <= c (and the strict version), and use the last to remove absolute values from inequalities. | needs: p12
+  p15 | The triangle inequality | Prove |a + b| <= |a| + |b| from -|a| <= a <= |a|, use the variants |a - b| <= |a| + |b|, and extend it to finitely many terms |a_1 + ... + a_n| <= |a_1| + ... + |a_n|. | needs: p14
+  p16 | The reverse triangle inequality | Prove |(|a| - |b|)| <= |a - b| from the triangle inequality and use it to get lower bounds, for example to show |x| > |a|/2 when |x - a| < |a|/2. | needs: p15
+  p17 | Distance on the real line | Read |a - b| as the distance between a and b, translate |x - a| < delta into a - delta < x < a + delta as an interval around a, and use the triangle inequality for distances |a - c| <= |a - b| + |b - c|. | needs: p15
+  p18 | Chaining and bounding estimates | Build a chain of inequalities to bound a quantity, using standard moves: add and subtract a term, split with the triangle inequality, bound a numerator above and a denominator below, and replace terms by cruder but simpler bounds (for example bounding |x^2 - 4| when |x - 2| < 1). | needs: p12, p15
+  p19 | 'It suffices to show' and working backwards | Find a proof of an inequality by working backwards from the goal to a sufficient condition in scratch work, then write the final proof forwards, checking that each step is an implication in the right direction. | needs: p12
+  p20 | Bernoulli's inequality | Prove (1 + x)^n >= 1 + nx for x >= -1 and natural n by induction, and use it as a model inequality proof and a tool for bounding powers. | needs: p12
+  p21 | The epsilon lemma: a <= b + epsilon for every epsilon | Prove that if a <= b + epsilon for every epsilon > 0 then a <= b, and that if |a - b| < epsilon for every epsilon > 0 then a = b, by contradiction with a chosen epsilon, and recognise this as the standard way to prove an inequality or equality in analysis. | needs: p14
+
+Piece: Supremum, infimum and the completeness axiom
+Topic t3: Supremum, infimum and the completeness axiom
+  p22 | Upper and lower bounds, maximum and minimum | The learner can say what it means for a set of reals to be bounded above, bounded below or bounded, and what its maximum and minimum are. They can show from the definitions that a given set is or is not bounded, including writing out the negation 'for every M there is s in S with s > M'. | needs: nothing
+  p23 | Supremum and infimum: the definitions | The learner knows the supremum as the least upper bound (an upper bound u with u <= v for every upper bound v) and the infimum as the greatest lower bound. They can prove that a set has at most one supremum, and that a set has a maximum exactly when its supremum exists and belongs to it. | needs: p22
+  p24 | Sup and inf of simple sets: attained or not | The learner can find and justify the sup and inf of sets such as finite sets, [0,1], [0,1), (0,1] and {1 - 1/n : n in N}. They can tell when the supremum is attained (a maximum) and when it is not, for example proving sup [0,1) = 1 by showing that any u < 1 is beaten by the midpoint (u + 1)/2. | needs: p23
+  p25 | Proving a supremum in two steps: upper bound, then least | The learner has the habit of proving u = sup S as two separate claims: first that every s in S satisfies s <= u, then that no smaller number is an upper bound (any upper bound v has u <= v, or any v < u is exceeded by some s in S). They use scratch work to find the element or the bound before writing the proof cleanly. | needs: p23
+  p26 | The completeness axiom | The learner can state the least upper bound axiom: every non-empty set of reals that is bounded above has a supremum in R. They understand that it is the axiom that makes R a complete ordered field and that the other ordered field axioms, which Q also satisfies, cannot give it. | needs: p23
+  p27 | Infimum version of completeness: inf S = -sup(-S) | The learner can prove that every non-empty set bounded below has an infimum, by showing inf S = -sup(-S) where -S = {-s : s in S}. They can move freely between statements about sup and statements about inf. | needs: p26
+  p28 | The epsilon characterisation of sup and inf | The learner can prove and use the criterion: an upper bound u of S is sup S exactly when for every epsilon > 0 there is s in S with s > u - epsilon; and a lower bound l is inf S exactly when for every epsilon > 0 there is s in S with s < l + epsilon. They use it both to prove a number is the supremum and to pick elements of S close to the supremum. | needs: p23
+  p29 | Comparing sups of sets: subsets and separated sets | The learner can prove that if A is a non-empty subset of B and B is bounded then inf B <= inf A <= sup A <= sup B, and that if a <= b for every a in A and b in B then sup A <= inf B. They see these as the basic comparison tools for later arguments. | needs: p26, p27
+  p30 | Supremum of a sum of sets: sup(A + B) = sup A + sup B | The learner can prove that for non-empty sets bounded above, A + B = {a + b} has supremum sup A + sup B, giving the upper bound step directly and the 'least' step either with the epsilon characterisation (using epsilon/2 for each set) or by fixing one element at a time. They can state and prove the matching result for inf and for translates c + A. | needs: p26, p28
+  p31 | Scaling a set: sup(cA) for c > 0 and c < 0 | The learner can prove that sup(cA) = c sup A when c > 0, and that sup(cA) = c inf A when c < 0, so multiplying by a negative number swaps sup and inf. They can handle the analogous statements for inf and the case c = 0. | needs: p27
+  p32 | Sup and inf of function values | The learner can work with sup and inf of the set of values {f(x) : x in D} of a bounded function, prove facts such as sup (f + g) <= sup f + sup g and inf f + inf g <= inf (f + g), and give examples where the inequalities are strict. They can prove 'if f(x) <= g(x) for all x then sup f <= sup g' and similar statements later used for Darboux sums. | needs: p29, p30
+  p33 | The rationals are not complete: {x in Q : x^2 < 2} | The learner can explain why the set of rationals with x^2 < 2 is non-empty and bounded above in Q but has no least upper bound in Q, using that no rational squares to 2 and that rationals can be nudged closer to sqrt 2 from either side. They understand this as the example showing that completeness is a genuine extra property; the existence of sqrt 2 in R is proved in the next topic. | needs: p26
+  p34 | Where the reals come from: a mention of their construction | The learner knows that R can be built from Q, by Dedekind cuts or by equivalence classes of Cauchy sequences, so that the complete ordered field assumed in the course really exists, and that this construction is not needed to use completeness. | needs: p33
+  p35 | Extended reals and sup S = +infinity as notation | The learner can read and use the notation sup S = +infinity for a set unbounded above and inf S = -infinity for a set unbounded below, understanding that +infinity and -infinity are symbols in the extended reals and not real numbers to compute with. | needs: p26, p27
+
+Piece: Consequences of completeness
+Topic t7: Consequences of completeness
+  p69 | The Archimedean property | Prove that the natural numbers are not bounded above in the reals, by assuming they are, taking alpha = sup N and getting a contradiction from alpha - 1 < n for some n. Understand that this needs completeness and is not just an ordered field fact. | needs: nothing
+  p70 | Archimedean property in epsilon form: 1/n < epsilon | Derive that for every epsilon > 0 there is n in N with 1/n < epsilon, use it to prove inf {1/n : n in N} = 0, and use it as the everyday tool for choosing N in epsilon arguments. | needs: p69
+  p71 | The integer part of a real number | Prove that for every real x there is a unique integer m with m <= x < m + 1 (the floor of x), using the Archimedean property and the well-ordering of the natural numbers. | needs: p69
+  p72 | Density of the rationals | Prove that between any two reals a < b there is a rational m/n: pick n with 1/n < b - a, then the least integer m with m > na. Explain what 'dense' means and why the step size 1/n must be smaller than the gap. | needs: p70, p71
+  p73 | The irrationality of sqrt 2 | Prove that no rational number squares to 2, by the lowest-terms parity argument, and so see concretely that the rationals have a gap where sqrt 2 should be. | needs: nothing
+  p74 | Existence of sqrt 2 as a supremum | Prove that alpha = sup {x > 0 : x^2 < 2} exists and satisfies alpha^2 = 2, by ruling out alpha^2 < 2 and alpha^2 > 2 with a well-chosen alpha +/- 1/n. Recognise this as the model existence proof: produce a number as a supremum, then show it has the property. | needs: p70
+  p75 | Existence of n-th roots | Adapt the sqrt 2 proof to show that every positive real a has a unique positive n-th root, using an estimate of (x + h)^n - x^n for small h. | needs: p74
+  p76 | Density of the irrationals | Prove that between any two reals there is an irrational number, for example by finding a rational q between a/sqrt 2 and b/sqrt 2 (or between a - sqrt 2 and b - sqrt 2) and checking that q sqrt 2 (or q + sqrt 2) is irrational. | needs: p72, p73, p74
+  p77 | The nested interval property | Prove that a decreasing sequence of closed bounded intervals I_1 contains I_2 contains ... has a nonempty intersection, by showing that x = sup of the left endpoints lies in every interval because every right endpoint is an upper bound for the left endpoints. | needs: nothing
+  p78 | Shrinking nested intervals meet in exactly one point | Prove that if, in addition, the lengths b_n - a_n can be made smaller than any epsilon > 0, the intersection is a single point, and see this as the basis of bisection arguments. | needs: p77
+  p79 | Where nested intervals fail: open intervals and the rationals | Show that the open intervals (0, 1/n) are nested with empty intersection, and that nested closed intervals with rational endpoints closing in on sqrt 2 have empty intersection in Q, so both closedness and completeness are needed. | needs: p70, p72, p73, p74, p77
+  p80 | The reals are uncountable (nested interval proof) | Prove that no list x_1, x_2, ... contains every real number: choose closed intervals I_1 contains I_2 contains ... with x_n not in I_n, and show the point in their intersection is missing from the list. | needs: p77
+  p81 | Decimal expansions of real numbers | Understand that every x in [0, 1] has a decimal expansion with digits found from integer parts of 10^n x, that every decimal string defines a real as the supremum of its truncations, and that the only real numbers with two expansions are those like 0.4999... = 0.5. | needs: p70, p71
+  p82 | The reals are uncountable (Cantor's diagonal argument) | Prove that (0, 1) is uncountable by building, from any list of decimal expansions, a decimal that differs from the n-th one in the n-th digit, choosing digits that avoid 0 and 9 so the double expansions like 0.4999... = 0.5 cannot spoil the argument. | needs: p81
+  p83 | The irrationals are uncountable | Conclude that the irrationals are uncountable because the rationals are countable and a union of two countable sets is countable, so 'most' real numbers are irrational even though both sets are dense. | needs: p80
+
+Open needs: ideas a point here was written to need from outside its own topic, not linked yet:
+N18 | p10 (Deriving algebra from the field axioms) | direct proof and proof by contradiction
+N19 | p12 (Rules for inequalities from the order axioms) | proof by cases
+N20 | p14 (Absolute value and its basic properties) | proof by cases
+N21 | p15 (The triangle inequality) | proof by mathematical induction
+N22 | p17 (Distance on the real line) | interval notation
+N23 | p19 ('It suffices to show' and working backwards) | implication, converse and equivalence
+N24 | p20 (Bernoulli's inequality) | proof by mathematical induction
+N25 | p21 (The epsilon lemma: a <= b + epsilon for every epsilon) | quantifiers 'for every' and 'there exists' and their negation
+N26 | p21 (The epsilon lemma: a <= b + epsilon for every epsilon) | proof by contradiction
+N27 | p22 (Upper and lower bounds, maximum and minimum) | order axioms of the real numbers (the order relation and its rules)
+N28 | p22 (Upper and lower bounds, maximum and minimum) | negating statements with quantifiers
+N29 | p26 (The completeness axiom) | the real numbers as an ordered field (field and order axioms)
+N30 | p27 (Infimum version of completeness: inf S = -sup(-S)) | multiplying an inequality by a negative number reverses it
+N31 | p28 (The epsilon characterisation of sup and inf) | negating statements with quantifiers
+N32 | p29 (Comparing sups of sets: subsets and separated sets) | subsets
+N33 | p31 (Scaling a set: sup(cA) for c > 0 and c < 0) | multiplying an inequality by a negative number reverses it
+N34 | p32 (Sup and inf of function values) | functions, domain and the image of a set
+N35 | p33 (The rationals are not complete: {x in Q : x^2 < 2}) | proof that sqrt 2 is irrational
+N80 | p69 (The Archimedean property) | completeness (least upper bound) axiom
+N81 | p69 (The Archimedean property) | definition of supremum as the least upper bound
+N82 | p69 (The Archimedean property) | proof by contradiction
+N83 | p70 (Archimedean property in epsilon form: 1/n < epsilon) | definition of infimum and its epsilon characterisation
+N84 | p71 (The integer part of a real number) | well-ordering principle of the natural numbers
+N85 | p73 (The irrationality of sqrt 2) | proof by contradiction
+N86 | p73 (The irrationality of sqrt 2) | parity of integers: if n^2 is even then n is even
+N87 | p74 (Existence of sqrt 2 as a supremum) | completeness (least upper bound) axiom
+N88 | p74 (Existence of sqrt 2 as a supremum) | definition of supremum as the least upper bound
+N89 | p77 (The nested interval property) | completeness (least upper bound) axiom
+N90 | p77 (The nested interval property) | definition of supremum as the least upper bound
+N91 | p78 (Shrinking nested intervals meet in exactly one point) | lemma: if |a - b| < epsilon for every epsilon > 0 then a = b
+N92 | p80 (The reals are uncountable (nested interval proof)) | definition of countable set (a bijection with N, or a list)
+N93 | p81 (Decimal expansions of real numbers) | completeness (least upper bound) axiom
+N94 | p81 (Decimal expansions of real numbers) | definition of supremum as the least upper bound
+N95 | p82 (The reals are uncountable (Cantor's diagonal argument)) | definition of countable set (a bijection with N, or a list)
+N96 | p82 (The reals are uncountable (Cantor's diagonal argument)) | Cantor's diagonal argument for decimals in outline
+N97 | p83 (The irrationals are uncountable) | the rationals are countable
+N98 | p83 (The irrationals are uncountable) | a union of two countable sets is countable
+
+Your job:
+1. Link each open need you can to the point in this part that teaches that idea. If the idea belongs outside this part, leave the need open: the reviewer above you will link it. If it belongs inside this part but no point teaches it, add the point.
+2. Fix what only someone who sees the pieces together can see: two points in different pieces that teach the same idea, a point in the wrong piece, an idea this part rests on that no piece has, a "needs" link between pieces that is missing or wrong.
+3. Fix any other real error you notice: a point that is wrong, misnamed, or doesn't belong to this subject. Leave reasonable choices of scope, order, grouping and naming alone.
+Give each change as one operation:
+- {"op": "link", "need": "open need id", "to": "point id"}
+- {"op": "drop_need", "need": "open need id", "why": ""}
+- {"op": "add_point", "topic": "topic id", "name": "", "what": "", "needs": ["point ids"], "for": ["open need ids it meets"], "why": ""}
+- {"op": "merge", "id": "the point to remove", "into": "the point that keeps the idea", "why": ""}
+- {"op": "rename", "id": "", "name": "", "what": "", "why": ""}
+- {"op": "move", "id": "", "topic": "topic id", "why": ""}
+- {"op": "remove_point", "id": "", "why": ""}
+- {"op": "add_need", "id": "", "need": "", "why": ""} and {"op": "remove_need", "id": "", "need": "", "why": ""}
+Reply with only JSON: {"fixes": [operations], "verdict": "one or two sentences on how sound this part is now"}

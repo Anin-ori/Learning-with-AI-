@@ -40,7 +40,6 @@ module.exports = function mock(opts = {}) {
     : { name: S.subject, trap: "a C major chord and an A minor chord share two notes, which explains why they can substitute for each other", slips: "a misremembered note name", observe: "play it on a keyboard and listen", shallow: "\\"name the notes of a C major triad\\"", rich: "\\"harmonise a four-bar melody and explain each chord choice\\"", examples: "notes written by name, with the sound described", run: "none", format: "A written answer: a few sentences or a short list of notes or chords." };
   // ---- the db's map, read back from prompts ----
   const pointsOf = (p) => { const out = []; let topic = null; p.split("\\n").forEach((l) => { const t = l.match(/^Topic (t\\d+):/); if (t) topic = t[1]; const m = l.match(/^  (p\\d+) \\| ([^|]+)/); if (m) out.push({ id: m[1], name: m[2].trim(), topic }); }); return out; };
-  let checkerCalls = 0;
   const sample = async (input, o) => {
     await wait(40);
     const text = Array.isArray(input) ? input.map((m) => m.content).join("\\n") : input;
@@ -69,34 +68,43 @@ module.exports = function mock(opts = {}) {
       const arr = JSON.parse(text.split("The strings, as a JSON array:\\n")[1].split("\\n\\nReply with only JSON")[0]);
       return { t: arr.map((x) => "译·" + x) };
     }
-    if (text.startsWith("You are the architect")) {
+    if (text.startsWith("You are the master planner")) {
       const S = pick(text);
-      return { subject: S.subject, scope: DZ ? "覆盖目标所需的基础，不含高级主题。" : "Covers the foundations the goal needs; leaves out advanced topics such as concurrency.", profile: profile(S),
-        areas: S.areas.map(([name, topics]) => ({ name, topics: topics.map(([tn, desc, pts]) => ({ name: tn, desc, points: pts })) })) };
+      return { subject: S.subject, scope: "Covers the foundations the goal needs; leaves out advanced topics such as concurrency.", profile: profile(S),
+        parts: S.areas.map(([name, topics]) => ({ name, brief: "Covers " + topics.map((t) => t[0]).join(" and ") + "." })) };
     }
-    if (text.startsWith("You write the details")) {
-      const all = pointsOf(text);
-      const mine = (text.match(/Your topics: ([^\\n]+)/) || [, ""])[1].match(/t\\d+/g) || [];
-      const pts = all.filter((x) => mine.includes(x.topic));
-      return { points: pts.map((x) => { const i = all.findIndex((y) => y.id === x.id); return { id: x.id, what: (DZ ? "能理解并使用" : "Understand and use ") + x.name + (DZ ? "。" : "."), needs: i > 0 ? [all[i - 1].id] : [], helps: i > 1 ? [all[i - 2].id] : [] }; }),
-        topics: mine.map((t, k) => ({ id: t, where: k % 2 ? [] : [{ title: DZ ? "某本教材" : "Think Python", detail: DZ ? "第 2 章" : "Chapter 2", url: "https://example.com/book" }] })) };
+    if (text.startsWith("You plan one part of a knowledge map")) {
+      const S = pick(text), part = (text.match(/^\\s*- (.+) \\(your part\\):/m) || [])[1];
+      if (window.__failPlannerAt && (window.__planners || 0) + 1 === window.__failPlannerAt) { window.__failPlannerAt = 0; throw { code: "rate_limited" }; }
+      window.__planners = (window.__planners || 0) + 1;
+      const area = S.areas.find(([name]) => name === part);
+      if (area && area[1].length > 1 && !/Write your part as one topic now/.test(text)) return { divide: area[1].map(([tn, desc]) => ({ name: tn, brief: desc })) };
+      const all = S.areas.flatMap(([, ts]) => ts);
+      const ti = all.findIndex(([tn]) => tn === part), t = ti >= 0 ? all[ti] : area[1][0];
+      const prev = ti > 0 ? all[ti - 1][2][all[ti - 1][2].length - 1] : null;
+      return { write: { desc: t[1], points: t[2].map((name, k) => ({ name, what: "Understand and use " + name + ".", needs: k ? [k] : [], outside: !k && prev ? ["the idea of " + prev] : [], helps: k > 1 ? [k - 1] : [] })),
+        where: ti % 2 ? [] : [{ title: "Think Python", detail: "Chapter 2", url: "https://example.com/book" }] } };
+    }
+    if (text.startsWith("You review one part of a knowledge map")) {
+      window.__reviewers = (window.__reviewers || 0) + 1;
+      const all = pointsOf(text), root = /nothing is above you/.test(text);
+      const open = [...text.matchAll(/^(N\\d+) \\| (p\\d+) \\([^)]*\\) \\| the idea of (.+)$/gm)];
+      const fixes = open.map((m) => { const to = all.find((x) => x.name === m[3]); return to ? { op: "link", need: m[1], to: to.id } : null; }).filter(Boolean);
+      if (root && all.length > 6) {
+        const last = all[all.length - 1], first = all[0];
+        fixes.push(
+          { op: "add_point", topic: all[2].topic, name: "Reading input with input()", what: "Read what the user types", needs: [first.id], why: "programs that react to the user need it" },
+          { op: "rename", id: all[1].id, name: "print() and output", why: "clearer" },
+          { op: "add_need", id: first.id, need: last.id, why: "a link that closes a loop" },
+          { op: "remove_point", id: "p999", why: "no such point" });
+      }
+      return { verdict: root ? "The map is sound after these fixes." : "This part holds together.", fixes };
     }
     if (text.startsWith("You mark the learner's route")) {
       const all = pointsOf(text);
       const goal = all.filter((_, i) => i % 3 === 1).map((x) => x.id);
       const topics = [...new Set(all.filter((x) => goal.includes(x.id)).map((x) => x.topic))];
       return { goal, why: topics.map((t) => ({ topic: t, why: DZ ? "你的目标会用到。" : "Your goal uses this every day." })), note: DZ ? "按目标挑选。" : "Chose what the goal uses directly." };
-    }
-    if (text.startsWith("You review a knowledge map")) {
-      checkerCalls++;
-      const all = pointsOf(text);
-      const last = all[all.length - 1], first = all[0];
-      return { verdict: DZ ? "地图基本可靠。" : "The map is sound after these fixes.", fixes: [
-        { op: "add_point", topic: all[2].topic, name: DZ ? "读取输入 input()" : "Reading input with input()", what: DZ ? "读取用户输入" : "Read what the user types", needs: [first.id], route: true, why: DZ ? "目标需要" : "programs that react to the user need it" },
-        { op: "rename", id: all[1].id, name: DZ ? "print() 与输出" : "print() and output", why: DZ ? "更清楚" : "clearer" },
-        { op: "add_need", id: first.id, need: last.id, why: DZ ? "测试环路" : "a link that closes a loop" },
-        { op: "remove_point", id: "p999", why: "no such point" },
-      ] };
     }
     if (text.startsWith("You plan a lesson")) return { aim: DZ ? "理解这个知识点" : "Understand the point", approach: DZ ? "从例子入手" : "Start from an example.", bridge: [], sections: [{ title: DZ ? "概念" : "The idea", teach: DZ ? "解释" : "Explain it", example: "x = 3" }], beyond: "", goal_link: DZ ? "数据处理里常用" : "Used everywhere in data work." };
     if (text.startsWith("You review a lesson")) return { errors: [], improvements: [] };

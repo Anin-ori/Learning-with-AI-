@@ -3,6 +3,7 @@
   //   app2/index           which subject is open, and their order
   //   subjects/<sid>       one subject's progress (goal, learned points, lesson index, practice, level check, guidance)
   //   maps/<sid>           one subject's map, written once when the AI builds it
+  //   builds/<sid>         a map being built by the tree of agents, saved after each agent so it can continue (v2.2)
   //   lessons2/<sid>_<pid> a point's lesson;  qa2/<sid> the questions asked per point;  practice2/<id> a practice set
   // v1.18's documents (state/current, points/*, qa/all, practice/*) are left as they were.
   const TIERS = [{ id: "quick", name: "Fast" }, { id: "default", name: "Standard" }, { id: "complex", name: "Most capable" }];
@@ -114,6 +115,7 @@
     capability_disabled: "Asking Claude isn't available in this view.",
     capability_removed: "This Claude app is too old for this page. Update it and try again.",
     rate_limited: "You've hit a usage or rate limit. Wait a while, then try again.",
+    queue_overflow: "Too many requests were waiting at once. Wait a moment, then try again.",
     session_expired: "Your session expired. Sign in again, then try again.",
     refused: "Claude declined this request. Try rephrasing it.",
     empty_completion: "No answer came back. Try asking for less at once.",
@@ -162,8 +164,9 @@
         return stripFence(text);
       } catch (e) {
         const code = (e && e.code) || "network";
-        if (code === "cancelled" || BLOCKING.has(code) || attempt >= 1) throw { code, agent };
-        await sleep(code === "rate_limited" ? 20000 : 2500);
+        // a usage or rate limit is the learner's to wait out: the page stops rather than asking again (builds can continue later)
+        if (code === "cancelled" || code === "rate_limited" || code === "queue_overflow" || BLOCKING.has(code) || attempt >= 1) throw { code, agent };
+        await sleep(2500);
       }
     }
   }

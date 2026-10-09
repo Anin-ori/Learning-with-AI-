@@ -566,9 +566,73 @@
   "The map is ready, but it couldn't be translated, so it's shown in English. You can translate it again from its About tab.": "地图已准备好，但没能翻译，所以显示的是英文。你可以在它的“关于”页里重新翻译。",
   "The lesson is ready, but it couldn't be translated, so it's shown in English. You can translate it again.": "课已准备好，但没能翻译，所以显示的是英文。你可以重新翻译。",
   "The practice set is ready, but it couldn't be translated, so it's shown in English. You can translate it again.": "练习已准备好，但没能翻译，所以显示的是英文。你可以重新翻译。",
-  "The route is updated, but its reasons couldn't be translated, so they're shown in English.": "路线已更新，但其中的理由没能翻译，所以显示的是英文。"
+  "The route is updated, but its reasons couldn't be translated, so they're shown in English.": "路线已更新，但其中的理由没能翻译，所以显示的是英文。",
+  "Master": "总规划者",
+  "✓ Master": "✓ 总规划者",
+  "… Master": "… 总规划者",
+  "Planners": "分部规划者",
+  "✓ Planners": "✓ 分部规划者",
+  "… Planners": "… 分部规划者",
+  "Reviewers": "审核者",
+  "✓ Reviewers": "✓ 审核者",
+  "… Reviewers": "… 审核者",
+  "Reviewer": "审核者",
+  "divides the subject into its main parts and writes the subject profile": "把科目分成几个主要部分，并写出科目概况",
+  "divide each part further, or write its points once it's small enough": "把每个部分继续细分，足够小时就写出其中的知识点",
+  "check and join the parts on the way back up, ending with the whole map": "回程中逐层检查并合并各部分，最后审核整张地图",
+  "About two AI requests run at a time, so a large subject can take half an hour. Everything finished is saved as it lands: if you leave or it stops, continue later from here.": "AI 请求大约同时只运行两个，所以较大的科目可能需要半小时。每完成一步都会立即保存：如果你离开或它中途停下，之后可以从这里继续。",
+  "A master AI divided the subject into parts. Planners divided each part until it was small enough to plan point by point, and wrote its points. On the way back up, a reviewer for each part checked and joined the pieces under it, and a last reviewer checked the whole map. A router marked your route. No human source was used: treat the map as the AIs' view of the subject, and check what matters to you elsewhere.": "总规划者 AI 把科目分成几个部分。分部规划者把每个部分继续细分，直到小到可以逐个规划知识点，再写出这些知识点。回程中，每个部分都有一位审核者检查并合并它下面的各块，最后一位审核者审核整张地图。路线规划者标出了你的路线。这里没有使用人类资料：请把地图看作这些 AI 对这门科目的看法，对你重要的内容请到别处核对。",
+  "What the reviewers changed": "审核者改了什么",
+  "Nothing: they found no errors to fix.": "没有：他们没有发现需要修正的错误。",
+  "AIs build the map as a tree: a master divides the subject into parts, planners divide each part until it's small enough to write, and on the way back up a reviewer checks and joins each part. A small subject takes a dozen or so AI requests, a large one many more; the count shows as it builds. No human source is used, so the map is the AIs' view of the subject.": "地图由 AI 以树状方式构建：总规划者把科目分成几个部分，分部规划者把每个部分继续细分到足够小再写出来，回程中由审核者逐个检查并合并各部分。小科目大约需要十几次 AI 请求，大科目会多得多；构建时会显示次数。这里不使用人类资料，所以地图是这些 AI 对这门科目的看法。",
+  "Your map is part-built": "你的地图已构建了一部分",
+  "A new map is part-built": "新地图已构建了一部分",
+  "Your current map stays until the new one is finished.": "新地图完成之前，当前地图保持不变。",
+  "Continue building": "继续生成",
+  "The map is part-built.": "地图已构建了一部分。",
+  "Too many requests were waiting at once. Wait a moment, then try again.": "同时等待的请求太多。请稍等，再试一次。"
  },
  "patterns": [
+  [
+   "The map wasn't finished\\. (Master|Planner|Reviewer|Router|Translator): (.+) Everything done so far is saved\\.",
+   "地图没有构建完。⟦\\1⟧：⟦\\2⟧ 已完成的部分都已保存。"
+  ],
+  [
+   "The map wasn't finished\\. (.+) Everything done so far is saved\\.",
+   "地图没有构建完。⟦\\1⟧ 已完成的部分都已保存。"
+  ],
+  [
+   "(Master|Planner|Reviewer|Router|Translator): (.+)",
+   "⟦\\1⟧：⟦\\2⟧"
+  ],
+  [
+   "· (\\d+) of (\\d+) parts planned · (\\d+) topics written · (\\d+) levels?",
+   "· 已规划 \\2 个部分中的 \\1 个 · 已写出 \\3 个主题 · 共 \\4 层"
+  ],
+  [
+   "· (\\d+) of (\\d+) parts checked",
+   "· 已检查 \\2 个部分中的 \\1 个"
+  ],
+  [
+   "(\\d+) of (\\d+) parts planned · (\\d+) topics written · (\\d+) of (\\d+) parts checked, in (\\d+) requests so far\\. Everything finished is saved\\.",
+   "已规划 \\2 个部分中的 \\1 个 · 已写出 \\3 个主题 · 已检查 \\5 个部分中的 \\4 个，目前用了 \\6 次请求。已完成的部分都已保存。"
+  ],
+  [
+   "(\\d+) planning and reviewing agents worked over (\\d+) levels?\\.",
+   "共有 \\1 个规划和审核 AI，分 \\2 层工作。"
+  ],
+  [
+   "Continuing the map for (.+)",
+   "继续为 \\1 构建地图"
+  ],
+  [
+   "Map built for (.+?): (\\d+) topics, (\\d+) points, (\\d+) links, (\\d+) route points; (\\d+) planning and reviewing agents over (\\d+) levels?; (\\d+) changes by the reviewers; (\\d+) requests",
+   "已为 \\1 构建地图：\\2 个主题、\\3 个知识点、\\4 条连线、路线上 \\5 个知识点；\\6 个规划和审核 AI，共 \\7 层；审核者做了 \\8 处修改；\\9 次请求"
+  ],
+  [
+   "Map not finished for (.+?)\\. (.+)",
+   "\\1 的地图没有构建完。⟦\\2⟧"
+  ],
   [
    "Uses 3 requests on your Claude account, and one more to translate",
    "将使用你 Claude 账户的 3 次请求，翻译再用 1 次"

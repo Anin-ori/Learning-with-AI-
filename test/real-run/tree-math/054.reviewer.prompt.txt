@@ -1,0 +1,106 @@
+You review one part of a knowledge map in Learning Companion, an open-source study tool for self-learners, before the learner sees it. The map is built by a tree of AIs: the pieces of this part were planned and written by separate AIs, each seeing only its own piece. You are the first to see them together; the reviewer above you will see this part beside its neighbours.
+Subject: Mathematical analysis
+The learner's goal: Understand real analysis rigorously at the level of a first university course: limits, continuity, differentiation, integration and series, and be able to read and write the proofs.
+Where they are now, in their own words: (not given)
+
+Where this part sits:
+Subject: Mathematical analysis. Scope: The map covers single-variable real analysis as taught in a standard first university course (the organisation of textbooks such as Abbott, Bartle and Sherbert, Spivak and the analysis part of Rudin): the real numbers and completeness, sequences, series of numbers, the topology of the real line, limits of functions and continuity, differentiation, the Riemann integral, and sequences and series of functions including power series. The learner's goal names limits, continuity, differentiation, integration and series, and asks them to read and write proofs, so the map starts with a foundations part on logic, quantifiers, proof techniques, sets and functions. No starting level was given, so this part is included in full but kept practical: it covers only the logic and set language the later proofs use. Formal logic and axiomatic set theory are left out. The real numbers are treated axiomatically as a complete ordered field. Building them from the rationals (Dedekind cuts or Cauchy sequences) is only mentioned, because most first courses do it this way and the construction is not needed to use completeness. The integral is the Riemann integral, set up with Darboux upper and lower sums. That is the most common choice; the equivalent tagged-sum definition is mentioned, not developed. The topology of the real line (open, closed, compact and connected sets) gets its own short part, as in Abbott and Rudin, because compactness and connectedness are the real reasons behind the extreme value and intermediate value theorems. Some books, such as Spivak, fold this into continuity instead. Exponential, logarithm and trigonometric functions may be used as examples from the start with their familiar properties; they are defined rigorously in the part on series of functions. Left out: multivariable analysis, metric spaces beyond a mention, Lebesgue measure and integration, complex analysis, Fourier analysis and differential equations. These are named in a short final part so the learner can see where the course leads, but they are not taught. Computational calculus technique (long integration drills, many differentiation rules) is also left out, except where a rule needs a proof.
+- Topology of the real line (your part): This part covers the set structure of the real line: neighbourhoods, open sets and closed sets, interior, limit (accumulation) points and isolated points, closure, and unions and intersections of open and closed sets. Compact sets: sequential compactness, the open-cover definition, and the Heine-Borel theorem (compact means closed and bounded), with proofs. Connected sets, and that the connected subsets of the real line are exactly the intervals. Perfect sets and the Cantor set as a key example. A short note that these ideas generalise to metric spaces. Edges: continuous functions are not studied here. 'Limits of functions and continuity' uses compactness and connectedness to prove the extreme value, intermediate value and uniform continuity theorems. Bolzano-Weierstrass is proved in 'Sequences' and used here. Keep this part short and aimed at what later parts need. What matters for this learner: compactness is the hypothesis that turns local information into global information, and the learner should be able to say why (0,1) and the whole real line are not compact.
+
+This part, piece by piece. Every point with its id, what it is, and the points it needs first:
+Piece: Open and closed sets
+Topic t28: Open and closed sets
+  p334 | Epsilon-neighbourhoods and interior points | The learner can write the epsilon-neighbourhood V_epsilon(a) = (a - epsilon, a + epsilon) = {x : |x - a| < epsilon} and can decide and prove whether a point is an interior point of a set, meaning some neighbourhood of it lies inside the set. | needs: nothing
+  p335 | Open sets | The learner knows that a set is open when every one of its points is an interior point. They can prove from the definition that open intervals, R and the empty set are open, by choosing epsilon as the distance to the nearer endpoint, and that [a,b) is not open because no neighbourhood of a fits inside it. | needs: p334
+  p336 | Limit points and isolated points | The learner knows that x is a limit (accumulation) point of A when every neighbourhood of x contains a point of A other than x, and that a point of A that is not a limit point is isolated. They can find the limit points of intervals, Z (none), {1/n} (only 0, which is not in the set) and Q (all of R), with proofs. | needs: p334
+  p337 | Limit points through sequences | The learner can prove that x is a limit point of A exactly when some sequence in A, with no term equal to x, converges to x. They can build such a sequence by choosing a point in each neighbourhood of radius 1/n, and can switch between the neighbourhood view and the sequence view. | needs: p336
+  p338 | Closed sets | The learner knows that a set is closed when it contains all its limit points. They can prove that closed intervals, Z and {1/n : n in N} together with {0} are closed, and that {1/n : n in N} on its own is not closed because it is missing the limit point 0. | needs: p336
+  p339 | Closed sets through sequences | The learner can prove that A is closed exactly when the limit of every convergent sequence of points of A is in A. They can use this test to show directly that [a,b] is closed and that (0,1] is not. | needs: p337, p338
+  p340 | Open exactly when the complement is closed | The learner can prove that a set is open exactly when its complement is closed, and can use this duality to turn a question about closedness into one about openness and back. | needs: p335, p338
+  p341 | Neither and both: open is not the opposite of closed | The learner understands that a set can be neither open nor closed, as [a,b) and Q are, and can be both, as R and the empty set are, and can prove each claim. They know that R and the empty set are the only subsets of R that are both, which is proved later with connectedness. | needs: p335, p338
+  p342 | Unions and intersections of open sets | The learner can prove that any union of open sets is open and that a finite intersection of open sets is open (taking the smallest epsilon), and can use (-1/n, 1/n), whose intersection over all n is {0}, to show why an infinite intersection can fail to be open. | needs: p335
+  p343 | Unions and intersections of closed sets | The learner can prove, using complements and De Morgan's laws, that any intersection of closed sets is closed and that a finite union of closed sets is closed. They can use [1/n, 1], whose union over all n is (0,1], to show that an infinite union can fail to be closed. | needs: p340, p342
+  p344 | Closure of a set | The learner knows that the closure of A is A together with its limit points. They can prove that it is closed and that it is the smallest closed set containing A, and can compute closures such as that of (a,b), {1/n} and Q, whose closure is R because Q is dense. | needs: p338
+  p345 | Interior of a set | The learner knows that the interior of A is the set of its interior points. They can prove that it is the largest open subset of A, and that the complement of the closure of A is the interior of the complement of A. They can compute examples such as the interior of [a,b] and the interior of Q, which is empty. | needs: p335, p342, p344
+
+Piece: Compact sets
+Topic t29: Compact sets
+  p346 | Sequential compactness | The learner can state the definition (every sequence in K has a subsequence converging to a point of K), check it for simple sets such as finite sets and [0,1], and explain why the limit must lie in K itself. | needs: nothing
+  p347 | Sequentially compact means closed and bounded | The learner can prove that a subset of R is sequentially compact exactly when it is closed and bounded: one direction uses Bolzano-Weierstrass and the sequence characterisation of closed sets, and the other builds a sequence with no convergent subsequence from unboundedness or from a missing limit point. | needs: p346
+  p348 | Open covers and finite subcovers | The learner can say what an open cover of a set is and what a finite subcover is, write down covers of given sets as indexed families of open sets, and decide in simple examples whether a given cover has a finite subcover. | needs: nothing
+  p349 | Compactness by open covers | The learner can state the open-cover definition of compactness (every open cover has a finite subcover), stressing that it must hold for every cover, and can prove directly that finite sets are compact in this sense. | needs: p348
+  p350 | Why (0,1) and R are not compact | The learner can prove in both views that (0,1) and R are not compact: 1/n has no subsequence converging in (0,1) and n has no convergent subsequence at all, while the covers (1/n, 1) and (-n, n) have no finite subcover, and can say in their own words which feature (a missing endpoint, unboundedness) causes each failure. | needs: p346, p349
+  p351 | A closed interval [a,b] is compact | The learner can prove that every open cover of [a,b] has a finite subcover by repeated bisection: if no finite subcover existed, the halves would give nested closed intervals whose common point lies in one open set of the cover that already contains a whole small interval. | needs: p349
+  p352 | The Heine-Borel theorem | The learner can prove that for a subset K of R the three conditions closed and bounded, sequentially compact, and every open cover has a finite subcover are equivalent, using that a closed subset of [a,b] is covered by adding its open complement to a cover, and that a cover-compact set must be bounded (cover by (-n,n)) and closed (cover by the complements of shrinking closed neighbourhoods of a missing limit point). | needs: p347, p351
+  p353 | Nested compact sets | The learner can prove that a decreasing sequence of nonempty compact sets has nonempty intersection, by choosing a point in each set and taking a convergent subsequence, and can show with (0, 1/n) and [n, infinity) that the result fails without compactness. | needs: p347
+  p354 | Compactness turns local into global | The learner can explain and use the pattern behind compactness arguments: when a property holds on a neighbourhood of each point of a compact set, a finite subcover makes it hold on the whole set (for example a function bounded near each point of [a,b] is bounded on [a,b]), and can see why the same argument breaks on (0,1). | needs: p349
+
+Piece: Connected sets, perfect sets and the Cantor set
+Topic t32: Connected sets, perfect sets and the Cantor set
+  p380 | Separated sets and connected sets | The learner can state when two sets are separated (neither meets the closure of the other) and when a set is connected (it is not the union of two nonempty separated sets). They can prove that Q, and a union of two disjoint intervals such as (0,1) ∪ (2,3), are disconnected, and explain why (0,1) ∪ (1,2) is disconnected while [0,1) ∪ [1,2) is not a separation. | needs: nothing
+  p381 | Connected subsets of R are exactly the intervals | The learner can prove that a subset E of R is connected exactly when it has the interval property (if a < c < b with a, b in E, then c is in E), using the supremum of the part of a separation lying below a chosen point. They can explain that this theorem is what the intermediate value theorem rests on. | needs: p380
+  p382 | Perfect sets | The learner can define a perfect set as a closed set with no isolated points and decide for given examples, such as [a,b], R, finite sets, Z and {0} ∪ {1/n}, whether they are perfect, justifying each answer from the definitions. | needs: nothing
+  p383 | Nonempty perfect sets are uncountable | The learner can follow and reproduce the proof that a nonempty perfect set P is uncountable: assuming P = {x1, x2, ...}, build a decreasing sequence of nonempty compact sets (closed intervals intersected with P) each avoiding x_n, and use the nested compact set property to reach a contradiction. | needs: p382
+  p384 | Constructing the Cantor set | The learner can describe the Cantor set as the intersection of the sets C_n obtained by repeatedly removing open middle thirds, prove it is closed, bounded and therefore compact, show it is nonempty (it contains 0, 1 and all endpoints), and use a geometric series to show the removed intervals have total length 1. | needs: nothing
+  p385 | The Cantor set is perfect and uncountable | The learner can prove that every point of the Cantor set is a limit of endpoints of the C_n, so the set is perfect, and can show it is uncountable in two ways: by the perfect set theorem, and by matching its points with ternary expansions using only the digits 0 and 2 and comparing with infinite binary sequences. | needs: p382, p384
+  p386 | The Cantor set contains no interval and is totally disconnected | The learner can prove that the Cantor set contains no interval of positive length, because C_n has total length (2/3)^n, and deduce from the intervals theorem that its only connected subsets are single points. They can use the Cantor set to explain why 'uncountable' and 'large in length' are different notions of size. | needs: p381, p384
+  p387 | Looking ahead: these ideas in metric spaces | The learner can explain that neighbourhoods, open and closed sets, compactness and connectedness are defined using only the distance |x - y|, so they make sense in any metric space, and that there closed and bounded no longer implies compact (for example, an infinite set with the discrete metric). | needs: nothing
+
+Open needs: ideas a point here was written to need from outside its own topic, not linked yet:
+N379 | p334 (Epsilon-neighbourhoods and interior points) | absolute value as distance and inequalities |x - a| < epsilon
+N380 | p336 (Limit points and isolated points) | density of the rationals and irrationals in R
+N381 | p337 (Limit points through sequences) | epsilon-N definition of convergence of a sequence
+N382 | p337 (Limit points through sequences) | Archimedean property (1/n can be made smaller than any epsilon)
+N383 | p339 (Closed sets through sequences) | limits preserve non-strict inequalities (order limit theorem)
+N384 | p340 (Open exactly when the complement is closed) | complement of a set
+N385 | p341 (Neither and both: open is not the opposite of closed) | density of the rationals and irrationals in R
+N386 | p342 (Unions and intersections of open sets) | unions and intersections of indexed families of sets
+N387 | p342 (Unions and intersections of open sets) | Archimedean property (1/n can be made smaller than any epsilon)
+N388 | p343 (Unions and intersections of closed sets) | De Morgan's laws for indexed families of sets
+N389 | p344 (Closure of a set) | density of the rationals in R
+N390 | p346 (Sequential compactness) | subsequences of a sequence
+N391 | p346 (Sequential compactness) | convergence of a sequence and its limit
+N392 | p347 (Sequentially compact means closed and bounded) | Bolzano-Weierstrass theorem
+N393 | p347 (Sequentially compact means closed and bounded) | a set is closed exactly when it contains the limits of its convergent sequences
+N394 | p347 (Sequentially compact means closed and bounded) | convergent sequences are bounded
+N395 | p347 (Sequentially compact means closed and bounded) | every subsequence of a convergent sequence converges to the same limit
+N396 | p347 (Sequentially compact means closed and bounded) | limit point of a set as the limit of a sequence from the set
+N397 | p348 (Open covers and finite subcovers) | definition of an open set
+N398 | p348 (Open covers and finite subcovers) | unions of indexed families of sets
+N399 | p350 (Why (0,1) and R are not compact) | Archimedean property of the real numbers
+N400 | p351 (A closed interval [a,b] is compact) | nested interval property
+N401 | p351 (A closed interval [a,b] is compact) | an open set contains an epsilon-neighbourhood of each of its points
+N402 | p352 (The Heine-Borel theorem) | the complement of a closed set is open
+N403 | p353 (Nested compact sets) | a set is closed exactly when it contains the limits of its convergent sequences
+N445 | p380 (Separated sets and connected sets) | closure of a set (A together with its limit points)
+N446 | p380 (Separated sets and connected sets) | limit points of a set
+N447 | p381 (Connected subsets of R are exactly the intervals) | least upper bound property (completeness axiom) of R
+N448 | p381 (Connected subsets of R are exactly the intervals) | closure of a set (A together with its limit points)
+N449 | p382 (Perfect sets) | closed sets defined as sets containing all their limit points
+N450 | p382 (Perfect sets) | isolated points and limit points of a set
+N451 | p383 (Nonempty perfect sets are uncountable) | nested compact set property (decreasing nonempty compact sets have nonempty intersection)
+N452 | p383 (Nonempty perfect sets are uncountable) | countable and uncountable sets
+N453 | p383 (Nonempty perfect sets are uncountable) | Heine-Borel theorem (closed and bounded sets are compact)
+N454 | p384 (Constructing the Cantor set) | arbitrary intersections of closed sets are closed
+N455 | p384 (Constructing the Cantor set) | Heine-Borel theorem (closed and bounded sets are compact)
+N456 | p384 (Constructing the Cantor set) | sum of a geometric series
+N457 | p385 (The Cantor set is perfect and uncountable) | uncountability of the set of infinite binary sequences (Cantor diagonal argument)
+N458 | p385 (The Cantor set is perfect and uncountable) | decimal-style expansions of real numbers in a base
+N459 | p387 (Looking ahead: these ideas in metric spaces) | open and closed sets defined via epsilon-neighbourhoods
+N460 | p387 (Looking ahead: these ideas in metric spaces) | Heine-Borel theorem (closed and bounded sets are compact)
+N461 | p387 (Looking ahead: these ideas in metric spaces) | sequential and open-cover compactness
+
+Your job:
+1. Link each open need you can to the point in this part that teaches that idea. If the idea belongs outside this part, leave the need open: the reviewer above you will link it. If it belongs inside this part but no point teaches it, add the point.
+2. Fix what only someone who sees the pieces together can see: two points in different pieces that teach the same idea, a point in the wrong piece, an idea this part rests on that no piece has, a "needs" link between pieces that is missing or wrong.
+3. Fix any other real error you notice: a point that is wrong, misnamed, or doesn't belong to this subject. Leave reasonable choices of scope, order, grouping and naming alone.
+Give each change as one operation:
+- {"op": "link", "need": "open need id", "to": "point id"}
+- {"op": "drop_need", "need": "open need id", "why": ""}
+- {"op": "add_point", "topic": "topic id", "name": "", "what": "", "needs": ["point ids"], "for": ["open need ids it meets"], "why": ""}
+- {"op": "merge", "id": "the point to remove", "into": "the point that keeps the idea", "why": ""}
+- {"op": "rename", "id": "", "name": "", "what": "", "why": ""}
+- {"op": "move", "id": "", "topic": "topic id", "why": ""}
+- {"op": "remove_point", "id": "", "why": ""}
+- {"op": "add_need", "id": "", "need": "", "why": ""} and {"op": "remove_need", "id": "", "need": "", "why": ""}
+Reply with only JSON: {"fixes": [operations], "verdict": "one or two sentences on how sound this part is now"}

@@ -8,8 +8,8 @@ const DIR = __dirname, CAP = path.join(DIR, process.env.CAP || "cap");
 fs.mkdirSync(CAP, { recursive: true });
 const D3 = fs.readFileSync("/opt/npm-tools/node_modules/d3/dist/d3.min.js", "utf8");
 const STEPS = (process.argv[2] || "map,lesson").split(",");
-const KIND = (p) => p.startsWith("You are the architect") ? "architect" : p.startsWith("You write the details") ? "writer" : p.startsWith("You mark the learner's route") ? "router"
-  : p.startsWith("You review a knowledge map") ? "mapcheck" : p.startsWith("You plan a lesson") ? "planner" : p.startsWith("You write a lesson") ? "teacher"
+const KIND = (p) => p.startsWith("You are the master planner") ? "master" : p.startsWith("You plan one part") ? "planner-part" : p.startsWith("You review one part") ? "reviewer" : p.startsWith("You mark the learner's route") ? "router"
+  : p.startsWith("You translate study material") ? "translator" : p.startsWith("You plan a lesson") ? "planner" : p.startsWith("You write a lesson") ? "teacher"
   : p.startsWith("You review a lesson") ? "lessoncheck" : p.startsWith("You wrote the lesson") ? "reviser" : "other";
 let n = 0;
 const MOCK = `<script>

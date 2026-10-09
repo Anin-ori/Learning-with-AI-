@@ -57,7 +57,7 @@
     const RING0 = 106, RING_GAP = 102, SPACING = 220;
     const RINGS = [0], CAP = [1];
     const KREF = 0.74, FS = 13.5, LH = 16.5;
-    const ORDER = new Map(KD.balls.map((b, i) => [b.id, i]));   // the architect lists topics from basics to advanced
+    const ORDER = new Map(KD.balls.map((b, i) => [b.id, i]));   // topics come in the planners' order, from basics to advanced
     KD.balls.slice().sort((x, y) => (x.d - y.d) || (ORDER.get(x.id) - ORDER.get(y.id)))
       .forEach((b, i) => {
         let k = 0, c = CAP[0];

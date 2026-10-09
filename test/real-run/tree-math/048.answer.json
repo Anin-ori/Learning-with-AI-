@@ -1,0 +1,19 @@
+{"fixes": [
+{"op": "link", "need": "N27", "to": "p11"},
+{"op": "link", "need": "N29", "to": "p13"},
+{"op": "link", "need": "N30", "to": "p12"},
+{"op": "link", "need": "N33", "to": "p12"},
+{"op": "link", "need": "N35", "to": "p73"},
+{"op": "link", "need": "N80", "to": "p26"},
+{"op": "link", "need": "N81", "to": "p23"},
+{"op": "link", "need": "N83", "to": "p28"},
+{"op": "link", "need": "N87", "to": "p26"},
+{"op": "link", "need": "N88", "to": "p23"},
+{"op": "link", "need": "N89", "to": "p26"},
+{"op": "link", "need": "N90", "to": "p23"},
+{"op": "link", "need": "N91", "to": "p21"},
+{"op": "link", "need": "N93", "to": "p26"},
+{"op": "link", "need": "N94", "to": "p23"},
+{"op": "drop_need", "need": "N96", "why": "The diagonal argument is exactly what p82 itself teaches; it cannot be a prerequisite of its own point, and the decimal groundwork it rests on is already covered by p81."},
+{"op": "move", "id": "p73", "topic": "t3", "why": "The irrationality of sqrt 2 uses no completeness, so it is not a consequence of completeness; p33 in t3 depends on it, and placing it in t3 lets the learner meet it before the 'Q is not complete' example instead of in a later topic."}
+], "verdict": "The part is sound: the three pieces fit together cleanly once the internal needs are linked to the order axioms, the completeness axiom, the definition and epsilon characterisation of the supremum and the epsilon lemma, and the irrationality of sqrt 2 now sits next to the Q-is-incomplete example that uses it. The remaining open needs (proof techniques, quantifiers, interval notation, well-ordering, parity, functions, subsets and countability) belong to the foundations part and are left for the reviewer above."}

@@ -54,11 +54,15 @@ const ok = (c, msg) => { if (!c) { console.log("FAIL:", msg); process.exitCode =
   await shot("v2-03-map");
   const mapInfo = await page.evaluate(() => ({ topics: document.querySelectorAll("g.km-ball").length, ticks: document.querySelectorAll(".km-tick").length, route: document.querySelectorAll("g.km-ball.route").length, hot: document.querySelectorAll("g.km-ball.hot").length, pill: document.getElementById("subject-pill").textContent }));
   console.log("map:", JSON.stringify(mapInfo));
-  ok(mapInfo.topics === 6 && mapInfo.ticks === 20, "map has 6 topics and 20 points (19 + 1 added by the checker)");
+  ok(mapInfo.topics === 6 && mapInfo.ticks === 20, "map has 6 topics and 20 points (19 + 1 added by the root reviewer)");
   ok(mapInfo.route > 0 && mapInfo.hot > 0, "route rings and top picks show");
   const store = await page.evaluate(() => JSON.parse(localStorage.getItem("lc-mock-db")));
   const sid = store["app2/index"].current, M = store["maps/" + sid];
-  ok(M && M.checks.fixes.filter((f) => f.done).length === 3, "checker's fixes applied (3 done, 1 skipped): " + M.checks.fixes.map((f) => (f.done ? "+" : "-") + f.text).join(" | "));
+  const agents = await page.evaluate(() => ({ planners: window.__planners, reviewers: window.__reviewers }));
+  ok(M.tree && M.tree.levels === 3 && agents.planners === 9 && agents.reviewers === 4, "the tree: master, 3 areas divided, 6 topics written, 4 reviewers " + JSON.stringify({ tree: M.tree, agents }));
+  ok(M.tree.linked === 5 && M.links.filter((l) => l[2] === "needs").length >= 19, "reviewers linked every need the writers described across topics");
+  ok(store["builds/" + sid] && store["builds/" + sid].status === "done", "the finished build is marked done");
+  ok(M && M.checks.fixes.filter((f) => f.done).length === 3, "root reviewer's fixes applied (3 done, 1 skipped): " + M.checks.fixes.map((f) => (f.done ? "+" : "-") + f.text).join(" | "));
   ok(M.checks.loopsDropped === 1, "the link that closed a loop was dropped by the page");
   // About tab
   await click("#km-t-src"); await page.waitForTimeout(200);
@@ -75,7 +79,7 @@ const ok = (c, msg) => { if (!c) { console.log("FAIL:", msg); process.exitCode =
     await page.evaluate(() => document.querySelector('#km-p-src [data-about="orig"]').click()); await page.waitForTimeout(1200);
     ok(await page.evaluate(() => document.querySelector(".km-blab").textContent.startsWith("译·")), "and back to the translation");
   } else ok(!(await page.evaluate(() => window.__translations)), "nothing is translated in English");
-  ok(await page.evaluate(() => /checker/i.test(document.getElementById("km-p-src").textContent) || /检查/.test(document.getElementById("km-p-src").textContent)), "About explains how the map was built");
+  ok(await page.evaluate(() => /reviewer/i.test(document.getElementById("km-p-src").textContent) || /审核/.test(document.getElementById("km-p-src").textContent)), "About explains how the map was built");
   // open a topic and a point
   await page.evaluate(() => document.querySelector("#km-p-mine .km-pick, #km-p-mine [data-ball]") ? 0 : 0);
   await click("#km-t-mine"); await page.waitForTimeout(100);
@@ -157,10 +161,19 @@ const ok = (c, msg) => { if (!c) { console.log("FAIL:", msg); process.exitCode =
   await clickText(".subnav button", ZH ? "科目|Subjects" : "Subjects"); await page.waitForTimeout(200);
   await page.fill("#subject", ZH ? "乐理" : "Music theory");
   await page.fill("#goal-text", ZH ? "给旋律配和弦" : "Harmonise simple melodies on the piano");
+  // this build stops part-way (a usage limit), then continues without redoing finished work
+  await page.evaluate(() => { window.__planners = 0; window.__failPlannerAt = 2; });
   await clickText("button.primary", ZH ? "生成我的地图|Build my map" : "Build my map");
+  await page.waitForFunction(() => [...document.querySelectorAll("button.primary")].some((b) => !b.disabled && /Continue building|继续生成/.test(b.textContent)), null, { timeout: 30000 });
+  await shot("v2-12b-paused", true);
+  const paused = await page.evaluate(() => { const s = JSON.parse(localStorage.getItem("lc-mock-db")); const k = Object.keys(s).filter((x) => x.startsWith("builds/")).map((x) => s[x]).find((b) => b.status === "paused"); return k ? { done: Object.values(k.nodes).filter((n) => n.state !== "todo").length, planners: window.__planners } : null; });
+  ok(paused && paused.done >= 2, "a stopped build is saved part-way and offers to continue " + JSON.stringify(paused));
+  await clickText("button.primary", ZH ? "继续生成|Continue building" : "Continue building");
   await page.waitForFunction(() => !document.getElementById("kmap").hidden, null, { timeout: 30000 }); await page.waitForTimeout(1500);
   await shot("v2-13-music-map");
   ok(await page.evaluate(() => document.querySelectorAll("g.km-ball").length === 3), "second subject has its own map");
+  const pl = await page.evaluate(() => window.__planners);
+  ok(pl === 4, "continuing didn't redo finished work (4 planners in all: " + pl + ")");
   await page.evaluate(() => { document.querySelector("#km-p-mine [data-ball]").click(); }); await page.waitForTimeout(500);
   await page.evaluate(() => document.querySelector("#km-p-det [data-markall]").click()); await page.waitForTimeout(200);
   await nav("practice"); await page.waitForTimeout(200);

@@ -2,7 +2,7 @@
   let km = null;
   function updatePill() {
     const s = cur(), pill = $("subject-pill");
-    pill.textContent = (s ? s.name + " / " : "") + "v2.1";
+    pill.textContent = (s ? s.name + " / " : "") + "v2.2";
     pill.setAttribute("data-ai", "");
   }
   function mountMap() {
@@ -100,6 +100,7 @@
           loaded.forEach((x) => { if (x && x.sid) subjects[x.sid] = Object.assign(freshSubject(x.sid, x), x); });
           app.order = app.order.filter((sid) => subjects[sid]);
           if (!subjects[app.current]) app.current = app.order[0] || null;
+          await Promise.all(app.order.map(loadBuild));
           if (app.current) await ensureMap(app.current);
         }
         setSave(snap.exists ? "Progress restored" : "Progress will be saved");

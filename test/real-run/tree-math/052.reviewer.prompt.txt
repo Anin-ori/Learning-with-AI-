@@ -1,0 +1,167 @@
+You review one part of a knowledge map in Learning Companion, an open-source study tool for self-learners, before the learner sees it. The map is built by a tree of AIs: the pieces of this part were planned and written by separate AIs, each seeing only its own piece. You are the first to see them together; the reviewer above you will see this part beside its neighbours.
+Subject: Mathematical analysis
+The learner's goal: Understand real analysis rigorously at the level of a first university course: limits, continuity, differentiation, integration and series, and be able to read and write the proofs.
+Where they are now, in their own words: (not given)
+
+Where this part sits:
+Subject: Mathematical analysis. Scope: The map covers single-variable real analysis as taught in a standard first university course (the organisation of textbooks such as Abbott, Bartle and Sherbert, Spivak and the analysis part of Rudin): the real numbers and completeness, sequences, series of numbers, the topology of the real line, limits of functions and continuity, differentiation, the Riemann integral, and sequences and series of functions including power series. The learner's goal names limits, continuity, differentiation, integration and series, and asks them to read and write proofs, so the map starts with a foundations part on logic, quantifiers, proof techniques, sets and functions. No starting level was given, so this part is included in full but kept practical: it covers only the logic and set language the later proofs use. Formal logic and axiomatic set theory are left out. The real numbers are treated axiomatically as a complete ordered field. Building them from the rationals (Dedekind cuts or Cauchy sequences) is only mentioned, because most first courses do it this way and the construction is not needed to use completeness. The integral is the Riemann integral, set up with Darboux upper and lower sums. That is the most common choice; the equivalent tagged-sum definition is mentioned, not developed. The topology of the real line (open, closed, compact and connected sets) gets its own short part, as in Abbott and Rudin, because compactness and connectedness are the real reasons behind the extreme value and intermediate value theorems. Some books, such as Spivak, fold this into continuity instead. Exponential, logarithm and trigonometric functions may be used as examples from the start with their familiar properties; they are defined rigorously in the part on series of functions. Left out: multivariable analysis, metric spaces beyond a mention, Lebesgue measure and integration, complex analysis, Fourier analysis and differential equations. These are named in a short final part so the learner can see where the course leads, but they are not taught. Computational calculus technique (long integration drills, many differentiation rules) is also left out, except where a rule needs a proof.
+- Limits of functions and continuity (your part): This part covers limits of functions on subsets of the real line: the epsilon-delta definition at limit points of the domain, one-sided limits, limits at infinity and infinite limits, the sequential criterion linking functional limits to 'Sequences', and the limit laws via that criterion. Continuity: the epsilon-delta and sequential definitions, the algebra and composition of continuous functions, continuity of polynomials and rational functions, and the classification of discontinuities with examples (Dirichlet function, Thomae's function, sin(1/x), x sin(1/x)). Main theorems: continuous images of compact sets are compact, the extreme value theorem, the intermediate value theorem (via connectedness, or via the supremum), uniform continuity and the Heine-Cantor theorem (a continuous function on a compact set is uniformly continuous), and Lipschitz functions. Monotone functions: their one-sided limits, the countability of their discontinuities, and the continuity of inverses of continuous strictly monotone functions (for example n-th roots). Edges: compactness and connectedness are defined in 'Topology of the real line'. Derivatives belong to 'Differentiation'. Continuity of power series and uniform limits belongs to 'Sequences and series of functions'. What matters for this learner: writing epsilon-delta proofs where delta depends on epsilon and the point, understanding the difference between continuity and uniform continuity at the level of the quantifiers, and knowing which hypothesis each big theorem needs.
+
+This part, piece by piece. Every point with its id, what it is, and the points it needs first:
+Piece: Limits of functions
+Topic t20: Limits of functions
+  p247 | The epsilon-delta definition of a functional limit | State lim_{x->c} f(x) = L for f: A -> R with 0 < |x - c| < delta and x in A, and explain why c must be a limit point of A (otherwise every L would qualify and the limit would not be unique) and why the value f(c), or whether f is even defined at c, plays no role. | needs: nothing
+  p248 | Proving a limit from the definition: scratch work then proof | Find a delta by working backwards from |f(x) - L| < epsilon (scratch work) and then write the forward proof cleanly, for linear functions and for x^2, using a preliminary bound such as delta <= 1 and delta = min(1, ...) to control the extra factor. | needs: p247
+  p249 | How delta depends on epsilon and the point | Prove limits such as 1/x at c > 0 and sqrt x at c > 0 (and sqrt x at 0 from the right side of the domain), and see from the formulas for delta that it must shrink as c approaches a trouble spot, not only as epsilon shrinks. | needs: p248
+  p250 | Negating the limit definition | Write out 'f(x) does not tend to L as x -> c' (there is an epsilon such that every delta has some x in A with 0 < |x - c| < delta and |f(x) - L| >= epsilon) and 'the limit does not exist', and use it to show directly that a given L is not the limit. | needs: p247
+  p251 | The sequential criterion for functional limits | Prove that lim_{x->c} f(x) = L if and only if f(x_n) -> L for every sequence (x_n) in A with x_n != c and x_n -> c, the converse by contrapositive choosing x_n within delta = 1/n. | needs: p247, p250
+  p252 | Uniqueness and the algebraic limit laws for functions | Use the sequential criterion to prove that a functional limit is unique and that limits of sums, scalar multiples, products and quotients (with nonzero limit in the denominator) behave as expected, without redoing any epsilon-delta work. | needs: p251
+  p253 | Order and squeeze for functional limits | Use the sequential criterion to prove that limits preserve non-strict inequalities between functions near c and the squeeze theorem for functions, and apply it to examples such as x sin(1/x) -> 0 as x -> 0. | needs: p251
+  p254 | Proving a limit does not exist with two sequences | Show that a limit fails to exist by finding sequences x_n -> c and y_n -> c (avoiding c) with f(x_n) and f(y_n) converging to different values or with f(x_n) divergent, as for sin(1/x) at 0 and the sign function at 0. | needs: p251
+  p255 | One-sided limits | Define the right-hand and left-hand limits at c (limits of the restriction of f to A intersected with (c, infinity) or (-infinity, c)), and prove that the two-sided limit exists and equals L exactly when both one-sided limits exist and equal L. | needs: p247
+  p256 | Limits at infinity | Define lim_{x->infinity} f(x) = L (for every epsilon there is M such that x > M in A gives |f(x) - L| < epsilon), write its negation, prove examples such as 1/x and (2x+1)/(x+3), and note that the sequential criterion and limit laws carry over. | needs: p247
+  p257 | Infinite limits | Define lim_{x->c} f(x) = infinity (for every M there is delta with f(x) > M whenever 0 < |x - c| < delta) and the variants as x -> infinity, write their negations, and prove examples such as 1/x^2 -> infinity at 0 and 1/x having no infinite two-sided limit at 0. | needs: p247
+
+Piece: Continuity and types of discontinuity
+Topic t22: Continuity and types of discontinuity
+  p267 | Continuity at a point and on a set: the epsilon-delta definition | State the definition of f: A -> R being continuous at a point c in A (for every epsilon > 0 there is delta > 0 such that |x - c| < delta and x in A imply |f(x) - f(c)| < epsilon) and of continuity on a set, and explain why c must be in the domain, why f(c) now matters (unlike for limits), and why a restriction of a function can be continuous where the original is not. | needs: nothing
+  p268 | Negating continuity | Write out correctly what it means for f to be discontinuous at c (there is an epsilon > 0 such that for every delta > 0 some x in A with |x - c| < delta has |f(x) - f(c)| >= epsilon), and use this negation to prove simple discontinuities, such as a step function at its jump, directly from the definition. | needs: p267
+  p269 | Proving continuity from the definition | Write complete epsilon-delta proofs that particular functions (for example 3x + 1, |x|, x^2 and 1/x at a given point) are continuous, doing scratch work to find delta and noticing when delta depends on both epsilon and the point c. | needs: p267
+  p270 | Continuity through limits; isolated points | Prove that at a limit point c of the domain, f is continuous at c exactly when the limit of f(x) as x -> c exists and equals f(c), and that every function is automatically continuous at an isolated point of its domain (so every function on the integers is continuous). | needs: p267
+  p271 | Sequential characterisation of continuity | Prove that f is continuous at c exactly when f(x_n) -> f(c) for every sequence (x_n) in the domain converging to c, and use this form to move results about sequences over to continuous functions. | needs: p270
+  p272 | Proving discontinuity with sequences | Show that f is discontinuous at c by finding one sequence x_n -> c in the domain with f(x_n) not converging to f(c), and recognise when this is easier than negating the epsilon-delta definition. | needs: p271
+  p273 | Algebra of continuous functions | Prove that if f and g are continuous at c then so are kf, f + g, fg and, when g(c) is not 0, f/g, by using the sequential characterisation together with the limit laws instead of redoing epsilon work. | needs: p271
+  p274 | Composition of continuous functions | Prove that if f is continuous at c and g is continuous at f(c) then g o f is continuous at c, both by chaining the epsilon-delta definitions and by sequences, and see why continuity of g at f(c), not just a limit there, is needed. | needs: p267
+  p275 | Continuity of polynomials, rational functions and familiar functions | Deduce that polynomials are continuous on R and rational functions on their domains, and build continuity of more complex expressions (such as sqrt(1 + x^2) or sin(x)/x for x not 0) from familiar continuous functions like exp, sin and sqrt, whose continuity is used now and proved when they are defined rigorously. | needs: p273, p274
+  p276 | Topological form of continuity | Prove that f: R -> R is continuous exactly when the preimage of every open set is open (equivalently, of every closed set is closed), state the relative version for functions on a subset A (preimages are open relative to A), and use it to see at once that sets like {x : f(x) > 0} are open. | needs: p267
+  p277 | Types of discontinuity: removable, jump, essential | Classify a discontinuity at a limit point c using one-sided limits: removable (the limit exists but differs from f(c) or f(c) is undefined), jump (both one-sided limits exist but differ), and essential (some one-sided limit fails to exist), and identify each type in simple examples. | needs: p270
+  p278 | sin(1/x) and x sin(1/x) at 0 | Show that sin(1/x) has an essential discontinuity at 0 however it is defined there, while x sin(1/x) has a removable discontinuity that becomes continuous when the value at 0 is set to 0, using sequences for the first and the squeeze theorem for the second. | needs: p272, p277
+  p279 | The Dirichlet function: continuous nowhere | Prove that the function equal to 1 on the rationals and 0 on the irrationals is discontinuous at every point, by choosing sequences of rationals or irrationals converging to the point. | needs: p272
+  p280 | x times the Dirichlet function: continuous at exactly one point | Prove that x times the Dirichlet function is continuous at 0 (take delta = epsilon) and discontinuous everywhere else, and see from it that continuity at a single point says nothing about nearby points. | needs: p269, p279
+  p281 | Thomae's function: continuous exactly at the irrationals | Prove that the function equal to 1/q at p/q in lowest terms (q > 0) and 0 at irrationals is discontinuous at every rational and continuous at every irrational, using that only finitely many rationals near a point have denominator at most N; this tests the quantifiers in the definition at their hardest. | needs: p269, p279
+
+Piece: The extreme and intermediate value theorems
+Topic t23: The extreme and intermediate value theorems
+  p282 | Continuous image of a compact set is compact | Prove that if K is compact and f is continuous on K then f(K) is compact, using sequential compactness: take a sequence in f(K), pull it back to K, extract a convergent subsequence, and push it forward by continuity. | needs: nothing
+  p283 | The same theorem with open covers | Give the second proof that continuous images of compact sets are compact, by pulling an open cover of f(K) back to an open cover of K and taking a finite subcover, and see why the two proofs agree on R. | needs: nothing
+  p284 | The extreme value theorem | Prove that a continuous function on a nonempty compact set, in particular on [a,b], is bounded and attains a maximum and a minimum, and explain this as local continuity becoming global information through compactness. | needs: p282
+  p285 | Why every hypothesis of the extreme value theorem is needed | Produce counterexamples when one hypothesis is dropped: x or 1/x on (0,1) (open interval), x on [0, infinity) (unbounded domain), a function on [0,1] with a jump or a pole (discontinuous), and 1/(x^2 - 2) on the rationals in [1,2] (domain in Q, not complete), and say which step of the proof breaks in each case. | needs: p284
+  p286 | Continuous image of a connected set is connected | Prove that if E is connected and f is continuous on E then f(E) is connected, by showing that a separation of f(E) would pull back to a separation of E. | needs: nothing
+  p287 | The intermediate value theorem via connectedness | State the intermediate value theorem (a continuous f on [a,b] takes every value between f(a) and f(b)) and derive it in a few lines from the connectedness of [a,b] and of its image. | needs: p286
+  p288 | The intermediate value theorem directly: supremum and bisection | Prove the intermediate value theorem without topology, once by taking c = sup{x in [a,b] : f(x) < L} and ruling out f(c) < L and f(c) > L, and once by bisection with nested intervals, seeing exactly where completeness enters. | needs: nothing
+  p289 | Why every hypothesis of the intermediate value theorem is needed | Show the theorem fails for a discontinuous function (a step function), on a domain that is not an interval, and for x^2 - 2 on the rationals in [0,2], and see that the converse fails: a function with the intermediate value property need not be continuous (sin(1/x) with value 0 at 0). | needs: p288
+  p290 | Continuous images of intervals are intervals | Prove that a continuous function maps any interval to an interval, and that it maps [a,b] onto exactly [m, M] where m and M are its minimum and maximum, combining the extreme and intermediate value theorems. | needs: p284, p287
+  p291 | Proving equations have solutions with the intermediate value theorem | Use sign changes to prove that equations such as x^2 = 2, x^n = a (a > 0) and cos x = x have solutions in a given interval, and use bisection to locate a root to any desired accuracy. | needs: p288
+  p292 | Every odd-degree polynomial has a real root | Prove that a real polynomial of odd degree takes both signs, because its leading term dominates for large |x|, and therefore has a real root; see why even degree gives no such guarantee (x^2 + 1). | needs: p288
+  p293 | Fixed-point theorem on a closed interval | Prove that every continuous f: [a,b] -> [a,b] has a fixed point by applying the intermediate value theorem to g(x) = f(x) - x, and give counterexamples on (0,1), on [0, infinity) and for a discontinuous map. | needs: p288
+  p294 | Which hypothesis does each theorem need: compactness, connectedness, completeness | Sort the theorems of this topic by what they really use (compactness for boundedness and attained extrema, connectedness for intermediate values, completeness of R behind both) and, given a new statement, predict which hypothesis it needs and find a counterexample without it. | needs: p285, p289
+
+Piece: Uniform continuity
+Topic t21: Uniform continuity
+  p258 | Uniform continuity versus continuity: the order of the quantifiers | The learner can state the definition of uniform continuity on a set A and write it side by side with continuity at every point of A, seeing that the only change is moving 'for all x' after 'there exists delta', so delta may depend on epsilon but not on the point. They can explain why uniform continuity implies continuity and not the reverse. | needs: nothing
+  p259 | Negating uniform continuity | The learner can write out correctly what it means for f not to be uniformly continuous on A: there is an epsilon_0 > 0 such that for every delta > 0 there are x, y in A with |x - y| < delta and |f(x) - f(y)| >= epsilon_0, and can compare it with the negation of continuity at a point. | needs: p258
+  p260 | Proving uniform continuity from the definition | The learner can do the scratch work and write a proof that a given function is uniformly continuous by finding a delta depending only on epsilon, for example x^2 on [0,1] (delta = epsilon/2), 1/x on [1, infinity) (delta = epsilon) and sqrt x on [0, infinity) (using |sqrt x - sqrt y| <= sqrt|x - y|, delta = epsilon^2). | needs: p258
+  p261 | Sequential criterion for failure of uniform continuity | The learner can state and prove that f fails to be uniformly continuous on A exactly when there are an epsilon_0 > 0 and sequences (x_n), (y_n) in A with x_n - y_n -> 0 but |f(x_n) - f(y_n)| >= epsilon_0 for all n, and knows this is the usual tool for disproving uniform continuity. | needs: p259
+  p262 | Disproving uniform continuity: x^2 on R and 1/x on (0,1) | The learner can prove that x^2 is not uniformly continuous on R (take x_n = n + 1/n, y_n = n) and 1/x is not uniformly continuous on (0,1) (take x_n = 1/n, y_n = 1/(n+1)), and can say what goes wrong in each case: unbounded steepness at infinity, or blow-up near a missing endpoint. | needs: p261
+  p263 | Lipschitz functions | The learner can define a Lipschitz function (|f(x) - f(y)| <= K|x - y|), prove that Lipschitz implies uniformly continuous with delta = epsilon/K, and show the converse fails with sqrt x on [0, infinity), which is uniformly continuous but not Lipschitz because its difference quotients near 0 are unbounded. | needs: p258, p260
+  p264 | The Heine-Cantor theorem | The learner can state and prove that a continuous function on a compact set (for example a closed bounded interval [a,b]) is uniformly continuous, by contradiction: build sequences from the negation, extract convergent subsequences with Bolzano-Weierstrass, and use continuity at the common limit. They can point to the examples 1/x on (0,1) and x^2 on R to show why closedness and boundedness are needed, and know this theorem is what later makes continuous functions Riemann integrable. | needs: p261
+  p265 | Uniformly continuous functions preserve Cauchy sequences | The learner can prove that if f is uniformly continuous on A and (x_n) is a Cauchy sequence in A then (f(x_n)) is Cauchy, and can show this fails for merely continuous functions with 1/x on (0,1) and x_n = 1/n. | needs: p258
+  p266 | Continuous extension to the endpoints | The learner can prove that a uniformly continuous function on (a,b) has limits at a and b and so extends to a continuous function on [a,b], using that it maps Cauchy sequences to Cauchy sequences, and with Heine-Cantor can conclude that a continuous function on (a,b) is uniformly continuous exactly when it extends continuously to [a,b] (so sin(1/x) on (0,1) is not uniformly continuous). | needs: p264, p265
+
+Piece: Monotone functions and continuous inverses
+Topic t24: Monotone functions and continuous inverses
+  p295 | Monotone functions | State the definitions of increasing, strictly increasing, decreasing and strictly decreasing functions on a set, give examples and non-examples, and see that strictly monotone functions are injective and that their inverses are strictly monotone in the same direction. | needs: nothing
+  p296 | One-sided limits of a monotone function | Prove that an increasing function on an interval has a left limit equal to the sup of f(x) for x < c and a right limit equal to the inf of f(x) for x > c at every interior point, with f(c-) <= f(c) <= f(c+), plus the matching one-sided statements at the endpoints and for decreasing functions. | needs: p295
+  p297 | Discontinuities of monotone functions are jumps | Show that a monotone function is continuous at c exactly when f(c-) = f(c+) = f(c), so its only possible discontinuities are jump discontinuities, and measure each jump by f(c+) - f(c-); removable and essential discontinuities cannot occur. | needs: p296
+  p298 | A monotone function has at most countably many discontinuities | Prove that the open jump intervals (f(c-), f(c+)) of an increasing function are pairwise disjoint, choose a rational number in each, and conclude that the set of discontinuities injects into Q and is countable; see an increasing function with a jump at every rational, built from a series of jumps 2^(-n) over an enumeration of Q. | needs: p297
+  p299 | A monotone function whose image is an interval is continuous | Prove that if f is monotone on an interval and f(I) is an interval, then f is continuous, because a jump would leave a gap in the image that f cannot fill. | needs: p297
+  p300 | A continuous injective function on an interval is strictly monotone | Prove, using the intermediate value theorem, that a continuous one-to-one function on an interval cannot change direction and so is strictly increasing or strictly decreasing. | needs: p295
+  p301 | Continuity of the inverse function | Prove that if f is continuous and strictly monotone on an interval I, then f(I) is an interval and the inverse f^(-1): f(I) -> I is strictly monotone and continuous, by applying the previous result to f^(-1), whose image I is an interval. | needs: p295, p299
+  p302 | n-th roots and other inverse functions are continuous | Apply the inverse function theorem to x^n on [0, infinity) (and on all of R for odd n) to get existence, uniqueness and continuity of n-th roots, then rational powers x^(m/n), and informally log as the inverse of exp and arcsin as the inverse of sin on [-pi/2, pi/2]. | needs: p301
+  p303 | Why the interval hypothesis matters | Work through a counterexample such as f(x) = x on [0,1] and f(x) = x - 1 on (2,3], a continuous strictly increasing bijection onto [0,2] whose inverse is discontinuous at 1, and locate exactly where the proof of continuity of the inverse uses that the domain is an interval. | needs: p301
+
+Open needs: ideas a point here was written to need from outside its own topic, not linked yet:
+N262 | p247 (The epsilon-delta definition of a functional limit) | limit point (accumulation point) of a subset of R
+N263 | p247 (The epsilon-delta definition of a functional limit) | reading and ordering nested quantifiers (for all epsilon there exists delta)
+N264 | p247 (The epsilon-delta definition of a functional limit) | absolute value inequalities and the triangle inequality
+N265 | p250 (Negating the limit definition) | negating statements with nested quantifiers
+N266 | p251 (The sequential criterion for functional limits) | definition of convergence of a sequence (epsilon-N)
+N267 | p252 (Uniqueness and the algebraic limit laws for functions) | algebraic limit theorem for sequences (sums, products, quotients)
+N268 | p252 (Uniqueness and the algebraic limit laws for functions) | uniqueness of limits of sequences
+N269 | p253 (Order and squeeze for functional limits) | order limit theorem for sequences
+N270 | p253 (Order and squeeze for functional limits) | squeeze theorem for sequences
+N271 | p258 (Uniform continuity versus continuity: the order of the quantifiers) | epsilon-delta definition of continuity at a point and on a set
+N272 | p258 (Uniform continuity versus continuity: the order of the quantifiers) | how the order of nested quantifiers changes the meaning of a statement (for all / there exists)
+N273 | p259 (Negating uniform continuity) | negating statements with nested quantifiers
+N274 | p261 (Sequential criterion for failure of uniform continuity) | convergence of a sequence of real numbers
+N275 | p264 (The Heine-Cantor theorem) | Bolzano-Weierstrass theorem: every bounded sequence has a convergent subsequence
+N276 | p264 (The Heine-Cantor theorem) | compact sets of R (closed and bounded, sequential compactness)
+N277 | p264 (The Heine-Cantor theorem) | sequential characterisation of continuity
+N278 | p265 (Uniformly continuous functions preserve Cauchy sequences) | Cauchy sequences and the Cauchy criterion for convergence
+N279 | p266 (Continuous extension to the endpoints) | sequential criterion for limits of functions
+N280 | p266 (Continuous extension to the endpoints) | one-sided limits of functions
+N281 | p267 (Continuity at a point and on a set: the epsilon-delta definition) | nested quantifiers (for all / there exists) and reading their order
+N282 | p267 (Continuity at a point and on a set: the epsilon-delta definition) | epsilon-delta definition of the limit of a function
+N283 | p268 (Negating continuity) | negating statements with nested quantifiers
+N284 | p269 (Proving continuity from the definition) | finding delta by scratch work in epsilon-delta limit proofs
+N285 | p269 (Proving continuity from the definition) | triangle inequality and absolute value inequalities
+N286 | p270 (Continuity through limits; isolated points) | limit points and isolated points of a set
+N287 | p270 (Continuity through limits; isolated points) | epsilon-delta definition of the limit of a function
+N288 | p271 (Sequential characterisation of continuity) | sequential criterion for limits of functions
+N289 | p271 (Sequential characterisation of continuity) | convergence of sequences
+N290 | p273 (Algebra of continuous functions) | limit laws for sequences or for functions
+N291 | p276 (Topological form of continuity) | open and closed sets in R
+N292 | p276 (Topological form of continuity) | preimage of a set under a function
+N293 | p277 (Types of discontinuity: removable, jump, essential) | one-sided limits of functions
+N294 | p278 (sin(1/x) and x sin(1/x) at 0) | limit of sin(1/x) as x -> 0 does not exist (two sequences with different limits)
+N295 | p278 (sin(1/x) and x sin(1/x) at 0) | squeeze theorem for limits of functions
+N296 | p279 (The Dirichlet function: continuous nowhere) | density of the rationals and of the irrationals in R
+N297 | p281 (Thomae's function: continuous exactly at the irrationals) | density of the irrationals in R
+N298 | p281 (Thomae's function: continuous exactly at the irrationals) | rationals written in lowest terms
+N299 | p282 (Continuous image of a compact set is compact) | sequential compactness of a subset of R (every sequence has a subsequence converging in the set)
+N300 | p282 (Continuous image of a compact set is compact) | sequential characterisation of continuity
+N301 | p282 (Continuous image of a compact set is compact) | subsequences and Bolzano-Weierstrass
+N302 | p283 (The same theorem with open covers) | open-cover definition of compactness and Heine-Borel
+N303 | p283 (The same theorem with open covers) | topological form of continuity: preimages of open sets are open relative to the domain
+N304 | p284 (The extreme value theorem) | a nonempty compact subset of R contains its supremum and infimum (closed and bounded)
+N305 | p284 (The extreme value theorem) | [a,b] is compact (Heine-Borel)
+N306 | p285 (Why every hypothesis of the extreme value theorem is needed) | sqrt 2 is irrational and the rationals are dense in R
+N307 | p286 (Continuous image of a connected set is connected) | definition of a connected set (cannot be split into two nonempty separated sets)
+N308 | p286 (Continuous image of a connected set is connected) | sequential characterisation of continuity
+N309 | p287 (The intermediate value theorem via connectedness) | a subset of R is connected exactly when it is an interval
+N310 | p288 (The intermediate value theorem directly: supremum and bisection) | axiom of completeness (least upper bound property)
+N311 | p288 (The intermediate value theorem directly: supremum and bisection) | nested interval property
+N312 | p288 (The intermediate value theorem directly: supremum and bisection) | epsilon-delta definition of continuity at a point (a continuous function keeps its strict sign near a point)
+N313 | p289 (Why every hypothesis of the intermediate value theorem is needed) | sqrt 2 is irrational
+N314 | p289 (Why every hypothesis of the intermediate value theorem is needed) | the function sin(1/x) and its behaviour near 0
+N315 | p290 (Continuous images of intervals are intervals) | definition of an interval as a set containing every point between any two of its points
+N316 | p292 (Every odd-degree polynomial has a real root) | continuity of polynomials
+N317 | p292 (Every odd-degree polynomial has a real root) | limits of polynomials at plus and minus infinity (the leading term dominates)
+N318 | p295 (Monotone functions) | functions, injectivity and inverse functions
+N319 | p295 (Monotone functions) | order properties of the real numbers
+N320 | p296 (One-sided limits of a monotone function) | definition of one-sided limits of a function
+N321 | p296 (One-sided limits of a monotone function) | supremum and infimum and the completeness axiom (approximation property of the sup)
+N322 | p297 (Discontinuities of monotone functions are jumps) | continuity in terms of one-sided limits
+N323 | p297 (Discontinuities of monotone functions are jumps) | classification of discontinuities (removable, jump, essential)
+N324 | p298 (A monotone function has at most countably many discontinuities) | countable sets and the countability of Q
+N325 | p298 (A monotone function has at most countably many discontinuities) | density of the rationals in R
+N326 | p299 (A monotone function whose image is an interval is continuous) | intervals characterised by the intermediate property (if a < y < b with a, b in the set, then y is in the set)
+N327 | p300 (A continuous injective function on an interval is strictly monotone) | intermediate value theorem
+N328 | p301 (Continuity of the inverse function) | the continuous image of an interval is an interval
+N329 | p302 (n-th roots and other inverse functions are continuous) | continuity of polynomials
+N330 | p302 (n-th roots and other inverse functions are continuous) | behaviour of the familiar functions exp and sin (rigorous definitions deferred)
+
+Your job:
+1. Link each open need you can to the point in this part that teaches that idea. If the idea belongs outside this part, leave the need open: the reviewer above you will link it. If it belongs inside this part but no point teaches it, add the point.
+2. Fix what only someone who sees the pieces together can see: two points in different pieces that teach the same idea, a point in the wrong piece, an idea this part rests on that no piece has, a "needs" link between pieces that is missing or wrong.
+3. Fix any other real error you notice: a point that is wrong, misnamed, or doesn't belong to this subject. Leave reasonable choices of scope, order, grouping and naming alone.
+Give each change as one operation:
+- {"op": "link", "need": "open need id", "to": "point id"}
+- {"op": "drop_need", "need": "open need id", "why": ""}
+- {"op": "add_point", "topic": "topic id", "name": "", "what": "", "needs": ["point ids"], "for": ["open need ids it meets"], "why": ""}
+- {"op": "merge", "id": "the point to remove", "into": "the point that keeps the idea", "why": ""}
+- {"op": "rename", "id": "", "name": "", "what": "", "why": ""}
+- {"op": "move", "id": "", "topic": "topic id", "why": ""}
+- {"op": "remove_point", "id": "", "why": ""}
+- {"op": "add_need", "id": "", "need": "", "why": ""} and {"op": "remove_need", "id": "", "need": "", "why": ""}
+Reply with only JSON: {"fixes": [operations], "verdict": "one or two sentences on how sound this part is now"}

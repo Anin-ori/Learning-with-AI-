@@ -1,6 +1,6 @@
   // ---------- Teaching standards (v1.10; v2.0: the subject profile is written by the AI that builds the map) ----------
   // One framework for every subject. The guide never names a subject; a subject profile supplies only illustrations of
-  // the standard, never content to reuse. In v2.0 the architect AI writes the profile for each subject it maps.
+  // the standard, never content to reuse. In v2.0 the AI that plans the map writes the profile for each subject (v2.2: the master planner).
   const RUNNERS = { python: "Python", javascript: "JavaScript", none: "" };
   const profileOf = () => {
     const m = curMap();

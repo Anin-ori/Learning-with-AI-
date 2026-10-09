@@ -1,0 +1,112 @@
+You review one part of a knowledge map in Learning Companion, an open-source study tool for self-learners, before the learner sees it. The map is built by a tree of AIs: the pieces of this part were planned and written by separate AIs, each seeing only its own piece. You are the first to see them together; the reviewer above you will see this part beside its neighbours.
+Subject: Mathematical analysis
+The learner's goal: Understand real analysis rigorously at the level of a first university course: limits, continuity, differentiation, integration and series, and be able to read and write the proofs.
+Where they are now, in their own words: (not given)
+
+Where this part sits:
+Subject: Mathematical analysis. Scope: The map covers single-variable real analysis as taught in a standard first university course (the organisation of textbooks such as Abbott, Bartle and Sherbert, Spivak and the analysis part of Rudin): the real numbers and completeness, sequences, series of numbers, the topology of the real line, limits of functions and continuity, differentiation, the Riemann integral, and sequences and series of functions including power series. The learner's goal names limits, continuity, differentiation, integration and series, and asks them to read and write proofs, so the map starts with a foundations part on logic, quantifiers, proof techniques, sets and functions. No starting level was given, so this part is included in full but kept practical: it covers only the logic and set language the later proofs use. Formal logic and axiomatic set theory are left out. The real numbers are treated axiomatically as a complete ordered field. Building them from the rationals (Dedekind cuts or Cauchy sequences) is only mentioned, because most first courses do it this way and the construction is not needed to use completeness. The integral is the Riemann integral, set up with Darboux upper and lower sums. That is the most common choice; the equivalent tagged-sum definition is mentioned, not developed. The topology of the real line (open, closed, compact and connected sets) gets its own short part, as in Abbott and Rudin, because compactness and connectedness are the real reasons behind the extreme value and intermediate value theorems. Some books, such as Spivak, fold this into continuity instead. Exponential, logarithm and trigonometric functions may be used as examples from the start with their familiar properties; they are defined rigorously in the part on series of functions. Left out: multivariable analysis, metric spaces beyond a mention, Lebesgue measure and integration, complex analysis, Fourier analysis and differential equations. These are named in a short final part so the learner can see where the course leads, but they are not taught. Computational calculus technique (long integration drills, many differentiation rules) is also left out, except where a rule needs a proof.
+- Series of real numbers (your part): This part covers infinite series of real numbers as limits of partial sums: geometric and telescoping series, the term test, the Cauchy criterion for series, series with nonnegative terms, comparison and limit comparison tests, the Cauchy condensation test (which settles p-series without integrals), the ratio and root tests (the root test stated with limsup), the alternating series (Leibniz) test, absolute versus conditional convergence, rearrangements (absolutely convergent series can be rearranged freely; the Riemann rearrangement theorem for conditionally convergent series), and products of series (Cauchy product) at least stated. Decimal expansions may appear as an application. Edges: the integral test belongs to 'The Riemann integral', because it needs integrals. Power series, Taylor series and series of functions belong to 'Sequences and series of functions'. The sequence results come from 'Sequences' and are used here, not reproved. What matters for this learner: understanding that a series is a limit, so that tests are theorems to be proved, not recipes. Choosing and justifying the right test matters more than the number of tests covered.
+
+This part, piece by piece. Every point with its id, what it is, and the points it needs first:
+Piece: Convergence of series: definition and first results
+Topic t4: Convergence of series: definition and first results
+  p36 | Series, partial sums and the sum of a series | The learner can define the partial sums s_n of a series, define convergence of the series as convergence of (s_n) and its sum as the limit, recognise divergence including divergence to plus or minus infinity, and explain why an infinite sum is not computed by 'adding forever' but defined by a limit. | needs: nothing
+  p37 | Geometric series | The learner can derive the closed form (1 - r^(n+1))/(1 - r) for the partial sums of a geometric series and prove from it that the series converges to 1/(1 - r) exactly when |r| < 1 and diverges otherwise. | needs: p36
+  p38 | Telescoping series | The learner can recognise a series whose terms are differences b_n - b_(n+1), compute its partial sums exactly, and prove convergence and find the sum, as in the sum of 1/(n(n+1)) = 1, using partial fractions where needed. | needs: p36
+  p39 | Linearity of convergent series | The learner can prove from the sequence limit laws that the sum of two convergent series and a constant multiple of a convergent series converge to the expected sums, and knows that a convergent plus a divergent series diverges while two divergent series may have a convergent sum, so series cannot be split carelessly. | needs: p36
+  p40 | Changing finitely many terms and tails | The learner can prove that changing, adding or deleting finitely many terms does not affect whether a series converges (only its sum), define the tail sum from index N on, and show that the tails of a convergent series tend to zero. | needs: p36
+  p41 | The term test (nth-term test for divergence) | The learner can prove that if a series converges then its terms tend to zero (from a_n = s_n - s_(n-1)), use the contrapositive to prove divergence, and explain why terms tending to zero can never by itself prove convergence. | needs: p36
+  p42 | The harmonic series diverges | The learner can prove that the sum of 1/n diverges to infinity by grouping terms into blocks to show s_(2^k) >= 1 + k/2, and uses it as the standard example of a series whose terms tend to zero but which diverges. | needs: p36
+  p43 | Cauchy criterion for series | The learner can state and derive from the Cauchy criterion for sequences that a series converges if and only if for every epsilon > 0 there is N with |a_(m+1) + ... + a_n| < epsilon for all n > m >= N, and use it to prove convergence without knowing the sum, to recover the term test as the case of one term, and to show the harmonic series diverges because s_(2n) - s_n >= 1/2. | needs: p36
+
+Piece: Series with nonnegative terms
+Topic t6: Series with nonnegative terms
+  p58 | Bounded partial sums criterion | The learner can prove that a series with nonnegative terms converges if and only if its partial sums are bounded above, because the partial sums increase and the monotone convergence theorem applies, and can explain that this is where completeness enters (for example, the partial sums of the sum of 1/n! are bounded rationals whose limit e is not rational). Otherwise the series diverges to plus infinity; there is no oscillation. | needs: nothing
+  p59 | Comparison test | The learner can state and prove the comparison test: if 0 <= a_n <= b_n for all n beyond some N, then convergence of the sum of b_n gives convergence of the sum of a_n, and divergence of the sum of a_n gives divergence of the sum of b_n. They can use it in both directions, for example showing the sum of 1/sqrt(n) diverges by comparison with the harmonic series. | needs: p58
+  p60 | Cauchy condensation test | The learner can state and prove that for a nonincreasing sequence of nonnegative terms, the sum of a_n converges if and only if the sum of 2^k a_(2^k) converges, by grouping terms into blocks from 2^k to 2^(k+1)-1 and bounding each block above and below, and can explain why the monotonicity hypothesis is needed. | needs: p58
+  p61 | p-series by condensation | The learner can prove, without integrals, that the sum of 1/n^p converges exactly when p > 1: condensation turns it into a geometric series with ratio 2^(1-p), and for p <= 0 the term test applies. They recognise the harmonic series as the borderline case p = 1. | needs: p60
+  p62 | Logarithmic benchmark series | The learner can use condensation twice to show that the sum of 1/(n log n) diverges and that the sum of 1/(n (log n)^p) converges exactly when p > 1, and understands from this that there is no slowest divergent or fastest convergent series to compare against. | needs: p60, p61
+  p63 | Writing the comparison inequality | The learner can turn an expression such as (n+1)/(n^3 - n + 5) into a correct, proved inequality against a benchmark, by enlarging the numerator and shrinking the denominator (or the reverse), valid for all n beyond a stated N. They avoid the classic mistakes: bounding above by a divergent series or below by a convergent one, which proves nothing, and inequalities that hold only in the wrong direction. | needs: p59
+  p64 | Limit comparison test | The learner can state and prove the limit comparison test: if a_n, b_n > 0 and a_n/b_n tends to a finite positive limit, the two series converge or diverge together (with the one-sided versions for limit 0 and limit infinity), by using the definition of the limit to get c b_n <= a_n <= C b_n eventually and then applying the comparison test. They can decide when limit comparison is easier than writing a direct inequality. | needs: p59
+  p65 | Comparing with a geometric series | The learner can show convergence by proving a_n <= C r^n eventually with 0 <= r < 1, for instance when a_(n+1)/a_n <= r or a_n^(1/n) <= r for all large n, and sees this as the idea behind the ratio and root tests, which are stated and proved for absolute values in the next part. They can apply it to series such as the sum of n^2/2^n or n!/n^n. | needs: p59
+  p66 | Choosing a comparison series | Given a series of nonnegative terms, the learner can find its dominant behaviour (leading powers, logarithms growing slower than any power, exponentials faster than any power), pick a benchmark (geometric, p-series or logarithmic), decide between direct comparison, limit comparison and condensation, and write the justification as a short proof rather than a recipe. | needs: p61, p63, p64
+  p67 | Decimal expansions converge | The learner can prove that for any digits d_k in {0,...,9} the series of d_k/10^k converges, by comparison with the geometric series 9/10^k, to a number in [0,1], and can compute simple cases such as 0.999... = 1. | needs: p59
+  p68 | Every number in [0,1] has a decimal expansion | The learner can prove that each x in [0,1] equals the sum of d_k/10^k for suitably chosen digits, by choosing each digit greedily (as the integer part of 10^k x minus 10 times the previous one) and showing the partial sums lie within 10^(-k) below x. They know that the expansion is unique except for numbers with two expansions, one ending in 0s and one ending in 9s. | needs: p67
+
+Piece: Absolute and conditional convergence
+Topic t5: Absolute and conditional convergence
+  p44 | Absolute convergence implies convergence | The learner can define absolute and conditional convergence and prove that if the sum of |a_n| converges then the sum of a_n converges, using the Cauchy criterion for series and the triangle inequality. | needs: nothing
+  p45 | Alternating series (Leibniz) test | The learner can state the test (terms alternate in sign, decrease in absolute value and tend to zero) and prove it, either by showing the even and odd partial sums are monotone and squeeze together or through the Cauchy criterion. | needs: nothing
+  p46 | Error bound for alternating series | The learner can prove that for a Leibniz series the sum lies between consecutive partial sums, so |S - s_n| <= a_{n+1}, and use this to estimate a sum to a given accuracy. | needs: p45
+  p47 | Conditional convergence: the alternating harmonic series | The learner can show that the alternating harmonic series converges but not absolutely, which proves that convergence does not imply absolute convergence, and can recognise other conditionally convergent series. | needs: p44, p45
+  p48 | The ratio test | The learner can state the ratio test with limsup and liminf of |a_{n+1}/a_n|, prove absolute convergence when the limsup is below 1 by comparison with a geometric series, and prove divergence when the liminf is above 1 (or the ratio is eventually at least 1) because the terms do not tend to zero. | needs: p44
+  p49 | The root test | The learner can state the root test with L = limsup |a_n|^(1/n) and prove absolute convergence when L < 1 by comparison with a geometric series, and divergence when L > 1 because |a_n| > 1 infinitely often. | needs: p44
+  p50 | Comparing the ratio and root tests and the inconclusive case | The learner can show with p-series that a limit of 1 in either test decides nothing, prove the inequalities liminf |a_{n+1}/a_n| <= liminf |a_n|^(1/n) <= limsup |a_n|^(1/n) <= limsup |a_{n+1}/a_n|, conclude that the root test is at least as strong as the ratio test, and give a series where the root test works but the ratio test fails. | needs: p48, p49
+  p51 | Choosing a test for a given series | The learner can look at a series, pick a suitable test (term test, comparison, ratio, root, Leibniz, absolute convergence first) for reasons they can state, and write the argument as a complete proof that checks every hypothesis. | needs: p47, p50
+  p52 | Positive and negative parts of a series | The learner can split a series into its positive and negative parts and prove that it converges absolutely exactly when both parts converge, while for a conditionally convergent series both parts diverge to infinity. | needs: p47
+  p53 | Rearranging an absolutely convergent series | The learner can define a rearrangement as a bijection of the indices and prove that every rearrangement of an absolutely convergent series converges to the same sum. | needs: p44
+  p54 | The Riemann rearrangement theorem | The learner can explain, and sketch the proof, that a conditionally convergent series can be rearranged to converge to any real number or to diverge, by taking positive terms until the target is passed and then negative terms, and can see a concrete rearrangement of the alternating harmonic series with a different sum. | needs: p52
+  p55 | The Cauchy product and Mertens' theorem | The learner can define the Cauchy product of two series, prove that the product of two absolutely convergent series converges absolutely to the product of their sums, and state Mertens' theorem that one absolutely convergent factor is enough. | needs: p44
+  p56 | A Cauchy product that diverges | The learner can show that the Cauchy product of the convergent series sum (-1)^n / sqrt(n+1) with itself diverges because its terms do not tend to zero, so conditional convergence of both factors is not enough. | needs: p47, p55
+  p57 | Dirichlet's and Abel's tests (optional) | The learner can use summation by parts to prove Dirichlet's test (bounded partial sums times a sequence decreasing to zero) and Abel's test, and see the Leibniz test as a special case. | needs: nothing
+
+Open needs: ideas a point here was written to need from outside its own topic, not linked yet:
+N36 | p36 (Series, partial sums and the sum of a series) | definition of the limit of a sequence (epsilon-N)
+N37 | p36 (Series, partial sums and the sum of a series) | sequences diverging to plus or minus infinity
+N38 | p37 (Geometric series) | limit of r^n: tends to 0 when |r| < 1 and does not converge when |r| > 1 or r = -1
+N39 | p39 (Linearity of convergent series) | algebraic limit laws for sums and constant multiples of convergent sequences
+N40 | p40 (Changing finitely many terms and tails) | a sequence and its shifted sequence have the same limit behaviour
+N41 | p41 (The term test (nth-term test for divergence)) | algebraic limit laws for differences of convergent sequences
+N42 | p42 (The harmonic series diverges) | an increasing sequence that is unbounded above diverges to plus infinity
+N43 | p43 (Cauchy criterion for series) | Cauchy criterion for sequences: a real sequence converges if and only if it is Cauchy
+N44 | p44 (Absolute convergence implies convergence) | Cauchy criterion for convergence of series
+N45 | p44 (Absolute convergence implies convergence) | triangle inequality for real numbers
+N46 | p45 (Alternating series (Leibniz) test) | monotone convergence theorem for sequences
+N47 | p45 (Alternating series (Leibniz) test) | convergence of a sequence whose even and odd subsequences converge to the same limit
+N48 | p47 (Conditional convergence: the alternating harmonic series) | divergence of the harmonic series
+N49 | p48 (The ratio test) | limsup and liminf of a sequence
+N50 | p48 (The ratio test) | comparison test for series with nonnegative terms
+N51 | p48 (The ratio test) | convergence of geometric series
+N52 | p48 (The ratio test) | term (nth-term) test for divergence
+N53 | p49 (The root test) | limsup and liminf of a sequence
+N54 | p49 (The root test) | comparison test for series with nonnegative terms
+N55 | p49 (The root test) | convergence of geometric series
+N56 | p49 (The root test) | term (nth-term) test for divergence
+N57 | p50 (Comparing the ratio and root tests and the inconclusive case) | convergence of p-series exactly when p > 1
+N58 | p51 (Choosing a test for a given series) | comparison and limit comparison tests
+N59 | p51 (Choosing a test for a given series) | term (nth-term) test for divergence
+N60 | p52 (Positive and negative parts of a series) | series with nonnegative terms converge exactly when their partial sums are bounded
+N61 | p53 (Rearranging an absolutely convergent series) | Cauchy criterion for convergence of series
+N62 | p53 (Rearranging an absolutely convergent series) | bijections of the natural numbers
+N63 | p55 (The Cauchy product and Mertens' theorem) | limit laws for sequences
+N64 | p56 (A Cauchy product that diverges) | term (nth-term) test for divergence
+N65 | p57 (Dirichlet's and Abel's tests (optional)) | Cauchy criterion for convergence of series
+N66 | p57 (Dirichlet's and Abel's tests (optional)) | monotone convergence theorem for sequences
+N67 | p58 (Bounded partial sums criterion) | monotone convergence theorem for bounded monotone sequences
+N68 | p58 (Bounded partial sums criterion) | a series converges when its sequence of partial sums converges (definition of series convergence)
+N69 | p59 (Comparison test) | changing or deleting finitely many terms does not affect convergence (tails of a series)
+N70 | p61 (p-series by condensation) | geometric series converges exactly when the ratio has absolute value below 1
+N71 | p61 (p-series by condensation) | term (nth-term) test for divergence
+N72 | p62 (Logarithmic benchmark series) | basic properties of the logarithm (log of a power, monotonicity)
+N73 | p63 (Writing the comparison inequality) | manipulating inequalities between real numbers (order properties of the reals)
+N74 | p64 (Limit comparison test) | epsilon-N definition of the limit of a sequence
+N75 | p65 (Comparing with a geometric series) | geometric series converges exactly when the ratio has absolute value below 1
+N76 | p66 (Choosing a comparison series) | growth rates: log n is eventually smaller than any positive power of n, and n^k is eventually smaller than r^n for r > 1
+N77 | p67 (Decimal expansions converge) | sum of a geometric series (closed form)
+N78 | p68 (Every number in [0,1] has a decimal expansion) | Archimedean property and existence of the integer part (floor) of a real number
+N79 | p68 (Every number in [0,1] has a decimal expansion) | squeeze theorem for sequences
+
+Your job:
+1. Link each open need you can to the point in this part that teaches that idea. If the idea belongs outside this part, leave the need open: the reviewer above you will link it. If it belongs inside this part but no point teaches it, add the point.
+2. Fix what only someone who sees the pieces together can see: two points in different pieces that teach the same idea, a point in the wrong piece, an idea this part rests on that no piece has, a "needs" link between pieces that is missing or wrong.
+3. Fix any other real error you notice: a point that is wrong, misnamed, or doesn't belong to this subject. Leave reasonable choices of scope, order, grouping and naming alone.
+Give each change as one operation:
+- {"op": "link", "need": "open need id", "to": "point id"}
+- {"op": "drop_need", "need": "open need id", "why": ""}
+- {"op": "add_point", "topic": "topic id", "name": "", "what": "", "needs": ["point ids"], "for": ["open need ids it meets"], "why": ""}
+- {"op": "merge", "id": "the point to remove", "into": "the point that keeps the idea", "why": ""}
+- {"op": "rename", "id": "", "name": "", "what": "", "why": ""}
+- {"op": "move", "id": "", "topic": "topic id", "why": ""}
+- {"op": "remove_point", "id": "", "why": ""}
+- {"op": "add_need", "id": "", "need": "", "why": ""} and {"op": "remove_need", "id": "", "need": "", "why": ""}
+Reply with only JSON: {"fixes": [operations], "verdict": "one or two sentences on how sound this part is now"}
