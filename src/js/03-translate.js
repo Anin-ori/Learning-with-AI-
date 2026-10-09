@@ -158,9 +158,11 @@
 
   function lessonPairs(doc, T) {
     const P = [], p = doc.plan;
-    T.plan = { sections: [] }; T.notes = []; T.advice = [];
+    T.plan = { sections: [], goals: [] }; T.notes = []; T.advice = [];
     [["aim"], ["approach"], ["beyond"], ["goal_link"]].forEach(([k]) => P.push([p[k], (v) => { T.plan[k] = v; }]));
-    p.sections.forEach((s, i) => { T.plan.sections[i] = {}; P.push([s.title, (v) => { T.plan.sections[i].title = v; }]); P.push([s.teach, (v) => { T.plan.sections[i].teach = v; }]); });
+    (p.goals || []).forEach((g, i) => P.push([g, (v) => { T.plan.goals[i] = v; }]));
+    P.push([doc.reading, (v) => { T.reading = v; }]);
+    (p.sections || []).forEach((s, i) => { T.plan.sections[i] = {}; P.push([s.title, (v) => { T.plan.sections[i].title = v; }]); P.push([s.teach, (v) => { T.plan.sections[i].teach = v; }]); });
     P.push([doc.lesson, (v) => { T.lesson = v; }]);
     P.push([doc.deeper, (v) => { T.deeper = v; }]);
     doc.notes.forEach((n, i) => P.push([n, (v) => { T.notes[i] = v; }]));
@@ -172,8 +174,10 @@
     if (!T) return doc;
     const p = doc.plan;
     return { ...doc,
+      reading: pickT(T.reading, doc.reading),
       plan: { ...p, aim: pickT(T.plan.aim, p.aim), approach: pickT(T.plan.approach, p.approach), beyond: pickT(T.plan.beyond, p.beyond), goal_link: pickT(T.plan.goal_link, p.goal_link),
-        sections: p.sections.map((s, i) => ({ ...s, title: pickT((T.plan.sections[i] || {}).title, s.title), teach: pickT((T.plan.sections[i] || {}).teach, s.teach) })) },
+        goals: p.goals ? p.goals.map((g, i) => pickT((T.plan.goals || [])[i], g)) : p.goals,
+        sections: (p.sections || []).length === 0 ? p.sections : p.sections.map((s, i) => ({ ...s, title: pickT((T.plan.sections[i] || {}).title, s.title), teach: pickT((T.plan.sections[i] || {}).teach, s.teach) })) },
       lesson: pickT(T.lesson, doc.lesson), deeper: pickT(T.deeper, doc.deeper),
       notes: doc.notes.map((n, i) => pickT(T.notes[i], n)), advice: (doc.advice || []).map((a, i) => ({ ...a, problem: pickT(T.advice[i], a.problem) })) };
   }

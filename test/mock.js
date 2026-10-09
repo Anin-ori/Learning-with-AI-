@@ -49,9 +49,13 @@ module.exports = function mock(opts = {}) {
       if (o && o.onText) o.onText({ text: a, delta: a });
       return { text: a, truncated: false };
     }
-    if (text.startsWith("You write a lesson on ONE") || text.startsWith("You wrote the lesson below")) {
+    if (text.startsWith("You write part")) {
+      const k = Number(text.match(/^You write part (\\d+)/)[1]);
+      return { text: (k === 1 ? (DZ ? "## 名字\\n\\n变量是名字。" : "## A name\\n\\nA variable is a name.") : (DZ ? "## 指向\\n\\n它指向一个值。" : "## Refers to\\n\\nIt refers to a value.")) + "\\n\\n=== DEEPER ===\\n", truncated: false };
+    }
+    if (text.startsWith("You write a lesson on ONE") || text.startsWith("You led the teaching") || text.startsWith("You reviewed the lesson below")) {
       const music = /Music|乐理/.test(text.slice(0, 300));
-      if (${!!opts.badLesson} && text.startsWith("You write a lesson on ONE") && !music) return { text: "## A variable is a name\\n\\n\`\`\`python\\nx = 3\\nprint(x * 2)\\n\`\`\`\\n\\nOutput:\\n\\n\`\`\`\\n5\\n\`\`\`\\n\\n=== NOTES ===\\n- **x** names 3", truncated: false };
+      if (${!!opts.badLesson} && text.startsWith("You led the teaching") && !music) return { text: "## A variable is a name\\n\\n\`\`\`python\\nx = 3\\nprint(x * 2)\\n\`\`\`\\n\\nOutput:\\n\\n\`\`\`\\n5\\n\`\`\`\\n\\n=== NOTES ===\\n- **x** names 3", truncated: false };
       const body = music
         ? (DZ ? "## 什么是音程\\n\\n音程是两个音之间的距离。\\n\\n## 例子\\n\\nC 到 E 是大三度。" : "## What an interval is\\n\\nAn interval is the distance between two notes.\\n\\n## An example\\n\\nC up to E is a major third: four semitones.")
         : (DZ ? "## 变量是名字\\n\\n变量是指向值的名字。\\n\\n\`\`\`python\\nx = 3\\nprint(x)\\n\`\`\`\\n\\nOutput:\\n\\n\`\`\`\\n3\\n\`\`\`" : "## A variable is a name\\n\\nA variable is a name that refers to a value.\\n\\n\`\`\`python\\nx = 3\\nprint(x)\\n\`\`\`\\n\\nOutput:\\n\\n\`\`\`\\n3\\n\`\`\`");
@@ -114,8 +118,11 @@ module.exports = function mock(opts = {}) {
       const topics = [...new Set(all.filter((x) => goal.includes(x.id)).map((x) => x.topic))];
       return { goal, why: topics.map((t) => ({ topic: t, why: DZ ? "你的目标会用到。" : "Your goal uses this every day." })), note: DZ ? "按目标挑选。" : "Chose what the goal uses directly." };
     }
-    if (text.startsWith("You plan a lesson")) return { aim: DZ ? "理解这个知识点" : "Understand the point", approach: DZ ? "从例子入手" : "Start from an example.", bridge: [], sections: [{ title: DZ ? "概念" : "The idea", teach: DZ ? "解释" : "Explain it", example: "x = 3" }], beyond: "", goal_link: DZ ? "数据处理里常用" : "Used everywhere in data work." };
-    if (text.startsWith("You review a lesson")) return { errors: [], improvements: [] };
+    if (text.startsWith("You lead the teaching")) {
+      const music = /Music|乐理/.test(text.slice(0, 300));
+      return { goals: [DZ ? "能说清变量是什么" : "Explain what a variable is", DZ ? "能预测一段赋值代码的输出" : "Predict what a short assignment prints"], frame: DZ ? "从名字讲起" : "Start from naming.", parts: music ? [{ goals: [1, 2], note: "" }] : [{ goals: [1], note: DZ ? "名字" : "the name" }, { goals: [2], note: DZ ? "指向" : "what it refers to" }], together: "sequence", beyond: "", goal_link: DZ ? "数据处理里常用" : "Used everywhere in data work." };
+    }
+    if (text.startsWith("You are about to learn ONE")) return { reading: DZ ? "顺利读完。" : "It read through without a snag.", false: [], stuck: [], goals: [], rules: [] };
     if (text.startsWith("You decide whether")) return { enough: true, why: DZ ? "已经可以组合成小任务。" : "You can combine what you've learned into a small real task.", focus: ["while loops", "Variables and assignment"], review: [], shape: "", next: [] };
     const music = /self-learner of (Music|乐理)/.test(text);
     if (text.startsWith("You design a practice set")) return { when: DZ ? "现在合适" : "Now is a good time.", how: [DZ ? "先自己试" : "Try first."], exercises: [{ title: music ? (DZ ? "和弦配旋律" : "Harmonise a melody") : (DZ ? "价格统计" : "Price tally"), level: "core", combines: ["a", "b"], idea: "x", thinking: "y" }] };

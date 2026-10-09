@@ -46,6 +46,7 @@ Current version: **v2.2** (Oct 8, 2026). Read this first, then the requirements 
 - The map is built by a tree of agents (R64, `05-build.js`): master → planners (divide, or write one topic) → reviewers join parts on the way up → router → page checks. Saved after each agent in `builds/<sid>`; Continue building / Start over. Usage limits stop the build (no retry).
 - Content follows the interface language both ways (`03-translate.js`: `curLang`, `srcOf`, `needsTr`, `trLine`, `autoTranslate`): anything shown in a language it wasn't written in is translated the first time it is shown; the original is one switch away.
 - `test/look.js <map.json> <subject.json> [zh]` renders saved real data locally (no AI calls) for checking the interface by eye; read the author's data with ArtifactData (read-only).
+- Lessons (R66, R67, `06-learn.js`): learning by reading and reflection, not dialogue. A lead sets the goals (what to come away with, not an outline), a shared frame, and how the writing is split (one writer is often best; parts in sequence see the text before them). Writers choose how to teach. The lead joins several parts. The page runs the Python examples. A reviewer first learns from the lesson as this learner (given only what they have learned), tries to reach each goal from the lesson alone, then reads it as an expert for anything false, and revises what it found. After a revision only the page's checks run again (up to 2 revisions). `STANDARDS.guide` now opens with what teaching is for (the author's direction), told to the lead and writers; the reviewer never gets it, so it can't become a checklist. Goals and the reviewer's reading are shown under "How this lesson was made". Old lessons still display. A real check of one lesson (about 4 to 8 requests) has not been run: it waits for the author's approval.
 - Open: I42, maps grow large (point-grain guidance added, unverified); I43, builds are slow (about two requests at a time per viewer).
 
 ## v2.1
@@ -57,7 +58,7 @@ Current version: **v2.2** (Oct 8, 2026). Read this first, then the requirements 
 - In Python, the page runs every lesson example and gives the checker the results (added after the first real lesson failed to converge on an unrun calculation).
 
 ## Open items
-- The author wants the same tree model for every component (lessons and practice next), one at a time.
+- The author wants the same tree model for every component, one at a time: map and lessons done; practice next.
 - I37: the route covered 90 of 139 points in the real run; whether it should be narrower is the author's call.
 - I39: package loading (NumPy, pandas, scikit-learn) and the JavaScript runner need a check in claude.ai.
 - I38: subjects that can't be run have only the checker; I40: lessons run long.

@@ -19,11 +19,12 @@
     };
   };
   const STANDARDS = {
-    // v1.14: one guide that the planner, the teacher and the checker all read. It describes what good teaching looks like
-    // and why; it is not a checklist and it presets no content. The AI decides how to meet it.
+    // v1.14: one guide for the AIs that teach. It describes what good teaching is for and why; it is not a checklist and
+    // presets no content. v2.2: it opens with the direction the author set (R66, R67), and the lesson reviewer never
+    // gets it: a reviewer that checks against a guide turns the guide into a benchmark that every lesson then performs.
     guide: (S) => [
-      "Teaching standards. They hold for every subject. The illustrations come from " + S.name + "; they show the standard and are not content to reuse. Use your own judgement about how to meet them.",
-      "- Depth. Aim for understanding the learner could rebuild on their own: why it works, not only what to do.",
+      "What the teaching is for. Teach for understanding that lasts and can be used: the learner should come away knowing why, able to rebuild it and to use it on something new, and aware of where it ends. Build on what they already know and make the connection plain. The learner reads on their own and thinks it through, so leave the thinking to them: give them something to work out or explain to themselves, not only conclusions to accept. Keep to one idea at a time, show it in varied forms and at its edges, and be honest about what is certain and what isn't. Knowledge should unfold the way it naturally does. How a lesson achieves this is yours to decide, and none of it has to show up as a feature: a lesson that simply explains the point well is right.",
+      "Standing rules. They hold for every subject; the illustrations come from " + S.name + " and are not content to reuse.",
       "- Surprises. A surprising case is worth showing when explaining it reveals how " + S.name + " works underneath, as in " + S.trap + ". A mistake that reveals nothing, such as a slip (" + S.slips + ") or a wrong idea no reasonable learner holds, teaches nothing, so leave it out. Don't claim how common a mistake is: there is no data on that.",
       "- Honest scope. When a rule has exceptions, say where it holds rather than stating it as absolute.",
       "- Extensions go down, not sideways. After the lesson, the most valuable extension usually explains what happens underneath: the steps actually taken, what the idea is built on, why it behaves the way it does, and how the learner can observe that for themselves (" + S.observe + "). A tour of more uses or later topics only adds breadth the learner will meet in later lessons anyway. Explain an extension properly or leave it out: concrete and exact, like a good reference entry, never a passing hint such as \"a clearer way comes later\". Under the hood, be exact about what you know, say plainly where your certainty ends, and say where it can be checked. The learner doesn't have to master it.",

@@ -246,13 +246,8 @@
   "Send": "发送",
   "Answering…": "正在回答…",
   "The planner sees what you've marked as learned, what this point needs, how 13 human sources title it and, where available, the key points checked in Automate the Boring Stuff.": "规划者会看到你标为已学的内容、这个知识点需要什么、13 份人类资料如何为它命名，以及（如有）在《Automate the Boring Stuff》中核对过的要点。",
-  "Usually 3 to 5 AI requests: one to plan, one to teach, one or more to check and fix.": "通常需要 3 到 5 次 AI 请求：一次规划，一次讲授，一次或多次检查和修改。",
   "Teach me this point": "教我这个知识点",
-  "What the checker still found": "检查者仍发现的问题",
   "Building your lesson": "正在准备你的课",
-  "outlines the lesson for you": "为你拟定课程提纲",
-  "writes it from the outline": "按提纲写课",
-  "checks facts, code and outputs": "检查事实、代码和输出",
   "Planner": "规划者",
   "Teacher": "讲授者",
   "Checker": "检查者",
@@ -613,9 +608,57 @@
   "This is in English: it couldn't be translated. ": "这部分是英文的，没能翻译。",
   "This is in Chinese: it couldn't be translated. ": "这部分是中文的，没能翻译。",
   "This map is in English: it couldn't be translated.": "这张地图是英文的，没能翻译。",
-  "This map is in Chinese: it couldn't be translated.": "这张地图是中文的，没能翻译。"
+  "This map is in Chinese: it couldn't be translated.": "这张地图是中文的，没能翻译。",
+  "Usually 3 to 8 AI requests: a lead, one or more writers, and a reviewer who revises what it finds.": "通常需要 3 到 8 次 AI 请求：一位主导者、一位或几位撰写者，以及一位审核者，它会修改自己发现的问题。",
+  "The lead sees what you've marked as learned, what this point needs and leads to, and what the map says about it.": "主导者会看到你标为已学的内容、这个知识点需要什么、通向什么，以及地图对它的说明。",
+  "What the reviewer still found": "审核者仍发现的问题",
+  "Pick one knowledge point. One AI sets what you should come away with, others decide how to teach it, and a reviewer learns from the lesson as you would before you see it. Practice has its own section.": "选一个知识点。一个 AI 定下你应当学到什么，其他 AI 决定怎么教，在你看到之前，一位审核者会像你一样先从这节课里学一遍。练习在单独的部分。",
+  "Lead": "主导者",
+  "✓ Lead": "✓ 主导者",
+  "… Lead": "… 主导者",
+  "✓ Reviewer": "✓ 审核者",
+  "… Reviewer": "… 审核者",
+  "sets what you should come away with, and how the writing is shared out": "定下你应当学到什么，以及写作如何分工",
+  "decide how to teach it, and write the lesson": "决定怎么教，并写出这节课",
+  "learns from the lesson as you would, checks it for anything false, and revises": "像你一样从这节课里学一遍，检查有没有错误，并加以修改",
+  "How this lesson was made": "这节课是怎么写成的",
+  "What you should come away with:": "你应当学到的：",
+  "The reviewer found 1 thing to change and is revising.": "审核者发现 1 处需要修改，正在修改。",
+  "The reviewer, after learning from it:": "审核者学完后的感受："
  },
  "patterns": [
+  [
+   "Written by AI in (\\d+) requests: a lead, (\\d+) writers? and a reviewer, with (\\d+) revisions?\\.",
+   "由 AI 写成，共 \\1 次请求：一位主导者、\\2 位撰写者和一位审核者，修改了 \\3 次。"
+  ],
+  [
+   "Written by AI in (\\d+) requests: a lead, (\\d+) writers? and a reviewer\\.",
+   "由 AI 写成，共 \\1 次请求：一位主导者、\\2 位撰写者和一位审核者。"
+  ],
+  [
+   "· (\\d+) of (\\d+) parts written · the lead is joining them",
+   "· 已写完 \\2 部分中的 \\1 部分 · 主导者正在把它们合在一起"
+  ],
+  [
+   "· (\\d+) of (\\d+) parts written",
+   "· 已写完 \\2 部分中的 \\1 部分"
+  ],
+  [
+   "· revised (\\d+) times?",
+   "· 已修改 \\1 次"
+  ],
+  [
+   "The reviewer found (\\d+) things to change and is revising\\.",
+   "审核者发现 \\1 处需要修改，正在修改。"
+  ],
+  [
+   "The lesson still had problems the page could see after (\\d+) revisions, so it wasn't shown\\. Try again\\.",
+   "修改 \\1 次后，页面仍能看出这节课有问题，所以没有显示。请重试。"
+  ],
+  [
+   "Point lesson delivered: (.+) \\((\\d+) requests, (\\d+) writers?, (\\d+) revisions\\)",
+   "知识点课程已交付：\\1（\\2 次请求，\\3 位撰写者，修改 \\4 次）"
+  ],
   [
    "Map checked for (.+?): (\\d+) changes?; (\\d+) requests",
    "已检查 \\1 的地图：\\2 处修改；\\3 次请求"
@@ -681,7 +724,7 @@
    "地图没有构建完。⟦\\1⟧ 已完成的部分都已保存。"
   ],
   [
-   "(Master|Planner|Reviewer|Router|Translator): (.+)",
+   "(Master|Planner|Reviewer|Writer|Router|Translator|Lead): (.+)",
    "⟦\\1⟧：⟦\\2⟧"
   ],
   [

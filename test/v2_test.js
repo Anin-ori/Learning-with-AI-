@@ -101,8 +101,10 @@ const ok = (c, msg) => { if (!c) { console.log("FAIL:", msg); process.exitCode =
     ok(await page.evaluate(() => !!document.querySelector(".orig-switch")), "the lesson offers the English original");
   }
   ok(lessonDoc && lessonDoc.rounds === 1 && lessonDoc.ran && lessonDoc.ran.n === lessonDoc.ran.of, "a wrong stated output was caught by running the example and fixed in one round (" + JSON.stringify(lessonDoc && { rounds: lessonDoc.rounds, ran: lessonDoc.ran }) + ")");
-  const sentFix = await page.evaluate(() => window.__prompts.find((p) => p.startsWith("You wrote the lesson below")) || "");
-  ok(/stated output is wrong/.test(sentFix), "the reviser was told what the example really printed");
+  const sentFix = await page.evaluate(() => window.__prompts.find((p) => p.startsWith("You reviewed the lesson below")) || "");
+  ok(/stated output is wrong/.test(sentFix), "the reviewer was told what the example really printed when revising");
+  ok(await page.evaluate(() => window.__prompts.filter((p) => p.startsWith("You write part")).length === 2 && window.__prompts.some((p) => p.startsWith("You led the teaching")) && window.__prompts.some((p) => p.startsWith("You are about to learn ONE"))), "the lead split the lesson between two writers, joined their parts, and a reviewer learned from it");
+  ok(await page.evaluate(() => { const w = window.__prompts.filter((p) => p.startsWith("You write part")); return w.length === 2 && /A variable is a name|变量是名字/.test(w[1]); }), "the second writer saw the first part");
   await page.fill("#chat-input", ZH ? "变量是什么？" : "What is a variable, really?");
   await clickText("button.primary", ZH ? "发送|Send" : "^Send$");
   await page.waitForTimeout(500);
