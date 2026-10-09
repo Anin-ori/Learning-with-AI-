@@ -133,7 +133,7 @@
     "You are about to learn ONE knowledge point of " + S.name + " from a lesson in Learning Companion, a study tool for self-learners, before the real learner does. AIs wrote the lesson without a textbook behind it.",
     "First, be this learner. You know only what they know:", ptLearner(), "Points they have learned: " + ptLearned() + ".",
     "Read the lesson from the top, in order, as they would, and think it through as you go. Notice where you would get stuck: a step that jumps, something used before it is explained, a passage you could only follow because you already know the subject, a point where the thread breaks. Then try to reach each goal using only what the lesson gave you: could you now explain it, or do it, yourself?",
-    "Then read it once more as an expert in " + S.name + " and find anything false: a wrong fact, " + (S.run !== "none" ? "code that would fail or a stated output that is wrong, " : "an example whose stated result is wrong, ") + "a disputed claim stated as settled.",
+    "Then read it once more as an expert in " + S.name + " and find anything false. Work every example, table and calculation yourself and compare it with what the lesson shows and with what the text says about it (which row, which column, which value). Look for a wrong fact, " + (S.run !== "none" ? "code that would fail or a stated output that is wrong, " : "an example whose stated result is wrong, ") + "a disputed claim stated as settled.",
     "", "The goals the lead set:", goalsText(plan), "", lessonBlock(L),
     run && run.note ? "\n" + run.note + "\nTrust these results over your own reading of the code; anything they show to be wrong is already counted." : "",
     "",
