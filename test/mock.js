@@ -71,39 +71,42 @@ module.exports = function mock(opts = {}) {
     if (text.startsWith("You are the master planner")) {
       const S = pick(text);
       return { subject: S.subject, scope: "Covers the foundations the goal needs; leaves out advanced topics such as concurrency.", profile: profile(S),
-        parts: S.areas.map(([name, topics]) => ({ name, brief: "Covers " + topics.map((t) => t[0]).join(" and ") + "." })) };
+        grain: { point: "one idea a learner can use after one sitting", examples: ["for loops and range()", "Dictionaries"] },
+        parts: S.areas.map(([name, topics]) => ({ name, brief: "Covers " + topics.map((t) => t[0]).join(" and ") + ".", share: "about a third" })) };
     }
     if (text.startsWith("You plan one part of a knowledge map")) {
-      const S = pick(text), part = (text.match(/^\\s*- (.+) \\(your part\\):/m) || [])[1];
+      const S = pick(text), part = (text.match(/^\\s*- (.+?)(?: \\[[^\\]]*\\])? <- your part/m) || [])[1];
       if (window.__failPlannerAt && (window.__planners || 0) + 1 === window.__failPlannerAt) { window.__failPlannerAt = 0; throw { code: "rate_limited" }; }
       window.__planners = (window.__planners || 0) + 1;
       const area = S.areas.find(([name]) => name === part);
-      if (area && area[1].length > 1 && !/Write your part as one topic now/.test(text)) return { divide: area[1].map(([tn, desc]) => ({ name: tn, brief: desc })) };
+      if (area && area[1].length > 1 && !/Name your part's points now/.test(text)) return { divide: area[1].map(([tn, desc]) => ({ name: tn, brief: desc, share: "half of this part" })) };
       const all = S.areas.flatMap(([, ts]) => ts);
       const ti = all.findIndex(([tn]) => tn === part), t = ti >= 0 ? all[ti] : area[1][0];
-      const prev = ti > 0 ? all[ti - 1][2][all[ti - 1][2].length - 1] : null;
-      return { write: { desc: t[1], points: t[2].map((name, k) => ({ name, what: "Understand and use " + name + ".", needs: k ? [k] : [], outside: !k && prev ? ["the idea of " + prev] : [], helps: k > 1 ? [k - 1] : [] })),
-        where: ti % 2 ? [] : [{ title: "Think Python", detail: "Chapter 2", url: "https://example.com/book" }] } };
+      return { topic: { desc: t[1], points: t[2], where: ti % 2 ? [] : [{ title: "Think Python", detail: "Chapter 2", url: "https://example.com/book" }] } };
+    }
+    if (text.startsWith("You review the plan of a knowledge map")) {
+      window.__planReviews = (window.__planReviews || 0) + 1;
+      const all = pointsOf(text);
+      return { verdict: "The plan is sound.", fixes: all.length > 6 ? [
+        { op: "add_point", topic: all[2].topic, name: "Reading input with input()", why: "programs that react to the user need it" },
+        { op: "rename", id: all[1].id, name: "print() and output", why: "clearer" },
+        { op: "remove_point", id: "p999", why: "no such point" }] : [] };
+    }
+    if (text.startsWith("You write the details of one topic")) {
+      window.__writers = (window.__writers || 0) + 1;
+      const all = pointsOf(text), mine = (text.match(/your topic \\((t\\d+):/) || [])[1];
+      return { points: all.filter((x) => x.topic === mine).map((x) => { const i = all.indexOf(x); return { id: x.id, what: "Understand and use " + x.name + ".", needs: i > 0 ? [all[i - 1].id] : [], helps: i > 1 ? [all[i - 2].id] : [] }; }), missing: [] };
+    }
+    if (text.startsWith("You review one part of a knowledge map")) {
+      window.__reviewers = (window.__reviewers || 0) + 1;
+      const all = pointsOf(text), root = /Your part is the whole map/.test(text);
+      return { verdict: root ? "The map is sound after these fixes." : "This part holds together.",
+        fixes: root && all.length > 6 ? [{ op: "add_need", id: all[0].id, need: all[all.length - 1].id, why: "a link that closes a loop" }] : [] };
     }
     if (text.startsWith("You check one part of a knowledge map")) {
       window.__checks = (window.__checks || 0) + 1;
       const all = pointsOf(text), root = /Your part is the whole map/.test(text);
       return { verdict: root ? "The map is sound." : "This area is sound.", fixes: root && all.length > 3 ? [{ op: "rename", id: all[3].id, name: all[3].name + " (checked)", why: "clearer" }] : [] };
-    }
-    if (text.startsWith("You review one part of a knowledge map")) {
-      window.__reviewers = (window.__reviewers || 0) + 1;
-      const all = pointsOf(text), root = /nothing is above you/.test(text);
-      const open = [...text.matchAll(/^(N\\d+) \\| (p\\d+) \\([^)]*\\) \\| the idea of (.+)$/gm)];
-      const fixes = open.map((m) => { const to = all.find((x) => x.name === m[3]); return to ? { op: "link", need: m[1], to: to.id } : null; }).filter(Boolean);
-      if (root && all.length > 6) {
-        const last = all[all.length - 1], first = all[0];
-        fixes.push(
-          { op: "add_point", topic: all[2].topic, name: "Reading input with input()", what: "Read what the user types", needs: [first.id], why: "programs that react to the user need it" },
-          { op: "rename", id: all[1].id, name: "print() and output", why: "clearer" },
-          { op: "add_need", id: first.id, need: last.id, why: "a link that closes a loop" },
-          { op: "remove_point", id: "p999", why: "no such point" });
-      }
-      return { verdict: root ? "The map is sound after these fixes." : "This part holds together.", fixes };
     }
     if (text.startsWith("You mark the learner's route")) {
       const all = pointsOf(text);

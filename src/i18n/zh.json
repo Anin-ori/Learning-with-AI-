@@ -581,10 +581,8 @@
   "divide each part further, or write its points once it's small enough": "把每个部分继续细分，足够小时就写出其中的知识点",
   "check and join the parts on the way back up, ending with the whole map": "回程中逐层检查并合并各部分，最后审核整张地图",
   "About two AI requests run at a time, so a large subject can take half an hour. Everything finished is saved as it lands: if you leave or it stops, continue later from here.": "AI 请求大约同时只运行两个，所以较大的科目可能需要半小时。每完成一步都会立即保存：如果你离开或它中途停下，之后可以从这里继续。",
-  "A master AI divided the subject into parts. Planners divided each part until it was small enough to plan point by point, and wrote its points. On the way back up, a reviewer for each part checked and joined the pieces under it, and a last reviewer checked the whole map. A router marked your route. No human source was used: treat the map as the AIs' view of the subject, and check what matters to you elsewhere.": "总规划者 AI 把科目分成几个部分。分部规划者把每个部分继续细分，直到小到可以逐个规划知识点，再写出这些知识点。回程中，每个部分都有一位审核者检查并合并它下面的各块，最后一位审核者审核整张地图。路线规划者标出了你的路线。这里没有使用人类资料：请把地图看作这些 AI 对这门科目的看法，对你重要的内容请到别处核对。",
   "What the reviewers changed": "审核者改了什么",
   "Nothing: they found no errors to fix.": "没有：他们没有发现需要修正的错误。",
-  "AIs build the map as a tree: a master divides the subject into parts, planners divide each part until it's small enough to write, and on the way back up a reviewer checks and joins each part. A small subject takes a dozen or so AI requests, a large one many more; the count shows as it builds. No human source is used, so the map is the AIs' view of the subject.": "地图由 AI 以树状方式构建：总规划者把科目分成几个部分，分部规划者把每个部分继续细分到足够小再写出来，回程中由审核者逐个检查并合并各部分。小科目大约需要十几次 AI 请求，大科目会多得多；构建时会显示次数。这里不使用人类资料，所以地图是这些 AI 对这门科目的看法。",
   "Your map is part-built": "你的地图已构建了一部分",
   "A new map is part-built": "新地图已构建了一部分",
   "Your current map stays until the new one is finished.": "新地图完成之前，当前地图保持不变。",
@@ -598,9 +596,40 @@
   "Build a new map from your saved goal? Your progress, lessons, notes and practice on this map won't carry over.": "按你保存的目标生成一张新地图？这张地图上的进度、课程、笔记和练习不会保留。",
   "Nothing: no errors were found.": "没有：没有发现错误。",
   "The check is done: no errors were found.": "检查完成：没有发现错误。",
-  "The map is checked, but it couldn't be translated again, so some of it may show in English. You can translate it again from its About tab.": "地图已检查完，但没能重新翻译，所以部分内容可能显示为英文。你可以在它的“关于”页里重新翻译。"
+  "The map is checked, but it couldn't be translated again, so some of it may show in English. You can translate it again from its About tab.": "地图已检查完，但没能重新翻译，所以部分内容可能显示为英文。你可以在它的“关于”页里重新翻译。",
+  "A master AI divided the subject into parts and set how big a point is. Planners divided each part until it was a single topic and named its points, each seeing the whole plan, and a reviewer checked the plan. Writers then filled in each topic, seeing every point on the map, and reviewers checked each area and the whole map. A router marked your route. No human source was used: treat the map as the AIs' view of the subject, and check what matters to you elsewhere.": "总规划者 AI 把科目分成几个部分，并定下一个知识点有多大。分部规划者把每个部分继续细分，直到成为单个主题，再列出其中的知识点，每位规划者都能看到整个规划；随后由一位审核者检查整个规划。接着撰写者逐个主题写出细节，写时能看到地图上的每个知识点；最后审核者逐个检查每个领域和整张地图。路线规划者标出了你的路线。这里没有使用人类资料：请把地图看作这些 AI 对这门科目的看法，对你重要的内容请到别处核对。",
+  "A team of AIs builds the map: a master divides the subject into parts, planners divide each part until it's a single topic, a reviewer checks the whole plan, writers fill in each topic, and reviewers check each area and the whole map. A small subject takes a dozen or so AI requests, a large one many more; the count shows as it builds. No human source is used, so the map is the AIs' view of the subject.": "地图由一组 AI 构建：总规划者把科目分成几个部分，分部规划者把每个部分细分到单个主题，一位审核者检查整个规划，撰写者逐个主题写出细节，最后审核者检查每个领域和整张地图。小科目大约需要十几次 AI 请求，大科目会多得多；构建时会显示次数。这里不使用人类资料，所以地图是这些 AI 对这门科目的看法。",
+  "divides the subject into its main parts, sets the size of a point and each part's share, and writes the subject profile": "把科目分成几个主要部分，定下一个知识点的大小和各部分所占的比重，并写出科目概况",
+  "divide each part further, or name its points once it's a single topic": "把每个部分继续细分，成为单个主题时列出其中的知识点",
+  "Plan reviewer": "规划审核者",
+  "✓ Plan reviewer": "✓ 规划审核者",
+  "… Plan reviewer": "… 规划审核者",
+  "checks the whole plan: the size of points, overlaps, gaps and proportions": "检查整个规划：知识点的大小、重复、缺漏和比例",
+  "write what each point is and what it needs first, each seeing the whole plan": "写出每个知识点是什么、需要先学什么，写时能看到整个规划",
+  "check each area, then the whole map": "先检查每个领域，再检查整张地图",
+  "Writer": "撰写者"
  },
  "patterns": [
+  [
+   "· (\\d+) of (\\d+) parts planned · (\\d+) topics · (\\d+) points · (\\d+) levels?",
+   "· 已规划 \\2 个部分中的 \\1 个 · \\3 个主题 · \\4 个知识点 · 共 \\5 层"
+  ],
+  [
+   "· (\\d+) of (\\d+) topics written",
+   "· 已写完 \\2 个主题中的 \\1 个"
+  ],
+  [
+   "(\\d+) of (\\d+) parts planned · (\\d+) of (\\d+) topics written · (\\d+) of (\\d+) parts checked, in (\\d+) requests so far\\. Everything finished is saved\\.",
+   "已规划 \\2 个部分中的 \\1 个 · 已写完 \\4 个主题中的 \\3 个 · 已检查 \\6 个部分中的 \\5 个，目前用了 \\7 次请求。已完成的部分都已保存。"
+  ],
+  [
+   "The map wasn't finished\\. (Master|Planner|Reviewer|Writer|Router|Translator): (.+) Everything done so far is saved\\.",
+   "地图没有构建完。⟦\\1⟧：⟦\\2⟧ 已完成的部分都已保存。"
+  ],
+  [
+   "(Writer): (.+)",
+   "⟦\\1⟧：⟦\\2⟧"
+  ],
   [
    "Uses about (\\d+) requests on your Claude account",
    "大约使用你 Claude 账户的 \\1 次请求"

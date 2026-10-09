@@ -1,14 +1,14 @@
-  // ---------- Building a subject's map: a tree of agents (v2.2) ----------
-  // No single agent plans the whole subject. The map is built as a tree:
-  //   down: a master divides the subject into its main parts and writes the subject profile; for each part, a planner
-  //         either divides it again or, when it is small enough to plan point by point, writes it as one topic;
-  //   up:   when every piece under a part is done, a reviewer for that part sees the pieces together for the first time.
-  //         It links the needs the writers could only describe ("needs an idea outside this topic"), merges duplicates,
-  //         moves misplaced points and fills gaps. Needs it can't place pass up to the next reviewer; the master's part,
-  //         the whole map, is reviewed last.
+  // ---------- Building a subject's map: a team of agents (v2.2) ----------
+  // No single agent plans the whole subject, and no agent works blind. Two passes:
+  //   plan:    a master divides the subject into its main parts, sets the size of a point (the grain) and each part's
+  //            share of the map, and writes the subject profile. For each part, a planner divides it again or, once it is
+  //            a single topic, names its points. Every planner sees the whole plan as it stands, so sizes stay even and
+  //            nothing is planned twice. A plan reviewer then checks the whole plan (grain, overlaps, gaps, proportions).
+  //   details: one writer per topic writes what each point is and what it needs first, seeing every point's id, so
+  //            prerequisites are linked directly. Reviewers check each area side by side, then the whole map.
   // Then a router marks the route, and the page checks structure. Every finished agent's work is saved as it lands
   // (builds/<sid>), so a build that stops (closed tab, usage limit, Stop) continues where it left off.
-  // The AI decides how deep the tree goes and what each part holds; the numbers below are safety limits only.
+  // The AI decides how deep the tree goes, how big each part is and what it holds; the numbers below are safety limits only.
   const MAP_LIMITS = { areas: 24, topics: 80, perTopic: 30, points: 480, parts: 16, depth: 4, agents: 220 };
   const builds = {};   // sid -> a build in progress, as saved
   const saveBuild = (B) => { builds[B.sid] = B; queueSave("builds/" + B.sid, clone(B)); };
@@ -20,7 +20,7 @@
   }
   // a build stopped part-way that can still continue: same goal as now
   // (one saved as running was cut off: the tab closed mid-build)
-  const resumable = (sid) => { const B = builds[sid], s = subjects[sid]; return B && s && B.status !== "done" && B.goal === s.goal && B.situation === (s.situation || "") ? B : null; };
+  const resumable = (sid) => { const B = builds[sid], s = subjects[sid]; return B && s && B.v === 2 && B.status !== "done" && B.goal === s.goal && B.situation === (s.situation || "") ? B : null; };
   const pausedBuild = (sid) => (ui.build && ui.build.running && ui.build.sid === sid ? null : resumable(sid));
   function dropBuild(sid) { const B = builds[sid]; if (B) { B.status = "dropped"; queueSave("builds/" + sid, { v: 1, sid, status: "dropped" }); } builds[sid] = null; }
   const learnerAbout = (s) => [
@@ -43,17 +43,19 @@
     "- format: for \"none\" only, what a practice exercise and its answer look like in this subject.",
   ];
   const masterPrompt = (s) => [
-    "You are the master planner in Learning Companion, an open-source study tool for self-learners. You lead a tree of AIs that builds the knowledge map for one learner's subject. You divide the subject into its main parts. For each part, another AI either divides it again or, once it is small enough to plan point by point, writes its points. On the way back up, a reviewer for each part checks and joins what was written under it, and a last reviewer checks the whole map. Lessons and practice are then built from the map.",
+    "You are the master planner in Learning Companion, an open-source study tool for self-learners. You lead a team of AIs that builds the knowledge map for one learner's subject, in two passes. First the plan: you divide the subject into its main parts, and for each part another AI divides it again or, once it is a single topic, names its points; a reviewer then checks the whole plan. Then the details: for each topic, an AI writes what each point is and which points it needs first, seeing the whole plan; reviewers check each area and the whole map. Lessons and practice are built from the map.",
     learnerAbout(s), "",
     "Your job:",
     "- Decide the scope: what this learner needs to reach their goal, the foundations that rests on, and enough around it that they can see where it leads. Say in \"scope\" what you included, what you left out, and why.",
+    "- Set the grain for the whole map, so that every AI below plans points of the same size. Say what one point is in this subject: one idea a learner can learn in one focused sitting and then use, small enough for one lesson and big enough to stand on its own. Give a few example point names from this subject at exactly that grain.",
     "- Divide the subject, within that scope, into its main parts, in the order a learner would meet them. Divide by how the ideas actually hang together, so that each part can be planned on its own and as few ideas as possible reach across parts.",
-    "- Give each part a brief: what it covers, where its edges are against the other parts (so no idea is planned twice or falls between two parts), and what in it matters for this learner's goal. The AIs under you see only the briefs on their own branch and their siblings' briefs, so the brief is all they know of your intent.",
+    "- Give each part a brief in two or three sentences: what it covers, where its edges are against the other parts (so no idea is planned twice or falls between two parts), and what in it matters for this learner's goal.",
+    "- Give each part its share: how much of the whole map it deserves for this learner, in words (for example \"a large part\", \"about a tenth\", \"a short overview\"). The AIs below keep to it, so the map stays in proportion to the goal.",
     "- Be accurate about the subject as experts understand it today. Where experts disagree about how it is organised, follow the most widely used organisation and mention the choice in \"scope\".",
     "",
   ].concat(profileAsk, [
     "",
-    'Reply with only JSON: {"subject": "the subject\'s name", "scope": "what the map covers and leaves out, and why", "profile": {"name": "", "trap": "", "slips": "", "observe": "", "shallow": "", "rich": "", "examples": "", "run": "python, javascript or none", "format": ""}, "parts": [{"name": "", "brief": ""}]}',
+    'Reply with only JSON: {"subject": "the subject\'s name", "scope": "what the map covers and leaves out, and why", "grain": {"point": "what one point is in this subject", "examples": ["point names at that grain"]}, "profile": {"name": "", "trap": "", "slips": "", "observe": "", "shallow": "", "rich": "", "examples": "", "run": "python, javascript or none", "format": ""}, "parts": [{"name": "", "brief": "", "share": ""}]}',
   ]).join("\n");
 
   // the branch from the subject down to a part, with each part's brief
@@ -61,42 +63,94 @@
     const chain = [];
     for (let x = n; x && x.depth > 0; x = B.nodes[x.parent]) chain.unshift(x);
     return ["Subject: " + (B.subject || subjects[B.sid].name) + ". Scope: " + (B.scope || "(not stated)")]
-      .concat(chain.map((x, i) => "  ".repeat(i) + "- " + x.name + (x === n ? " (your part)" : "") + ": " + (x.brief || "(no brief)"))).join("\n");
+      .concat(chain.map((x, i) => "  ".repeat(i) + "- " + x.name + ": " + (x.brief || "(no brief)"))).join("\n");
   };
-  const plannerPrompt = (s, B, n, forced) => {
-    const sibs = (B.nodes[n.parent].kids || []).filter((k) => k !== n.id).map((k) => B.nodes[k]);
-    return [
-      "You plan one part of a knowledge map in Learning Companion, an open-source study tool for self-learners. The map is built by a tree of AIs: a master divided the subject into parts, and for each part an AI like you either divides it again or, once it is small enough, writes its points. Other AIs are working on the other parts at the same time. On the way back up, reviewers check and join the parts.",
-      learnerAbout(s), "",
-      "Where your part sits:", pathLines(B, n), "",
-      "Beside your part (other AIs plan these; leave their ideas to them):",
-      sibs.length ? sibs.map((x) => "- " + x.name + ": " + (x.brief || "(no brief)")).join("\n") : "Nothing: your part is the only one here.", "",
-      forced ? "Write your part as one topic now: the page's safety limit on how far the map divides has been reached." : [
-        "Decide how to handle your part:",
-        "- Write it only if it is a single topic: a few closely related ideas a learner would study in a row, like one section of a textbook chapter rather than the whole chapter. Writing means planning every point of the part in this one answer, so the smaller the part, the more care each point gets.",
-        "- Otherwise divide it: into smaller parts, by how its ideas hang together, in the order a learner would meet them, each with a brief (what it covers, its edges against its siblings, what in it matters for the goal). An AI for each smaller part then does what you are doing now.",
-      ].join("\n"),
-      "",
-      "When you write:",
-      "- A point is one idea a learner can learn in one focused sitting and then use: small enough for one lesson, big enough to stand on its own. Name it the way a learner would recognise it, briefly. No two points teach the same idea. List them in a sensible teaching order.",
-      "- Keep that grain however small your part is: a small part simply has few points. Don't split one idea into its steps, cases or examples because your part is narrow; those belong inside the point's lesson.",
-      "- what: one or two sentences on what the learner will understand or be able to do once they have learned it.",
-      "- needs: the numbers (1 for the first point you list, and so on) of points in this topic that must be learned first because this point can't be understood without them. Only direct needs: if A needs B and B needs C, A lists B, not C.",
-      "- outside: ideas outside this topic that this point can't be understood without, each described in a few words, exactly enough that another AI can find the point that teaches it. Only direct needs; an idea that only makes this point easier doesn't count. Reviewers link them.",
-      "- helps: the numbers of points in this topic that make this one easier but aren't required.",
-      "- desc: one sentence on what this topic is about and why its points belong together.",
-      "- where: real books, courses or references that teach this topic well, with the chapter or section where you know it. Add a URL only if you are sure it is right. Name only sources you are confident exist; an empty list is better than a guess.",
-      "",
-      forced ? "Reply with only JSON:" : "Reply with only JSON, in one of two forms:",
-      forced ? null : '{"divide": [{"name": "", "brief": ""}]}',
-      '{"write": {"desc": "", "points": [{"name": "", "what": "", "needs": [numbers], "outside": ["idea"], "helps": [numbers]}], "where": [{"title": "", "detail": "chapter or section, or empty", "url": "or empty"}]}}',
-    ].filter((x) => x != null).join("\n");
-  };
+  // what every agent shares: the scope and the grain the master set
+  const frameLines = (B) => [
+    "Scope the master chose: " + (B.scope || "(not stated)"),
+    "What one point is on this map: " + ((B.grain && B.grain.point) || "one idea a learner can learn in one focused sitting and then use"),
+    B.grain && B.grain.examples && B.grain.examples.length ? "Example points at that grain: " + B.grain.examples.join("; ") : null,
+  ].filter(Boolean).join("\n");
+  // the whole plan as it stands, every part with its share; briefs on the branch of `focus` and its siblings
+  function outlineLines(B, focus) {
+    const near = new Set();
+    for (let x = focus; x; x = B.nodes[x.parent]) { near.add(x.id); (B.nodes[x.parent] ? B.nodes[x.parent].kids : []).forEach((k) => near.add(k)); }
+    const out = [];
+    const walk = (id, d) => {
+      const x = B.nodes[id];
+      if (d > 0) {
+        const pts = x.ball && B.balls[x.ball] ? B.balls[x.ball].pts.map((p) => B.byId[p].name) : null;
+        out.push("  ".repeat(d - 1) + "- " + x.name + (x.share ? " [" + x.share + "]" : "") + (x === focus ? " <- your part" : "") +
+          (near.has(x.id) && x.brief ? ": " + x.brief : "") + (pts ? " (a topic: " + pts.join("; ") + ")" : x.state === "todo" && x !== focus ? " (being planned)" : ""));
+      }
+      (x.kids || []).forEach((k) => walk(k, d + 1));
+    };
+    walk("n1", 0);
+    return out.join("\n");
+  }
+  const plannerPrompt = (s, B, n, forced) => [
+    "You plan one part of a knowledge map in Learning Companion, an open-source study tool for self-learners. A team of AIs plans the map: a master divided the subject into parts, and for each part an AI like you divides it again or, once it is a single topic, names its points. Other AIs plan the other parts at the same time. Afterwards, other AIs write each point's details and reviewers check the map.",
+    learnerAbout(s), "",
+    frameLines(B), "",
+    "The whole plan so far. Each part has its share of the map in brackets; your part is marked:", outlineLines(B, n), "",
+    forced ? "Name your part's points now, as one topic: the page's safety limit on how far the map divides has been reached." : [
+      "Decide how to handle your part:",
+      "- Name its points, if it is a single topic: a few closely related ideas a learner would study in a row, like one section of a textbook chapter rather than the whole chapter.",
+      "- Otherwise divide it into smaller parts, by how its ideas hang together, in the order a learner would meet them. Give each a brief in two or three sentences (what it covers, its edges against its siblings, what in it matters for the goal) and its share of your part. An AI for each smaller part then does what you are doing now.",
+    ].join("\n"),
+    "",
+    "When you name points:",
+    "- Keep to the grain above, however small your part is: a small part simply has few points, and its share tells you how much room it has. Don't split one idea into its steps, cases or examples; those belong inside the point's lesson.",
+    "- Name each point the way a learner would recognise it, briefly, in a sensible teaching order. Don't name an idea that another part of the plan has or clearly will have.",
+    "- desc: one sentence on what this topic is about and why its points belong together.",
+    "- where: real books, courses or references that teach this topic well, with the chapter or section where you know it. Add a URL only if you are sure it is right. Name only sources you are confident exist; an empty list is better than a guess.",
+    "",
+    forced ? "Reply with only JSON:" : "Reply with only JSON, in one of two forms:",
+    forced ? null : '{"divide": [{"name": "", "brief": "", "share": ""}]}',
+    '{"topic": {"desc": "", "points": ["point names"], "where": [{"title": "", "detail": "chapter or section, or empty", "url": "or empty"}]}}',
+  ].filter((x) => x != null).join("\n");
 
   // ----- the tree's state -----
   const kidsOf = (B, id) => B.nodes[id].kids || [];
   const ballsUnder = (B, id) => { const n = B.nodes[id]; return n.kids ? n.kids.flatMap((k) => ballsUnder(B, k)) : n.ball && B.balls[n.ball] ? [n.ball] : []; };
   const ptsUnder = (B, id) => ballsUnder(B, id).flatMap((t) => B.balls[t].pts);
+  // the plan, every point with its id, area by area (`mark` flags one topic)
+  const planLines = (B, mark) => kidsOf(B, "n1").map((a) => "Area: " + B.nodes[a].name + (B.nodes[a].share ? " [" + B.nodes[a].share + "]" : "") + "\n" +
+    ballsUnder(B, a).map((t) => "Topic " + t + ": " + B.balls[t].name + (t === mark ? "  <- your topic" : "") + "\n" + B.balls[t].pts.map((p) => "  " + p + " | " + B.byId[p].name).join("\n")).join("\n")).join("\n");
+
+  const planReviewPrompt = (s, B) => [
+    "You review the plan of a knowledge map in Learning Companion, an open-source study tool for self-learners, before its details are written. AIs planned its parts separately, each seeing the plan only as it stood while they worked; you are the first to see the whole plan at once.",
+    learnerAbout(s), "",
+    frameLines(B), "",
+    "The plan, every point with its id. Each area has the share of the map the master gave it:", planLines(B), "",
+    "Fix what only someone who sees the whole plan can see:",
+    "- grain: a point much bigger or smaller than the grain above (a point that is only a step, case or example of another; a point that holds several ideas);",
+    "- overlap: two points in different parts that teach the same idea;",
+    "- gaps: an idea the goal or other points clearly rest on that no part has;",
+    "- place: a point in the wrong topic;",
+    "- proportion: a part far bigger or smaller than its share, usually because it goes into more detail than the rest of the map.",
+    "Leave reasonable choices of scope, order, grouping and naming alone.",
+    "Give each change as one operation:",
+    '- {"op": "add_point", "topic": "topic id", "name": "", "why": ""}',
+    '- {"op": "merge", "id": "the point to remove", "into": "the point that keeps the idea", "why": ""}',
+    '- {"op": "rename", "id": "", "name": "", "why": ""}',
+    '- {"op": "move", "id": "", "topic": "topic id", "why": ""}',
+    '- {"op": "remove_point", "id": "", "why": ""}',
+    'Reply with only JSON: {"fixes": [operations], "verdict": "one or two sentences on how sound the plan is now"}',
+  ].join("\n");
+
+  const writerPrompt = (s, B, t) => [
+    "You write the details of one topic of a knowledge map in Learning Companion, an open-source study tool for self-learners. A team of AIs planned the map and a reviewer checked the plan; other writers are doing the other topics at the same time, each seeing the same plan.",
+    learnerAbout(s), "",
+    frameLines(B), "",
+    "The whole map, every point with its id; your topic is marked:", planLines(B, t), "",
+    "For every point in your topic (" + t + ": " + B.balls[t].name + "):",
+    "- what: one or two sentences on what the learner will understand or be able to do once they have learned it.",
+    "- needs: the ids of points anywhere on the map that must be learned first because this point can't be understood without them. Only direct needs: if A needs B and B needs C, A lists B, not C. A point that only makes this one easier is not a need.",
+    "- helps: the ids of points that make this one easier but aren't required.",
+    "If a point here can't be understood without an idea that no point on the map teaches, name that idea in \"missing\"; reviewers will add it.",
+    'Reply with only JSON: {"points": [{"id": "the point id", "what": "", "needs": ["ids"], "helps": ["ids"]}], "missing": [{"idea": "", "for": ["point ids"]}]}',
+  ].join("\n");
 
   const reviewerPrompt = (s, B, n, check) => {
     const root = n.depth === 0;
@@ -107,71 +161,76 @@
     return [
       check
         ? "You check one part of a knowledge map in Learning Companion, an open-source study tool for self-learners. The learner is already using this map and asked for another check of it: AIs built it without a textbook, and earlier reviews may have missed things. " + (root ? "Your part is the whole map; reviewers have just checked each area on its own, so look most closely at what lies between areas." : "Another AI will then check the whole map.") + " The learner keeps their progress, so fix only what is really wrong. Write new names and descriptions in the language the map is written in."
-        : "You review one part of a knowledge map in Learning Companion, an open-source study tool for self-learners, before the learner sees it. The map is built by a tree of AIs: the pieces of this part were planned and written by separate AIs, each seeing only its own piece. You are the first to see them together" + (root ? ". Your part is the whole map, and nothing is above you." : "; the reviewer above you will see this part beside its neighbours."),
+        : "You review one part of a knowledge map in Learning Companion, an open-source study tool for self-learners, before the learner sees it. Separate AIs wrote the details of its topics, each seeing the whole plan; you are the first to check them together. " + (root ? "Your part is the whole map; reviewers have just checked each area on its own, so look most closely at what lies between areas." : "Another AI will then check the whole map."),
       learnerAbout(s), "",
-      root ? "Scope the master chose: " + (B.scope || "(not stated)") : "Where this part sits:\n" + pathLines(B, n), "",
+      root || !B.nodes[n.parent] ? frameLines(B) : "Where this part sits:\n" + pathLines(B, n), "",
       "This part, piece by piece. Every point with its id, what it is, and the points it needs first:", pieces, "",
-      "Open needs: ideas a point here was written to need from outside its own topic, not linked yet:",
-      open.length ? open.map((o) => o.id + " | " + o.pt + " (" + B.byId[o.pt].name + ") | " + o.text).join("\n") : "None.", "",
-      "Your job:",
-      "1. Link each open need you can to the point in this part that teaches that idea. " + (root
-        ? "Nothing is above you, so settle every open need: link it, add the point it needs if that idea belongs on the map, or drop it if the point can be understood without it."
-        : "If the idea belongs outside this part, leave the need open: the reviewer above you will link it. If it belongs inside this part but no point teaches it, add the point."),
-      "2. Fix what only someone who sees the pieces together can see: two points in different pieces that teach the same idea, a point in the wrong piece, an idea this part rests on that no piece has, a \"needs\" link between pieces that is missing or wrong.",
-      "3. Fix any other real error you notice: a point that is wrong, misnamed, or doesn't belong to this subject. Leave reasonable choices of scope, order, grouping and naming alone.",
+      open.length ? "Ideas the writers found missing (no point on the map teaches them):\n" + open.map((o) => o.id + " | needed by " + o.pt + " (" + B.byId[o.pt].name + ") | " + o.text).join("\n") + "\n" : null,
+      "Fix real errors: a point that is wrong, misnamed, or doesn't belong to this subject; two points that teach the same idea; a point in the wrong topic; an idea this part rests on that no point teaches; a \"needs\" link that is wrong (the point can be understood without it) or missing (it can't be understood without it), above all between topics written by different AIs. Leave reasonable choices of scope, order, grouping and naming alone.",
+      open.length ? (root ? "For each missing idea, link it to the point that teaches it, add the point if the idea belongs on the map, or drop it if the point can be understood without it." : "For each missing idea, link it to the point in this part that teaches it, add the point if it belongs in this part, or leave it for the reviewer of the whole map.") : null,
       "Give each change as one operation:",
-      '- {"op": "link", "need": "open need id", "to": "point id"}',
-      '- {"op": "drop_need", "need": "open need id", "why": ""}',
-      '- {"op": "add_point", "topic": "topic id", "name": "", "what": "", "needs": ["point ids"], "for": ["open need ids it meets"], "why": ""}',
+      open.length ? '- {"op": "link", "need": "missing idea id", "to": "point id"} and {"op": "drop_need", "need": "missing idea id", "why": ""}' : null,
+      '- {"op": "add_point", "topic": "topic id", "name": "", "what": "", "needs": ["point ids"]' + (open.length ? ', "for": ["missing idea ids it meets"]' : "") + ', "why": ""}',
       '- {"op": "merge", "id": "the point to remove", "into": "the point that keeps the idea", "why": ""}',
       '- {"op": "rename", "id": "", "name": "", "what": "", "why": ""}',
       '- {"op": "move", "id": "", "topic": "topic id", "why": ""}',
       '- {"op": "remove_point", "id": "", "why": ""}',
       '- {"op": "add_need", "id": "", "need": "", "why": ""} and {"op": "remove_need", "id": "", "need": "", "why": ""}',
       'Reply with only JSON: {"fixes": [operations], "verdict": "one or two sentences on how sound this part is now"}',
-    ].join("\n");
+    ].filter((x) => x != null).join("\n");
   };
 
   const newBuild = (s) => ({
-    v: 1, sid: s.sid, goal: s.goal, situation: s.situation || "", started: new Date().toISOString(), status: "running", requests: 0, agents: 0,
-    subject: "", scope: "", profile: null,
+    v: 2, sid: s.sid, goal: s.goal, situation: s.situation || "", started: new Date().toISOString(), status: "running", requests: 0, agents: 0,
+    subject: "", scope: "", grain: null, profile: null,
     nodes: { n1: { id: "n1", parent: null, depth: 0, name: s.name, brief: "", state: "todo" } },
     nNode: 1, nTopic: 0, nPoint: 0, nNeed: 0, balls: {}, byId: {}, open: [], fixes: [], notes: [], verdicts: {}, linked: 0,
+    planChecked: false, reviewed: {},
   });
   function addKids(B, n, parts) {
-    const ok = parr(parts).map((x) => ({ name: pstr(x && x.name), brief: pstr(x && x.brief) })).filter((x) => x.name);
+    const ok = parr(parts).map((x) => ({ name: pstr(x && x.name), brief: pstr(x && x.brief), share: pstr(x && x.share) })).filter((x) => x.name);
     if (ok.length > MAP_LIMITS.parts) B.notes.push("\"" + n.name + "\" was divided into more parts than the page's safety limit, so " + (ok.length - MAP_LIMITS.parts) + " were left out.");
     n.kids = ok.slice(0, MAP_LIMITS.parts).map((x) => {
       const id = "n" + (++B.nNode);
-      B.nodes[id] = { id, parent: n.id, depth: n.depth + 1, name: x.name, brief: x.brief, state: "todo" };
+      B.nodes[id] = { id, parent: n.id, depth: n.depth + 1, name: x.name, brief: x.brief, share: x.share, state: "todo" };
       return id;
     });
     n.state = "split";
   }
-  function writeTopic(B, n, w) {
+  // a planner named its part's points: the part becomes a topic, its points get ids; details come later
+  function nameTopic(B, n, w) {
     const tid = "t" + (++B.nTopic);
-    const b = { id: tid, name: n.name, desc: pstr(w.desc), node: n.id, pts: [], where: [] };
-    const raw = parr(w.points), num = {}, seen = new Set();
+    const b = { id: tid, name: n.name, desc: pstr(w.desc), node: n.id, pts: [], where: [], written: false };
+    const seen = new Set(Object.values(B.byId).map((x) => x.name.toLowerCase()));
     let cut = 0;
-    raw.forEach((x, i) => {
-      const name = pstr(x && x.name);
-      if (!name || seen.has(name.toLowerCase())) return;
+    parr(w.points).map((x) => pstr(typeof x === "string" ? x : x && x.name)).filter(Boolean).forEach((name) => {
+      if (seen.has(name.toLowerCase())) { B.notes.push("Dropped a second point named \"" + name + "\"."); return; }
       if (b.pts.length >= MAP_LIMITS.perTopic || Object.keys(B.byId).length >= MAP_LIMITS.points) { cut++; return; }
       seen.add(name.toLowerCase());
       const id = "p" + (++B.nPoint);
-      B.byId[id] = { id, name, what: pstr(x.what), needs: [], helps: [] };
-      b.pts.push(id); num[i + 1] = id;
-    });
-    raw.forEach((x, i) => {
-      const id = num[i + 1]; if (!id) return;
-      const P = B.byId[id], ref = (k) => num[+k];
-      P.needs = [...new Set(parr(x.needs).map(ref).filter((r) => r && r !== id))];
-      P.helps = [...new Set(parr(x.helps).map(ref).filter((r) => r && r !== id && !P.needs.includes(r)))];
-      parr(x.outside).map(pstr).filter(Boolean).forEach((text) => B.open.push({ id: "N" + (++B.nNeed), pt: id, text }));
+      B.byId[id] = { id, name, what: "", needs: [], helps: [] };
+      b.pts.push(id);
     });
     if (cut) B.notes.push("\"" + n.name + "\" ran past the page's safety limits, so " + cut + " of its points were left out.");
     b.where = parr(w.where).map((x) => ({ title: pstr(x && x.title), detail: pstr(x && x.detail), url: /^https?:\/\/\S+$/.test(pstr(x && x.url)) ? pstr(x.url) : "" })).filter((x) => x.title).slice(0, 8);
     B.balls[tid] = b; n.ball = tid; n.state = "topic";
+  }
+  function applyDetails(B, t, d) {
+    const b = B.balls[t];
+    parr(d && d.points).forEach((x) => {
+      const P = B.byId[pstr(x && x.id)];
+      if (!P || !b.pts.includes(P.id)) return;
+      P.what = pstr(x.what);
+      P.needs = [...new Set(parr(x.needs).map(pstr).filter((id) => B.byId[id] && id !== P.id))];
+      P.helps = [...new Set(parr(x.helps).map(pstr).filter((id) => B.byId[id] && id !== P.id && !P.needs.includes(id)))];
+    });
+    parr(d && d.missing).forEach((m) => {
+      const text = pstr(m && m.idea);
+      if (!text) return;
+      const pt = parr(m.for).map(pstr).find((id) => b.pts.includes(id)) || b.pts[0];
+      if (pt) B.open.push({ id: "N" + (++B.nNeed), pt, text });
+    });
+    b.written = true;
   }
   // one agent's answer, checked; a second request if the first can't be used
   async function askValid(job, agent, prompt, tier, valid) {
@@ -185,6 +244,8 @@
     if (n.depth === 0) {
       const d = await askValid(job, "Master", masterPrompt(s), "complex", (d) => d && parr(d.parts).some((x) => pstr(x && x.name)));
       B.subject = pstr(d.subject); B.scope = pstr(d.scope);
+      const g = d.grain || {};
+      B.grain = { point: pstr(g.point), examples: parr(g.examples).map(pstr).filter(Boolean).slice(0, 12) };
       const p = d.profile || {};
       B.profile = {};
       ["name", "trap", "slips", "observe", "shallow", "rich", "examples", "format"].forEach((k) => { B.profile[k] = pstr(p[k]); });
@@ -192,10 +253,10 @@
       addKids(B, n, d.parts);
     } else {
       const forced = n.depth >= MAP_LIMITS.depth || Object.keys(B.nodes).length >= MAP_LIMITS.agents / 2 || B.nTopic + Object.values(B.nodes).filter((x) => x.state === "todo").length >= MAP_LIMITS.topics;
-      const canWrite = (d) => d && d.write && parr(d.write.points).some((x) => pstr(x && x.name));
+      const canName = (d) => d && d.topic && parr(d.topic.points).some((x) => pstr(typeof x === "string" ? x : x && x.name));
       const canDivide = (d) => !forced && d && parr(d.divide).some((x) => pstr(x && x.name));
-      const d = await askValid(job, "Planner", plannerPrompt(s, B, n, forced), "default", (d) => canWrite(d) || canDivide(d));
-      if (canWrite(d)) writeTopic(B, n, d.write); else addKids(B, n, d.divide);
+      const d = await askValid(job, "Planner", plannerPrompt(s, B, n, forced), "default", (d) => canName(d) || canDivide(d));
+      if (canName(d)) nameTopic(B, n, d.topic); else addKids(B, n, d.divide);
     }
     B.agents++;
   }
@@ -266,28 +327,43 @@
     });
     if (pstr(r && r.verdict)) B.verdicts[n.id] = pstr(r.verdict);
   }
-  async function reviewNode(s, B, n, job) {
-    // a part with a single topic under it has nothing to join: its open needs simply pass up
-    if (ballsUnder(B, n.id).length > 1 || n.depth === 0) {
-      applyReview(B, n, await askValid(job, "Reviewer", reviewerPrompt(s, B, n), "complex", (d) => d && Array.isArray(d.fixes)));
-      B.agents++;
-    }
-    if (n.depth === 0 && B.open.length) {
-      B.open.forEach((o) => B.notes.push("\"" + (B.byId[o.pt] || {}).name + "\" was written to need \"" + o.text + "\", but no reviewer linked it to a point, so that need was left out."));
-      B.open = [];
-    }
-    n.state = "reviewed";
-  }
-  // down the tree, then back up; whatever is already done (a continued build) is skipped
-  async function doNode(s, B, id, job) {
+  // ----- the passes: plan down the tree, check the plan, write the details, check each area and then the whole map.
+  // Whatever is already done (a continued build) is skipped. -----
+  const saveStep = (B, job) => { B.requests = job.requests; saveBuild(B); job.paint(); };
+  const settle = async (ps) => { const res = await Promise.allSettled(ps); const bad = res.find((x) => x.status === "rejected"); if (bad) throw bad.reason; };
+  const reviewOk = (d) => d && Array.isArray(d.fixes);
+  async function planTree(s, B, id, job) {
     const n = B.nodes[id];
     if (job.cancel) throw { code: "cancelled" };
-    if (n.state === "todo") { await planNode(s, B, n, job); B.requests = job.requests; saveBuild(B); job.paint(); }
-    if (!n.kids) return;
-    const res = await Promise.allSettled(n.kids.map((k) => doNode(s, B, k, job)));
-    const bad = res.find((x) => x.status === "rejected");
-    if (bad) throw bad.reason;
-    if (n.state === "split") { await reviewNode(s, B, n, job); B.requests = job.requests; saveBuild(B); job.paint(); }
+    if (n.state === "todo") { await planNode(s, B, n, job); saveStep(B, job); }
+    if (n.kids) await settle(n.kids.map((k) => planTree(s, B, k, job)));
+  }
+  const areasToReview = (B) => kidsOf(B, "n1").filter((a) => ballsUnder(B, a).length > 1);
+  async function runTree(s, B, job) {
+    job.stage = "plan"; job.paint();
+    await planTree(s, B, "n1", job);
+    if (!B.planChecked) {
+      job.stage = "plancheck"; job.paint();
+      applyReview(B, B.nodes.n1, await askValid(job, "Reviewer", planReviewPrompt(s, B), "complex", reviewOk));
+      B.verdicts.plan = B.verdicts.n1 || ""; delete B.verdicts.n1;
+      B.agents++; B.planChecked = true; saveStep(B, job);
+    }
+    job.stage = "write"; job.paint();
+    await settle(Object.keys(B.balls).filter((t) => !B.balls[t].written && B.balls[t].pts.length).map(async (t) => {
+      applyDetails(B, t, await askValid(job, "Writer", writerPrompt(s, B, t), "default", (d) => d && Array.isArray(d.points)));
+      B.agents++; saveStep(B, job);
+    }));
+    job.stage = "review"; job.paint();
+    await settle(areasToReview(B).filter((a) => !B.reviewed[a]).map(async (a) => {
+      applyReview(B, B.nodes[a], await askValid(job, "Reviewer", reviewerPrompt(s, B, B.nodes[a]), "complex", reviewOk));
+      B.agents++; B.reviewed[a] = true; saveStep(B, job);
+    }));
+    if (!B.reviewed.n1) {
+      applyReview(B, B.nodes.n1, await askValid(job, "Reviewer", reviewerPrompt(s, B, B.nodes.n1), "complex", reviewOk));
+      B.open.forEach((o) => B.notes.push("A writer found \"" + (B.byId[o.pt] || {}).name + "\" needs \"" + o.text + "\", which no point teaches, and no reviewer settled it."));
+      B.open = [];
+      B.agents++; B.reviewed.n1 = true; saveStep(B, job);
+    }
   }
   // the finished tree as a working map: areas are the master's parts, topics are the parts that were written
   function treeToWork(B) {
@@ -431,7 +507,7 @@
         if (!B) B = newBuild(s);
         B.status = "running"; job.B = B; job.requests = B.requests || 0;
         saveBuild(B); job.paint();
-        await doNode(s, B, "n1", job);
+        await runTree(s, B, job);
         W = treeToWork(B);
         // 2. the router
         job.stage = "route"; job.paint();
@@ -552,13 +628,14 @@
 
   // ----- progress, while the tree works and when it has stopped part-way -----
   function treeCounts(B) {
-    const ns = Object.values(B.nodes);
-    const joins = ns.filter((x) => x.kids && (x.depth === 0 || ballsUnder(B, x.id).length > 1 || x.state !== "reviewed"));
-    return { planned: ns.filter((x) => x.state !== "todo").length, parts: ns.length, topics: Object.keys(B.balls).length,
-      reviewed: joins.filter((x) => x.state === "reviewed").length, joins: joins.length, levels: ns.reduce((m, x) => Math.max(m, x.depth), 0) + 1,
-      masterDone: B.nodes.n1.state !== "todo", plansDone: ns.every((x) => x.state !== "todo"), rootDone: B.nodes.n1.state === "reviewed" };
+    const ns = Object.values(B.nodes), ts = Object.values(B.balls).filter((b) => b.pts.length);
+    const reviews = areasToReview(B).concat(["n1"]);
+    return { planned: ns.filter((x) => x.state !== "todo").length, parts: ns.length, topics: ts.length, points: Object.keys(B.byId).length,
+      written: ts.filter((b) => b.written).length, reviewed: reviews.filter((a) => B.reviewed[a]).length, reviews: reviews.length,
+      levels: ns.reduce((m, x) => Math.max(m, x.depth), 0) + 1, masterDone: B.nodes.n1.state !== "todo", plansDone: ns.every((x) => x.state !== "todo"),
+      planChecked: !!B.planChecked, allWritten: ts.length > 0 && ts.every((b) => b.written), rootDone: !!B.reviewed.n1 };
   }
-  const treeLine = (c) => c.planned + " of " + c.parts + " parts planned · " + c.topics + " topics written · " + c.reviewed + " of " + c.joins + " parts checked";
+  const treeLine = (c) => c.planned + " of " + c.parts + " parts planned · " + c.written + " of " + c.topics + " topics written · " + c.reviewed + " of " + c.reviews + " parts checked";
   function buildCard(job) {
     const TRS = trLang() ? [["translate", "Translator", "translates the map into your language, keeping the English original"]] : [];
     if (job.only === "check") {
@@ -577,13 +654,15 @@
         h("ol", { class: "plain" }, [["route", "Router", "marks the route your goal needs"]].concat(TRS).map(([id, who, what], i) => h("li", null, h("strong", null, (i < at ? "✓ " : i === at ? "… " : "") + who), " " + what))),
         h("div", { class: "row" }, h("button", { class: "quiet", type: "button", onclick: () => { job.cancel = true; } }, "Stop")));
     }
-    const c = job.B ? treeCounts(job.B) : { planned: 0, parts: 1, topics: 0, reviewed: 0, joins: 0, levels: 1, masterDone: false, plansDone: false, rootDone: false };
+    const c = job.B ? treeCounts(job.B) : { planned: 0, parts: 1, topics: 0, points: 0, written: 0, reviewed: 0, reviews: 1, levels: 1, masterDone: false, plansDone: false, planChecked: false, allWritten: false, rootDone: false };
     const after = { tree: 0, route: 1, page: 2, translate: 3, done: 4 }[job.stage] || 0;
     const mark = (done, now) => (done ? "✓ " : now ? "… " : "");
     const rows = [
-      [mark(c.masterDone, !c.masterDone), "Master", "divides the subject into its main parts and writes the subject profile", null],
-      [mark(c.plansDone, c.masterDone && !c.plansDone), "Planners", "divide each part further, or write its points once it's small enough", c.masterDone ? c.planned + " of " + c.parts + " parts planned · " + c.topics + " topics written · " + c.levels + (c.levels === 1 ? " level" : " levels") : null],
-      [mark(c.rootDone, c.masterDone && !c.rootDone && c.reviewed > 0), "Reviewers", "check and join the parts on the way back up, ending with the whole map", c.joins ? c.reviewed + " of " + c.joins + " parts checked" : null],
+      [mark(c.masterDone, !c.masterDone), "Master", "divides the subject into its main parts, sets the size of a point and each part's share, and writes the subject profile", null],
+      [mark(c.plansDone, c.masterDone && !c.plansDone), "Planners", "divide each part further, or name its points once it's a single topic", c.masterDone ? c.planned + " of " + c.parts + " parts planned · " + c.topics + " topics · " + c.points + " points · " + c.levels + (c.levels === 1 ? " level" : " levels") : null],
+      [mark(c.planChecked, c.plansDone && !c.planChecked), "Plan reviewer", "checks the whole plan: the size of points, overlaps, gaps and proportions", null],
+      [mark(c.allWritten, c.planChecked && !c.allWritten), "Writers", "write what each point is and what it needs first, each seeing the whole plan", c.planChecked ? c.written + " of " + c.topics + " topics written" : null],
+      [mark(c.rootDone, c.allWritten && !c.rootDone), "Reviewers", "check each area, then the whole map", c.allWritten ? c.reviewed + " of " + c.reviews + " parts checked" : null],
       [mark(after > 1, after === 1), "Router", "marks the route your goal needs", null],
       [mark(after > 2, after === 2), "Page", "checks the map's structure in code", null],
     ].concat(TRS.map(([, who, what]) => [mark(after > 3, after === 3), who, what, null]));
@@ -615,7 +694,7 @@
       '<p class="km-small">' + esc(I18N.t(M.balls.length + " topics and " + M.nodes.length + " points, with " + needs + " “needed first” links, built in " + (M.requests || 0) + " AI requests.")) +
       (tree ? " " + esc(I18N.t(tree.agents + " planning and reviewing agents worked over " + tree.levels + (tree.levels === 1 ? " level." : " levels."))) : "") + "</p>" +
       '<p class="km-small">' + (tree
-        ? T("A master AI divided the subject into parts. Planners divided each part until it was small enough to plan point by point, and wrote its points. On the way back up, a reviewer for each part checked and joined the pieces under it, and a last reviewer checked the whole map. A router marked your route. No human source was used: treat the map as the AIs' view of the subject, and check what matters to you elsewhere.")
+        ? T("A master AI divided the subject into parts and set how big a point is. Planners divided each part until it was a single topic and named its points, each seeing the whole plan, and a reviewer checked the plan. Writers then filled in each topic, seeing every point on the map, and reviewers checked each area and the whole map. A router marked your route. No human source was used: treat the map as the AIs' view of the subject, and check what matters to you elsewhere.")
         : T("An architect AI planned the topics and points for your goal, writers said what each point is and what it needs first, a router marked your route, and a checker reviewed the whole map. No human source was used: treat the map as one AI's view of the subject, and check what matters to you elsewhere.")) + "</p>" +
       (M.scope ? "<h3>" + T("What it covers") + '</h3><p class="km-small" data-ai>' + esc(M.scope) + "</p>" : "") +
       (M.route && M.route.note ? "<h3>" + T("How the route was chosen") + '</h3><p class="km-small" data-ai>' + esc(M.route.note) + "</p>" : "") +

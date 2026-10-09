@@ -105,7 +105,7 @@
           h("label", { for: "situation" }, "Where are you now?", h("span", { class: "hint" }, " Optional: what you've done so far, what feels easy or hard")),
           h("textarea", { id: "situation", rows: 3, value: f.situation, oninput: (e) => { f.situation = e.target.value; } })),
         errLine("subject"),
-        h("p", { class: "small muted" }, "AIs build the map as a tree: a master divides the subject into parts, planners divide each part until it's small enough to write, and on the way back up a reviewer checks and joins each part. A small subject takes a dozen or so AI requests, a large one many more; the count shows as it builds. No human source is used, so the map is the AIs' view of the subject."),
+        h("p", { class: "small muted" }, "A team of AIs builds the map: a master divides the subject into parts, planners divide each part until it's a single topic, a reviewer checks the whole plan, writers fill in each topic, and reviewers check each area and the whole map. A small subject takes a dozen or so AI requests, a large one many more; the count shows as it builds. No human source is used, so the map is the AIs' view of the subject."),
         h("div", { class: "row" }, h("button", { class: "primary", type: "button", disabled: !aiReady() || (ui.build && ui.build.running), onclick: startSubject }, "Build my map"))));
   }
 

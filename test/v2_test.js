@@ -54,15 +54,15 @@ const ok = (c, msg) => { if (!c) { console.log("FAIL:", msg); process.exitCode =
   await shot("v2-03-map");
   const mapInfo = await page.evaluate(() => ({ topics: document.querySelectorAll("g.km-ball").length, ticks: document.querySelectorAll(".km-tick").length, route: document.querySelectorAll("g.km-ball.route").length, hot: document.querySelectorAll("g.km-ball.hot").length, pill: document.getElementById("subject-pill").textContent }));
   console.log("map:", JSON.stringify(mapInfo));
-  ok(mapInfo.topics === 6 && mapInfo.ticks === 20, "map has 6 topics and 20 points (19 + 1 added by the root reviewer)");
+  ok(mapInfo.topics === 6 && mapInfo.ticks === 20, "map has 6 topics and 20 points (19 + 1 added by the plan reviewer)");
   ok(mapInfo.route > 0 && mapInfo.hot > 0, "route rings and top picks show");
   const store = await page.evaluate(() => JSON.parse(localStorage.getItem("lc-mock-db")));
   const sid = store["app2/index"].current, M = store["maps/" + sid];
-  const agents = await page.evaluate(() => ({ planners: window.__planners, reviewers: window.__reviewers }));
-  ok(M.tree && M.tree.levels === 3 && agents.planners === 9 && agents.reviewers === 4, "the tree: master, 3 areas divided, 6 topics written, 4 reviewers " + JSON.stringify({ tree: M.tree, agents }));
-  ok(M.tree.linked === 5 && M.links.filter((l) => l[2] === "needs").length >= 19, "reviewers linked every need the writers described across topics");
+  const agents = await page.evaluate(() => ({ planners: window.__planners, planReviews: window.__planReviews, writers: window.__writers, reviewers: window.__reviewers }));
+  ok(M.tree && M.tree.levels === 3 && agents.planners === 9 && agents.planReviews === 1 && agents.writers === 6 && agents.reviewers === 4, "the team: master, 3 areas divided, 6 topics named, 1 plan review, 6 writers, 3 area reviewers and 1 whole-map reviewer " + JSON.stringify({ tree: M.tree, agents }));
+  ok(M.links.filter((l) => l[2] === "needs").length >= 19, "writers linked prerequisites by id across topics");
   ok(store["builds/" + sid] && store["builds/" + sid].status === "done", "the finished build is marked done");
-  ok(M && M.checks.fixes.filter((f) => f.done).length === 3, "root reviewer's fixes applied (3 done, 1 skipped): " + M.checks.fixes.map((f) => (f.done ? "+" : "-") + f.text).join(" | "));
+  ok(M && M.checks.fixes.filter((f) => f.done).length === 3, "reviewers' fixes applied (3 done, 1 skipped): " + M.checks.fixes.map((f) => (f.done ? "+" : "-") + f.text).join(" | "));
   ok(M.checks.loopsDropped === 1, "the link that closed a loop was dropped by the page");
   // About tab
   await click("#km-t-src"); await page.waitForTimeout(200);
