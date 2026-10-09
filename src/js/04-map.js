@@ -67,7 +67,7 @@
     }
     KD.balls.forEach((b) => {
       const n = b.pts.length;
-      b.r = 8 + 3.3 * Math.sqrt(n); b.cur = b.r; b.ro = Math.max(60, n * 10.5);
+      b.r = 8 + 3.3 * Math.sqrt(n); b.cur = b.r;
       b.lines = I18N.cjk(b.name) && !/[A-Za-z]{3}/.test(b.name) && I18N.units(b.name) <= 32 ? I18N.split(b.name) : wrapName(b.name, 22, 3);
       b.lw = Math.max(...b.lines.map(I18N.units)) * 7.1 / KREF;
       b.lh = (b.lines.length * LH + 7) / KREF;
@@ -176,6 +176,9 @@
     const linkSel = gL.selectAll("path").data(BLINKS).join("path").attr("class", "km-blk");
     const ballSel = gB.selectAll("g.km-ball").data(KD.balls).join("g").attr("class", "km-ball").attr("transform", (b) => `translate(${b.x},${b.y})`);
     ballSel.append("circle").attr("class", "km-glow").attr("fill", "url(#km-glowg)");
+    ballSel.append("circle").attr("class", "km-lens");
+    ballSel.append("g").attr("class", "km-srings");
+    ballSel.append("g").attr("class", "km-plinks");
     ballSel.append("circle").attr("class", "km-ping");
     ballSel.append("circle").attr("class", "km-ping p2");
     ballSel.append("circle").attr("class", "km-flare");
@@ -206,11 +209,10 @@
         g.select(".km-body").attr("r", R);
         g.select(".km-hit").attr("r", R + 9 / K);
         g.select(".km-arc").attr("d", f > 0 && f < 1 ? arcD(R, f) : null);
-        const lab = g.select(".km-blab"), n = b.lines.length;
+        const lab = g.select(".km-blab");
         if (open) {
-          const fs = 19 / K, lh = 21 / K, y0 = -((n - 1) * lh) / 2 - 3 / K;
-          lab.attr("font-size", fs).attr("stroke-width", 0).attr("y", y0); lab.selectAll("tspan").attr("dy", (l, i) => i ? lh : 0);
-          g.select(".km-prog").attr("font-size", 12.5 / K).attr("y", y0 + (n - 1) * lh + 22 / K);
+          lab.attr("font-size", 14 / K).attr("stroke-width", 3.6 / K).attr("y", R + 19 / K); lab.selectAll("tspan").attr("dy", (l, i) => i ? 17 / K : 0);
+          g.select(".km-prog").attr("font-size", 11 / K).attr("y", 4 / K);
         } else {
           const ts = Math.max(0.8, Math.min(1, K / KREF)); // below the zoom the layout was spaced for, labels shrink a little instead of overlapping
           lab.attr("font-size", FS * ts / K).attr("stroke-width", 3.6 / K).attr("y", R + (5 + 13 * ts) / K); lab.selectAll("tspan").attr("dy", (l, i) => i ? LH * ts / K : 0);
@@ -225,19 +227,9 @@
       bcount.attr("display", (b) => ks.open === b.id ? null : "none");
       geom(ballSel);
       linkSel.attr("d", linkPath);
-      dotSel.select(".km-core").attr("r", 8.5 / K);
-      dotSel.select(".km-halo").attr("r", 13 / K);
-      // a point's label sits outside its dot; several lines are stacked so the block stays centred on the dot's side
-      const PLH = 15.5 / K;
-      dotSel.select("text").attr("font-size", 13.5 / K).attr("stroke-width", 3.6 / K)
-        .attr("text-anchor", (d) => Math.cos(d.a) > 0.12 ? "start" : Math.cos(d.a) < -0.12 ? "end" : "middle")
-        .attr("dominant-baseline", "central")
-        .each(function (d) {
-          const t = d3.select(this), n = t.selectAll("tspan").size(), x = Math.cos(d.a) * 21 / K, y = Math.sin(d.a) * 21 / K;
-          const side = Math.abs(Math.cos(d.a)) > 0.12 ? 0 : Math.sin(d.a) < 0 ? -1 : 1;
-          const y0 = side === 0 ? y - (n - 1) * PLH / 2 : side < 0 ? y - (n - 0.5) * PLH : y + 0.5 * PLH;
-          t.selectAll("tspan").attr("x", x).attr("y", (l, i) => y0 + i * PLH);
-        });
+      dotSel.select(".km-core").attr("r", 6 / K);
+      dotSel.select(".km-halo").attr("r", 10 / K);
+      if (ks.open && !BALL[ks.open].blooming) placeSub(BALL[ks.open], K, false);
       declutter();
     }
     // labels that would collide are moved above their topic, or hidden until the learner zooms in;
@@ -258,6 +250,51 @@
         if (r) placed.push(r); else lab.attr("display", "none");
       });
     }
+    // ----- an open topic (v2.2): a small map of its own, centred on the topic and laid over the big one, its points
+    // linked in the same style as topics. Laid out in screen pixels, so it reads the same at any zoom. -----
+    function subOf(b) {
+      const node = svg.node(), h = node.clientHeight || 700, ids = new Set(b.pts), order = new Map(b.pts.map((p, i) => [p, i]));
+      const inNeeds = (p) => byId[p].needs.filter((q) => ids.has(q));
+      const depth = {}, dOf = (p, seen = new Set()) => { if (depth[p] != null) return depth[p]; if (seen.has(p)) return 1; seen.add(p); depth[p] = 1 + inNeeds(p).reduce((m, q) => Math.max(m, dOf(q, seen)), 0); return depth[p]; };
+      b.pts.forEach((p) => dOf(p));
+      // the points wind outward from the topic on a gentle spiral, in the order they can be learned: what needs nothing
+      // else in the topic closest in, what builds on it further out, so most links are short and run outward
+      const seq = b.pts.slice().sort((x, y) => depth[x] - depth[y] || order.get(x) - order.get(y));
+      const Rs = 30, R0 = 112, TURN = 112, SP = 158;   // the disc, where the spiral starts, the room between turns and between points
+      const c = TURN / (2 * Math.PI), pos = {};
+      let a = -Math.PI / 2;
+      seq.forEach((p, i) => { const r = R0 + c * (a + Math.PI / 2); pos[p] = { id: p, x: r * Math.cos(a), y: r * Math.sin(a), r }; a += SP / r; });
+      const Rmax = d3.max(Object.values(pos), (q) => q.r);
+      const fit = Math.min(1, ((h - TOP - BOTTOM) / 2 - 24) / (Rmax + 70));   // a large topic shrinks to fit the view
+      Object.values(pos).forEach((q) => { q.x *= fit; q.y *= fit; });
+      const rings = []; for (let r = R0; r <= Rmax + 1; r += TURN) rings.push(r * fit);
+      return { Rs, rings, lens: (Rmax + 70) * fit, pts: b.pts.map((p) => pos[p]) };
+    }
+    function placeSub(b, k, animate) {
+      const F = b.sub; if (!F) return;
+      const g = ballSel.filter((x) => x === b), at = new Map(F.pts.map((p) => [p.id, p]));
+      const sel = dotSel.filter((d) => d.ball === b.id);
+      const tf = (d) => `translate(${at.get(d.id).x / k},${at.get(d.id).y / k})`;
+      if (animate) sel.transition("bloom").duration(reduceMotion() ? 0 : 560).delay((d, i) => reduceMotion() ? 0 : 80 + i * 16).ease(d3.easeCubicOut).attr("transform", tf).style("opacity", 1);
+      else sel.interrupt("bloom").attr("transform", tf).style("opacity", 1);
+      const PLH = 15 / K;
+      sel.select("text").attr("font-size", 12.5 / K).attr("stroke-width", 3.6 / K).attr("text-anchor", "middle").attr("dominant-baseline", "hanging")
+        .each(function (d) {
+          const t = d3.select(this), ls = wrapName(nm(d.id), 20, 2);
+          t.selectAll("tspan").data(ls).join("tspan").text((l) => l).attr("x", 0).attr("y", (l, i) => 13 / K + i * PLH);
+        });
+      g.select(".km-lens").attr("r", F.lens / k);
+      g.select(".km-srings").selectAll("circle").data(F.rings).join("circle").attr("r", (r) => r / k);
+      // links between the topic's points, drawn the way topics are linked on the big map
+      const L = [];
+      b.pts.forEach((p) => byId[p].needs.forEach((q) => { if (at.has(q)) L.push([q, p]); }));
+      g.select(".km-plinks").selectAll("path").data(L).join("path").attr("class", (l) => "km-plk" + (ks.point && (l[0] === ks.point || l[1] === ks.point) ? " lit" : ""))
+        .attr("d", ([q, p]) => {
+          const a = at.get(q), c = at.get(p), m = [(a.x + c.x) / 2 * 0.93 / k, (a.y + c.y) / 2 * 0.93 / k];
+          const p0 = trimTo([a.x / k, a.y / k], m, 10 / k), p1 = trimTo([c.x / k, c.y / k], m, 10 / k);
+          return `M${p0}Q${m} ${p1}`;
+        });
+    }
     const reduceMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
     function grow(b, R) {
       const g = ballSel.filter((x) => x === b), i = d3.interpolate(b.cur, R);
@@ -265,8 +302,14 @@
         .tween("grow", () => (t) => { b.cur = i(t); geom(g); linkSel.attr("d", linkPath); });
     }
     function bloom(b, on) {
-      dotSel.filter((d) => d.ball === b.id).transition("bloom").duration(reduceMotion() ? 0 : on ? 520 : 240).delay((d, i) => on && !reduceMotion() ? 80 + i * 22 : 0).ease(d3.easeCubicOut)
-        .attr("transform", (d) => on ? `translate(${b.ro * Math.cos(d.a)},${b.ro * Math.sin(d.a)})` : "translate(0,0)").style("opacity", on ? 1 : 0);
+      if (on) {
+        b.blooming = true; placeSub(b, b.kOpen, true);
+        setTimeout(() => { b.blooming = false; if (ks.open === b.id) sizeText(); }, reduceMotion() ? 0 : 560 + b.pts.length * 18);
+        return;
+      }
+      const g = ballSel.filter((x) => x === b);
+      g.select(".km-lens").attr("r", 0); g.select(".km-srings").selectAll("circle").remove(); g.select(".km-plinks").selectAll("path").remove();
+      dotSel.filter((d) => d.ball === b.id).transition("bloom").duration(reduceMotion() ? 0 : 240).ease(d3.easeCubicOut).attr("transform", "translate(0,0)").style("opacity", 0);
     }
     const zoom = d3.zoom().scaleExtent([0.2, 8]).on("zoom", (e) => { root.attr("transform", e.transform); if (Math.abs(e.transform.k - K) > 1e-3) { K = e.transform.k; sizeText(); } });
     svg.call(zoom).on("dblclick.zoom", null);
@@ -282,22 +325,26 @@
       const bs = KD.balls.filter((b) => ids.has(b.id)), hw = (b) => Math.max(b.r, b.lw / 2) + 8;
       fitBox(d3.min(bs, (b) => b.x - hw(b)), d3.min(bs, (b) => b.y - b.r - 10), d3.max(bs, (b) => b.x + hw(b)), d3.max(bs, (b) => b.y + b.r + b.lh), ms);
     }
-    function fitOpen(b) {
-      const node = svg.node(), w = node.clientWidth, h = node.clientHeight; if (!w || !h) return;
-      const room = Math.min(w / 2 - (w < 600 ? 110 : 200), (h - TOP - BOTTOM) / 2 - 70);
-      const k = Math.max(0.5, Math.min(1.9, room / b.ro));
-      fitTo(d3.zoomIdentity.translate(w / 2 - k * b.x, TOP + (h - TOP - BOTTOM) / 2 - k * b.y).scale(k));
+    // the zoom an open topic is shown at, and where it sits: the disc and its points centred together in the free space
+    function openZoom(b) {
+      const node = svg.node(), w = node.clientWidth, h = node.clientHeight; if (!w || !h) return null;
+      b.sub = subOf(b);
+      const k = 1.4;
+      return { k, t: d3.zoomIdentity.translate(w / 2 - k * b.x, TOP + (h - TOP - BOTTOM) / 2 - k * b.y).scale(k) };
     }
+    function fitOpen(b) { const z = openZoom(b); if (!z) return; b.kOpen = z.k; fitTo(z.t); }
 
     // ----- state -----
     const ks = { open: null, point: null, focus: null, shown: false };
     function refresh() {
       HOT = new Set(hotBalls());
       el("kmap").classList.toggle("km-flashon", flashOn);
+      el("kmap").classList.toggle("km-opened", !!ks.open);
+      gB.selectAll(".km-plk").classed("lit", (l) => !!ks.point && (l[0] === ks.point || l[1] === ks.point));
       const fb = el("km-flash"); fb.setAttribute("aria-pressed", flashOn ? "true" : "false"); fb.querySelector("span").innerHTML = flashOn ? '<b class="km-wide">Top picks glowing</b><b class="km-narrow">Glow on</b>' : "Glow off";
       ballSel.attr("class", (b) => "km-ball st-" + bStatus(b.id) + (bOnRoute(b.id) ? " route" : "") + (bNext(b.id) ? " next" : "") + (HOT.has(b.id) ? " hot" : "") + (ks.open === b.id ? " open" : ""));
       dotSel.attr("class", (d) => "km-dot st-" + pStatus(d.id) + (ROUTE.has(d.id) && !learned.has(d.id) ? " route" : "") + (pNext(d.id) ? " next" : "") + (ks.point === d.id ? " sel" : ""));
-      bcount.text((b) => `${doneOf(b)} of ${b.pts.length} learned`);
+      bcount.text((b) => `${doneOf(b)} / ${b.pts.length}`);
       dialTicks.classed("on", (pid) => learned.has(pid)); dialNum.text(learned.size);
       sizeText(); paintFocus(); renderMine();
       if (ks.point) renderPoint(ks.point); else if (ks.open) renderBall(ks.open);
@@ -310,7 +357,7 @@
     }
     function collapse() { if (!ks.open) return; const b = BALL[ks.open]; ks.open = null; grow(b, b.r); bloom(b, false); }
     function openBall(id, fit = true) {
-      if (ks.open !== id) { collapse(); ks.open = id; const b = BALL[id]; grow(b, b.ro); bloom(b, true); }
+      if (ks.open !== id) { collapse(); ks.open = id; const b = BALL[id], z = openZoom(b); if (!z) b.sub = subOf(b); b.kOpen = z ? z.k : K; grow(b, b.sub.Rs / b.kOpen); bloom(b, true); }
       ks.focus = null; ks.point = null;
       el("km-focus").classList.remove("on");
       gB.selectAll("g.km-ball").filter((b) => b.id === id).raise();
