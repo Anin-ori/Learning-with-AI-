@@ -26,6 +26,7 @@
       notify("The map couldn't be drawn here (" + ((err && err.message) || "unknown error") + ").", "bad");
     }
     loadQa().then(() => { if (km) km.reload(); if (ui.view !== "map") render(); });
+    autoTranslateMap();
   }
 
   // ---------- Sections and steps ----------

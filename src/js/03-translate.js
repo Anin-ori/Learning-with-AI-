@@ -4,8 +4,15 @@
   // original is kept beside it: the learner can switch to it at any time. The tutor chat is the exception: it answers
   // directly in the learner's language, so replies still stream in. A failed translation never blocks anything: the
   // learner gets the English original and can ask for the translation again.
-  const LANG_NAMES = { zh: "Simplified Chinese (简体中文)" };
-  const trLang = () => (I18N.lang !== "en" && LANG_NAMES[I18N.lang] ? I18N.lang : null);
+  // v2.2: content follows the interface language both ways. Whatever is shown in a language it wasn't written in is
+  // translated the first time it is shown (a map built in Chinese before v2.1 is translated into English too), and the
+  // original stays one switch away.
+  const LANG_NAMES = { en: "English", zh: "Simplified Chinese (简体中文)" };
+  const curLang = () => (LANG_NAMES[I18N.lang] ? I18N.lang : "en");
+  const trLang = () => (curLang() !== "en" ? curLang() : null);   // new content is written in English, then translated into this
+  // the language an item was written in: its own mark, else its map's (maps from v2.0 recorded only that), else English
+  const srcOf = (item) => (item && (item.src || item.lang)) || (typeof curMap === "function" && curMap() && (curMap().src || curMap().lang)) || "en";
+  const needsTr = (item) => !!item && srcOf(item) !== curLang();
   const TR_CHUNK = 9000;   // safety limit on the characters sent in one translation request
   const TR_PART = 2500;    // safety limit: a longer text (a lesson) is sent as several parts, split between paragraphs
   // splits Markdown between paragraphs, never inside a code block; the parts join back with a blank line
@@ -24,7 +31,6 @@
   }
   let showOrigFlag = false;
   try { showOrigFlag = localStorage.getItem("lc-orig") === "1"; } catch (_) {}
-  const showOrig = () => !trLang() || showOrigFlag;
   function setShowOrig(on) {
     showOrigFlag = !!on;
     try { localStorage.setItem("lc-orig", on ? "1" : "0"); } catch (_) {}
@@ -32,11 +38,11 @@
     render();
   }
   // the translated version of a stored item, or null when the original should show
-  const trOf = (item) => { const L = trLang(); return L && !showOrigFlag && item && item.tr && item.tr[L] ? item.tr[L] : null; };
+  const trOf = (item) => { const L = curLang(); return needsTr(item) && !showOrigFlag && item.tr && item.tr[L] ? item.tr[L] : null; };
   const pickT = (t, v) => (typeof t === "string" && t.trim() ? t : v);
 
-  const translatorPrompt = (strs, about) => [
-    "You translate study material in Learning Companion, a study tool for self-learners, from English into " + LANG_NAMES[trLang()] + ". " + about,
+  const translatorPrompt = (strs, about, from) => [
+    "You translate study material in Learning Companion, a study tool for self-learners, from " + LANG_NAMES[from || "en"] + " into " + LANG_NAMES[curLang()] + ". " + about,
     "- Translate every string faithfully and completely, in the natural, precise style a good textbook in that language would use. Don't add, drop or explain anything.",
     "- Use the standard terms that textbooks in that language use for this subject. Where a standard term may be unfamiliar, give the English term in parentheses the first time it appears in a string.",
     "- In code blocks, translate only the comments. Keep exactly as they are: the code itself (strings in it too), text in backticks, formulas and mathematical notation, identifiers, program input and output, numbers, URLs, and the Markdown structure (headings, lists, tables, bold, line breaks). Keep a line that reads only \"Output:\" exactly as it is.",
@@ -48,17 +54,17 @@
     'Reply with only JSON: {"t": ["the translation of string 1", "..."]}, with exactly ' + strs.length + " strings in the same order.",
   ].join("\n");
   // translates a list of strings in as few requests as the safety limit allows; empty strings stay empty
-  async function translateList(job, list, about) {
+  async function translateList(job, list, about, from) {
     const texts = list.map((s) => (typeof s === "string" ? s : ""));
     // long texts go as parts so one request never carries a whole lesson; they are joined again below
     const units = [], owner = [];
     texts.forEach((s, i) => (s.length > TR_PART ? mdParts(s) : [s]).forEach((u) => { units.push(u); owner.push(i); }));
-    const done = await translateUnits(job, units, about);
+    const done = await translateUnits(job, units, about, from);
     const res = texts.map(() => []);
     done.forEach((u, k) => res[owner[k]].push(u));
     return res.map((r, i) => (texts[i].length > TR_PART ? r.join("\n\n") : r[0]));
   }
-  async function translateUnits(job, list, about) {
+  async function translateUnits(job, list, about, from) {
     const out = list.slice();
     const idx = out.map((s, i) => (s.trim() ? i : -1)).filter((i) => i >= 0);
     const chunks = [];
@@ -68,7 +74,7 @@
     await Promise.all(chunks.map(async (c) => {
       const strs = c.map((i) => out[i]);
       for (let attempt = 0; ; attempt++) {
-        const d = await ask(job, "Translator", translatorPrompt(strs, about), "default", true);
+        const d = await ask(job, "Translator", translatorPrompt(strs, about, from), "default", true);
         const t = d && Array.isArray(d.t) ? d.t : null;
         if (t && t.length === strs.length && t.every((x) => typeof x === "string")) { c.forEach((i, k) => { out[i] = t[k].trim() ? t[k] : out[i]; }); return; }
         if (attempt >= 1) throw { code: "invalid_json", agent: "Translator" };
@@ -77,8 +83,8 @@
     return out;
   }
   // fills `target` from pairs of [English text, setter] with one translation pass
-  async function trPairs(job, pairs, about) {
-    const t = await translateList(job, pairs.map((p) => p[0] || ""), about);
+  async function trPairs(job, pairs, about, from) {
+    const t = await translateList(job, pairs.map((p) => p[0] || ""), about, from);
     pairs.forEach((p, i) => p[1](t[i]));
   }
   const subjectAbout = (kind) => { const s = cur(); return "This is " + kind + (s ? " for a learner of " + s.name : "") + "."; };
@@ -142,10 +148,10 @@
     return D;
   }
   async function translateMap(sid, job, onlyRoute) {
-    const M = maps[sid], L = trLang();
-    if (!M || !L) return;
+    const M = maps[sid], L = curLang();
+    if (!M || !needsTr(M)) return;
     const T = onlyRoute && M.tr && M.tr[L] ? clone(M.tr[L]) : {};
-    await trPairs(job, onlyRoute ? routePairs(M, T) : mapPairs(M, T), subjectAbout("a knowledge map: the names and descriptions of its areas, topics and points, where topics are taught, and notes on how it was built"));
+    await trPairs(job, onlyRoute ? routePairs(M, T) : mapPairs(M, T), subjectAbout("a knowledge map: the names and descriptions of its areas, topics and points, where topics are taught, and notes on how it was built"), srcOf(M));
     M.tr = Object.assign({}, M.tr, { [L]: T });
   }
 
@@ -199,13 +205,13 @@
   }
   // translates any small record in place: `fields` are string fields, `lists` are arrays of strings
   async function translateRecord(job, rec, fields, lists, about) {
-    const L = trLang();
-    if (!L || !rec) return;
+    const L = curLang();
+    if (!rec || !needsTr(rec)) return;
     const T = {};
     const P = [];
     fields.forEach((k) => P.push([rec[k], (v) => { T[k] = v; }]));
     lists.forEach((k) => { T[k] = []; (rec[k] || []).forEach((x, i) => P.push([x, (v) => { T[k][i] = v; }])); });
-    await trPairs(job, P, about);
+    await trPairs(job, P, about, srcOf(rec));
     rec.tr = Object.assign({}, rec.tr, { [L]: T });
   }
   function recordView(rec, fields, lists) {
@@ -217,21 +223,44 @@
     return V;
   }
   // the switch between the translation and the English original, shown where translated content appears
+  const origLabel = (item) => (showOrigFlag ? "Show the translation" : srcOf(item) === "en" ? "Show the English original" : "Show the Chinese original");
   function origSwitch(item) {
-    if (!trLang() || !item || !item.tr || !item.tr[trLang()]) return null;
-    return h("button", { class: "link small orig-switch", type: "button", onclick: () => setShowOrig(!showOrigFlag) }, showOrigFlag ? "Show the translation" : "Show the English original");
+    if (!needsTr(item) || !item.tr || !item.tr[curLang()]) return null;
+    return h("button", { class: "link small orig-switch", type: "button", onclick: () => setShowOrig(!showOrigFlag) }, origLabel(item));
+  }
+  // content shown in a language it wasn't written in is translated the first time it is shown, once per page load;
+  // if that fails, the learner can ask again
+  async function autoTranslate(key, fn) {
+    if (!aiReady() || ui.autoTr[key] === "running" || ui.autoTr[key] === "done") return;
+    ui.autoTr[key] = "running";
+    setTimeout(() => render(), 0);
+    try { await fn({ requests: 0, cancel: false }); ui.autoTr[key] = "done"; }
+    catch (e) { ui.autoTr[key] = "failed"; ui.autoTrErr = noteAiError(e); }
+    render();
+  }
+  // the line where translated content appears: starts the translation if it is needed, and says what is happening
+  function trLine(key, item, fn) {
+    if (!needsTr(item) || showOrigFlag) return origSwitch(item);
+    if (item.tr && item.tr[curLang()]) return origSwitch(item);
+    const st = ui.autoTr[key];
+    if (!st && aiReady()) autoTranslate(key, fn);
+    if (st === "failed" || !aiReady()) return h("p", { class: "small muted" }, srcOf(item) === "en" ? "This is in English: it couldn't be translated. " : "This is in Chinese: it couldn't be translated. ",
+      aiReady() ? h("button", { class: "link", type: "button", onclick: () => { ui.autoTr[key] = null; render(); } }, "Translate it") : null);
+    return h("p", { class: "small muted thinking" }, "Translating into your language…");
   }
   // run a translation as its own small job, for content that was delivered untranslated
-  async function retranslate(kind, fn) {
-    if (!aiReady() || ui.busy["tr:" + kind]) return;
-    ui.busy["tr:" + kind] = true; render();
-    const job = { requests: 0, cancel: false };
-    try { await fn(job); notify("Translated."); }
-    catch (e) { notify("The translation didn't finish: " + noteAiError(e) + " The English original is shown.", "warn"); }
-    ui.busy["tr:" + kind] = false; render();
+  // notes on the map: every point's notes that need it, translated together
+  function notesTrFn() {
+    return async (job) => {
+      const s = cur(), L = curLang();
+      if (!s) return;
+      const todo = Object.entries(s.pointIndex || {}).filter(([, e]) => needsTr(e) && (e.notes || []).length && !(e.tr && e.tr[L]));
+      if (!todo.length) return;
+      const P = [], out = {};
+      todo.forEach(([pid, e]) => { out[pid] = []; e.notes.forEach((x, i) => P.push([x, (v) => { out[pid][i] = v; }])); });
+      await trPairs(job, P, subjectAbout("a learner's notes on the points they studied"), srcOf(todo[0][1]));
+      todo.forEach(([pid, e]) => { e.tr = Object.assign({}, e.tr, { [L]: out[pid] }); });
+      saveSubject();
+    };
   }
-  function trMissing(item, kind, fn) {
-    if (!trLang() || !item || item.src !== "en" || (item.tr && item.tr[trLang()])) return null;
-    return h("p", { class: "small muted" }, "This is in English: it wasn't translated. ",
-      h("button", { class: "link", type: "button", disabled: !aiReady() || ui.busy["tr:" + kind], onclick: () => retranslate(kind, fn) }, ui.busy["tr:" + kind] ? "Translating…" : "Translate it"));
-  }
+  const notesNeedTr = () => { const s = cur(); return !!s && !showOrigFlag && Object.values(s.pointIndex || {}).some((e) => needsTr(e) && (e.notes || []).length && !(e.tr && e.tr[curLang()])); };

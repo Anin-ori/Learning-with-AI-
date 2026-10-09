@@ -22,7 +22,7 @@
     step: "subjects", view: "path", busy: {}, errors: {},
     chat: [], chatKey: null, chatInput: "", showLog: false, note: "", confirmReset: false,
     plessons: {}, pjobs: {}, qa: {}, noteHide: false, noteRevealed: {},
-    build: null, form: { name: "", goal: "", situation: "" }, confirmDelete: null, trialAnswers: {}, tierResults: {},
+    build: null, autoTr: {}, form: { name: "", goal: "", situation: "" }, confirmDelete: null, trialAnswers: {}, tierResults: {},
   };
   let log = [];
   let sample = null;

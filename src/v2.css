@@ -20,3 +20,10 @@
 @media (max-width: 760px) { .topbar-right { flex-wrap: wrap; justify-content: flex-end; white-space: normal; } }
 /* practice is for every subject now: a pencil instead of a code sign */
 :root { --ico-practice: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 20l1.2-4.6L16.4 4.2a2 2 0 0 1 2.8 0l.6.6a2 2 0 0 1 0 2.8L8.6 18.8z M14.5 6l3.5 3.5 M4 20h16' fill='none' stroke='%23000' stroke-width='1.8' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+
+/* v2.2: AI-written names are long. The point list stays inside its card, and the top picks wrap. */
+.picker, .picker .field { min-width: 0; }
+select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
+.picker .chips .chip { white-space: normal; text-align: left; max-width: 100%; line-height: 1.35; }
+/* the Learn page is one column below 1100px (a later rule had put the two columns back, squeezing the lesson on phones) */
+@media (max-width: 1100px) { .learn { grid-template-columns: minmax(0, 1fr); } }

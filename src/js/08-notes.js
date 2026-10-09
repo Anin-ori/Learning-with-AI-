@@ -13,10 +13,11 @@
   const ptIndex = () => (cur() && cur().pointIndex) || {};
   // a point's notes in the learner's language when they were translated (v2.1), else as written
   function noteList(pid) {
-    const e = ptIndex()[pid], L = trLang();
+    const e = ptIndex()[pid], L = curLang();
     if (!e) return [];
     const en = e.notes || [];
-    return L && !showOrigFlag && e.tr && e.tr[L] ? en.map((x, i) => pickT(e.tr[L][i], x)) : en;
+    if (notesNeedTr()) autoTranslate("notes:" + app.current, notesTrFn());
+    return needsTr(e) && !showOrigFlag && e.tr && e.tr[L] ? en.map((x, i) => pickT(e.tr[L][i], x)) : en;
   }
   const hasNotes = (pid) => noteList(pid).length > 0 || qaOf(pid).length > 0;
   const escH = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);

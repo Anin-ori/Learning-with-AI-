@@ -54,9 +54,29 @@
     // ----- layout (v1.3): topics sit on rings, basics at the centre and more advanced topics further out.
     // The angle keeps an area together and puts a topic near the topics it builds on. v2.0: rings are added as the
     // map needs them, each holding as many topics as its length has room for. -----
-    const RING0 = 106, RING_GAP = 102, SPACING = 220;
-    const RINGS = [0], CAP = [1];
     const KREF = 0.74, FS = 13.5, LH = 16.5;
+    // long names (written by the AI) wrap into a few short lines; what doesn't fit ends in "…", and the full name shows on hover
+    function wrapName(name, maxU, maxLines) {
+      // Chinese breaks between characters, other text between words; mixed text (Chinese with English terms) does both
+      const toks = name.match(/[\u2e80-\u9fff\uf900-\ufaff\uff00-\uffef]|[^\s\u2e80-\u9fff\uf900-\ufaff\uff00-\uffef]+|\s+/g) || [name], lines = [];
+      let cur = "";
+      toks.forEach((t) => { const next = cur + t; if (cur.trim() && !/^\s+$/.test(t) && I18N.units(next.trim()) > maxU) { lines.push(cur.trim()); cur = t; } else cur = next; });
+      if (cur.trim()) lines.push(cur.trim());
+      if (lines.length > maxLines) { lines.length = maxLines; lines[maxLines - 1] = lines[maxLines - 1].replace(/[\s,;:·、，]*$/, "") + "…"; }
+      return lines;
+    }
+    KD.balls.forEach((b) => {
+      const n = b.pts.length;
+      b.r = 8 + 3.3 * Math.sqrt(n); b.cur = b.r; b.ro = Math.max(60, n * 10.5);
+      b.lines = I18N.cjk(b.name) && !/[A-Za-z]{3}/.test(b.name) && I18N.units(b.name) <= 32 ? I18N.split(b.name) : wrapName(b.name, 22, 3);
+      b.lw = Math.max(...b.lines.map(I18N.units)) * 7.1 / KREF;
+      b.lh = (b.lines.length * LH + 7) / KREF;
+      b.dots = b.pts.map((id, i) => ({ id, ball: b.id, a: -Math.PI / 2 + i * 2 * Math.PI / n }));
+    });
+    // rings and the room between topics follow the labels this map actually has, so long names don't pile up
+    const maxR = Math.max(...KD.balls.map((b) => b.r)), maxLh = Math.max(...KD.balls.map((b) => b.lh)), avgLw = KD.balls.reduce((n, b) => n + b.lw, 0) / KD.balls.length;
+    const RING0 = Math.max(106, maxR * 2 + maxLh * 0.6, (Math.max(...KD.balls.map((b) => b.lw)) + avgLw) * 0.42), RING_GAP = Math.max(102, maxR * 2 + maxLh + 14), SPACING = Math.max(220, avgLw * 0.9 + 40);
+    const RINGS = [0], CAP = [1];
     const ORDER = new Map(KD.balls.map((b, i) => [b.id, i]));   // topics come in the planners' order, from basics to advanced
     KD.balls.slice().sort((x, y) => (x.d - y.d) || (ORDER.get(x.id) - ORDER.get(y.id)))
       .forEach((b, i) => {
@@ -64,17 +84,6 @@
         while (i >= c) { k++; if (!RINGS[k]) { RINGS[k] = RING0 + RING_GAP * (k - 1); CAP[k] = Math.max(3, Math.round(2 * Math.PI * RINGS[k] / SPACING)); } c += CAP[k]; }
         b.ring = k;
       });
-    KD.balls.forEach((b) => {
-      const n = b.pts.length;
-      b.r = 8 + 3.3 * Math.sqrt(n); b.cur = b.r; b.ro = Math.max(54, n * 8.6);
-      const w = b.name.split(" ");
-      if (b.name.length <= 14 || w.length < 2) b.lines = [b.name];
-      else { let best = null; for (let i = 1; i < w.length; i++) { const l1 = w.slice(0, i).join(" "), l2 = w.slice(i).join(" "), m = Math.max(l1.length, l2.length); if (!best || m < best[0]) best = [m, l1, l2]; } b.lines = [best[1], best[2]]; }
-      if (I18N.cjk(b.name)) b.lines = I18N.split(b.name);
-      b.lw = Math.max(...b.lines.map(I18N.units)) * 7.1 / KREF;
-      b.lh = (b.lines.length * LH + 7) / KREF;
-      b.dots = b.pts.map((id, i) => ({ id, ball: b.id, a: -Math.PI / 2 + i * 2 * Math.PI / n }));
-    });
     const TAU = Math.PI * 2, wrap = (a) => Math.atan2(Math.sin(a), Math.cos(a));
     const areaAng = (a) => (AREA[a].i / KD.areas.length) * TAU - Math.PI / 2;
     const place = (b) => { const R = RINGS[b.ring]; b.x = R * Math.cos(b.a); b.y = R * Math.sin(b.a); };
@@ -112,6 +121,23 @@
           const dir = Math.sign((P.x - Q.x) * tx + (P.y - Q.y) * ty) || (P === A ? 1 : -1);
           const need = Math.min(Math.abs(tx) > 0.08 ? ox / Math.abs(tx) : 1e9, Math.abs(ty) > 0.08 ? oy / Math.abs(ty) : 1e9);
           P.a = wrap(P.a + dir * Math.min(need * (Q.ring ? 0.5 : 1) * 0.6 + 0.5, 24) / RINGS[P.ring]);
+          place(P);
+        }
+      }
+      if (!hit) break;
+    }
+    // whatever labels still overlap, topics themselves never do: a last pass looks at the circles alone
+    // (labels that would still collide are hidden at drawing time and appear as the learner zooms in)
+    for (let it = 0; it < 400; it++) {
+      let hit = 0;
+      for (let i = 0; i < KD.balls.length; i++) for (let j = i + 1; j < KD.balls.length; j++) {
+        const A = KD.balls[i], B = KD.balls[j], gap = Math.hypot(A.x - B.x, A.y - B.y) - (A.r + B.r + 16);
+        if (gap >= 0) continue;
+        hit++;
+        for (const [P, Q] of [[A, B], [B, A]]) {
+          if (!P.ring) continue;
+          const tx = -Math.sin(P.a), ty = Math.cos(P.a), dir = Math.sign((P.x - Q.x) * tx + (P.y - Q.y) * ty) || (P === A ? 1 : -1);
+          P.a = wrap(P.a + dir * Math.min(-gap * 0.6 + 0.5, 24) / RINGS[P.ring]);
           place(P);
         }
       }
@@ -159,9 +185,11 @@
     ballSel.append("circle").attr("class", "km-hit");
     const dotSel = ballSel.append("g").attr("class", "km-dots").selectAll("g.km-dot").data((b) => b.dots).join("g")
       .attr("class", "km-dot").attr("transform", "translate(0,0)").style("opacity", 0);
+    dotSel.append("title").text((d) => nm(d.id));
     dotSel.append("circle").attr("class", "km-halo");
     dotSel.append("circle").attr("class", "km-core");
-    dotSel.append("text").attr("data-ai", "").text((d) => nm(d.id));
+    dotSel.append("text").attr("data-ai", "").selectAll("tspan").data((d) => wrapName(nm(d.id), 26, 3)).join("tspan").text((l) => l);
+    ballSel.append("title").text((b) => b.name);
     const blab = ballSel.append("text").attr("class", "km-blab").attr("data-ai", "").attr("text-anchor", "middle");
     blab.selectAll("tspan").data((b) => b.lines).join("tspan").attr("x", 0).text((l) => l);
     const bcount = ballSel.append("text").attr("class", "km-prog").attr("text-anchor", "middle");
@@ -197,22 +225,32 @@
       bcount.attr("display", (b) => ks.open === b.id ? null : "none");
       geom(ballSel);
       linkSel.attr("d", linkPath);
-      dotSel.select(".km-core").attr("r", 6.4 / K);
-      dotSel.select(".km-halo").attr("r", 10 / K);
+      dotSel.select(".km-core").attr("r", 8.5 / K);
+      dotSel.select(".km-halo").attr("r", 13 / K);
+      // a point's label sits outside its dot; several lines are stacked so the block stays centred on the dot's side
+      const PLH = 15.5 / K;
       dotSel.select("text").attr("font-size", 13.5 / K).attr("stroke-width", 3.6 / K)
-        .attr("x", (d) => Math.cos(d.a) * 17 / K).attr("y", (d) => Math.sin(d.a) * 17 / K)
-        .attr("text-anchor", (d) => Math.cos(d.a) > 0.3 ? "start" : Math.cos(d.a) < -0.3 ? "end" : "middle")
-        .attr("dominant-baseline", (d) => Math.abs(Math.cos(d.a)) > 0.3 ? "central" : Math.sin(d.a) < 0 ? "auto" : "hanging");
-      if (ks.open) declutter();
+        .attr("text-anchor", (d) => Math.cos(d.a) > 0.12 ? "start" : Math.cos(d.a) < -0.12 ? "end" : "middle")
+        .attr("dominant-baseline", "central")
+        .each(function (d) {
+          const t = d3.select(this), n = t.selectAll("tspan").size(), x = Math.cos(d.a) * 21 / K, y = Math.sin(d.a) * 21 / K;
+          const side = Math.abs(Math.cos(d.a)) > 0.12 ? 0 : Math.sin(d.a) < 0 ? -1 : 1;
+          const y0 = side === 0 ? y - (n - 1) * PLH / 2 : side < 0 ? y - (n - 0.5) * PLH : y + 0.5 * PLH;
+          t.selectAll("tspan").attr("x", x).attr("y", (l, i) => y0 + i * PLH);
+        });
+      declutter();
     }
+    // labels that would collide are moved above their topic, or hidden until the learner zooms in;
+    // top picks and route topics get their place first
     function declutter() {
       const ob = ks.open, hit = (a, c) => Math.min(a.right, c.right) - Math.max(a.left, c.left) > 1 && Math.min(a.bottom, c.bottom) - Math.max(a.top, c.top) > 1;
       const mine = ballSel.filter((b) => b.id === ob), rect = (n) => n.getBoundingClientRect();
-      const own = [...mine.selectAll(".km-dot text").nodes(), mine.select(".km-body").node(), mine.select(".km-blab").node()].map(rect);
+      const own = (ob ? [...mine.selectAll(".km-dot text").nodes(), mine.select(".km-body").node(), mine.select(".km-blab").node()] : ballSel.select(".km-body").nodes()).map(rect);
+      const rank = (b) => (HOT.has(b.id) ? 0 : bOnRoute(b.id) ? 1 : 2);
       const chrome = [...document.querySelectorAll("#kmap .km-bar > *, #kmap .km-legend")].filter((e) => e.offsetParent).map(rect);
       const placed = [], ts = Math.max(0.8, Math.min(1, K / KREF));
-      ballSel.each(function (b) {
-        const lab = d3.select(this).select(".km-blab");
+      ballSel.nodes().map((n) => [n, d3.select(n).datum()]).sort((x, y) => rank(x[1]) - rank(y[1])).forEach(([node, b]) => {
+        const lab = d3.select(node).select(".km-blab");
         if (b.id === ob || lab.attr("display") === "none") return;
         const clear = () => { const r = rect(lab.node()); return !own.some((o) => hit(r, o)) && !placed.some((o) => hit(r, o)) && !chrome.some((o) => hit(r, o)) ? r : null; };
         let r = clear();
@@ -246,7 +284,7 @@
     }
     function fitOpen(b) {
       const node = svg.node(), w = node.clientWidth, h = node.clientHeight; if (!w || !h) return;
-      const room = Math.min(w / 2 - (w < 600 ? 92 : 170), (h - TOP - BOTTOM) / 2 - 46);
+      const room = Math.min(w / 2 - (w < 600 ? 110 : 200), (h - TOP - BOTTOM) / 2 - 70);
       const k = Math.max(0.5, Math.min(1.9, room / b.ro));
       fitTo(d3.zoomIdentity.translate(w / 2 - k * b.x, TOP + (h - TOP - BOTTOM) / 2 - k * b.y).scale(k));
     }

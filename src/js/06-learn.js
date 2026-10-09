@@ -184,18 +184,18 @@
   }
 
   async function translateLesson(doc, job) {
-    const L = trLang(), T = {};
-    await trPairs(job, lessonPairs(doc, T), subjectAbout("a lesson on one point, with its plan, extensions and notes"));
+    const L = curLang(), T = {};
+    await trPairs(job, lessonPairs(doc, T), subjectAbout("a lesson on one point, with its plan, extensions and notes"), srcOf(doc));
     doc.tr = Object.assign({}, doc.tr, { [L]: T });
   }
-  function retranslateLesson(pid) {
+  function lessonTrFn(pid) {
     const doc = lessonOf(pid), key = lessonKey(pid);
-    return retranslate("lesson", async (job) => {
+    return async (job) => {
       await translateLesson(doc, job);
-      const s = cur();
-      if (s.pointIndex[pid]) { s.pointIndex[pid].tr = Object.assign({}, s.pointIndex[pid].tr, { [trLang()]: doc.tr[trLang()].notes }); saveSubject(); }
+      const s = cur(), L = curLang();
+      if (s.pointIndex[pid] && srcOf(s.pointIndex[pid]) === srcOf(doc)) { s.pointIndex[pid].tr = Object.assign({}, s.pointIndex[pid].tr, { [L]: doc.tr[L].notes }); saveSubject(); }
       if (db) await db.doc("lessons2/" + key).set(clone(doc));
-    });
+    };
   }
 
   // ---------- The tutor: questions are kept with their point ----------
@@ -314,12 +314,14 @@
     const st = pid ? km.status(pid) : null;
     const missing = n ? n.needs.filter((x) => !km.isLearned(x)) : [];
 
-    const picker = h("div", { class: "card" },
+    // long point names are shortened in the list (a native list can't wrap); the full name shows on hover and below
+    const shortName = (t) => (I18N.units(t) > 64 ? [...t].reduce((o, ch) => (I18N.units(o + ch) > 62 ? o : o + ch), "").replace(/[\s,;:·、，(（]*$/, "") + "…" : t);
+    const picker = h("div", { class: "card picker" },
       h("div", { class: "field" },
         h("label", { for: "pt-select" }, "Point to learn"),
         h("select", { id: "pt-select", "data-ai": "", onchange: (e) => { if (e.target.value) { plPick(e.target.value, "the list"); render(); } } },
           h("option", { value: "" }, I18N.t("Choose a point…")),
-          P.KD.balls.map((b) => h("optgroup", { label: b.name }, b.pts.map((x) => h("option", { value: x, selected: x === pid ? true : null }, P.byId[x].name + " · " + I18N.t(PT_STATUS[km.status(x)]))))))),
+          P.KD.balls.map((b) => h("optgroup", { label: b.name }, b.pts.map((x) => h("option", { value: x, title: P.byId[x].name, selected: x === pid ? true : null }, shortName(P.byId[x].name) + " · " + I18N.t(PT_STATUS[km.status(x)]))))))),
       picks.length ? h("div", { class: "field" }, h("span", { class: "label small muted" }, "AI's top picks right now"),
         h("div", { class: "chips" }, picks.map((x) => ai("button", { class: x === pid ? "chip accent" : "chip", type: "button", onclick: () => { plPick(x, "top picks"); render(); } }, P.byId[x].name)))) : null,
       n ? h("p", { class: "small" },
@@ -346,9 +348,7 @@
           (L.advice || []).length ? h("div", { class: "small" }, h("strong", null, "The editor's remaining suggestions (they didn't block the lesson):"),
             ai("ul", { class: "plain" }, L.advice.map((a) => h("li", null, a.problem)))) : null,
           h("p", { class: "small muted" }, "Planned, taught and checked by AI in " + L.requests + " requests" + (L.rounds ? ", with " + L.rounds + " round" + (L.rounds > 1 ? "s" : "") + " of fixes" : "") + ".")),
-        origSwitch(L0) || trMissing(L0, "lesson", null) ? h("div", { class: "row tr-row" }, origSwitch(L0),
-          trLang() && L0.src === "en" && !(L0.tr && L0.tr[trLang()]) ? h("p", { class: "small muted" }, "This lesson is in English: it wasn't translated. ",
-            h("button", { class: "link", type: "button", disabled: !aiReady() || ui.busy["tr:lesson"], onclick: () => retranslateLesson(pid) }, ui.busy["tr:lesson"] ? "Translating…" : "Translate it")) : null) : null,
+        h("div", { class: "row tr-row" }, trLine("lesson:" + lessonKey(pid), L0, lessonTrFn(pid))),
         h("article", { class: "card lesson-card" }, h("div", { class: "lesson" }, md(L.lesson))),
         h("p", { class: "small muted" }, L.ran && L.ran.n ? (L.ran.n === L.ran.of ? "Written and checked by AI, without a textbook behind it. The page ran every Python example and checked its output; for everything else, check what matters to you in a source you trust." : "Written and checked by AI, without a textbook behind it. The page ran " + L.ran.n + " of the " + L.ran.of + " Python examples and checked their output; for everything else, check what matters to you in a source you trust.") : "Written and checked by AI, without a textbook behind it. Where something matters to you, check it in a source you trust."),
         L.deeper ? h("aside", { class: "card deeper", "aria-label": "Going deeper, optional" },

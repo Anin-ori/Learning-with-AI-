@@ -210,7 +210,8 @@
         errLine("trial"),
         h("div", { class: "row" }, h("button", { class: "primary", type: "button", disabled: !aiReady() || ui.busy.trialPick, onclick: pickLevelTasks }, ui.busy.trialPick ? "Writing your tasks…" : "Set my level check"),
           h("button", { class: "quiet", type: "button", disabled: !aiReady() || ui.busy.trial, onclick: () => runLevelCheck(false) }, "Skip the tasks: judge from what I said"))) : [
-        T.why ? ai("p", { class: "lede" }, T.why) : null, origSwitch(T0),
+        T.why ? ai("p", { class: "lede" }, T.why) : null,
+        trLine("lvtasks:" + T0.at, T0, async (job) => { const tmp = { src: srcOf(T0), why: T0.why, titles: T0.tasks.map((x) => x.title), bodies: T0.tasks.map((x) => x.task) }; await translateRecord(job, tmp, ["why"], ["titles", "bodies"], subjectAbout("a short level check: tasks for the learner")); T0.tr = Object.assign({}, T0.tr, tmp.tr); saveSubject(); }),
         T.tasks.map((task, n) => {
           const res = t && t.results && t.results[n], r = res ? (RESULT[res.result] || RESULT.almost) : null;
           return h("article", { class: "card" },
@@ -230,6 +231,7 @@
       t ? h("div", { class: "card" },
         h("h3", null, "What the check shows"),
         t.summary ? ai("p", null, h("strong", null, t.summary)) : null,
+        trLine("lvresult:" + t0.at, t0, async (job) => { const tmp = { src: srcOf(t0), summary: t0.summary, feedback: t0.feedback, notes: (T0 ? T0.tasks : []).map((_, k) => ((t0.results || {})[k] || {}).note || "") }; await translateRecord(job, tmp, ["summary", "feedback"], ["notes"], subjectAbout("feedback on a level check")); t0.tr = Object.assign({}, t0.tr, tmp.tr); saveSubject(); }),
         ai("p", { class: "bubble-text" }, t.feedback),
         t.solid.length ? h("div", { class: "field" }, h("span", { class: "label" }, "Looks solid"), chips(t.solid, "ok")) : null,
         t.shaky.length ? h("div", { class: "field" }, h("span", { class: "label" }, "Needs work"), chips(t.shaky, "warn")) : null,
@@ -311,7 +313,7 @@
       head("Profile · AI guidance", "How far I can guide you", "Three models estimate, separately, how much of this map an AI can explain well for you, and where you'll need other help. Where they disagree, you'll see it. Lessons and the tutor use this figure."),
       g ? h("div", { class: "verdict " + g.agreement },
         h("div", { class: "row spread" }, h("span", { class: "verdict-title" }, words[g.agreement] + (g.agreement === "agree" ? "" : " (estimates " + g.spread + " points apart)")), h("span", { class: "share" }, g.share + "%")),
-        ai("p", null, g.statement), origSwitch(g0),
+        ai("p", null, g.statement), trLine("grade:" + g0.share + ":" + String(g0.statement || "").slice(0, 30), g0, async (job) => { await translateRecord(job, g0, ["statement"], [], subjectAbout("AI estimates of how far an AI can guide this learner")); saveSubject(); }),
         caution("These are AI estimates of AI ability, and they can be wrong.")) : null,
       h("div", { class: "row" },
         h("button", { class: g ? "quiet" : "primary", type: "button", disabled: ui.busy.grade || !aiReady(), onclick: runGrade }, ui.busy.grade ? "Asking three models…" : g ? "Ask again" : "Ask the three models"),

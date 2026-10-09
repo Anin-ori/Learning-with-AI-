@@ -438,18 +438,18 @@
   }
 
   async function translateSet(set, job) {
-    const L = trLang(), T = {};
-    await trPairs(job, practicePairs(set, T), subjectAbout("a practice set: tasks, hints, criteria and model answers, and advice on how to practise"));
+    const L = curLang(), T = {};
+    await trPairs(job, practicePairs(set, T), subjectAbout("a practice set: tasks, hints, criteria and model answers, and advice on how to practise"), srcOf(set));
     set.tr = Object.assign({}, set.tr, { [L]: T });
   }
-  function retranslateSet() {
-    const set = ui.pset, s = cur();
-    return retranslate("set", async (job) => {
+  function setTrFn(set) {
+    const s = cur();
+    return async (job) => {
       await translateSet(set, job);
-      const e = (s.practice || []).find((p) => p.id === set.id);
-      if (e) { e.tr = Object.assign({}, e.tr, { [trLang()]: set.tr[trLang()].exercises.map((x) => x.title) }); saveSubject(); }
+      const L = curLang(), e = (s.practice || []).find((p) => p.id === set.id);
+      if (e) { e.tr = Object.assign({}, e.tr, { [L]: set.tr[L].exercises.map((x) => x.title) }); saveSubject(); }
       savePset();
-    });
+    };
   }
   async function loadPracticeSet(id) {
     if (!id || (ui.pset && ui.pset.id === id) || !db) return;
@@ -527,7 +527,7 @@
           return h("li", { class: cls }, h("span", { class: "tick" }, tick), ai("div", null, h("span", null, c), r.note ? h("p", { class: "small muted" }, r.note) : null)); })),
         F.text ? ai("p", { class: "bubble-text" }, F.text) : null,
         h("p", { class: "caution" }, "AI feedback · can be wrong. Nothing in this subject can be run, so this is one AI's reading of your answer."),
-        origSwitch(F0));
+        trLine("fb:" + S.id + ":" + String(F0.text || "").slice(0, 40), F0, async (job) => { await translateRecord(job, F0, ["text"], ["notes"], subjectAbout("feedback on the learner's answer to a practice exercise")); savePset(); }));
     }
     const rs = run.results || [], passed = rs.filter((r) => r.pass).length;
     const firstFail = rs.findIndex((r) => !r.pass);
@@ -585,7 +585,7 @@
       h("div", { class: "row" }, h("button", { class: "primary", type: "button", disabled: !aiReady() || !n, onclick: judgePractice }, "Is it time to practise?")));
     else verdict = h("div", { class: "card pr-verdict " + (R.enough ? "yes" : "no") },
       h("p", { class: "eyebrow" }, R.enough ? "Worth practising now" : "Not yet"),
-      ai("p", null, R.why), origSwitch(R0),
+      ai("p", null, R.why), trLine("ready:" + R0.at, R0, async (job) => { await translateRecord(job, R0, ["why", "shape"], ["focus", "review", "next"], subjectAbout("a judgement on whether the learner should practise now")); saveSubject(); }),
       R.enough && R.focus.length ? h("p", { class: "small" }, h("strong", null, "It would combine: "), ai("span", null, R.focus.join(" · "))) : null,
       R.enough && R.review.length ? h("p", { class: "small" }, h("strong", null, "With review of: "), ai("span", null, R.review.join(" · "))) : null,
       !R.enough && R.next.length ? h("p", { class: "small" }, h("strong", null, "Practice gets much better after: "), ai("span", null, R.next.join(" · "))) : null,
@@ -599,9 +599,7 @@
     const setView2 = S ? [
       h("div", { class: "card soft pr-plan" },
         h("p", { class: "eyebrow" }, "This set"),
-        origSwitch(S0),
-        trLang() && S0.src === "en" && !(S0.tr && S0.tr[trLang()]) ? h("p", { class: "small muted" }, "This set is in English: it wasn't translated. ",
-          h("button", { class: "link", type: "button", disabled: !aiReady() || ui.busy["tr:set"], onclick: retranslateSet }, ui.busy["tr:set"] ? "Translating…" : "Translate it")) : null,
+        trLine("set:" + S0.id, S0, setTrFn(S0)),
         S.when ? ai("p", null, S.when) : null,
         S.how.length ? h("div", null, h("p", { class: "label" }, "How to practise"), ai("ul", { class: "plain" }, S.how.map((t) => h("li", null, t)))) : null,
         h("p", { class: "small muted" }, verifiedText(S)),

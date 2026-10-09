@@ -494,7 +494,7 @@
         const fin = finishMap(W);
         const M2 = { ...M, route: fin.route, routeAt: new Date().toISOString() };
         maps[sid] = M2;
-        if (trLang() && M2.src === "en") {
+        if (needsTr(M2)) {
           job.stage = "translate"; job.paint();
           try { await translateMap(sid, job, true); } catch (e) { if (e && e.code === "cancelled") throw e; notify("The route is updated, but its reasons couldn't be translated, so they're shown in English.", "warn"); }
         }
@@ -606,7 +606,7 @@
       const M = { ...M0, areas: fin.areas, balls: fin.balls, nodes: fin.nodes, links: fin.links, blinks: fin.blinks, route: fin.route,
         checked: (M0.checked || []).concat([{ at: new Date().toISOString(), fixes: B.fixes, verdict: B.verdicts.n1 || "", notes: B.notes }]) };
       maps[sid] = M;
-      if (trLang() && M.src === "en") {
+      if (needsTr(M)) {
         job.stage = "translate"; job.paint();
         try { await translateMap(sid, job); } catch (e) { if (e && e.code === "cancelled") throw e; notify("The map is checked, but it couldn't be translated again, so some of it may show in English. You can translate it again from its About tab.", "warn"); }
       }
@@ -711,11 +711,17 @@
         (c.fixes.filter((f) => f.done).length ? '<ul class="km-notelist">' + c.fixes.filter((f) => f.done).map((f) => "<li>" + esc(I18N.t(f.text)) + "</li>").join("") + "</ul>" : '<p class="km-empty">' + T("Nothing: no errors were found.") + "</p>")).join("") +
       (notes.length ? "<h3>" + T("What the page's structure check changed") + '</h3><ul class="km-notelist">' + notes.map((n) => "<li>" + esc(I18N.t(n)) + "</li>").join("") + "</ul>" : "") +
       '<p class="km-small">' + esc(I18N.t("Built " + new Date(M.built).toLocaleDateString(I18N.lang === "zh" ? "zh-CN" : "en-US", { year: "numeric", month: "short", day: "numeric" }) + ".")) + "</p>" +
-      (trLang() && M.tr && M.tr[trLang()] ? '<div class="km-btns"><button class="km-btn" type="button" data-about="orig">' + T(showOrigFlag ? "Show the translation" : "Show the English original") + "</button></div>"
-        : trLang() && M.src === "en" ? '<p class="km-small">' + T("This map is in English: it wasn't translated.") + '</p><div class="km-btns"><button class="km-btn" type="button" data-about="translate"' + (ui.busy["tr:map"] ? " disabled" : "") + ">" + T(ui.busy["tr:map"] ? "Translating…" : "Translate it") + "</button></div>" : "") +
+      (needsTr(M) && M.tr && M.tr[curLang()] ? '<div class="km-btns"><button class="km-btn" type="button" data-about="orig">' + T(origLabel(M)) + "</button></div>"
+        : needsTr(M) && ui.autoTr["map:" + M.mid] === "failed" ? '<p class="km-small">' + T(srcOf(M) === "en" ? "This map is in English: it couldn't be translated." : "This map is in Chinese: it couldn't be translated.") + '</p><div class="km-btns"><button class="km-btn" type="button" data-about="translate">' + T("Translate it") + "</button></div>"
+        : needsTr(M) && !showOrigFlag ? '<p class="km-small">' + T("Translating into your language…") + "</p>" : "") +
       '<div class="km-btns"><button class="km-btn" type="button" data-about="profile">' + T("Rebuild or update in Profile") + "</button></div>";
   }
-  function retranslateMap() {
-    const sid = app.current;
-    return retranslate("map", async (job) => { await translateMap(sid, job); saveMap(sid); const v = ui.view; mountMap(); if (v === "map") setView("map"); });
+  // the open map, translated into the interface language the first time it is shown in it
+  function mapTrFn(sid) {
+    return async (job) => { await translateMap(sid, job); saveMap(sid); if (sid === app.current) { const v = ui.view; mountMap(); if (v === "map") setView("map"); } };
   }
+  function autoTranslateMap() {
+    const M = curMap();
+    if (M && needsTr(M) && !showOrigFlag && !(M.tr && M.tr[curLang()])) autoTranslate("map:" + M.mid, mapTrFn(app.current));
+  }
+  function retranslateMap() { const M = curMap(); if (M) { ui.autoTr["map:" + M.mid] = null; autoTranslateMap(); } }

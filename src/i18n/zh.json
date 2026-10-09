@@ -607,7 +607,13 @@
   "checks the whole plan: the size of points, overlaps, gaps and proportions": "检查整个规划：知识点的大小、重复、缺漏和比例",
   "write what each point is and what it needs first, each seeing the whole plan": "写出每个知识点是什么、需要先学什么，写时能看到整个规划",
   "check each area, then the whole map": "先检查每个领域，再检查整张地图",
-  "Writer": "撰写者"
+  "Writer": "撰写者",
+  "Show the Chinese original": "显示中文原文",
+  "Translating into your language…": "正在翻译成你的语言……",
+  "This is in English: it couldn't be translated. ": "这部分是英文的，没能翻译。",
+  "This is in Chinese: it couldn't be translated. ": "这部分是中文的，没能翻译。",
+  "This map is in English: it couldn't be translated.": "这张地图是英文的，没能翻译。",
+  "This map is in Chinese: it couldn't be translated.": "这张地图是中文的，没能翻译。"
  },
  "patterns": [
   [

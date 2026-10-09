@@ -220,6 +220,16 @@ const ok = (c, msg) => { if (!c) { console.log("FAIL:", msg); process.exitCode =
   ok(!overflow, "no horizontal scroll on a phone");
   await shot("v2-18-phone-profile", true);
 
+  // ---- switching the language: what the AI wrote follows, translated the first time it's shown ----
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("file://" + path.join(DIR, "page.html") + (ZH ? "#lang=en" : "#lang=zh")); await page.reload(); await page.waitForTimeout(2500);
+  const sw = await page.evaluate(() => ({ lab: document.querySelector(".km-blab") && document.querySelector(".km-blab").textContent, tr: window.__translations || 0 }));
+  ok(ZH ? !/^译·/.test(sw.lab) : /^译·/.test(sw.lab) && sw.tr > 0, "after switching language, the map shows in the new language " + JSON.stringify(sw));
+  await nav("learn"); await page.waitForTimeout(1500);
+  const lsw = await page.evaluate(() => (document.querySelector(".lesson-card") || {}).textContent || "");
+  ok(ZH ? !/译·/.test(lsw) : /译·/.test(lsw), "and so does the lesson");
+  await page.screenshot({ path: path.join(OUT, "v2-19-switched" + SUF + ".png") });   // no harvest: the page is in the other language now
+
   if (ZH) { fs.writeFileSync(path.join(OUT, "untranslated.txt"), [...left].join("\n")); console.log("untranslated strings:", left.size); }
   console.log(errs.length ? "ERRORS:\n" + errs.join("\n") : "no page errors");
   if (errs.length) process.exitCode = 1;
