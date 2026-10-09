@@ -617,6 +617,10 @@
  },
  "patterns": [
   [
+   "Map checked for (.+?): (\\d+) changes?; (\\d+) requests",
+   "已检查 \\1 的地图：\\2 处修改；\\3 次请求"
+  ],
+  [
    "· (\\d+) of (\\d+) parts planned · (\\d+) topics · (\\d+) points · (\\d+) levels?",
    "· 已规划 \\2 个部分中的 \\1 个 · \\3 个主题 · \\4 个知识点 · 共 \\5 层"
   ],

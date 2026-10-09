@@ -170,7 +170,8 @@
       open.length ? (root ? "For each missing idea, link it to the point that teaches it, add the point if the idea belongs on the map, or drop it if the point can be understood without it." : "For each missing idea, link it to the point in this part that teaches it, add the point if it belongs in this part, or leave it for the reviewer of the whole map.") : null,
       "Give each change as one operation:",
       open.length ? '- {"op": "link", "need": "missing idea id", "to": "point id"} and {"op": "drop_need", "need": "missing idea id", "why": ""}' : null,
-      '- {"op": "add_point", "topic": "topic id", "name": "", "what": "", "needs": ["point ids"]' + (open.length ? ', "for": ["missing idea ids it meets"]' : "") + ', "why": ""}',
+      '- {"op": "add_point", "topic": "topic id", "name": "", "what": "", "needs": ["point ids"], "needed_by": ["ids of points that need the new point"]' + (open.length ? ', "for": ["missing idea ids it meets"]' : "") + ', "why": ""}',
+      "A point you add has no id yet, so link the points that need it with \"needed_by\" in the same operation, not with add_need. A \"needs\" link may point to any point on the map; the point that gains or loses it must be in your part.",
       '- {"op": "merge", "id": "the point to remove", "into": "the point that keeps the idea", "why": ""}',
       '- {"op": "rename", "id": "", "name": "", "what": "", "why": ""}',
       '- {"op": "move", "id": "", "topic": "topic id", "why": ""}',
@@ -300,6 +301,7 @@
         const nid = "p" + (++B.nPoint);
         B.byId[nid] = { id: nid, name, what: pstr(f.what), needs: parr(f.needs).map(pstr).filter((x) => P.has(x)), helps: [] };
         B.balls[t].pts.push(nid);
+        parr(f.needed_by).map(pstr).forEach((k) => { if (P.has(k) && k !== nid && !B.byId[k].needs.includes(nid)) B.byId[k].needs.push(nid); });
         parr(f.for).map(pstr).forEach((k) => { const o = openOf(k); if (o && o.pt !== nid) { B.byId[o.pt].needs.push(nid); B.open = B.open.filter((y) => y !== o); B.linked++; } });
         ok("Added \"" + name + "\" to " + B.balls[t].name + tail);
       } else if (op === "remove_point") {
@@ -325,7 +327,7 @@
         B.balls[t].pts.push(id); ok("Moved " + nameOf(id) + " to " + B.balls[t].name + tail);
       } else if (op === "add_need" || op === "remove_need") {
         const x = B.byId[id], need = pstr(f.need);
-        if (!P.has(id) || !P.has(need) || id === need) return skip("Couldn't change what " + id + " needs" + tail);
+        if (!P.has(id) || !B.byId[need] || id === need || (op === "remove_need" && !x.needs.includes(need))) return skip("Couldn't change what " + id + " needs" + tail);
         if (op === "add_need") { if (x.needs.includes(need)) return; x.needs.push(need); x.helps = x.helps.filter((y) => y !== need); ok(nameOf(id) + " now needs " + nameOf(need) + " first" + tail); }
         else { x.needs = x.needs.filter((y) => y !== need); ok(nameOf(id) + " no longer needs " + nameOf(need) + " first" + tail); }
       } else if (op) skip("Unknown change \"" + op + "\"" + tail);
@@ -603,7 +605,7 @@
         route: { goal: M0.route.goal.filter((id) => B.byId[id]), why: M0.route.why, note: M0.route.note }, notes: B.notes, fixes: B.fixes };
       W.areas = W.areas.filter((a) => W.balls.some((b) => b.area === a.id));
       const fin = finishMap(W);
-      const M = { ...M0, areas: fin.areas, balls: fin.balls, nodes: fin.nodes, links: fin.links, blinks: fin.blinks, route: fin.route,
+      const M = { ...M0, tr: undefined, areas: fin.areas, balls: fin.balls, nodes: fin.nodes, links: fin.links, blinks: fin.blinks, route: fin.route,
         checked: (M0.checked || []).concat([{ at: new Date().toISOString(), fixes: B.fixes, verdict: B.verdicts.n1 || "", notes: B.notes }]) };
       maps[sid] = M;
       if (needsTr(M)) {
@@ -617,7 +619,7 @@
       saveMap(sid); saveSubject(sid);
       job.stage = "done";
       const n = B.fixes.filter((f) => f.done).length;
-      logEvent("map", "Map checked for " + s.name + ": " + n + (n === 1 ? " change" : " changes") + ", " + B.linked + " links added; " + job.requests + " requests");
+      logEvent("map", "Map checked for " + s.name + ": " + n + (n === 1 ? " change" : " changes") + "; " + job.requests + " requests");
       notify(n ? "The check is done: " + n + (n === 1 ? " change" : " changes") + " to your map. See them on the map's About tab." : "The check is done: no errors were found.");
       if (sid === app.current) mountMap();
     } catch (e) {

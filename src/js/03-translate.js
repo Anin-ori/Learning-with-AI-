@@ -47,12 +47,13 @@
     "- Use the standard terms that textbooks in that language use for this subject. Where a standard term may be unfamiliar, give the English term in parentheses the first time it appears in a string.",
     "- In code blocks, translate only the comments. Keep exactly as they are: the code itself (strings in it too), text in backticks, formulas and mathematical notation, identifiers, program input and output, numbers, URLs, and the Markdown structure (headings, lists, tables, bold, line breaks). Keep a line that reads only \"Output:\" exactly as it is.",
     "- Names of books and courses keep their published title in that language if one exists, otherwise the original title.",
+    curLang() === "en" ? "- Write every name and heading in sentence case: capitalise only the first word and proper names, the same way in every string." : null,
     "",
     "The strings, as a JSON array:",
     JSON.stringify(strs),
     "",
     'Reply with only JSON: {"t": ["the translation of string 1", "..."]}, with exactly ' + strs.length + " strings in the same order.",
-  ].join("\n");
+  ].filter((x) => x != null).join("\n");
   // translates a list of strings in as few requests as the safety limit allows; empty strings stay empty
   async function translateList(job, list, about, from) {
     const texts = list.map((s) => (typeof s === "string" ? s : ""));
