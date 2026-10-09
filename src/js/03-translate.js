@@ -1,0 +1,230 @@
+  // ---------- Translation (v2.1) ----------
+  // Every agent works in English. When the learner reads another language, a translator turns what was built (maps,
+  // lessons, notes, practice, the level check, AI guidance) into that language after it is delivered, and the English
+  // original is kept beside it: the learner can switch to it at any time. The tutor chat is the exception: it answers
+  // directly in the learner's language, so replies still stream in. A failed translation never blocks anything: the
+  // learner gets the English original and can ask for the translation again.
+  const LANG_NAMES = { zh: "Simplified Chinese (简体中文)" };
+  const trLang = () => (I18N.lang !== "en" && LANG_NAMES[I18N.lang] ? I18N.lang : null);
+  const TR_CHUNK = 9000;   // safety limit on the characters sent in one translation request
+  const TR_PART = 2500;    // safety limit: a longer text (a lesson) is sent as several parts, split between paragraphs
+  // splits Markdown between paragraphs, never inside a code block; the parts join back with a blank line
+  function mdParts(s) {
+    const blocks = [];
+    let cur = [], fence = false;
+    s.split("\n").forEach((line) => {
+      if (/^\s*(```|~~~)/.test(line)) fence = !fence;
+      if (!fence && !line.trim()) { if (cur.length) { blocks.push(cur.join("\n")); cur = []; } return; }
+      cur.push(line);
+    });
+    if (cur.length) blocks.push(cur.join("\n"));
+    const parts = [];
+    blocks.forEach((b) => { if (parts.length && parts[parts.length - 1].length + b.length < TR_PART) parts[parts.length - 1] += "\n\n" + b; else parts.push(b); });
+    return parts;
+  }
+  let showOrigFlag = false;
+  try { showOrigFlag = localStorage.getItem("lc-orig") === "1"; } catch (_) {}
+  const showOrig = () => !trLang() || showOrigFlag;
+  function setShowOrig(on) {
+    showOrigFlag = !!on;
+    try { localStorage.setItem("lc-orig", on ? "1" : "0"); } catch (_) {}
+    if (typeof mountMap === "function") { const v = ui.view; mountMap(); if (v === "map") setView("map"); }
+    render();
+  }
+  // the translated version of a stored item, or null when the original should show
+  const trOf = (item) => { const L = trLang(); return L && !showOrigFlag && item && item.tr && item.tr[L] ? item.tr[L] : null; };
+  const pickT = (t, v) => (typeof t === "string" && t.trim() ? t : v);
+
+  const translatorPrompt = (strs, about) => [
+    "You translate study material in Learning Companion, a study tool for self-learners, from English into " + LANG_NAMES[trLang()] + ". " + about,
+    "- Translate every string faithfully and completely, in the natural, precise style a good textbook in that language would use. Don't add, drop or explain anything.",
+    "- Use the standard terms that textbooks in that language use for this subject. Where a standard term may be unfamiliar, give the English term in parentheses the first time it appears in a string.",
+    "- In code blocks, translate only the comments. Keep exactly as they are: the code itself (strings in it too), text in backticks, formulas and mathematical notation, identifiers, program input and output, numbers, URLs, and the Markdown structure (headings, lists, tables, bold, line breaks). Keep a line that reads only \"Output:\" exactly as it is.",
+    "- Names of books and courses keep their published title in that language if one exists, otherwise the original title.",
+    "",
+    "The strings, as a JSON array:",
+    JSON.stringify(strs),
+    "",
+    'Reply with only JSON: {"t": ["the translation of string 1", "..."]}, with exactly ' + strs.length + " strings in the same order.",
+  ].join("\n");
+  // translates a list of strings in as few requests as the safety limit allows; empty strings stay empty
+  async function translateList(job, list, about) {
+    const texts = list.map((s) => (typeof s === "string" ? s : ""));
+    // long texts go as parts so one request never carries a whole lesson; they are joined again below
+    const units = [], owner = [];
+    texts.forEach((s, i) => (s.length > TR_PART ? mdParts(s) : [s]).forEach((u) => { units.push(u); owner.push(i); }));
+    const done = await translateUnits(job, units, about);
+    const res = texts.map(() => []);
+    done.forEach((u, k) => res[owner[k]].push(u));
+    return res.map((r, i) => (texts[i].length > TR_PART ? r.join("\n\n") : r[0]));
+  }
+  async function translateUnits(job, list, about) {
+    const out = list.slice();
+    const idx = out.map((s, i) => (s.trim() ? i : -1)).filter((i) => i >= 0);
+    const chunks = [];
+    let cur = [], size = 0;
+    idx.forEach((i) => { const n = out[i].length; if (cur.length && size + n > TR_CHUNK) { chunks.push(cur); cur = []; size = 0; } cur.push(i); size += n; });
+    if (cur.length) chunks.push(cur);
+    await Promise.all(chunks.map(async (c) => {
+      const strs = c.map((i) => out[i]);
+      for (let attempt = 0; ; attempt++) {
+        const d = await ask(job, "Translator", translatorPrompt(strs, about), "default", true);
+        const t = d && Array.isArray(d.t) ? d.t : null;
+        if (t && t.length === strs.length && t.every((x) => typeof x === "string")) { c.forEach((i, k) => { out[i] = t[k].trim() ? t[k] : out[i]; }); return; }
+        if (attempt >= 1) throw { code: "invalid_json", agent: "Translator" };
+      }
+    }));
+    return out;
+  }
+  // fills `target` from pairs of [English text, setter] with one translation pass
+  async function trPairs(job, pairs, about) {
+    const t = await translateList(job, pairs.map((p) => p[0] || ""), about);
+    pairs.forEach((p, i) => p[1](t[i]));
+  }
+  const subjectAbout = (kind) => { const s = cur(); return "This is " + kind + (s ? " for a learner of " + s.name : "") + "."; };
+
+  // ----- what gets translated -----
+  function mapPairs(M, T) {
+    T.areas = {}; T.balls = {}; T.nodes = {}; T.route = { why: {} };
+    const P = [];
+    P.push([M.subject, (v) => { T.subject = v; }]);
+    P.push([M.scope, (v) => { T.scope = v; }]);
+    M.areas.forEach(([id, name]) => P.push([name, (v) => { T.areas[id] = v; }]));
+    M.balls.forEach((b) => {
+      const tb = T.balls[b.id] = { where: [] };
+      P.push([b.name, (v) => { tb.name = v; }]);
+      P.push([b.desc, (v) => { tb.desc = v; }]);
+      (b.where || []).forEach((w, i) => { tb.where[i] = {}; P.push([w.title, (v) => { tb.where[i].title = v; }]); P.push([w.detail, (v) => { tb.where[i].detail = v; }]); });
+    });
+    M.nodes.forEach((n) => { const tn = T.nodes[n.id] = {}; P.push([n.name, (v) => { tn.name = v; }]); P.push([n.what, (v) => { tn.what = v; }]); });
+    Object.entries((M.route && M.route.why) || {}).forEach(([id, w]) => P.push([w, (v) => { T.route.why[id] = v; }]));
+    P.push([M.route && M.route.note, (v) => { T.route.note = v; }]);
+    if (M.checks) {
+      T.fixes = [];
+      P.push([M.checks.verdict, (v) => { T.verdict = v; }]);
+      (M.checks.fixes || []).forEach((f, i) => P.push([f.text, (v) => { T.fixes[i] = v; }]));
+      T.notes = [];
+      (M.checks.notes || []).forEach((n, i) => P.push([n, (v) => { T.notes[i] = v; }]));
+    }
+    return P;
+  }
+  function routePairs(M, T) {
+    T.route = { why: {} };
+    const P = Object.entries((M.route && M.route.why) || {}).map(([id, w]) => [w, (v) => { T.route.why[id] = v; }]);
+    P.push([M.route && M.route.note, (v) => { T.route.note = v; }]);
+    return P;
+  }
+  // the map as the learner sees it: translated names over a copy of the original (never the stored map itself)
+  function displayMap(M) {
+    const D = clone(M);
+    D.nodes.forEach((n) => { n.name_en = n.name; });
+    D.balls.forEach((b) => { b.name_en = b.name; });
+    const T = trOf(M);
+    if (!T) return D;
+    D.subject = pickT(T.subject, D.subject);
+    D.scope = pickT(T.scope, D.scope);
+    D.areas = D.areas.map(([id, name]) => [id, pickT((T.areas || {})[id], name)]);
+    D.balls.forEach((b) => {
+      const t = (T.balls || {})[b.id]; if (!t) return;
+      b.name = pickT(t.name, b.name); b.desc = pickT(t.desc, b.desc);
+      b.where = (b.where || []).map((w, i) => ({ ...w, title: pickT((t.where[i] || {}).title, w.title), detail: pickT((t.where[i] || {}).detail, w.detail) }));
+    });
+    D.nodes.forEach((n) => { const t = (T.nodes || {})[n.id]; if (t) { n.name = pickT(t.name, n.name); n.what = pickT(t.what, n.what); } });
+    if (T.route) D.route = { ...D.route, why: Object.fromEntries(Object.entries(D.route.why || {}).map(([k, v]) => [k, pickT(T.route.why[k], v)])), note: pickT(T.route.note, D.route.note) };
+    if (D.checks) D.checks = { ...D.checks, verdict: pickT(T.verdict, D.checks.verdict), fixes: (D.checks.fixes || []).map((f, i) => ({ ...f, text: pickT((T.fixes || [])[i], f.text), translated: !!(T.fixes || [])[i] })), notes: (D.checks.notes || []).map((n, i) => pickT((T.notes || [])[i], n)) };
+    return D;
+  }
+  async function translateMap(sid, job, onlyRoute) {
+    const M = maps[sid], L = trLang();
+    if (!M || !L) return;
+    const T = onlyRoute && M.tr && M.tr[L] ? clone(M.tr[L]) : {};
+    await trPairs(job, onlyRoute ? routePairs(M, T) : mapPairs(M, T), subjectAbout("a knowledge map: the names and descriptions of its areas, topics and points, where topics are taught, and notes on how it was built"));
+    M.tr = Object.assign({}, M.tr, { [L]: T });
+  }
+
+  function lessonPairs(doc, T) {
+    const P = [], p = doc.plan;
+    T.plan = { sections: [] }; T.notes = []; T.advice = [];
+    [["aim"], ["approach"], ["beyond"], ["goal_link"]].forEach(([k]) => P.push([p[k], (v) => { T.plan[k] = v; }]));
+    p.sections.forEach((s, i) => { T.plan.sections[i] = {}; P.push([s.title, (v) => { T.plan.sections[i].title = v; }]); P.push([s.teach, (v) => { T.plan.sections[i].teach = v; }]); });
+    P.push([doc.lesson, (v) => { T.lesson = v; }]);
+    P.push([doc.deeper, (v) => { T.deeper = v; }]);
+    doc.notes.forEach((n, i) => P.push([n, (v) => { T.notes[i] = v; }]));
+    (doc.advice || []).forEach((a, i) => P.push([a.problem, (v) => { T.advice[i] = v; }]));
+    return P;
+  }
+  function lessonView(doc) {
+    const T = trOf(doc);
+    if (!T) return doc;
+    const p = doc.plan;
+    return { ...doc,
+      plan: { ...p, aim: pickT(T.plan.aim, p.aim), approach: pickT(T.plan.approach, p.approach), beyond: pickT(T.plan.beyond, p.beyond), goal_link: pickT(T.plan.goal_link, p.goal_link),
+        sections: p.sections.map((s, i) => ({ ...s, title: pickT((T.plan.sections[i] || {}).title, s.title), teach: pickT((T.plan.sections[i] || {}).teach, s.teach) })) },
+      lesson: pickT(T.lesson, doc.lesson), deeper: pickT(T.deeper, doc.deeper),
+      notes: doc.notes.map((n, i) => pickT(T.notes[i], n)), advice: (doc.advice || []).map((a, i) => ({ ...a, problem: pickT(T.advice[i], a.problem) })) };
+  }
+
+  function practicePairs(S, T) {
+    const P = [];
+    T.how = []; T.advice = []; T.dropped = []; T.exercises = [];
+    P.push([S.when, (v) => { T.when = v; }]);
+    (S.how || []).forEach((x, i) => P.push([x, (v) => { T.how[i] = v; }]));
+    (S.advice || []).forEach((x, i) => P.push([x, (v) => { T.advice[i] = v; }]));
+    (S.dropped || []).forEach((x, i) => P.push([x, (v) => { T.dropped[i] = v; }]));
+    S.exercises.forEach((x, i) => {
+      const t = T.exercises[i] = { combines: [], hints: [], criteria: [] };
+      ["title", "level", "task", "thinking"].forEach((k) => P.push([x[k], (v) => { t[k] = v; }]));
+      if (!x.tests) P.push([x.solution, (v) => { t.solution = v; }]);
+      (x.combines || []).forEach((c, j) => P.push([c, (v) => { t.combines[j] = v; }]));
+      (x.hints || []).forEach((c, j) => P.push([c, (v) => { t.hints[j] = v; }]));
+      (x.criteria || []).forEach((c, j) => P.push([c, (v) => { t.criteria[j] = v; }]));
+    });
+    return P;
+  }
+  function practiceView(S) {
+    const T = trOf(S);
+    if (!T) return S;
+    const arr = (a, t) => (a || []).map((x, i) => pickT((t || [])[i], x));
+    return { ...S, when: pickT(T.when, S.when), how: arr(S.how, T.how), advice: arr(S.advice, T.advice), dropped: arr(S.dropped, T.dropped),
+      exercises: S.exercises.map((x, i) => { const t = T.exercises[i] || {};
+        return { ...x, title: pickT(t.title, x.title), level: pickT(t.level, x.level), task: pickT(t.task, x.task), thinking: pickT(t.thinking, x.thinking),
+          solution: x.tests ? x.solution : pickT(t.solution, x.solution), combines: arr(x.combines, t.combines), hints: arr(x.hints, t.hints), criteria: x.criteria ? arr(x.criteria, t.criteria) : x.criteria }; }) };
+  }
+  // translates any small record in place: `fields` are string fields, `lists` are arrays of strings
+  async function translateRecord(job, rec, fields, lists, about) {
+    const L = trLang();
+    if (!L || !rec) return;
+    const T = {};
+    const P = [];
+    fields.forEach((k) => P.push([rec[k], (v) => { T[k] = v; }]));
+    lists.forEach((k) => { T[k] = []; (rec[k] || []).forEach((x, i) => P.push([x, (v) => { T[k][i] = v; }])); });
+    await trPairs(job, P, about);
+    rec.tr = Object.assign({}, rec.tr, { [L]: T });
+  }
+  function recordView(rec, fields, lists) {
+    const T = trOf(rec);
+    if (!T) return rec;
+    const V = { ...rec };
+    fields.forEach((k) => { V[k] = pickT(T[k], rec[k]); });
+    lists.forEach((k) => { V[k] = (rec[k] || []).map((x, i) => pickT((T[k] || [])[i], x)); });
+    return V;
+  }
+  // the switch between the translation and the English original, shown where translated content appears
+  function origSwitch(item) {
+    if (!trLang() || !item || !item.tr || !item.tr[trLang()]) return null;
+    return h("button", { class: "link small orig-switch", type: "button", onclick: () => setShowOrig(!showOrigFlag) }, showOrigFlag ? "Show the translation" : "Show the English original");
+  }
+  // run a translation as its own small job, for content that was delivered untranslated
+  async function retranslate(kind, fn) {
+    if (!aiReady() || ui.busy["tr:" + kind]) return;
+    ui.busy["tr:" + kind] = true; render();
+    const job = { requests: 0, cancel: false };
+    try { await fn(job); notify("Translated."); }
+    catch (e) { notify("The translation didn't finish: " + noteAiError(e) + " The English original is shown.", "warn"); }
+    ui.busy["tr:" + kind] = false; render();
+  }
+  function trMissing(item, kind, fn) {
+    if (!trLang() || !item || item.src !== "en" || (item.tr && item.tr[trLang()])) return null;
+    return h("p", { class: "small muted" }, "This is in English: it wasn't translated. ",
+      h("button", { class: "link", type: "button", disabled: !aiReady() || ui.busy["tr:" + kind], onclick: () => retranslate(kind, fn) }, ui.busy["tr:" + kind] ? "Translating…" : "Translate it"));
+  }

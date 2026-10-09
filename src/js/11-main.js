@@ -2,7 +2,7 @@
   let km = null;
   function updatePill() {
     const s = cur(), pill = $("subject-pill");
-    pill.textContent = (s ? s.name + " / " : "") + "v2.0";
+    pill.textContent = (s ? s.name + " / " : "") + "v2.1";
     pill.setAttribute("data-ai", "");
   }
   function mountMap() {
@@ -11,10 +11,14 @@
     updatePill();
     if (!M || !cur()) { $("kmap").hidden = true; return; }
     try {
-      km = knowledgeMap(M, {
+      km = knowledgeMap(displayMap(M), {
         onLearn: (pid) => { plPick(pid, "the map"); leaveNotes(); setView("path"); go("learn"); },
         noteMarks, notesHTML, notesIndex, hasNotes, onNoteAct, aboutHTML,
-        onAbout: () => { leaveNotes(); setView("path"); go("goal"); },
+        onAbout: (what) => {
+          if (what === "orig") return setShowOrig(!showOrigFlag);
+          if (what === "translate") return retranslateMap();
+          leaveNotes(); setView("path"); go("goal");
+        },
       });
     } catch (err) {
       km = null;
@@ -83,7 +87,7 @@
   (async () => {
     const use = (name) => (window.claude && typeof window.claude.use === "function") ? window.claude.use(name).catch(() => null) : Promise.resolve(null);
     const [s, d] = await Promise.all([use("sample"), use("db")]);
-    sample = I18N.wrapAI(s); db = d;
+    sample = s; sampleChat = I18N.wrapAI(s); db = d;
     $("ai-banner").hidden = !!sample;
     if (db) {
       try {

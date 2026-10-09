@@ -11,16 +11,23 @@
     try { const snap = await db.doc(p).get(); if (snap.exists && snap.data() && snap.data().items) ui.qa = clone(snap.data().items); } catch (_) {}
   }
   const ptIndex = () => (cur() && cur().pointIndex) || {};
-  const hasNotes = (pid) => !!(ptIndex()[pid] && (ptIndex()[pid].notes || []).length) || qaOf(pid).length > 0;
+  // a point's notes in the learner's language when they were translated (v2.1), else as written
+  function noteList(pid) {
+    const e = ptIndex()[pid], L = trLang();
+    if (!e) return [];
+    const en = e.notes || [];
+    return L && !showOrigFlag && e.tr && e.tr[L] ? en.map((x, i) => pickT(e.tr[L][i], x)) : en;
+  }
+  const hasNotes = (pid) => noteList(pid).length > 0 || qaOf(pid).length > 0;
   const escH = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
   const inlineH = (t) => escH(t).replace(/`([^`]+)`/g, "<code>$1</code>").replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
   const mdH = (t) => { const d = document.createElement("div"); [].concat(md(t)).forEach((x) => x && d.append(x)); return d.innerHTML; };
   function noteMarks(pid) {
-    const n = (ptIndex()[pid] || {}).notes || [], q = qaOf(pid).length;
+    const n = noteList(pid), q = qaOf(pid).length;
     return (n.length ? ' <span class="km-mark" title="' + escH(I18N.t("Has notes")) + '">✎</span>' : "") + (q ? ' <span class="km-mark q" title="' + escH(I18N.t("Questions asked")) + '">?' + q + "</span>" : "");
   }
   function notesHTML(pid) {
-    const n = (ptIndex()[pid] || {}).notes || [], qs = qaOf(pid);
+    const n = noteList(pid), qs = qaOf(pid);
     if (!n.length && !qs.length) return "";
     const T = (x) => escH(I18N.t(x));
     const qaRows = qs.map((it, i) => '<details class="km-qa"' + (i === qs.length - 1 ? " open" : "") + '><summary data-ai>' + escH(it.q) + "</summary>" +
@@ -61,7 +68,7 @@
     P.KD.balls.forEach((b) => {
       const pts = b.pts.filter((p) => idx[p]); if (!pts.length) return;
       out.push(b.name);
-      pts.forEach((p) => { out.push("  " + ptName(p)); (idx[p].notes || []).forEach((x) => out.push("   - " + plainNote(x))); });
+      pts.forEach((p) => { out.push("  " + ptName(p)); noteList(p).forEach((x) => out.push("   - " + plainNote(x))); });
       out.push("");
     });
     return out.join("\n");
@@ -90,7 +97,7 @@
         h("div", { class: "note-head" },
           h("h4", null, ai("span", null, ptName(p)), " ", h("span", { class: km.isLearned(p) ? "chip ok" : "chip" }, km.isLearned(p) ? "learned" : PT_STATUS[km.status(p)])),
           h("button", { class: "link small", type: "button", onclick: () => { plPick(p, "notes"); go("learn"); } }, "Lesson")),
-        (idx[p].notes || []).length ? h("ul", { class: "note-points" }, idx[p].notes.map((x, j) => h("li", null, noteInline(x, hide, p + "-" + j)))) : h("p", { class: "small muted" }, "No notes came with this lesson.")))));
+        noteList(p).length ? h("ul", { class: "note-points" }, noteList(p).map((x, j) => h("li", null, noteInline(x, hide, p + "-" + j)))) : h("p", { class: "small muted" }, "No notes came with this lesson.")))));
     return h("section", { class: "panel" },
       head("Notes", "Your notes", "The notes from each point you've studied, grouped by topic. To test yourself, hide the key terms and recall each one before you click it."),
       toolbar,

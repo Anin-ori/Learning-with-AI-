@@ -133,7 +133,7 @@
   }
 
   // ----- level check: the AI sets a few tasks for this subject and reads the answers -----
-  const mapIdList = () => km.data.KD.balls.map((b) => "Topic " + b.name + ":\n" + b.pts.map((p) => "  " + p + " | " + ptName(p)).join("\n")).join("\n");
+  const mapIdList = () => km.data.KD.balls.map((b) => "Topic " + enBall(b.id).name + ":\n" + b.pts.map((p) => "  " + p + " | " + enName(p)).join("\n")).join("\n");
   const levelTasksPrompt = () => [
     "You set a short level check for a self-learner in Learning Companion, so the tool knows where they are on their knowledge map. It isn't a test they pass or fail.",
     ptLearner(), "", "Their map, every point with its id:", mapIdList(), "",
@@ -158,7 +158,9 @@
       const d = await ask(job, "Level check", levelTasksPrompt(), "default", true);
       const tasks = parr(d && d.tasks).map((t) => ({ title: pstr(t && t.title), task: pstr(t && t.task), probes: parr(t && t.probes).map(pstr).filter((id) => km.data.byId[id]) })).filter((t) => t.title && t.task).slice(0, 8);
       if (!tasks.length) throw { code: "invalid_json", agent: "Level check" };
-      s.trialTasks = { why: pstr(d.why), tasks, at: new Date().toISOString() }; s.trial = null; ui.trialAnswers = {};
+      const TT = { src: "en", why: pstr(d.why), tasks, at: new Date().toISOString() };
+      if (trLang()) { try { const tmp = { why: TT.why, titles: tasks.map((t) => t.title), bodies: tasks.map((t) => t.task) }; await translateRecord(job, tmp, ["why"], ["titles", "bodies"], subjectAbout("a short level check: tasks for the learner")); TT.tr = tmp.tr; } catch (_) {} }
+      s.trialTasks = TT; s.trial = null; ui.trialAnswers = {};
       saveSubject();
       logEvent("trial", "Level check tasks for " + s.name + ": " + tasks.map((t) => t.title).join("; "));
     } catch (e) { ui.errors.trial = jobError(e); }
@@ -175,7 +177,9 @@
       const ids = (v) => parr(v).map(pstr).filter((id) => km.data.byId[id]);
       const results = {};
       parr(d && d.tasks).forEach((r) => { const n = Number(r && r.n); if (n >= 1 && n <= tasks.length) results[n - 1] = { result: ["works", "almost", "not yet"].includes(pstr(r.result)) ? pstr(r.result) : "almost", note: pstr(r.note) }; });
-      s.trial = { summary: pstr(d && d.summary), solid: ids(d && d.solid), shaky: ids(d && d.shaky), feedback: pstr(d && d.feedback) || "No feedback came back.", results, withTasks, at: new Date().toISOString() };
+      const TR = { src: "en", summary: pstr(d && d.summary), solid: ids(d && d.solid), shaky: ids(d && d.shaky), feedback: pstr(d && d.feedback) || "No feedback came back.", results, withTasks, at: new Date().toISOString() };
+      if (trLang()) { try { const tmp = { summary: TR.summary, feedback: TR.feedback, notes: tasks.map((_, k) => (results[k] || {}).note || "") }; await translateRecord({ requests: 0, cancel: false }, tmp, ["summary", "feedback"], ["notes"], subjectAbout("feedback on a level check")); TR.tr = tmp.tr; } catch (_) {} }
+      s.trial = TR;
       saveSubject();
       logEvent("trial", "Level check for " + s.name + (withTasks ? "" : " (from description only)") + ": " + s.trial.summary + " Solid: " + s.trial.solid.length + ", shaky: " + s.trial.shaky.length);
       notify("Your level check is read. The feedback is below.");
@@ -185,7 +189,9 @@
   function renderTrial() {
     const s = cur();
     if (!s || !km) return noMapPanel("Profile · Level check");
-    const T = s.trialTasks, t = s.trial;
+    const T0 = s.trialTasks, t0 = s.trial, TTv = trOf(T0), TRv = trOf(t0);
+    const T = T0 && TTv ? { ...T0, why: pickT(TTv.why, T0.why), tasks: T0.tasks.map((x, k) => ({ ...x, title: pickT((TTv.titles || [])[k], x.title), task: pickT((TTv.bodies || [])[k], x.task) })) } : T0;
+    const t = t0 && TRv ? { ...t0, summary: pickT(TRv.summary, t0.summary), feedback: pickT(TRv.feedback, t0.feedback), results: Object.fromEntries(Object.entries(t0.results || {}).map(([k, r]) => [k, { ...r, note: pickT((TRv.notes || [])[k], r.note) }])) } : t0;
     const RESULT = { works: ["ok", "Works"], almost: ["warn", "Almost"], "not yet": ["bad", "Not yet"] };
     const chips = (ids, cls) => h("div", { class: "chips" }, ids.map((id) => ai("span", { class: "chip " + cls }, ptName(id))));
     const unlearnedSolid = t ? t.solid.filter((id) => !km.isLearned(id)) : [];
@@ -196,7 +202,7 @@
         errLine("trial"),
         h("div", { class: "row" }, h("button", { class: "primary", type: "button", disabled: !aiReady() || ui.busy.trialPick, onclick: pickLevelTasks }, ui.busy.trialPick ? "Writing your tasks…" : "Set my level check"),
           h("button", { class: "quiet", type: "button", disabled: !aiReady() || ui.busy.trial, onclick: () => runLevelCheck(false) }, "Skip the tasks: judge from what I said"))) : [
-        T.why ? ai("p", { class: "lede" }, T.why) : null,
+        T.why ? ai("p", { class: "lede" }, T.why) : null, origSwitch(T0),
         T.tasks.map((task, n) => {
           const res = t && t.results && t.results[n], r = res ? (RESULT[res.result] || RESULT.almost) : null;
           return h("article", { class: "card" },
@@ -234,7 +240,7 @@
     render();
     const prompt = [
       "A self-learner will study " + profileOf().name + " for their goal with a knowledge map an AI built for them, without human sources. They pick points themselves; an AI plans and teaches each point, and an AI writes practice sets" + (canRun(profileOf().run) ? ", proven by running them" : ", checked by a second AI because nothing in this subject can be run") + ". The map's topics and points:",
-      km.data.KD.balls.map((b, i) => (i + 1) + ". " + b.name + ": " + b.pts.map((x) => ptName(x)).join(", ")).join("\n"),
+      km.data.KD.balls.map((b, i) => (i + 1) + ". " + enBall(b.id).name + ": " + b.pts.map((x) => enName(x)).join(", ")).join("\n"),
       ptLearner(), "",
       "Estimate honestly what share (0 to 100) of this material an AI tutor like you can explain well and accurately to this learner, and where they will need other help, such as hands-on practice, a teacher's feedback, a lab, a native speaker, or primary sources.",
       "", "Reply with only a JSON object:",
@@ -258,7 +264,16 @@
       const spread = shares[shares.length - 1] - shares[0];
       const agreement = spread <= 15 ? "agree" : spread <= 30 ? "partial" : "disagree";
       const std = done.find((x) => x.tier.id === "default") || done[0];
-      s.grade = { share: mid, spread, agreement, statement: std.r.statement, shares: Object.fromEntries(done.map((x) => [x.tier.id, x.r.share])) };
+      s.grade = { src: "en", share: mid, spread, agreement, statement: std.r.statement, shares: Object.fromEntries(done.map((x) => [x.tier.id, x.r.share])) };
+      if (trLang()) {
+        try {
+          const L = trLang(), G = {}, P = [[s.grade.statement, (v) => { G.statement = v; }]];
+          done.forEach((x) => { const t = { strong: [], limits: [] }; x.r.tr = { [L]: t };
+            x.r.strong.forEach((v0, k) => P.push([v0, (v) => { t.strong[k] = v; }])); x.r.limits.forEach((v0, k) => P.push([v0, (v) => { t.limits[k] = v; }])); });
+          await trPairs({ requests: 0, cancel: false }, P, subjectAbout("AI estimates of how far an AI can guide this learner"));
+          s.grade.tr = { [L]: G };
+        } catch (_) {}
+      }
       logEvent("grade", "AI guidance for " + s.name + ": " + mid + "% (" + done.map((x) => x.tier.name + " " + x.r.share + "%").join(", ") + "), " + agreement);
       saveSubject();
     } else {
@@ -269,10 +284,10 @@
   function renderReach() {
     const s = cur();
     if (!s || !km) return noMapPanel("Profile · AI guidance");
-    const g = s.grade;
+    const g0 = s.grade, g = g0 ? recordView(g0, ["statement"], []) : g0;
     const words = { agree: "The three models agree", partial: "The models partly agree", disagree: "The models disagree" };
     const tierCards = TIERS.map((t) => {
-      const r = ui.tierResults[t.id];
+      const r0 = ui.tierResults[t.id], rt = trOf(r0), r = r0 && rt ? { ...r0, strong: r0.strong.map((x, k) => pickT(rt.strong[k], x)), limits: r0.limits.map((x, k) => pickT(rt.limits[k], x)) } : r0;
       const saved = g && g.shares && g.shares[t.id];
       if (!r && saved === undefined) return h("div", { class: "card soft" }, h("h3", null, t.name), h("p", { class: "muted small" }, "Not asked yet"));
       if (r && r.state === "running") return h("div", { class: "card soft" }, h("h3", null, t.name), h("p", { class: "thinking" }, "Estimating on its own…"));
@@ -288,11 +303,11 @@
       head("Profile · AI guidance", "How far I can guide you", "Three models estimate, separately, how much of this map an AI can explain well for you, and where you'll need other help. Where they disagree, you'll see it. Lessons and the tutor use this figure."),
       g ? h("div", { class: "verdict " + g.agreement },
         h("div", { class: "row spread" }, h("span", { class: "verdict-title" }, words[g.agreement] + (g.agreement === "agree" ? "" : " (estimates " + g.spread + " points apart)")), h("span", { class: "share" }, g.share + "%")),
-        ai("p", null, g.statement),
+        ai("p", null, g.statement), origSwitch(g0),
         caution("These are AI estimates of AI ability, and they can be wrong.")) : null,
       h("div", { class: "row" },
         h("button", { class: g ? "quiet" : "primary", type: "button", disabled: ui.busy.grade || !aiReady(), onclick: runGrade }, ui.busy.grade ? "Asking three models…" : g ? "Ask again" : "Ask the three models"),
-        h("span", { class: "muted small" }, "Uses 3 requests on your Claude account")),
+        h("span", { class: "muted small" }, trLang() ? "Uses 3 requests on your Claude account, and one more to translate" : "Uses 3 requests on your Claude account")),
       errLine("reach"),
       h("div", { class: "tiers" }, tierCards),
       g ? h("div", { class: "row" }, h("button", { class: "primary", type: "button", onclick: () => go("learn") }, "Start learning")) : null);

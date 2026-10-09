@@ -3,6 +3,17 @@
   // block delivery until fixed (up to PL_ROUNDS times), improvements go back once. Practice has its own section.
   const PL_ROUNDS = 2;
   const ptName = (pid) => (km && km.data.byId[pid] ? km.data.byId[pid].name : pid);
+  // v2.1: prompts always use the map's original (English) names; the learner sees the translated ones
+  let enCache = null;
+  function EN() {
+    const M = curMap();
+    if (!M) return { n: {}, b: {}, M: null };
+    if (!enCache || enCache.M !== M) enCache = { M, n: Object.fromEntries(M.nodes.map((x) => [x.id, x])), b: Object.fromEntries(M.balls.map((x) => [x.id, x])) };
+    return enCache;
+  }
+  const enName = (pid) => (EN().n[pid] || {}).name || ptName(pid);
+  const enWhat = (pid) => (EN().n[pid] || {}).what || "";
+  const enBall = (bid) => EN().b[bid] || (km && km.data.BALL[bid]) || { name: bid, pts: [] };
   const plPoint = () => { const s = cur(); return km && s && s.learnPoint && km.data.byId[s.learnPoint] ? s.learnPoint : null; };
   const lessonKey = (pid) => { const M = curMap(); return (M && M.mid ? M.mid : "m") + "_" + pid; };
   function ptLearner() {
@@ -15,7 +26,7 @@
       s.grade ? "AI involvement agreed for this learner: about " + s.grade.share + "% (the higher, the more the AI explains itself; the lower, the more it points to other sources and help)." : "",
     ].filter(Boolean).join("\n");
   }
-  const ptLearned = () => { const xs = km.learnedList().map(ptName); return xs.length ? xs.join(", ") : "none"; };
+  const ptLearned = () => { const xs = km.learnedList().map(enName); return xs.length ? xs.join(", ") : "none"; };
   function plPick(pid, from) {
     const s = cur();
     if (!km || !s || !km.data.byId[pid]) return;
@@ -42,16 +53,16 @@
       : "- Examples: " + S.examples + " Where an example has a definite result, show it, and be sure it is right.";
   }
   function plannerPromptPt(pid) {
-    const P = km.data, n = P.byId[pid], ball = P.BALL[P.BALL_OF[pid]], S = profileOf();
+    const P = km.data, n = P.byId[pid], ball = enBall(P.BALL_OF[pid]), S = profileOf(), M = curMap();
     return [
       "You plan a lesson on ONE knowledge point of " + S.name + " for Learning Companion, a study tool for self-learners. Another AI will write it from your plan. You decide the approach, the structure and the examples: choose whatever gets this learner to real understanding fastest.",
-      "Point: \"" + n.name + "\"" + (n.what ? ": " + n.what : "") + ".",
-      "It belongs to the topic \"" + ball.name + "\"" + (ball.desc ? " (" + ball.desc + ")" : "") + ", together with: " + (ball.pts.filter((x) => x !== pid).map(ptName).join(", ") || "nothing else") + ".",
+      "Point: \"" + enName(pid) + "\"" + (enWhat(pid) ? ": " + enWhat(pid) : "") + ".",
+      "It belongs to the topic \"" + ball.name + "\"" + (ball.desc ? " (" + ball.desc + ")" : "") + ", together with: " + (ball.pts.filter((x) => x !== pid).map(enName).join(", ") || "nothing else") + ".",
       ptLearner(),
       "Points the learner has marked as learned on their map: " + ptLearned() + ".",
-      "This point needs first: " + (n.needs.map((x) => ptName(x) + (km.isLearned(x) ? " (learned)" : " (NOT learned yet)")).join("; ") || "nothing") + ". If something it needs isn't learned yet, plan a short bridge for it at the start.",
-      "It leads to: " + (n.usedBy.map(ptName).join(", ") || "nothing else on this map") + ".",
-      "Topics on this map, from basics to advanced: " + P.KD.balls.map((b) => b.name).join(", ") + ".",
+      "This point needs first: " + (n.needs.map((x) => enName(x) + (km.isLearned(x) ? " (learned)" : " (NOT learned yet)")).join("; ") || "nothing") + ". If something it needs isn't learned yet, plan a short bridge for it at the start.",
+      "It leads to: " + (n.usedBy.map(enName).join(", ") || "nothing else on this map") + ".",
+      "Topics on this map, from basics to advanced: " + (M ? M.balls : P.KD.balls).map((b) => b.name).join(", ") + ".",
       (ball.where || []).length ? "Where the AI that built the map said this topic is taught (from memory, unchecked): " + ball.where.map((w) => w.title + (w.detail ? ", " + w.detail : "")).join("; ") + "." : "",
       "", STANDARDS.guide(S), "", "How examples look in this subject: " + S.examples, MD_NOTE, "",
       'Reply with only JSON: {"aim": "one sentence: what the learner can do afterwards", "approach": "two or three sentences: how you will get this learner to real understanding, and why this way", "bridge": ["a short recap of a missing prerequisite, if any"], "sections": [{"title": "short heading", "teach": "what to explain and how", "example": "what the example should show"}], "beyond": "what lies beyond this lesson that is worth the learner knowing (where its rules stop holding, a mechanism underneath), and which of these deserve a proper extension after the lesson; empty if nothing", "goal_link": "one sentence on where this shows up in the learner\'s goal"}',
@@ -83,7 +94,7 @@
   ].filter(Boolean).join("\n");
   const teacherPromptPt = (pid, plan) => { const S = profileOf(); return [
     "You write a lesson on ONE knowledge point of " + S.name + " in Learning Companion, from a plan by a planning AI.",
-    "Point: \"" + ptName(pid) + "\".", ptLearner(), "Points the learner has marked as learned: " + ptLearned() + ".",
+    "Point: \"" + enName(pid) + "\".", ptLearner(), "Points the learner has marked as learned: " + ptLearned() + ".",
     "", "The plan:", planText(plan), "", STANDARDS.guide(S), "", "Format:", teachRules(S),
   ].join("\n"); };
   function splitLesson(text) {
@@ -94,7 +105,7 @@
   }
   const checkerPromptPt = (pid, plan, L, run) => { const S = profileOf(); return [
     "You review a lesson on ONE knowledge point of " + S.name + " before a self-learner sees it. You are an editor, not a gatekeeper: be strict about facts" + (S.run !== "none" ? " and code" : "") + ", and constructive about the teaching. No textbook stands behind this lesson, so you are the check on what its writer got wrong.",
-    "Point: \"" + ptName(pid) + "\".", ptLearner(), "Points the learner has marked as learned: " + ptLearned() + ".",
+    "Point: \"" + enName(pid) + "\".", ptLearner(), "Points the learner has marked as learned: " + ptLearned() + ".",
     "", "The plan it was written from:", planText(plan),
     "", "The lesson:", "<<<", L.lesson, ">>>", "", "Extensions after the lesson:", L.deeper || "(none)", "", "The notes for the learner:", L.notes.map((x) => "- " + x).join("\n") || "(none)",
     run && run.note ? "\n" + run.note + "\nTrust these results over your own reading of the code. Anything they show to be wrong is already listed as an error, so you needn't repeat it." : "",
@@ -110,7 +121,7 @@
     errs.length ? "Fix every error." : "",
     imps.length ? "Consider each suggested improvement and make it where it helps this learner; you may leave one out if you think the lesson is better without it." : "",
     "Change nothing else.",
-    "Point: \"" + ptName(pid) + "\".", ptLearner(),
+    "Point: \"" + enName(pid) + "\".", ptLearner(),
     "", "The plan:", planText(plan),
     errs.length ? "\nErrors:\n" + errs.map((p, i) => (i + 1) + ". " + (p.quote ? "\"" + p.quote + "\": " : "") + p.problem + (p.fix ? " Fix: " + p.fix : "")).join("\n") : "",
     imps.length ? "\nSuggested improvements:\n" + imps.map((p, i) => (i + 1) + ". " + (p.quote ? "\"" + p.quote + "\": " : "") + p.problem + (p.fix ? " Suggestion: " + p.fix : "")).join("\n") : "",
@@ -147,10 +158,16 @@
         L = splitLesson(await ask(job, "Teacher", reviserPromptPt(pid, job.plan, L, rv.errors, imps), "default", false));
         if (imps.length) polished = true;
       }
-      const doc = { v: 2, pid, key, at: new Date().toISOString(), plan: job.plan, lesson: L.lesson, deeper: L.deeper || "", notes: L.notes, advice: job.advice || [], requests: job.requests, rounds: job.rounds, ran: job.ran };
+      const doc = { v: 2, src: "en", pid, key, at: new Date().toISOString(), plan: job.plan, lesson: L.lesson, deeper: L.deeper || "", notes: L.notes, advice: job.advice || [], requests: job.requests, rounds: job.rounds, ran: job.ran };
+      if (trLang()) {
+        job.stage = "translate"; paint();
+        try { await translateLesson(doc, job); }
+        catch (e) { if (e && e.code === "cancelled") throw e; notify("The lesson is ready, but it couldn't be translated, so it's shown in English. You can translate it again.", "warn"); }
+      }
+      doc.requests = job.requests;
       ui.plessons[key] = doc;
       const s = cur();
-      s.pointIndex[pid] = { at: doc.at, notes: doc.notes };
+      s.pointIndex[pid] = { at: doc.at, notes: doc.notes, src: "en", tr: doc.tr ? { [trLang()]: doc.tr[trLang()].notes } : undefined };
       if (db) db.doc("lessons2/" + key).set(clone(doc)).catch(() => notify("The lesson is shown but couldn't be saved.", "warn"));
       saveSubject();
       job.stage = "done";
@@ -164,6 +181,21 @@
     } finally {
       job.running = false; paint();
     }
+  }
+
+  async function translateLesson(doc, job) {
+    const L = trLang(), T = {};
+    await trPairs(job, lessonPairs(doc, T), subjectAbout("a lesson on one point, with its plan, extensions and notes"));
+    doc.tr = Object.assign({}, doc.tr, { [L]: T });
+  }
+  function retranslateLesson(pid) {
+    const doc = lessonOf(pid), key = lessonKey(pid);
+    return retranslate("lesson", async (job) => {
+      await translateLesson(doc, job);
+      const s = cur();
+      if (s.pointIndex[pid]) { s.pointIndex[pid].tr = Object.assign({}, s.pointIndex[pid].tr, { [trLang()]: doc.tr[trLang()].notes }); saveSubject(); }
+      if (db) await db.doc("lessons2/" + key).set(clone(doc));
+    });
   }
 
   // ---------- The tutor: questions are kept with their point ----------
@@ -195,7 +227,7 @@
     const turns = [{ role: "user", content: pointTutorRules(pid) }];
     ui.chat.slice(-13, -1).forEach((m) => { if (m.content && !m.failed) turns.push({ role: m.role, content: m.content }); });
     try {
-      const res = await sample(turns, { modelTier: "default", cache: false, onText: ({ text: t }) => { msg.content = t; const el = $("bubble-" + idx); if (el) el.textContent = t; } });
+      const res = await sampleChat(turns, { modelTier: "default", cache: false, onText: ({ text: t }) => { msg.content = t; const el = $("bubble-" + idx); if (el) el.textContent = t; } });
       msg.content = res.text; msg.truncated = res.truncated;
       logEvent("chat", "Asked the tutor about " + ptName(pid) + ": " + text.slice(0, 160));
       ui.qa[pid] = qaOf(pid).filter((it) => it.a || it.q !== text).concat([{ q: text, a: res.text, at: new Date().toISOString() }]);
@@ -213,7 +245,7 @@
     msg.check = { state: "running" }; render();
     const prompt = "A learner studying " + profileOf().name + " asked the question below. Answer it independently and briefly.\n\nQuestion:\n" + msg.question;
     const others = [TIERS[0], TIERS[2]];
-    const settled = await Promise.allSettled(others.map((t) => sample(prompt, { modelTier: t.id, cache: false })));
+    const settled = await Promise.allSettled(others.map((t) => sampleChat(prompt, { modelTier: t.id, cache: false })));
     const answers = [{ name: "Standard (the tutor)", text: msg.content }];
     settled.forEach((s, i) => { if (s.status === "fulfilled") answers.push({ name: others[i].name, text: s.value.text }); });
     if (answers.length < 2) { msg.check = { state: "error", error: noteAiError(settled[0].reason) }; render(); return; }
@@ -225,7 +257,7 @@
       'Reply with only JSON: {"verdict": "agree" | "partial" | "disagree", "summary": "one plain sentence", "differences": ["short sentence per real difference"]}',
     ].join("\n");
     try {
-      const data = await sample.json(cmp, { modelTier: "default", cache: false });
+      const data = await sampleChat.json(cmp, { modelTier: "default", cache: false });
       const v = ["agree", "partial", "disagree"].includes(data && data.verdict) ? data.verdict : "partial";
       msg.check = { state: "done", verdict: v, n: answers.length, summary: String((data && data.summary) || ""), differences: parr(data && data.differences).map(String).filter(Boolean) };
       logEvent("crosscheck", "Cross-check of a tutor answer (" + answers.length + " models): " + v);
@@ -257,11 +289,12 @@
   const PT_STATUS = { learned: "learned", ready: "can learn now", locked: "not reachable yet" };
   const PT_STAGES = [["plan", "Planner", "outlines the lesson for you"], ["teach", "Teacher", "writes it from the outline"], ["check", "Checker", "checks facts and examples, and suggests improvements"]];
   function ptTeamCard(job) {
-    const order = { plan: 0, teach: 1, check: 2, fix: 2, done: 3, error: -1 };
+    const order = { plan: 0, teach: 1, check: 2, fix: 2, translate: 3, done: 4, error: -1 };
     const at = order[job.stage];
+    const stages = trLang() ? PT_STAGES.concat([["translate", "Translator", "translates it into your language, keeping the English original"]]) : PT_STAGES;
     return h("div", { class: "card", id: "pt-team", "aria-live": "polite" },
       h("div", { class: "row spread" }, h("h3", null, "Building your lesson"), h("span", { class: "muted small" }, job.requests + " requests so far")),
-      h("ol", { class: "plain" }, PT_STAGES.map(([id, who, what], i) => h("li", null,
+      h("ol", { class: "plain" }, stages.map(([id, who, what], i) => h("li", null,
         h("strong", null, (i < at ? "✓ " : i === at ? "… " : "") + who), " " + what,
         id === "check" && job.rounds ? h("span", { class: "muted small" }, " · fixed and rechecked " + job.rounds + (job.rounds > 1 ? " times" : " time")) : null))),
       job.stage === "fix" ? h("p", { class: "small muted" }, "The editor sent back " + job.problems.length + " note" + (job.problems.length === 1 ? "" : "s") + "; the teacher is revising.") : null,
@@ -295,7 +328,8 @@
       n && n.what ? ai("p", { class: "small muted" }, n.what) : null,
       h("div", { class: "row" }, h("button", { class: "link", type: "button", onclick: () => { setView("map"); if (pid) km.openPoint(pid); } }, pid ? "Show this point on the map" : "Choose on the knowledge map")));
 
-    const L = pid ? lessonOf(pid) : null, job = pid ? ui.pjobs[lessonKey(pid)] : null;
+    const L0 = pid ? lessonOf(pid) : null, job = pid ? ui.pjobs[lessonKey(pid)] : null;
+    const L = L0 && L0.lesson ? lessonView(L0) : L0;
     const cost = h("p", { class: "small muted" }, "Usually 3 to 5 AI requests: one to plan, one to teach, one or more to check and fix.");
     let body;
     if (!pid) body = [h("div", { class: "card soft" }, h("p", null, "Choose a point above, or open a topic on the knowledge map and use “Learn this point”."))];
@@ -312,6 +346,9 @@
           (L.advice || []).length ? h("div", { class: "small" }, h("strong", null, "The editor's remaining suggestions (they didn't block the lesson):"),
             ai("ul", { class: "plain" }, L.advice.map((a) => h("li", null, a.problem)))) : null,
           h("p", { class: "small muted" }, "Planned, taught and checked by AI in " + L.requests + " requests" + (L.rounds ? ", with " + L.rounds + " round" + (L.rounds > 1 ? "s" : "") + " of fixes" : "") + ".")),
+        origSwitch(L0) || trMissing(L0, "lesson", null) ? h("div", { class: "row tr-row" }, origSwitch(L0),
+          trLang() && L0.src === "en" && !(L0.tr && L0.tr[trLang()]) ? h("p", { class: "small muted" }, "This lesson is in English: it wasn't translated. ",
+            h("button", { class: "link", type: "button", disabled: !aiReady() || ui.busy["tr:lesson"], onclick: () => retranslateLesson(pid) }, ui.busy["tr:lesson"] ? "Translating…" : "Translate it")) : null) : null,
         h("article", { class: "card lesson-card" }, h("div", { class: "lesson" }, md(L.lesson))),
         h("p", { class: "small muted" }, L.ran && L.ran.n ? (L.ran.n === L.ran.of ? "Written and checked by AI, without a textbook behind it. The page ran every Python example and checked its output; for everything else, check what matters to you in a source you trust." : "Written and checked by AI, without a textbook behind it. The page ran " + L.ran.n + " of the " + L.ran.of + " Python examples and checked their output; for everything else, check what matters to you in a source you trust.") : "Written and checked by AI, without a textbook behind it. Where something matters to you, check it in a source you trust."),
         L.deeper ? h("aside", { class: "card deeper", "aria-label": "Going deeper, optional" },

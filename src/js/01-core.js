@@ -25,6 +25,7 @@
   };
   let log = [];
   let sample = null;
+  let sampleChat = null;   // the tutor answers directly in the learner's language (v2.1)
   let db = null;
   let aiBlocked = false;
 

@@ -547,9 +547,36 @@
   "checks facts and examples, and suggests improvements": "检查事实和例子，并提出改进建议",
   "checks each exercise, its criteria and its model answer": "检查每道题、它的评判标准和参考答案",
   "Lessons and the tutor use this figure.": "课程和导师会使用这个数字。",
-  "Written and checked by AI, without a textbook behind it. The page ran every Python example and checked its output; for everything else, check what matters to you in a source you trust.": "由 AI 编写和检查，背后没有教材。页面运行了每个 Python 示例并核对了输出；其余内容，请到你信任的资料中核对对你重要的部分。"
+  "Written and checked by AI, without a textbook behind it. The page ran every Python example and checked its output; for everything else, check what matters to you in a source you trust.": "由 AI 编写和检查，背后没有教材。页面运行了每个 Python 示例并核对了输出；其余内容，请到你信任的资料中核对对你重要的部分。",
+  "Translator": "翻译者",
+  "✓ Translator": "✓ 翻译者",
+  "… Translator": "… 翻译者",
+  "translates the map into your language, keeping the English original": "把地图翻译成你的语言，并保留英文原文",
+  "translates it into your language, keeping the English original": "把它翻译成你的语言，并保留英文原文",
+  "translates the set into your language, keeping the English original": "把这组练习翻译成你的语言，并保留英文原文",
+  "Show the English original": "显示英文原文",
+  "Show the translation": "显示译文",
+  "This map is in English: it wasn't translated.": "这张地图是英文的：它没有被翻译。",
+  "This lesson is in English: it wasn't translated.": "这节课是英文的：它没有被翻译。",
+  "This set is in English: it wasn't translated.": "这组练习是英文的：它没有被翻译。",
+  "This is in English: it wasn't translated.": "这部分是英文的：它没有被翻译。",
+  "Translate it": "翻译",
+  "Translating…": "正在翻译…",
+  "Translated.": "已翻译。",
+  "The map is ready, but it couldn't be translated, so it's shown in English. You can translate it again from its About tab.": "地图已准备好，但没能翻译，所以显示的是英文。你可以在它的“关于”页里重新翻译。",
+  "The lesson is ready, but it couldn't be translated, so it's shown in English. You can translate it again.": "课已准备好，但没能翻译，所以显示的是英文。你可以重新翻译。",
+  "The practice set is ready, but it couldn't be translated, so it's shown in English. You can translate it again.": "练习已准备好，但没能翻译，所以显示的是英文。你可以重新翻译。",
+  "The route is updated, but its reasons couldn't be translated, so they're shown in English.": "路线已更新，但其中的理由没能翻译，所以显示的是英文。"
  },
  "patterns": [
+  [
+   "Uses 3 requests on your Claude account, and one more to translate",
+   "将使用你 Claude 账户的 3 次请求，翻译再用 1 次"
+  ],
+  [
+   "The translation didn't finish: (.+) The English original is shown\\.",
+   "翻译没有完成：⟦\\1⟧ 显示的是英文原文。"
+  ],
   [
    "Added \"(.+?)\" to (.+?)( \\(.*\\))?",
    "在“\\2”中加入“\\1”\\3"

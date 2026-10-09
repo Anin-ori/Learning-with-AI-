@@ -309,11 +309,12 @@
     svg.on("click", () => { if (ks.open) { closeBall(); tab("mine"); } });
     const q = el("km-q");
     q.value = "";
-    el("km-names").innerHTML = [...new Set([...KD.balls.map((b) => b.name), ...KD.nodes.map((n) => n.name)].filter(Boolean))].sort((a, b) => a.localeCompare(b)).map((n) => `<option value="${esc(n)}">`).join("");
+    el("km-names").innerHTML = [...new Set([...KD.balls.map((b) => b.name), ...KD.nodes.map((n) => n.name), ...KD.balls.map((b) => b.name_en), ...KD.nodes.map((n) => n.name_en)].filter(Boolean))].sort((a, b) => a.localeCompare(b)).map((n) => `<option value="${esc(n)}">`).join("");
     q.onchange = () => {
       const v = q.value.trim().toLowerCase(); if (!v) return;
-      const b = KD.balls.find((x) => x.name.toLowerCase() === v); if (b) return openBall(b.id);
-      const n = KD.nodes.find((x) => x.name.toLowerCase() === v) || KD.nodes.find((x) => x.name.toLowerCase().includes(v));
+      const nms = (x) => [x.name, x.name_en || ""].map((w) => w.toLowerCase());
+      const b = KD.balls.find((x) => nms(x).includes(v)); if (b) return openBall(b.id);
+      const n = KD.nodes.find((x) => nms(x).includes(v)) || KD.nodes.find((x) => nms(x).some((w) => w && w.includes(v)));
       if (n) showPoint(n.id);
     };
 

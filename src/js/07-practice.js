@@ -216,12 +216,12 @@
   function learnedPids() { return km ? km.data.KD.balls.flatMap((b) => b.pts.filter((p) => km.isLearned(p))) : []; }
   function learnedText() {
     const P = km.data, idx = (cur() && cur().pointIndex) || {};
-    const lines = P.KD.balls.map((b) => { const xs = b.pts.filter((p) => km.isLearned(p)); return xs.length ? "- " + b.name + ": " + xs.map(ptName).join("; ") : ""; }).filter(Boolean);
+    const lines = P.KD.balls.map((b) => { const xs = b.pts.filter((p) => km.isLearned(p)); return xs.length ? "- " + enBall(b.id).name + ": " + xs.map(enName).join("; ") : ""; }).filter(Boolean);
     const recent = Object.keys(idx).filter((p) => P.byId[p] && km.isLearned(p)).sort((a, b) => String(idx[b].at || "").localeCompare(String(idx[a].at || ""))).slice(0, 8);
     let budget = 5000;
-    const taught = recent.map((p) => { const t = "- " + ptName(p) + ": " + (idx[p].notes || []).join(" | "); budget -= t.length; return budget > 0 ? t : ""; }).filter(Boolean);
+    const taught = recent.map((p) => { const t = "- " + enName(p) + ": " + (idx[p].notes || []).join(" | "); budget -= t.length; return budget > 0 ? t : ""; }).filter(Boolean);
     return ["Points the learner has learned, by topic (the learner knows these and nothing else):", lines.join("\n") || "- none yet",
-      recent.length ? "Studied most recently, newest first: " + recent.map(ptName).join(", ") + "." : "",
+      recent.length ? "Studied most recently, newest first: " + recent.map(enName).join(", ") + "." : "",
       taught.length ? "What their lessons actually taught for those points (the lesson notes):\n" + taught.join("\n") : ""].filter(Boolean).join("\n");
   }
   const learnedSig = () => learnedPids().join(",");
@@ -232,7 +232,7 @@
   const readinessPrompt = () => { const S = profileOf(); return [
     "You decide whether a self-learner of " + S.name + " should practise now, in Learning Companion, a study tool. Practice here is a separate section with exercises an AI writes for them.",
     ptLearner(), "", learnedText(), "",
-    "Points they can learn next (everything these need is learned): " + km.data.KD.nodes.filter((x) => km.status(x.id) === "ready").map((x) => x.name).slice(0, 40).join(", ") + ".",
+    "Points they can learn next (everything these need is learned): " + km.data.KD.nodes.filter((x) => km.status(x.id) === "ready").map((x) => enName(x.id)).slice(0, 40).join(", ") + ".",
     STANDARDS.readiness(S),
     ((cur() && cur().practice) || []).length ? "Practice sets they already did (don't repeat them):\n" + prevSetsText() : "",
     "", 'Reply with only JSON: {"enough": true or false, "why": "plain and brief", "focus": ["learned points the practice should combine, recent ones first"], "review": ["older learned points worth bringing back inside the tasks"], "shape": "if enough: one sentence on what kind of task fits", "next": ["if not enough: the points from the map whose learning would make the most difference"]}',
@@ -336,7 +336,9 @@
     ui.pjudge = job; render();
     try {
       const R = normReady(await ask(job, "Judge", readinessPrompt(), "default", true));
-      s.practiceReady = { sig: learnedSig(), at: new Date().toISOString(), ...R };
+      const rec = { sig: learnedSig(), at: new Date().toISOString(), src: "en", ...R };
+      if (trLang()) { try { await translateRecord(job, rec, ["why", "shape"], ["focus", "review", "next"], subjectAbout("a judgement on whether the learner should practise now")); } catch (e) { if (e && e.code === "cancelled") throw e; } }
+      s.practiceReady = rec;
       saveSubject();
       logEvent("practice", "Practice check: " + (R.enough ? "worth practising now" : "not yet") + ". " + R.why);
     } catch (e) {
@@ -349,7 +351,7 @@
     const s = cur(), R = s && s.practiceReady;
     if (!R || !aiReady() || (ui.pjob && ui.pjob.running)) return;
     const kind = profileOf().run;
-    const focus = R.focus.length ? R : { ...R, focus: learnedPids().slice(-5).map(ptName) };
+    const focus = R.focus.length ? R : { ...R, focus: learnedPids().slice(-5).map(enName) };
     const job = { id: "pset", requests: 0, cancel: false, running: true, stage: "design", rounds: 0, problems: [], ran: null, dropped: [], why: [], kind };
     const paint = () => { if (ui.step === "practice" && ui.view !== "map") render(); };
     job.paint = paint;
@@ -408,12 +410,18 @@
           return ask(job, "Designer", exerciseFixPrompt(focus, O, x, i, f.errs, f.imps), "default", true).then((y) => normEx(y, kind)).catch((e) => { if (e && e.code === "cancelled") throw e; return x; });
         }));
       }
-      const set = { v: 2, id: newId("s"), sid: s.sid, kind, at: new Date().toISOString(), focus: focus.focus, review: focus.review, when: O.when, how: O.how,
+      const set = { v: 2, src: "en", id: newId("s"), sid: s.sid, kind, at: new Date().toISOString(), focus: focus.focus, review: focus.review, when: O.when, how: O.how,
         exercises: EX.map((x) => ({ ...x, mine: x.starter || "", solved: false, hintsShown: 0, revealed: false })),
         advice: advice.map((p) => (p.exercise ? "Exercise " + p.exercise + ": " : "") + p.problem), dropped: job.dropped,
         verified: !!job.verified, requests: job.requests, rounds: job.rounds };
+      if (trLang()) {
+        job.stage = "translate"; paint();
+        try { await translateSet(set, job); }
+        catch (e) { if (e && e.code === "cancelled") throw e; notify("The practice set is ready, but it couldn't be translated, so it's shown in English. You can translate it again.", "warn"); }
+        set.requests = job.requests;
+      }
       ui.pset = set; ui.prun = {};
-      s.practice = (s.practice || []).concat([{ id: set.id, at: set.at, titles: set.exercises.map((x) => x.title), focus: set.focus }]).slice(-30);
+      s.practice = (s.practice || []).concat([{ id: set.id, at: set.at, titles: set.exercises.map((x) => x.title), focus: set.focus, tr: set.tr ? { [trLang()]: set.tr[trLang()].exercises.map((x) => x.title) } : undefined }]).slice(-30);
       s.practiceCurrent = set.id;
       if (db) db.doc("practice2/" + set.id).set(clone(set)).catch(() => notify("The practice set is shown but couldn't be saved.", "warn"));
       saveSubject();
@@ -429,6 +437,20 @@
     } finally { job.running = false; paint(); }
   }
 
+  async function translateSet(set, job) {
+    const L = trLang(), T = {};
+    await trPairs(job, practicePairs(set, T), subjectAbout("a practice set: tasks, hints, criteria and model answers, and advice on how to practise"));
+    set.tr = Object.assign({}, set.tr, { [L]: T });
+  }
+  function retranslateSet() {
+    const set = ui.pset, s = cur();
+    return retranslate("set", async (job) => {
+      await translateSet(set, job);
+      const e = (s.practice || []).find((p) => p.id === set.id);
+      if (e) { e.tr = Object.assign({}, e.tr, { [trLang()]: set.tr[trLang()].exercises.map((x) => x.title) }); saveSubject(); }
+      savePset();
+    });
+  }
   async function loadPracticeSet(id) {
     if (!id || (ui.pset && ui.pset.id === id) || !db) return;
     ui.psetLoading = id; render();
@@ -447,7 +469,9 @@
       try {
         const d = await sample.json(answerCheckPrompt(x, x.mine), { modelTier: "default", cache: false });
         const results = parr(d && d.results).map((r) => ({ n: Number(r && r.criterion) || 0, met: ["yes", "partly", "no"].includes(pstr(r && r.met).toLowerCase()) ? pstr(r.met).toLowerCase() : "partly", note: pstr(r && r.note) }));
-        ui.prun[i] = { running: false, feedback: { results, text: pstr(d && d.feedback) } };
+        const fb = { results, text: pstr(d && d.feedback), notes: results.map((r) => r.note) };
+        if (trLang()) { try { await translateRecord({ requests: 0, cancel: false }, fb, ["text"], ["notes"], subjectAbout("feedback on the learner's answer to a practice exercise")); } catch (_) {} }
+        ui.prun[i] = { running: false, feedback: fb };
         const all = x.criteria.every((_, j) => (results.find((r) => r.n === j + 1) || {}).met === "yes");
         if (all && !x.solved) { x.solved = true; notify("The feedback says your answer meets every criterion. Compare with the model answer when you like."); logEvent("practice", "Solved (by AI feedback): " + x.title); }
         savePset();
@@ -473,7 +497,8 @@
     const stages = [["design", "Designer", "plans the set from what you've learned, then writes each exercise"]]
       .concat(runnable ? [["run", "Runner", "runs the designer's own solution against the tests"]] : [])
       .concat([["check", "Editor", runnable ? "checks that you can do each exercise and that it's worth doing" : "checks each exercise, its criteria and its model answer"]]);
-    const order = runnable ? { design: 0, run: 1, check: 2, fix: 2, done: 3, error: -1 } : { design: 0, check: 1, fix: 1, done: 2, error: -1 };
+    if (trLang()) stages.push(["translate", "Translator", "translates the set into your language, keeping the English original"]);
+    const order = runnable ? { design: 0, run: 1, check: 2, fix: 2, translate: 3, done: 4, error: -1 } : { design: 0, check: 1, fix: 1, translate: 2, done: 3, error: -1 };
     const at = order[job.stage];
     return h("div", { class: "card", "aria-live": "polite" },
       h("div", { class: "row spread" }, h("h3", null, "Building your practice set"), h("span", { class: "muted small" }, job.requests + " requests so far")),
@@ -496,12 +521,13 @@
     if (run.running) return h("p", { class: "thinking" }, !canRun(S.kind) ? "Reading your answer…" : S.kind === "python" && !PY.api ? "Starting Python in the page (the first time takes a few seconds)…" : "Running your code…");
     if (run.error) return h("p", { class: "msg" }, run.error);
     if (run.feedback) {
-      const F = run.feedback, word = { yes: ["ok", "✓"], partly: ["warn", "~"], no: ["warn", "✗"] };
+      const F0 = run.feedback, FV = recordView(F0, ["text"], ["notes"]), F = { ...F0, text: FV.text, results: F0.results.map((r, k) => ({ ...r, note: pickT(FV.notes[k], r.note) })) }, word = { yes: ["ok", "✓"], partly: ["warn", "~"], no: ["warn", "✗"] };
       return h("div", { class: "pr-results" },
         h("ul", { class: "checks" }, x.criteria.map((c, j) => { const r = F.results.find((y) => y.n === j + 1) || { met: "partly", note: "" }; const [cls, tick] = word[r.met];
           return h("li", { class: cls }, h("span", { class: "tick" }, tick), ai("div", null, h("span", null, c), r.note ? h("p", { class: "small muted" }, r.note) : null)); })),
         F.text ? ai("p", { class: "bubble-text" }, F.text) : null,
-        h("p", { class: "caution" }, "AI feedback · can be wrong. Nothing in this subject can be run, so this is one AI's reading of your answer."));
+        h("p", { class: "caution" }, "AI feedback · can be wrong. Nothing in this subject can be run, so this is one AI's reading of your answer."),
+        origSwitch(F0));
     }
     const rs = run.results || [], passed = rs.filter((r) => r.pass).length;
     const firstFail = rs.findIndex((r) => !r.pass);
@@ -522,32 +548,33 @@
             : h("details", { class: "pr-fold" }, h("summary", null, "Test " + (j + 1)), diff));
       })));
   }
-  function exerciseCard(S, x, i) {
+  function exerciseCard(S, xs, i, x) {
+    // xs is the stored exercise (the learner's code, hints shown, solved); x is what the learner reads (maybe translated)
     const run = (ui.prun || {})[i], code = canRun(S.kind);
     return h("article", { class: "card pr-ex" + (x.solved ? " solved" : "") },
       h("div", { class: "row spread" },
         h("div", { class: "pr-title" }, h("span", { class: "pr-n" }, String(i + 1)), ai("h3", null, x.title)),
-        h("div", { class: "row" }, x.level ? ai("span", { class: "chip" }, x.level) : null, x.solved ? h("span", { class: "chip ok" }, "solved") : null)),
+        h("div", { class: "row" }, x.level ? ai("span", { class: "chip" }, x.level) : null, xs.solved ? h("span", { class: "chip ok" }, "solved") : null)),
       x.combines.length ? h("p", { class: "small muted" }, I18N.t("Combines:") + " ", ai("span", null, x.combines.join(" · "))) : null,
       h("div", { class: "lesson pr-task" }, md(x.task)),
-      h("div", { class: "field" }, h("span", { class: "label" }, code ? "Your code" : "Your answer"), codeArea(i, x, code)),
+      h("div", { class: "field" }, h("span", { class: "label" }, code ? "Your code" : "Your answer"), codeArea(i, xs, code)),
       h("div", { class: "row" },
         h("button", { class: "primary", type: "button", disabled: (run && run.running) || (!code && !aiReady()), onclick: () => checkMine(i) }, code ? "Check my code" : "Get feedback on my answer"),
         h("span", { class: "muted small" }, code ? "Ctrl or Cmd + Enter · " + x.tests.length + " tests" : "Ctrl or Cmd + Enter · " + x.criteria.length + " criteria · one AI request"),
-        x.hints.length && x.hintsShown < x.hints.length ? h("button", { class: "quiet", type: "button", onclick: () => { x.hintsShown++; savePset(); render(); } }, x.hintsShown ? "Another hint" : "A hint") : null),
+        x.hints.length && xs.hintsShown < x.hints.length ? h("button", { class: "quiet", type: "button", onclick: () => { xs.hintsShown++; savePset(); render(); } }, xs.hintsShown ? "Another hint" : "A hint") : null),
       testResults(S, x, run),
-      x.hintsShown ? ai("ul", { class: "plain small pr-hints" }, x.hints.slice(0, x.hintsShown).map((t, j) => h("li", null, h("strong", null, I18N.t("Hint " + (j + 1) + ":") + " "), t))) : null,
+      xs.hintsShown ? ai("ul", { class: "plain small pr-hints" }, x.hints.slice(0, xs.hintsShown).map((t, j) => h("li", null, h("strong", null, I18N.t("Hint " + (j + 1) + ":") + " "), t))) : null,
       !code ? h("details", { class: "pr-fold" }, h("summary", { class: "small" }, "What a good answer does"), ai("ol", { class: "plain small" }, x.criteria.map((c) => h("li", null, c)))) : null,
-      h("details", { class: "pr-more", ontoggle: (e) => { if (e.target.open && !x.revealed) { x.revealed = true; savePset(); } } },
-        h("summary", null, code ? (x.solved ? "Compare with the reference solution" : "Show the reference solution") : (x.solved ? "Compare with the model answer" : "Show the model answer")),
-        x.solved ? null : h("p", { class: "small muted" }, "Try first: the struggle is where the practice happens. Open this when you're done or truly stuck."),
+      h("details", { class: "pr-more", ontoggle: (e) => { if (e.target.open && !xs.revealed) { xs.revealed = true; savePset(); } } },
+        h("summary", null, code ? (xs.solved ? "Compare with the reference solution" : "Show the reference solution") : (xs.solved ? "Compare with the model answer" : "Show the model answer")),
+        xs.solved ? null : h("p", { class: "small muted" }, "Try first: the struggle is where the practice happens. Open this when you're done or truly stuck."),
         code ? h("div", { class: "code-wrap" }, h("pre", null, h("code", null, x.solution))) : h("div", { class: "lesson" }, md(x.solution)),
         x.thinking ? h("p", { class: "small" }, h("strong", null, "What this exercise is really about: "), ai("span", null, x.thinking)) : null));
   }
   function renderPractice() {
     const lede = "Practice comes in sets, once what you've learned can combine into real tasks. An AI judges whether that's true yet and writes the exercises; where the subject can be run, the page runs the AI's own solution against the tests before you see them.";
     if (!km) return noMapPanel("Practice");
-    const s = cur(), R = s.practiceReady, fresh = R && R.sig === learnedSig(), judge = ui.pjudge, job = ui.pjob;
+    const s = cur(), R0 = s.practiceReady, R = R0 ? recordView(R0, ["why", "shape"], ["focus", "review", "next"]) : R0, fresh = R && R.sig === learnedSig(), judge = ui.pjudge, job = ui.pjob;
     if (s.practiceCurrent && !ui.pset && ui.psetTried !== s.practiceCurrent) { ui.psetTried = s.practiceCurrent; setTimeout(() => loadPracticeSet(s.practiceCurrent), 0); }
     const n = learnedPids().length;
     let verdict;
@@ -558,26 +585,29 @@
       h("div", { class: "row" }, h("button", { class: "primary", type: "button", disabled: !aiReady() || !n, onclick: judgePractice }, "Is it time to practise?")));
     else verdict = h("div", { class: "card pr-verdict " + (R.enough ? "yes" : "no") },
       h("p", { class: "eyebrow" }, R.enough ? "Worth practising now" : "Not yet"),
-      ai("p", null, R.why),
+      ai("p", null, R.why), origSwitch(R0),
       R.enough && R.focus.length ? h("p", { class: "small" }, h("strong", null, "It would combine: "), ai("span", null, R.focus.join(" · "))) : null,
       R.enough && R.review.length ? h("p", { class: "small" }, h("strong", null, "With review of: "), ai("span", null, R.review.join(" · "))) : null,
       !R.enough && R.next.length ? h("p", { class: "small" }, h("strong", null, "Practice gets much better after: "), ai("span", null, R.next.join(" · "))) : null,
       h("div", { class: "row" },
         h("button", { class: R.enough ? "primary" : "quiet", type: "button", disabled: !aiReady() || (job && job.running), onclick: buildPractice }, R.enough ? "Build a practice set" : "Build one anyway"),
         h("span", { class: "muted small" }, "One AI request to plan, one per exercise, then checks and fixes")));
-    const S = ui.pset && ui.pset.sid === s.sid ? ui.pset : null;
+    const S0 = ui.pset && ui.pset.sid === s.sid ? ui.pset : null, S = S0 ? practiceView(S0) : null;
     const verifiedText = (S) => canRun(S.kind)
       ? (S.verified ? "Written by AI. The page ran its reference solutions against every test before showing them, and an editor held the set to the practice standards." : "Written by AI and checked against the practice standards. The page couldn't run the code when it was built, so the tests weren't run.")
       : "Written by AI and checked by a second AI against the practice standards. Nothing in this subject can be run, so neither the exercises nor your answers are proven: treat the model answers and the feedback as one AI's view.";
     const setView2 = S ? [
       h("div", { class: "card soft pr-plan" },
         h("p", { class: "eyebrow" }, "This set"),
+        origSwitch(S0),
+        trLang() && S0.src === "en" && !(S0.tr && S0.tr[trLang()]) ? h("p", { class: "small muted" }, "This set is in English: it wasn't translated. ",
+          h("button", { class: "link", type: "button", disabled: !aiReady() || ui.busy["tr:set"], onclick: retranslateSet }, ui.busy["tr:set"] ? "Translating…" : "Translate it")) : null,
         S.when ? ai("p", null, S.when) : null,
         S.how.length ? h("div", null, h("p", { class: "label" }, "How to practise"), ai("ul", { class: "plain" }, S.how.map((t) => h("li", null, t)))) : null,
         h("p", { class: "small muted" }, verifiedText(S)),
         (S.dropped || []).length ? h("p", { class: "small muted" }, I18N.t("Left out because it couldn't be made right:") + " ", ai("span", null, S.dropped.join(" · "))) : null,
         (S.advice || []).length ? h("details", { class: "pr-fold" }, h("summary", { class: "small" }, "The editor's remaining suggestions"), ai("ul", { class: "plain small" }, S.advice.map((t) => h("li", null, t)))) : null),
-      ...S.exercises.map((x, i) => exerciseCard(S, x, i)),
+      ...S.exercises.map((x, i) => exerciseCard(S, S0.exercises[i], i, x)),
     ] : ui.psetLoading ? [h("p", { class: "thinking" }, "Loading your practice set…")] : [];
     const older = (s.practice || []).filter((p) => !S || p.id !== S.id).slice().reverse();
     return h("section", { class: "panel" },
@@ -586,5 +616,5 @@
       job && (job.running || job.stage === "error") ? (job.running ? prTeamCard(job) : h("div", { class: "card soft" }, h("p", { class: "msg" }, job.error))) : null,
       ...setView2,
       older.length ? h("details", { class: "card soft" }, h("summary", null, "Earlier practice sets (" + older.length + ")"),
-        h("ul", { class: "plain" }, older.map((p) => h("li", null, ai("button", { class: "link", type: "button", onclick: () => { s.practiceCurrent = p.id; ui.pset = null; ui.prun = {}; saveSubject(); loadPracticeSet(p.id); } }, (p.titles || []).join(" · ") || p.id))))) : null);
+        h("ul", { class: "plain" }, older.map((p) => h("li", null, ai("button", { class: "link", type: "button", onclick: () => { s.practiceCurrent = p.id; ui.pset = null; ui.prun = {}; saveSubject(); loadPracticeSet(p.id); } }, ((trOf(p) || p.titles) || []).join(" · ") || p.id))))) : null);
   }

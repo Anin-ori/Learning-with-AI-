@@ -63,6 +63,18 @@ const ok = (c, msg) => { if (!c) { console.log("FAIL:", msg); process.exitCode =
   // About tab
   await click("#km-t-src"); await page.waitForTimeout(200);
   await shot("v2-04-about");
+  if (ZH) {
+    const names = await page.evaluate(() => [...document.querySelectorAll(".km-blab")].map((t) => t.textContent));
+    ok(names.length && names.every((n) => n.startsWith("译·")), "the map shows translated names (" + names[0] + ")");
+    ok(!!(M.tr && M.tr.zh && M.tr.zh.nodes && Object.keys(M.tr.zh.nodes).length === M.nodes.length) && /^[A-Z]/.test(M.nodes[0].name), "the stored map keeps the English original and its translation");
+    await page.evaluate(() => document.querySelector('#km-p-src [data-about="orig"]').click()); await page.waitForTimeout(1200);
+    const en = await page.evaluate(() => [...document.querySelectorAll(".km-blab")].map((t) => t.textContent));
+    ok(en.every((n) => !n.startsWith("译·")), "the switch shows the English original (" + en[0] + ")");
+    await shot("v2-04b-original");
+    await click("#km-t-src"); await page.waitForTimeout(200);
+    await page.evaluate(() => document.querySelector('#km-p-src [data-about="orig"]').click()); await page.waitForTimeout(1200);
+    ok(await page.evaluate(() => document.querySelector(".km-blab").textContent.startsWith("译·")), "and back to the translation");
+  } else ok(!(await page.evaluate(() => window.__translations)), "nothing is translated in English");
   ok(await page.evaluate(() => /checker/i.test(document.getElementById("km-p-src").textContent) || /检查/.test(document.getElementById("km-p-src").textContent)), "About explains how the map was built");
   // open a topic and a point
   await page.evaluate(() => document.querySelector("#km-p-mine .km-pick, #km-p-mine [data-ball]") ? 0 : 0);
@@ -79,6 +91,11 @@ const ok = (c, msg) => { if (!c) { console.log("FAIL:", msg); process.exitCode =
   await page.waitForSelector(".lesson-card", { timeout: 20000 }); await page.waitForTimeout(200);
   await shot("v2-07-lesson", true);
   const lessonDoc = await page.evaluate(() => { const s = JSON.parse(localStorage.getItem("lc-mock-db")); const k = Object.keys(s).find((x) => x.startsWith("lessons2/")); return s[k]; });
+  if (ZH) {
+    ok(lessonDoc.tr && lessonDoc.tr.zh && lessonDoc.tr.zh.lesson.startsWith("译·") && !lessonDoc.lesson.startsWith("译·"), "the lesson is stored in English with its translation");
+    ok(await page.evaluate(() => document.querySelector(".lesson-card").textContent.includes("译·")), "the learner reads the translated lesson");
+    ok(await page.evaluate(() => !!document.querySelector(".orig-switch")), "the lesson offers the English original");
+  }
   ok(lessonDoc && lessonDoc.rounds === 1 && lessonDoc.ran && lessonDoc.ran.n === lessonDoc.ran.of, "a wrong stated output was caught by running the example and fixed in one round (" + JSON.stringify(lessonDoc && { rounds: lessonDoc.rounds, ran: lessonDoc.ran }) + ")");
   const sentFix = await page.evaluate(() => window.__prompts.find((p) => p.startsWith("You wrote the lesson below")) || "");
   ok(/stated output is wrong/.test(sentFix), "the reviser was told what the example really printed");

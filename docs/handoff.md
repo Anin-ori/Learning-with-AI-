@@ -1,6 +1,6 @@
 # Learning Companion: handoff for a new chat
 
-Current version: **v2.0** (Oct 8, 2026). Read this first, then the requirements doc.
+Current version: **v2.1** (Oct 8, 2026). Read this first, then the requirements doc.
 
 ## Links
 - App (always update this one; never create a new artifact): https://claude.ai/artifact/S3F4yxSMJYgxZovEzKixxo
@@ -34,18 +34,23 @@ Current version: **v2.0** (Oct 8, 2026). Read this first, then the requirements 
 - Notes live on the map. Tutor questions are kept with their point.
 
 ## How the build works
-- `src/js/*.js` are joined in order inside one function by `build.py`: 00-i18n, 01-core (state, storage, `ask`), 02-md, 03-standards (the guide; the subject profile comes from the map), 04-map (drawing), 05-build (building a map), 06-learn, 07-practice (runners for Python and JavaScript, lesson-example runs), 08-notes, 09-profile (subjects, goal, level check, AI guidance), 10-log, 11-main.
+- `src/js/*.js` are joined in order inside one function by `build.py`: 00-i18n, 01-core (state, storage, `ask`), 02-md, 03-standards (the guide; the subject profile comes from the map), 03-translate (the translation layer), 04-map (drawing), 05-build (building a map), 06-learn, 07-practice (runners for Python and JavaScript, lesson-example runs), 08-notes, 09-profile (subjects, goal, level check, AI guidance), 10-log, 11-main.
 - Storage (db): `app2/index`, `subjects/<sid>`, `maps/<sid>`, `lessons2/<mapId>_<pointId>`, `qa2/<mapId>`, `practice2/<setId>`, `logs/main`. v1.18's documents are left untouched.
+- **Agents work in English (R63).** Prompts use the stored English (`enName`, `enWhat`, `enBall` in 06-learn), never the translation. Built items are stored in English with `src: "en"` and `tr: {zh: {...}}` beside it; views pick through `displayMap`, `lessonView`, `practiceView`, `recordView`, `noteList`. New AI-written fields need adding to the matching `*Pairs` function in 03-translate, or they stay English. The original switch is stored per browser (`lc-orig`). The tutor chat uses `sampleChat`, which answers in the learner's language.
 - New UI strings need Chinese entries in `src/i18n/zh.json` (`exact`, or `patterns` for strings with numbers or names). `L=zh node test/v2_test.js` writes `test/out/untranslated.txt`.
 - Tests: `node test/v2_test.js` (and `L=zh`). They need Playwright (`/opt/npm-tools/node_modules/playwright`, Chromium in `/opt/pw-browsers`) and Pyodide 0.26.4 core at `/home/claude/pyo/pyodide`: npm is blocked here, so download `pyodide-core-0.26.4.tar.bz2` from Pyodide's GitHub release.
 - Real-prompt checks: `test/capture.js` runs the page and writes each prompt to `test/cap/NNN.<kind>.prompt.txt`, then waits for `NNN.answer.json` (or `.txt`). Fresh agents answer them; tell them to write the file in one go, because the page reads it as soon as it appears. `SUBJECT`, `GOAL`, `POINT` set the run. The first run is in `test/real-run`.
 
-## v2.0 (latest)
+## v2.1 (latest)
+- Translation layer: every agent works in English; a translator agent turns built content into the learner's language after delivery; the English original is kept, with one switch; the tutor answers in the learner's language directly. A failed translation never blocks ("Translate it" retries). Long texts are sent in parts between paragraphs; only code comments are translated. Real-prompt check in `test/real-run/translate`. I41: translations are not checked.
+
+## v2.0
 - Subjects in Profile; the AI builds each map (architect, writers, router, checker), and the page checks structure.
 - Lessons, practice, tutor, notes, level check and AI guidance for any subject. Practice in Python and JavaScript is run in the browser; other subjects get written answers read by an AI, labelled.
 - In Python, the page runs every lesson example and gives the checker the results (added after the first real lesson failed to converge on an unrun calculation).
 
 ## Open items
+- Proposed, awaiting the author: a recursive agent tree for the map (a master agent splits the subject into areas, sub-agents subdivide down to the smallest units, results checked and consolidated on the way up), later for every component. Waiting for the go-ahead and an acceptable cost per map.
 - I37: the route covered 90 of 139 points in the real run; whether it should be narrower is the author's call.
 - I39: package loading (NumPy, pandas, scikit-learn) and the JavaScript runner need a check in claude.ai.
 - I38: subjects that can't be run have only the checker; I40: lessons run long.

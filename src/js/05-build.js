@@ -284,8 +284,14 @@
         job.stage = "route"; job.paint();
         applyRoute(W, await ask(job, "Router", routerPrompt(s, W), "default", true));
         const fin = finishMap(W);
-        const M2 = { ...M, route: fin.route, routeAt: new Date().toISOString(), requests: (M.requests || 0) + job.requests };
-        maps[sid] = M2; saveMap(sid);
+        const M2 = { ...M, route: fin.route, routeAt: new Date().toISOString() };
+        maps[sid] = M2;
+        if (trLang() && M2.src === "en") {
+          job.stage = "translate"; job.paint();
+          try { await translateMap(sid, job, true); } catch (e) { if (e && e.code === "cancelled") throw e; notify("The route is updated, but its reasons couldn't be translated, so they're shown in English.", "warn"); }
+        }
+        M2.requests = (M.requests || 0) + job.requests;
+        saveMap(sid);
         job.stage = "done";
         logEvent("map", "Route updated for " + s.name + ": " + fin.route.goal.length + " goal points");
         notify("Your route is updated.");
@@ -309,12 +315,18 @@
         job.stage = "page"; job.paint();
         const fin = finishMap(W);
         const M = {
-          v: 2, sid, mid: newId("m"), subject: W.subject || s.name, goal: s.goal, lang: I18N.lang, built: new Date().toISOString(),
+          v: 2, src: "en", sid, mid: newId("m"), subject: W.subject || s.name, goal: s.goal, lang: "en", built: new Date().toISOString(),
           scope: W.scope, profile: { ...W.profile, name: W.profile.name || W.subject || s.name },
           areas: fin.areas, balls: fin.balls, nodes: fin.nodes, links: fin.links, blinks: fin.blinks, route: fin.route,
           checks: { fixes: W.fixes, verdict: W.verdict || "", notes: W.notes, loopsDropped: fin.loopsDropped }, requests: job.requests,
         };
         maps[sid] = M;
+        // 6. the translator, when the learner reads another language; the English map stays as the original
+        if (trLang()) {
+          job.stage = "translate"; job.paint();
+          try { await translateMap(sid, job); } catch (e) { if (e && e.code === "cancelled") throw e; notify("The map is ready, but it couldn't be translated, so it's shown in English. You can translate it again from its About tab.", "warn"); }
+          M.requests = job.requests;
+        }
         const known = new Set(M.nodes.map((n) => n.id));
         s.learned = []; s.pointIndex = {}; s.learnPoint = null; s.practiceReady = null; s.practiceCurrent = null; s.practice = []; s.trial = null; s.trialTasks = null; s.grade = null;
         s.built = true; s.mapBuilt = M.built;
@@ -336,9 +348,10 @@
     }
   }
   function buildCard(job) {
-    const order = { arch: 0, detail: 1, route: 2, check: 3, page: 4, done: 5, error: -1 };
+    const order = { arch: 0, detail: 1, route: 2, check: 3, page: 4, translate: 5, done: 6, error: -1 };
     const at = order[job.stage];
-    const stages = job.only === "route" ? BUILD_STAGES.filter(([id]) => id === "route") : BUILD_STAGES;
+    const TRS = trLang() ? [["translate", "Translator", "translates the map into your language, keeping the English original"]] : [];
+    const stages = job.only === "route" ? BUILD_STAGES.filter(([id]) => id === "route").concat(TRS) : BUILD_STAGES.concat(TRS);
     return h("div", { class: "card", "aria-live": "polite" },
       h("div", { class: "row spread" }, h("h3", null, job.only === "route" ? "Updating your route" : "Building your map"), h("span", { class: "muted small" }, job.requests + " requests so far")),
       h("ol", { class: "plain" }, stages.map(([id, who, what]) => { const i = order[id]; return h("li", null,
@@ -362,5 +375,11 @@
       (done.length ? '<ul class="km-notelist">' + done.map((f) => "<li>" + esc(I18N.t(f.text)) + "</li>").join("") + "</ul>" : '<p class="km-empty">' + T("Nothing: it found no errors to fix.") + "</p>") +
       (notes.length ? "<h3>" + T("What the page's structure check changed") + '</h3><ul class="km-notelist">' + notes.map((n) => "<li>" + esc(I18N.t(n)) + "</li>").join("") + "</ul>" : "") +
       '<p class="km-small">' + esc(I18N.t("Built " + new Date(M.built).toLocaleDateString(I18N.lang === "zh" ? "zh-CN" : "en-US", { year: "numeric", month: "short", day: "numeric" }) + ".")) + "</p>" +
+      (trLang() && M.tr && M.tr[trLang()] ? '<div class="km-btns"><button class="km-btn" type="button" data-about="orig">' + T(showOrigFlag ? "Show the translation" : "Show the English original") + "</button></div>"
+        : trLang() && M.src === "en" ? '<p class="km-small">' + T("This map is in English: it wasn't translated.") + '</p><div class="km-btns"><button class="km-btn" type="button" data-about="translate"' + (ui.busy["tr:map"] ? " disabled" : "") + ">" + T(ui.busy["tr:map"] ? "Translating…" : "Translate it") + "</button></div>" : "") +
       '<div class="km-btns"><button class="km-btn" type="button" data-about="profile">' + T("Rebuild or update in Profile") + "</button></div>";
+  }
+  function retranslateMap() {
+    const sid = app.current;
+    return retranslate("map", async (job) => { await translateMap(sid, job); saveMap(sid); const v = ui.view; mountMap(); if (v === "map") setView("map"); });
   }

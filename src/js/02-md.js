@@ -63,7 +63,7 @@
         while (i < lines.length && !/^\s*```\s*$/.test(lines[i])) { code.push(lines[i]); i++; }
         i++;
         const prev = out[out.length - 1];
-        const isOutput = !fence[1] && prev && prev.tagName === "P" && /^(output|it prints|prints|result)\s*:?$/i.test(prev.textContent.trim());
+        const isOutput = !fence[1] && prev && prev.tagName === "P" && /^(output|it prints|prints|result|输出|运行结果)\s*[:：]?$/i.test(prev.textContent.trim());
         if (isOutput) out.pop();
         out.push(codeBlock(code.join("\n"), isOutput || fence[1] === "text" || fence[1] === "output" ? "output" : null));
         continue;
