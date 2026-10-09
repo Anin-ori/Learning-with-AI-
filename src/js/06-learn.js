@@ -8,7 +8,12 @@
   function EN() {
     const M = curMap();
     if (!M) return { n: {}, b: {}, M: null };
-    if (!enCache || enCache.M !== M) enCache = { M, n: Object.fromEntries(M.nodes.map((x) => [x.id, x])), b: Object.fromEntries(M.balls.map((x) => [x.id, x])) };
+    if (!enCache || enCache.M !== M) {
+      // a map first built in another language is given to the agents in its English translation (R63)
+      const T = (M.src || M.lang || "en") !== "en" && M.tr && M.tr.en ? M.tr.en : null, tn = (T && T.nodes) || {}, tb = (T && T.balls) || {};
+      enCache = { M, n: Object.fromEntries(M.nodes.map((x) => [x.id, tn[x.id] ? { ...x, name: tn[x.id].name || x.name, what: tn[x.id].what || x.what } : x])),
+        b: Object.fromEntries(M.balls.map((x) => [x.id, tb[x.id] ? { ...x, name: tb[x.id].name || x.name, desc: tb[x.id].desc || x.desc } : x])) };
+    }
     return enCache;
   }
   const enName = (pid) => (EN().n[pid] || {}).name || ptName(pid);
@@ -19,7 +24,7 @@
   function ptLearner() {
     const s = cur() || {};
     return [
-      "Subject: " + (s.name || ""),
+      "Subject: " + profileOf().name,
       "Learner's goal: " + (s.goal || "(not given)"),
       s.situation ? "Where they were when they started, in their own words: " + s.situation.slice(0, 600) : "",
       s.trial && s.trial.summary ? "What their level check showed: " + s.trial.summary : "",
@@ -61,13 +66,13 @@
   const pointContext = (pid) => {
     const P = km.data, n = P.byId[pid], ball = enBall(P.BALL_OF[pid]), M = curMap();
     return [
-      "Point: \"" + enName(pid) + "\"" + (enWhat(pid) ? ": " + enWhat(pid) : "") + ".",
+      "Point: \"" + enName(pid) + "\"" + (enWhat(pid) ? ": " + enWhat(pid).replace(/\.\s*$/, "") : "") + ".",
       "It belongs to the topic \"" + ball.name + "\"" + (ball.desc ? " (" + ball.desc + ")" : "") + ", together with these points, each taught in its own lesson:" + (ball.pts.filter((x) => x !== pid).map((x) => "\n- " + enName(x) + (enWhat(x) ? ": " + enWhat(x) : "")).join("") || " nothing else") ,
       ptLearner(),
       "Points the learner has marked as learned on their map: " + ptLearned() + ".",
       "This point needs first: " + (n.needs.map((x) => enName(x) + (km.isLearned(x) ? " (learned)" : " (NOT learned yet)")).join("; ") || "nothing") + ".",
       "It leads to: " + (n.usedBy.map(enName).join(", ") || "nothing else on this map") + ".",
-      "Topics on this map, from basics to advanced: " + (M ? M.balls : P.KD.balls).map((b) => b.name).join(", ") + ".",
+      "Topics on this map, from basics to advanced: " + (M ? M.balls.map((b) => enBall(b.id).name) : P.KD.balls.map((b) => b.name)).join(", ") + ".",
     ].join("\n");
   };
   const leadPromptPt = (pid) => { const S = profileOf(); return [
@@ -79,7 +84,7 @@
     "- frame: only what the writers must share so the parts read as one lesson: the notation and terms to use, an example the goals share if they share one, what may be assumed, and a brief bridge for anything needed that isn't learned yet.",
     "- parts: who writes what, in order. One writer for the whole lesson is often best, because a lesson is one line of reasoning; split only where a part can be taught well on its own. Each part lists the numbers of its goals (1 for the first goal).",
     "- together: \"sequence\" if each part builds on the text of the parts before it (each writer then sees them), \"parallel\" if the parts can be written side by side.",
-    "- beyond: what lies underneath this point that is worth knowing (the mechanism that makes it work, where its rules stop holding), if anything; empty if nothing. Down into this point, not sideways into other topics.",
+    "- beyond: what lies underneath this point that is worth knowing (the mechanism that makes it work, where its rules stop holding), if anything; empty if nothing.",
     "- goal_link: one sentence on where this point shows up in the learner's goal.",
     'Reply with only JSON: {"goals": [""], "frame": "", "parts": [{"goals": [numbers], "note": "what this writer must know that the goals and frame do not say, such as where their part starts and ends; usually empty"}], "together": "sequence or parallel", "beyond": "", "goal_link": ""}',
   ].join("\n"); };
@@ -97,7 +102,6 @@
   const writeRules = (S, whole) => [
     exampleRule(S),
     S.run === "python" ? "- The page runs every Python example in the lesson, in order, as one session, and checks its output; extensions after === DEEPER === run as a separate session, so they import and define what they use. Where a claim rests on values computed step by step, show them with code that prints them rather than working them out in prose." : "",
-    "- Don't write exercises, quizzes or \"try it yourself\" tasks: practice has its own section. A question for the reader to think about before reading on, with the answer following, is fine. Don't copy text from any book.",
     "- As long as the goals need and no longer. Markdown with ## headings, no title line at the top. " + MD_NOTE,
     whole ? "- Extensions, if they are worth writing, go after the lesson, after a line containing only === DEEPER ===, each under a ### heading." : "- An extension worth writing for your goals goes after your part, after a line containing only === DEEPER ===, under a ### heading.",
     whole ? "- Then a line containing only === NOTES === and the notes for the learner to keep, one per line starting with \"- \": each one fact worth remembering, with `code` or exact notation in backticks and key **terms** in bold. As many as the lesson has such facts." : "",
@@ -118,7 +122,7 @@
     "You led the teaching of ONE knowledge point of " + S.name + " in Learning Companion. Writers have written the parts of the lesson. Join them into one lesson that reads as a single line of thought: add the transitions it needs, remove what one part repeats from another, and keep one voice and one notation. Don't rewrite what works and don't add new material: the content is the writers'.",
     "Point: \"" + enName(pid) + "\".", ptLearner(), "", "The goals:", goalsText(plan), "The frame: " + (plan.frame || "(none)"), "",
     ...parts.map((p, i) => "Part " + (i + 1) + ":\n<<<\n" + p.lesson + "\n>>>" + (p.deeper ? "\nIts extension:\n<<<\n" + p.deeper + "\n>>>" : "")),
-    "", "Format:", writeRules(S, true), "",
+    "", STANDARDS.rules(S), "", "Format:", writeRules(S, true), "",
     "Reply with the whole lesson, then the === DEEPER === line and the extensions if there are any, then the === NOTES === line and the notes.",
   ].join("\n"); };
   function splitLesson(text) {
@@ -133,15 +137,15 @@
     "You are about to learn ONE knowledge point of " + S.name + " from a lesson in Learning Companion, a study tool for self-learners, before the real learner does. AIs wrote the lesson without a textbook behind it.",
     "First, be this learner. You know only what they know:", ptLearner(), "Points they have learned: " + ptLearned() + ".",
     "Read the lesson from the top, in order, as they would, and think it through as you go. Notice where you would get stuck: a step that jumps, something used before it is explained, a passage you could only follow because you already know the subject, a point where the thread breaks. Then try to reach each goal using only what the lesson gave you: could you now explain it, or do it, yourself?",
-    "Then read it once more as an expert in " + S.name + " and find anything false. Work every example, table and calculation yourself and compare it with what the lesson shows and with what the text says about it (which row, which column, which value). Look for a wrong fact, " + (S.run !== "none" ? "code that would fail or a stated output that is wrong, " : "an example whose stated result is wrong, ") + "a disputed claim stated as settled.",
-    "", "The goals the lead set:", goalsText(plan), "", lessonBlock(L),
+    "Then read it once more as an expert in " + S.name + " and find anything false: a wrong fact, " + (S.run !== "none" ? "code that would fail or a stated output that is wrong, " : "an example whose stated result is wrong, ") + "a disputed claim stated as settled.",
+    "", "The goals the lead set:", goalsText(plan), "", STANDARDS.rules(S), "", lessonBlock(L),
     run && run.note ? "\n" + run.note + "\nTrust these results over your own reading of the code; anything they show to be wrong is already counted." : "",
     "",
     "Report only what needs changing, with the passage it concerns:",
     "- false: anything false, as above;",
     "- stuck: where this learner would get stuck, and what would let them through;",
     "- goals: each goal you could not reach from the lesson, and what is missing;",
-    "- rules: an exercise, quiz or practice task written into the lesson (a question to think about, with its answer after it, is fine), a claim that some mistake is common, an extension that goes sideways into other topics instead of down into what lies underneath this point, text copied from a book, missing notes.",
+    "- rules: anything against the standing rules below.",
     "Don't report matters of taste. If the lesson works, say so and report nothing.",
     'Reply with only JSON: {"reading": "two or three sentences on how learning from it went", "false": [{"quote": "", "problem": "", "fix": ""}], "stuck": [{"quote": "", "problem": "", "fix": ""}], "goals": [{"goal": number, "problem": "", "fix": ""}], "rules": [{"quote": "", "problem": "", "fix": ""}]}',
   ].filter((x) => x !== "").join("\n"); };
@@ -155,7 +159,7 @@
   const revisePromptPt = (pid, plan, L, F) => { const S = profileOf(); return [
     "You reviewed the lesson below on ONE knowledge point of " + S.name + " by learning from it as the learner would. Now revise it: fix what you found, and change nothing else. Keep the writers' way of teaching; a fix should make the lesson clearer, not longer than it needs to be.",
     "Point: \"" + enName(pid) + "\".", ptLearner(), "", "The goals:", goalsText(plan), "", "What you found:", findingsText(F), "", lessonBlock(L), "",
-    "Format:", writeRules(S, true), "",
+    STANDARDS.rules(S), "", "Format:", writeRules(S, true), "",
     "Reply with the whole lesson, then the === DEEPER === line and the extensions if there are any, then the === NOTES === line and the notes.",
   ].join("\n"); };
   const hasFindings = (F) => F.false.length + F.stuck.length + F.goals.length + F.rules.length > 0;
@@ -169,23 +173,23 @@
     ui.pjobs[key] = job; render();
     try {
       // 1. the lead: goals, frame, and how the writing is split
-      job.plan = normLead(await ask(job, "Lead", inLang(leadPromptPt(pid)), "complex", true));
+      job.plan = normLead(await ask(job, "Lead", inEnglish(leadPromptPt(pid)), "complex", true));
       // 2. the writers: in sequence (each sees the parts before it) or side by side
       job.stage = "teach"; job.parts = job.plan.parts.length; paint();
       let parts = [];
-      const write = async (k, before) => { const t = splitLesson(await ask(job, "Writer", inLang(writerPromptPt(pid, job.plan, k, before)), "default", false)); job.written++; paint(); return t; };
+      const write = async (k, before) => { const t = splitLesson(await ask(job, "Writer", inEnglish(writerPromptPt(pid, job.plan, k, before)), "default", false)); job.written++; paint(); return t; };
       if (job.plan.together === "parallel") parts = await Promise.all(job.plan.parts.map((_, k) => write(k, "")));
       else for (let k = 0; k < job.plan.parts.length; k++) parts.push(await write(k, parts.map((p) => p.lesson).join("\n\n")));
       // 3. the lead joins several parts into one lesson
       let L = parts[0];
-      if (parts.length > 1) { job.stage = "stitch"; paint(); L = splitLesson(await ask(job, "Lead", inLang(stitchPromptPt(pid, job.plan, parts)), "default", false)); }
+      if (parts.length > 1) { job.stage = "stitch"; paint(); L = splitLesson(await ask(job, "Lead", inEnglish(stitchPromptPt(pid, job.plan, parts)), "default", false)); }
       // 4. the page runs the examples; 5. the reviewer learns from the lesson, and revises what it found
       for (let round = 0; ; round++) {
         job.stage = "check"; paint();
         const run = profileOf().run === "python" ? await runLessonExamples(L).catch(() => null) : null;
         job.ran = run && run.ran ? { n: run.n, of: run.of } : null;
         let F;
-        if (round === 0) { F = normFindings(await ask(job, "Reviewer", inLang(reviewPromptPt(pid, job.plan, L, run)), "complex", true), job.plan); job.reading = F.reading; }
+        if (round === 0) { F = normFindings(await ask(job, "Reviewer", inEnglish(reviewPromptPt(pid, job.plan, L, run)), "complex", true), job.plan); job.reading = F.reading; }
         else F = { reading: "", false: [], stuck: [], goals: [], rules: [] };   // after a revision only the page's checks run again
         if (run && run.errs.length) F.false = run.errs.concat(F.false);
         if (!L.notes.length) F.rules.push({ quote: "", problem: "The notes are missing.", fix: "Add the === NOTES === line and the notes worth keeping." });
@@ -193,10 +197,10 @@
         if (!hasFindings(F)) break;
         if (round >= PL_ROUNDS) throw { code: "not_compliant", agent: "Reviewer" };
         job.stage = "fix"; job.rounds++; paint();
-        L = splitLesson(await ask(job, "Reviewer", inLang(revisePromptPt(pid, job.plan, L, F)), "default", false));
+        L = splitLesson(await ask(job, "Reviewer", inEnglish(revisePromptPt(pid, job.plan, L, F)), "default", false));
       }
-      const doc = { v: 2, src: workLang(), pid, key, at: new Date().toISOString(), plan: job.plan, reading: job.reading || "", lesson: L.lesson, deeper: L.deeper || "", notes: L.notes, advice: [], requests: job.requests, rounds: job.rounds, ran: job.ran };
-      if (outLang()) {
+      const doc = { v: 2, src: "en", pid, key, at: new Date().toISOString(), plan: job.plan, reading: job.reading || "", lesson: L.lesson, deeper: L.deeper || "", notes: L.notes, advice: [], requests: job.requests, rounds: job.rounds, ran: job.ran };
+      if (trLang()) {
         job.stage = "translate"; paint();
         try { await translateLesson(doc, job); }
         catch (e) { if (e && e.code === "cancelled") throw e; notify("The lesson is ready, but it couldn't be translated, so it's shown in English. You can translate it again.", "warn"); }
@@ -204,7 +208,7 @@
       doc.requests = job.requests;
       ui.plessons[key] = doc;
       const s = cur();
-      s.pointIndex[pid] = { at: doc.at, notes: doc.notes, src: doc.src, tr: doc.tr && doc.tr[curLang()] ? { [curLang()]: doc.tr[curLang()].notes } : undefined };
+      s.pointIndex[pid] = { at: doc.at, notes: doc.notes, src: "en", tr: doc.tr && doc.tr[curLang()] ? { [curLang()]: doc.tr[curLang()].notes } : undefined };
       if (db) db.doc("lessons2/" + key).set(clone(doc)).catch(() => notify("The lesson is shown but couldn't be saved.", "warn"));
       saveSubject();
       job.stage = "done";
@@ -329,7 +333,7 @@
   function ptTeamCard(job) {
     const order = { plan: 0, teach: 1, stitch: 1, check: 2, fix: 2, translate: 3, done: 4, error: -1 };
     const at = order[job.stage];
-    const stages = outLang() ? PT_STAGES.concat([["translate", "Translator", "translates it into your language, keeping the English original"]]) : PT_STAGES;
+    const stages = trLang() ? PT_STAGES.concat([["translate", "Translator", "translates it into your language, keeping the English original"]]) : PT_STAGES;
     return h("div", { class: "card", id: "pt-team", "aria-live": "polite" },
       h("div", { class: "row spread" }, h("h3", null, "Building your lesson"), h("span", { class: "muted small" }, job.requests + " requests so far")),
       h("ol", { class: "plain" }, stages.map(([id, who, what], i) => h("li", null,

@@ -5,7 +5,9 @@
   const profileOf = () => {
     const m = curMap();
     const p = (m && m.profile) || {};
-    const name = p.name || (cur() && cur().name) || "the subject";
+    // agents work in English (R63): a map first built in another language gives its English subject name
+    const en = m && (m.src || m.lang || "en") !== "en" && m.tr && m.tr.en && m.tr.en.subject;
+    const name = en || p.name || (cur() && cur().name) || "the subject";
     return {
       name,
       trap: p.trap || "a case whose surprising result is explained by how " + name + " works underneath",
@@ -19,18 +21,24 @@
     };
   };
   const STANDARDS = {
-    // v1.14: one guide for the AIs that teach. It describes what good teaching is for and why; it is not a checklist and
-    // presets no content. v2.2: it opens with the direction the author set (R66, R67), and the lesson reviewer never
-    // gets it: a reviewer that checks against a guide turns the guide into a benchmark that every lesson then performs.
-    guide: (S) => [
+    // v2.2 (R66, R67): two layers. The purpose says what teaching is for, in the author's terms; only the AIs that create
+    // a lesson get it, as direction, never as criteria: a reviewer that checks against it turns it into a benchmark that
+    // every lesson then performs. The standing rules are the author's teaching standards; every AI that writes, joins,
+    // checks or revises a lesson gets them, from this one list.
+    purpose: () => [
       "What the teaching is for. Teach for understanding that lasts and can be used: the learner should come away knowing why, able to rebuild it and to use it on something new, and aware of where it ends. Build on what they already know and make the connection plain. The learner reads on their own and thinks it through, so leave the thinking to them: give them something to work out or explain to themselves, not only conclusions to accept. Keep to one idea at a time, show it in varied forms and at its edges, and be honest about what is certain and what isn't. Knowledge should unfold the way it naturally does. How a lesson achieves this is yours to decide, and none of it has to show up as a feature: a lesson that simply explains the point well is right.",
+    ].join("\n"),
+    rules: (S) => [
       "Standing rules. They hold for every subject; the illustrations come from " + S.name + " and are not content to reuse.",
       "- Surprises. A surprising case is worth showing when explaining it reveals how " + S.name + " works underneath, as in " + S.trap + ". A mistake that reveals nothing, such as a slip (" + S.slips + ") or a wrong idea no reasonable learner holds, teaches nothing, so leave it out. Don't claim how common a mistake is: there is no data on that.",
       "- Honest scope. When a rule has exceptions, say where it holds rather than stating it as absolute.",
       "- Extensions go down, not sideways. After the lesson, the most valuable extension usually explains what happens underneath: the steps actually taken, what the idea is built on, why it behaves the way it does, and how the learner can observe that for themselves (" + S.observe + "). A tour of more uses or later topics only adds breadth the learner will meet in later lessons anyway. Explain an extension properly or leave it out: concrete and exact, like a good reference entry, never a passing hint such as \"a clearer way comes later\". Under the hood, be exact about what you know, say plainly where your certainty ends, and say where it can be checked. The learner doesn't have to master it.",
       "- New things. If you use something the learner hasn't learned, explain it briefly where it appears.",
       "- Honest about yourself. You are an AI teaching without a textbook in front of you. Where a claim is one you are less sure of, or one that experts dispute, say so plainly and say where it can be checked.",
+      "- Practice has its own section. No exercises, quizzes or \"try it yourself\" tasks in a lesson; a question for the reader to think about before reading on, with the answer following, is fine.",
+      "- Your own words. Don't copy text from any book.",
     ].join("\n"),
+    guide: (S) => STANDARDS.purpose() + "\n" + STANDARDS.rules(S),
     readiness: (S) => [
       "Practice standards (they hold for every subject; the examples come from " + S.name + "):",
       "- Practice is worth doing when the learned points can combine into a small, real task in which the learner must decide how to fit them together: what to keep track of, in what order things happen, which cases to handle. One or two isolated points are not enough: practice on them is a drill that only repeats the lesson.",

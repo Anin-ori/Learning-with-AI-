@@ -1987,7 +1987,9 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
   const profileOf = () => {
     const m = curMap();
     const p = (m && m.profile) || {};
-    const name = p.name || (cur() && cur().name) || "the subject";
+    // agents work in English (R63): a map first built in another language gives its English subject name
+    const en = m && (m.src || m.lang || "en") !== "en" && m.tr && m.tr.en && m.tr.en.subject;
+    const name = en || p.name || (cur() && cur().name) || "the subject";
     return {
       name,
       trap: p.trap || "a case whose surprising result is explained by how " + name + " works underneath",
@@ -2001,18 +2003,24 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     };
   };
   const STANDARDS = {
-    // v1.14: one guide for the AIs that teach. It describes what good teaching is for and why; it is not a checklist and
-    // presets no content. v2.2: it opens with the direction the author set (R66, R67), and the lesson reviewer never
-    // gets it: a reviewer that checks against a guide turns the guide into a benchmark that every lesson then performs.
-    guide: (S) => [
+    // v2.2 (R66, R67): two layers. The purpose says what teaching is for, in the author's terms; only the AIs that create
+    // a lesson get it, as direction, never as criteria: a reviewer that checks against it turns it into a benchmark that
+    // every lesson then performs. The standing rules are the author's teaching standards; every AI that writes, joins,
+    // checks or revises a lesson gets them, from this one list.
+    purpose: () => [
       "What the teaching is for. Teach for understanding that lasts and can be used: the learner should come away knowing why, able to rebuild it and to use it on something new, and aware of where it ends. Build on what they already know and make the connection plain. The learner reads on their own and thinks it through, so leave the thinking to them: give them something to work out or explain to themselves, not only conclusions to accept. Keep to one idea at a time, show it in varied forms and at its edges, and be honest about what is certain and what isn't. Knowledge should unfold the way it naturally does. How a lesson achieves this is yours to decide, and none of it has to show up as a feature: a lesson that simply explains the point well is right.",
+    ].join("\n"),
+    rules: (S) => [
       "Standing rules. They hold for every subject; the illustrations come from " + S.name + " and are not content to reuse.",
       "- Surprises. A surprising case is worth showing when explaining it reveals how " + S.name + " works underneath, as in " + S.trap + ". A mistake that reveals nothing, such as a slip (" + S.slips + ") or a wrong idea no reasonable learner holds, teaches nothing, so leave it out. Don't claim how common a mistake is: there is no data on that.",
       "- Honest scope. When a rule has exceptions, say where it holds rather than stating it as absolute.",
       "- Extensions go down, not sideways. After the lesson, the most valuable extension usually explains what happens underneath: the steps actually taken, what the idea is built on, why it behaves the way it does, and how the learner can observe that for themselves (" + S.observe + "). A tour of more uses or later topics only adds breadth the learner will meet in later lessons anyway. Explain an extension properly or leave it out: concrete and exact, like a good reference entry, never a passing hint such as \"a clearer way comes later\". Under the hood, be exact about what you know, say plainly where your certainty ends, and say where it can be checked. The learner doesn't have to master it.",
       "- New things. If you use something the learner hasn't learned, explain it briefly where it appears.",
       "- Honest about yourself. You are an AI teaching without a textbook in front of you. Where a claim is one you are less sure of, or one that experts dispute, say so plainly and say where it can be checked.",
+      "- Practice has its own section. No exercises, quizzes or \"try it yourself\" tasks in a lesson; a question for the reader to think about before reading on, with the answer following, is fine.",
+      "- Your own words. Don't copy text from any book.",
     ].join("\n"),
+    guide: (S) => STANDARDS.purpose() + "\n" + STANDARDS.rules(S),
     readiness: (S) => [
       "Practice standards (they hold for every subject; the examples come from " + S.name + "):",
       "- Practice is worth doing when the learned points can combine into a small, real task in which the learner must decide how to fit them together: what to keep track of, in what order things happen, which cases to handle. One or two isolated points are not enough: practice on them is a drill that only repeats the lesson.",
@@ -2051,13 +2059,9 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
   const LANG_NAMES = { en: "English", zh: "Simplified Chinese (简体中文)" };
   const curLang = () => (LANG_NAMES[I18N.lang] ? I18N.lang : "en");
   const trLang = () => (curLang() !== "en" ? curLang() : null);   // a new map is written in English, then translated into this
-  // v2.2: lessons, practice, the level check and AI guidance are written in the language of the subject's map (English for
-  // every map built since v2.1; Chinese for maps built in Chinese before it), because the agents are given the map's own
-  // names and descriptions. A lesson on a Chinese map once came back in Chinese while marked as English, and was
-  // "translated" from Chinese into Chinese.
-  const workLang = () => { const M = typeof curMap === "function" && curMap(); return (M && (M.src || M.lang)) || "en"; };
-  const outLang = () => (curLang() !== workLang() ? curLang() : null);   // what new content is translated into after delivery
-  const inLang = (prompt) => (workLang() === "en" ? prompt : prompt + "\n\nWrite everything you write for the learner in " + LANG_NAMES[workLang()] + ", the language of their map; keep JSON keys and the === lines as they are.");
+  // Agents always work in English (R63): they are given the English of the map (for a map first built in another
+  // language, its English translation) and told to write in English, whatever language the learner's goal is in.
+  const inEnglish = (prompt) => prompt + "\n\nWrite in English, whatever language the learner's goal or any name above is in: a translator turns what you write into the learner's language.";
   // the language an item was written in: its own mark, else its map's (maps from v2.0 recorded only that), else English
   const srcOf = (item) => (item && (item.src || item.lang)) || (typeof curMap === "function" && curMap() && (curMap().src || curMap().lang)) || "en";
   const needsTr = (item) => !!item && srcOf(item) !== curLang();
@@ -3608,7 +3612,12 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
   function EN() {
     const M = curMap();
     if (!M) return { n: {}, b: {}, M: null };
-    if (!enCache || enCache.M !== M) enCache = { M, n: Object.fromEntries(M.nodes.map((x) => [x.id, x])), b: Object.fromEntries(M.balls.map((x) => [x.id, x])) };
+    if (!enCache || enCache.M !== M) {
+      // a map first built in another language is given to the agents in its English translation (R63)
+      const T = (M.src || M.lang || "en") !== "en" && M.tr && M.tr.en ? M.tr.en : null, tn = (T && T.nodes) || {}, tb = (T && T.balls) || {};
+      enCache = { M, n: Object.fromEntries(M.nodes.map((x) => [x.id, tn[x.id] ? { ...x, name: tn[x.id].name || x.name, what: tn[x.id].what || x.what } : x])),
+        b: Object.fromEntries(M.balls.map((x) => [x.id, tb[x.id] ? { ...x, name: tb[x.id].name || x.name, desc: tb[x.id].desc || x.desc } : x])) };
+    }
     return enCache;
   }
   const enName = (pid) => (EN().n[pid] || {}).name || ptName(pid);
@@ -3619,7 +3628,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
   function ptLearner() {
     const s = cur() || {};
     return [
-      "Subject: " + (s.name || ""),
+      "Subject: " + profileOf().name,
       "Learner's goal: " + (s.goal || "(not given)"),
       s.situation ? "Where they were when they started, in their own words: " + s.situation.slice(0, 600) : "",
       s.trial && s.trial.summary ? "What their level check showed: " + s.trial.summary : "",
@@ -3661,13 +3670,13 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
   const pointContext = (pid) => {
     const P = km.data, n = P.byId[pid], ball = enBall(P.BALL_OF[pid]), M = curMap();
     return [
-      "Point: \"" + enName(pid) + "\"" + (enWhat(pid) ? ": " + enWhat(pid) : "") + ".",
+      "Point: \"" + enName(pid) + "\"" + (enWhat(pid) ? ": " + enWhat(pid).replace(/\.\s*$/, "") : "") + ".",
       "It belongs to the topic \"" + ball.name + "\"" + (ball.desc ? " (" + ball.desc + ")" : "") + ", together with these points, each taught in its own lesson:" + (ball.pts.filter((x) => x !== pid).map((x) => "\n- " + enName(x) + (enWhat(x) ? ": " + enWhat(x) : "")).join("") || " nothing else") ,
       ptLearner(),
       "Points the learner has marked as learned on their map: " + ptLearned() + ".",
       "This point needs first: " + (n.needs.map((x) => enName(x) + (km.isLearned(x) ? " (learned)" : " (NOT learned yet)")).join("; ") || "nothing") + ".",
       "It leads to: " + (n.usedBy.map(enName).join(", ") || "nothing else on this map") + ".",
-      "Topics on this map, from basics to advanced: " + (M ? M.balls : P.KD.balls).map((b) => b.name).join(", ") + ".",
+      "Topics on this map, from basics to advanced: " + (M ? M.balls.map((b) => enBall(b.id).name) : P.KD.balls.map((b) => b.name)).join(", ") + ".",
     ].join("\n");
   };
   const leadPromptPt = (pid) => { const S = profileOf(); return [
@@ -3679,7 +3688,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     "- frame: only what the writers must share so the parts read as one lesson: the notation and terms to use, an example the goals share if they share one, what may be assumed, and a brief bridge for anything needed that isn't learned yet.",
     "- parts: who writes what, in order. One writer for the whole lesson is often best, because a lesson is one line of reasoning; split only where a part can be taught well on its own. Each part lists the numbers of its goals (1 for the first goal).",
     "- together: \"sequence\" if each part builds on the text of the parts before it (each writer then sees them), \"parallel\" if the parts can be written side by side.",
-    "- beyond: what lies underneath this point that is worth knowing (the mechanism that makes it work, where its rules stop holding), if anything; empty if nothing. Down into this point, not sideways into other topics.",
+    "- beyond: what lies underneath this point that is worth knowing (the mechanism that makes it work, where its rules stop holding), if anything; empty if nothing.",
     "- goal_link: one sentence on where this point shows up in the learner's goal.",
     'Reply with only JSON: {"goals": [""], "frame": "", "parts": [{"goals": [numbers], "note": "what this writer must know that the goals and frame do not say, such as where their part starts and ends; usually empty"}], "together": "sequence or parallel", "beyond": "", "goal_link": ""}',
   ].join("\n"); };
@@ -3697,7 +3706,6 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
   const writeRules = (S, whole) => [
     exampleRule(S),
     S.run === "python" ? "- The page runs every Python example in the lesson, in order, as one session, and checks its output; extensions after === DEEPER === run as a separate session, so they import and define what they use. Where a claim rests on values computed step by step, show them with code that prints them rather than working them out in prose." : "",
-    "- Don't write exercises, quizzes or \"try it yourself\" tasks: practice has its own section. A question for the reader to think about before reading on, with the answer following, is fine. Don't copy text from any book.",
     "- As long as the goals need and no longer. Markdown with ## headings, no title line at the top. " + MD_NOTE,
     whole ? "- Extensions, if they are worth writing, go after the lesson, after a line containing only === DEEPER ===, each under a ### heading." : "- An extension worth writing for your goals goes after your part, after a line containing only === DEEPER ===, under a ### heading.",
     whole ? "- Then a line containing only === NOTES === and the notes for the learner to keep, one per line starting with \"- \": each one fact worth remembering, with `code` or exact notation in backticks and key **terms** in bold. As many as the lesson has such facts." : "",
@@ -3718,7 +3726,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     "You led the teaching of ONE knowledge point of " + S.name + " in Learning Companion. Writers have written the parts of the lesson. Join them into one lesson that reads as a single line of thought: add the transitions it needs, remove what one part repeats from another, and keep one voice and one notation. Don't rewrite what works and don't add new material: the content is the writers'.",
     "Point: \"" + enName(pid) + "\".", ptLearner(), "", "The goals:", goalsText(plan), "The frame: " + (plan.frame || "(none)"), "",
     ...parts.map((p, i) => "Part " + (i + 1) + ":\n<<<\n" + p.lesson + "\n>>>" + (p.deeper ? "\nIts extension:\n<<<\n" + p.deeper + "\n>>>" : "")),
-    "", "Format:", writeRules(S, true), "",
+    "", STANDARDS.rules(S), "", "Format:", writeRules(S, true), "",
     "Reply with the whole lesson, then the === DEEPER === line and the extensions if there are any, then the === NOTES === line and the notes.",
   ].join("\n"); };
   function splitLesson(text) {
@@ -3733,15 +3741,15 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     "You are about to learn ONE knowledge point of " + S.name + " from a lesson in Learning Companion, a study tool for self-learners, before the real learner does. AIs wrote the lesson without a textbook behind it.",
     "First, be this learner. You know only what they know:", ptLearner(), "Points they have learned: " + ptLearned() + ".",
     "Read the lesson from the top, in order, as they would, and think it through as you go. Notice where you would get stuck: a step that jumps, something used before it is explained, a passage you could only follow because you already know the subject, a point where the thread breaks. Then try to reach each goal using only what the lesson gave you: could you now explain it, or do it, yourself?",
-    "Then read it once more as an expert in " + S.name + " and find anything false. Work every example, table and calculation yourself and compare it with what the lesson shows and with what the text says about it (which row, which column, which value). Look for a wrong fact, " + (S.run !== "none" ? "code that would fail or a stated output that is wrong, " : "an example whose stated result is wrong, ") + "a disputed claim stated as settled.",
-    "", "The goals the lead set:", goalsText(plan), "", lessonBlock(L),
+    "Then read it once more as an expert in " + S.name + " and find anything false: a wrong fact, " + (S.run !== "none" ? "code that would fail or a stated output that is wrong, " : "an example whose stated result is wrong, ") + "a disputed claim stated as settled.",
+    "", "The goals the lead set:", goalsText(plan), "", STANDARDS.rules(S), "", lessonBlock(L),
     run && run.note ? "\n" + run.note + "\nTrust these results over your own reading of the code; anything they show to be wrong is already counted." : "",
     "",
     "Report only what needs changing, with the passage it concerns:",
     "- false: anything false, as above;",
     "- stuck: where this learner would get stuck, and what would let them through;",
     "- goals: each goal you could not reach from the lesson, and what is missing;",
-    "- rules: an exercise, quiz or practice task written into the lesson (a question to think about, with its answer after it, is fine), a claim that some mistake is common, an extension that goes sideways into other topics instead of down into what lies underneath this point, text copied from a book, missing notes.",
+    "- rules: anything against the standing rules below.",
     "Don't report matters of taste. If the lesson works, say so and report nothing.",
     'Reply with only JSON: {"reading": "two or three sentences on how learning from it went", "false": [{"quote": "", "problem": "", "fix": ""}], "stuck": [{"quote": "", "problem": "", "fix": ""}], "goals": [{"goal": number, "problem": "", "fix": ""}], "rules": [{"quote": "", "problem": "", "fix": ""}]}',
   ].filter((x) => x !== "").join("\n"); };
@@ -3755,7 +3763,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
   const revisePromptPt = (pid, plan, L, F) => { const S = profileOf(); return [
     "You reviewed the lesson below on ONE knowledge point of " + S.name + " by learning from it as the learner would. Now revise it: fix what you found, and change nothing else. Keep the writers' way of teaching; a fix should make the lesson clearer, not longer than it needs to be.",
     "Point: \"" + enName(pid) + "\".", ptLearner(), "", "The goals:", goalsText(plan), "", "What you found:", findingsText(F), "", lessonBlock(L), "",
-    "Format:", writeRules(S, true), "",
+    STANDARDS.rules(S), "", "Format:", writeRules(S, true), "",
     "Reply with the whole lesson, then the === DEEPER === line and the extensions if there are any, then the === NOTES === line and the notes.",
   ].join("\n"); };
   const hasFindings = (F) => F.false.length + F.stuck.length + F.goals.length + F.rules.length > 0;
@@ -3769,23 +3777,23 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     ui.pjobs[key] = job; render();
     try {
       // 1. the lead: goals, frame, and how the writing is split
-      job.plan = normLead(await ask(job, "Lead", inLang(leadPromptPt(pid)), "complex", true));
+      job.plan = normLead(await ask(job, "Lead", inEnglish(leadPromptPt(pid)), "complex", true));
       // 2. the writers: in sequence (each sees the parts before it) or side by side
       job.stage = "teach"; job.parts = job.plan.parts.length; paint();
       let parts = [];
-      const write = async (k, before) => { const t = splitLesson(await ask(job, "Writer", inLang(writerPromptPt(pid, job.plan, k, before)), "default", false)); job.written++; paint(); return t; };
+      const write = async (k, before) => { const t = splitLesson(await ask(job, "Writer", inEnglish(writerPromptPt(pid, job.plan, k, before)), "default", false)); job.written++; paint(); return t; };
       if (job.plan.together === "parallel") parts = await Promise.all(job.plan.parts.map((_, k) => write(k, "")));
       else for (let k = 0; k < job.plan.parts.length; k++) parts.push(await write(k, parts.map((p) => p.lesson).join("\n\n")));
       // 3. the lead joins several parts into one lesson
       let L = parts[0];
-      if (parts.length > 1) { job.stage = "stitch"; paint(); L = splitLesson(await ask(job, "Lead", inLang(stitchPromptPt(pid, job.plan, parts)), "default", false)); }
+      if (parts.length > 1) { job.stage = "stitch"; paint(); L = splitLesson(await ask(job, "Lead", inEnglish(stitchPromptPt(pid, job.plan, parts)), "default", false)); }
       // 4. the page runs the examples; 5. the reviewer learns from the lesson, and revises what it found
       for (let round = 0; ; round++) {
         job.stage = "check"; paint();
         const run = profileOf().run === "python" ? await runLessonExamples(L).catch(() => null) : null;
         job.ran = run && run.ran ? { n: run.n, of: run.of } : null;
         let F;
-        if (round === 0) { F = normFindings(await ask(job, "Reviewer", inLang(reviewPromptPt(pid, job.plan, L, run)), "complex", true), job.plan); job.reading = F.reading; }
+        if (round === 0) { F = normFindings(await ask(job, "Reviewer", inEnglish(reviewPromptPt(pid, job.plan, L, run)), "complex", true), job.plan); job.reading = F.reading; }
         else F = { reading: "", false: [], stuck: [], goals: [], rules: [] };   // after a revision only the page's checks run again
         if (run && run.errs.length) F.false = run.errs.concat(F.false);
         if (!L.notes.length) F.rules.push({ quote: "", problem: "The notes are missing.", fix: "Add the === NOTES === line and the notes worth keeping." });
@@ -3793,10 +3801,10 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
         if (!hasFindings(F)) break;
         if (round >= PL_ROUNDS) throw { code: "not_compliant", agent: "Reviewer" };
         job.stage = "fix"; job.rounds++; paint();
-        L = splitLesson(await ask(job, "Reviewer", inLang(revisePromptPt(pid, job.plan, L, F)), "default", false));
+        L = splitLesson(await ask(job, "Reviewer", inEnglish(revisePromptPt(pid, job.plan, L, F)), "default", false));
       }
-      const doc = { v: 2, src: workLang(), pid, key, at: new Date().toISOString(), plan: job.plan, reading: job.reading || "", lesson: L.lesson, deeper: L.deeper || "", notes: L.notes, advice: [], requests: job.requests, rounds: job.rounds, ran: job.ran };
-      if (outLang()) {
+      const doc = { v: 2, src: "en", pid, key, at: new Date().toISOString(), plan: job.plan, reading: job.reading || "", lesson: L.lesson, deeper: L.deeper || "", notes: L.notes, advice: [], requests: job.requests, rounds: job.rounds, ran: job.ran };
+      if (trLang()) {
         job.stage = "translate"; paint();
         try { await translateLesson(doc, job); }
         catch (e) { if (e && e.code === "cancelled") throw e; notify("The lesson is ready, but it couldn't be translated, so it's shown in English. You can translate it again.", "warn"); }
@@ -3804,7 +3812,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
       doc.requests = job.requests;
       ui.plessons[key] = doc;
       const s = cur();
-      s.pointIndex[pid] = { at: doc.at, notes: doc.notes, src: doc.src, tr: doc.tr && doc.tr[curLang()] ? { [curLang()]: doc.tr[curLang()].notes } : undefined };
+      s.pointIndex[pid] = { at: doc.at, notes: doc.notes, src: "en", tr: doc.tr && doc.tr[curLang()] ? { [curLang()]: doc.tr[curLang()].notes } : undefined };
       if (db) db.doc("lessons2/" + key).set(clone(doc)).catch(() => notify("The lesson is shown but couldn't be saved.", "warn"));
       saveSubject();
       job.stage = "done";
@@ -3929,7 +3937,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
   function ptTeamCard(job) {
     const order = { plan: 0, teach: 1, stitch: 1, check: 2, fix: 2, translate: 3, done: 4, error: -1 };
     const at = order[job.stage];
-    const stages = outLang() ? PT_STAGES.concat([["translate", "Translator", "translates it into your language, keeping the English original"]]) : PT_STAGES;
+    const stages = trLang() ? PT_STAGES.concat([["translate", "Translator", "translates it into your language, keeping the English original"]]) : PT_STAGES;
     return h("div", { class: "card", id: "pt-team", "aria-live": "polite" },
       h("div", { class: "row spread" }, h("h3", null, "Building your lesson"), h("span", { class: "muted small" }, job.requests + " requests so far")),
       h("ol", { class: "plain" }, stages.map(([id, who, what], i) => h("li", null,
@@ -4368,9 +4376,9 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     const job = { id: "pjudge", requests: 0, cancel: false, running: true };
     ui.pjudge = job; render();
     try {
-      const R = normReady(await ask(job, "Judge", inLang(readinessPrompt()), "default", true));
-      const rec = { sig: learnedSig(), at: new Date().toISOString(), src: workLang(), ...R };
-      if (outLang()) { try { await translateRecord(job, rec, ["why", "shape"], ["focus", "review", "next"], subjectAbout("a judgement on whether the learner should practise now")); } catch (e) { if (e && e.code === "cancelled") throw e; } }
+      const R = normReady(await ask(job, "Judge", inEnglish(readinessPrompt()), "default", true));
+      const rec = { sig: learnedSig(), at: new Date().toISOString(), src: "en", ...R };
+      if (trLang()) { try { await translateRecord(job, rec, ["why", "shape"], ["focus", "review", "next"], subjectAbout("a judgement on whether the learner should practise now")); } catch (e) { if (e && e.code === "cancelled") throw e; } }
       s.practiceReady = rec;
       saveSubject();
       logEvent("practice", "Practice check: " + (R.enough ? "worth practising now" : "not yet") + ". " + R.why);
@@ -4391,9 +4399,9 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     ui.pjob = job; render();
     try {
       // 1. plan the set, then write each exercise with its own call (they run side by side)
-      const O = normOutline(await ask(job, "Designer", inLang(designPrompt(focus)), "default", true));
+      const O = normOutline(await ask(job, "Designer", inEnglish(designPrompt(focus)), "default", true));
       job.planned = O.exercises.length; paint();
-      let EX = await Promise.all(O.exercises.map((_, i) => ask(job, "Designer", inLang(exercisePrompt(focus, O, i, kind)), "default", true).then((x) => normEx(x, kind)).catch((e) => {
+      let EX = await Promise.all(O.exercises.map((_, i) => ask(job, "Designer", inEnglish(exercisePrompt(focus, O, i, kind)), "default", true).then((x) => normEx(x, kind)).catch((e) => {
         if (e && e.code === "cancelled") throw e;
         job.dropped.push(O.exercises[i].title); job.why.push(O.exercises[i].title + ": " + (e && e.code || "error")); return null; })));
       const polished = new Set();
@@ -4417,7 +4425,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
         job.ran = ran;
         // 3. the editor: errors must be fixed, improvements get one revision
         job.stage = "check"; paint();
-        const rv = await ask(job, "Checker", inLang(practiceCheckPrompt(focus, S, ran, kind)), "complex", true);
+        const rv = await ask(job, "Checker", inEnglish(practiceCheckPrompt(focus, S, ran, kind)), "complex", true);
         const errs = runErrs.concat(normProblemsPr(rv && (rv.errors || rv.problems)));
         const imps = normProblemsPr(rv && rv.improvements);
         advice = imps;
@@ -4440,14 +4448,14 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
           const f = fixes[i];
           if (!f.errs.length && !f.imps.length) return x;
           if (f.imps.length) polished.add(i);
-          return ask(job, "Designer", inLang(exerciseFixPrompt(focus, O, x, i, f.errs, f.imps)), "default", true).then((y) => normEx(y, kind)).catch((e) => { if (e && e.code === "cancelled") throw e; return x; });
+          return ask(job, "Designer", inEnglish(exerciseFixPrompt(focus, O, x, i, f.errs, f.imps)), "default", true).then((y) => normEx(y, kind)).catch((e) => { if (e && e.code === "cancelled") throw e; return x; });
         }));
       }
-      const set = { v: 2, src: workLang(), id: newId("s"), sid: s.sid, kind, at: new Date().toISOString(), focus: focus.focus, review: focus.review, when: O.when, how: O.how,
+      const set = { v: 2, src: "en", id: newId("s"), sid: s.sid, kind, at: new Date().toISOString(), focus: focus.focus, review: focus.review, when: O.when, how: O.how,
         exercises: EX.map((x) => ({ ...x, mine: x.starter || "", solved: false, hintsShown: 0, revealed: false })),
         advice: advice.map((p) => (p.exercise ? "Exercise " + p.exercise + ": " : "") + p.problem), dropped: job.dropped,
         verified: !!job.verified, requests: job.requests, rounds: job.rounds };
-      if (outLang()) {
+      if (trLang()) {
         job.stage = "translate"; paint();
         try { await translateSet(set, job); }
         catch (e) { if (e && e.code === "cancelled") throw e; notify("The practice set is ready, but it couldn't be translated, so it's shown in English. You can translate it again.", "warn"); }
@@ -4500,10 +4508,10 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     if (!canRun(S.kind)) {
       if (!aiReady() || !(x.mine || "").trim()) { ui.prun[i] = null; render(); return; }
       try {
-        const d = await sample.json(inLang(answerCheckPrompt(x, x.mine)), { modelTier: "default", cache: false });
+        const d = await sample.json(inEnglish(answerCheckPrompt(x, x.mine)), { modelTier: "default", cache: false });
         const results = parr(d && d.results).map((r) => ({ n: Number(r && r.criterion) || 0, met: ["yes", "partly", "no"].includes(pstr(r && r.met).toLowerCase()) ? pstr(r.met).toLowerCase() : "partly", note: pstr(r && r.note) }));
         const fb = { results, text: pstr(d && d.feedback), notes: results.map((r) => r.note) };
-        if (outLang()) { try { await translateRecord({ requests: 0, cancel: false }, fb, ["text"], ["notes"], subjectAbout("feedback on the learner's answer to a practice exercise")); } catch (_) {} }
+        if (trLang()) { try { await translateRecord({ requests: 0, cancel: false }, fb, ["text"], ["notes"], subjectAbout("feedback on the learner's answer to a practice exercise")); } catch (_) {} }
         ui.prun[i] = { running: false, feedback: fb };
         const all = x.criteria.every((_, j) => (results.find((r) => r.n === j + 1) || {}).met === "yes");
         if (all && !x.solved) { x.solved = true; notify("The feedback says your answer meets every criterion. Compare with the model answer when you like."); logEvent("practice", "Solved (by AI feedback): " + x.title); }
@@ -4530,7 +4538,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     const stages = [["design", "Designer", "plans the set from what you've learned, then writes each exercise"]]
       .concat(runnable ? [["run", "Runner", "runs the designer's own solution against the tests"]] : [])
       .concat([["check", "Editor", runnable ? "checks that you can do each exercise and that it's worth doing" : "checks each exercise, its criteria and its model answer"]]);
-    if (outLang()) stages.push(["translate", "Translator", "translates the set into your language, keeping the English original"]);
+    if (trLang()) stages.push(["translate", "Translator", "translates the set into your language, keeping the English original"]);
     const order = runnable ? { design: 0, run: 1, check: 2, fix: 2, translate: 3, done: 4, error: -1 } : { design: 0, check: 1, fix: 1, translate: 2, done: 3, error: -1 };
     const at = order[job.stage];
     return h("div", { class: "card", "aria-live": "polite" },
@@ -4926,11 +4934,11 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     const job = { requests: 0, cancel: false };
     ui.busy.trialPick = true; ui.errors.trial = null; render();
     try {
-      const d = await ask(job, "Level check", inLang(levelTasksPrompt()), "default", true);
+      const d = await ask(job, "Level check", inEnglish(levelTasksPrompt()), "default", true);
       const tasks = parr(d && d.tasks).map((t) => ({ title: pstr(t && t.title), task: pstr(t && t.task), probes: parr(t && t.probes).map(pstr).filter((id) => km.data.byId[id]) })).filter((t) => t.title && t.task).slice(0, 8);
       if (!tasks.length) throw { code: "invalid_json", agent: "Level check" };
-      const TT = { src: workLang(), why: pstr(d.why), tasks, at: new Date().toISOString() };
-      if (outLang()) { try { const tmp = { src: TT.src, why: TT.why, titles: tasks.map((t) => t.title), bodies: tasks.map((t) => t.task) }; await translateRecord(job, tmp, ["why"], ["titles", "bodies"], subjectAbout("a short level check: tasks for the learner")); TT.tr = tmp.tr; } catch (_) {} }
+      const TT = { src: "en", why: pstr(d.why), tasks, at: new Date().toISOString() };
+      if (trLang()) { try { const tmp = { why: TT.why, titles: tasks.map((t) => t.title), bodies: tasks.map((t) => t.task) }; await translateRecord(job, tmp, ["why"], ["titles", "bodies"], subjectAbout("a short level check: tasks for the learner")); TT.tr = tmp.tr; } catch (_) {} }
       s.trialTasks = TT; s.trial = null; ui.trialAnswers = {};
       saveSubject();
       logEvent("trial", "Level check tasks for " + s.name + ": " + tasks.map((t) => t.title).join("; "));
@@ -4944,12 +4952,12 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     if (withTasks && !answers.some((a) => a.trim())) { ui.errors.trial = "Answer at least one task first, or skip the tasks."; render(); return; }
     ui.busy.trial = true; ui.errors.trial = null; render();
     try {
-      const d = await ask({ requests: 0, cancel: false }, "Level check", inLang(levelAssessPrompt(tasks, answers, withTasks)), "default", true);
+      const d = await ask({ requests: 0, cancel: false }, "Level check", inEnglish(levelAssessPrompt(tasks, answers, withTasks)), "default", true);
       const ids = (v) => parr(v).map(pstr).filter((id) => km.data.byId[id]);
       const results = {};
       parr(d && d.tasks).forEach((r) => { const n = Number(r && r.n); if (n >= 1 && n <= tasks.length) results[n - 1] = { result: ["works", "almost", "not yet"].includes(pstr(r.result)) ? pstr(r.result) : "almost", note: pstr(r.note) }; });
-      const TR = { src: workLang(), summary: pstr(d && d.summary), solid: ids(d && d.solid), shaky: ids(d && d.shaky), feedback: pstr(d && d.feedback) || "No feedback came back.", results, withTasks, at: new Date().toISOString() };
-      if (outLang()) { try { const tmp = { src: TR.src, summary: TR.summary, feedback: TR.feedback, notes: tasks.map((_, k) => (results[k] || {}).note || "") }; await translateRecord({ requests: 0, cancel: false }, tmp, ["summary", "feedback"], ["notes"], subjectAbout("feedback on a level check")); TR.tr = tmp.tr; } catch (_) {} }
+      const TR = { src: "en", summary: pstr(d && d.summary), solid: ids(d && d.solid), shaky: ids(d && d.shaky), feedback: pstr(d && d.feedback) || "No feedback came back.", results, withTasks, at: new Date().toISOString() };
+      if (trLang()) { try { const tmp = { summary: TR.summary, feedback: TR.feedback, notes: tasks.map((_, k) => (results[k] || {}).note || "") }; await translateRecord({ requests: 0, cancel: false }, tmp, ["summary", "feedback"], ["notes"], subjectAbout("feedback on a level check")); TR.tr = tmp.tr; } catch (_) {} }
       s.trial = TR;
       saveSubject();
       logEvent("trial", "Level check for " + s.name + (withTasks ? "" : " (from description only)") + ": " + s.trial.summary + " Solid: " + s.trial.solid.length + ", shaky: " + s.trial.shaky.length);
@@ -5021,7 +5029,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     ].join("\n");
     await Promise.all(TIERS.map(async (t) => {
       try {
-        const data = await sample.json(inLang(prompt), { modelTier: t.id, cache: false });
+        const data = await sample.json(inEnglish(prompt), { modelTier: t.id, cache: false });
         const share = Math.max(0, Math.min(100, Math.round(Number(data && data.share))));
         if (!Number.isFinite(share)) throw { code: "invalid_json" };
         ui.tierResults[t.id] = { state: "done", share, strong: parr(data.strong).slice(0, 6).map(String), limits: parr(data.limits).slice(0, 6).map(String), statement: String(data.statement || "") };
@@ -5037,13 +5045,13 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
       const spread = shares[shares.length - 1] - shares[0];
       const agreement = spread <= 15 ? "agree" : spread <= 30 ? "partial" : "disagree";
       const std = done.find((x) => x.tier.id === "default") || done[0];
-      s.grade = { src: workLang(), share: mid, spread, agreement, statement: std.r.statement, shares: Object.fromEntries(done.map((x) => [x.tier.id, x.r.share])) };
-      if (outLang()) {
+      s.grade = { src: "en", share: mid, spread, agreement, statement: std.r.statement, shares: Object.fromEntries(done.map((x) => [x.tier.id, x.r.share])) };
+      if (trLang()) {
         try {
-          const L = outLang(), G = {}, P = [[s.grade.statement, (v) => { G.statement = v; }]];
+          const L = trLang(), G = {}, P = [[s.grade.statement, (v) => { G.statement = v; }]];
           done.forEach((x) => { const t = { strong: [], limits: [] }; x.r.tr = { [L]: t };
             x.r.strong.forEach((v0, k) => P.push([v0, (v) => { t.strong[k] = v; }])); x.r.limits.forEach((v0, k) => P.push([v0, (v) => { t.limits[k] = v; }])); });
-          await trPairs({ requests: 0, cancel: false }, P, subjectAbout("AI estimates of how far an AI can guide this learner"), workLang());
+          await trPairs({ requests: 0, cancel: false }, P, subjectAbout("AI estimates of how far an AI can guide this learner"));
           s.grade.tr = { [L]: G };
         } catch (_) {}
       }
@@ -5080,7 +5088,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
         caution("These are AI estimates of AI ability, and they can be wrong.")) : null,
       h("div", { class: "row" },
         h("button", { class: g ? "quiet" : "primary", type: "button", disabled: ui.busy.grade || !aiReady(), onclick: runGrade }, ui.busy.grade ? "Asking three models…" : g ? "Ask again" : "Ask the three models"),
-        h("span", { class: "muted small" }, outLang() ? "Uses 3 requests on your Claude account, and one more to translate" : "Uses 3 requests on your Claude account")),
+        h("span", { class: "muted small" }, trLang() ? "Uses 3 requests on your Claude account, and one more to translate" : "Uses 3 requests on your Claude account")),
       errLine("reach"),
       h("div", { class: "tiers" }, tierCards),
       g ? h("div", { class: "row" }, h("button", { class: "primary", type: "button", onclick: () => go("learn") }, "Start learning")) : null);
