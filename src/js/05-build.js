@@ -243,7 +243,7 @@
   }
   async function planNode(s, B, n, job) {
     if (n.depth === 0) {
-      const d = await askValid(job, "Master", masterPrompt(s), "complex", (d) => d && parr(d.parts).some((x) => pstr(x && x.name)));
+      const d = await askValid(job, "Master", inEnglish(masterPrompt(s)), "complex", (d) => d && parr(d.parts).some((x) => pstr(x && x.name)));
       B.subject = pstr(d.subject); B.scope = pstr(d.scope);
       const g = d.grain || {};
       B.grain = { point: pstr(g.point), examples: parr(g.examples).map(pstr).filter(Boolean).slice(0, 12) };
@@ -256,7 +256,7 @@
       const forced = n.depth >= MAP_LIMITS.depth || Object.keys(B.nodes).length >= MAP_LIMITS.agents / 2 || B.nTopic + Object.values(B.nodes).filter((x) => x.state === "todo").length >= MAP_LIMITS.topics;
       const canName = (d) => d && d.topic && parr(d.topic.points).some((x) => pstr(typeof x === "string" ? x : x && x.name));
       const canDivide = (d) => !forced && d && parr(d.divide).some((x) => pstr(x && x.name));
-      const d = await askValid(job, "Planner", plannerPrompt(s, B, n, forced), "default", (d) => canName(d) || canDivide(d));
+      const d = await askValid(job, "Planner", inEnglish(plannerPrompt(s, B, n, forced)), "default", (d) => canName(d) || canDivide(d));
       if (canName(d)) nameTopic(B, n, d.topic); else addKids(B, n, d.divide);
     }
     B.agents++;
@@ -302,7 +302,7 @@
         B.byId[nid] = { id: nid, name, what: pstr(f.what), needs: parr(f.needs).map(pstr).filter((x) => P.has(x)), helps: [] };
         B.balls[t].pts.push(nid);
         parr(f.needed_by).map(pstr).forEach((k) => { if (P.has(k) && k !== nid && !B.byId[k].needs.includes(nid)) B.byId[k].needs.push(nid); });
-        parr(f.for).map(pstr).forEach((k) => { const o = openOf(k); if (o && o.pt !== nid) { B.byId[o.pt].needs.push(nid); B.open = B.open.filter((y) => y !== o); B.linked++; } });
+        parr(f.for).map(pstr).forEach((k) => { const o = openOf(k); if (o && o.pt !== nid) { if (!B.byId[o.pt].needs.includes(nid)) B.byId[o.pt].needs.push(nid); B.open = B.open.filter((y) => y !== o); B.linked++; } });
         ok("Added \"" + name + "\" to " + B.balls[t].name + tail);
       } else if (op === "remove_point") {
         if (!P.has(id)) return skip("Couldn't remove " + id + tail);
@@ -351,22 +351,22 @@
     await planTree(s, B, "n1", job);
     if (!B.planChecked) {
       job.stage = "plancheck"; job.paint();
-      applyReview(B, B.nodes.n1, await askValid(job, "Reviewer", planReviewPrompt(s, B), "complex", reviewOk));
+      applyReview(B, B.nodes.n1, await askValid(job, "Reviewer", inEnglish(planReviewPrompt(s, B)), "complex", reviewOk));
       B.verdicts.plan = B.verdicts.n1 || ""; delete B.verdicts.n1;
       B.agents++; B.planChecked = true; saveStep(B, job);
     }
     job.stage = "write"; job.paint();
     await settle(Object.keys(B.balls).filter((t) => !B.balls[t].written && B.balls[t].pts.length).map(async (t) => {
-      applyDetails(B, t, await askValid(job, "Writer", writerPrompt(s, B, t), "default", (d) => d && Array.isArray(d.points)));
+      applyDetails(B, t, await askValid(job, "Writer", inEnglish(writerPrompt(s, B, t)), "default", (d) => d && Array.isArray(d.points)));
       B.agents++; saveStep(B, job);
     }));
     job.stage = "review"; job.paint();
     await settle(areasToReview(B).filter((a) => !B.reviewed[a]).map(async (a) => {
-      applyReview(B, B.nodes[a], await askValid(job, "Reviewer", reviewerPrompt(s, B, B.nodes[a]), "complex", reviewOk));
+      applyReview(B, B.nodes[a], await askValid(job, "Reviewer", inEnglish(reviewerPrompt(s, B, B.nodes[a])), "complex", reviewOk));
       B.agents++; B.reviewed[a] = true; saveStep(B, job);
     }));
     if (!B.reviewed.n1) {
-      applyReview(B, B.nodes.n1, await askValid(job, "Reviewer", reviewerPrompt(s, B, B.nodes.n1), "complex", reviewOk));
+      applyReview(B, B.nodes.n1, await askValid(job, "Reviewer", inEnglish(reviewerPrompt(s, B, B.nodes.n1)), "complex", reviewOk));
       B.open.forEach((o) => B.notes.push("A writer found \"" + (B.byId[o.pt] || {}).name + "\" needs \"" + o.text + "\", which no point teaches, and no reviewer settled it."));
       B.open = [];
       B.agents++; B.reviewed.n1 = true; saveStep(B, job);
@@ -463,7 +463,8 @@
     const dOf = (id, seen = new Set()) => { if (depth[id] != null) return depth[id]; if (seen.has(id)) return 0; seen.add(id); const d = (par[id] || []).reduce((m, p) => Math.max(m, dOf(p, seen) + 1), 0); depth[id] = d; return d; };
     W.balls.forEach((b) => { b.d = dOf(b.id); });
     const links = [];
-    ids.forEach((id) => { const n = W.byId[id]; n.needs.forEach((p) => links.push([p, id, "needs"])); n.helps.filter((p) => W.byId[p] && !n.needs.includes(p)).forEach((p) => links.push([p, id, "helps"])); });
+    // each link once (a reviewer could add the same need twice, once for the point and once for a missing idea)
+    ids.forEach((id) => { const n = W.byId[id]; [...new Set(n.needs)].forEach((p) => links.push([p, id, "needs"])); [...new Set(n.helps)].filter((p) => W.byId[p] && !n.needs.includes(p)).forEach((p) => links.push([p, id, "helps"])); });
     const missingWhat = ids.filter((id) => !W.byId[id].what).length;
     if (missingWhat) notes.push(missingWhat + " points came back without a description.");
     return {
@@ -492,7 +493,7 @@
         if (!M) throw { code: "no_map" };
         W = workFromMap(M);
         job.stage = "route"; job.paint();
-        applyRoute(W, await ask(job, "Router", routerPrompt(s, W), "default", true));
+        applyRoute(W, await ask(job, "Router", inMapLang(M, routerPrompt(s, W)), "default", true));
         const fin = finishMap(W);
         const M2 = { ...M, route: fin.route, routeAt: new Date().toISOString() };
         maps[sid] = M2;
@@ -518,7 +519,7 @@
         W = treeToWork(B);
         // 2. the router
         job.stage = "route"; job.paint();
-        applyRoute(W, await ask(job, "Router", routerPrompt(s, W), "default", true));
+        applyRoute(W, await ask(job, "Router", inEnglish(routerPrompt(s, W)), "default", true));
         // 3. structure, in code
         job.stage = "page"; job.paint();
         const fin = finishMap(W);
@@ -592,12 +593,12 @@
       job.parts = areas.length + 1; job.paint();
       // each area on its own, side by side; then the whole map
       const res = await Promise.allSettled(areas.map(async (aid) => {
-        applyReview(B, B.nodes[aid], await askValid(job, "Reviewer", reviewerPrompt(s, B, B.nodes[aid], true), "complex", (d) => d && Array.isArray(d.fixes)));
+        applyReview(B, B.nodes[aid], await askValid(job, "Reviewer", inMapLang(M0, reviewerPrompt(s, B, B.nodes[aid], true)), "complex", (d) => d && Array.isArray(d.fixes)));
         job.done++; job.paint();
       }));
       const bad = res.find((x) => x.status === "rejected");
       if (bad) throw bad.reason;
-      applyReview(B, B.nodes.n1, await askValid(job, "Reviewer", reviewerPrompt(s, B, B.nodes.n1, true), "complex", (d) => d && Array.isArray(d.fixes)));
+      applyReview(B, B.nodes.n1, await askValid(job, "Reviewer", inMapLang(M0, reviewerPrompt(s, B, B.nodes.n1, true)), "complex", (d) => d && Array.isArray(d.fixes)));
       job.done++; job.paint();
       // the checked map, through the page's structure checks; the route keeps what is still on the map
       const W = { scope: M0.scope, subject: M0.subject, profile: M0.profile, areas: M0.areas.map(([id, name]) => ({ id, name })), byId: B.byId,

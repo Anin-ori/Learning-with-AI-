@@ -12,6 +12,8 @@
   const trLang = () => (curLang() !== "en" ? curLang() : null);   // a new map is written in English, then translated into this
   // Agents always work in English (R63): they are given the English of the map (for a map first built in another
   // language, its English translation) and told to write in English, whatever language the learner's goal is in.
+  // a check or a new route on a map first built in Chinese stays in the map's language; on an English map, English
+  const inMapLang = (M, prompt) => (srcOf(M) === "en" ? inEnglish(prompt) : prompt);
   const inEnglish = (prompt) => prompt + "\n\nWrite in English, whatever language the learner's goal or any name above is in: a translator turns what you write into the learner's language.";
   // the language an item was written in: its own mark, else its map's (maps from v2.0 recorded only that), else English
   const srcOf = (item) => (item && (item.src || item.lang)) || (typeof curMap === "function" && curMap() && (curMap().src || curMap().lang)) || "en";
