@@ -46,20 +46,25 @@
       "- Judge only from the lists given. Don't assume the learner knows anything else.",
       "- If it isn't enough yet, say plainly why, and name the points they can learn next whose learning would make the most difference to practice: the few that matter, not a list.",
     ].join("\n"),
-    practice: (S) => [
-      "Practice standards (they hold for every subject; the examples come from " + S.name + "):",
-      "- Each exercise is a small, realistic task that combines at least two of the points to combine, ideally three or more, and brings back review points where they fit. It must make the learner decide something: how to structure the answer, what to keep track of, in what order, which cases to handle. Name that decision in \"thinking\".",
-      "- Shallow is not allowed: retyping or lightly varying a lesson example; filling one blank; a single step; trivia about notation; a slip to spot (" + S.slips + "); a task whose only difficulty is reading a long statement. For example, " + S.shallow + " is a drill, not practice; " + S.rich + " is practice.",
-      "- Use only what the learner has learned. The task and the reference answer may need nothing else. If a good task would need more, change the task.",
-      "- The task is complete and exact: what it is given, what it must produce, and at least one worked example where the subject allows one. Every behaviour a test or criterion checks is stated in the task. Don't give away the decision the exercise is about.",
+    // v2.2 (R68): like the lessons, two layers. The purpose goes to the AIs that write the practice; the rules go to them
+    // and to the editor. No counts: an exercise is as big as the material calls for (the author found sets on simple
+    // material overloaded, every task stringing all the learned points together).
+    practicePurpose: () => [
+      "What practice is for. The learner uses what they have learned on their own, so it becomes theirs: they find out what they can already do without the lesson in front of them, and what they hadn't really understood. An exercise is as big as the material calls for. Where what was learned is simple, the tasks are simple and short, and a few small ones can make the right set; combine points where a task naturally needs them, not to cover a list. A clear task the learner can finish in one sitting is better than one that strings every step together. How the set does this is yours to decide.",
+    ].join("\n"),
+    practiceRules: (S) => [
+      "Practice rules (they hold for every subject; the examples come from " + S.name + "):",
+      "- Use only what the learner has learned. The task and the reference answer may need nothing else; if a good task would need more, change the task.",
+      "- The task is complete and exact: what the learner is given and what they must produce. It doesn't give away what the exercise asks them to work out.",
+      "- Not a lesson example retyped or lightly varied.",
       "- " + S.format,
-      "- As many exercises as the learned material supports well, from easier to harder. One excellent exercise beats several thin ones, and a set can be a single exercise.",
-      "- Hints that nudge toward the decision without giving the answer away, from gentle to stronger, as many as the exercise needs.",
+      "- Hints nudge without giving the answer away, from gentle to stronger, as many as the exercise needs.",
       "- Never call a mistake common or classic.",
     ].join("\n"),
   };
   // How each kind of exercise is checked. Runnable subjects use tests the page runs; the others use criteria an AI reads.
   const RUN_FORMAT = {
+    none: "Each exercise is a written task with a reference answer that shows the whole working, not only the result. The learner works it out on paper and then compares with the reference answer; nothing they write is collected or marked.",
     python: "Each exercise is a whole Python program that reads typed lines with input() and prints with print(). A test gives the typed lines and exactly what the program prints. Text passed to input() as a prompt isn't checked, so the task should say prompts are optional, and examples show only what print() prints. Only if the learner has learned how to define functions and the exercise is about writing one may a test instead be {\"check\": \"one Python assert line that calls the function\"}; then the task names the function and its parameters exactly.",
     javascript: "Each exercise is a whole JavaScript program. It reads typed lines by calling input(), which the page provides and which returns the next typed line as a string, and it prints with console.log(). A test gives the typed lines and exactly what the program prints. The page shows strings and numbers as console.log does, and arrays and objects as JSON.stringify would, so tasks that print arrays or objects should say so. Only if the learner has learned how to define functions and the exercise is about writing one may a test instead be {\"check\": \"one JavaScript expression that must be true, calling the function\"}; then the task names the function and its parameters exactly.",
   };

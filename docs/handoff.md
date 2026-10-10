@@ -32,6 +32,7 @@ Current version: **v2.2** (Oct 8, 2026). Read this first, then the requirements 
   - Extensions go down (what happens underneath, how to observe it, honest about where certainty ends), not sideways.
   - Unlearned things may be used with a brief explanation.
 - Practice is its own section and comes in sets once learned points combine into real tasks. The AI judges readiness first and may include review.
+  - R68 (Oct 10): an exercise is as big as the material calls for; simple material, simple tasks. Written subjects have no answer to hand in: a reference answer with the whole working. Practice guidance is `STANDARDS.practicePurpose` (writers) + `practiceRules` (writers and editor); the editor reports errors only.
 - Notes live on the map. Tutor questions are kept with their point.
 
 ## How the build works

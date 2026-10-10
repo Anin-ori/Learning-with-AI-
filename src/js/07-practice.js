@@ -228,7 +228,9 @@
   const prevSetsText = () => ((cur() && cur().practice) || []).slice(-3).map((s) => "- " + (s.titles || []).join("; ")).join("\n");
 
   // ---------- prompts ----------
-  const practiceProfile = () => { const S = profileOf(); return { ...S, format: RUN_FORMAT[S.run] || S.format }; };
+  // the format comes from how practice works on this page (a run for Python and JavaScript, a reference answer otherwise),
+  // not from the subject profile, whose text for older maps still speaks of an AI marking answers
+  const practiceProfile = () => { const S = profileOf(); return { ...S, format: RUN_FORMAT[S.run] || RUN_FORMAT.none }; };
   const readinessPrompt = () => { const S = profileOf(); return [
     "You decide whether a self-learner of " + S.name + " should practise now, in Learning Companion, a study tool. Practice here is a separate section with exercises an AI writes for them.",
     ptLearner(), "", learnedText(), "",
@@ -239,49 +241,49 @@
   ].filter((x) => x !== "").join("\n"); };
   const checkRule = (kind) => canRun(kind)
     ? "- Enough tests to tell a correct solution from a nearly correct one: every case the task names, the boundaries, and the mistakes a reasonable attempt would make. No padding with tests that check the same thing."
-    : "- Criteria a reader can apply: what a good answer must contain or do, enough to tell a good answer from a nearly good one, each one checkable from the answer alone. No padding.";
-  const practiceContext = (R) => { const S = practiceProfile(); return [
+    : "";
+  const practiceContext = (R, editor) => { const S = practiceProfile(); return [
     ptLearner(), "", learnedText(), "",
     "A first AI judged that practice is worth doing now. Its reasons: " + R.why,
     "Combine these points: " + R.focus.join(", ") + "." + (R.review.length ? " Bring these back as review where they fit: " + R.review.join(", ") + "." : ""),
     R.shape ? "Suggested kind of task: " + R.shape : "",
     ((cur() && cur().practice) || []).length ? "Sets they already did (write different tasks):\n" + prevSetsText() : "",
-    "", STANDARDS.practice(S), checkRule(S.run), MD_NOTE,
+    "", editor ? "" : STANDARDS.practicePurpose(), STANDARDS.practiceRules(S), checkRule(S.run), MD_NOTE,
   ].filter((x) => x !== "").join("\n"); };
   const outlineText = (O) => O.exercises.map((x, i) => (i + 1) + ". " + x.title + " (" + x.level + "): " + x.idea + " Decision: " + x.thinking).join("\n");
   const designPrompt = (R) => [
     "You design a practice set for a self-learner of " + profileOf().name + " in Learning Companion, a study tool. Plan the set now; each exercise will then be written in full by its own call, so keep this plan short.",
     practiceContext(R), "",
-    'Reply with only JSON: {"when": "why practising this now makes sense", "how": ["advice on how to practise these particular exercises, as much as is useful"], "exercises": [{"title": "short title", "level": "warm-up, core or stretch", "combines": ["learned points it uses"], "idea": "what the task is, in two or three sentences", "thinking": "the decision the learner has to work out, which is why this is not a drill"}]}',
+    'Reply with only JSON: {"when": "why practising this now makes sense", "how": ["advice on how to practise these particular exercises, as much as is useful"], "exercises": [{"title": "short title", "level": "warm-up, core or stretch", "combines": ["learned points it uses"], "idea": "what the task is, in two or three sentences", "thinking": "what the learner works out in it"}]}',
   ].join("\n");
   const exerciseShape = (kind) => canRun(kind)
-    ? '{"title": "short title", "level": "warm-up, core or stretch", "task": "the full task in Markdown, with what the program reads, what it prints and at least one worked example", "combines": ["learned points it uses"], "thinking": "the decision the learner has to work out", "starter": "starter code or an empty string", "tests": [{"input": "the typed lines, one per line", "output": "exactly what the program prints"}], "solution": "a reference solution that uses only what the learner has learned", "hints": ["a gentle nudge", "a stronger nudge, still without the answer"]}'
-    : '{"title": "short title", "level": "warm-up, core or stretch", "task": "the full task in Markdown, with what the learner is given, what their answer must do and a worked example where the subject allows one", "combines": ["learned points it uses"], "thinking": "the decision the learner has to work out", "criteria": ["what a good answer must contain or do"], "solution": "a model answer in Markdown that uses only what the learner has learned", "hints": ["a gentle nudge", "a stronger nudge, still without the answer"]}';
+    ? '{"title": "short title", "level": "warm-up, core or stretch", "task": "the full task in Markdown, with what the program reads, what it prints and at least one worked example", "combines": ["learned points it uses"], "thinking": "what the learner works out in it", "starter": "starter code or an empty string", "tests": [{"input": "the typed lines, one per line", "output": "exactly what the program prints"}], "solution": "a reference solution that uses only what the learner has learned", "hints": ["a gentle nudge", "a stronger nudge, still without the answer"]}'
+    : '{"title": "short title", "level": "warm-up, core or stretch", "task": "the full task in Markdown, with what the learner is given, what their answer must do and a worked example where the subject allows one", "combines": ["learned points it uses"], "thinking": "what the learner works out in it", "solution": "a reference answer in Markdown that shows the whole working and uses only what the learner has learned", "hints": ["a gentle nudge", "a stronger nudge, still without the answer"]}';
   const exercisePrompt = (R, O, i, kind) => [
     "You write one exercise of a practice set for a self-learner of " + profileOf().name + " in Learning Companion, a study tool.",
     practiceContext(R), "", "The whole set as planned:", outlineText(O), "",
-    "Write exercise " + (i + 1) + ", \"" + O.exercises[i].title + "\", in full. Keep to its idea and its decision; improve on the plan where you see a better exercise.",
+    "Write exercise " + (i + 1) + ", \"" + O.exercises[i].title + "\", in full. Keep to its idea; improve on the plan where you see a better exercise.",
     "Reply with only JSON: " + exerciseShape(kind),
   ].join("\n");
   const exText = (x, i) => [
     "Exercise " + (i + 1) + ": " + x.title + " (" + x.level + ")", "Combines: " + x.combines.join(", "), "Thinking: " + x.thinking,
     "Task:\n" + x.task, x.starter ? "Starter:\n" + x.starter : "", (x.tests ? "Reference solution:\n" : "Model answer:\n") + x.solution,
     x.tests ? "Tests:\n" + x.tests.map((t, j) => "  " + (j + 1) + ". " + (t.check ? "check: " + t.check : "input " + JSON.stringify(t.input || "") + " -> output " + JSON.stringify(t.output || ""))).join("\n")
-      : "Criteria:\n" + (x.criteria || []).map((c, j) => "  " + (j + 1) + ". " + c).join("\n"),
+      : "",
     "Hints: " + x.hints.join(" | "),
   ].filter(Boolean).join("\n");
   const setText = (S) => S.exercises.map(exText).join("\n\n");
+  // the editor checks; it doesn't push exercises to be harder or bigger (R68)
   const practiceCheckPrompt = (R, S, ran, kind) => [
-    "You review a practice set before a self-learner of " + profileOf().name + " sees it. You are an editor, not a gatekeeper: strict about whether the learner can do each exercise " + (canRun(kind) ? "and pass its tests" : "and whether its criteria and model answer are right") + ", constructive about the rest.",
-    practiceContext(R), "",
+    "You check a practice set before a self-learner of " + profileOf().name + " sees it. Report only what needs changing.",
+    practiceContext(R, true), "",
     "The set:", "<<<", setText(S), ">>>",
     canRun(kind) ? (ran ? "The page ran each reference solution against its tests: " + ran : "The page could not run the code here, so check every expected output by reasoning.")
-      : "Nothing in this subject can be run, so you are the only check: verify the model answers and the criteria by reasoning, carefully.",
+      : "Nothing in this subject can be run, so work each reference answer yourself and compare.",
     "",
-    "Errors, which must be fixed: the learner couldn't fairly do the exercise (a task or " + (canRun(kind) ? "reference solution" : "model answer") + " that needs something they haven't learned and the task doesn't explain, an ambiguous task, " + (canRun(kind) ? "a test that checks behaviour the task doesn't state, a worked example or expected output that is wrong" : "a criterion the task doesn't ask for, a model answer or worked example that is wrong") + "), or the exercise isn't practice at all under the standards (a drill: one step, a lesson example retyped or lightly varied, a slip to spot).",
-    "Improvements: where an exercise could be clearly better under the practice standards (a decision the task gives away, a hint that gives the answer away, a shallower version of a deeper exercise), most important first, only what matters.",
-    "Wording, length and the choice of task are not problems when the standards are met.",
-    'Reply with only JSON: {"errors": [{"exercise": 1, "problem": "what is wrong", "fix": "what to do"}], "improvements": [{"exercise": 1, "problem": "what falls short", "fix": "how to make it better"}]}',
+    "Errors: the learner couldn't fairly do the exercise (it needs something they haven't learned and the task doesn't explain; it is ambiguous; " + (canRun(kind) ? "a test checks behaviour the task doesn't state; a worked example or expected output is wrong" : "a worked example or the reference answer is wrong") + "), or it breaks the practice rules.",
+    "Don't report matters of taste, and don't ask for an exercise to be harder, longer or more combined. If the set is fine, report nothing.",
+    'Reply with only JSON: {"errors": [{"exercise": 1, "problem": "what is wrong", "fix": "what to do"}]}',
   ].join("\n");
   const exerciseFixPrompt = (R, O, x, i, errs, imps) => [
     "You wrote exercise " + (i + 1) + " of the practice set below. An editor" + (x.tests ? " and the page's test run" : "") + " found the following." + (errs.length ? " Fix every error." : "") + (imps.length ? " Consider each improvement and make it where it helps the learner." : "") + " A fix may rewrite the exercise if it can't be repaired.",
@@ -320,8 +322,7 @@
       e.tests = parr(x && x.tests).map((t) => ({ input: typeof (t && t.input) === "string" ? t.input : "", output: typeof (t && t.output) === "string" ? t.output : (t && t.check ? null : ""), check: pstr(t && t.check) || undefined })).filter((t) => t.check || t.output != null).slice(0, 40);
       if (!(e.title && e.task && e.solution && e.tests.length)) throw { code: "invalid_json", agent: "Designer" };
     } else {
-      e.criteria = parr(x && x.criteria).map(pstr).filter(Boolean).slice(0, 20);
-      if (!(e.title && e.task && e.solution && e.criteria.length)) throw { code: "invalid_json", agent: "Designer" };
+      if (!(e.title && e.task && e.solution)) throw { code: "invalid_json", agent: "Designer" };
     }
     return e;
   }
@@ -386,7 +387,7 @@
         job.stage = "check"; paint();
         const rv = await ask(job, "Checker", inEnglish(practiceCheckPrompt(focus, S, ran, kind)), "complex", true);
         const errs = runErrs.concat(normProblemsPr(rv && (rv.errors || rv.problems)));
-        const imps = normProblemsPr(rv && rv.improvements);
+        const imps = [];   // since R68 the editor reports errors only
         advice = imps;
         const fixes = EX.map((x, i) => {
           const mine = (list) => list.filter((p) => p.exercise === i + 1 || !p.exercise);
@@ -496,7 +497,7 @@
     const runnable = canRun(job.kind);
     const stages = [["design", "Designer", "plans the set from what you've learned, then writes each exercise"]]
       .concat(runnable ? [["run", "Runner", "runs the designer's own solution against the tests"]] : [])
-      .concat([["check", "Editor", runnable ? "checks that you can do each exercise and that it's worth doing" : "checks each exercise, its criteria and its model answer"]]);
+      .concat([["check", "Editor", runnable ? "checks that you can do each exercise and that it's worth doing" : "checks each exercise and works its reference answer"]]);
     if (trLang()) stages.push(["translate", "Translator", "translates the set into your language, keeping the English original"]);
     const order = runnable ? { design: 0, run: 1, check: 2, fix: 2, translate: 3, done: 4, error: -1 } : { design: 0, check: 1, fix: 1, translate: 2, done: 3, error: -1 };
     const at = order[job.stage];
@@ -557,16 +558,17 @@
         h("div", { class: "row" }, x.level ? ai("span", { class: "chip" }, x.level) : null, xs.solved ? h("span", { class: "chip ok" }, "solved") : null)),
       x.combines.length ? h("p", { class: "small muted" }, I18N.t("Combines:") + " ", ai("span", null, x.combines.join(" · "))) : null,
       h("div", { class: "lesson pr-task" }, md(x.task)),
-      h("div", { class: "field" }, h("span", { class: "label" }, code ? "Your code" : "Your answer"), codeArea(i, xs, code)),
+      // written subjects (R68): no answer to hand in; the learner works on paper and compares with the reference answer
+      code ? h("div", { class: "field" }, h("span", { class: "label" }, "Your code"), codeArea(i, xs, code)) : null,
       h("div", { class: "row" },
-        h("button", { class: "primary", type: "button", disabled: (run && run.running) || (!code && !aiReady()), onclick: () => checkMine(i) }, code ? "Check my code" : "Get feedback on my answer"),
-        h("span", { class: "muted small" }, code ? "Ctrl or Cmd + Enter · " + x.tests.length + " tests" : "Ctrl or Cmd + Enter · " + x.criteria.length + " criteria · one AI request"),
+        code ? h("button", { class: "primary", type: "button", disabled: run && run.running, onclick: () => checkMine(i) }, "Check my code") : null,
+        code ? h("span", { class: "muted small" }, "Ctrl or Cmd + Enter · " + x.tests.length + " tests") : null,
+        !code ? h("button", { class: xs.solved ? "quiet" : "primary", type: "button", onclick: () => { xs.solved = !xs.solved; savePset(); if (xs.solved) logEvent("practice", "Done: " + x.title); render(); } }, xs.solved ? "Mark as not done" : "Mark as done") : null,
         x.hints.length && xs.hintsShown < x.hints.length ? h("button", { class: "quiet", type: "button", onclick: () => { xs.hintsShown++; savePset(); render(); } }, xs.hintsShown ? "Another hint" : "A hint") : null),
       testResults(S, x, run),
       xs.hintsShown ? ai("ul", { class: "plain small pr-hints" }, x.hints.slice(0, xs.hintsShown).map((t, j) => h("li", null, h("strong", null, I18N.t("Hint " + (j + 1) + ":") + " "), t))) : null,
-      !code ? h("details", { class: "pr-fold" }, h("summary", { class: "small" }, "What a good answer does"), ai("ol", { class: "plain small" }, x.criteria.map((c) => h("li", null, c)))) : null,
       h("details", { class: "pr-more", ontoggle: (e) => { if (e.target.open && !xs.revealed) { xs.revealed = true; savePset(); } } },
-        h("summary", null, code ? (xs.solved ? "Compare with the reference solution" : "Show the reference solution") : (xs.solved ? "Compare with the model answer" : "Show the model answer")),
+        h("summary", null, code ? (xs.solved ? "Compare with the reference solution" : "Show the reference solution") : "Show the reference answer"),
         xs.solved ? null : h("p", { class: "small muted" }, "Try first: the struggle is where the practice happens. Open this when you're done or truly stuck."),
         code ? h("div", { class: "code-wrap" }, h("pre", null, h("code", null, x.solution))) : h("div", { class: "lesson" }, md(x.solution)),
         x.thinking ? h("p", { class: "small" }, h("strong", null, "What this exercise is really about: "), ai("span", null, x.thinking)) : null));
@@ -595,7 +597,7 @@
     const S0 = ui.pset && ui.pset.sid === s.sid ? ui.pset : null, S = S0 ? practiceView(S0) : null;
     const verifiedText = (S) => canRun(S.kind)
       ? (S.verified ? "Written by AI. The page ran its reference solutions against every test before showing them, and an editor held the set to the practice standards." : "Written by AI and checked against the practice standards. The page couldn't run the code when it was built, so the tests weren't run.")
-      : "Written by AI and checked by a second AI against the practice standards. Nothing in this subject can be run, so neither the exercises nor your answers are proven: treat the model answers and the feedback as one AI's view.";
+      : "Written by AI and checked by a second AI. Nothing in this subject can be run, so the reference answers are an AI's working, not proven: check what matters to you.";
     const setView2 = S ? [
       h("div", { class: "card soft pr-plan" },
         h("p", { class: "eyebrow" }, "This set"),

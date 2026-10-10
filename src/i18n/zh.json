@@ -624,7 +624,12 @@
   "How this lesson was made": "这节课是怎么写成的",
   "What you should come away with:": "你应当学到的：",
   "The reviewer found 1 thing to change and is revising.": "审核者发现 1 处需要修改，正在修改。",
-  "The reviewer, after learning from it:": "审核者学完后的感受："
+  "The reviewer, after learning from it:": "审核者学完后的感受：",
+  "Mark as done": "标为已完成",
+  "Mark as not done": "标为未完成",
+  "Show the reference answer": "查看参考答案",
+  "checks each exercise and works its reference answer": "检查每道题，并亲自演算参考答案",
+  "Written by AI and checked by a second AI. Nothing in this subject can be run, so the reference answers are an AI's working, not proven: check what matters to you.": "由 AI 编写，并由另一个 AI 检查。这门科目的内容无法运行，所以参考答案只是 AI 的演算，未经证明：对你重要的地方请自行核对。"
  },
  "patterns": [
   [

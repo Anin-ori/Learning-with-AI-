@@ -39,7 +39,7 @@
     "- shallow: an example of a drill in this subject (one step, repeating one fact).",
     "- rich: an example of real practice in this subject (a small task that makes the learner combine several ideas and decide how).",
     "- examples: how good examples look in this subject's lessons, in one or two sentences (for a programming language: short runnable programs, each followed by its exact output).",
-    "- run: how practice answers can be checked. The page can run \"python\" programs and \"javascript\" programs in the browser. Choose one of them only if the subject is that language, or is practised by writing programs in it; otherwise choose \"none\", and practice will be written answers that another AI reads.",
+    "- run: how practice answers can be checked. The page can run \"python\" programs and \"javascript\" programs in the browser. Choose one of them only if the subject is that language, or is practised by writing programs in it; otherwise choose \"none\", and practice will be written tasks with a reference answer the learner compares their work with.",
     "- format: for \"none\" only, what a practice exercise and its answer look like in this subject.",
   ];
   const masterPrompt = (s) => [

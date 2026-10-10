@@ -194,11 +194,10 @@ const ok = (c, msg) => { if (!c) { console.log("FAIL:", msg); process.exitCode =
   await page.evaluate(() => document.querySelector(".pr-verdict button.primary").click());
   await page.waitForSelector(".pr-ex", { timeout: 30000 });
   ok(await page.evaluate(() => /Nothing in this subject can be run|无法运行/.test(document.querySelector(".pr-plan").textContent)), "the set says nothing could be run");
-  await page.fill(".pr-code", ZH ? "C 配 C 大三和弦，因为包含 C。" : "C: C major, because it contains C. D: G major. E: E minor.");
-  await page.evaluate(() => document.querySelector(".pr-ex button.primary").click());
-  await page.waitForSelector(".pr-results", { timeout: 5000 }); await page.waitForTimeout(200);
+  ok(await page.evaluate(() => !document.querySelector(".pr-ex .pr-code") && !!document.querySelector(".pr-ex .pr-more")), "written exercises have no answer box, only a reference answer (R68)");
+  await page.evaluate(() => document.querySelector(".pr-ex button.primary").click()); await page.waitForTimeout(200);
   await shot("v2-14-music-practice", true);
-  ok(await page.evaluate(() => /AI feedback|AI 反馈/.test(document.querySelector(".pr-results").textContent)), "written answers get labelled AI feedback");
+  ok(await page.evaluate(() => !!document.querySelector(".pr-ex.solved")), "a written exercise can be marked as done");
 
   // ---- switch back, then reload ----
   await nav("profile"); await page.waitForTimeout(200);
