@@ -191,7 +191,8 @@
     dotSel.append("title").text((d) => nm(d.id));
     dotSel.append("circle").attr("class", "km-halo");
     dotSel.append("circle").attr("class", "km-core");
-    dotSel.append("text").attr("data-ai", "").selectAll("tspan").data((d) => wrapName(nm(d.id), 26, 3)).join("tspan").text((l) => l);
+    dotSel.append("text").attr("data-ai", "").attr("text-anchor", "middle").attr("dominant-baseline", "hanging")
+      .selectAll("tspan").data((d) => (d.lines = wrapName(nm(d.id), 20, 2))).join("tspan").attr("x", 0).text((l) => l);
     ballSel.append("title").text((b) => b.name);
     const blab = ballSel.append("text").attr("class", "km-blab").attr("data-ai", "").attr("text-anchor", "middle");
     blab.selectAll("tspan").data((b) => b.lines).join("tspan").attr("x", 0).text((l) => l);
@@ -200,19 +201,21 @@
     const arcD = (R, f) => { const t = f * TAU; return `M0,${-R}A${R},${R} 0 ${f > 0.5 ? 1 : 0} 1 ${(R * Math.sin(t)).toFixed(2)},${(-R * Math.cos(t)).toFixed(2)}`; };
     const doneOf = (b) => b.pts.filter((p) => learned.has(p)).length;
     // everything that depends on the zoom (text, rings, gaps) is sized in screen pixels, so it looks the same at any zoom
+    // each topic's parts, looked up once: the zoom resizes them many times a second
+    ballSel.each(function (b) { const g = d3.select(this); b.$ = { glow: g.select(".km-glow"), halo: g.select(".km-halo"), ring: g.selectAll(".km-ping, .km-flare"), body: g.select(".km-body"), hit: g.select(".km-hit"), arc: g.select(".km-arc"), lab: g.select(".km-blab"), prog: g.select(".km-prog") }; });
     function geom(sel) {
       sel.each(function (b) {
-        const g = d3.select(this), R = b.cur, open = ks.open === b.id, f = doneOf(b) / b.pts.length;
-        g.select(".km-glow").attr("r", R + 26 / K);
-        g.select(".km-halo").attr("r", R + 4.5 / K);
-        g.selectAll(".km-ping, .km-flare").attr("r", R + 9.5 / K);
-        g.select(".km-body").attr("r", R);
-        g.select(".km-hit").attr("r", R + 9 / K);
-        g.select(".km-arc").attr("d", f > 0 && f < 1 ? arcD(R, f) : null);
-        const lab = g.select(".km-blab");
+        const $ = b.$, R = b.cur, open = ks.open === b.id, f = doneOf(b) / b.pts.length;
+        $.glow.attr("r", R + 26 / K);
+        $.halo.attr("r", R + 4.5 / K);
+        $.ring.attr("r", R + 9.5 / K);
+        $.body.attr("r", R);
+        $.hit.attr("r", R + 9 / K);
+        $.arc.attr("d", f > 0 && f < 1 ? arcD(R, f) : null);
+        const lab = $.lab;
         if (open) {
           lab.attr("font-size", 14 / K).attr("stroke-width", 3.6 / K).attr("y", R + 19 / K); lab.selectAll("tspan").attr("dy", (l, i) => i ? 17 / K : 0);
-          g.select(".km-prog").attr("font-size", 11 / K).attr("y", 4 / K);
+          $.prog.attr("font-size", 11 / K).attr("y", 4 / K);
         } else {
           const ts = Math.max(0.8, Math.min(1, K / KREF)); // below the zoom the layout was spaced for, labels shrink a little instead of overlapping
           lab.attr("font-size", FS * ts / K).attr("stroke-width", 3.6 / K).attr("y", R + (5 + 13 * ts) / K); lab.selectAll("tspan").attr("dy", (l, i) => i ? LH * ts / K : 0);
@@ -227,26 +230,55 @@
       bcount.attr("display", (b) => ks.open === b.id ? null : "none");
       geom(ballSel);
       linkSel.attr("d", linkPath);
-      dotSel.select(".km-core").attr("r", 6 / K);
-      dotSel.select(".km-halo").attr("r", 10 / K);
+      if (ks.open) { const od = dotSel.filter((d) => d.ball === ks.open); od.select(".km-core").attr("r", 6 / K); od.select(".km-halo").attr("r", 10 / K); }
       if (ks.open && !BALL[ks.open].blooming) placeSub(BALL[ks.open], K, false);
       declutter();
     }
     // labels that would collide are moved above their topic, or hidden until the learner zooms in;
-    // top picks and route topics get their place first
+    // top picks and route topics get their place first.
+    // v2.2: the boxes are worked out from the layout the page already knows, with text widths measured once on a canvas.
+    // Asking the browser for each label's box forced a full layout per label on every zoom step, which made zooming lag.
+    const textW = (() => {
+      const ctx = document.createElement("canvas").getContext("2d"), cache = new Map(); let font = null;
+      if (document.fonts) document.fonts.addEventListener("loadingdone", () => { cache.clear(); font = null; });
+      return (str) => {
+        if (!font) { const n = gB.select(".km-blab").node(), cs = n && getComputedStyle(n); font = cs ? cs.fontWeight + " 100px " + cs.fontFamily : "600 100px sans-serif"; }
+        let w = cache.get(str);
+        if (w == null) { w = ctx ? (ctx.font = font, ctx.measureText(str).width / 100) : I18N.units(str) * 0.53; cache.set(str, w); }
+        return w;   // width at a font size of 1
+      };
+    })();
+    const textBox = (cx, top, lines, f, lh) => { const w = Math.max(...lines.map(textW)) * f; return [cx - w / 2, top, cx + w / 2, top + (lines.length - 1) * lh + 1.2 * f]; };
+    let chromeScreen = [], svgScreen = null;   // the glass bar and legend over the map, in screen pixels; measured on refresh and resize
+    const measureChrome = () => {
+      svgScreen = svg.node().getBoundingClientRect();
+      chromeScreen = [...document.querySelectorAll("#kmap .km-bar > *, #kmap .km-legend")].filter((e) => e.offsetParent).map((e) => e.getBoundingClientRect());
+    };
     function declutter() {
-      const ob = ks.open, hit = (a, c) => Math.min(a.right, c.right) - Math.max(a.left, c.left) > 1 && Math.min(a.bottom, c.bottom) - Math.max(a.top, c.top) > 1;
-      const mine = ballSel.filter((b) => b.id === ob), rect = (n) => n.getBoundingClientRect();
-      const own = (ob ? [...mine.selectAll(".km-dot text").nodes(), mine.select(".km-body").node(), mine.select(".km-blab").node()] : ballSel.select(".km-body").nodes()).map(rect);
+      const ob = ks.open, ts = Math.max(0.8, Math.min(1, K / KREF)), e = 1 / K;
+      const hit = (a, c) => Math.min(a[2], c[2]) - Math.max(a[0], c[0]) > e && Math.min(a[3], c[3]) - Math.max(a[1], c[1]) > e;
+      const circ = (b) => [b.x - b.cur, b.y - b.cur, b.x + b.cur, b.y + b.cur];
+      let own;
+      if (ob) {
+        const b = BALL[ob], at = new Map(((b.sub && b.sub.pts) || []).map((p) => [p.id, p]));
+        own = [circ(b), textBox(b.x, b.y + b.cur + 19 / K - 14 / K * 0.92, b.lines, 14 / K, 17 / K)];
+        b.dots.forEach((d) => { const p = at.get(d.id); if (p) own.push(textBox(b.x + p.x / K, b.y + p.y / K + 13 / K, d.lines, 12.5 / K, 15 / K)); });
+      } else own = KD.balls.map(circ);
+      // the glass bar and legend, from screen pixels into the map's coordinates
+      const t = d3.zoomTransform(svg.node()), sx = (x) => (x - (svgScreen ? svgScreen.left : 0) - t.x) / t.k, sy = (y) => (y - (svgScreen ? svgScreen.top : 0) - t.y) / t.k;
+      const chrome = chromeScreen.map((r) => [sx(r.left), sy(r.top), sx(r.right), sy(r.bottom)]);
       const rank = (b) => (HOT.has(b.id) ? 0 : bOnRoute(b.id) ? 1 : 2);
-      const chrome = [...document.querySelectorAll("#kmap .km-bar > *, #kmap .km-legend")].filter((e) => e.offsetParent).map(rect);
-      const placed = [], ts = Math.max(0.8, Math.min(1, K / KREF));
-      ballSel.nodes().map((n) => [n, d3.select(n).datum()]).sort((x, y) => rank(x[1]) - rank(y[1])).forEach(([node, b]) => {
-        const lab = d3.select(node).select(".km-blab");
+      const placed = [], f = FS * ts / K, lh = LH * ts / K;
+      KD.balls.slice().sort((x, y) => rank(x) - rank(y)).forEach((b) => {
+        const lab = b.$.lab;
         if (b.id === ob || lab.attr("display") === "none") return;
-        const clear = () => { const r = rect(lab.node()); return !own.some((o) => hit(r, o)) && !placed.some((o) => hit(r, o)) && !chrome.some((o) => hit(r, o)) ? r : null; };
-        let r = clear();
-        if (!r) { lab.attr("y", -b.cur - 7 / K - (b.lines.length - 1) * LH * ts / K); r = clear(); }
+        const clear = (r) => !own.some((o) => hit(r, o)) && !placed.some((o) => hit(r, o)) && !chrome.some((o) => hit(r, o));
+        let r = textBox(b.x, b.y + b.cur + (5 + 13 * ts) / K - 0.92 * f, b.lines, f, lh);
+        if (!clear(r)) {
+          const y = -b.cur - 7 / K - (b.lines.length - 1) * lh;
+          r = textBox(b.x, b.y + y - 0.92 * f, b.lines, f, lh);
+          if (clear(r)) lab.attr("y", y); else r = null;
+        }
         if (r) placed.push(r); else lab.attr("display", "none");
       });
     }
@@ -278,11 +310,7 @@
       if (animate) sel.transition("bloom").duration(reduceMotion() ? 0 : 560).delay((d, i) => reduceMotion() ? 0 : 80 + i * 16).ease(d3.easeCubicOut).attr("transform", tf).style("opacity", 1);
       else sel.interrupt("bloom").attr("transform", tf).style("opacity", 1);
       const PLH = 15 / K;
-      sel.select("text").attr("font-size", 12.5 / K).attr("stroke-width", 3.6 / K).attr("text-anchor", "middle").attr("dominant-baseline", "hanging")
-        .each(function (d) {
-          const t = d3.select(this), ls = wrapName(nm(d.id), 20, 2);
-          t.selectAll("tspan").data(ls).join("tspan").text((l) => l).attr("x", 0).attr("y", (l, i) => 13 / K + i * PLH);
-        });
+      sel.select("text").attr("font-size", 12.5 / K).attr("stroke-width", 3.6 / K).selectAll("tspan").attr("y", (l, i) => 13 / K + i * PLH);
       g.select(".km-lens").attr("r", F.lens / k);
       g.select(".km-srings").selectAll("circle").data(F.rings).join("circle").attr("r", (r) => r / k);
       // links between the topic's points, drawn the way topics are linked on the big map
@@ -311,7 +339,13 @@
       g.select(".km-lens").attr("r", 0); g.select(".km-srings").selectAll("circle").remove(); g.select(".km-plinks").selectAll("path").remove();
       dotSel.filter((d) => d.ball === b.id).transition("bloom").duration(reduceMotion() ? 0 : 240).ease(d3.easeCubicOut).attr("transform", "translate(0,0)").style("opacity", 0);
     }
-    const zoom = d3.zoom().scaleExtent([0.2, 8]).on("zoom", (e) => { root.attr("transform", e.transform); if (Math.abs(e.transform.k - K) > 1e-3) { K = e.transform.k; sizeText(); } });
+    // v2.2: the zoom resizes text at most once a frame, and the top picks' pulse pauses while the map moves
+    let sizeQueued = 0, moveTimer = 0;
+    const zoom = d3.zoom().scaleExtent([0.2, 8]).on("zoom", (e) => {
+      root.attr("transform", e.transform);
+      if (e.sourceEvent) { el("kmap").classList.add("km-moving"); clearTimeout(moveTimer); moveTimer = setTimeout(() => el("kmap").classList.remove("km-moving"), 250); }
+      if (Math.abs(e.transform.k - K) > 1e-3) { K = e.transform.k; if (!sizeQueued) sizeQueued = requestAnimationFrame(() => { sizeQueued = 0; sizeText(); }); }
+    }).on("end", () => { if (sizeQueued) { cancelAnimationFrame(sizeQueued); sizeQueued = 0; sizeText(); } });
     svg.call(zoom).on("dblclick.zoom", null);
     const TOP = 44, BOTTOM = 34; // the search bar and the legend are glass, so the map may run under their edges
     function fitTo(t, ms = 450) { (ms && !reduceMotion() ? svg.transition().duration(ms) : svg).call(zoom.transform, t); }
@@ -337,6 +371,7 @@
     // ----- state -----
     const ks = { open: null, point: null, focus: null, shown: false };
     function refresh() {
+      measureChrome();
       HOT = new Set(hotBalls());
       el("kmap").classList.toggle("km-flashon", flashOn);
       el("kmap").classList.toggle("km-opened", !!ks.open);
@@ -516,7 +551,7 @@
     loadProgress(); refresh(); tab("mine");
     const fitTop = () => { const t = document.querySelector(".topbar"); if (t) document.documentElement.style.setProperty("--km-top", t.offsetHeight + "px"); };
     let rz;
-    kmResize = () => { clearTimeout(rz); rz = setTimeout(() => { fitTop(); if (!el("kmap").hidden) (ks.open ? fitOpen(BALL[ks.open]) : fitBalls(ks.focus, 0)); }, 150); };
+    kmResize = () => { clearTimeout(rz); rz = setTimeout(() => { fitTop(); measureChrome(); if (!el("kmap").hidden) (ks.open ? fitOpen(BALL[ks.open]) : fitBalls(ks.focus, 0)); }, 150); };
     return {
       show() { fitTop(); refresh(); if (!ks.shown) { ks.shown = true; el("kmap").classList.add("km-intro"); setTimeout(() => el("kmap").classList.remove("km-intro"), 1500); requestAnimationFrame(() => { if (!ks.open) fitBalls(el("km-svg").clientWidth < 600 && HOT.size ? new Set(HOT) : null, 0); }); } },
       reload() { loadProgress(); refresh(); },

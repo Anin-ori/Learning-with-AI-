@@ -36,3 +36,9 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
 #kmap.km-opened .km-ball:not(.open) { opacity: .5; transition: opacity .3s; }
 #kmap.km-opened .km-blk { opacity: .35; }
 #kmap .km-ball.open .km-prog { letter-spacing: .08em; }
+/* v2.2: the top picks' pulse redraws the whole map each time it changes, so it changes about twenty times a second
+   instead of every frame (the steps are too small to see), and it pauses while the learner zooms or pans */
+#kmap.km-flashon .km-ball.hot > .km-glow { animation-timing-function: steps(26); }
+#kmap.km-flashon .km-ball.hot:not(.open) > .km-flare { animation-timing-function: steps(24); }
+#kmap.km-flashon .km-ball.hot:not(.open) > .km-ping { animation-timing-function: steps(40); }
+#kmap.km-moving .km-ball > .km-glow, #kmap.km-moving .km-ball > .km-flare, #kmap.km-moving .km-ball > .km-ping { animation-play-state: paused; }
