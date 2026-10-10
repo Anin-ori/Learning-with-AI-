@@ -152,6 +152,10 @@
     [["km-m-learned", [[0, "#ffffff"], [0.65, "#fcfbf9"], [1, "#eeebe6"]]], ["km-m-ready", [[0, "#f5f3ef"], [1, "#e0dbd4"]]], ["km-m-locked", [[0, "#d4cec5"], [1, "#c2bbb1"]]]]
       .forEach(([id, st]) => { const m = defs.append("radialGradient").attr("id", id).attr("cx", "38%").attr("cy", "32%").attr("r", "78%"); st.forEach(([o, c]) => m.append("stop").attr("offset", o).attr("stop-color", c)); });
     const gR = root.append("g"), gL = root.append("g"), gB = root.append("g");
+    // v2.2: topic names, point names and the progress count sit in a layer that is moved but never scaled. Browsers
+    // lay out all text again whenever the scale of the layer it sits in changes, which made every zoom step slow.
+    // Each topic has a twin group here with the same classes, so the same styles apply to its text.
+    const gT = svg.append("g").attr("class", "km-tlayer");
     RINGS.slice(1).forEach((R, i) => gR.append("circle").attr("class", "km-ring").attr("r", R).attr("pathLength", 1).style("animation-delay", (i * 0.08) + "s"));
     // the dial: one tick per point, ordered by the bearing of its topic, so lit ticks gather where the learner has been
     const DIAL = RINGS[RINGS.length - 1] + 82, bearing = (b) => b.ring ? (b.a + Math.PI / 2 + 2 * TAU) % TAU : -1;
@@ -186,23 +190,30 @@
     ballSel.append("circle").attr("class", "km-body");
     ballSel.append("path").attr("class", "km-arc");
     ballSel.append("circle").attr("class", "km-hit");
-    const dotSel = ballSel.append("g").attr("class", "km-dots").selectAll("g.km-dot").data((b) => b.dots).join("g")
+    const tSel = gT.selectAll("g.km-ball").data(KD.balls).join("g").attr("class", "km-ball");
+    const dotSel = tSel.append("g").attr("class", "km-dots").selectAll("g.km-dot").data((b) => b.dots).join("g")
       .attr("class", "km-dot").attr("transform", "translate(0,0)").style("opacity", 0);
     dotSel.append("title").text((d) => nm(d.id));
-    dotSel.append("circle").attr("class", "km-halo");
-    dotSel.append("circle").attr("class", "km-core");
+    dotSel.append("circle").attr("class", "km-halo").attr("r", 10);
+    dotSel.append("circle").attr("class", "km-core").attr("r", 6);
     dotSel.append("text").attr("data-ai", "").attr("text-anchor", "middle").attr("dominant-baseline", "hanging")
-      .selectAll("tspan").data((d) => (d.lines = wrapName(nm(d.id), 20, 2))).join("tspan").attr("x", 0).text((l) => l);
+      .attr("font-size", 12.5).attr("stroke-width", 3.6)
+      .selectAll("tspan").data((d) => (d.lines = wrapName(nm(d.id), 20, 2))).join("tspan").attr("x", 0).attr("y", (l, i) => 13 + i * 15).text((l) => l);
     ballSel.append("title").text((b) => b.name);
-    const blab = ballSel.append("text").attr("class", "km-blab").attr("data-ai", "").attr("text-anchor", "middle");
+    const blab = tSel.append("text").attr("class", "km-blab").attr("data-ai", "").attr("text-anchor", "middle");
     blab.selectAll("tspan").data((b) => b.lines).join("tspan").attr("x", 0).text((l) => l);
-    const bcount = ballSel.append("text").attr("class", "km-prog").attr("text-anchor", "middle");
+    const bcount = tSel.append("text").attr("class", "km-prog").attr("text-anchor", "middle");
 
     const arcD = (R, f) => { const t = f * TAU; return `M0,${-R}A${R},${R} 0 ${f > 0.5 ? 1 : 0} 1 ${(R * Math.sin(t)).toFixed(2)},${(-R * Math.cos(t)).toFixed(2)}`; };
     const doneOf = (b) => b.pts.filter((p) => learned.has(p)).length;
     // everything that depends on the zoom (text, rings, gaps) is sized in screen pixels, so it looks the same at any zoom
     // each topic's parts, looked up once: the zoom resizes them many times a second
-    ballSel.each(function (b) { const g = d3.select(this); b.$ = { glow: g.select(".km-glow"), halo: g.select(".km-halo"), ring: g.selectAll(".km-ping, .km-flare"), body: g.select(".km-body"), hit: g.select(".km-hit"), arc: g.select(".km-arc"), lab: g.select(".km-blab"), prog: g.select(".km-prog") }; });
+    ballSel.each(function (b) { const g = d3.select(this); b.$ = { glow: g.select(".km-glow"), halo: g.select(".km-halo"), ring: g.selectAll(".km-ping, .km-flare"), body: g.select(".km-body"), hit: g.select(".km-hit"), arc: g.select(".km-arc") }; });
+    tSel.each(function (b) { const g = d3.select(this); b.$.t = g; b.$.lab = g.select(".km-blab"); b.$.prog = g.select(".km-prog"); });
+    // the text layer follows the zoom by moving only: the layer by the pan, each topic's text to where its topic is on screen
+    let textK = null;
+    const placeText = (t) => { gT.attr("transform", `translate(${t.x},${t.y})`); if (t.k !== textK) { textK = t.k; tSel.attr("transform", (b) => `translate(${b.x * t.k},${b.y * t.k})`); } };
+    placeText(d3.zoomIdentity);
     function geom(sel) {
       sel.each(function (b) {
         const $ = b.$, R = b.cur, open = ks.open === b.id, f = doneOf(b) / b.pts.length;
@@ -214,11 +225,11 @@
         $.arc.attr("d", f > 0 && f < 1 ? arcD(R, f) : null);
         const lab = $.lab;
         if (open) {
-          lab.attr("font-size", 14 / K).attr("stroke-width", 3.6 / K).attr("y", R + 19 / K); lab.selectAll("tspan").attr("dy", (l, i) => i ? 17 / K : 0);
-          $.prog.attr("font-size", 11 / K).attr("y", 4 / K);
+          lab.attr("font-size", 14).attr("stroke-width", 3.6).attr("y", R * K + 19); lab.selectAll("tspan").attr("dy", (l, i) => i ? 17 : 0);
+          $.prog.attr("font-size", 11).attr("y", 4);
         } else {
           const ts = Math.max(0.8, Math.min(1, K / KREF)); // below the zoom the layout was spaced for, labels shrink a little instead of overlapping
-          lab.attr("font-size", FS * ts / K).attr("stroke-width", 3.6 / K).attr("y", R + (5 + 13 * ts) / K); lab.selectAll("tspan").attr("dy", (l, i) => i ? LH * ts / K : 0);
+          lab.attr("font-size", FS * ts).attr("stroke-width", 3.6).attr("y", R * K + 5 + 13 * ts); lab.selectAll("tspan").attr("dy", (l, i) => i ? LH * ts : 0);
         }
       });
     }
@@ -230,7 +241,6 @@
       bcount.attr("display", (b) => ks.open === b.id ? null : "none");
       geom(ballSel);
       linkSel.attr("d", linkPath);
-      if (ks.open) { const od = dotSel.filter((d) => d.ball === ks.open); od.select(".km-core").attr("r", 6 / K); od.select(".km-halo").attr("r", 10 / K); }
       if (ks.open && !BALL[ks.open].blooming) placeSub(BALL[ks.open], K, false);
       declutter();
     }
@@ -242,7 +252,7 @@
       const ctx = document.createElement("canvas").getContext("2d"), cache = new Map(); let font = null;
       if (document.fonts) document.fonts.addEventListener("loadingdone", () => { cache.clear(); font = null; });
       return (str) => {
-        if (!font) { const n = gB.select(".km-blab").node(), cs = n && getComputedStyle(n); font = cs ? cs.fontWeight + " 100px " + cs.fontFamily : "600 100px sans-serif"; }
+        if (!font) { const n = gT.select(".km-blab").node(), cs = n && getComputedStyle(n); font = cs ? cs.fontWeight + " 100px " + cs.fontFamily : "600 100px sans-serif"; }
         let w = cache.get(str);
         if (w == null) { w = ctx ? (ctx.font = font, ctx.measureText(str).width / 100) : I18N.units(str) * 0.53; cache.set(str, w); }
         return w;   // width at a font size of 1
@@ -277,7 +287,7 @@
         if (!clear(r)) {
           const y = -b.cur - 7 / K - (b.lines.length - 1) * lh;
           r = textBox(b.x, b.y + y - 0.92 * f, b.lines, f, lh);
-          if (clear(r)) lab.attr("y", y); else r = null;
+          if (clear(r)) lab.attr("y", y * K); else r = null;
         }
         if (r) placed.push(r); else lab.attr("display", "none");
       });
@@ -306,11 +316,9 @@
       const F = b.sub; if (!F) return;
       const g = ballSel.filter((x) => x === b), at = new Map(F.pts.map((p) => [p.id, p]));
       const sel = dotSel.filter((d) => d.ball === b.id);
-      const tf = (d) => `translate(${at.get(d.id).x / k},${at.get(d.id).y / k})`;
+      const tf = (d) => `translate(${at.get(d.id).x},${at.get(d.id).y})`;
       if (animate) sel.transition("bloom").duration(reduceMotion() ? 0 : 560).delay((d, i) => reduceMotion() ? 0 : 80 + i * 16).ease(d3.easeCubicOut).attr("transform", tf).style("opacity", 1);
       else sel.interrupt("bloom").attr("transform", tf).style("opacity", 1);
-      const PLH = 15 / K;
-      sel.select("text").attr("font-size", 12.5 / K).attr("stroke-width", 3.6 / K).selectAll("tspan").attr("y", (l, i) => 13 / K + i * PLH);
       g.select(".km-lens").attr("r", F.lens / k);
       g.select(".km-srings").selectAll("circle").data(F.rings).join("circle").attr("r", (r) => r / k);
       // links between the topic's points, drawn the way topics are linked on the big map
@@ -342,7 +350,7 @@
     // v2.2: the zoom resizes text at most once a frame, and the top picks' pulse pauses while the map moves
     let sizeQueued = 0, moveTimer = 0;
     const zoom = d3.zoom().scaleExtent([0.2, 8]).on("zoom", (e) => {
-      root.attr("transform", e.transform);
+      root.attr("transform", e.transform); placeText(e.transform);
       if (e.sourceEvent) { el("kmap").classList.add("km-moving"); clearTimeout(moveTimer); moveTimer = setTimeout(() => el("kmap").classList.remove("km-moving"), 250); }
       if (Math.abs(e.transform.k - K) > 1e-3) { K = e.transform.k; if (!sizeQueued) sizeQueued = requestAnimationFrame(() => { sizeQueued = 0; sizeText(); }); }
     }).on("end", () => { if (sizeQueued) { cancelAnimationFrame(sizeQueued); sizeQueued = 0; sizeText(); } });
@@ -377,6 +385,7 @@
       el("kmap").classList.toggle("km-opened", !!ks.open);
       gB.selectAll(".km-plk").classed("lit", (l) => !!ks.point && (l[0] === ks.point || l[1] === ks.point));
       const fb = el("km-flash"); fb.setAttribute("aria-pressed", flashOn ? "true" : "false"); fb.querySelector("span").innerHTML = flashOn ? '<b class="km-wide">Top picks glowing</b><b class="km-narrow">Glow on</b>' : "Glow off";
+      tSel.attr("class", (b) => "km-ball st-" + bStatus(b.id) + (bOnRoute(b.id) ? " route" : "") + (bNext(b.id) ? " next" : "") + (HOT.has(b.id) ? " hot" : "") + (ks.open === b.id ? " open" : ""));
       ballSel.attr("class", (b) => "km-ball st-" + bStatus(b.id) + (bOnRoute(b.id) ? " route" : "") + (bNext(b.id) ? " next" : "") + (HOT.has(b.id) ? " hot" : "") + (ks.open === b.id ? " open" : ""));
       dotSel.attr("class", (d) => "km-dot st-" + pStatus(d.id) + (ROUTE.has(d.id) && !learned.has(d.id) ? " route" : "") + (pNext(d.id) ? " next" : "") + (ks.point === d.id ? " sel" : ""));
       bcount.text((b) => `${doneOf(b)} / ${b.pts.length}`);
@@ -387,7 +396,7 @@
     function paintFocus() {
       const lit = ks.focus || (ks.open ? new Set([ks.open, ...BALL[ks.open].parents, ...BALL[ks.open].children]) : null);
       svg.classed("dimmed", !!lit);
-      ballSel.classed("lit", (b) => !!lit && lit.has(b.id));
+      ballSel.classed("lit", (b) => !!lit && lit.has(b.id)); tSel.classed("lit", (b) => !!lit && lit.has(b.id));
       linkSel.classed("lit", ([s, t]) => !!ks.open && (s === ks.open || t === ks.open));
     }
     function collapse() { if (!ks.open) return; const b = BALL[ks.open]; ks.open = null; grow(b, b.r); bloom(b, false); }
@@ -395,7 +404,7 @@
       if (ks.open !== id) { collapse(); ks.open = id; const b = BALL[id], z = openZoom(b); if (!z) b.sub = subOf(b); b.kOpen = z ? z.k : K; grow(b, b.sub.Rs / b.kOpen); bloom(b, true); }
       ks.focus = null; ks.point = null;
       el("km-focus").classList.remove("on");
-      gB.selectAll("g.km-ball").filter((b) => b.id === id).raise();
+      gB.selectAll("g.km-ball").filter((b) => b.id === id).raise(); tSel.filter((b) => b.id === id).raise();
       refresh(); renderBall(id); tab("det");
       if (fit) fitOpen(BALL[id]);
       setTimeout(() => { if (ks.open === id) sizeText(); }, 1000);
