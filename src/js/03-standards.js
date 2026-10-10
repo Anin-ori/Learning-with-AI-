@@ -27,6 +27,8 @@
     // checks or revises a lesson gets them, from this one list.
     purpose: () => [
       "What the teaching is for. Teach for understanding that lasts and can be used: the learner should come away knowing why, able to rebuild it and to use it on something new, and aware of where it ends. Build on what they already know and make the connection plain. The learner reads on their own and thinks it through, so leave the thinking to them: give them something to work out or explain to themselves, not only conclusions to accept. Keep to one idea at a time, show it in varied forms and at its edges, and be honest about what is certain and what isn't. Knowledge should unfold the way it naturally does. How a lesson achieves this is yours to decide, and none of it has to show up as a feature: a lesson that simply explains the point well is right.",
+      // v2.2 (R69): the author's direction on style, given as guidance for the AIs that write, never as a check
+      "How it reads. Rigorous, concise and clear: say exactly what is true, in as few words as that takes, in an order the reader can follow. Every sentence should give the learner something; announcements of what is coming, restatements of what was just said, reassurance and asides that teach nothing only dilute it. Let the length follow the substance of the point: a simple point deserves a short lesson that explains it plainly and stops.",
     ].join("\n"),
     rules: (S) => [
       "Standing rules. They hold for every subject; the illustrations come from " + S.name + " and are not content to reuse.",

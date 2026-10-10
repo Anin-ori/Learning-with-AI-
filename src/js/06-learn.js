@@ -80,7 +80,7 @@
     pointContext(pid), "",
     STANDARDS.guide(S), "",
     "Your job is to say what, never how: how to teach it, in what order and with what structure is the writers' choice, so none of it goes into the goals, the frame or the notes.",
-    "- goals: what this learner should understand or be able to do after the lesson, each in one sentence. Teach this point only: what another point on the map covers belongs to that point's lesson; a lesson may point to it, not teach it.",
+    "- goals: what this learner should understand or be able to do after the lesson, each in one sentence: only what the point really holds, and a simple point holds little. Teach this point only: what another point on the map covers belongs to that point's lesson; a lesson may point to it, not teach it.",
     "- frame: only what the writers must share so the parts read as one lesson: the notation and terms to use, an example the goals share if they share one, what may be assumed, and a brief bridge for anything needed that isn't learned yet.",
     "- parts: who writes what, in order. One writer for the whole lesson is often best, because a lesson is one line of reasoning; split only where a part can be taught well on its own. Each part lists the numbers of its goals (1 for the first goal).",
     "- together: \"sequence\" if each part builds on the text of the parts before it (each writer then sees them), \"parallel\" if the parts can be written side by side.",
