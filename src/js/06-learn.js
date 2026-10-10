@@ -247,7 +247,7 @@
       "You are the tutor in Learning Companion, a study tool for self-learners. Follow these rules:",
       "- The learner is studying the point \"" + ptName(pid) + "\" in " + S.name + ".",
       L && L.lesson ? "- The lesson written for them:\n\"\"\"\n" + L.lesson.slice(0, 9000) + "\n\"\"\"\nStay consistent with it, and correct it plainly if you find a mistake in it." : "- No lesson has been built for this point yet.",
-      "- Explain clearly and concretely. " + (S.run !== "none" ? "Use short " + RUNNERS[S.run] + " examples the learner can run themselves." : "Use concrete examples."),
+      "- Explain clearly and concretely. Write formulas in LaTeX, $…$ inline and $$…$$ on their own lines; the page draws them. " + (S.run !== "none" ? "Use short " + RUNNERS[S.run] + " examples the learner can run themselves." : "Use concrete examples."),
       "- Don't set exercises in the chat. For practice, point them to the Practice section. If they paste an exercise, help with it directly.",
       "- If you're unsure about something, say so plainly. Answer as briefly as the question allows, and go longer when the question needs it or the learner asks.",
       "- When you point out a mistake, explain the mechanism behind it. Don't list mistakes, and never call a mistake common or classic.",
@@ -383,7 +383,7 @@
     else if (L && L.lesson) {
       body = [
         h("details", { class: "card soft" }, h("summary", null, L.plan.goals ? "How this lesson was made" : "How the planner set up this lesson"),
-          L.plan.goals ? [h("p", { class: "small" }, h("strong", null, "What you should come away with:")), ai("ol", { class: "plain small" }, L.plan.goals.map((g) => h("li", null, g)))] : null,
+          L.plan.goals ? [h("p", { class: "small" }, h("strong", null, "What you should come away with:")), ai("ol", { class: "plain small" }, L.plan.goals.map((g) => h("li", null, ...mathText(g))))] : null,
           L.plan.goals && L.reading ? h("p", { class: "small" }, h("strong", null, "The reviewer, after learning from it: "), ai("span", null, L.reading)) : null,
           L.plan.aim ? h("p", { class: "small" }, h("strong", null, "Aim: "), ai("span", null, L.plan.aim)) : null,
           L.plan.approach ? h("p", { class: "small" }, h("strong", null, "Approach: "), ai("span", null, L.plan.approach)) : null,

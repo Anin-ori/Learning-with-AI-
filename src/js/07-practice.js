@@ -566,12 +566,12 @@
         !code ? h("button", { class: xs.solved ? "quiet" : "primary", type: "button", onclick: () => { xs.solved = !xs.solved; savePset(); if (xs.solved) logEvent("practice", "Done: " + x.title); render(); } }, xs.solved ? "Mark as not done" : "Mark as done") : null,
         x.hints.length && xs.hintsShown < x.hints.length ? h("button", { class: "quiet", type: "button", onclick: () => { xs.hintsShown++; savePset(); render(); } }, xs.hintsShown ? "Another hint" : "A hint") : null),
       testResults(S, x, run),
-      xs.hintsShown ? ai("ul", { class: "plain small pr-hints" }, x.hints.slice(0, xs.hintsShown).map((t, j) => h("li", null, h("strong", null, I18N.t("Hint " + (j + 1) + ":") + " "), t))) : null,
+      xs.hintsShown ? ai("ul", { class: "plain small pr-hints" }, x.hints.slice(0, xs.hintsShown).map((t, j) => h("li", null, h("strong", null, I18N.t("Hint " + (j + 1) + ":") + " "), ...mathText(t)))) : null,
       h("details", { class: "pr-more", ontoggle: (e) => { if (e.target.open && !xs.revealed) { xs.revealed = true; savePset(); } } },
         h("summary", null, code ? (xs.solved ? "Compare with the reference solution" : "Show the reference solution") : "Show the reference answer"),
         xs.solved ? null : h("p", { class: "small muted" }, "Try first: the struggle is where the practice happens. Open this when you're done or truly stuck."),
         code ? h("div", { class: "code-wrap" }, h("pre", null, h("code", null, x.solution))) : h("div", { class: "lesson" }, md(x.solution)),
-        x.thinking ? h("p", { class: "small" }, h("strong", null, "What this exercise is really about: "), ai("span", null, x.thinking)) : null));
+        x.thinking ? h("p", { class: "small" }, h("strong", null, "What this exercise is really about: "), ai("span", null, ...mathText(x.thinking))) : null));
   }
   function renderPractice() {
     const lede = "Practice comes in sets, once what you've learned can combine into real tasks. An AI judges whether that's true yet and writes the exercises; where the subject can be run, the page runs the AI's own solution against the tests before you see them.";

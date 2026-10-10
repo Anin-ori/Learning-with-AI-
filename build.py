@@ -14,7 +14,7 @@ head = (f"<title>Learning Companion {VERSION}</title>\n"
         '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Montserrat:wght@700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap">\n')
 page = (head + "<style>\n" + read("app.css") + read("v2.css") + "</style>\n\n" + read("body.html") +
-        '\n<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>\n<script>\n(() => {\n  "use strict";\n' + js + "})();\n</script>\n")
+        '\n<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>\n<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>\n<script>\n(() => {\n  "use strict";\n' + js + "})();\n</script>\n")
 out = os.path.join(HERE, "learning-companion.html")
 open(out, "w", encoding="utf-8").write(page)
 print("built", out, len(page), "bytes")

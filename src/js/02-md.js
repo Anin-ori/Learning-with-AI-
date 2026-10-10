@@ -1,14 +1,38 @@
+  // ---------- Math (v2.2): LaTeX between $…$ (inline) or $$…$$ (display), drawn by KaTeX as MathML ----------
+  // MathML is drawn by the browser itself, so the page needs no stylesheet or font files for it. If KaTeX didn't load,
+  // the formula is shown as its source text.
+  function mathEl(tex, display) {
+    const el = h(display ? "div" : "span", { class: display ? "math math-display" : "math" });
+    try {
+      if (!window.katex) throw 0;
+      el.innerHTML = window.katex.renderToString(tex, { displayMode: !!display, output: "mathml", throwOnError: false, strict: "ignore" });
+    } catch (_) { el.textContent = display ? tex : "$" + tex + "$"; el.classList.add("math-src"); }
+    return el;
+  }
+  // an inline formula starts with $ and a non-space and ends with a non-space and $ not followed by a digit (so "$5 and $6" stays text)
+  const MATH_INLINE = "\\$\\$[^$]+?\\$\\$|\\$[^$\\s](?:[^$]*?[^$\\s])?\\$(?!\\d)|\\\\\\((?:.+?)\\\\\\)";
+  const mathTok = (t) => (t.startsWith("$$") ? mathEl(t.slice(2, -2).trim(), true) : t[0] === "$" ? mathEl(t.slice(1, -1), false) : mathEl(t.slice(2, -2), false));
+  // plain text that may hold formulas (hints, goals, descriptions)
+  function mathText(text) {
+    const s = String(text == null ? "" : text), nodes = [], re = new RegExp(MATH_INLINE, "g");
+    let last = 0, m;
+    while ((m = re.exec(s))) { if (m.index > last) nodes.push(s.slice(last, m.index)); nodes.push(mathTok(m[0])); last = m.index + m[0].length; }
+    if (last < s.length) nodes.push(s.slice(last));
+    return nodes;
+  }
+
   // ---------- Markdown (lessons, tasks, answers) ----------
   // Small, safe Markdown renderer for lessons: headings, paragraphs, lists (one level of nesting), tables,
   // code blocks (with output blocks shown as console output), block quotes, rules, inline code, bold, italics and links.
   function inline(text) {
     const nodes = [];
-    const re = /(`[^`]+`|\*\*[^*]+\*\*|\*[^*\s][^*]*?\*|\[[^\]]+\]\(https?:\/\/[^)\s]+\))/g;
+    const re = new RegExp("(`[^`]+`|" + MATH_INLINE + "|\\*\\*[^*]+\\*\\*|\\*[^*\\s][^*]*?\\*|\\[[^\\]]+\\]\\(https?:\\/\\/[^)\\s]+\\))", "g");
     let last = 0, m;
     while ((m = re.exec(text))) {
       if (m.index > last) nodes.push(text.slice(last, m.index));
       const t = m[0];
       if (t[0] === "`") nodes.push(h("code", null, t.slice(1, -1)));
+      else if (t[0] === "$" || t.startsWith("\\(")) nodes.push(mathTok(t));
       else if (t.startsWith("**")) nodes.push(h("strong", null, inline(t.slice(2, -2))));
       else if (t[0] === "*") nodes.push(h("em", null, inline(t.slice(1, -1))));
       else { const lm = t.match(/^\[([^\]]+)\]\((.+)\)$/); nodes.push(extLink(lm[2], lm[1])); }
@@ -40,7 +64,7 @@
     const cells = [];
     let cur = "", code = false;
     for (const ch of t) {
-      if (ch === "`") code = !code;
+      if (ch === "`" || ch === "$") code = !code;
       if (ch === "|" && !code) { cells.push(cur.trim()); cur = ""; } else cur += ch;
     }
     cells.push(cur.trim());
@@ -67,6 +91,20 @@
         if (isOutput) out.pop();
         out.push(codeBlock(code.join("\n"), isOutput || fence[1] === "text" || fence[1] === "output" ? "output" : null));
         continue;
+      }
+      const dm = line.match(/^\s*(\$\$|\\\[)(.*)$/);
+      if (dm) {
+        const close = dm[1] === "$$" ? "$$" : "\\]", body = [];
+        let rest = dm[2], done = false, after = "";
+        for (;;) {
+          const k = rest.indexOf(close);
+          if (k >= 0) { body.push(rest.slice(0, k)); after = rest.slice(k + close.length).trim(); done = true; break; }
+          body.push(rest); i++;
+          if (i >= lines.length) break;
+          rest = lines[i];
+        }
+        if (done) { flushPara(); flushList(); out.push(mathEl(body.join("\n").trim(), true)); if (after) out.push(h("p", null, inline(after))); i++; continue; }
+        i -= body.length;   // no closing mark: back to this line, read as ordinary text below
       }
       if (/^\s*\|/.test(line) && i + 1 < lines.length && TABLE_SEP.test(lines[i + 1])) {
         flushPara(); flushList();
@@ -130,11 +168,11 @@
     const toHide = new Set(bold.length ? bold : spans.length ? [0] : []);
     let last = 0;
     spans.forEach((m, n) => {
-      if (m.index > last) nodes.push(text.slice(last, m.index));
+      if (m.index > last) nodes.push(...mathText(text.slice(last, m.index)));
       const t = m[0];
       const isCode = t[0] === "`";
       const inner = isCode ? t.slice(1, -1) : t.slice(2, -2);
-      const shown = () => (isCode ? h("code", null, inner) : h("strong", null, inner));
+      const shown = () => (isCode ? h("code", null, inner) : h("strong", null, mathText(inner)));
       const key = keyBase + ":" + n;
       if (hide && toHide.has(n) && !ui.noteRevealed[key]) {
         const btn = h("button", {
@@ -146,7 +184,7 @@
       } else nodes.push(shown());
       last = m.index + t.length;
     });
-    if (last < text.length) nodes.push(text.slice(last));
+    if (last < text.length) nodes.push(...mathText(text.slice(last)));
     return nodes;
   }
   const plainNote = (t) => t.replace(/\*\*/g, "");

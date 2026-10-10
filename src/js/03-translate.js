@@ -50,7 +50,7 @@
     "You translate study material in Learning Companion, a study tool for self-learners, from " + LANG_NAMES[from || "en"] + " into " + LANG_NAMES[curLang()] + ". " + about,
     "- Translate every string faithfully and completely, in the natural, precise style a good textbook in that language would use. Don't add, drop or explain anything.",
     "- Use the standard terms that textbooks in that language use for this subject. Where a standard term may be unfamiliar, give the English term in parentheses the first time it appears in a string.",
-    "- In code blocks, translate only the comments. Keep exactly as they are: the code itself (strings in it too), text in backticks, formulas and mathematical notation, identifiers, program input and output, numbers, URLs, and the Markdown structure (headings, lists, tables, bold, line breaks). Keep a line that reads only \"Output:\" exactly as it is.",
+    "- In code blocks, translate only the comments. Keep exactly as they are: the code itself (strings in it too), text in backticks, LaTeX math between $ signs (except words inside \\text{…}), formulas and mathematical notation, identifiers, program input and output, numbers, URLs, and the Markdown structure (headings, lists, tables, bold, line breaks). Keep a line that reads only \"Output:\" exactly as it is.",
     "- Names of books and courses keep their published title in that language if one exists, otherwise the original title.",
     curLang() === "en" ? "- Write every name and heading in sentence case: capitalise only the first word and proper names, the same way in every string." : null,
     "",

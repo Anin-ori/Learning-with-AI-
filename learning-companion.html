@@ -1501,6 +1501,11 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
 #kmap.km-flashon .km-ball.hot:not(.open) > .km-flare { animation-timing-function: steps(24); }
 #kmap.km-flashon .km-ball.hot:not(.open) > .km-ping { animation-timing-function: steps(40); }
 #kmap.km-moving .km-ball > .km-glow, #kmap.km-moving .km-ball > .km-flare, #kmap.km-moving .km-ball > .km-ping { animation-play-state: paused; }
+/* formulas (v2.2): KaTeX writes MathML, which the browser draws in its own math font */
+.math math { font-size: 1.08em; }
+.math-display { display: block; margin: 0.9em 0; overflow-x: auto; overflow-y: hidden; text-align: center; }
+.math-display math { display: block; font-size: 1.12em; }
+.math-src { font-family: var(--font-mono); font-size: 0.92em; }
 </style>
 
 <header class="topbar">
@@ -1550,6 +1555,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <script>
 (() => {
   "use strict";
@@ -1833,17 +1839,41 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
   }
   const jobError = (e) => (e && e.code === "cancelled" ? "Stopped." : (e && e.agent ? e.agent + ": " : "") + noteAiError(e));
 
+  // ---------- Math (v2.2): LaTeX between $…$ (inline) or $$…$$ (display), drawn by KaTeX as MathML ----------
+  // MathML is drawn by the browser itself, so the page needs no stylesheet or font files for it. If KaTeX didn't load,
+  // the formula is shown as its source text.
+  function mathEl(tex, display) {
+    const el = h(display ? "div" : "span", { class: display ? "math math-display" : "math" });
+    try {
+      if (!window.katex) throw 0;
+      el.innerHTML = window.katex.renderToString(tex, { displayMode: !!display, output: "mathml", throwOnError: false, strict: "ignore" });
+    } catch (_) { el.textContent = display ? tex : "$" + tex + "$"; el.classList.add("math-src"); }
+    return el;
+  }
+  // an inline formula starts with $ and a non-space and ends with a non-space and $ not followed by a digit (so "$5 and $6" stays text)
+  const MATH_INLINE = "\\$\\$[^$]+?\\$\\$|\\$[^$\\s](?:[^$]*?[^$\\s])?\\$(?!\\d)|\\\\\\((?:.+?)\\\\\\)";
+  const mathTok = (t) => (t.startsWith("$$") ? mathEl(t.slice(2, -2).trim(), true) : t[0] === "$" ? mathEl(t.slice(1, -1), false) : mathEl(t.slice(2, -2), false));
+  // plain text that may hold formulas (hints, goals, descriptions)
+  function mathText(text) {
+    const s = String(text == null ? "" : text), nodes = [], re = new RegExp(MATH_INLINE, "g");
+    let last = 0, m;
+    while ((m = re.exec(s))) { if (m.index > last) nodes.push(s.slice(last, m.index)); nodes.push(mathTok(m[0])); last = m.index + m[0].length; }
+    if (last < s.length) nodes.push(s.slice(last));
+    return nodes;
+  }
+
   // ---------- Markdown (lessons, tasks, answers) ----------
   // Small, safe Markdown renderer for lessons: headings, paragraphs, lists (one level of nesting), tables,
   // code blocks (with output blocks shown as console output), block quotes, rules, inline code, bold, italics and links.
   function inline(text) {
     const nodes = [];
-    const re = /(`[^`]+`|\*\*[^*]+\*\*|\*[^*\s][^*]*?\*|\[[^\]]+\]\(https?:\/\/[^)\s]+\))/g;
+    const re = new RegExp("(`[^`]+`|" + MATH_INLINE + "|\\*\\*[^*]+\\*\\*|\\*[^*\\s][^*]*?\\*|\\[[^\\]]+\\]\\(https?:\\/\\/[^)\\s]+\\))", "g");
     let last = 0, m;
     while ((m = re.exec(text))) {
       if (m.index > last) nodes.push(text.slice(last, m.index));
       const t = m[0];
       if (t[0] === "`") nodes.push(h("code", null, t.slice(1, -1)));
+      else if (t[0] === "$" || t.startsWith("\\(")) nodes.push(mathTok(t));
       else if (t.startsWith("**")) nodes.push(h("strong", null, inline(t.slice(2, -2))));
       else if (t[0] === "*") nodes.push(h("em", null, inline(t.slice(1, -1))));
       else { const lm = t.match(/^\[([^\]]+)\]\((.+)\)$/); nodes.push(extLink(lm[2], lm[1])); }
@@ -1875,7 +1905,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     const cells = [];
     let cur = "", code = false;
     for (const ch of t) {
-      if (ch === "`") code = !code;
+      if (ch === "`" || ch === "$") code = !code;
       if (ch === "|" && !code) { cells.push(cur.trim()); cur = ""; } else cur += ch;
     }
     cells.push(cur.trim());
@@ -1902,6 +1932,20 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
         if (isOutput) out.pop();
         out.push(codeBlock(code.join("\n"), isOutput || fence[1] === "text" || fence[1] === "output" ? "output" : null));
         continue;
+      }
+      const dm = line.match(/^\s*(\$\$|\\\[)(.*)$/);
+      if (dm) {
+        const close = dm[1] === "$$" ? "$$" : "\\]", body = [];
+        let rest = dm[2], done = false, after = "";
+        for (;;) {
+          const k = rest.indexOf(close);
+          if (k >= 0) { body.push(rest.slice(0, k)); after = rest.slice(k + close.length).trim(); done = true; break; }
+          body.push(rest); i++;
+          if (i >= lines.length) break;
+          rest = lines[i];
+        }
+        if (done) { flushPara(); flushList(); out.push(mathEl(body.join("\n").trim(), true)); if (after) out.push(h("p", null, inline(after))); i++; continue; }
+        i -= body.length;   // no closing mark: back to this line, read as ordinary text below
       }
       if (/^\s*\|/.test(line) && i + 1 < lines.length && TABLE_SEP.test(lines[i + 1])) {
         flushPara(); flushList();
@@ -1965,11 +2009,11 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     const toHide = new Set(bold.length ? bold : spans.length ? [0] : []);
     let last = 0;
     spans.forEach((m, n) => {
-      if (m.index > last) nodes.push(text.slice(last, m.index));
+      if (m.index > last) nodes.push(...mathText(text.slice(last, m.index)));
       const t = m[0];
       const isCode = t[0] === "`";
       const inner = isCode ? t.slice(1, -1) : t.slice(2, -2);
-      const shown = () => (isCode ? h("code", null, inner) : h("strong", null, inner));
+      const shown = () => (isCode ? h("code", null, inner) : h("strong", null, mathText(inner)));
       const key = keyBase + ":" + n;
       if (hide && toHide.has(n) && !ui.noteRevealed[key]) {
         const btn = h("button", {
@@ -1981,7 +2025,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
       } else nodes.push(shown());
       last = m.index + t.length;
     });
-    if (last < text.length) nodes.push(text.slice(last));
+    if (last < text.length) nodes.push(...mathText(text.slice(last)));
     return nodes;
   }
   const plainNote = (t) => t.replace(/\*\*/g, "");
@@ -2058,7 +2102,8 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     python: "Each exercise is a whole Python program that reads typed lines with input() and prints with print(). A test gives the typed lines and exactly what the program prints. Text passed to input() as a prompt isn't checked, so the task should say prompts are optional, and examples show only what print() prints. Only if the learner has learned how to define functions and the exercise is about writing one may a test instead be {\"check\": \"one Python assert line that calls the function\"}; then the task names the function and its parameters exactly.",
     javascript: "Each exercise is a whole JavaScript program. It reads typed lines by calling input(), which the page provides and which returns the next typed line as a string, and it prints with console.log(). A test gives the typed lines and exactly what the program prints. The page shows strings and numbers as console.log does, and arrays and objects as JSON.stringify would, so tasks that print arrays or objects should say so. Only if the learner has learned how to define functions and the exercise is about writing one may a test instead be {\"check\": \"one JavaScript expression that must be true, calling the function\"}; then the task names the function and its parameters exactly.",
   };
-  const MD_NOTE = "The page renders Markdown: headings, lists, tables, code blocks, bold and italics, but not LaTeX. Write any formula in plain text with Unicode symbols (x², √, ≤, →, ∑), in a code block if it needs alignment.";
+  // v2.2: the page draws LaTeX (KaTeX), so formulas are written as math, not as Unicode text in code blocks
+  const MD_NOTE = "The page renders Markdown (headings, lists, tables, code blocks, bold and italics) and LaTeX math: $…$ inside a sentence, and $$…$$ on lines of its own for a displayed formula, a matrix or an aligned derivation (\\begin{pmatrix}…\\end{pmatrix}, \\begin{aligned}…\\end{aligned}). Write every formula, matrix and symbol as LaTeX; keep code blocks for code.";
 
   // ---------- Translation (v2.1) ----------
   // Every agent works in English. When the learner reads another language, a translator turns what was built (maps,
@@ -2112,7 +2157,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     "You translate study material in Learning Companion, a study tool for self-learners, from " + LANG_NAMES[from || "en"] + " into " + LANG_NAMES[curLang()] + ". " + about,
     "- Translate every string faithfully and completely, in the natural, precise style a good textbook in that language would use. Don't add, drop or explain anything.",
     "- Use the standard terms that textbooks in that language use for this subject. Where a standard term may be unfamiliar, give the English term in parentheses the first time it appears in a string.",
-    "- In code blocks, translate only the comments. Keep exactly as they are: the code itself (strings in it too), text in backticks, formulas and mathematical notation, identifiers, program input and output, numbers, URLs, and the Markdown structure (headings, lists, tables, bold, line breaks). Keep a line that reads only \"Output:\" exactly as it is.",
+    "- In code blocks, translate only the comments. Keep exactly as they are: the code itself (strings in it too), text in backticks, LaTeX math between $ signs (except words inside \\text{…}), formulas and mathematical notation, identifiers, program input and output, numbers, URLs, and the Markdown structure (headings, lists, tables, bold, line breaks). Keep a line that reads only \"Output:\" exactly as it is.",
     "- Names of books and courses keep their published title in that language if one exists, otherwise the original title.",
     curLang() === "en" ? "- Write every name and heading in sentence case: capitalise only the first word and proper names, the same way in every string." : null,
     "",
@@ -3911,7 +3956,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
       "You are the tutor in Learning Companion, a study tool for self-learners. Follow these rules:",
       "- The learner is studying the point \"" + ptName(pid) + "\" in " + S.name + ".",
       L && L.lesson ? "- The lesson written for them:\n\"\"\"\n" + L.lesson.slice(0, 9000) + "\n\"\"\"\nStay consistent with it, and correct it plainly if you find a mistake in it." : "- No lesson has been built for this point yet.",
-      "- Explain clearly and concretely. " + (S.run !== "none" ? "Use short " + RUNNERS[S.run] + " examples the learner can run themselves." : "Use concrete examples."),
+      "- Explain clearly and concretely. Write formulas in LaTeX, $…$ inline and $$…$$ on their own lines; the page draws them. " + (S.run !== "none" ? "Use short " + RUNNERS[S.run] + " examples the learner can run themselves." : "Use concrete examples."),
       "- Don't set exercises in the chat. For practice, point them to the Practice section. If they paste an exercise, help with it directly.",
       "- If you're unsure about something, say so plainly. Answer as briefly as the question allows, and go longer when the question needs it or the learner asks.",
       "- When you point out a mistake, explain the mechanism behind it. Don't list mistakes, and never call a mistake common or classic.",
@@ -4047,7 +4092,7 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
     else if (L && L.lesson) {
       body = [
         h("details", { class: "card soft" }, h("summary", null, L.plan.goals ? "How this lesson was made" : "How the planner set up this lesson"),
-          L.plan.goals ? [h("p", { class: "small" }, h("strong", null, "What you should come away with:")), ai("ol", { class: "plain small" }, L.plan.goals.map((g) => h("li", null, g)))] : null,
+          L.plan.goals ? [h("p", { class: "small" }, h("strong", null, "What you should come away with:")), ai("ol", { class: "plain small" }, L.plan.goals.map((g) => h("li", null, ...mathText(g))))] : null,
           L.plan.goals && L.reading ? h("p", { class: "small" }, h("strong", null, "The reviewer, after learning from it: "), ai("span", null, L.reading)) : null,
           L.plan.aim ? h("p", { class: "small" }, h("strong", null, "Aim: "), ai("span", null, L.plan.aim)) : null,
           L.plan.approach ? h("p", { class: "small" }, h("strong", null, "Approach: "), ai("span", null, L.plan.approach)) : null,
@@ -4667,12 +4712,12 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
         !code ? h("button", { class: xs.solved ? "quiet" : "primary", type: "button", onclick: () => { xs.solved = !xs.solved; savePset(); if (xs.solved) logEvent("practice", "Done: " + x.title); render(); } }, xs.solved ? "Mark as not done" : "Mark as done") : null,
         x.hints.length && xs.hintsShown < x.hints.length ? h("button", { class: "quiet", type: "button", onclick: () => { xs.hintsShown++; savePset(); render(); } }, xs.hintsShown ? "Another hint" : "A hint") : null),
       testResults(S, x, run),
-      xs.hintsShown ? ai("ul", { class: "plain small pr-hints" }, x.hints.slice(0, xs.hintsShown).map((t, j) => h("li", null, h("strong", null, I18N.t("Hint " + (j + 1) + ":") + " "), t))) : null,
+      xs.hintsShown ? ai("ul", { class: "plain small pr-hints" }, x.hints.slice(0, xs.hintsShown).map((t, j) => h("li", null, h("strong", null, I18N.t("Hint " + (j + 1) + ":") + " "), ...mathText(t)))) : null,
       h("details", { class: "pr-more", ontoggle: (e) => { if (e.target.open && !xs.revealed) { xs.revealed = true; savePset(); } } },
         h("summary", null, code ? (xs.solved ? "Compare with the reference solution" : "Show the reference solution") : "Show the reference answer"),
         xs.solved ? null : h("p", { class: "small muted" }, "Try first: the struggle is where the practice happens. Open this when you're done or truly stuck."),
         code ? h("div", { class: "code-wrap" }, h("pre", null, h("code", null, x.solution))) : h("div", { class: "lesson" }, md(x.solution)),
-        x.thinking ? h("p", { class: "small" }, h("strong", null, "What this exercise is really about: "), ai("span", null, x.thinking)) : null));
+        x.thinking ? h("p", { class: "small" }, h("strong", null, "What this exercise is really about: "), ai("span", null, ...mathText(x.thinking))) : null));
   }
   function renderPractice() {
     const lede = "Practice comes in sets, once what you've learned can combine into real tasks. An AI judges whether that's true yet and writes the exercises; where the subject can be run, the page runs the AI's own solution against the tests before you see them.";
