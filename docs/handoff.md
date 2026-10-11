@@ -67,3 +67,7 @@ Current version: **v2.2** (Oct 8, 2026). Read this first, then the requirements 
 - I39: package loading (NumPy, pandas, scikit-learn) and the JavaScript runner need a check in claude.ai.
 - I38: subjects that can't be run have only the checker; I40: lessons run long.
 - R33: bring your own model. I31: Chinese sources (now: the AI names sources in the learner's language).
+
+## Local temporary version (R73, Oct 11)
+Not the official release; the claude.ai app stays standard and is unchanged. `local/`: `shim.js` defines `window.claude.use("sample"|"db")` (AI through the learner's own key — Anthropic Messages or any OpenAI-compatible chat/completions, a model per tier quick/default/complex; db docs at the same `col/id` paths), `server.py` (stdlib; serves the page on 127.0.0.1:8765, data in `local/data/<col>/<id>.json`, key in `local/config.json`, `/api/ai` proxy, `/api/export`, `/api/import` with the old data folder kept as a backup), `build_local.py` (build.py output + shim → `local/learning-companion-local.html`), start files, README. Opened as a file it falls back to IndexedDB and direct API calls. Export format: `{app, format: 1, exportedAt, docs: {"col/id": doc}}`. The author's claude.ai progress was exported to that format on Oct 11 (33 records, via ArtifactData; not committed). The official page has no import: to go back, load an export into the app link with ArtifactData. Differences: no streaming; prompts written for Claude. Not run by Claude.
+Pending: practice guidance v4 (re-read of 526 questions; see R72 follow-up) awaits the author's go-ahead.
