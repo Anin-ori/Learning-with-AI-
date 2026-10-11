@@ -644,9 +644,69 @@
   "Written by AI and worked through by a reviewer. The page couldn't run the code when it was built, so the tests weren't run.": "由 AI 编写，并由审核者做了一遍。生成时页面无法运行代码，所以没有运行测试。",
   "Written by AI and worked through by a reviewer. Nothing in this subject can be run, so the reference answers are an AI's working, not proven: check what matters to you.": "由 AI 编写，并由审核者做了一遍。这门科目的内容无法运行，所以参考答案只是 AI 的演算，未经证明：对你重要的地方请自行核对。",
   "Practice has its own section, whenever you want it.": "练习在单独的部分，随时都可以去练。",
-  "None of the exercises could be written. Try again.": "没有一道题能写出来。请重试。"
+  "None of the exercises could be written. Try again.": "没有一道题能写出来。请重试。",
+  "Your practice questions. Ask for new ones on what you've just learned or on one point, do them, check the answer, and mark how it went. Mistakes and bookmarks stay here to come back to.": "你的练习题。可以就刚学的内容或某个知识点要新题，做完后对照答案，并标记做得怎么样。错题和收藏都留在这里，方便以后回来再做。",
+  "New questions on what I learned recently": "就最近学的内容出新题",
+  "New questions on this point": "就这个知识点出新题",
+  "A lead, a writer per question and a reviewer: one request each, a few more if the reviewer finds something to fix.": "一位主导者、每道题一位撰写者和一位审核者：各用一次请求，审核者发现问题时会多用几次。",
+  "Learn a point first: questions are written from what you've learned.": "先学一个知识点：题目是根据你学过的内容出的。",
+  "All": "全部",
+  "Not done": "未做",
+  "Mistakes": "错题",
+  "Bookmarked": "已收藏",
+  "All points": "全部知识点",
+  "← All questions": "← 全部题目",
+  "Previous": "上一题",
+  "Next": "下一题",
+  "Reference solution": "参考代码",
+  "Answer": "答案",
+  "The working": "解析",
+  "Answer and working": "答案与解析",
+  "Show the answer": "查看答案",
+  "✓ Got it right": "✓ 做对了",
+  "✗ Got it wrong": "✗ 做错了",
+  "★ Bookmarked": "★ 已收藏",
+  "☆ Bookmark": "☆ 收藏",
+  "Delete this question for good?": "永久删除这道题？",
+  "Keep it": "保留",
+  "Written by AI. The page ran the reference solution against every test, and a reviewer worked the question.": "由 AI 编写。页面已用每个测试运行过参考代码，审核者也做过这道题。",
+  "Written by AI and worked through by a reviewer.": "由 AI 编写，并由审核者做过一遍。",
+  "Written by AI and worked through by a reviewer. Nothing in this subject can be run, so the answer is an AI's working, not proven: check what matters to you.": "由 AI 编写，并由审核者做过一遍。这门科目的内容无法运行，所以答案只是 AI 的演算，未经证明：对你重要的地方请自行核对。",
+  "Writing new questions": "正在出新题",
+  "decides which questions are worth adding now": "决定现在值得加哪些题",
+  "write each question, its answer and its working": "编写每道题、答案和解析",
+  "works each question as you would, and fixes what it finds": "像你一样把每道题做一遍，并修改发现的问题",
+  "translates them into your language, keeping the English original": "把它们翻译成你的语言，保留英文原文",
+  "Loading the question…": "正在载入题目…",
+  "This question couldn't be loaded.": "这道题载入失败。",
+  "Remove it from the list": "从列表中移除",
+  "No questions here.": "这里没有题目。",
+  "No questions yet.": "还没有题目。",
+  "Moving your earlier practice sets into the bank…": "正在把你以前的练习移入题库…",
+  "Practise this point": "练习这个知识点",
+  "A new question is in your bank.": "一道新题已加入你的题库。",
+  "None of the questions could be written. Try again.": "一道题都没能写出来。请重试。",
+  "The reviewer still found every question wrong after revising them, so none were added. Try again.": "修改后审核者仍认为每道题都有错，所以没有加入任何题目。请重试。",
+  "A point to practise": "要练习的知识点",
+  "Show questions on": "显示的题目范围"
  },
  "patterns": [
+  [
+   "(\\d+) new questions are in your bank\\.",
+   "\\1 道新题已加入你的题库。"
+  ],
+  [
+   "No new questions were added\\. (.+)",
+   "没有加入新题。⟦\\1⟧"
+  ],
+  [
+   "(All|Not done|Mistakes|Bookmarked) (\\d+)",
+   "⟦\\1⟧ \\2"
+  ],
+  [
+   "New questions: (.+) \\((\\d+) requests, (\\d+) revisions(.*)\\)",
+   "新题：\\1（\\2 次请求，修改 \\3 次\\4）"
+  ],
   [
    "· (\\d+) of (\\d+) written",
    "· 已写完 \\2 道中的 \\1 道"

@@ -123,14 +123,14 @@ module.exports = function mock(opts = {}) {
       return { goals: [DZ ? "能说清变量是什么" : "Explain what a variable is", DZ ? "能预测一段赋值代码的输出" : "Predict what a short assignment prints"], frame: DZ ? "从名字讲起" : "Start from naming.", parts: music ? [{ goals: [1, 2], note: "" }] : [{ goals: [1], note: DZ ? "名字" : "the name" }, { goals: [2], note: DZ ? "指向" : "what it refers to" }], together: "sequence", beyond: "", goal_link: DZ ? "数据处理里常用" : "Used everywhere in data work." };
     }
     if (text.startsWith("You are about to learn ONE")) return { reading: DZ ? "顺利读完。" : "It read through without a snag.", false: [], stuck: [], goals: [], rules: [] };
-    if (text.startsWith("You lead the practice")) return { about: DZ ? "练习刚学的内容" : "Practises what you just learned.", exercises: [{ what: DZ ? "用学过的内容完成一个小任务" : "Use what was learned on one small task." }] };
-    const music = /self-learner of (Music|乐理)/.test(text);
+    if (text.startsWith("You lead the practice")) return { questions: [{ what: DZ ? "用学过的内容完成一个小任务" : "Use what was learned on one small task.", points: [] }] };
+    const music = /self-learner of (Music|乐理)|practice questions below in (Music|乐理)/.test(text);
 
-    if (text.startsWith("You write one exercise") || text.startsWith("You worked exercise")) {
+    if (text.startsWith("You write one question") || text.startsWith("You worked the practice question")) {
       if (music) return { title: DZ ? "和弦配旋律" : "Harmonise a melody", level: "core", task: DZ ? "给 C D E 配三和弦。" : "Choose a triad for each of the notes C, D, E and explain each choice.", combines: ["Triads", "Intervals"], thinking: DZ ? "选择" : "Which chord contains each note", criteria: [DZ ? "每个和弦都包含该音" : "Each chord contains its melody note", DZ ? "说明理由" : "Each choice is explained"], solution: DZ ? "C：C 大三和弦。" : "C: C major (C E G). D: G major (G B D). E: C major or E minor.", hints: [DZ ? "哪些和弦包含这个音？" : "Which triads contain the note?"] };
       return { title: DZ ? "价格统计" : "Price tally", level: "core", task: DZ ? "读入价格直到空行，打印个数。" : "Read prices until an empty line, then print how many there were.", combines: ["while loops"], thinking: "count", starter: "", tests: [{ input: "2\\n3\\n\\n", output: "2" }, { input: "\\n", output: "0" }], solution: "n = 0\\nline = input()\\nwhile line != '':\\n    n += 1\\n    line = input()\\nprint(n)", hints: [DZ ? "要记住什么？" : "What do you need to remember?"] };
     }
-    if (text.startsWith("You are about to practise")) return { attempts: DZ ? "顺利做完。" : "Worked through without a snag.", false: [], stuck: [], rules: [] };
+    if (text.startsWith("You are about to work the practice questions")) return { attempts: DZ ? "顺利做完。" : "Worked through without a snag.", false: [], stuck: [], rules: [] };
     if (text.startsWith("You give feedback on a self-learner's answer")) return { results: [{ criterion: 1, met: "yes", note: DZ ? "对" : "Right." }, { criterion: 2, met: /because|因为/.test(text) ? "yes" : "partly", note: DZ ? "理由可以更多" : "Say why for each one." }], feedback: DZ ? "不错。" : "Good choices; explain each one." };
     if (text.startsWith("You set a short level check")) return { why: DZ ? "从易到难" : "From easier to harder.", tasks: [{ title: DZ ? "打印" : "Print a greeting", task: DZ ? "写程序打印 hi。" : "Write a program that prints hi.", probes: ["p2"] }, { title: DZ ? "循环" : "Count to three", task: DZ ? "用循环打印 1 到 3。" : "Use a loop to print 1 to 3.", probes: ["p11", "p12"] }] };
     if (text.startsWith("You assess where a self-learner is")) return { tasks: [{ n: 1, result: "works", note: "ok" }], summary: DZ ? "基础扎实。" : "Comfortable with the basics.", solid: ["p4", "p5", "p6"], shaky: ["p12"], feedback: DZ ? "继续学循环。" : "Move on to loops next." };

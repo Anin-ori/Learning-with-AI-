@@ -52,7 +52,7 @@
     app.order = app.order.filter((x) => x !== sid);
     delete subjects[sid]; delete maps[sid];
     dropBuild(sid);
-    if (db) ["subjects/" + sid, "maps/" + sid].concat(mid ? ["qa2/" + mid] : []).forEach((p) => { try { const d = db.doc(p); if (d.delete) d.delete().catch(() => {}); else d.set({ deleted: true }).catch(() => {}); } catch (_) {} });
+    if (db) ["subjects/" + sid, "maps/" + sid].concat(mid ? ["qa2/" + mid] : [], (s.qbank || []).map((e) => "q/" + e.id)).forEach((p) => { try { const d = db.doc(p); if (d.delete) d.delete().catch(() => {}); else d.set({ deleted: true }).catch(() => {}); } catch (_) {} });
     logEvent("subject", "Deleted the subject " + s.name);
     ui.confirmDelete = null;
     if (app.current === sid) {

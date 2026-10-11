@@ -47,3 +47,25 @@ select#pt-select { width: 100%; min-width: 0; text-overflow: ellipsis; }
 .math-display { display: block; margin: 0.9em 0; overflow-x: auto; overflow-y: hidden; text-align: center; }
 .math-display math { display: block; font-size: 1.12em; }
 .math-src { font-family: var(--font-mono); font-size: 0.92em; }
+/* the question bank (v2.2, R71) */
+.pr-filters { flex-wrap: wrap; gap: 10px; align-items: center; margin: 4px 0 10px; }
+.pr-filters .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.pr-filters button.chip { cursor: pointer; }
+.pr-filters button.chip.on { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.pr-filters select, .pr-pointask select { max-width: min(100%, 420px); min-width: 0; text-overflow: ellipsis; }
+.pr-pointask { flex-wrap: wrap; gap: 8px; }
+.pr-qlist { display: grid; gap: 6px; margin: 0; }
+.pr-qrow { display: flex; align-items: baseline; gap: 12px; width: 100%; text-align: left; padding: 11px 14px; background: var(--surface); border: 1px solid var(--line); color: var(--fg); font: inherit; cursor: pointer; }
+.pr-qrow:hover { background: var(--hover); }
+.pr-qmark { width: 1.2em; flex: none; text-align: center; color: var(--muted); font-weight: 700; }
+.pr-qrow.right .pr-qmark { color: var(--ok); }
+.pr-qrow.wrong .pr-qmark { color: var(--bad); }
+.pr-qtitle { flex: 1; min-width: 0; }
+.pr-qstar { color: var(--gold); flex: none; }
+.pr-qpts { flex: none; max-width: 38%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pr-q.right { box-shadow: inset 3px 0 0 var(--ok); }
+.pr-q.wrong { box-shadow: inset 3px 0 0 var(--bad); }
+.pr-answer { border-top: 1px solid var(--line); padding-top: 10px; margin-top: 4px; }
+.pr-marks { flex-wrap: wrap; gap: 8px; align-items: center; }
+.pr-marks button.quiet.on { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+button.danger { color: var(--bad); border-color: var(--bad); }

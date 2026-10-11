@@ -403,7 +403,7 @@
           h("p", { class: "small muted" }, "What happens underneath this lesson: how it actually works. You don't need to master it now, and the practice doesn't depend on it."),
           h("div", { class: "lesson" }, md(L.deeper))) : null,
         h("p", { class: "small muted pr-pointer" }, "Practice has its own section, whenever you want it. ",
-          h("button", { class: "link", type: "button", onclick: () => go("practice") }, "Go to Practice")),
+          h("button", { class: "link", type: "button", onclick: () => practisePoint(pid) }, "Practise this point")),
         h("div", { class: "row" },
           km.isLearned(pid)
             ? h("button", { class: "quiet", type: "button", onclick: () => { km.setLearned(pid, false); render(); } }, "Mark as not learned")

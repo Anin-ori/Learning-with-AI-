@@ -51,10 +51,11 @@
     practiceRules: (S) => [
       "Practice rules (they hold for every subject; the examples come from " + S.name + "):",
       "- Use only what the learner has learned. The task and the reference answer may need nothing else; if a good task would need more, change the task.",
-      "- The task is complete and exact: what the learner is given and what they must produce. It doesn't give away what the exercise asks them to work out.",
+      "- The task is complete and exact: what the learner is given and what they must produce. It doesn't give away what the question asks them to work out.",
+      "- One question asks one thing. Where it has parts, they serve that one thing; a list of separate sub-questions is a worksheet, not a question.",
       "- Not a lesson example retyped or lightly varied.",
       "- " + S.format,
-      "- Hints nudge without giving the answer away, from gentle to stronger, as many as the exercise needs.",
+      "- Hints nudge without giving the answer away, from gentle to stronger, as many as the question needs.",
       "- Never call a mistake common or classic.",
     ].join("\n"),
   };
