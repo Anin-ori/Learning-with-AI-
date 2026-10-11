@@ -208,7 +208,7 @@
       doc.requests = job.requests;
       ui.plessons[key] = doc;
       const s = cur();
-      s.pointIndex[pid] = { at: doc.at, notes: doc.notes, src: "en", tr: doc.tr && doc.tr[curLang()] ? { [curLang()]: doc.tr[curLang()].notes } : undefined };
+      s.pointIndex[pid] = { at: doc.at, notes: doc.notes, goals: (doc.plan && doc.plan.goals) || [], src: "en", tr: doc.tr && doc.tr[curLang()] ? { [curLang()]: doc.tr[curLang()].notes } : undefined };
       if (db) db.doc("lessons2/" + key).set(clone(doc)).catch(() => notify("The lesson is shown but couldn't be saved.", "warn"));
       saveSubject();
       job.stage = "done";
@@ -402,7 +402,7 @@
           h("p", { class: "eyebrow" }, "Going deeper · optional"),
           h("p", { class: "small muted" }, "What happens underneath this lesson: how it actually works. You don't need to master it now, and the practice doesn't depend on it."),
           h("div", { class: "lesson" }, md(L.deeper))) : null,
-        h("p", { class: "small muted pr-pointer" }, "Practice has its own section: it comes in sets, once what you've learned can combine into real tasks. ",
+        h("p", { class: "small muted pr-pointer" }, "Practice has its own section, whenever you want it. ",
           h("button", { class: "link", type: "button", onclick: () => go("practice") }, "Go to Practice")),
         h("div", { class: "row" },
           km.isLearned(pid)

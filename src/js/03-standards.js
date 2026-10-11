@@ -41,18 +41,12 @@
       "- Your own words. Don't copy text from any book.",
     ].join("\n"),
     guide: (S) => STANDARDS.purpose() + "\n" + STANDARDS.rules(S),
-    readiness: (S) => [
-      "Practice standards (they hold for every subject; the examples come from " + S.name + "):",
-      "- Practice is worth doing when the learned points can combine into a small, real task in which the learner must decide how to fit them together: what to keep track of, in what order things happen, which cases to handle. One or two isolated points are not enough: practice on them is a drill that only repeats the lesson.",
-      "- Recent points are the focus. Older learned points can come back as review inside the tasks, even if that is all they get.",
-      "- Judge only from the lists given. Don't assume the learner knows anything else.",
-      "- If it isn't enough yet, say plainly why, and name the points they can learn next whose learning would make the most difference to practice: the few that matter, not a list.",
-    ].join("\n"),
-    // v2.2 (R68): like the lessons, two layers. The purpose goes to the AIs that write the practice; the rules go to them
-    // and to the editor. No counts: an exercise is as big as the material calls for (the author found sets on simple
-    // material overloaded, every task stringing all the learned points together).
+    // v2.2 (R68, R70): like the lessons, two layers. The purpose goes to the lead and writers of practice; the rules go to
+    // them and to the reviewer. No counts, and no rule that practice waits until points combine (the author found sets on
+    // simple material overloaded, every task stringing all the learned points together).
+    // R70: what makes practice effective, as the author and Claude agreed on Oct 10; direction for the lead and writers
     practicePurpose: () => [
-      "What practice is for. The learner uses what they have learned on their own, so it becomes theirs: they find out what they can already do without the lesson in front of them, and what they hadn't really understood. An exercise is as big as the material calls for. Where what was learned is simple, the tasks are simple and short, and a few small ones can make the right set; combine points where a task naturally needs them, not to cover a list. A clear task the learner can finish in one sitting is better than one that strings every step together. How the set does this is yours to decide.",
+      "What practice is for. The learner produces what they have learned themselves, without the lesson in front of them, and then finds out exactly where their thinking held and where it went another way. That effort of retrieving and using an idea is what makes it last, and it doesn't depend on a task being big: a few short exercises done from memory can do more than one long one. Aim just past comfortable: the learner should succeed, with effort. Vary the exercises so they show where an idea applies and where it stops, and let earlier material come back now and then. Give each exercise one clear point the learner could name afterwards. The comparison with the reference answer is where the learning settles, so the reference answer shows the reasoning, not only the result. How the practice does this is yours to decide.",
     ].join("\n"),
     practiceRules: (S) => [
       "Practice rules (they hold for every subject; the examples come from " + S.name + "):",

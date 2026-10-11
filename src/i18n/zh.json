@@ -629,9 +629,36 @@
   "Mark as not done": "标为未完成",
   "Show the reference answer": "查看参考答案",
   "checks each exercise and works its reference answer": "检查每道题，并亲自演算参考答案",
-  "Written by AI and checked by a second AI. Nothing in this subject can be run, so the reference answers are an AI's working, not proven: check what matters to you.": "由 AI 编写，并由另一个 AI 检查。这门科目的内容无法运行，所以参考答案只是 AI 的演算，未经证明：对你重要的地方请自行核对。"
+  "Written by AI and checked by a second AI. Nothing in this subject can be run, so the reference answers are an AI's working, not proven: check what matters to you.": "由 AI 编写，并由另一个 AI 检查。这门科目的内容无法运行，所以参考答案只是 AI 的演算，未经证明：对你重要的地方请自行核对。",
+  "Practise whenever you like. One AI decides what is worth practising from what you've learned and what your lessons set out to teach, others write the exercises, and a reviewer works each one as you would before you see it.": "随时都可以练习。一个 AI 根据你学过的内容和课程设定的目标决定该练什么，其他 AI 编写题目，在你看到之前，一位审核者会像你一样把每道题做一遍。",
+  "Learn a point first: practice is built from what you've learned.": "先学一个知识点：练习是根据你学过的内容编写的。",
+  "You've learned 1 point so far.": "你目前学了 1 个知识点。",
+  "A lead, a writer per exercise and a reviewer; a few more requests if it finds something to fix": "一位主导者、每道题一位撰写者和一位审核者；如果发现需要修改的地方，会多用几次请求",
+  "decides what is worth practising now": "决定现在值得练什么",
+  "write each exercise and its reference answer": "编写每道题及其参考答案",
+  "runs each reference solution against its tests": "用测试运行每份参考答案",
+  "works each exercise as you would, and fixes what it finds": "像你一样把每道题做一遍，并修改发现的问题",
+  "How this set was made": "这组练习是怎么写成的",
+  "The reviewer, after working the set:": "审核者做完这组题后的感受：",
+  "Written by AI. The page ran its reference solutions against every test before showing them, and a reviewer worked each exercise.": "由 AI 编写。展示之前，页面已用每个测试运行过参考答案，审核者也把每道题做了一遍。",
+  "Written by AI and worked through by a reviewer. The page couldn't run the code when it was built, so the tests weren't run.": "由 AI 编写，并由审核者做了一遍。生成时页面无法运行代码，所以没有运行测试。",
+  "Written by AI and worked through by a reviewer. Nothing in this subject can be run, so the reference answers are an AI's working, not proven: check what matters to you.": "由 AI 编写，并由审核者做了一遍。这门科目的内容无法运行，所以参考答案只是 AI 的演算，未经证明：对你重要的地方请自行核对。",
+  "Practice has its own section, whenever you want it.": "练习在单独的部分，随时都可以去练。",
+  "None of the exercises could be written. Try again.": "没有一道题能写出来。请重试。"
  },
  "patterns": [
+  [
+   "· (\\d+) of (\\d+) written",
+   "· 已写完 \\2 道中的 \\1 道"
+  ],
+  [
+   "Every exercise still failed its tests after (\\d+) revisions, so the set wasn't shown\\. Try again\\.",
+   "修改 \\1 次后每道题仍未通过测试，所以没有显示这组练习。请重试。"
+  ],
+  [
+   "Practice set delivered: (.+) \\((\\d+) requests, (\\d+) revisions(.*)\\)",
+   "练习已交付：\\1（\\2 次请求，修改 \\3 次\\4）"
+  ],
   [
    "Written by AI in (\\d+) requests: a lead, (\\d+) writers? and a reviewer, with (\\d+) revisions?\\.",
    "由 AI 写成，共 \\1 次请求：一位主导者、\\2 位撰写者和一位审核者，修改了 \\3 次。"

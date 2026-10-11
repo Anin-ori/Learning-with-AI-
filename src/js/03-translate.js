@@ -191,6 +191,8 @@
     const P = [];
     T.how = []; T.advice = []; T.dropped = []; T.exercises = [];
     P.push([S.when, (v) => { T.when = v; }]);
+    P.push([S.about, (v) => { T.about = v; }]);
+    P.push([S.attempts, (v) => { T.attempts = v; }]);
     (S.how || []).forEach((x, i) => P.push([x, (v) => { T.how[i] = v; }]));
     (S.advice || []).forEach((x, i) => P.push([x, (v) => { T.advice[i] = v; }]));
     (S.dropped || []).forEach((x, i) => P.push([x, (v) => { T.dropped[i] = v; }]));
@@ -208,7 +210,7 @@
     const T = trOf(S);
     if (!T) return S;
     const arr = (a, t) => (a || []).map((x, i) => pickT((t || [])[i], x));
-    return { ...S, when: pickT(T.when, S.when), how: arr(S.how, T.how), advice: arr(S.advice, T.advice), dropped: arr(S.dropped, T.dropped),
+    return { ...S, when: pickT(T.when, S.when), about: pickT(T.about, S.about), attempts: pickT(T.attempts, S.attempts), how: arr(S.how, T.how), advice: arr(S.advice, T.advice), dropped: arr(S.dropped, T.dropped),
       exercises: S.exercises.map((x, i) => { const t = T.exercises[i] || {};
         return { ...x, title: pickT(t.title, x.title), level: pickT(t.level, x.level), task: pickT(t.task, x.task), thinking: pickT(t.thinking, x.thinking),
           solution: x.tests ? x.solution : pickT(t.solution, x.solution), combines: arr(x.combines, t.combines), hints: arr(x.hints, t.hints), criteria: x.criteria ? arr(x.criteria, t.criteria) : x.criteria }; }) };

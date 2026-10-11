@@ -122,9 +122,7 @@ const ok = (c, msg) => { if (!c) { console.log("FAIL:", msg); process.exitCode =
 
   // ---- practice (Python, run in the page) ----
   await nav("practice"); await page.waitForTimeout(300);
-  await page.evaluate(() => document.querySelector(".pr-verdict button.primary").click());
-  await page.waitForSelector(".pr-verdict.yes", { timeout: 5000 });
-  await page.evaluate(() => document.querySelector(".pr-verdict button.primary").click());
+  await page.evaluate(() => document.querySelector(".pr-verdict button.primary").click());   // R70: no readiness step
   await page.waitForSelector(".pr-ex", { timeout: 90000 }); await page.waitForTimeout(200);
   console.log("set:", await page.evaluate(() => document.querySelector(".pr-plan .small.muted").textContent));
   ok(await page.evaluate(() => /ran its reference solutions|运行过参考答案/.test(document.querySelector(".pr-plan").textContent)), "Python set was run before showing");
@@ -189,9 +187,7 @@ const ok = (c, msg) => { if (!c) { console.log("FAIL:", msg); process.exitCode =
   await page.evaluate(() => { document.querySelector("#km-p-mine [data-ball]").click(); }); await page.waitForTimeout(500);
   await page.evaluate(() => document.querySelector("#km-p-det [data-markall]").click()); await page.waitForTimeout(200);
   await nav("practice"); await page.waitForTimeout(200);
-  await page.evaluate(() => document.querySelector(".pr-verdict button.primary").click());
-  await page.waitForSelector(".pr-verdict.yes", { timeout: 5000 });
-  await page.evaluate(() => document.querySelector(".pr-verdict button.primary").click());
+  await page.evaluate(() => document.querySelector(".pr-verdict button.primary").click());   // R70: no readiness step
   await page.waitForSelector(".pr-ex", { timeout: 30000 });
   ok(await page.evaluate(() => /Nothing in this subject can be run|无法运行/.test(document.querySelector(".pr-plan").textContent)), "the set says nothing could be run");
   ok(await page.evaluate(() => !document.querySelector(".pr-ex .pr-code") && !!document.querySelector(".pr-ex .pr-more")), "written exercises have no answer box, only a reference answer (R68)");

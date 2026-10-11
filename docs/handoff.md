@@ -31,7 +31,7 @@ Current version: **v2.2** (Oct 8, 2026). Read this first, then the requirements 
   - Traps and mistakes are taught only if they reveal a mechanism. No "common mistakes" lists, and never claim a mistake is common.
   - Extensions go down (what happens underneath, how to observe it, honest about where certainty ends), not sideways.
   - Unlearned things may be used with a brief explanation.
-- Practice is its own section and comes in sets once learned points combine into real tasks. The AI judges readiness first and may include review.
+- Practice is its own section. Since R70 (Oct 10) the learner asks for it whenever they like: a lead decides what to practise from what they've learned and their lessons' goals (`lessonGoals`, goals stored in `pointIndex`), writers write each exercise (task, reference answer, hints), the page runs code tests, a reviewer works each exercise as the learner and revises what it found. The readiness judge and the rule that points must combine first are gone.
   - R69 (Oct 10): lessons rigorous, concise and clear; length follows the substance, simple points get short lessons. Guidance in `STANDARDS.purpose` (lead and writers only), not a check.
   - R68 (Oct 10): an exercise is as big as the material calls for; simple material, simple tasks. Written subjects have no answer to hand in: a reference answer with the whole working. Practice guidance is `STANDARDS.practicePurpose` (writers) + `practiceRules` (writers and editor); the editor reports errors only.
 - Notes live on the map. Tutor questions are kept with their point.
