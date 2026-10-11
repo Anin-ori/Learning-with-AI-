@@ -273,12 +273,12 @@
     practiceContext(goals, focus), "",
     "Learned points, with their ids:", learnedIds(), "",
     STANDARDS.practicePurpose(), "", practiceRulesText(kind), "",
-    "Say what each question practises, not how to pose it: what it has the learner retrieve or use, and the ids of the learned points it practises. The writers decide how.",
+    "Say what each question practises, not how to pose it: the idea it has the learner retrieve or use, and the ids of the learned points it practises. Name the idea, not the steps; the writers decide how to ask.",
     'Reply with only JSON: {"questions": [{"what": "what this question has the learner retrieve or use", "points": ["point ids"]}]}',
   ].join("\n");
   const questionShape = (kind) => canRun(kind)
     ? '{"title": "short title", "task": "the full question in Markdown, with what the program reads, what it prints and at least one worked example", "starter": "starter code or an empty string", "tests": [{"input": "the typed lines, one per line", "output": "exactly what the program prints"}], "solution": "a reference solution that uses only what the learner has learned", "hints": ["nudges, gentle first, if hints help"]}'
-    : '{"title": "short title", "task": "the full question in Markdown", "answer": "the final answer alone, as briefly as it can be stated", "solution": "the working in Markdown: the reasoning that leads to the answer, using only what the learner has learned", "hints": ["nudges, gentle first, if hints help"]}';
+    : '{"title": "short title", "task": "the question in Markdown: what is given and what to find", "answer": "the final answer alone, as briefly as it can be stated: a value, a matrix, a condition, a sentence", "solution": "the working in Markdown: the reasoning that leads to the answer, using only what the learner has learned", "hints": ["nudges, gentle first, if hints help"]}';
   const writerPromptQ = (goals, focus, plan, i, kind) => [
     "You write one question for a self-learner of " + profileOf().name + " in Learning Companion, a study tool. " + howItWorks(kind),
     "The lead decided what the new questions practise. How to pose this one is yours to decide.",
@@ -404,7 +404,8 @@
       const docs = QS.map((x) => ({ v: 1, src: "en", id: newId("q"), sid: s.sid, kind, at, ...x, verified: canRun(kind) ? !!job.verified : undefined, mine: x.starter || "", hintsShown: 0 }));
       if (trLang()) {
         job.stage = "translate"; paint();
-        for (const d of docs) { try { await translateQ(d, job); } catch (e) { if (e && e.code === "cancelled") throw e; } }
+        // all the new questions in one translation (it splits into parts only past its size limit)
+        try { await translateQs(docs, job); } catch (e) { if (e && e.code === "cancelled") throw e; }
       }
       docs.forEach((d) => {
         ui.qcache[d.id] = d;
@@ -438,6 +439,11 @@
     const L = curLang(), T = {};
     await trPairs(job, qPairs(q, T), subjectAbout("a practice question: its task, answer, working and hints"), srcOf(q));
     q.tr = Object.assign({}, q.tr, { [L]: T });
+  }
+  async function translateQs(qs, job) {
+    const L = curLang(), Ts = qs.map(() => ({}));
+    await trPairs(job, qs.flatMap((q, k) => qPairs(q, Ts[k])), subjectAbout("practice questions: their tasks, answers, working and hints"), srcOf(qs[0]));
+    qs.forEach((q, k) => { q.tr = Object.assign({}, q.tr, { [L]: Ts[k] }); });
   }
   function qView(q) {
     const T = trOf(q);

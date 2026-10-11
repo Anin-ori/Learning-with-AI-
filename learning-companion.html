@@ -2101,6 +2101,9 @@ button.danger { color: var(--bad); border-color: var(--bad); }
     // R70: what makes practice effective, as the author and Claude agreed on Oct 10; direction for the lead and writers
     practicePurpose: () => [
       "What practice is for. The learner produces what they have learned themselves, without the lesson in front of them, and then finds out exactly where their thinking held and where it went another way. That effort of retrieving and using an idea is what makes it last, and it doesn't depend on a task being big: a few short exercises done from memory can do more than one long one. Aim just past comfortable: the learner should succeed, with effort. Vary the exercises so they show where an idea applies and where it stops, and let earlier material come back now and then. Give each exercise one clear point the learner could name afterwards. The comparison with the reference answer is where the learning settles, so the reference answer shows the reasoning, not only the result. How the practice does this is yours to decide.",
+      // R72: how questions written by good teachers read, from comparing the AI's questions with human problem sets
+      // (Strang's Problem Set 2.6, MIT 18.06, Nicholson 2.7) on the same topic; direction, not a check
+      "How a good question reads. Good problem sets, written by people who teach the subject, are mostly short: a sentence or two that says what is given and asks one thing, with an answer that can be checked at a glance. The material is chosen so the point shows itself: an example where the interesting thing actually happens, a parameter that makes the learner find where something breaks, letters instead of numbers when the point is a pattern, small clean numbers when arithmetic is not the point. The question asks rather than instructs: it leaves the method to the learner unless the method is what is being practised. Across a batch, the questions differ in kind (working an example, finding when something fails, explaining why, finding the general pattern, proving a fact where the subject has proofs) and build from concrete to general, each idea once.",
     ].join("\n"),
     practiceRules: (S) => [
       "Practice rules (they hold for every subject; the examples come from " + S.name + "):",
@@ -4438,12 +4441,12 @@ button.danger { color: var(--bad); border-color: var(--bad); }
     practiceContext(goals, focus), "",
     "Learned points, with their ids:", learnedIds(), "",
     STANDARDS.practicePurpose(), "", practiceRulesText(kind), "",
-    "Say what each question practises, not how to pose it: what it has the learner retrieve or use, and the ids of the learned points it practises. The writers decide how.",
+    "Say what each question practises, not how to pose it: the idea it has the learner retrieve or use, and the ids of the learned points it practises. Name the idea, not the steps; the writers decide how to ask.",
     'Reply with only JSON: {"questions": [{"what": "what this question has the learner retrieve or use", "points": ["point ids"]}]}',
   ].join("\n");
   const questionShape = (kind) => canRun(kind)
     ? '{"title": "short title", "task": "the full question in Markdown, with what the program reads, what it prints and at least one worked example", "starter": "starter code or an empty string", "tests": [{"input": "the typed lines, one per line", "output": "exactly what the program prints"}], "solution": "a reference solution that uses only what the learner has learned", "hints": ["nudges, gentle first, if hints help"]}'
-    : '{"title": "short title", "task": "the full question in Markdown", "answer": "the final answer alone, as briefly as it can be stated", "solution": "the working in Markdown: the reasoning that leads to the answer, using only what the learner has learned", "hints": ["nudges, gentle first, if hints help"]}';
+    : '{"title": "short title", "task": "the question in Markdown: what is given and what to find", "answer": "the final answer alone, as briefly as it can be stated: a value, a matrix, a condition, a sentence", "solution": "the working in Markdown: the reasoning that leads to the answer, using only what the learner has learned", "hints": ["nudges, gentle first, if hints help"]}';
   const writerPromptQ = (goals, focus, plan, i, kind) => [
     "You write one question for a self-learner of " + profileOf().name + " in Learning Companion, a study tool. " + howItWorks(kind),
     "The lead decided what the new questions practise. How to pose this one is yours to decide.",
@@ -4569,7 +4572,8 @@ button.danger { color: var(--bad); border-color: var(--bad); }
       const docs = QS.map((x) => ({ v: 1, src: "en", id: newId("q"), sid: s.sid, kind, at, ...x, verified: canRun(kind) ? !!job.verified : undefined, mine: x.starter || "", hintsShown: 0 }));
       if (trLang()) {
         job.stage = "translate"; paint();
-        for (const d of docs) { try { await translateQ(d, job); } catch (e) { if (e && e.code === "cancelled") throw e; } }
+        // all the new questions in one translation (it splits into parts only past its size limit)
+        try { await translateQs(docs, job); } catch (e) { if (e && e.code === "cancelled") throw e; }
       }
       docs.forEach((d) => {
         ui.qcache[d.id] = d;
@@ -4603,6 +4607,11 @@ button.danger { color: var(--bad); border-color: var(--bad); }
     const L = curLang(), T = {};
     await trPairs(job, qPairs(q, T), subjectAbout("a practice question: its task, answer, working and hints"), srcOf(q));
     q.tr = Object.assign({}, q.tr, { [L]: T });
+  }
+  async function translateQs(qs, job) {
+    const L = curLang(), Ts = qs.map(() => ({}));
+    await trPairs(job, qs.flatMap((q, k) => qPairs(q, Ts[k])), subjectAbout("practice questions: their tasks, answers, working and hints"), srcOf(qs[0]));
+    qs.forEach((q, k) => { q.tr = Object.assign({}, q.tr, { [L]: Ts[k] }); });
   }
   function qView(q) {
     const T = trOf(q);
