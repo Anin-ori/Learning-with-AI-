@@ -1,6 +1,6 @@
-  // ---------- Learn one point (v1.1; v2.0: any subject; v2.2: lead, writers, a reviewer who learns from it) ----------
-  // The learner picks a point. A lead sets the goals, writers teach them, a reviewer learns from the lesson and revises
-  // it; the page runs the examples and asks for another revision if they still fail (up to PL_ROUNDS times).
+  // ---------- Learn one point (v1.1; v2.0: any subject; v2.2: lead, writers, reviewer; v2.3: reviewer checks facts) ----------
+  // The learner picks a point. A lead sets the goals, writers teach them, a reviewer checks the facts and corrects them;
+  // the page runs the examples and asks for another revision if they still fail (up to PL_ROUNDS times).
   const PL_ROUNDS = 2;
   const ptName = (pid) => (km && km.data.byId[pid] ? km.data.byId[pid].name : pid);
   // v2.1: prompts always use the map's original (English) names; the learner sees the translated ones
@@ -57,12 +57,12 @@
       ? "- Every code example is short, runnable " + RUNNERS[S.run] + ", and is followed by its exact output in a separate block that starts with the line \"Output:\". Show only output you are sure of."
       : "- Examples: " + S.examples + " Where an example has a definite result, show it, and be sure it is right.";
   }
-  // ----- a lesson (v2.2): a lead sets the goals, writers teach them, a reviewer learns from the result -----
-  // The lead sets what the learner should come away with and a shared frame, and decides how the writing is split.
-  // Writers decide how to teach. The lead stitches several parts into one. The page runs the examples. A reviewer then
-  // goes through the lesson as this learner would and tries to reach the goals from it alone, reads it once more for
-  // anything false, and revises what it found. The teaching direction is given to the lead and the writers as a purpose;
-  // the reviewer never gets it as criteria, so it can't turn into a checklist.
+  // ----- a lesson (v2.2; v2.3, R74) -----
+  // The lead decides what this learner needs from the point (goals scoped by their use, the core marked) and a shared
+  // frame, and splits the writing so no part has to compress what it explains. Writers decide how to teach. The lead
+  // stitches several parts into one. The page runs the examples. A reviewer then checks the facts only and corrects
+  // what is false. The teaching direction goes to the lead and the writers as a purpose; the reviewer never gets it,
+  // so it can't turn into a checklist.
   const pointContext = (pid) => {
     const P = km.data, n = P.byId[pid], ball = enBall(P.BALL_OF[pid]), M = curMap();
     return [
@@ -76,17 +76,18 @@
     ].join("\n");
   };
   const leadPromptPt = (pid) => { const S = profileOf(); return [
-    "You lead the teaching of ONE knowledge point of " + S.name + " in Learning Companion, a study tool for self-learners. The learner reads the lesson on their own and thinks it through; it is not a conversation. You set what this learner should come away with; writers decide how to teach it, and a reviewer will then learn from the lesson as this learner would.",
+    "You lead the teaching of ONE knowledge point of " + S.name + " in Learning Companion, a study tool for self-learners. The learner reads the lesson on their own; it is not a conversation. You decide what this learner needs from this point; writers decide how to teach it, and a reviewer then checks it for errors.",
     pointContext(pid), "",
     STANDARDS.guide(S), "",
     "Your job is to say what, never how: how to teach it, in what order and with what structure is the writers' choice, so none of it goes into the goals, the frame or the notes.",
-    "- goals: what this learner should understand or be able to do after the lesson, each in one sentence: only what the point really holds, and a simple point holds little. Teach this point only: what another point on the map covers belongs to that point's lesson; a lesson may point to it, not teach it.",
+    "- goals: what this learner will be able to do with the point after the lesson, each in one sentence, at the depth their use of it calls for. Cover everything the point holds that this learner will use, so nothing they need is missing, and nothing they won't use; a simple point holds little. Teach this point only: what another point on the map covers belongs to that point's lesson; a lesson may point to it, not teach it.",
+    "- core: the numbers of the goals that are the core of this point for this learner, where most of the lesson's effort should go.",
     "- frame: only what the writers must share so the parts read as one lesson: the notation and terms to use, an example the goals share if they share one, what may be assumed, and a brief bridge for anything needed that isn't learned yet.",
-    "- parts: who writes what, in order. One writer for the whole lesson is often best, because a lesson is one line of reasoning; split only where a part can be taught well on its own. Each part lists the numbers of its goals (1 for the first goal).",
+    "- parts: who writes what, in order. A part is what one writer can explain completely and clearly in one go: if the point holds more than that, split it so no part has to compress what it explains; if one writer can cover it all, use one. Each part lists the numbers of its goals (1 for the first goal).",
     "- together: \"sequence\" if each part builds on the text of the parts before it (each writer then sees them), \"parallel\" if the parts can be written side by side.",
     "- beyond: what lies underneath this point that is worth knowing (the mechanism that makes it work, where its rules stop holding), if anything; empty if nothing.",
     "- goal_link: one sentence on where this point shows up in the learner's goal.",
-    'Reply with only JSON: {"goals": [""], "frame": "", "parts": [{"goals": [numbers], "note": "what this writer must know that the goals and frame do not say, such as where their part starts and ends; usually empty"}], "together": "sequence or parallel", "beyond": "", "goal_link": ""}',
+    'Reply with only JSON: {"goals": [""], "core": [numbers], "frame": "", "parts": [{"goals": [numbers], "note": "what this writer must know that the goals and frame do not say, such as where their part starts and ends; usually empty"}], "together": "sequence or parallel", "beyond": "", "goal_link": ""}',
   ].join("\n"); };
   function normLead(d) {
     const goals = parr(d && d.goals).map(pstr).filter(Boolean).slice(0, 12);
@@ -96,9 +97,10 @@
     const missed = goals.map((_, i) => i + 1).filter((k) => !covered.has(k));
     if (!parts.length) parts = [{ goals: goals.map((_, i) => i + 1), note: "" }];
     else if (missed.length) parts[parts.length - 1].goals.push(...missed);
-    return { goals, frame: pstr(d.frame), parts, together: pstr(d.together) === "parallel" ? "parallel" : "sequence", beyond: pstr(d.beyond), goal_link: pstr(d.goal_link) };
+    const core = [...new Set(parr(d.core).map(Number).filter((k) => k >= 1 && k <= goals.length))];
+    return { goals, core, frame: pstr(d.frame), parts, together: pstr(d.together) === "parallel" ? "parallel" : "sequence", beyond: pstr(d.beyond), goal_link: pstr(d.goal_link) };
   }
-  const goalsText = (p) => p.goals.map((g, i) => (i + 1) + ". " + g).join("\n");
+  const goalsText = (p) => p.goals.map((g, i) => (i + 1) + ". " + g + ((p.core || []).includes(i + 1) ? " (core)" : "")).join("\n");
   const writeRules = (S, whole) => [
     exampleRule(S),
     S.run === "python" ? "- The page runs every Python example in the lesson, in order, as one session, and checks its output; extensions after === DEEPER === run as a separate session, so they import and define what they use. Where a claim rests on values computed step by step, show them with code that prints them rather than working them out in prose." : "",
@@ -108,7 +110,7 @@
   ].filter(Boolean).join("\n");
   const writerPromptPt = (pid, plan, k, before) => { const S = profileOf(), part = plan.parts[k], whole = plan.parts.length === 1; return [
     whole ? "You write a lesson on ONE knowledge point of " + S.name + " in Learning Companion, a study tool for self-learners. The learner reads it on their own and thinks it through." : "You write part " + (k + 1) + " of " + plan.parts.length + " of a lesson on ONE knowledge point of " + S.name + " in Learning Companion, a study tool for self-learners. The learner reads the lesson on their own and thinks it through. Other writers write the other parts; the lead will join them into one lesson.",
-    "A lead set what the learner should come away with. How to teach it is yours to decide.",
+    "A lead decided what this learner needs from the point: the goals below, with most of the effort on those marked core. How to teach it is yours to decide.",
     pointContext(pid), "",
     "All the goals of the lesson:", goalsText(plan),
     whole ? "" : "Your goals: " + part.goals.join(", ") + "." + (part.note ? " " + part.note : ""),
@@ -132,22 +134,16 @@
     return { lesson: lesson.trim(), deeper: (deeper || "").trim(), notes };
   }
   const lessonBlock = (L) => ["The lesson:", "<<<", L.lesson, ">>>", "", "Extensions after the lesson:", L.deeper || "(none)", "", "The notes the learner keeps:", L.notes.map((x) => "- " + x).join("\n") || "(none)"].join("\n");
-  // the reviewer: learns from the lesson as this learner would, then reads it once more for anything false
+  // the reviewer (v2.3, R74): cross-checks the facts only. A weak lesson isn't rescued by revising it, so the quality has
+  // to come from the lead and writers; the check guards against what is false.
   const reviewPromptPt = (pid, plan, L, run) => { const S = profileOf(); return [
-    "You are about to learn ONE knowledge point of " + S.name + " from a lesson in Learning Companion, a study tool for self-learners, before the real learner does. AIs wrote the lesson without a textbook behind it.",
-    "First, be this learner. You know only what they know:", ptLearner(), "Points they have learned: " + ptLearned() + ".",
-    "Read the lesson from the top, in order, as they would, and think it through as you go. Notice where you would get stuck: a step that jumps, something used before it is explained, a passage you could only follow because you already know the subject, a point where the thread breaks. Then try to reach each goal using only what the lesson gave you: could you now explain it, or do it, yourself?",
-    "Then read it once more as an expert in " + S.name + " and find anything false: a wrong fact, " + (S.run !== "none" ? "code that would fail or a stated output that is wrong, " : "an example whose stated result is wrong, ") + "a disputed claim stated as settled.",
-    "", "The goals the lead set:", goalsText(plan), "", STANDARDS.rules(S), "", lessonBlock(L),
+    "You check a lesson on ONE knowledge point of " + S.name + " in Learning Companion, a study tool for self-learners, before the learner reads it. AIs wrote it without a textbook behind it.",
+    "Read it as an expert in " + S.name + " and find anything false: a wrong fact, " + (S.run !== "none" ? "code that would fail or a stated output that is wrong, " : "an example whose stated result is wrong, ") + "a claim stated more broadly than it holds, a disputed claim stated as settled.",
+    "", "Point: \"" + enName(pid) + "\".", "", lessonBlock(L),
     run && run.note ? "\n" + run.note + "\nTrust these results over your own reading of the code; anything they show to be wrong is already counted." : "",
     "",
-    "Report only what needs changing, with the passage it concerns:",
-    "- false: anything false, as above;",
-    "- stuck: where this learner would get stuck, and what would let them through;",
-    "- goals: each goal you could not reach from the lesson, and what is missing;",
-    "- rules: anything against the standing rules below.",
-    "Don't report matters of taste. If the lesson works, say so and report nothing.",
-    'Reply with only JSON: {"reading": "two or three sentences on how learning from it went", "false": [{"quote": "", "problem": "", "fix": ""}], "stuck": [{"quote": "", "problem": "", "fix": ""}], "goals": [{"goal": number, "problem": "", "fix": ""}], "rules": [{"quote": "", "problem": "", "fix": ""}]}',
+    "Report only what is false, with the passage it concerns and the correction. Don't report style, structure or what you would teach differently. If nothing is false, report nothing.",
+    'Reply with only JSON: {"false": [{"quote": "", "problem": "", "fix": ""}]}',
   ].filter((x) => x !== "").join("\n"); };
   const normItems = (v) => parr(v).map((p) => ({ quote: String((p && p.quote) || "").slice(0, 300), problem: pstr(p && p.problem), fix: pstr(p && p.fix) })).filter((p) => p.problem);
   function normFindings(v, plan) {
@@ -157,7 +153,7 @@
   const findingsText = (F) => [["Anything false", F.false], ["Where the learner gets stuck", F.stuck], ["Goals not reached", F.goals], ["Against the standing rules", F.rules]]
     .filter(([, xs]) => xs.length).map(([t, xs]) => t + ":\n" + xs.map((p, i) => (i + 1) + ". " + (p.quote ? "\"" + p.quote + "\": " : "") + p.problem + (p.fix ? " Fix: " + p.fix : "")).join("\n")).join("\n\n");
   const revisePromptPt = (pid, plan, L, F) => { const S = profileOf(); return [
-    "You reviewed the lesson below on ONE knowledge point of " + S.name + " by learning from it as the learner would. Now revise it: fix what you found, and change nothing else. Keep the writers' way of teaching; a fix should make the lesson clearer, not longer than it needs to be.",
+    "You checked the lesson below on ONE knowledge point of " + S.name + " for errors. Now correct it: fix what you found, and change nothing else. Keep the writers' way of teaching and the length of the lesson.",
     "Point: \"" + enName(pid) + "\".", ptLearner(), "", "The goals:", goalsText(plan), "", "What you found:", findingsText(F), "", lessonBlock(L), "",
     STANDARDS.rules(S), "", "Format:", writeRules(S, true), "",
     "Reply with the whole lesson, then the === DEEPER === line and the extensions if there are any, then the === NOTES === line and the notes.",
@@ -183,7 +179,7 @@
       // 3. the lead joins several parts into one lesson
       let L = parts[0];
       if (parts.length > 1) { job.stage = "stitch"; paint(); L = splitLesson(await ask(job, "Lead", inEnglish(stitchPromptPt(pid, job.plan, parts)), "default", false)); }
-      // 4. the page runs the examples; 5. the reviewer learns from the lesson, and revises what it found
+      // 4. the page runs the examples; 5. the reviewer checks the facts, and corrects what is false
       for (let round = 0; ; round++) {
         job.stage = "check"; paint();
         const run = profileOf().run === "python" ? await runLessonExamples(L).catch(() => null) : null;
@@ -329,7 +325,7 @@
 
   // ---------- the Learn page ----------
   const PT_STATUS = { learned: "learned", ready: "can learn now", locked: "not reachable yet" };
-  const PT_STAGES = [["plan", "Lead", "sets what you should come away with, and how the writing is shared out"], ["teach", "Writers", "decide how to teach it, and write the lesson"], ["check", "Reviewer", "learns from the lesson as you would, checks it for anything false, and revises"]];
+  const PT_STAGES = [["plan", "Lead", "decides what you need from the point, and how the writing is shared out"], ["teach", "Writers", "decide how to teach it, and write the lesson"], ["check", "Reviewer", "checks the lesson for anything false, and corrects it"]];
   function ptTeamCard(job) {
     const order = { plan: 0, teach: 1, stitch: 1, check: 2, fix: 2, translate: 3, done: 4, error: -1 };
     const at = order[job.stage];
@@ -344,7 +340,7 @@
       h("div", { class: "row" }, h("button", { class: "quiet", type: "button", onclick: () => { job.cancel = true; } }, "Stop")));
   }
   function renderPointLearn() {
-    const lede = "Pick one knowledge point. One AI sets what you should come away with, others decide how to teach it, and a reviewer learns from the lesson as you would before you see it. Practice has its own section.";
+    const lede = "Pick one knowledge point. One AI decides what you need from it, others decide how to teach it, and a reviewer checks it for errors before you see it. Practice has its own section.";
     if (!km) return noMapPanel("Learn");
     const P = km.data, pid = plPoint();
     if (pid && lessonOf(pid) === undefined) setTimeout(() => ensurePointLesson(pid), 0);
